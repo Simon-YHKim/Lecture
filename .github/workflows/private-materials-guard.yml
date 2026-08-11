@@ -1,0 +1,23 @@
+name: Private materials guard
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Test guard behavior
+        shell: pwsh
+        run: ./scripts/test-private-materials-guard.ps1
+
+      - name: Scan tracked files
+        shell: pwsh
+        run: ./scripts/check-private-materials.ps1 -Mode all

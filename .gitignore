@@ -1,0 +1,52 @@
+# Private presentation sources and exports
+*.ppt
+*.pptx
+*.pptm
+*.pps
+*.ppsx
+*.ppsm
+*.pot
+*.potx
+*.potm
+*.odp
+~$*
+
+# AutoCAD source and recovery files
+*.dwg
+*.dxf
+*.dwt
+*.dws
+*.sv$
+*.ac$
+*.dwl
+*.dwl2
+
+# Derived course media that belongs in the private delivery system
+*.pdf
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.wav
+*.m4a
+*.mp3
+*.srt
+*.vtt
+
+# Archives can conceal blocked source material
+*.zip
+*.7z
+*.rar
+
+# Known private planning-source naming pattern
+AutoCAD_Technician_Video_Course_MasterPlan_*.html
+
+# Private-only working directories
+private/
+_private/
+private-materials/
+source-materials/
+raw-materials/
+local-materials/
+course-source/
+private-work/
