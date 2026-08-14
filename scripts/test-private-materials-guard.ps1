@@ -11,6 +11,32 @@ Remove-Item -LiteralPath $temporaryIndex
 $previousIndex = $env:GIT_INDEX_FILE
 $env:GIT_INDEX_FILE = $temporaryIndex
 
+function Add-TestIndexEntry([string]$Blob, [string]$Path) {
+    $startInfo = [Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = 'git'
+    $startInfo.Arguments = 'update-index --add -z --index-info'
+    $startInfo.WorkingDirectory = $repoRoot
+    $startInfo.UseShellExecute = $false
+    $startInfo.RedirectStandardInput = $true
+    $startInfo.RedirectStandardError = $true
+    $startInfo.CreateNoWindow = $true
+
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $startInfo
+    try {
+        if (-not $process.Start()) { throw "Unable to start git update-index for: $Path" }
+        $payload = [Text.UTF8Encoding]::new($false).GetBytes("100644 $Blob`t$Path" + [char]0)
+        $process.StandardInput.BaseStream.Write($payload, 0, $payload.Length)
+        $process.StandardInput.BaseStream.Flush()
+        $process.StandardInput.Close()
+        $errorText = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) { throw "Unable to stage test path: $Path`n$errorText" }
+    } finally {
+        $process.Dispose()
+    }
+}
+
 try {
     & git read-tree HEAD
     if ($LASTEXITCODE -ne 0) { throw 'Unable to initialize the temporary Git index.' }
@@ -39,13 +65,12 @@ try {
     $manifestJson = $manifestObject | ConvertTo-Json -Depth 8
     $manifestBlob = ($manifestJson | & git hash-object -w --stdin).Trim()
 
-    & git update-index --add --cacheinfo "100644,$manifestBlob,$manifestPath"
+    Add-TestIndexEntry $manifestBlob $manifestPath
     foreach ($asset in @($manifestObject.assets)) {
         $assetPath = ([string]$asset.path).Replace('\', '/')
         $assetFile = Join-Path $repoRoot $assetPath
         $assetBlob = (& git hash-object -w -- $assetFile).Trim()
-        & git update-index --add --cacheinfo "100644,$assetBlob,$assetPath"
-        if ($LASTEXITCODE -ne 0) { throw "Unable to stage approved fixture asset: $assetPath" }
+        Add-TestIndexEntry $assetBlob $assetPath
     }
     $approvedFixtureTree = (& git write-tree).Trim()
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($approvedFixtureTree)) {
@@ -60,38 +85,33 @@ try {
     function Set-TestContentPath([string]$Path, [string]$Content) {
         Reset-TestIndex
         $blob = ($Content | & git hash-object -w --stdin).Trim()
-        & git update-index --add --cacheinfo "100644,$blob,$Path"
-        if ($LASTEXITCODE -ne 0) { throw "Unable to stage test path: $Path" }
+        Add-TestIndexEntry $blob $Path
     }
 
     function Set-TestPath([string]$Path) {
         Reset-TestIndex
-        & git update-index --add --cacheinfo "100644,$fixtureBlob,$Path"
-        if ($LASTEXITCODE -ne 0) { throw "Unable to stage test path: $Path" }
+        Add-TestIndexEntry $fixtureBlob $Path
     }
 
     function Set-TestRepositoryPath([string]$Path) {
         Reset-TestIndex
         $fullPath = Join-Path $repoRoot $Path
         $blob = (& git hash-object -w -- $fullPath).Trim()
-        & git update-index --add --cacheinfo "100644,$blob,$Path"
-        if ($LASTEXITCODE -ne 0) { throw "Unable to stage repository test path: $Path" }
+        Add-TestIndexEntry $blob $Path
     }
 
     function Set-TestManifestContent([string]$Content) {
         Reset-TestIndex
         $blob = ($Content | & git hash-object -w --stdin).Trim()
-        & git update-index --add --cacheinfo "100644,$blob,$manifestPath"
-        if ($LASTEXITCODE -ne 0) { throw 'Unable to stage modified manifest content.' }
+        Add-TestIndexEntry $blob $manifestPath
     }
 
     function Set-TestContentWithManifest([string]$Path, [string]$Content, [string]$ManifestContent) {
         Reset-TestIndex
         $manifestTestBlob = ($ManifestContent | & git hash-object -w --stdin).Trim()
-        & git update-index --add --cacheinfo "100644,$manifestTestBlob,$manifestPath"
+        Add-TestIndexEntry $manifestTestBlob $manifestPath
         $contentBlob = ($Content | & git hash-object -w --stdin).Trim()
-        & git update-index --add --cacheinfo "100644,$contentBlob,$Path"
-        if ($LASTEXITCODE -ne 0) { throw "Unable to stage content with modified manifest: $Path" }
+        Add-TestIndexEntry $contentBlob $Path
     }
 
     function Invoke-GuardChecker {
@@ -145,6 +165,17 @@ try {
         if ($exitCode -eq 0) { throw 'Expected guard to block modified artifact manifest.' }
     }
 
+    function Assert-BlockedMissingStagedManifest {
+        Reset-TestIndex
+        & git update-index --force-remove -- $manifestPath
+        if ($LASTEXITCODE -ne 0) { throw 'Unable to remove the staged manifest fixture.' }
+        $exitCode = Invoke-GuardChecker
+        if ($exitCode -eq 0) { throw 'Expected guard to fail closed when the manifest is absent from the index.' }
+        if (($script:lastGuardOutput -join "`n") -notmatch 'approved public artifact manifest is missing') {
+            throw "Expected the missing-index-manifest failure reason.`n$($script:lastGuardOutput -join "`n")"
+        }
+    }
+
     function Assert-BlockedContentWithManifest([string]$Path, [string]$Content, [string]$ManifestContent) {
         Set-TestContentWithManifest $Path $Content $ManifestContent
         $exitCode = Invoke-GuardChecker
@@ -163,6 +194,18 @@ try {
     Assert-Blocked 'exports/deck-page.webp'
     Assert-Blocked 'exports/source-slide.svg'
     Assert-Blocked 'archives/materials.zip'
+    Assert-Blocked 'archives/materials.tar'
+    Assert-Blocked 'archives/materials.tar.gz'
+    Assert-Blocked 'archives/materials.tgz'
+    Assert-Blocked 'archives/materials.bz2'
+    Assert-Blocked 'archives/materials.xz'
+    # Windows Git refuses these pathnames before they reach the index. Exercise
+    # the NUL-delimited parser on Unix CI, where quote/tab filenames are valid.
+    $isWindows = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows)
+    if (-not $isWindows) {
+        Assert-Blocked 'exports/lecture".pptx'
+        Assert-Blocked "exports/lecture`tcopy.pptx"
+    }
     Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/source-slide-01.png'
     Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/arbitrary.json'
     Assert-Blocked 'docs/autocad-technician/reference/unreviewed.png'
@@ -174,6 +217,7 @@ try {
     Assert-AllowedRepositoryPath 'docs/autocad-technician/reference/a3-landscape-template-reference.png'
     Assert-AllowedRepositoryPath 'docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html'
     Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/frame-00-at-30s.png'
+    Assert-BlockedMissingStagedManifest
 
     $forgedShaManifest = $manifestJson | ConvertFrom-Json
     $forgedShaManifest.assets[0].sha256 = ('0' * 64)

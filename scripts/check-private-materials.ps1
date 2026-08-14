@@ -12,6 +12,7 @@ function Get-RepositoryText([string]$Path) {
     if ($Mode -eq 'staged') {
         $stagedText = @(& git show ":$Path" 2>$null) -join "`n"
         if ($LASTEXITCODE -eq 0) { return $stagedText }
+        return $null
     }
 
     $fullPath = Join-Path $repoRoot $Path
@@ -27,6 +28,37 @@ function Get-Sha256Hex([byte[]]$Bytes) {
         return (($sha256.ComputeHash($Bytes) | ForEach-Object { $_.ToString('x2') }) -join '')
     } finally {
         $sha256.Dispose()
+    }
+}
+
+function Get-GitNulPaths([string]$Arguments) {
+    $startInfo = [Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = 'git'
+    $startInfo.Arguments = $Arguments
+    $startInfo.WorkingDirectory = $repoRoot
+    $startInfo.UseShellExecute = $false
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $startInfo.CreateNoWindow = $true
+
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $startInfo
+    $stream = [IO.MemoryStream]::new()
+    try {
+        if (-not $process.Start()) {
+            throw "Unable to start git $Arguments"
+        }
+        $process.StandardOutput.BaseStream.CopyTo($stream)
+        $errorText = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) {
+            throw "Unable to read Git paths: $errorText"
+        }
+        $decoded = [Text.UTF8Encoding]::new($false, $true).GetString($stream.ToArray())
+        return @($decoded.Split([char]0, [StringSplitOptions]::RemoveEmptyEntries))
+    } finally {
+        $stream.Dispose()
+        $process.Dispose()
     }
 }
 
@@ -89,13 +121,9 @@ function Get-RepositoryAsset([string]$Path) {
 }
 
 $paths = if ($Mode -eq 'staged') {
-    @(& git -c core.quotepath=false diff --cached --name-only --diff-filter=ACMR)
+    @(Get-GitNulPaths 'diff --cached --name-only --diff-filter=ACMR -z')
 } else {
-    @(& git -c core.quotepath=false ls-files --cached --others --exclude-standard | Sort-Object -Unique)
-}
-
-if ($LASTEXITCODE -ne 0) {
-    throw 'Unable to read Git paths.'
+    @(Get-GitNulPaths 'ls-files --cached --others --exclude-standard -z' | Sort-Object -Unique)
 }
 
 $blockedExtensions = @(
@@ -106,7 +134,7 @@ $blockedExtensions = @(
     '.wav', '.m4a', '.mp3', '.srt', '.vtt',
     '.ttf', '.ttc', '.otf', '.woff', '.woff2',
     '.png', '.jpg', '.jpeg', '.webp', '.gif', '.bmp', '.tif', '.tiff', '.avif', '.svg',
-    '.zip', '.7z', '.rar'
+    '.zip', '.7z', '.rar', '.tar', '.tgz', '.gz', '.bz2', '.xz'
 )
 
 $privateDirectoryPattern = '(^|/)(private|_private|private-materials|source-materials|raw-materials|local-materials|course-source|private-work)(/|$)'

@@ -76,8 +76,8 @@
       <h2 lang="ko">남은 위험과 롤백</h2><h2 lang="en">Residual risk and rollback</h2>
       <p class="easy" lang="ko">이미지나 HTML에 내용을 복사하면 확장자만으로는 알아낼 수 없습니다. 공개 전 사람이 화면과 문장을 확인해야 합니다.</p>
       <p class="easy" lang="en">A copied image or HTML excerpt cannot be identified by extension alone. A person must review content before publishing.</p>
-      <p class="expert" lang="ko">정책은 경로·확장자 방어이며 내용 기반 DLP는 아닙니다. 합성 도면과 승인된 공개 자산만 저장소에 넣고, 위반이 발견되면 push를 중단한 뒤 해당 커밋을 <code>git revert</code>해야 합니다.</p>
-      <p class="expert" lang="en">This is path-and-extension enforcement, not content-aware DLP. Only synthetic or explicitly approved assets should be tracked. If a violation is found, stop pushing and revert the introducing commit.</p>
+      <p class="expert" lang="ko">정책은 경로·확장자 방어이며 내용 기반 DLP는 아닙니다. 합성 도면과 승인된 공개 자산만 저장소에 넣습니다. push 전 발견하면 해당 커밋을 수정·제거하고 검사를 다시 실행합니다. 이미 공개 원격에 올라간 비공개 자료는 <code>git revert</code>만으로 지워지지 않으므로 즉시 접근을 제한하고, 노출된 시크릿을 폐기한 뒤 승인된 절차로 Git 이력을 정리하고 영향받은 ref를 갱신해야 합니다.</p>
+      <p class="expert" lang="en">This is path-and-extension enforcement, not content-aware DLP. Only synthetic or explicitly approved assets should be tracked. Before push, amend or remove the offending commit and rerun the checks. If private material has reached a public remote, <code>git revert</code> alone does not remove the blob: restrict access, rotate exposed credentials, purge the Git history through the approved incident process, and then update affected refs.</p>
       <details><summary><span lang="ko">[자세히] 수동 공개 검토</span><span lang="en">[Details] Manual publication review</span></summary>
         <p lang="ko">회사 식별자, 도면번호, 설비명, 치수, 사용자명, 로컬 경로, 슬라이드 화면과 발표자 노트가 복사되지 않았는지 확인합니다.</p>
         <p lang="en">Check for company identifiers, drawing numbers, equipment names, dimensions, user names, local paths, slide images, and copied speaker notes.</p>

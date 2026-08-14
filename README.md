@@ -25,6 +25,12 @@ The repository uses three layers of protection:
 2. A pre-commit hook blocks prohibited files even when they were force-added.
 3. GitHub Actions scans every push and pull request.
 
+GitHub Actions is a secondary detection and merge gate; it cannot retract a blob
+that has already reached a public remote. Run the local staged guard before every
+push. If private material is ever published, follow the incident process to restrict
+access, rotate exposed credentials, and purge the affected Git history—reverting the
+tip alone is not sufficient.
+
 Enable the repository hook after cloning:
 
 ```bash

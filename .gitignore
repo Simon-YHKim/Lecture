@@ -56,6 +56,11 @@
 *.zip
 *.7z
 *.rar
+*.tar
+*.tgz
+*.gz
+*.bz2
+*.xz
 
 # Known private planning-source naming pattern
 AutoCAD_Technician_Video_Course_MasterPlan_*.html
