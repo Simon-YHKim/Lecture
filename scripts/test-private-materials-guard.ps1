@@ -201,8 +201,8 @@ try {
     Assert-Blocked 'archives/materials.xz'
     # Windows Git refuses these pathnames before they reach the index. Exercise
     # the NUL-delimited parser on Unix CI, where quote/tab filenames are valid.
-    $isWindows = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows)
-    if (-not $isWindows) {
+    $runningOnWindows = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows)
+    if (-not $runningOnWindows) {
         Assert-Blocked 'exports/lecture".pptx'
         Assert-Blocked "exports/lecture`tcopy.pptx"
     }
