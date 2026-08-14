@@ -1,0 +1,8 @@
+{
+  "duration": 150,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#l08f02-scene h1", "bySec": 2 },
+    { "kind": "before", "a": "#l08f02-scene .compare", "b": "#l08f02-scene .record" },
+    { "kind": "staysInFrame", "selector": "#l08f02-scene .record" }
+  ]
+}

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -23,16 +23,30 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "Unable to stage test path: $Path" }
     }
 
+    function Invoke-GuardChecker {
+        $previousErrorAction = $ErrorActionPreference
+        try {
+            # Windows PowerShell 5 can promote a child pwsh stderr stream to a
+            # terminating NativeCommandError even when it is redirected. A
+            # blocked fixture is expected here, so capture only its exit code.
+            $ErrorActionPreference = 'Continue'
+            & $shell -NoProfile -File $checker -Mode staged *> $null
+            return $LASTEXITCODE
+        } finally {
+            $ErrorActionPreference = $previousErrorAction
+        }
+    }
+
     function Assert-Blocked([string]$Path) {
         Set-TestPath $Path
-        & $shell -NoProfile -File $checker -Mode staged *> $null
-        if ($LASTEXITCODE -eq 0) { throw "Expected guard to block: $Path" }
+        $exitCode = Invoke-GuardChecker
+        if ($exitCode -eq 0) { throw "Expected guard to block: $Path" }
     }
 
     function Assert-Allowed([string]$Path) {
         Set-TestPath $Path
-        & $shell -NoProfile -File $checker -Mode staged *> $null
-        if ($LASTEXITCODE -ne 0) { throw "Expected guard to allow: $Path" }
+        $exitCode = Invoke-GuardChecker
+        if ($exitCode -ne 0) { throw "Expected guard to allow: $Path" }
     }
 
     Assert-Blocked 'materials/source.PPTX'
@@ -40,6 +54,12 @@ try {
     Assert-Blocked 'private/notes.txt'
     Assert-Blocked 'exports/course.pdf'
     Assert-Blocked 'assets/drawing.dwg'
+    Assert-Blocked 'assets/fonts/LGEIText.ttf'
+    Assert-Blocked 'assets/fonts/LGEIHeadline.woff2'
+    Assert-Blocked 'exports/source-slide-01.png'
+    Assert-Blocked 'exports/deck-page.jpg'
+    Assert-Blocked 'exports/deck-page.webp'
+    Assert-Blocked 'exports/source-slide.svg'
     Assert-Blocked 'archives/materials.zip'
     Assert-Allowed 'docs/public-course-outline.md'
 

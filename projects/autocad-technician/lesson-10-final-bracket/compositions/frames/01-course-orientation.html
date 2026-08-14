@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l10f01-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .eyebrow {
+          color: #c7004c;
+          font-size: 26px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 70px;
+          height: 820px;
+          padding-top: 54px;
+        }
+        .hero {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .kicker {
+          color: #666666;
+          font-size: 30px;
+        }
+        .hero h1 {
+          margin: 18px 0 22px;
+          max-width: 850px;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 92px;
+          line-height: 1.05;
+          letter-spacing: -0.045em;
+          word-break: keep-all;
+        }
+        .hero p {
+          color: #666666;
+          font-size: 35px;
+          line-height: 1.45;
+        }
+        .goal {
+          padding: 25px 29px;
+          border-left: 8px solid #c7004c;
+          background: #f5f5f3;
+          font-size: 30px;
+          font-weight: 600;
+        }
+        .visual {
+          display: grid;
+          grid-template-rows: 500px auto;
+          gap: 24px;
+          padding-left: 56px;
+          border-left: 4px solid #c7004c;
+        }
+        .bracket {
+          width: 100%;
+          height: 500px;
+        }
+        .shape {
+          fill: #f5f5f3;
+          stroke: #111111;
+          stroke-width: 10;
+          stroke-linejoin: miter;
+        }
+        .hole {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 9;
+        }
+        .accent {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 6;
+        }
+        .steps {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 10px;
+        }
+        .step {
+          min-height: 125px;
+          padding: 18px 14px;
+          border: 2px solid #a4a3a4;
+          font-size: 23px;
+          font-weight: 600;
+        }
+        .step b {
+          display: block;
+          margin-bottom: 12px;
+          color: #c7004c;
+        }
+        .grid {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.1;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 80px 80px;
+        }
+      </style>
+      <div
+        id="l10f01-root"
+        data-composition-id="l10-frame-01-orientation"
+        data-start="0"
+        data-duration="75"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l10f01-scene"
+          class="clip"
+          data-start="0"
+          data-duration="75"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L09_RELEASE_CANDIDATE → L10_RELEASE</b><span>A3 · 제3각법 · OUTLINE/CENTER/HIDDEN/DIM/BORDER/TITLE/HATCH · 시험 감점 위험</span></div>
+          <div class="grid"></div>
+          <header class="top">
+            <div class="eyebrow">AUTOCAD BASIC COURSE · CAPSTONE</div>
+            <div class="lesson">Lesson 10 · 합성 센서 브래킷</div>
+          </header>
+          <main class="layout">
+            <section class="hero">
+              <div>
+                <div class="kicker">Technician 최종 실습</div>
+                <h1>릴리스 후보의 오류만 수정합니다</h1>
+                <p>
+                  L09_RELEASE_CANDIDATE를 처음부터 다시 그리지 않고 3D 모델·치수·지시사항과 대조합니다.
+                </p>
+              </div>
+              <div class="goal">
+                제한시간 목표: 7개 감점 게이트 통과 · L10_RELEASE
+              </div>
+            </section>
+            <section class="visual">
+              <svg class="bracket" viewBox="0 0 800 500" aria-hidden="true">
+                <path class="shape" d="M100 430 V185 H275 A105 105 0 0 1 485 185 H561.5 A35 35 0 0 1 586.25 195.25 L660 269 V395 L625 430 Z" />
+                <rect class="hole" x="135" y="227" width="98" height="98"/>
+                <circle class="hole" cx="380" cy="276" r="70"/><polygon class="hole" points="501.25,276 440.62,171 319.38,171 258.75,276 319.38,381 440.62,381"/>
+                <path class="hole" d="M331 108 H429 A28 28 0 0 1 429 164 H331 A28 28 0 0 1 331 108 Z"/>
+                <circle class="hole" cx="205" cy="374" r="21"/><circle class="hole" cx="555" cy="374" r="21"/>
+                <circle class="hole" cx="489.12" cy="213" r="14"/><circle class="hole" cx="270.88" cy="213" r="14"/><circle class="hole" cx="380" cy="402" r="14"/>
+                <path class="accent" d="M100 430 V185 H275 A105 105 0 0 1 485 185 H561.5 A35 35 0 0 1 586.25 195.25 L660 269 V395 L625 430 Z" />
+              </svg>
+              <div class="steps">
+                <div class="step"><b>01</b>시험 입력</div>
+                <div class="step"><b>02</b>A3 · TITLE</div>
+                <div class="step"><b>03</b>제3각법 · Layer</div>
+                <div class="step"><b>04</b>형상 · 표현</div>
+                <div class="step"><b>05</b>치수 · 승인</div>
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l10f01-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .kicker`,
+          { opacity: 0, x: -48 },
+          { opacity: 1, x: 0, duration: 0.42, ease: "power3.out" },
+          0.55,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 70 },
+          { opacity: 1, y: 0, duration: 0.82, ease: "expo.out" },
+          0.75,
+        );
+        tl.fromTo(
+          `${s} .hero p`,
+          { opacity: 0, x: -36 },
+          { opacity: 1, x: 0, duration: 0.52, ease: "power3.out" },
+          1.2,
+        );
+        const path = document.querySelector("#l10f01-scene .accent");
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = `${len}`;
+        path.style.strokeDashoffset = `${len}`;
+        tl.fromTo(
+          `${s} .bracket`,
+          { opacity: 0, x: 80 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+          7,
+        );
+        tl.to(
+          path,
+          { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" },
+          8,
+        );
+        tl.fromTo(
+          `${s} .step`,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.38,
+            ease: "power4.out",
+            stagger: 0.09,
+          },
+          23,
+        );
+        tl.fromTo(
+          `${s} .goal`,
+          { opacity: 0, y: 34 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          50,
+        );
+        tl.fromTo(
+          `${s} .grid`,
+          { opacity: 0.05 },
+          {
+            opacity: 0.14,
+            duration: 5,
+            ease: "sine.inOut",
+            repeat: 11,
+            yoyo: true,
+          },
+          0.4,
+        );
+        window.__timelines["l10-frame-01-orientation"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

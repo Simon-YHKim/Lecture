@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family:
+            "LG EI Text TTF Regular", "LG EI Text", "Malgun Gothic", sans-serif;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.12;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 80px 80px;
+        }
+        .topline {
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .eyebrow {
+          color: #c7004c;
+          font-size: 26px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        .main {
+          position: relative;
+          display: grid;
+          grid-template-columns: 0.98fr 1.02fr;
+          gap: 62px;
+          height: 760px;
+          padding-top: 52px;
+        }
+        .copy {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .kicker {
+          color: #666666;
+          font-size: 30px;
+        }
+        h1 {
+          margin: 18px 0 28px;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 94px;
+          line-height: 1.06;
+          letter-spacing: -0.045em;
+        }
+        .thesis {
+          color: #666666;
+          font-size: 35px;
+          line-height: 1.45;
+        }
+        .outcome {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .outcome div {
+          min-height: 94px;
+          padding: 18px;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+          font-size: 27px;
+          font-weight: 600;
+        }
+        .outcome b {
+          display: block;
+          margin-bottom: 7px;
+          color: #c7004c;
+          font-size: 20px;
+        }
+        .sequence {
+          display: grid;
+          gap: 10px;
+          align-content: center;
+          padding-left: 46px;
+          border-left: 4px solid #c7004c;
+        }
+        .step {
+          display: grid;
+          grid-template-columns: 72px 1fr auto;
+          align-items: center;
+          min-height: 94px;
+          padding: 14px 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .step b {
+          color: #c7004c;
+          font-size: 27px;
+        }
+        .step strong {
+          font-size: 31px;
+        }
+        .step span {
+          color: #666666;
+          font-size: 22px;
+        }
+        .result {
+          margin-top: 18px;
+          padding: 24px;
+          border: 3px solid #c7004c;
+        }
+        .result strong {
+          display: block;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 39px;
+        }
+        .result span {
+          display: block;
+          margin-top: 6px;
+          color: #666666;
+          font-size: 24px;
+        }
+      </style>
+      <div
+        id="root"
+        data-composition-id="l3-frame-01-orientation"
+        data-start="0"
+        data-duration="60"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l3f1"
+          class="clip"
+          data-start="0"
+          data-duration="60"
+          data-track-index="1"
+        >
+          <div class="grid"></div>
+          <header class="topline">
+            <div class="eyebrow">EDU-SB-01 · L02_SETUP</div>
+            <div class="lesson">Lesson 03 · 정면 기준 외곽</div>
+          </header>
+          <main class="main">
+            <section class="copy">
+              <div>
+                <div class="kicker">A3 가로형 · 제3각법 FRONT</div>
+                <h1>준비된 파일에<br />외곽을 누적합니다</h1>
+                <p class="thesis">
+                  OUTLINE과 CONSTRUCTION으로 원점·Datum·80×50 본체·러그 직선
+                  골격을 만듭니다.
+                </p>
+              </div>
+              <div class="outcome">
+                <div><b>IN</b>L02_SETUP</div>
+                <div><b>OUT</b>L03_BASE_PROFILE</div>
+              </div>
+            </section>
+            <section class="sequence">
+              <div class="step">
+                <b>01</b><strong>LINE · PLINE</strong
+                ><span>보조선 / 연속 외곽</span>
+              </div>
+              <div class="step">
+                <b>02</b><strong>DATUM A · B</strong><span>0,0 · X=40</span>
+              </div>
+              <div class="step">
+                <b>03</b><strong>80 × 50</strong><span>기준 상자</span>
+              </div>
+              <div class="step">
+                <b>04</b><strong>PROFILE</strong><span>러그·경사 골격</span>
+              </div>
+              <div class="result">
+                <strong>OUTLINE · CONSTRUCTION</strong
+                ><span>시험 Layer 오배치는 감점 위험</span>
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l3f1";
+        tl.fromTo(
+          `${s} .topline`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .kicker`,
+          { opacity: 0, x: -48 },
+          { opacity: 1, x: 0, duration: 0.44, ease: "power2.out" },
+          0.5,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 70, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.84, ease: "expo.out" },
+          0.7,
+        );
+        tl.fromTo(
+          `${s} .thesis`,
+          { opacity: 0, x: -38 },
+          { opacity: 1, x: 0, duration: 0.58, ease: "power4.out" },
+          1.25,
+        );
+        tl.fromTo(
+          `${s} .outcome div`,
+          { opacity: 0, y: 44 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.42,
+            ease: "back.out(1.2)",
+            stagger: 0.12,
+          },
+          7,
+        );
+        tl.fromTo(
+          `${s} .sequence`,
+          { opacity: 0, x: 84 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+          16,
+        );
+        tl.fromTo(
+          `${s} .step`,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.36,
+            ease: "power4.out",
+            stagger: 0.12,
+          },
+          17,
+        );
+        tl.fromTo(
+          `${s} .result`,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          31,
+        );
+        tl.to(
+          `${s} .result`,
+          {
+            backgroundColor: "#C7004C",
+            color: "#FFFFFF",
+            duration: 0.46,
+            ease: "power2.inOut",
+          },
+          52,
+        );
+        tl.to(`${s} .result span`, { color: "#FFFFFF", duration: 0.3 }, 52);
+        tl.fromTo(
+          `${s} .grid`,
+          { opacity: 0.08 },
+          {
+            opacity: 0.15,
+            duration: 7,
+            ease: "sine.inOut",
+            repeat: 6,
+            yoyo: true,
+          },
+          0.4,
+        );
+        window.__timelines["l3-frame-01-orientation"] = tl;
+      </script>
+      <style>
+        @font-face {
+          font-family: "LG EI Text TTF Regular";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Text";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "Malgun Gothic";
+          src: local("Malgun Gothic");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Semibold";
+          src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Regular";
+          src: local("LG EI Headline TTF Regular");
+          font-weight: 400;
+        }
+    @font-face {
+      font-family: "LG EI Headline";
+      src: local("LG EI Headline TTF Semibold");
+          font-weight: 400;
+        }
+      </style></template
+    >
+  </body>
+</html>

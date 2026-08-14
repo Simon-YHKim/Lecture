@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      #l09-main-root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #l09-main-root > [data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+      .transition-track {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .seam {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      .wipe {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      .magenta {
+        background: #c7004c;
+      }
+      .ink {
+        background: #111111;
+      }
+      .white {
+        background: #ffffff;
+      }
+      .split-top,
+      .split-bottom {
+        position: absolute;
+        left: 0;
+        width: 1920px;
+        height: 540px;
+      }
+      .split-top {
+        top: 0;
+        background: #c7004c;
+      }
+      .split-bottom {
+        bottom: 0;
+        background: #111111;
+      }
+      .rule {
+        position: absolute;
+        left: 0;
+        top: 532px;
+        width: 1920px;
+        height: 16px;
+        background: #c7004c;
+      }
+    </style>
+  <style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></head>
+  <body>
+    <div
+      id="l09-main-root"
+      data-composition-id="l09-main"
+      data-start="0"
+      data-duration="840"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="l09-slot-01"
+        class="clip"
+        data-composition-id="l09-frame-01-orientation"
+        data-composition-src="compositions/frames/01-course-orientation.html"
+        data-start="0"
+        data-duration="60"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-slot-02"
+        class="clip"
+        data-composition-id="l09-frame-02-dimstyle"
+        data-composition-src="compositions/frames/02-dimstyle.html"
+        data-start="60"
+        data-duration="150"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-slot-03"
+        class="clip"
+        data-composition-id="l09-frame-03-linear-aligned-angular"
+        data-composition-src="compositions/frames/03-linear-aligned-angular.html"
+        data-start="210"
+        data-duration="210"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-slot-04"
+        class="clip"
+        data-composition-id="l09-frame-04-radius-diameter"
+        data-composition-src="compositions/frames/04-radius-diameter.html"
+        data-start="420"
+        data-duration="180"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-slot-05"
+        class="clip"
+        data-composition-id="l09-frame-05-dimension-review"
+        data-composition-src="compositions/frames/05-dimension-review.html"
+        data-start="600"
+        data-duration="180"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-slot-06"
+        class="clip"
+        data-composition-id="l09-frame-06-recap"
+        data-composition-src="compositions/frames/06-recap.html"
+        data-start="780"
+        data-duration="60"
+        data-track-index="1"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="l09-transitions"
+        class="clip transition-track"
+        data-start="0"
+        data-duration="840"
+        data-track-index="2"
+        data-layout-allow-occlusion
+        data-layout-allow-overflow
+      >
+        <div id="l09-seam-01" class="seam">
+          <div class="wipe magenta a"></div>
+          <div class="wipe ink b"></div>
+        </div>
+        <div id="l09-seam-02" class="seam"><div class="rule"></div></div>
+        <div id="l09-seam-03" class="seam">
+          <div class="split-top"></div>
+          <div class="split-bottom"></div>
+        </div>
+        <div id="l09-seam-04" class="seam"><div class="rule"></div></div>
+        <div id="l09-seam-05" class="seam">
+          <div class="wipe magenta a"></div>
+          <div class="wipe white b"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      function wipe(id, at) {
+        tl.fromTo(
+          `${id} .a`,
+          { x: -1920 },
+          { x: 0, duration: 0.25, ease: "power3.inOut" },
+          at,
+        );
+        tl.fromTo(
+          `${id} .b`,
+          { x: -1920 },
+          { x: 0, duration: 0.25, ease: "power3.inOut" },
+          at + 0.06,
+        );
+        tl.to(
+          `${id} .a`,
+          { x: 1920, duration: 0.25, ease: "power3.inOut" },
+          at + 0.34,
+        );
+        tl.to(
+          `${id} .b`,
+          { x: 1920, duration: 0.25, ease: "power3.inOut" },
+          at + 0.4,
+        );
+      }
+      function rule(id, at) {
+        tl.fromTo(
+          `${id} .rule`,
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, duration: 0.14, ease: "expo.out" },
+          at,
+        );
+        tl.to(
+          `${id} .rule`,
+          { opacity: 0, duration: 0.05, ease: "power1.in" },
+          at + 0.16,
+        );
+      }
+      wipe("#l09-seam-01", 59.65);
+      rule("#l09-seam-02", 209.9);
+      tl.fromTo(
+        "#l09-seam-03 .split-top",
+        { x: -1920 },
+        { x: 0, duration: 0.28, ease: "power3.inOut" },
+        419.65,
+      );
+      tl.fromTo(
+        "#l09-seam-03 .split-bottom",
+        { x: 1920 },
+        { x: 0, duration: 0.28, ease: "power3.inOut" },
+        419.65,
+      );
+      tl.to(
+        "#l09-seam-03 .split-top",
+        { x: 1920, duration: 0.28, ease: "power3.inOut" },
+        420.01,
+      );
+      tl.to(
+        "#l09-seam-03 .split-bottom",
+        { x: -1920, duration: 0.28, ease: "power3.inOut" },
+        420.01,
+      );
+      rule("#l09-seam-04", 599.9);
+      wipe("#l09-seam-05", 779.65);
+      window.__timelines["l09-main"] = tl;
+    </script>
+  </body>
+</html>

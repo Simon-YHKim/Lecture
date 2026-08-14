@@ -33,6 +33,25 @@
 *.srt
 *.vtt
 
+# Licensed local font binaries (style references may remain in code)
+*.ttf
+*.ttc
+*.otf
+*.woff
+*.woff2
+
+# Raster/vector exports can reproduce confidential presentation slides
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.avif
+*.svg
+
 # Archives can conceal blocked source material
 *.zip
 *.7z
@@ -50,3 +69,11 @@ raw-materials/
 local-materials/
 course-source/
 private-work/
+
+# HyperFrames local preview cache
+.thumbnails/
+.hyperframes/
+snapshots/
+
+# Local JavaScript dependencies used by preview and QA tooling
+node_modules/

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        @font-face {
+          font-family: "LG EI Text TTF Regular";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Text";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "Malgun Gothic";
+          src: local("Malgun Gothic");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Semibold";
+          src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Regular";
+          src: local("LG EI Headline TTF Regular");
+          font-weight: 400;
+        }
+    @font-face {
+      font-family: "LG EI Headline";
+      src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+      </style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l04-f06-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family:
+            "LG EI Text TTF Regular", "LG EI Text", "Malgun Gothic", sans-serif;
+        }
+        .scene {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 0;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 64px;
+          letter-spacing: -0.035em;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 30px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 0.95fr 1.05fr;
+          gap: 58px;
+          padding-top: 48px;
+        }
+        .drawing {
+          height: 690px;
+          display: grid;
+          place-items: center;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+        }
+        .drawing svg {
+          width: 90%;
+          height: 90%;
+        }
+        .shape {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 12;
+        }
+        .accent {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 8;
+        }
+        .list {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 10px;
+        }
+        .item {
+          display: grid;
+          grid-template-columns: 210px 1fr;
+          align-items: center;
+          min-height: 88px;
+          padding: 14px 22px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .item b {
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 35px;
+          color: #c7004c;
+        }
+        .item span {
+          font-size: 31px;
+        }
+        .next {
+          margin-top: 24px;
+          padding: 24px 28px;
+          border-top: 4px solid #c7004c;
+          background: #f5f5f3;
+          font-size: 29px;
+          font-weight: 600;
+        }
+      </style>
+      <div
+        id="l04-f06-root"
+        data-composition-id="l04-frame-06-recap"
+        data-start="0"
+        data-duration="45"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l04-f06-scene"
+          class="clip scene"
+          data-start="0"
+          data-duration="45"
+          data-track-index="1"
+        >
+          <header class="top">
+            <div>
+              <div class="index">06 · EDU-SB-01 CHECKPOINT</div>
+              <h1>L04_PRIMARY_FEATURES 완성</h1>
+            </div>
+            <div class="prompt">OUTLINE / CENTER / CONSTRUCTION · ByLayer</div>
+          </header>
+          <main class="layout">
+            <section class="drawing">
+              <svg viewBox="0 0 900 680">
+                <path
+                  class="shape draw"
+                  d="M100 560 V280 H300 A120 120 0 0 1 540 280 H644 L740 376 V560 Z"
+                />
+                <circle class="accent draw" cx="420" cy="384" r="80" />
+                <rect
+                  class="accent draw"
+                  x="140"
+                  y="328"
+                  width="112"
+                  height="112"
+                />
+                <polygon
+                  class="accent draw"
+                  points="558.57,384 489.28,264 350.72,264 281.43,384 350.72,504 489.28,504"
+                />
+                <path
+                  class="accent draw"
+                  d="M364 192 H476 A32 32 0 0 1 476 256 H364 A32 32 0 0 1 364 192 Z"
+                />
+              </svg>
+            </section>
+            <section class="list">
+              <div class="item">
+                <b>CIRCLE</b><span>중앙 센서 구멍 Ø20</span>
+              </div>
+              <div class="item">
+                <b>ARC</b><span>러그 원호 · 장공 22 × 8</span>
+              </div>
+              <div class="item">
+                <b>POLYGON</b><span>중앙 육각 포켓 AF30</span>
+              </div>
+              <div class="item">
+                <b>OFFSET</b><span>좌측 Seed window 안쪽 5 mm 국소 포켓</span>
+              </div>
+              <div class="next">
+                시험 지시 우선 · 감점 위험: 중심선 / Layer / 방향 · 다음 L05
+                제3각법
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l04-f06-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .drawing`,
+          { opacity: 0, x: -82 },
+          { opacity: 1, x: 0, duration: 0.66, ease: "power4.out" },
+          0.9,
+        );
+        const paths = document.querySelectorAll("#l04-f06-scene .draw");
+        paths.forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = n;
+          p.style.strokeDashoffset = n;
+        });
+        tl.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            duration: 0.86,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          1.5,
+        );
+        tl.fromTo(
+          `${s} .item`,
+          { opacity: 0, y: 44 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power4.out",
+            stagger: 0.11,
+          },
+          3,
+        );
+        tl.fromTo(
+          `${s} .next`,
+          { opacity: 0, x: 50 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" },
+          17,
+        );
+        tl.to(
+          `${s} .next`,
+          {
+            backgroundColor: "#C7004C",
+            color: "#FFFFFF",
+            duration: 0.42,
+            ease: "power2.inOut",
+          },
+          30,
+        );
+        tl.to(
+          `${s} .layout, ${s} .top`,
+          { opacity: 0, duration: 0.7, ease: "power1.in" },
+          44,
+        );
+        window.__timelines["l04-frame-06-recap"] = tl;
+      </script></template
+    >
+  </body>
+</html>

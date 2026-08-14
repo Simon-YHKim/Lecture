@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        @font-face {
+          font-family: "LG EI Text TTF Regular";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Text";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "Malgun Gothic";
+          src: local("Malgun Gothic");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Semibold";
+          src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Regular";
+          src: local("LG EI Headline TTF Regular");
+          font-weight: 400;
+        }
+    @font-face {
+      font-family: "LG EI Headline";
+      src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+      </style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l04-f05-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family:
+            "LG EI Text TTF Regular", "LG EI Text", "Malgun Gothic", sans-serif;
+        }
+        .scene {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 0;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 62px;
+          letter-spacing: -0.035em;
+        }
+        .pause {
+          padding: 12px 20px;
+          color: #c7004c;
+          border: 2px solid #c7004c;
+          font-size: 27px;
+          font-weight: 600;
+        }
+        .track {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 178px;
+          height: 12px;
+          background: #f5f5f3;
+          overflow: hidden;
+        }
+        .fill {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #c7004c;
+          transform-origin: left center;
+        }
+        .body {
+          display: grid;
+          grid-template-columns: 1.25fr 0.75fr;
+          gap: 48px;
+          padding-top: 42px;
+        }
+        .drawing {
+          height: 700px;
+          padding: 26px;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+        }
+        .drawing svg {
+          width: 100%;
+          height: 100%;
+        }
+        .shape {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 13;
+          stroke-linejoin: round;
+        }
+        .feature {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 9;
+        }
+        .problem {
+          fill: #ffffff;
+          stroke: #c7004c;
+          stroke-width: 6;
+        }
+        .num {
+          fill: #c7004c;
+          font-size: 29px;
+          font-weight: 600;
+          text-anchor: middle;
+          dominant-baseline: middle;
+        }
+        .tag {
+          fill: #111111;
+          font-size: 25px;
+          font-weight: 600;
+        }
+        .side {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 700px;
+        }
+        .instruction {
+          padding: 22px 24px;
+          border-top: 4px solid #c7004c;
+          background: #f5f5f3;
+        }
+        .instruction h2 {
+          margin: 0 0 10px;
+          font-size: 37px;
+        }
+        .instruction p {
+          margin: 0;
+          color: #666666;
+          font-size: 24px;
+          line-height: 1.35;
+        }
+        .answers div {
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          min-height: 62px;
+          padding: 8px 14px;
+          border-bottom: 2px solid #a4a3a4;
+          font-size: 24px;
+        }
+        .answers b {
+          color: #c7004c;
+        }
+        .mask {
+          position: absolute;
+          right: 14px;
+          color: #666666;
+          font-size: 21px;
+        }
+        .check {
+          padding: 18px 22px;
+          border: 2px solid #111111;
+        }
+        .check-title {
+          color: #c7004c;
+          font-size: 22px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        .check p {
+          margin: 4px 0;
+          font-size: 21px;
+          line-height: 1.3;
+        }
+      </style>
+      <div
+        id="l04-f05-root"
+        data-composition-id="l04-frame-05-guided-practice"
+        data-start="0"
+        data-duration="145"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l04-f05-scene"
+          class="clip scene"
+          data-start="0"
+          data-duration="145"
+          data-track-index="1"
+        >
+          <header class="top">
+            <div>
+              <div class="index">05 · EDU-SB-01 누적 검수</div>
+              <h1>L03 외곽에 네 특징을 누적합니다</h1>
+            </div>
+            <div class="pause">20초 · L03에서 계속</div>
+          </header>
+          <div class="track"><span class="fill"></span></div>
+          <main class="body">
+            <section class="drawing">
+              <svg viewBox="0 0 1120 660">
+                <path
+                  class="shape draw"
+                  d="M120 540 V172.5 H382.5 A157.5 157.5 0 0 1 697.5 172.5 H834 L960 298.5 V540 Z"
+                />
+                <circle class="feature draw" cx="540" cy="309" r="105" />
+                <rect
+                  class="feature draw"
+                  x="172.5"
+                  y="235.5"
+                  width="147"
+                  height="147"
+                />
+                <polygon
+                  class="feature draw"
+                  points="721.87,309 630.93,151.5 449.07,151.5 358.13,309 449.07,466.5 630.93,466.5"
+                />
+                <path
+                  class="feature draw"
+                  d="M466.5 57 H613.5 A42 42 0 0 1 613.5 141 H466.5 A42 42 0 0 1 466.5 57 Z"
+                />
+                <circle class="problem" cx="540" cy="309" r="24" />
+                <text class="num" x="540" y="309">1</text>
+                <text class="tag" x="455" y="435">Ø20</text>
+                <circle class="problem" cx="540" cy="99" r="24" />
+                <text class="num" x="540" y="99">2</text>
+                <text class="tag" x="700" y="130">장공 22 × 8</text>
+                <circle class="problem" cx="650" cy="331" r="24" />
+                <text class="num" x="650" y="331">3</text>
+                <text class="tag" x="735" y="365">AF30</text>
+                <circle class="problem" cx="235" cy="370" r="24" />
+                <text class="num" x="235" y="370">4</text>
+                <text class="tag" x="125" y="285">LOCAL OFFSET 5</text>
+              </svg>
+            </section>
+            <aside class="side">
+              <div class="instruction">
+                <h2>L03_BASE_PROFILE에서 계속</h2>
+                <p>
+                  중심, 크기, 접점, 방향을 적고 같은 EDU-SB-01에 누적합니다.
+                </p>
+              </div>
+              <div class="answers">
+                <div>
+                  <span>1 · 중앙 Ø20</span><b>CIRCLE</b
+                  ><span class="mask">직접 결정</span>
+                </div>
+                <div>
+                  <span>2 · 상부 장공 22×8</span><b>ARC</b
+                  ><span class="mask">직접 결정</span>
+                </div>
+                <div>
+                  <span>3 · 중앙 AF30</span><b>POLYGON</b
+                  ><span class="mask">직접 결정</span>
+                </div>
+                <div>
+                  <span>4 · 좌측 국소 5 mm</span><b>OFFSET</b
+                  ><span class="mask">직접 결정</span>
+                </div>
+              </div>
+              <div class="check">
+                <div class="check-title">CHECKPOINT · L04_PRIMARY_FEATURES</div>
+                <p>□ OUTLINE · 보이는 형상</p>
+                <p>□ CENTER · 중심과 대칭축</p>
+                <p>□ CONSTRUCTION · Seed 창과 예정 위치 기준</p>
+                <p>□ Ø20 · AF30 · 장공 22×8 · 5 mm</p>
+                <p>□ ByLayer · 닫힘 · 원본 보존</p>
+              </div>
+            </aside>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l04-f05-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .pause`,
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.4)" },
+          0.7,
+        );
+        tl.fromTo(
+          `${s} .drawing`,
+          { opacity: 0, x: -88 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power4.out" },
+          1,
+        );
+        tl.fromTo(
+          `${s} .side`,
+          { opacity: 0, x: 86 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power3.out" },
+          1.1,
+        );
+        const paths = document.querySelectorAll("#l04-f05-scene .draw");
+        paths.forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = n;
+          p.style.strokeDashoffset = n;
+        });
+        tl.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            duration: 0.9,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          1.9,
+        );
+        tl.fromTo(
+          `${s} .problem, ${s} .num, ${s} .tag`,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power3.out",
+            stagger: 0.035,
+          },
+          3,
+        );
+        tl.fromTo(
+          `${s} .fill`,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 20, ease: "none" },
+          8,
+        );
+        tl.to(
+          `${s} .pause`,
+          {
+            backgroundColor: "#C7004C",
+            color: "#FFFFFF",
+            duration: 0.36,
+            ease: "power2.inOut",
+          },
+          28,
+        );
+        tl.to(
+          `${s} .mask`,
+          { opacity: 0, duration: 0.24, ease: "power2.in", stagger: 0.08 },
+          42,
+        );
+        tl.fromTo(
+          `${s} .answers b`,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.34,
+            ease: "power3.out",
+            stagger: 0.12,
+          },
+          42.2,
+        );
+        tl.fromTo(
+          `${s} .check`,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" },
+          90,
+        );
+        tl.fromTo(
+          `${s} .check p`,
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.3,
+            ease: "power3.out",
+            stagger: 0.09,
+          },
+          90.3,
+        );
+        window.__timelines["l04-frame-05-guided-practice"] = tl;
+      </script></template
+    >
+  </body>
+</html>

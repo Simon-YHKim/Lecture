@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l09f05-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+        }
+        h1 {
+          margin: 4px 0 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 64px;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 30px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 1.15fr 0.85fr;
+          gap: 42px;
+          margin-top: 38px;
+        }
+        .drawing {
+          height: 650px;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+        }
+        .drawing svg {
+          width: 100%;
+          height: 100%;
+        }
+        .shape {
+          fill: #ffffff;
+          stroke: #111111;
+          stroke-width: 9;
+        }
+        .feature { fill:none; stroke:#111111; stroke-width:9; }
+        .dim {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 5;
+        }
+        .dimtext {
+          fill: #c7004c;
+          font-size: 28px;
+        }
+        .callout line {
+          stroke: #c7004c;
+          stroke-width: 4;
+        }
+        .callout circle {
+          fill: #c7004c;
+          stroke: #ffffff;
+          stroke-width: 4;
+        }
+        .callout text {
+          fill: #ffffff;
+          font-size: 26px;
+          font-weight: 600;
+          text-anchor: middle;
+          dominant-baseline: central;
+        }
+        .duplicate {
+          stroke: #666666;
+        }
+        .side {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .check {
+          display: grid;
+          grid-template-columns: 42px 1fr;
+          align-items: center;
+          min-height: 84px;
+          padding: 14px 16px;
+          border-bottom: 2px solid #a4a3a4;
+          font-size: 23px;
+        }
+        .box {
+          width: 26px;
+          height: 26px;
+          border: 3px solid #c7004c;
+        }
+        .check b {
+          font-weight: 600;
+        }
+        .check span {
+          display: block;
+          margin-top: 5px;
+          color: #666666;
+          font-size: 18px;
+          line-height: 1.3;
+        }
+        .progress {
+          margin-top: auto;
+          padding: 24px;
+          background: #f5f5f3;
+          border-left: 8px solid #c7004c;
+        }
+        .progress strong {
+          font-size: 29px;
+        }
+        .track {
+          width: 100%;
+          height: 12px;
+          margin-top: 16px;
+          background: #a4a3a4;
+        }
+        .fill {
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: #c7004c;
+          transform-origin: left center;
+        }
+        .decision {
+          margin-top: 14px;
+          color: #666666;
+          font-size: 25px;
+          line-height: 1.4;
+        }
+      </style>
+      <div
+        id="l09f05-root"
+        data-composition-id="l09-frame-05-dimension-review"
+        data-start="0"
+        data-duration="180"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l09f05-scene"
+          class="clip"
+          data-start="0"
+          data-duration="180"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L08_REPRESENTED → L09_RELEASE_CANDIDATE</b><span>A3 가로 · 제3각법 · DIM/OUTLINE/CENTER · 시험 감점 위험 점검</span></div>
+          <header class="top">
+            <div>
+              <div class="index">05 · RELEASE CANDIDATE</div>
+              <h1>EDU-SB-01의 치수와 축척을 함께 닫습니다</h1>
+            </div>
+            <div class="prompt">기준과 중복을 검수합니다</div>
+          </header>
+          <main class="layout">
+            <section class="drawing">
+              <svg viewBox="0 0 1100 650" aria-label="EDU-SB-01 센서 장착 브래킷 치수 검수">
+                <path class="shape" d="M210 500 V202.5 H422.5 A127.5 127.5 0 0 1 677.5 202.5 H770.4 A42.5 42.5 0 0 1 800.44 214.94 L890 304.5 V457.5 L847.5 500 Z"/>
+                <rect class="feature" x="252.5" y="253.5" width="119" height="119"/>
+                <circle class="feature" cx="550" cy="313" r="85"/><polygon class="feature" points="697.23,313 623.61,185.5 476.39,185.5 402.77,313 476.39,440.5 623.61,440.5"/>
+                <path class="feature" d="M490.5 109 H609.5 A34 34 0 0 1 609.5 177 H490.5 A34 34 0 0 1 490.5 109 Z"/>
+                <circle class="feature" cx="337.5" cy="432" r="25.5"/><circle class="feature" cx="762.5" cy="432" r="25.5"/>
+                <circle class="feature" cx="682.5" cy="236.5" r="17"/><circle class="feature" cx="417.5" cy="236.5" r="17"/><circle class="feature" cx="550" cy="466" r="17"/>
+                <path class="dim" d="M210 140V90M890 140V90M210 110H890" />
+                <text class="dimtext" x="520" y="95">80</text>
+                <path class="dim" d="M170 75H120M170 500H120M140 75V500" />
+                <text class="dimtext" x="85" y="350">50</text>
+                <path class="dim" d="M465 313H635" />
+                <text class="dimtext" x="500" y="295">Ø20</text>
+                <text class="dimtext" x="245" y="405">2×Ø6</text>
+                <text class="dimtext" x="650" y="215">3×Ø4 · PCD Ø36</text>
+                <path class="dim duplicate" d="M210 550H890" />
+                <text class="dimtext" x="500" y="590">80 중복 제거</text>
+                <g class="callout"><line x1="226" y1="174" x2="210" y2="110"/><circle cx="230" cy="178" r="22"/><text x="230" y="178">1</text></g>
+                <g class="callout"><line x1="575" y1="268" x2="550" y2="313"/><circle cx="580" cy="258" r="22"/><text x="580" y="258">2</text></g>
+                <g class="callout"><line x1="810" y1="408" x2="762.5" y2="432"/><circle cx="820" cy="403" r="22"/><text x="820" y="403">3</text></g>
+                <g class="callout"><line x1="640" y1="118" x2="609.5" y2="143"/><circle cx="650" cy="110" r="22"/><text x="650" y="110">4</text></g>
+                <g class="callout"><line x1="278" y1="238" x2="305" y2="275"/><circle cx="270" cy="228" r="22"/><text x="270" y="228">5</text></g>
+              </svg>
+            </section>
+            <section class="side">
+              <div class="check">
+                <i class="box"></i>
+                <div><b>1 · 80×50×8 · Datum A/B</b><span>원점 정면 좌하단 · Datum B X=40</span></div>
+              </div>
+              <div class="check">
+                <i class="box"></i>
+                <div>
+                  <b>2 · Ø20 · AF30 깊이 4</b><span>공통 중심 (40,22)</span>
+                </div>
+              </div>
+              <div class="check">
+                <i class="box"></i>
+                <div>
+                  <b>3 · 2×Ø6 · 3×Ø4 PCD Ø36</b><span>(15,8)/(65,8) · 시작 30° CCW</span>
+                </div>
+              </div>
+              <div class="check">
+                <i class="box"></i>
+                <div><b>4 · SLOT 22×8 · R15/R5/C5 · 45°</b><span>장공 (40,42) · 경사 (68,35)→(80,23)</span></div>
+              </div>
+              <div class="check">
+                <i class="box"></i>
+                <div>
+                  <b>5 · POCKET 14×14 · 깊이 2</b><span>(5,15)–(19,29)</span>
+                </div>
+              </div>
+              <div class="progress">
+                <strong>L09_RELEASE_CANDIDATE</strong>
+                <div class="track"><i class="fill"></i></div>
+                <div class="decision">
+                  교육용 정본 · 중복 없이 기준 위치까지 확인<br />실제 시험 문제지 지정값 우선
+                </div>
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l09f05-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .drawing`,
+          { opacity: 0, x: -80 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power4.out" },
+          0.8,
+        );
+        document.querySelectorAll("#l09f05-scene .dim").forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = `${n}`;
+          p.style.strokeDashoffset = `${n}`;
+        });
+        tl.to(
+          `${s} .dim`,
+          {
+            strokeDashoffset: 0,
+            duration: 0.75,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          1.5,
+        );
+        tl.fromTo(
+          `${s} .check`,
+          { opacity: 0, x: 65 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.4,
+            ease: "power3.out",
+            stagger: 0.12,
+          },
+          3,
+        );
+        tl.fromTo(
+          `${s} .box`,
+          { backgroundColor: "#FFFFFF" },
+          {
+            backgroundColor: "#C7004C",
+            duration: 0.28,
+            ease: "power1.out",
+            stagger: 0.22,
+          },
+          34,
+        );
+        tl.to(
+          `${s} .duplicate`,
+          { opacity: 0, duration: 0.45, ease: "power2.in" },
+          42,
+        );
+        tl.fromTo(
+          `${s} .progress`,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          65,
+        );
+        tl.fromTo(
+          `${s} .fill`,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1, ease: "power2.out" },
+          65.2,
+        );
+        window.__timelines["l09-frame-05-dimension-review"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet('staged', 'all')]
     [string]$Mode = 'staged'
@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 $paths = if ($Mode -eq 'staged') {
     @(& git -c core.quotepath=false diff --cached --name-only --diff-filter=ACMR)
 } else {
-    @(& git -c core.quotepath=false ls-files)
+    @(& git -c core.quotepath=false ls-files --cached --others --exclude-standard | Sort-Object -Unique)
 }
 
 if ($LASTEXITCODE -ne 0) {
@@ -22,6 +22,8 @@ $blockedExtensions = @(
     '.dwg', '.dxf', '.dwt', '.dws', '.sv$', '.ac$', '.dwl', '.dwl2',
     '.pdf', '.mp4', '.mov', '.mkv', '.avi',
     '.wav', '.m4a', '.mp3', '.srt', '.vtt',
+    '.ttf', '.ttc', '.otf', '.woff', '.woff2',
+    '.png', '.jpg', '.jpeg', '.webp', '.gif', '.bmp', '.tif', '.tiff', '.avif', '.svg',
     '.zip', '.7z', '.rar'
 )
 

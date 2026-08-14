@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l10f04-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+        }
+        h1 {
+          margin: 4px 0 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 64px;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 30px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 42px;
+          margin-top: 40px;
+        }
+        .drawing {
+          position: relative;
+          height: 650px;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+        }
+        .drawing svg {
+          width: 100%;
+          height: 100%;
+        }
+        .shape {
+          fill: #ffffff;
+          stroke: #111111;
+          stroke-width: 10;
+        }
+        .guide {
+          fill: none;
+          stroke: #a4a3a4;
+          stroke-width: 5;
+          stroke-dasharray: 16 12;
+        }
+        .hole {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 8;
+        }
+        .source {
+          fill: #c7004c;
+        }
+        .side {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .stage {
+          padding: 24px;
+          border: 2px solid #a4a3a4;
+        }
+        .stage b {
+          display: block;
+          color: #c7004c;
+          font-size: 24px;
+        }
+        .stage strong {
+          display: block;
+          margin-top: 10px;
+          font-size: 30px;
+        }
+        .stage span {
+          display: block;
+          margin-top: 6px;
+          color: #666666;
+          font-size: 23px;
+        }
+        .principle {
+          margin-top: auto;
+          padding: 25px;
+          background: #f5f5f3;
+          border-left: 8px solid #c7004c;
+          font-size: 29px;
+          font-weight: 600;
+        }
+        .record {
+          position: absolute;
+          inset: 216px 96px 64px;
+          display: grid;
+          grid-template-rows: 58px 1fr;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .record-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 22px;
+          border-bottom: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 23px;
+        }
+        .record-bar b {
+          color: #c7004c;
+        }
+        .record-canvas {
+          display: grid;
+          place-items: center;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 48px 48px;
+        }
+        .placeholder {
+          width: 900px;
+          padding: 42px;
+          text-align: center;
+          background: #ffffff;
+          border: 3px solid #c7004c;
+        }
+        .placeholder strong {
+          display: block;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .placeholder span {
+          display: block;
+          margin-top: 14px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .check {
+          position: absolute;
+          left: 138px;
+          bottom: 104px;
+          width: 760px;
+          padding: 26px 30px;
+          background: #ffffff;
+          border-left: 8px solid #c7004c;
+          font-size: 29px;
+          opacity: 0;
+        }
+      </style>
+      <div
+        id="l10f04-root"
+        data-composition-id="l10-frame-04-holes-repetition"
+        data-start="0"
+        data-duration="240"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l10f04-scene"
+          class="clip"
+          data-start="0"
+          data-duration="240"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L09_RELEASE_CANDIDATE → L10_RELEASE</b><span>A3 · 제3각법 · OUTLINE/CENTER/HIDDEN/DIM/BORDER/TITLE/HATCH · 시험 감점 위험</span></div>
+          <header class="top">
+            <div>
+              <div class="index">04 · GATES 05–06</div>
+              <h1>형상·표현·축척을 입력과 대조합니다</h1>
+            </div>
+            <div class="prompt">틀린 항목만 수정</div>
+          </header>
+          <main class="layout">
+            <section class="drawing">
+              <svg viewBox="0 0 1200 650" aria-hidden="true">
+                <path class="shape" d="M130 560 V210 H380 A150 150 0 0 1 680 210 H789.29 A50 50 0 0 1 824.64 224.64 L930 330 V510 L880 560 Z" />
+                <rect class="hole target" x="180" y="270" width="140" height="140"/>
+                <path class="guide" d="M530 40V610M80 340H1080" />
+                <circle class="guide" cx="530" cy="340" r="180"/>
+                <circle class="hole source" cx="530" cy="340" r="100" />
+                <polygon class="hole target" points="703.21,340 616.6,190 443.4,190 356.79,340 443.4,490 616.6,490"/>
+                <circle class="hole target" cx="280" cy="480" r="30" />
+                <circle class="hole target" cx="780" cy="480" r="30" />
+                <circle class="hole target" cx="685.88" cy="250" r="20" />
+                <circle class="hole target" cx="374.12" cy="250" r="20" />
+                <circle class="hole target" cx="530" cy="520" r="20" />
+                <path class="hole target" d="M460 100 H600 A40 40 0 0 1 600 180 H460 A40 40 0 0 1 460 100 Z" />
+              </svg>
+            </section>
+            <section class="side">
+              <div class="stage">
+                <b>01 · GEOMETRY</b><strong>80×50 · Ø20 · AF30</strong
+                ><span>2×Ø6 · 3×Ø4 · PCD Ø36</span>
+              </div>
+              <div class="stage">
+                <b>02 · FINISH</b><strong>장공 · R5 · C5</strong
+                ><span>경계와 접선 관계 확인</span>
+              </div>
+              <div class="stage">
+                <b>03 · REPRESENT</b><strong>A–A · 센서 · 주석</strong
+                ><span>HATCH · BLOCK · GROUP</span>
+              </div>
+              <div class="stage">
+                <b>04 · SCALE</b><strong>Model 1:1</strong
+                ><span>A3 뷰 축척 · 표기 일치</span>
+              </div>
+              <div class="principle">
+                기준 한 개를 먼저 검수하고 전체 패턴을 다시 검수합니다.
+              </div>
+            </section>
+          </main>
+          <section
+            class="record"
+            aria-label="DEMO-02 구멍 반복 사용자 화면 녹화 삽입 자리"
+          >
+            <div class="record-bar">
+              <b>DEMO-02 · USER RECORDING</b
+              ><span>GEOMETRY · HATCH · BLOCK · SCALE</span>
+            </div>
+            <div class="record-canvas">
+              <div class="placeholder">
+                <strong>AutoCAD 화면 녹화</strong
+                ><span>사용자 촬영본이 이 프레임을 대체합니다</span>
+              </div>
+            </div>
+          </section>
+          <div class="check">
+            구멍 개수 · 중심 간격 · 대칭 관계 · 장공 크기를 확인합니다.
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l10f04-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .drawing`,
+          { opacity: 0, x: -85 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power4.out" },
+          0.8,
+        );
+        tl.fromTo(
+          `${s} .stage`,
+          { opacity: 0, x: 70 },
+          { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.1 },
+          1.1,
+        );
+        tl.fromTo(
+          `${s} .source`,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" },
+          2,
+        );
+        tl.fromTo(
+          `${s} .target`,
+          { opacity: 0, scale: 0.4 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.65,
+            ease: "power3.out",
+            stagger: 0.12,
+          },
+          3,
+        );
+        tl.fromTo(
+          `${s} .principle`,
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          15,
+        );
+        tl.to(
+          `${s} .layout`,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          49,
+        );
+        tl.fromTo(
+          `${s} .record`,
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" },
+          49.12,
+        );
+        tl.fromTo(
+          `${s} .placeholder`,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          49.4,
+        );
+        tl.fromTo(
+          `${s} .check`,
+          { opacity: 0, x: -64 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power4.out" },
+          209,
+        );
+        window.__timelines["l10-frame-04-holes-repetition"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

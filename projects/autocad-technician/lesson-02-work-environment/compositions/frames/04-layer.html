@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"></head>
+<body>
+<template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+<style>
+*{box-sizing:border-box}#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111111;font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif}.clip{position:absolute;inset:0;padding:72px 96px 64px;background:#FFFFFF}.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}h1{margin:0;font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:62px}.current{padding:9px 15px;border:2px solid #C7004C;color:#C7004C;font-size:24px;font-weight:600}.body{display:grid;grid-template-columns:1.18fr .82fr;gap:40px;height:720px;padding-top:40px}.table{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;border:2px solid #A4A3A4}.row{display:grid;grid-template-columns:36px 205px 52px 1fr;align-items:center;min-width:0;padding:0 12px;border-bottom:2px solid #A4A3A4;font-size:22px}.row:nth-child(odd){border-right:2px solid #A4A3A4}.row:nth-last-child(-n+2){border-bottom:0}.row b{color:#C7004C;font-size:20px}.row strong{font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:21px;white-space:nowrap}.sample{height:7px;background:#111111;transform-origin:left center}.row:nth-child(2) .sample{height:4px;background:#C7004C}.row:nth-child(3) .sample{height:5px;background:#666666}.role{min-width:0;color:#666666;font-size:18px;line-height:1.2}.diagram{display:grid;grid-template-rows:1fr auto;padding:28px;background:#F5F5F3;border-top:4px solid #111111}.diagram svg{width:100%;height:500px}.outline{fill:none;stroke:#111111;stroke-width:13}.centerline{stroke:#C7004C;stroke-width:5;stroke-dasharray:30 12 8 12}.hidden{stroke:#666666;stroke-width:7;stroke-dasharray:18 12}.construction{fill:none;stroke:#A4A3A4;stroke-width:4;stroke-dasharray:14 10}.caption{padding:17px;border-top:2px solid #A4A3A4;font-size:24px;line-height:1.35}.caption b{color:#C7004C}.recording{position:absolute;inset:216px 96px 64px;display:grid;grid-template-rows:56px 1fr;border:3px solid #111111;background:#F5F5F3;opacity:0;overflow:hidden}.bar{display:flex;justify-content:space-between;align-items:center;padding:0 22px;border-bottom:2px solid #A4A3A4;color:#666666;font-size:22px}.bar b{color:#C7004C;letter-spacing:.08em}.canvas{display:grid;place-items:center;background-image:linear-gradient(#A4A3A4 1px,transparent 1px),linear-gradient(90deg,#A4A3A4 1px,transparent 1px);background-size:48px 48px}.placeholder{width:820px;padding:42px;text-align:center;background:#FFFFFF;border:3px solid #C7004C}.placeholder strong{display:block;font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:44px}.placeholder span{display:block;margin-top:13px;color:#666666;font-size:25px}.decision{position:absolute;right:140px;bottom:96px;width:620px;padding:25px 30px;background:#FFFFFF;border-left:8px solid #C7004C;font-size:28px;opacity:0}.decision b{display:block;color:#C7004C;font-size:21px;letter-spacing:.08em}
+</style>
+<style>
+.row{grid-template-columns:30px 140px 24px 1fr;gap:8px;padding:0 10px}.row strong{font-size:18px}.role{display:flex;flex-direction:column;gap:4px;font-size:16px}.role em{color:#111111;font-size:15px;font-style:normal}.role small{color:#666666;font-size:14px;line-height:1.15;white-space:nowrap}.row .sample{background:#111111}.row .sample.aci8,.row .sample.aci9{background:#666666}
+</style>
+<div id="root" data-composition-id="l2-frame-04-layer" data-start="0" data-duration="150" data-width="1920" data-height="1080">
+  <section id="l2f4" class="clip" data-start="0" data-duration="150" data-track-index="1">
+    <header class="topline">
+      <div><div class="index">04 · A3 + ALL LAYERS</div><h1>도면틀과 여덟 Layer를 직접 준비합니다</h1></div>
+      <div class="current">BYLAYER · L02_SETUP</div>
+    </header>
+    <main class="body">
+      <section class="table" aria-label="EDU-SB-01 전체 Layer 목록">
+        <div class="row"><b>01</b><strong>OUTLINE</strong><span class="sample aci7"></span><span class="role"><em>보이는 외형선</em><small>ACI 7 · Continuous · 0.50 mm</small></span></div>
+        <div class="row"><b>02</b><strong>CENTER</strong><span class="sample aci1"></span><span class="role"><em>중심선·대칭축</em><small>ACI 1 · CENTER2 · 0.25 mm</small></span></div>
+        <div class="row"><b>03</b><strong>HIDDEN</strong><span class="sample aci3"></span><span class="role"><em>보이지 않는 형상</em><small>ACI 3 · HIDDEN2 · 0.25 mm</small></span></div>
+        <div class="row"><b>04</b><strong>DIM</strong><span class="sample aci2"></span><span class="role"><em>치수선·치수 문자</em><small>ACI 2 · Continuous · 0.25 mm</small></span></div>
+        <div class="row"><b>05</b><strong>BORDER</strong><span class="sample aci7"></span><span class="role"><em>용지 외관선·도면틀</em><small>ACI 7 · Continuous · 0.50 mm</small></span></div>
+        <div class="row"><b>06</b><strong>TITLE</strong><span class="sample aci7"></span><span class="role"><em>표제란·주석칸</em><small>ACI 7 · Continuous · 0.25 mm</small></span></div>
+        <div class="row"><b>07</b><strong>HATCH</strong><span class="sample aci8"></span><span class="role"><em>단면 해칭</em><small>ACI 8 · Continuous · 0.18 mm</small></span></div>
+        <div class="row"><b>08</b><strong>CONSTRUCTION</strong><span class="sample aci9"></span><span class="role"><em>투영·보조선</em><small>ACI 9 · Continuous · 0.18 mm</small></span></div>
+      </section>
+      <section class="diagram">
+        <svg viewBox="0 0 700 500" aria-label="Layer 선종류 원리 개념도, 축척 없음">
+          <path class="construction" d="M80 390H625V65H80ZM350 40V430"/>
+          <path class="outline" d="M80 390H555V295H625V105H415V65H190L80 155Z"/>
+          <circle class="outline" cx="270" cy="250" r="58"/>
+          <line class="centerline" x1="270" y1="110" x2="270" y2="390"/>
+          <line class="hidden" x1="470" y1="175" x2="470" y2="330"/>
+        </svg>
+        <div class="caption"><b>Layer 원리 개념도 · NTS</b> 선 표본은 ACI 색상이 아닙니다. 실제 색은 숫자와 AutoCAD 대화상자로 확인하고 시험 DWT/DWG 지정을 우선합니다.</div>
+      </section>
+    </main>
+    <section class="recording" aria-label="DEMO-02 사용자 화면 녹화 삽입 자리">
+      <div class="bar"><b>DEMO-02 · USER RECORDING</b><span>빈 LAYOUT부터 · A3 · VIEWPORT · 8 LAYERS</span></div>
+      <div class="canvas"><div class="placeholder"><strong>도면틀을 직접 작성하는 화면</strong><span>420×297 · 사방10 · 200×30 · 100+100 · text10 · viewport lock</span></div></div>
+    </section>
+    <div class="decision" data-layout-allow-occlusion><b>감점 위험 CHECK</b>필수 Layer 누락·지정 색상·선종류 불일치를 확인합니다.</div>
+  </section>
+</div>
+<script>
+window.__timelines=window.__timelines||{};
+const tl=gsap.timeline({paused:true});const s="#l2f4";
+tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2)
+  .fromTo(`${s} .current`,{opacity:0,x:46},{opacity:1,x:0,duration:.44,ease:"power2.out"},.72)
+  .fromTo(`${s} .row`,{opacity:0,x:-70},{opacity:1,x:0,duration:.4,ease:"power4.out",stagger:.1},1.1)
+  .fromTo(`${s} .diagram`,{opacity:0,x:94},{opacity:1,x:0,duration:.7,ease:"power3.out"},1.25)
+  .fromTo(`${s} .sample`,{scaleX:0},{scaleX:1,duration:.52,ease:"power2.out",stagger:.12},3)
+  .to(`${s} .current`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.38,ease:"power2.inOut"},24)
+  .to(`${s} .body`,{opacity:0,duration:.32,ease:"power2.in"},49.5)
+  .fromTo(`${s} .recording`,{opacity:0,scale:.98},{opacity:1,scale:1,duration:.62,ease:"power3.out"},49.62)
+  .fromTo(`${s} .placeholder`,{opacity:0,y:34},{opacity:1,y:0,duration:.55,ease:"power2.out"},50)
+  .fromTo(`${s} .decision`,{opacity:0,x:66},{opacity:1,x:0,duration:.58,ease:"power4.out"},132);
+window.__timelines["l2-frame-04-layer"]=tl;
+</script>
+</template>
+</body>
+</html>

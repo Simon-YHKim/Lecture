@@ -1,0 +1,8 @@
+{
+  "duration": 45,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#frame-06-layout h1", "bySec": 1 },
+    { "kind": "before", "a": "#frame-06-layout .command", "b": "#frame-06-layout .next" },
+    { "kind": "staysInFrame", "selector": "#frame-06-layout .map" }
+  ]
+}

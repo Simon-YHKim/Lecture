@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        #root { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; color:#111111; font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif; }
+        * { box-sizing:border-box; }
+        .clip { position:absolute; inset:0; width:100%; height:100%; padding:72px 96px 64px; background:#FFFFFF; }
+        .topline { display:flex; align-items:end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid #A4A3A4; }
+        .index { color:#C7004C; font-size:24px; font-weight:600; letter-spacing:.08em; }
+        h1 { margin:0; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:64px; font-weight:600; letter-spacing:-.035em; }
+        .pause { padding:12px 22px; color:#C7004C; border:2px solid #C7004C; font-size:28px; font-weight:600; }
+        .body { display:grid; grid-template-columns:1.3fr .7fr; gap:48px; height:750px; padding-top:40px; }
+        .drawing { height:710px; padding:28px; background:#F5F5F3; border:2px solid #A4A3A4; }
+        .drawing svg { width:100%; height:100%; }
+        .shape { fill:none; stroke:#111111; stroke-width:14; stroke-linejoin:round; }
+        .problem { fill:#FFFFFF; stroke:#C7004C; stroke-width:7; }
+        .num { fill:#C7004C; font-size:30px; font-weight:700; text-anchor:middle; dominant-baseline:middle; }
+        .tag { fill:#111111; font-size:27px; font-weight:600; }
+        .side { display:flex; flex-direction:column; justify-content:space-between; height:710px; }
+        .instruction { padding:22px 24px; border-top:4px solid #C7004C; background:#F5F5F3; }
+        .instruction h2 { margin:0 0 12px; font-size:38px; }
+        .instruction p { margin:0; font-size:25px; line-height:1.35; color:#666666; }
+        .commands { display:grid; gap:4px; }
+        .commands div { position:relative; display:flex; align-items:center; justify-content:space-between; min-height:56px; padding:8px 16px; border-bottom:2px solid #A4A3A4; font-size:24px; }
+        .commands b { color:#C7004C; }
+        .answer-mask { position:absolute; right:16px; color:#666666; font-size:21px; }
+        .check { padding:17px 22px; border:2px solid #111111; }
+        .check-title { margin-bottom:9px; color:#C7004C; font-size:22px; font-weight:600; }
+        .check p { margin:3px 0; font-size:21px; line-height:1.3; }
+        .pause-track { position:absolute; left:96px; right:96px; top:178px; height:12px; background:#F5F5F3; overflow:hidden; }
+        .pause-fill { display:block; width:100%; height:100%; background:#C7004C; transform-origin:left center; }
+        .phase-label { position:absolute; right:96px; top:200px; color:#666666; font-size:21px; letter-spacing:.06em; }
+      </style>
+      <div data-hf-id="hf-n0wo" id="root" data-composition-id="frame-05-guided-challenge" data-start="0" data-duration="180" data-width="1920" data-height="1080">
+        <section data-hf-id="hf-ety8" id="frame-05-layout" class="clip" data-start="0" data-duration="180" data-track-index="1">
+          <div data-hf-id="continuity-l7f5" style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #A4A3A4;background:#FFFFFF;color:#666666;font-size:18px"><b style="color:#C7004C">EDU-SB-01 · L06_PATTERNED_FEATURES → L07_GEOMETRY_FINAL</b><span>A3 가로 · 제3각법 · OUTLINE/CENTER/HIDDEN · 시험 감점 위험 점검</span></div>
+          <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-yvlv" class="index">05 · L07 형상 게이트</div><h1 data-hf-id="hf-8me6">L06 결과에서 바뀐 다섯 지점만 봅니다</h1></div><div data-hf-id="hf-qz6j" class="pause">20초 · 직접 검수</div></header>
+          <div data-hf-id="hf-xrvn" class="pause-track" aria-hidden="true"><span data-hf-id="hf-gvu9" class="pause-fill"></span></div>
+          <div data-hf-id="hf-pta3" class="phase-label">THINK → SOLVE → CHECK</div>
+          <main data-hf-id="hf-lyjg" class="body">
+            <section data-hf-id="hf-hc3y" class="drawing">
+              <svg data-hf-id="hf-nr3p" viewBox="0 0 1120 660" aria-label="가상 브래킷 실습 형상">
+                <path data-hf-id="hf-qn5p" class="shape" d="M120 560 V210 H370 A150 150 0 0 1 670 210 H779.29 A50 50 0 0 1 814.64 224.64 L920 330 V510 L870 560 Z" />
+                <rect class="shape" x="170" y="270" width="140" height="140" />
+                <circle data-hf-id="hf-8m93" class="shape" cx="520" cy="340" r="100" /><polygon data-hf-id="hf-psqu" class="shape" points="693.21,340 606.6,190 433.4,190 346.79,340 433.4,490 606.6,490" /><path data-hf-id="hf-53tt" class="shape" d="M450 100 H590 A40 40 0 0 1 590 180 H450 A40 40 0 0 1 450 100 Z" />
+                <circle class="shape" cx="270" cy="480" r="30" /><circle class="shape" cx="770" cy="480" r="30" /><circle class="shape" cx="675.88" cy="250" r="20" /><circle class="shape" cx="364.12" cy="250" r="20" /><circle class="shape" cx="520" cy="520" r="20" />
+                <circle data-hf-id="hf-bfxu" class="problem" cx="120" cy="560" r="25" /><text data-hf-id="hf-777t" class="num" x="120" y="560">1</text><text data-hf-id="hf-src8" class="tag" x="55" y="620">투영선 점검</text>
+                <circle data-hf-id="hf-zku6" class="problem" cx="814.64" cy="224.64" r="25" /><text data-hf-id="hf-5hfg" class="num" x="814.64" y="224.64">2</text><text data-hf-id="hf-wauq" class="tag" x="850" y="215">접속 점검</text>
+                <circle data-hf-id="hf-75bg" class="problem" cx="800" cy="210" r="25" /><text data-hf-id="hf-uvkn" class="num" x="800" y="210">3</text><text data-hf-id="hf-kgfx" class="tag" x="838" y="175">R5</text>
+                <circle data-hf-id="hf-u0e9" class="problem" cx="895" cy="535" r="25" /><text data-hf-id="hf-ep0x" class="num" x="895" y="535">4</text><text data-hf-id="hf-h4r8" class="tag" x="925" y="570">C5</text>
+                <circle data-hf-id="hf-h7mf" class="problem" cx="520" cy="340" r="25" /><text data-hf-id="hf-om1y" class="num" x="520" y="340">5</text><text data-hf-id="hf-b4tu" class="tag" x="430" y="615">센서 참조</text>
+              </svg>
+            </section>
+            <aside data-hf-id="hf-ntsi" class="side">
+              <section data-hf-id="hf-oamk" class="instruction"><h2 data-hf-id="hf-jc9g">먼저 적어 보세요</h2><p data-hf-id="hf-yaai">각 번호에 필요한 명령과 적용 순서를 정한 뒤 AutoCAD에서 실행합니다.</p></section>
+              <section data-hf-id="hf-9cku" class="commands"><div data-hf-id="hf-y7yw"><span data-hf-id="hf-1jtb">1 · 뷰 밖 CONSTRUCTION</span><b data-hf-id="hf-pbjd">TRIM</b><span data-hf-id="hf-rzud" class="answer-mask">직접 결정</span></div><div data-hf-id="hf-x11t"><span data-hf-id="hf-5058">2 · 짧은 HIDDEN</span><b data-hf-id="hf-e161">EXTEND</b><span data-hf-id="hf-ys15" class="answer-mask">직접 결정</span></div><div data-hf-id="hf-xfcu"><span data-hf-id="hf-rfvf">3 · 어깨 R5</span><b data-hf-id="hf-z3sp">FILLET</b><span data-hf-id="hf-zyy8" class="answer-mask">직접 결정</span></div><div data-hf-id="hf-w8fr"><span data-hf-id="hf-e37q">4 · 하단 C5</span><b data-hf-id="hf-a2ad">CHAMFER</b><span data-hf-id="hf-zkn7" class="answer-mask">직접 결정</span></div><div data-hf-id="hf-wmqs"><span data-hf-id="hf-0csl">5 · 센서 참조</span><b data-hf-id="hf-f4c1">SCALE</b><span data-hf-id="hf-xl42" class="answer-mask">Reference만</span></div></section>
+              <section data-hf-id="hf-94gk" class="check"><div data-hf-id="hf-ewh3" class="check-title">L07_GEOMETRY_FINAL</div><p data-hf-id="hf-a98k">□ OUTLINE 경계가 닫혔는가</p><p data-hf-id="hf-6zlf">□ CENTER·HIDDEN이 유지됐는가</p><p data-hf-id="hf-3vzw">□ R5와 C5가 맞는가</p><p data-hf-id="hf-flyn">□ 센서 참조만 교정됐는가</p></section>
+            </aside>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines=window.__timelines||{};
+        const tl=gsap.timeline({paused:true});
+        const s="#frame-05-layout";
+        tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2);
+        tl.fromTo(`${s} .pause`,{opacity:0,scale:.9},{opacity:1,scale:1,duration:.48,ease:"back.out(1.45)"},.7);
+        tl.fromTo(`${s} .drawing`,{opacity:0,x:-90},{opacity:1,x:0,duration:.7,ease:"power4.out"},1.0);
+        tl.fromTo(`${s} .side`,{opacity:0,x:92},{opacity:1,x:0,duration:.7,ease:"power3.out"},1.14);
+        const shapePaths=document.querySelectorAll("#frame-05-layout .shape");
+        shapePaths.forEach((p)=>{const len=p.getTotalLength();p.style.strokeDasharray=`${len}`;p.style.strokeDashoffset=`${len}`;});
+        tl.to(shapePaths,{strokeDashoffset:0,duration:.95,ease:"power2.out",stagger:.1},1.9);
+        tl.fromTo(`${s} .problem`,{opacity:0,scale:0},{opacity:1,scale:1,duration:.32,ease:"back.out(1.65)",stagger:.07},3.0);
+        tl.fromTo(`${s} .num, ${s} .tag`,{opacity:0,y:18},{opacity:1,y:0,duration:.3,ease:"power3.out",stagger:.035},3.2);
+        tl.fromTo(`${s} .instruction`,{opacity:0,y:36},{opacity:1,y:0,duration:.5,ease:"power2.out"},5.8);
+        tl.fromTo(`${s} .pause-fill`,{scaleX:0},{scaleX:1,duration:20,ease:"none"},8.0);
+        tl.to(`${s} .pause`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.38,ease:"power2.inOut"},28.0);
+        tl.fromTo(`${s} .commands div`,{opacity:.42,x:26},{opacity:1,x:0,duration:.34,ease:"power3.out",stagger:.12},30.0);
+        tl.to(`${s} .answer-mask`,{opacity:0,duration:.24,ease:"power2.in",stagger:.08},54.8);
+        tl.fromTo(`${s} .commands b`,{opacity:0,y:22},{opacity:1,y:0,duration:.38,ease:"back.out(1.35)",stagger:.14},55.0);
+        tl.to(`${s} .commands div`,{borderBottomColor:"#C7004C",duration:.3,ease:"power1.inOut",stagger:.14},55.0);
+        tl.fromTo(`${s} .check`,{opacity:0,y:44},{opacity:1,y:0,duration:.58,ease:"power4.out"},116.0);
+        tl.fromTo(`${s} .check p`,{opacity:0,x:34},{opacity:1,x:0,duration:.34,ease:"power3.out",stagger:.1},116.35);
+        window.__timelines["frame-05-guided-challenge"]=tl;
+      </script>
+    </template>
+  </body>
+</html>

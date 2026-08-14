@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l05-f04-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .scene {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 62px;
+          letter-spacing: -0.035em;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 29px;
+        }
+        .board {
+          height: 700px;
+          margin-top: 38px;
+          padding: 24px;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+        }
+        .board svg {
+          width: 100%;
+          height: 100%;
+        }
+        .shape {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 10;
+          stroke-linejoin: round;
+        }
+        .hidden {
+          fill: none;
+          stroke: #666666;
+          stroke-width: 7;
+          stroke-dasharray: 18 12;
+        }
+        .centerline {
+          fill: none;
+          stroke: #a4a3a4;
+          stroke-width: 5;
+          stroke-dasharray: 28 8 6 8;
+        }
+        .trace {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 6;
+          stroke-dasharray: 15 10;
+        }
+        .badge {
+          fill: #ffffff;
+          stroke: #c7004c;
+          stroke-width: 6;
+        }
+        .num {
+          fill: #c7004c;
+          font-size: 28px;
+          font-weight: 600;
+          text-anchor: middle;
+          dominant-baseline: middle;
+        }
+        .label {
+          fill: #c7004c;
+          font-size: 23px;
+          font-weight: 600;
+        }
+        .recording {
+          position: absolute;
+          inset: 250px 96px 64px;
+          display: grid;
+          grid-template-rows: 58px 1fr;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .record-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 24px;
+          border-bottom: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 23px;
+        }
+        .record-bar b {
+          color: #c7004c;
+          letter-spacing: 0.08em;
+        }
+        .record-body {
+          position: relative;
+          display: grid;
+          place-items: center;
+        }
+        .placeholder {
+          width: 800px;
+          padding: 42px;
+          text-align: center;
+          background: #ffffff;
+          border: 3px solid #c7004c;
+        }
+        .placeholder strong {
+          display: block;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .placeholder span {
+          display: block;
+          margin-top: 14px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .cursor {
+          position: absolute;
+          left: 310px;
+          top: 470px;
+          width: 34px;
+          height: 34px;
+          border: 4px solid #c7004c;
+        }
+        .ripple {
+          position: absolute;
+          left: 1310px;
+          top: 355px;
+          width: 88px;
+          height: 88px;
+          border: 3px solid #c7004c;
+          opacity: 0;
+        }
+        .decision {
+          position: absolute;
+          right: 140px;
+          bottom: 96px;
+          width: 610px;
+          padding: 26px 30px;
+          background: #ffffff;
+          border-left: 8px solid #c7004c;
+          font-size: 28px;
+          opacity: 0;
+        }
+        .decision b {
+          display: block;
+          color: #c7004c;
+          font-size: 22px;
+          margin-bottom: 6px;
+        }
+      </style>
+      <div
+        id="l05-f04-root"
+        data-composition-id="l05-frame-04-feature-tracing"
+        data-start="0"
+        data-duration="180"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l05-f04-scene"
+          class="clip scene"
+          data-start="0"
+          data-duration="180"
+          data-track-index="1"
+        >
+          <header class="top">
+            <div>
+              <div class="index">04 · L04 특징 추적</div>
+              <h1>Ø20·AF30·장공·포켓을 연결합니다</h1>
+            </div>
+            <div class="prompt">OUTLINE + CENTER + HIDDEN + CONSTRUCTION</div>
+          </header>
+          <section class="board">
+            <svg viewBox="0 0 1680 650">
+              <text
+                x="90"
+                y="55"
+                fill="#C7004C"
+                font-size="24"
+                font-weight="600"
+              >
+                FRONT · 기준
+              </text>
+              <path class="shape draw" d="M90 270 V90.625 H218.125 A76.875 76.875 0 0 1 371.875 90.625 H438.5 L500 152.125 V270 Z" />
+              <circle class="shape draw" cx="295" cy="157.25" r="51.25" />
+              <polygon class="shape draw" points="383.77,157.25 339.38,80.375 250.62,80.375 206.23,157.25 250.62,234.125 339.38,234.125" />
+              <path class="shape draw" d="M259.125 34.25 H330.875 A20.5 20.5 0 0 1 330.875 75.25 H259.125 A20.5 20.5 0 0 1 259.125 34.25 Z" />
+              <rect class="shape draw" x="115.625" y="121.375" width="71.75" height="71.75" />
+              <path class="centerline draw" d="M205 157.25 H385 M295 20 V290 M235 54.75H355" />
+              <text
+                x="665"
+                y="55"
+                fill="#C7004C"
+                font-size="24"
+                font-weight="600"
+              >
+                TOP · 위 · NTS 두께 과장
+              </text>
+              <path class="shape draw" d="M665 150 H1095 V230 H665 Z" />
+              <path class="hidden draw" d="M691.88 150 V170 M767.13 150 V170 M786.9 150 V190 M833.7 150 V190 M826.25 150 V230 M933.75 150 V230 M926.55 150 V190 M973.1 150 V190 M820.88 150 V230 M939.13 150 V230" />
+              <path class="centerline draw" d="M729.5 125 V195 M880 125 V255" />
+              <text
+                x="1225"
+                y="55"
+                fill="#C7004C"
+                font-size="24"
+                font-weight="600"
+              >
+                RIGHT · 오른쪽 · NTS 두께 과장
+              </text>
+              <path
+                class="shape draw"
+                d="M1390 270 H1480 V20 H1390 Z"
+              />
+              <path class="hidden draw" d="M1390 40 H1480 M1390 80 H1480 M1390 85 H1435 M1390 110 H1480 M1390 125 H1412.5 M1390 195 H1412.5 M1390 210 H1480 M1390 235 H1435" />
+              <path class="centerline draw" d="M1365 60 H1505 M1365 160 H1505" />
+              <path
+                class="trace draw"
+                d="M305 210 C470 390 690 390 827 190 M933 190 C1110 390 1280 390 1390 210 M1480 210 H1510"
+              />
+              <circle class="badge" cx="305" cy="210" r="24" />
+              <text class="num" x="305" y="210">1</text>
+              <circle class="badge" cx="880" cy="190" r="24" />
+              <text class="num" x="880" y="190">1</text>
+              <circle class="badge" cx="1435" cy="210" r="24" />
+              <text class="num" x="1435" y="210">1</text>
+              <text class="label" x="660" y="430">
+                1 · Ø20: OUTLINE + CENTER → HIDDEN + CENTER
+              </text>
+              <path class="trace draw" d="M344 150 H1390" />
+              <circle class="badge" cx="344" cy="150" r="24" />
+              <text class="num" x="344" y="150">2</text>
+              <circle class="badge" cx="1390" cy="150" r="24" />
+              <text class="num" x="1390" y="150">2</text>
+              <text class="label" x="660" y="495">
+                2 · AF30: 정면 포켓 → 다른 뷰 HIDDEN
+              </text>
+              <text class="label" x="660" y="560">3 · 장공 Seed: 중심축과 깊이 대응</text>
+              <text class="label" x="660" y="625">4 · 좌측 국소 OFFSET 5: 보임과 가림 판단</text>
+            </svg>
+          </section>
+          <section class="recording" aria-label="DEMO-02 사용자 화면 녹화 자리">
+            <div class="record-bar">
+              <b>DEMO-02 · USER RECORDING</b
+              ><span>Ø20 / AF30 / SLOT / OFFSET TRACE</span>
+            </div>
+            <div class="record-body">
+              <div class="placeholder">
+                <strong>AutoCAD 화면 녹화</strong
+                ><span>동일 EDU-SB-01의 네 특징 추적 녹화로 교체됩니다</span>
+              </div>
+              <div class="cursor"></div>
+              <div class="ripple"></div>
+            </div>
+          </section>
+          <div class="decision">
+            <b>TRACE CHECK</b>같은 특징의 위치와 OUTLINE·CENTER·HIDDEN 변화를 설명합니다.
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l05-f04-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .board`,
+          { opacity: 0, y: 54 },
+          { opacity: 1, y: 0, duration: 0.68, ease: "power4.out" },
+          0.9,
+        );
+        const paths = document.querySelectorAll("#l05-f04-scene .draw");
+        paths.forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = n;
+          p.style.strokeDashoffset = n;
+        });
+        tl.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            duration: 0.88,
+            ease: "power2.out",
+            stagger: 0.07,
+          },
+          1.7,
+        );
+        tl.fromTo(
+          `${s} .badge, ${s} .num`,
+          { opacity: 0, scale: 0.7 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.35,
+            ease: "back.out(1.35)",
+            stagger: 0.05,
+          },
+          4,
+        );
+        tl.to(
+          `${s} .board`,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          46,
+        );
+        tl.fromTo(
+          `${s} .recording`,
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" },
+          46.1,
+        );
+        tl.fromTo(
+          `${s} .placeholder`,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          46.4,
+        );
+        tl.fromTo(
+          `${s} .cursor`,
+          { opacity: 0, x: 0, y: 0 },
+          { opacity: 1, x: 970, y: -135, duration: 1.1, ease: "power2.inOut" },
+          50,
+        );
+        tl.to(
+          `${s} .cursor`,
+          {
+            scale: 0.84,
+            duration: 0.1,
+            ease: "power2.in",
+            repeat: 1,
+            yoyo: true,
+          },
+          51.1,
+        );
+        tl.fromTo(
+          `${s} .ripple`,
+          { opacity: 0.8, scale: 0 },
+          { opacity: 0, scale: 4, duration: 0.7, ease: "power3.out" },
+          51.12,
+        );
+        tl.fromTo(
+          `${s} .decision`,
+          { opacity: 0, x: 60 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power4.out" },
+          153,
+        );
+        window.__timelines["l05-frame-04-feature-tracing"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

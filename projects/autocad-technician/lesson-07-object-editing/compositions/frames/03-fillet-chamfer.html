@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        #root { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; color:#111111; font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif; }
+        * { box-sizing:border-box; }
+        .clip { position:absolute; inset:0; width:100%; height:100%; padding:72px 96px 64px; background:#FFFFFF; }
+        .topline { display:flex; align-items:end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid #A4A3A4; }
+        .index { color:#C7004C; font-size:24px; font-weight:600; letter-spacing:.08em; }
+        h1 { margin:0; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:64px; font-weight:600; letter-spacing:-.035em; }
+        .choice { color:#666666; font-size:34px; }
+        .split { display:grid; grid-template-columns:1fr 4px 1fr; gap:38px; height:590px; padding-top:44px; }
+        .divider { background:#C7004C; }
+        .side { display:grid; grid-template-rows:auto 1fr auto; }
+        .command-row { display:flex; align-items:baseline; justify-content:space-between; }
+        .command { font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:62px; font-weight:600; }
+        .parameter { padding:10px 18px; border:2px solid #C7004C; color:#C7004C; font-size:28px; font-weight:600; }
+        .corner { width:100%; height:330px; margin-top:12px; }
+        .base { fill:none; stroke:#111111; stroke-width:18; stroke-linejoin:round; }
+        .accent { fill:none; stroke:#C7004C; stroke-width:18; }
+        .description { display:grid; grid-template-columns:1fr 1fr; gap:18px; font-size:28px; line-height:1.4; }
+        .description div { padding-top:18px; border-top:2px solid #A4A3A4; }
+        .description b { display:block; color:#C7004C; margin-bottom:6px; }
+        .demo { display:flex; align-items:center; justify-content:space-between; min-height:160px; margin-top:28px; padding:24px 30px; background:#F5F5F3; border:2px solid #A4A3A4; }
+        .demo strong { font-size:34px; }
+        .demo span { color:#666666; font-size:27px; }
+        .recording-stage { position:absolute; inset:216px 96px 64px; display:grid; grid-template-rows:54px 1fr; border:3px solid #111111; background:#F5F5F3; opacity:0; overflow:hidden; }
+        .recording-bar { display:flex; align-items:center; justify-content:space-between; padding:0 22px; color:#666666; border-bottom:2px solid #A4A3A4; font-size:23px; }
+        .recording-bar b { color:#C7004C; letter-spacing:.08em; }
+        .recording-canvas { position:relative; display:grid; place-items:center; background-image:linear-gradient(rgba(164,163,164,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(164,163,164,.34) 1px,transparent 1px); background-size:44px 44px; }
+        .recording-placeholder { width:760px; padding:42px; text-align:center; background:#FFFFFF; border:3px solid #C7004C; }
+        .recording-placeholder strong { display:block; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:44px; }
+        .recording-placeholder span { display:block; margin-top:14px; color:#666666; font-size:27px; }
+        .method-tags { position:absolute; left:54px; bottom:48px; display:flex; gap:12px; }
+        .method-tags span { padding:12px 18px; background:#FFFFFF; border:2px solid #A4A3A4; font-size:24px; }
+        .choice-card { position:absolute; right:138px; bottom:102px; width:620px; padding:28px 32px; background:#FFFFFF; border-left:8px solid #C7004C; font-size:32px; line-height:1.35; opacity:0; }
+        .choice-card b { display:block; margin-bottom:6px; color:#C7004C; font-size:24px; letter-spacing:.08em; }
+      </style>
+      <div data-hf-id="hf-ckyl" id="root" data-composition-id="frame-03-fillet-chamfer" data-start="0" data-duration="195" data-width="1920" data-height="1080">
+        <section data-hf-id="hf-n90c" id="frame-03-layout" class="clip" data-start="0" data-duration="195" data-track-index="1">
+          <div data-hf-id="continuity-l7f3" style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #A4A3A4;background:#FFFFFF;color:#666666;font-size:18px"><b style="color:#C7004C">EDU-SB-01 · L06_PATTERNED_FEATURES → L07_GEOMETRY_FINAL</b><span>A3 가로 · 제3각법 · OUTLINE/CENTER/HIDDEN · 시험 감점 위험 점검</span></div>
+          <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-i0s7" class="index">03 · EDU-SB-01 모서리</div><h1 data-hf-id="hf-8725">어깨 R5와 하단 C5를 완성합니다</h1></div><div data-hf-id="hf-a9sm" class="choice">FILLET R5 / CHAMFER C5</div></header>
+          <div data-hf-id="hf-hgc8" class="split">
+            <section data-hf-id="hf-h659" class="side">
+              <div data-hf-id="hf-ypcw" class="command-row"><div data-hf-id="hf-532z" class="command">FILLET</div><div data-hf-id="hf-c1fo" class="parameter">R · 반지름</div></div>
+              <svg data-hf-id="hf-z0qp" class="corner" viewBox="0 0 700 330" aria-hidden="true"><path data-hf-id="hf-lx22" class="base" d="M140 255 L140 95 L300 95" /><path data-hf-id="hf-pedr" class="base" d="M300 95 L560 95" /><path data-hf-id="hf-q4cj" class="accent" d="M140 255 L140 190 A95 95 0 0 1 235 95 L300 95" /></svg>
+              <div data-hf-id="hf-w12m" class="description"><div data-hf-id="hf-8sap"><b data-hf-id="hf-3zqu">R = 0</b>교차점 정리</div><div data-hf-id="hf-wf6c"><b data-hf-id="hf-9vrf">R &gt; 0</b>호로 연결</div></div>
+            </section>
+            <div data-hf-id="hf-jk23" class="divider"></div>
+            <section data-hf-id="hf-sh2p" class="side">
+              <div data-hf-id="hf-zr2w" class="command-row"><div data-hf-id="hf-g1xf" class="command">CHAMFER</div><div data-hf-id="hf-fzsa" class="parameter">D · 거리</div></div>
+              <svg data-hf-id="hf-0f4l" class="corner" viewBox="0 0 700 330" aria-hidden="true"><path data-hf-id="hf-z62m" class="base" d="M140 255 L140 95 L560 95" /><path data-hf-id="hf-vr9x" class="accent" d="M140 205 L250 95" /></svg>
+              <div data-hf-id="hf-qz5e" class="description"><div data-hf-id="hf-ptjh"><b data-hf-id="hf-e5t2">D1</b>첫 번째 거리</div><div data-hf-id="hf-bmuc"><b data-hf-id="hf-ek43">D2</b>두 번째 거리</div></div>
+            </section>
+          </div>
+          <div data-hf-id="hf-jui5" class="demo"><strong data-hf-id="hf-1jjj">DEMO-02 · AutoCAD 화면 녹화</strong><span data-hf-id="hf-vvxw">FILLET R 설정 → 두 객체 선택 / CHAMFER 거리 설정 → 선택 순서 확인</span></div>
+          <section data-hf-id="hf-qc0z" id="frame-03-recording" class="recording-stage" aria-label="DEMO-02 화면 녹화 삽입 자리">
+            <div data-hf-id="hf-6s6p" class="recording-bar"><b data-hf-id="hf-z8lq">DEMO-02 · USER RECORDING</b><span data-hf-id="hf-1you">FILLET / CHAMFER</span></div>
+            <div data-hf-id="hf-udpm" class="recording-canvas">
+              <div data-hf-id="hf-zzbp" class="recording-placeholder"><strong data-hf-id="hf-z94i">AutoCAD 화면 녹화</strong><span data-hf-id="hf-hm58">사용자 촬영본이 이 프레임을 대체합니다</span></div>
+              <div data-hf-id="hf-gw13" class="method-tags"><span data-hf-id="hf-u7fj">R = 0 정리</span><span data-hf-id="hf-hhr7">R &gt; 0 라운드</span><span data-hf-id="hf-bop3">D1 / D2 모따기</span></div>
+            </div>
+          </section>
+          <div data-hf-id="hf-7m2y" class="choice-card"><b data-hf-id="hf-cwoy">L07 GATE 02</b>R5·C5 값과 OUTLINE 연결을 확인하고 CENTER·HIDDEN은 보존합니다.</div>
+        </section>
+      </div>
+      <script>
+        window.__timelines=window.__timelines||{};
+        const tl=gsap.timeline({paused:true});
+        const s="#frame-03-layout";
+        tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2);
+        tl.fromTo(`${s} .choice`,{opacity:0,x:44},{opacity:1,x:0,duration:.46,ease:"power2.out"},.7);
+        tl.fromTo(`${s} .divider`,{scaleY:0},{scaleY:1,duration:.7,ease:"power3.out"},.92);
+        tl.fromTo(`${s} .side:first-child`,{opacity:0,x:-118,scale:.97},{opacity:1,x:0,scale:1,duration:.74,ease:"power4.out"},1.04);
+        tl.fromTo(`${s} .side:last-child`,{opacity:0,x:118,scale:.97},{opacity:1,x:0,scale:1,duration:.74,ease:"power3.out"},1.18);
+        const accents=document.querySelectorAll("#frame-03-layout .accent");
+        accents.forEach((p)=>{const len=p.getTotalLength();p.style.strokeDasharray=`${len}`;p.style.strokeDashoffset=`${len}`;});
+        tl.to(accents,{strokeDashoffset:0,duration:.9,ease:"power2.out",stagger:.18},2.0);
+        tl.fromTo(`${s} .description div`,{opacity:0,y:30},{opacity:1,y:0,duration:.38,ease:"power3.out",stagger:.09},2.68);
+        tl.fromTo(`${s} .demo`,{opacity:0,y:38},{opacity:1,y:0,duration:.52,ease:"power2.out"},18.6);
+        tl.to(`${s} .parameter`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.42,ease:"power2.inOut",stagger:.16},23.4);
+        tl.to(`${s} .parameter`,{backgroundColor:"#FFFFFF",color:"#C7004C",duration:.36,ease:"power2.inOut",stagger:.16},24.2);
+        tl.to(`${s} .split, ${s} .demo`,{opacity:0,duration:.34,ease:"power2.in"},55.4);
+        tl.fromTo(`${s} .recording-stage`,{opacity:0,scale:.975},{opacity:1,scale:1,duration:.64,ease:"power3.out"},55.55);
+        tl.fromTo(`${s} .recording-placeholder`,{opacity:0,y:34},{opacity:1,y:0,duration:.56,ease:"power2.out"},55.95);
+        tl.fromTo(`${s} .method-tags span`,{opacity:0,y:28},{opacity:1,y:0,duration:.38,ease:"back.out(1.22)",stagger:.12},58.8);
+        tl.fromTo(`${s} .choice-card`,{opacity:0,x:66},{opacity:1,x:0,duration:.6,ease:"power4.out"},169.0);
+        window.__timelines["frame-03-fillet-chamfer"]=tl;
+      </script>
+    </template>
+  </body>
+</html>

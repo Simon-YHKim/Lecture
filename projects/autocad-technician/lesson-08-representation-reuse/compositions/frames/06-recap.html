@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l08f06-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        h1 {
+          margin: 62px 0 42px;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 78px;
+        }
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .card {
+          min-height: 310px;
+          padding: 32px;
+          border: 2px solid #a4a3a4;
+          background: #f5f5f3;
+        }
+        .card b {
+          display: block;
+          color: #c7004c;
+          font-size: 27px;
+        }
+        .card strong {
+          display: block;
+          margin: 24px 0 14px;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 48px;
+        }
+        .card span {
+          color: #666666;
+          font-size: 29px;
+          line-height: 1.4;
+        }
+        .next {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          margin-top: 50px;
+          padding: 28px 32px;
+          border-top: 4px solid #c7004c;
+          font-size: 34px;
+        }
+        .next b {
+          color: #c7004c;
+        }
+        .next-line {
+          display: block;
+          width: 360px;
+          height: 4px;
+          background: #c7004c;
+          transform-origin: left center;
+        }
+      </style>
+      <div
+        id="l08f06-root"
+        data-composition-id="l08-frame-06-recap"
+        data-start="0"
+        data-duration="45"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l08f06-scene"
+          class="clip"
+          data-start="0"
+          data-duration="45"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L07_GEOMETRY_FINAL → L08_REPRESENTED</b><span>A3 가로 · 제3각법 · BORDER/TITLE/HATCH/OUTLINE/CENTER/HIDDEN · 시험 감점 위험</span></div>
+          <header class="top">
+            <div class="index">06 · RECAP</div>
+            <div class="lesson">Lesson 08 · 표현과 재사용</div>
+          </header>
+          <h1>EDU-SB-01 표현 도면이 완성됐습니다</h1>
+          <div class="cards">
+            <div class="card">
+              <b>HATCH</b><strong>표현</strong
+              ><span>닫힌 영역에 재질과 단면의 의미를 채웁니다.</span>
+            </div>
+            <div class="card">
+              <b>BLOCK · INSERT</b><strong>정의 · 배치</strong
+              ><span>하나의 기준을 여러 위치에서 재사용합니다.</span>
+            </div>
+            <div class="card">
+              <b>GROUP</b><strong>선택</strong
+              ><span>객체 성격을 유지한 채 함께 선택합니다.</span>
+            </div>
+          </div>
+          <div class="next">
+            <span>L08_REPRESENTED</span><i class="next-line"></i
+            ><b>다음: DIM Layer와 축척 검수</b>
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l08f06-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 58 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" },
+          0.6,
+        );
+        tl.fromTo(
+          `${s} .card`,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.44,
+            ease: "power4.out",
+            stagger: 0.12,
+          },
+          1.3,
+        );
+        tl.fromTo(
+          `${s} .next`,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          18,
+        );
+        tl.fromTo(
+          `${s} .next-line`,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.7, ease: "power2.out" },
+          18.3,
+        );
+        window.__timelines["l08-frame-06-recap"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

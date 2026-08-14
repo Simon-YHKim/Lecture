@@ -21,3 +21,7 @@ jobs:
       - name: Scan tracked files
         shell: pwsh
         run: ./scripts/check-private-materials.ps1 -Mode all
+
+      - name: Validate AutoCAD course projects
+        shell: pwsh
+        run: ./scripts/check-course-projects.ps1

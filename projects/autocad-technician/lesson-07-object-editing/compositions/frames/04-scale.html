@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        #root { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; color:#111111; font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif; }
+        * { box-sizing:border-box; }
+        .clip { position:absolute; inset:0; width:100%; height:100%; padding:72px 96px 64px; background:#FFFFFF; }
+        .topline { display:flex; align-items:end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid #A4A3A4; }
+        .index { color:#C7004C; font-size:24px; font-weight:600; letter-spacing:.08em; }
+        h1 { margin:0; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:64px; font-weight:600; letter-spacing:-.035em; }
+        .key { color:#C7004C; font-size:34px; font-weight:600; }
+        .body { display:grid; grid-template-columns:.86fr 1.14fr; gap:52px; padding-top:42px; }
+        .concept { display:grid; grid-template-rows:auto 1fr auto; height:720px; padding:34px; background:#F5F5F3; border-top:4px solid #111111; }
+        .concept h2 { margin:0; font-size:46px; }
+        .scale-diagram { width:100%; height:420px; }
+        .small-shape { fill:none; stroke:#A4A3A4; stroke-width:8; }
+        .large-shape { fill:none; stroke:#111111; stroke-width:12; }
+        .pin { fill:#C7004C; }
+        .pin-label { fill:#C7004C; font-size:25px; font-weight:600; }
+        .rule { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        .rule div { padding:20px; border:2px solid #A4A3A4; font-size:27px; }
+        .rule b { display:block; color:#C7004C; font-size:34px; margin-bottom:8px; }
+        .right { display:grid; grid-template-rows:1fr auto; gap:28px; }
+        .demo { display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:520px; border:3px solid #C7004C; background:#FFFFFF; }
+        .demo-label { color:#C7004C; font-size:25px; font-weight:600; letter-spacing:.08em; }
+        .demo-title { margin-top:14px; font-size:46px; font-weight:600; }
+        .demo-sub { margin-top:18px; color:#666666; font-size:28px; }
+        .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+        .steps div { min-height:128px; padding:20px; border-top:3px solid #111111; background:#F5F5F3; font-size:25px; line-height:1.35; }
+        .steps b { display:block; margin-bottom:10px; color:#C7004C; }
+        .recording-stage { position:absolute; inset:216px 96px 64px; display:grid; grid-template-rows:54px 1fr; border:3px solid #111111; background:#F5F5F3; opacity:0; overflow:hidden; }
+        .recording-bar { display:flex; align-items:center; justify-content:space-between; padding:0 22px; color:#666666; border-bottom:2px solid #A4A3A4; font-size:23px; }
+        .recording-bar b { color:#C7004C; letter-spacing:.08em; }
+        .recording-canvas { position:relative; display:grid; place-items:center; background-image:linear-gradient(rgba(164,163,164,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(164,163,164,.34) 1px,transparent 1px); background-size:44px 44px; }
+        .recording-placeholder { width:760px; padding:42px; text-align:center; background:#FFFFFF; border:3px solid #C7004C; }
+        .recording-placeholder strong { display:block; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:44px; }
+        .recording-placeholder span { display:block; margin-top:14px; color:#666666; font-size:27px; }
+        .scale-readout { position:absolute; left:52px; bottom:46px; display:flex; gap:12px; }
+        .scale-readout span { min-width:178px; padding:14px 18px; background:#FFFFFF; border:2px solid #A4A3A4; font-size:25px; font-variant-numeric:tabular-nums; }
+        .verification { position:absolute; right:138px; bottom:102px; width:540px; padding:28px 32px; background:#FFFFFF; border-left:8px solid #C7004C; font-size:32px; line-height:1.35; opacity:0; }
+        .verification b { display:block; margin-bottom:6px; color:#C7004C; font-size:24px; letter-spacing:.08em; }
+      </style>
+      <div data-hf-id="hf-3ae9" id="root" data-composition-id="frame-04-scale" data-start="0" data-duration="180" data-width="1920" data-height="1080">
+        <section data-hf-id="hf-bu0r" id="frame-04-layout" class="clip" data-start="0" data-duration="180" data-track-index="1">
+          <div data-hf-id="continuity-l7f4" style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #A4A3A4;background:#FFFFFF;color:#666666;font-size:18px"><b style="color:#C7004C">EDU-SB-01 · L06_PATTERNED_FEATURES → L07_GEOMETRY_FINAL</b><span>A3 가로 · 제3각법 · OUTLINE/CENTER/HIDDEN · 시험 감점 위험 점검</span></div>
+          <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-q2xu" class="index">04 · 센서 참조 교정</div><h1 data-hf-id="hf-rw93">부품 전체는 SCALE하지 않습니다</h1></div><div data-hf-id="hf-yhge" class="key">REFERENCE ONLY</div></header>
+          <main data-hf-id="hf-lyjg" class="body">
+            <section data-hf-id="hf-3y1k" class="concept">
+              <h2 data-hf-id="hf-dp2i">80×50 부품 잠금 · 참조 윤곽만 선택</h2>
+              <svg data-hf-id="hf-6ep0" class="scale-diagram" viewBox="0 0 700 420" aria-hidden="true"><path data-hf-id="hf-b8rn" class="small-shape" d="M145 295 H350 V190 H490 V340 H145 Z" /><path data-hf-id="hf-w3jw" class="large-shape" d="M145 295 H430 V145 H610 V360 H145 Z" /><circle data-hf-id="hf-450c" class="pin" cx="145" cy="295" r="15" /><text data-hf-id="hf-83pw" class="pin-label" x="170" y="282">고정되는 기준점</text></svg>
+              <div data-hf-id="hf-a46i" class="rule"><div data-hf-id="hf-lnp9"><b data-hf-id="hf-6jvq">LOCK</b>EDU-SB-01</div><div data-hf-id="hf-fv6h"><b data-hf-id="hf-82k0">SCALE</b>센서 참조</div></div>
+            </section>
+            <section data-hf-id="hf-znsy" class="right">
+              <div data-hf-id="hf-jui5" class="demo"><div data-hf-id="hf-t1b3" class="demo-label">DEMO-03</div><div data-hf-id="hf-k4es" class="demo-title">센서 참조 윤곽 교정</div><div data-hf-id="hf-7bew" class="demo-sub">부품 제외 · Reference 목표 길이</div></div>
+              <div data-hf-id="hf-70xd" class="steps"><div data-hf-id="hf-5fzu"><b data-hf-id="hf-27a2">01</b>참조만 선택</div><div data-hf-id="hf-4c4v"><b data-hf-id="hf-2ll3">02</b>조립점 고정</div><div data-hf-id="hf-5vac"><b data-hf-id="hf-2zw4">03</b>Reference</div><div data-hf-id="hf-yt1n"><b data-hf-id="hf-3e75">04</b>부품값 검증</div></div>
+            </section>
+          </main>
+          <section data-hf-id="hf-eamh" id="frame-04-recording" class="recording-stage" aria-label="DEMO-03 화면 녹화 삽입 자리">
+            <div data-hf-id="hf-6s6p" class="recording-bar"><b data-hf-id="hf-3d73">DEMO-03 · USER RECORDING</b><span data-hf-id="hf-17kt">SCALE / REFERENCE</span></div>
+            <div data-hf-id="hf-udpm" class="recording-canvas">
+              <div data-hf-id="hf-zzbp" class="recording-placeholder"><strong data-hf-id="hf-z94i">AutoCAD 화면 녹화</strong><span data-hf-id="hf-hm58">사용자 촬영본이 이 프레임을 대체합니다</span></div>
+              <div data-hf-id="hf-t79x" class="scale-readout"><span data-hf-id="hf-d2np">기준점 · 고정</span><span data-hf-id="hf-fy1i">배율 · 1.50</span><span data-hf-id="hf-4o9r">참조 · 목표 길이</span></div>
+            </div>
+          </section>
+          <div data-hf-id="hf-qxpt" class="verification"><b data-hf-id="hf-p6f8">L07 GATE 03</b>참조 윤곽만 교정되고 80×50·구멍·R5·C5는 유지됩니다.</div>
+        </section>
+      </div>
+      <script>
+        window.__timelines=window.__timelines||{};
+        const tl=gsap.timeline({paused:true});
+        const s="#frame-04-layout";
+        tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2);
+        tl.fromTo(`${s} .key`,{opacity:0,x:44},{opacity:1,x:0,duration:.46,ease:"power2.out"},.7);
+        tl.fromTo(`${s} .concept`,{opacity:0,x:-94,scale:.975},{opacity:1,x:0,scale:1,duration:.72,ease:"power4.out"},1.0);
+        tl.fromTo(`${s} .right`,{opacity:0,x:112},{opacity:1,x:0,duration:.72,ease:"power3.out"},1.14);
+        const scalePaths=document.querySelectorAll("#frame-04-layout .small-shape, #frame-04-layout .large-shape");
+        scalePaths.forEach((p)=>{const len=p.getTotalLength();p.style.strokeDasharray=`${len}`;p.style.strokeDashoffset=`${len}`;});
+        tl.to(scalePaths,{strokeDashoffset:0,duration:1.0,ease:"power2.out",stagger:.18},2.0);
+        tl.fromTo(`${s} .pin`,{opacity:0,scale:0},{opacity:1,scale:1,duration:.42,ease:"back.out(1.7)"},2.82);
+        tl.fromTo(`${s} .pin-label`,{opacity:0,x:-26},{opacity:1,x:0,duration:.38,ease:"power3.out"},3.0);
+        tl.fromTo(`${s} .steps div`,{opacity:0,y:34},{opacity:1,y:0,duration:.36,ease:"power4.out",stagger:.09},12.0);
+        tl.to(`${s} .body`,{opacity:0,duration:.34,ease:"power2.in"},41.6);
+        tl.fromTo(`${s} .recording-stage`,{opacity:0,scale:.975},{opacity:1,scale:1,duration:.64,ease:"power3.out"},41.72);
+        tl.fromTo(`${s} .recording-placeholder`,{opacity:0,y:34},{opacity:1,y:0,duration:.56,ease:"power2.out"},42.12);
+        tl.fromTo(`${s} .scale-readout span`,{opacity:0,y:26},{opacity:1,y:0,duration:.36,ease:"power3.out",stagger:.12},45.0);
+        tl.to(`${s} .scale-readout span:nth-child(2)`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.5,ease:"power1.inOut"},72.0);
+        tl.to(`${s} .scale-readout span:nth-child(3)`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.5,ease:"power1.inOut"},111.0);
+        tl.fromTo(`${s} .verification`,{opacity:0,x:62},{opacity:1,x:0,duration:.58,ease:"power4.out"},158.0);
+        window.__timelines["frame-04-scale"]=tl;
+      </script>
+    </template>
+  </body>
+</html>

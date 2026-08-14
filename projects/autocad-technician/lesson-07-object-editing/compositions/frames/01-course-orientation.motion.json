@@ -1,0 +1,8 @@
+{
+  "duration": 60,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#frame-01-layout h1", "bySec": 2 },
+    { "kind": "before", "a": "#frame-01-layout h1", "b": "#frame-01-layout .agenda" },
+    { "kind": "staysInFrame", "selector": "#frame-01-layout .purpose" }
+  ]
+}

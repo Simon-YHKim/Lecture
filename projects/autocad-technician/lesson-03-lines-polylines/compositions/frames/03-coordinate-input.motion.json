@@ -1,0 +1,1 @@
+{"duration":150,"assertions":[{"kind":"appearsBy","selector":"#l3f3 h1","bySec":2},{"kind":"before","a":"#l3f3 .abs-path","b":"#l3f3 .rel-y"},{"kind":"staysInFrame","selector":"#l3f3 .plane"}]}
