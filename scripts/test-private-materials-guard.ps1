@@ -271,6 +271,7 @@ try {
     Assert-BlockedContent 'notes/key.txt' '-----BEGIN PRIVATE KEY-----'
 
     Write-Output 'Private materials guard tests passed.'
+    exit 0
 } finally {
     $env:GIT_INDEX_FILE = $previousIndex
     Remove-Item -LiteralPath $temporaryIndex -ErrorAction SilentlyContinue
