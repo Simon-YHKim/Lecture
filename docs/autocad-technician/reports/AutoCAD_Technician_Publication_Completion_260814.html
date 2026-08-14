@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AutoCAD Technician · Public Release Completion</title>
+  <style>
+    :root{--accent:#c7004c;--text:#171717;--muted:#696969;--paper:#f5f5f3;color-scheme:light dark}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--text);font-family:"Segoe UI","Malgun Gothic",Arial,sans-serif;line-height:1.55}
+    body.lang-ko [data-lang=en],body.lang-en [data-lang=ko],body.mode-easy [data-mode=expert],body.mode-expert [data-mode=easy]{display:none!important}
+    a{color:var(--accent)}button,summary{font:inherit}.page{max-width:1240px;margin:auto;padding:32px}.top{display:flex;justify-content:space-between;gap:24px;align-items:center;border-top:8px solid var(--accent);padding:18px 0 34px}.brand{font-weight:900;letter-spacing:.08em}.controls{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid currentColor;background:transparent;color:inherit;padding:8px 12px;font-weight:800;cursor:pointer}button[aria-pressed=true]{background:var(--text);color:var(--paper)}button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .hero{display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:end;padding:36px 0;border-bottom:2px solid var(--text)}.eyebrow{margin:0 0 8px;color:var(--accent);font-size:.78rem;font-weight:900;letter-spacing:.16em}h1{font-size:clamp(2.8rem,7vw,6.4rem);line-height:.9;letter-spacing:-.06em;margin:.12em 0}.lede{max-width:760px;font-size:1.15rem;color:var(--muted)}.release{border-left:5px solid var(--accent);padding:18px}.release b{display:block;font-size:2rem}.release span{color:var(--muted)}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--text)}.metric{padding:22px 16px;border-right:1px solid var(--muted)}.metric:last-child{border:0}.metric strong{display:block;font-size:2.2rem;line-height:1}.metric span{font-size:.88rem;color:var(--muted)}
+    section{padding:44px 0}h2{font-size:clamp(1.8rem,4vw,3.1rem);line-height:1;margin:0 0 20px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:color-mix(in srgb,var(--paper) 93%,var(--text));border-top:4px solid var(--text);padding:22px}.card.pass{border-color:var(--accent)}.card h3{margin:0 0 8px}.card p,.card li{color:var(--muted)}.card ul{padding-left:1.2em}.bar{display:grid;grid-template-columns:170px 1fr 70px;gap:12px;align-items:center;margin:10px 0}.track{height:16px;background:color-mix(in srgb,var(--muted) 25%,transparent)}.fill{display:block;height:100%;background:var(--accent)}
+    details{border-top:1px solid var(--muted);padding:14px 0}summary{cursor:pointer;font-weight:900;color:var(--accent)}code{font-family:Consolas,monospace;font-size:.86em;overflow-wrap:anywhere}.privacy{background:var(--text);color:var(--paper);padding:28px}.privacy p{color:color-mix(in srgb,var(--paper) 74%,transparent)}footer{display:flex;justify-content:space-between;gap:20px;padding:26px 0;color:var(--muted);font-size:.86rem}
+    @media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.page{padding:22px}.bar{grid-template-columns:120px 1fr 56px}}
+    @media(max-width:520px){.top,footer{align-items:flex-start;flex-direction:column}.metrics{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid var(--muted)}}
+    @media(prefers-color-scheme:dark){:root{--text:#f5f5f3;--muted:#aaa;--paper:#151515}.privacy{background:#f5f5f3;color:#171717}.privacy p{color:#555}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body class="lang-ko mode-easy">
+  <main class="page">
+    <nav class="top" aria-label="Report controls">
+      <div class="brand">AUTOCAD TECHNICIAN · PUBLIC RELEASE</div>
+      <div class="controls">
+        <button data-control="lang" data-value="ko" aria-pressed="true" aria-label="한국어로 보기">한국어</button>
+        <button data-control="lang" data-value="en" aria-pressed="false" aria-label="View in English">EN</button>
+        <button data-control="mode" data-value="easy" aria-pressed="true" aria-label="쉬운 설명 보기">쉬운 설명</button>
+        <button data-control="mode" data-value="expert" aria-pressed="false" aria-label="전문가 설명 보기">전문가</button>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">READY FOR PR · 26.08.14</p>
+        <h1 data-lang="ko">자료는 공개.<br>PPT는 보호.</h1>
+        <h1 data-lang="en">Publish the course.<br>Protect the decks.</h1>
+        <p class="lede" data-lang="ko" data-mode="easy">10개 강의를 이해하고 검토할 수 있는 공개 자료를 한곳에 모았습니다. 원본 PPT와 PPT에서 바로 뽑은 이미지, 실제 녹화, LG 폰트 파일은 올리지 않았습니다.</p>
+        <p class="lede" data-lang="en" data-mode="easy">The public package now contains everything needed to understand and review the ten-lesson course. Original decks, direct slide derivatives, real recordings, and LG font files stay private.</p>
+        <p class="lede" data-lang="ko" data-mode="expert">공개 범위는 125개 HyperFrames QA 이미지, 2개 보고서, MasterPlan, A3 참고 이미지, 재생성 스크립트와 path+Git blob+SHA-256 manifest입니다. PR 대상 브랜치는 <code>chore/protect-private-materials</code>입니다.</p>
+        <p class="lede" data-lang="en" data-mode="expert">The release contains 125 HyperFrames QA images, two reports, the MasterPlan, the A3 reference, rebuild scripts, and a path/Git-blob/SHA-256 manifest. The PR branch is <code>chore/protect-private-materials</code>.</p>
+      </div>
+      <div class="release"><span>RELEASE GATE</span><b>PASS</b><span data-lang="ko">PR #1 갱신 준비 완료</span><span data-lang="en">Ready to update PR #1</span></div>
+    </header>
+
+    <section class="metrics" aria-label="Release metrics">
+      <div class="metric"><strong>137</strong><span data-lang="ko">변경 경로</span><span data-lang="en">changed paths</span></div>
+      <div class="metric"><strong>125</strong><span data-lang="ko">검토 이미지</span><span data-lang="en">reviewed images</span></div>
+      <div class="metric"><strong>10/10</strong><span>HyperFrames</span></div>
+      <div class="metric"><strong>0</strong><span data-lang="ko">PPT·CAD·폰트·미디어</span><span data-lang="en">PPT, CAD, fonts, media</span></div>
+    </section>
+
+    <section>
+      <h2 data-lang="ko">무엇을 공개했나</h2><h2 data-lang="en">What is public</h2>
+      <div class="grid">
+        <article class="card pass"><h3 data-lang="ko">강의 검토 패키지</h3><h3 data-lang="en">Course review package</h3><p data-lang="ko" data-mode="easy">강의별 완성 화면과 중간 검수 화면을 포함해 결과를 직접 확인할 수 있습니다.</p><p data-lang="en" data-mode="easy">Final and intermediate QA frames make the course results directly reviewable.</p><p data-lang="ko" data-mode="expert"><code>lesson-*/snapshots/**</code> 125개, 합계 약 9.67 MiB. 모든 파일은 공개 합성 HTML의 렌더입니다.</p><p data-lang="en" data-mode="expert">125 files under <code>lesson-*/snapshots/**</code>, about 9.67 MiB. Every file renders public synthetic HTML.</p></article>
+        <article class="card pass"><h3 data-lang="ko">문서와 재생성 도구</h3><h3 data-lang="en">Documents and rebuild tools</h3><p data-lang="ko" data-mode="easy">강의 계획, A3 도면틀 참고 화면, 완료보고서와 다시 만드는 명령을 함께 제공합니다.</p><p data-lang="en" data-mode="easy">The plan, A3 frame reference, completion reports, and rebuild commands ship together.</p><p data-lang="ko" data-mode="expert">MasterPlan HTML, A3 420×297 reference, self-contained bilingual reports, deterministic manifest/report builders를 포함합니다.</p><p data-lang="en" data-mode="expert">Includes the MasterPlan HTML, A3 420×297 reference, self-contained bilingual reports, and deterministic manifest/report builders.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-lang="ko">검증 결과</h2><h2 data-lang="en">Verification</h2>
+      <div class="bar"><b>HyperFrames</b><div class="track"><span class="fill" style="width:100%"></span></div><strong>10/10</strong></div>
+      <div class="bar"><b>Course guard</b><div class="track"><span class="fill" style="width:100%"></span></div><strong>PASS</strong></div>
+      <div class="bar"><b>Privacy</b><div class="track"><span class="fill" style="width:100%"></span></div><strong>PASS</strong></div>
+      <div class="bar"><b>Diff check</b><div class="track"><span class="fill" style="width:100%"></span></div><strong>PASS</strong></div>
+      <details><summary><span data-lang="ko">[자세히] 실행 근거</span><span data-lang="en">[Details] Evidence</span></summary><div data-lang="ko"><ul><li><code>hyperframes@0.7.107 check</code>: 10차시 모두 Runtime·Layout·Motion 오류 0, 대비 검사 통과</li><li><code>check-course-projects.ps1</code>: 10차시·60 프레임·60 motion·29 녹화 슬롯 통과</li><li><code>check-private-materials.ps1 -Mode staged/all</code>: 모두 통과</li><li><code>test-private-materials-guard.ps1</code>: 이름 변경·해시 변경·임의 data URI·경로·시크릿 우회 차단 통과</li><li><code>git diff --cached --check</code>: 통과</li></ul></div><div data-lang="en"><ul><li><code>hyperframes@0.7.107 check</code>: all ten lessons have zero runtime, layout, and motion errors; contrast checks pass</li><li><code>check-course-projects.ps1</code>: ten lessons, sixty frames, sixty motion files, and twenty-nine recording slots pass</li><li><code>check-private-materials.ps1 -Mode staged/all</code>: both pass</li><li><code>test-private-materials-guard.ps1</code>: renamed files, changed hashes, arbitrary data URIs, paths, and secret bypasses are blocked</li><li><code>git diff --cached --check</code>: passes</li></ul></div></details>
+    </section>
+
+    <section>
+      <h2 data-lang="ko">위험과 롤백</h2><h2 data-lang="en">Risk and rollback</h2>
+      <div class="grid">
+        <article class="card"><h3 data-lang="ko">남은 위험</h3><h3 data-lang="en">Remaining risk</h3><ul data-lang="ko"><li>약 12 MiB의 공개 검토 자료가 Git 이력에 추가됩니다.</li><li>자체완결 보고서는 10개 contact sheet를 중복 내장합니다.</li><li>LG 폰트가 없는 환경에서는 Malgun Gothic으로 표시됩니다.</li><li>교육 기본값보다 실제 시험 문제지와 제공 DWT/DWG가 우선합니다.</li></ul><ul data-lang="en"><li>About 12 MiB of review material is added to Git history.</li><li>The self-contained report embeds ten duplicate contact sheets.</li><li>Systems without LG fonts fall back to Malgun Gothic.</li><li>Official exam sheets and supplied DWT/DWG files override training defaults.</li></ul></article>
+        <article class="card"><h3 data-lang="ko">되돌리는 방법</h3><h3 data-lang="en">Rollback</h3><p data-lang="ko" data-mode="easy">문제가 보이면 PR을 합치지 않으면 됩니다. 합친 뒤라면 공개 커밋 하나를 되돌릴 수 있습니다.</p><p data-lang="en" data-mode="easy">If anything looks wrong, do not merge the PR. After merge, revert the single publication commit.</p><p data-lang="ko" data-mode="expert"><code>git revert &lt;publication-commit&gt;</code>으로 공개 추가분을 역커밋합니다. 원본 비공개 자료는 이동·삭제하지 않았으므로 별도 복구가 필요 없습니다.</p><p data-lang="en" data-mode="expert">Use <code>git revert &lt;publication-commit&gt;</code>. Private source materials were never moved or deleted, so no source recovery is required.</p></article>
+      </div>
+    </section>
+
+    <section class="privacy">
+      <p class="eyebrow">CONFIDENTIALITY BOUNDARY</p>
+      <h2 data-lang="ko">확장자가 아니라 내용으로 보호합니다.</h2><h2 data-lang="en">Protection follows content, not extensions.</h2>
+      <p data-lang="ko">PPTX 파일뿐 아니라 슬라이드 추출 이미지·리뷰 보드·레이아웃 데이터도 제외했습니다. 공개 이미지 126개와 MasterPlan은 exact path, Git blob, SHA-256으로 고정했고 보고서 내장 이미지도 같은 승인 해시와 대조합니다.</p>
+      <p data-lang="en">PPTX files, extracted slide images, review boards, and layout data are excluded. The 126 public images and MasterPlan are pinned by exact path, Git blob, and SHA-256; embedded report images must match the same approved hashes.</p>
+    </section>
+
+    <footer><span><a href="https://github.com/Simon-YHKim/Lecture/pull/1">Lecture PR #1</a> · Ready for review</span><span>Generated 26.08.14 17:17:20 KST</span></footer>
+  </main>
+  <script>
+    const b=document.body,bs=[...document.querySelectorAll('button[data-control]')];
+    function set(k,v){b.className=b.className.replace(new RegExp(k+'-(ko|en|easy|expert)','g'),'').trim()+' '+k+'-'+v;bs.filter(x=>x.dataset.control===k).forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.value===v)));if(k==='lang')document.documentElement.lang=v}
+    bs.forEach(x=>x.addEventListener('click',()=>set(x.dataset.control,x.dataset.value)));
+  </script>
+</body>
+</html>

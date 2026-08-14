@@ -77,3 +77,10 @@ snapshots/
 
 # Local JavaScript dependencies used by preview and QA tooling
 node_modules/
+
+# Explicitly reviewed public AutoCAD course artifacts. Keep the global image and
+# planning-source blocks above; only these exact deliverable paths are public.
+!projects/autocad-technician/lesson-*/snapshots/
+!projects/autocad-technician/lesson-*/snapshots/**
+!docs/autocad-technician/reference/a3-landscape-template-reference.png
+!docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html

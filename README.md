@@ -12,6 +12,8 @@ Only the following belong here:
 - documentation reviewed for public release;
 - synthetic training diagrams authored as inline SVG inside reviewed HTML;
 - validation scripts and CI configuration.
+- reviewed HyperFrames QA snapshots rendered from the public synthetic course scenes;
+- explicitly reviewed public references listed in `docs/autocad-technician/README.md`.
 
 Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
 
@@ -64,14 +66,19 @@ layer, projection, checkpoint, and exam-disclosure rules live in
 feature-clearance contract live in `projects/autocad-technician/master-part-geometry.json`.
 The 29 screen-recording slots and their exact frame sources are locked in
 `projects/autocad-technician/recording-map.json`.
-All lessons inherit the LG
-technical-training visual system while keeping drawings, recordings, narration,
-fonts, transcripts, snapshots, and renders local-only.
+All lessons inherit the LG technical-training visual system. Selected QA snapshots
+rendered solely from the public synthetic scenes are tracked as review evidence.
+Drawings, recordings, narration, transcripts, presentation sources and direct slide
+derivatives remain private.
 
-Public HTML contains the `LG EI` family names and `Malgun Gothic` fallback only;
-it contains no private font URL or filesystem path. The font binaries and their
-locations remain ignored/private. A private local preview wrapper may inject the
-installed LG font without changing public course files.
+Public HTML resolves installed LG EI families with CSS `local()` and falls back to
+`Malgun Gothic`; it contains no private font URL or filesystem path. Font binaries
+and their locations remain ignored/private because no redistribution license is
+included.
+
+The reviewed public package, including the course MasterPlan, A3 landscape template
+reference, QA snapshots, and bilingual completion report, is indexed in
+[`docs/autocad-technician/README.md`](docs/autocad-technician/README.md).
 
 ## Publishing checklist
 
