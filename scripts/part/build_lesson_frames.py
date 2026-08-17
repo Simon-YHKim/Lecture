@@ -44,7 +44,7 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:30px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:26px}
 .card span{color:#666;font-size:22px;line-height:1.4}
-.chain{display:flex;gap:12px;align-items:center;font-size:22px;color:#6F6D70;letter-spacing:.04em}
+.chain{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:20px;color:#6F6D70;letter-spacing:.04em}
 .chain i{font-style:normal;padding:6px 14px;border:2px solid #DCDBD7}
 .chain i.done{color:#111;border-color:#111}
 .chain i.now{color:#C7004C;border-color:#C7004C;font-weight:600}
@@ -105,7 +105,7 @@ S = "#" + "{}"
 
 # ---------------------------------------------------------------- frame 1
 body = (header("01 · PART", "부품 하나를 여섯 차시에 걸쳐 만듭니다", "EDU-IB-02 · 아이들러 풀리 브래킷")
-        + '\n      <main class="body" style="grid-template-columns:.86fr 1.14fr">'
+        + '\n      <main class="body" style="grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)">'
         + '<section class="left">'
         + '<div class="card"><b>무엇인가</b><strong>아이들러 풀리 브래킷</strong>'
         + '<span>벨트를 옆에서 눌러 장력을 잡는 바퀴의 축을 잡고, 프레임 수직면에 볼트 두 개로 붙는다.</span></div>'
@@ -132,14 +132,18 @@ feat = [("base", "베이스 120", "넓게 벌린 두 볼트가 축이 만드는 
         ("boss", "보스 Ø56", "축 구멍 둘레의 살 두께를 필요한 곳만 키운다")]
 cards = "".join(f'<div class="card f-{k}"><b>{t}</b><span>{d}</span></div>' for k, t, d in feat)
 body = (header("02 · WHY", "형상마다 이유가 있습니다", "기능이 형상을 결정한다")
-        + '\n      <main class="body" style="grid-template-columns:1.1fr .9fr">'
+        + '\n      <main class="body" style="grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)">'
         + f'<section class="panel">{svg_front}</section>'
         + f'<section style="display:grid;gap:14px;align-content:center">{cards}</section></main>')
 steps = []
 for i, (k, _, _) in enumerate(feat):
     at = 4 + i * 10
-    steps.append(f'    tl.add(()=>{{document.querySelectorAll("#l1f2 [data-feature=\\"{k}\\"]")'
+    steps.append(f'    tl.add(()=>{{document.querySelectorAll("#l1f2 .dwg [data-feature]")'
+                 f'.forEach(e=>e.classList.remove("hot"));'
+                 f'document.querySelectorAll("#l1f2 [data-feature=\\"{k}\\"]")'
                  f'.forEach(e=>e.classList.add("hot"))}},{at});')
+    steps.append(f'    tl.to("#l1f2 .card",{{borderColor:"#A4A3A4",backgroundColor:"#FFF",'
+                 f'duration:.3,ease:"power1.inOut"}},{at});')
     steps.append(f'    tl.to("#l1f2 .f-{k}",{{borderColor:"#C7004C",backgroundColor:"#F5F5F3",'
                  f'duration:.4,ease:"power1.inOut"}},{at});')
 tl = ('    const s="#l1f2";\n'
@@ -163,7 +167,7 @@ body = (header("03 · READ", "숫자 하나가 공정을 결정합니다", "Ø25
           'font-family:\'LG EI Headline TTF Semibold\',\'Malgun Gothic\',sans-serif">Ø25 H7</span>'
         + '<span class="arrowline" style="flex:0 0 120px;height:2px;background:#111"></span>'
         + '<span class="proc">드릴 Ø24 → 리머 Ø25 H7</span></section>'
-        + '<section style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-content:start">'
+        + '<section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:start">'
         + cc + '</section>'
         + '<div class="note"><b>개념만</b> 아래 네 가지는 뜻과 이유만 알고 넘어갑니다. 이 과정의 작도 대상이 아닙니다.</div>'
         + '</main>')
@@ -183,7 +187,7 @@ layers = [("OUTLINE", "흰색 7", "Continuous", "0.50"), ("CENTER", "빨강 1", 
           ("BORDER", "흰색 7", "Continuous", "0.50"), ("TITLE", "흰색 7", "Continuous", "0.25"),
           ("HATCH", "회색 8", "Continuous", "0.18"), ("CONSTRUCTION", "9", "Continuous", "0.18")]
 rows = "".join(f'<tr class="lr"><td>{a}</td><td>{b}</td><td>{c}</td><td>{d}</td></tr>' for a, b, c, d in layers)
-sheet = ('<svg viewBox="0 0 460 330" style="width:100%;height:auto">'
+sheet = ('<svg viewBox="0 0 460 330" style="width:100%;height:auto;max-height:100%">'
          '<rect class="sh-out" x="10" y="10" width="420" height="297" fill="none" stroke="#111" stroke-width="2"/>'
          '<rect class="sh-brd" x="20" y="20" width="400" height="277" fill="none" stroke="#C7004C" stroke-width="2"/>'
          '<rect class="sh-ttl" x="220" y="267" width="200" height="30" fill="none" stroke="#C7004C" stroke-width="2"/>'
@@ -192,8 +196,8 @@ sheet = ('<svg viewBox="0 0 460 330" style="width:100%;height:auto">'
          '<text x="340" y="287" font-size="14" fill="#666">이름</text>'
          '<text x="220" y="322" font-size="15" fill="#111" text-anchor="middle">A3  420 × 297</text></svg>')
 body = (header("04 · SHEET", "종이와 규칙을 먼저 정합니다", "A3 가로 · 사방 10 · 표제란 200×30")
-        + '\n      <main class="body" style="grid-template-columns:.95fr 1.05fr">'
-        + f'<section class="panel" style="padding:24px">{sheet}</section>'
+        + '\n      <main class="body" style="grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)">'
+        + f'<section class="panel" style="padding:56px">{sheet}</section>'
         + '<section><table style="width:100%;border-collapse:collapse;font-size:23px">'
         + '<thead><tr style="color:#666;font-size:19px;letter-spacing:.08em">'
           '<th style="text-align:left;padding:8px 10px">LAYER</th><th style="text-align:left;padding:8px 10px">색</th>'
@@ -215,7 +219,7 @@ steps5 = ["acadiso.dwt 선택", "SAVEAS · 파일명", "UNITS 확인", "LIMITS 4
           "LAYER 8개 생성", "BORDER 도면틀", "TITLE 표제란", "객체 스냅 · 직교"]
 chk = "".join(f'<li class="st">{t}</li>' for t in steps5)
 body = (header("05 · DEMO-01", "템플릿 만들기", "USER RECORDING · acadiso.dwt → L01_TEMPLATE")
-        + '\n      <main class="body" style="grid-template-columns:1.32fr .68fr">'
+        + '\n      <main class="body" style="grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr)">'
         + '<section class="panel rec" style="border-style:dashed">'
           '<div style="text-align:center;color:#666"><div style="font-size:30px;letter-spacing:.12em;'
           'color:#C7004C">USER RECORDING</div><div style="font-size:24px;margin-top:12px">DEMO-01 · 화면 녹화 삽입</div></div>'
@@ -238,7 +242,7 @@ write("05-build-template.html", "l1f5", 380, body, "\n".join(lines5))
 body = (header("06 · RECAP", "문서가 아니라 파일이 남았습니다", "L01_TEMPLATE 완료")
         + '\n      <main class="body" style="grid-template-rows:auto auto 1fr;align-content:start">'
         + f'<div style="margin-top:12px">{chain_html(1, "L02_PROFILE")}</div>'
-        + '<section style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px">'
+        + '<section style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:34px">'
         + '<div class="card"><b>남은 것</b><strong>템플릿 파일</strong><span>A3 도면틀 · 표제란 · 레이어 8개 · 스냅 설정</span></div>'
         + '<div class="card"><b>다음</b><strong>L02_PROFILE</strong><span>좌표를 입력해 베이스와 목의 외곽을 그린다</span></div>'
         + '<div class="card"><b>미리</b><strong>접점 스냅</strong><span>목은 보스 원에 접하게 그린다. 오늘 켜 둔 TAN을 쓴다</span></div>'
