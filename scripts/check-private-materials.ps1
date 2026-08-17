@@ -138,6 +138,12 @@ $blockedExtensions = @(
 )
 
 $privateDirectoryPattern = '(^|/)(private|_private|private-materials|source-materials|raw-materials|local-materials|course-source|private-work)(/|$)'
+# Whisper transcripts and caption data are derived from the private narration
+# recordings, so they are blocked unconditionally and cannot be bypassed by the
+# approved artifact manifest. Only a numbers-only timing derivative such as
+# narration-timing.json may be published.
+$privateTranscriptDirectoryPattern = '(^|/)(transcript|transcripts|caption|captions)/'
+$privateTranscriptFilePattern = '(^|/)(?:[^/]+\.)?(?:transcript|caption|captions)\.(?:json|txt|tsv|csv|md)$'
 $reviewedPublicMasterPlan = 'docs/autocad-technician/master-plan/autocad_technician_video_course_masterplan_260811.html'
 $reviewedPublicReference = 'docs/autocad-technician/reference/a3-landscape-template-reference.png'
 $reviewedSnapshotPattern = '^projects/autocad-technician/(?:lesson-01-drawing-language|lesson-02-work-environment|lesson-03-lines-polylines|lesson-04-curves-offset|lesson-05-orthographic-reading|lesson-06-placement-repetition|lesson-07-object-editing|lesson-08-representation-reuse|lesson-09-dimensioning|lesson-10-final-bracket)/snapshots/.+\.(?:png|jpe?g)$'
@@ -204,6 +210,8 @@ foreach ($path in $paths) {
 
     if ($normalized -match $privateDirectoryPattern) {
         $reason = 'private-only directory'
+    } elseif ($normalized -match $privateTranscriptDirectoryPattern -or $normalized -match $privateTranscriptFilePattern) {
+        $reason = 'recording-derived transcript or caption data'
     } elseif ($normalized -match '^projects/autocad-technician/lesson-\d{2}-[^/]+/snapshots/' -and -not $isReviewedPublicAsset) {
         $reason = 'snapshot artifact is not in the approved path-and-hash manifest'
     } elseif (($blockedExtensions -contains $extension) -and -not $isReviewedPublicAsset) {

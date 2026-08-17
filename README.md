@@ -17,6 +17,13 @@ Only the following belong here:
 
 Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
 
+Narration recordings and the Whisper transcripts produced from them stay private.
+Transcript and caption paths are blocked unconditionally and cannot be bypassed by
+the approved artifact manifest. Scene timing measured from a recording may be
+published only as a numbers-only derivative such as `narration-timing.json`, which
+carries scene identifiers, start and end seconds, and cue keys, and never carries
+spoken text.
+
 ## Guardrails
 
 The repository uses three layers of protection:

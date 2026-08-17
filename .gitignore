@@ -33,6 +33,18 @@
 *.srt
 *.vtt
 
+# Whisper transcripts and caption data derived from the private narration
+# recordings. Only a numbers-only timing derivative such as
+# narration-timing.json may be published.
+transcript.*
+*.transcript.*
+transcript/
+transcripts/
+caption/
+captions/
+caption.json
+captions.json
+
 # Licensed local font binaries (style references may remain in code)
 *.ttf
 *.ttc
