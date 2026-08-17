@@ -1,0 +1,1 @@
+{"duration": 55, "assertions": [{"kind": "appearsBy", "selector": "#l1f3 .fitcode", "bySec": 3}, {"kind": "before", "a": "#l1f3 .fitcode", "b": "#l1f3 .proc"}, {"kind": "staysInFrame", "selector": "#l1f3 .body"}]}

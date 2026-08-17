@@ -1,0 +1,1 @@
+{"duration": 55, "assertions": [{"kind": "appearsBy", "selector": "#l1f4 .sh-out", "bySec": 3}, {"kind": "before", "a": "#l1f4 .sh-out", "b": "#l1f4 .sh-ttl"}, {"kind": "staysInFrame", "selector": "#l1f4 .body"}]}
