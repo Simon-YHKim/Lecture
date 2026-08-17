@@ -95,6 +95,13 @@ snapshots/
 # Local JavaScript dependencies used by preview and QA tooling
 node_modules/
 
+# Local Python environment for the narration transcription tooling. Installed
+# packages record absolute install paths and file:// URIs that the content guard
+# blocks, so this directory must never become tracked.
+.venv/
+__pycache__/
+*.pyc
+
 # Explicitly reviewed public AutoCAD course artifacts. Keep the global image and
 # planning-source blocks above; only these exact deliverable paths are public.
 !projects/autocad-technician/lesson-*/snapshots/
