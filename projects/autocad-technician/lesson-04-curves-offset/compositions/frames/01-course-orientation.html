@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        @font-face {
+          font-family: "LG EI Text TTF Regular";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Text";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "Malgun Gothic";
+          src: local("Malgun Gothic");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Semibold";
+          src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Regular";
+          src: local("LG EI Headline TTF Regular");
+          font-weight: 400;
+        }
+    @font-face {
+      font-family: "LG EI Headline";
+      src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+      </style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l04-f01-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family:
+            "LG EI Text TTF Regular", "LG EI Text", "Malgun Gothic", sans-serif;
+        }
+        .scene {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 68px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .eyebrow {
+          color: #c7004c;
+          font-size: 26px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 1.08fr 0.92fr;
+          gap: 72px;
+          height: 820px;
+          padding-top: 54px;
+        }
+        .copy {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .kicker {
+          font-size: 30px;
+          color: #666666;
+        }
+        h1 {
+          margin: 18px 0 26px;
+          max-width: 900px;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 92px;
+          line-height: 1.08;
+          letter-spacing: -0.045em;
+        }
+        .thesis {
+          max-width: 780px;
+          color: #666666;
+          font-size: 36px;
+          line-height: 1.45;
+        }
+        .criteria {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+        .criterion {
+          min-height: 126px;
+          padding: 22px;
+          border: 2px solid #a4a3a4;
+          font-size: 29px;
+          font-weight: 600;
+        }
+        .criterion b {
+          display: block;
+          margin-bottom: 11px;
+          color: #c7004c;
+          font-size: 21px;
+        }
+        .guide {
+          padding-left: 52px;
+          border-left: 4px solid #c7004c;
+        }
+        .guide-title {
+          margin-bottom: 28px;
+          color: #666666;
+          font-size: 24px;
+          letter-spacing: 0.08em;
+        }
+        .step {
+          display: grid;
+          grid-template-columns: 62px 1fr;
+          align-items: center;
+          min-height: 102px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .step b {
+          color: #c7004c;
+          font-size: 28px;
+        }
+        .step span {
+          font-size: 34px;
+          font-weight: 600;
+        }
+        .agenda {
+          margin-top: 34px;
+          padding: 24px 28px;
+          background: #f5f5f3;
+          border-top: 3px solid #111111;
+        }
+        .agenda small {
+          display: block;
+          margin-bottom: 16px;
+          color: #666666;
+          font-size: 24px;
+        }
+        .agenda-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+        .agenda-row span {
+          padding: 12px 8px;
+          font-size: 24px;
+          font-weight: 600;
+        }
+        .agenda-row b {
+          color: #c7004c;
+          margin-right: 6px;
+        }
+        .draft {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.12;
+          background-image:
+            linear-gradient(#a4a3a4 1px, #ffffff 1px),
+            linear-gradient(90deg, #a4a3a4 1px, #ffffff 1px);
+          background-size: 80px 80px;
+        }
+      </style>
+      <div
+        id="l04-f01-root"
+        data-composition-id="l04-frame-01-course-orientation"
+        data-start="0"
+        data-duration="60"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l04-f01-scene"
+          class="clip scene"
+          data-start="0"
+          data-duration="60"
+          data-track-index="1"
+        >
+          <div class="draft" aria-hidden="true"></div>
+          <header class="top">
+            <div class="eyebrow">EDU-SB-01 · CUMULATIVE BUILD</div>
+            <div class="lesson">
+              Lesson 04 · L03_BASE_PROFILE → L04_PRIMARY_FEATURES
+            </div>
+          </header>
+          <main class="layout">
+            <section class="copy">
+              <div>
+                <div class="kicker">INPUT · L03_BASE_PROFILE</div>
+                <h1>같은 부품에 주요 특징을 더합니다</h1>
+                <p class="thesis">
+                  정면도 기준 외곽을 유지하고 중심·크기·접점·간격으로 네 특징을
+                  누적합니다.
+                </p>
+              </div>
+              <div class="criteria">
+                <div class="criterion">
+                  <b>FEATURE 01</b>Ø20 · 러그 · 장공 Seed
+                </div>
+                <div class="criterion">
+                  <b>FEATURE 02</b>중앙 육각 포켓 AF30
+                </div>
+                <div class="criterion">
+                  <b>FEATURE 03</b>좌측 국소 포켓 · OFFSET 5
+                </div>
+              </div>
+            </section>
+            <section class="guide">
+              <div class="guide-title">OUTPUT · L04_PRIMARY_FEATURES</div>
+              <div class="step"><b>01</b><span>CIRCLE / ARC</span></div>
+              <div class="step"><b>02</b><span>POLYGON · AF30</span></div>
+              <div class="step"><b>03</b><span>OFFSET · 5 mm</span></div>
+              <div class="step"><b>04</b><span>누적 형상 검수</span></div>
+              <div class="agenda">
+                <small
+              >Layer · OUTLINE / CENTER / CONSTRUCTION · A3 landscape · third-angle</small
+                >
+                <div class="agenda-row">
+                  <span><b>1</b>중심</span><span><b>2</b>접점</span
+                  ><span><b>3</b>방향</span><span><b>4</b>ByLayer</span>
+                </div>
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l04-f01-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -24 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .kicker`,
+          { opacity: 0, x: -52 },
+          { opacity: 1, x: 0, duration: 0.45, ease: "power2.out" },
+          0.5,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 72, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "expo.out" },
+          0.7,
+        );
+        tl.fromTo(
+          `${s} .thesis`,
+          { opacity: 0, x: -34 },
+          { opacity: 1, x: 0, duration: 0.58, ease: "power4.out" },
+          1.2,
+        );
+        tl.fromTo(
+          `${s} .criterion`,
+          { opacity: 0, y: 46 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.42,
+            ease: "power3.out",
+            stagger: 0.11,
+          },
+          5.1,
+        );
+        tl.fromTo(
+          `${s} .guide`,
+          { opacity: 0, x: 72 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power3.out" },
+          14.6,
+        );
+        tl.fromTo(
+          `${s} .step`,
+          { opacity: 0, x: 48 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.36,
+            ease: "power4.out",
+            stagger: 0.1,
+          },
+          15.4,
+        );
+        tl.fromTo(
+          `${s} .agenda`,
+          { opacity: 0, y: 38 },
+          { opacity: 1, y: 0, duration: 0.52, ease: "power2.out" },
+          34,
+        );
+        tl.fromTo(
+          `${s} .agenda-row span`,
+          { opacity: 0, y: 22 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power3.out",
+            stagger: 0.08,
+          },
+          34.3,
+        );
+        tl.to(
+          `${s} .agenda-row span:first-child`,
+          {
+            backgroundColor: "#C7004C",
+            color: "#FFFFFF",
+            duration: 0.4,
+            ease: "power2.inOut",
+          },
+          52,
+        );
+        window.__timelines["l04-frame-01-course-orientation"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

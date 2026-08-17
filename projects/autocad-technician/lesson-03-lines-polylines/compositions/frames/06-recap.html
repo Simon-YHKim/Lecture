@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"></head>
+<body>
+<template>
+<style>
+*{box-sizing:border-box}#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111111;font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif}.clip{position:absolute;inset:0;padding:72px 96px 64px;background:#FFFFFF}.topline{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:2px solid #A4A3A4}.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}.lesson{color:#666666;font-size:24px}.main{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;height:760px;padding-top:48px}.copy{display:flex;flex-direction:column;justify-content:space-between}.kicker{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}h1{margin:15px 0 24px;font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:76px;line-height:1.08;letter-spacing:-.04em}.thesis{color:#666666;font-size:31px;line-height:1.45}.next{padding:22px;border-left:7px solid #C7004C;background:#F5F5F3}.next b{display:block;color:#C7004C;font-size:20px;letter-spacing:.08em}.next strong{display:block;margin-top:6px;font-size:27px}.summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:center}.item{min-height:126px;padding:21px;border:2px solid #A4A3A4}.item b{display:block;color:#C7004C;font-size:21px;letter-spacing:.08em}.item strong{display:block;margin-top:8px;font-size:28px}.item span{display:block;margin-top:6px;color:#666666;font-size:20px;line-height:1.35}.anchor{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;min-height:158px;padding:27px 30px;border:4px solid #C7004C}.anchor strong{font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:42px}.anchor span{display:block;margin-top:8px;color:#666666;font-size:23px}.anchor b{color:#C7004C;font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:46px}
+</style>
+<div id="root" data-composition-id="l3-frame-06-recap" data-start="0" data-duration="60" data-width="1920" data-height="1080">
+  <section id="l3f6" class="clip" data-start="0" data-duration="60" data-track-index="1">
+    <header class="topline"><div class="index">06 · CHECKPOINT OUT</div><div class="lesson">Lesson 03 · EDU-SB-01 누적 제작</div></header>
+    <main class="main">
+      <section class="copy">
+        <div>
+          <div class="kicker">L02_SETUP → L03_BASE_PROFILE</div>
+          <h1>정면 기본 외곽을 완성했습니다</h1>
+          <p class="thesis">CONSTRUCTION 기준 위에 OUTLINE 폐곡선을 만들었습니다. 이 파일을 그대로 다음 차시의 특징 형상 작도에 사용합니다.</p>
+        </div>
+        <div class="next"><b>NEXT · LESSON 04</b><strong>Ø20 · R15 러그 · 22×8 장공 · AF30 · 국소 OFFSET 추가</strong></div>
+      </section>
+      <section class="summary">
+        <div class="item"><b>CHECKPOINT IN</b><strong>L02_SETUP</strong><span>acadiso.dwt · A3 · 제3각법 환경</span></div>
+        <div class="item"><b>LAYERS USED</b><strong>OUTLINE</strong><span>실제 정면 외곽 · 하나의 Closed 객체</span></div>
+        <div class="item"><b>DATUM</b><strong>CONSTRUCTION</strong><span>원점 · Datum A · Datum B(X=40)</span></div>
+        <div class="item"><b>시험·감점</b><strong>폐합·Layer 확인</strong><span>열린 외곽, Layer 혼용, 치수 오류는 감점 위험</span></div>
+        <div class="anchor"><div><strong>EDU-SB-01 · 정면 80 × 50</strong><span>실제 시험 지시사항이 다르면 시험 지시를 우선합니다.</span></div><b>L03_BASE_PROFILE</b></div>
+      </section>
+    </main>
+  </section>
+</div>
+<script>
+window.__timelines=window.__timelines||{};
+const tl=gsap.timeline({paused:true});const s="#l3f6";
+tl.fromTo(`${s} .topline`,{opacity:0,y:-22},{opacity:1,y:0,duration:.56,ease:"power3.out"},.2)
+  .fromTo(`${s} .kicker`,{opacity:0,x:-46},{opacity:1,x:0,duration:.42,ease:"power2.out"},.6)
+  .fromTo(`${s} h1`,{opacity:0,y:66},{opacity:1,y:0,duration:.78,ease:"expo.out"},.8)
+  .fromTo(`${s} .thesis`,{opacity:0,x:-36},{opacity:1,x:0,duration:.52,ease:"power3.out"},1.35)
+  .fromTo(`${s} .item`,{opacity:0,y:48},{opacity:1,y:0,duration:.4,ease:"back.out(1.2)",stagger:.12},6)
+  .fromTo(`${s} .anchor`,{opacity:0,y:42},{opacity:1,y:0,duration:.52,ease:"power3.out"},18)
+  .fromTo(`${s} .next`,{opacity:0,x:-48},{opacity:1,x:0,duration:.5,ease:"power4.out"},34)
+  .to(`${s} .anchor`,{backgroundColor:"#C7004C",color:"#FFFFFF",duration:.46,ease:"power2.inOut"},51)
+  .to(`${s} .anchor span,${s} .anchor b`,{color:"#FFFFFF",duration:.3},51);
+window.__timelines["l3-frame-06-recap"]=tl;
+</script>
+<style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:400}</style>
+</template>
+</body>
+</html>

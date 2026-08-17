@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Private Materials Guard Completion Report</title>
+  <style>
+    :root{--accent:#087f8c;--text:#17232d;--muted:#60717e;--bg:#f3f7f8;--panel:#fff;--line:#cedadd;--ok:#087f8c}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main,header{width:min(1080px,calc(100% - 32px));margin:auto}header{padding:48px 0 24px;border-bottom:1px solid var(--line)}h1{max-width:760px;margin:8px 0;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-.04em}h2{font-size:25px;margin:0 0 16px}h3{font-size:18px;margin:0 0 8px}.eyebrow,.status{color:var(--accent);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.lead{max-width:780px;color:var(--muted);font-size:18px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.toolbar button{min-height:44px;padding:9px 14px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--text);font:inherit;font-weight:700;cursor:pointer}.toolbar button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:#fff}.toolbar button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}main{padding:28px 0 64px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.section{background:var(--panel);border:1px solid var(--line);border-radius:10px}.card{padding:20px}.metric{font-size:28px;font-weight:850;color:var(--accent)}.label{color:var(--muted)}.section{padding:24px;margin-top:16px}details{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}summary{cursor:pointer;color:var(--accent);font-weight:800}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-size:14px}.chart{width:100%;height:auto;margin-top:8px}.chart text{font:14px system-ui,sans-serif;fill:currentColor}.chart .track{fill:var(--line)}.chart .fill{fill:var(--accent)}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent)}.lang-en [lang="ko"],.lang-ko [lang="en"],.mode-easy .expert,.mode-expert .easy{display:none}.next{border-left:5px solid var(--accent)}footer{margin-top:24px;color:var(--muted);font-size:14px}@media(max-width:820px){.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.cards{grid-template-columns:1fr}header{padding-top:28px}.section{padding:18px}}@media(prefers-color-scheme:dark){:root{--text:#e8f0f2;--muted:#a8bbc1;--bg:#101718;--panel:#172123;--line:#344649;--accent:#66d3dc}.toolbar button[aria-pressed="true"]{color:#102022}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body class="lang-ko mode-easy">
+  <header>
+    <div class="eyebrow">DONE · SECURITY BASELINE</div>
+    <h1 lang="ko">비공개 강의 원본을 공개 저장소에서 차단했습니다</h1>
+    <h1 lang="en">Private course sources are blocked from the public repository</h1>
+    <p class="lead easy" lang="ko">실수로 원본 자료를 추가하더라도 저장 전과 GitHub 검사 단계에서 멈추도록 안전장치를 만들었습니다.</p>
+    <p class="lead easy" lang="en">Guardrails now stop private source material before commit and again on GitHub.</p>
+    <p class="lead expert" lang="ko">확장자·경로 기반 정책을 단일 검사기로 구현하고 pre-commit hook과 GitHub Actions가 같은 규칙을 실행하도록 구성했습니다.</p>
+    <p class="lead expert" lang="en">A single path-and-extension policy is shared by the pre-commit hook and GitHub Actions.</p>
+    <div class="toolbar" aria-label="Report display controls">
+      <button type="button" data-lang="ko" aria-pressed="true" aria-label="한국어로 보기">한국어</button>
+      <button type="button" data-lang="en" aria-pressed="false" aria-label="View in English">English</button>
+      <button type="button" data-mode="easy" aria-pressed="true" aria-label="쉬운 설명으로 보기">쉬운 설명</button>
+      <button type="button" data-mode="expert" aria-pressed="false" aria-label="전문가 설명으로 보기">전문가 설명</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="cards" aria-label="Summary metrics">
+      <article class="card"><div class="metric">3</div><div class="label" lang="ko">보호 계층</div><div class="label" lang="en">protection layers</div></article>
+      <article class="card"><div class="metric">7/7</div><div class="label" lang="ko">자동 테스트 통과</div><div class="label" lang="en">automated cases passed</div></article>
+      <article class="card"><div class="metric">0</div><div class="label" lang="ko">공개된 비공개 원본</div><div class="label" lang="en">private sources published</div></article>
+      <article class="card"><div class="metric">Ready</div><div class="label" lang="ko">다음 제작 단계</div><div class="label" lang="en">next production phase</div></article>
+    </section>
+
+    <section class="section">
+      <h2 lang="ko">결과</h2><h2 lang="en">Outcome</h2>
+      <p class="easy" lang="ko">공개 저장소에는 제작 코드와 공개 검토가 끝난 자료만 들어갈 수 있습니다. 원본 프레젠테이션, CAD 도면, 영상과 자막은 기본적으로 차단됩니다.</p>
+      <p class="easy" lang="en">Only production code and reviewed public material belong in the repository. Presentation sources, CAD files, video, and captions are blocked by default.</p>
+      <p class="expert" lang="ko"><code>.gitignore</code>가 일반 추가를 방지하고, <code>check-private-materials.ps1</code>이 강제 추가를 탐지합니다. 동일 검사는 로컬 hook과 CI에서 재사용됩니다.</p>
+      <p class="expert" lang="en"><code>.gitignore</code> prevents ordinary adds, while <code>check-private-materials.ps1</code> detects force-added files. The hook and CI reuse the same checker.</p>
+      <svg class="chart" viewBox="0 0 760 150" role="img" aria-label="Three active protection layers">
+        <text x="0" y="27">Ignore</text><rect class="track" x="130" y="10" width="600" height="22" rx="4"/><rect class="fill" x="130" y="10" width="600" height="22" rx="4"/>
+        <text x="0" y="77">Pre-commit</text><rect class="track" x="130" y="60" width="600" height="22" rx="4"/><rect class="fill" x="130" y="60" width="600" height="22" rx="4"/>
+        <text x="0" y="127">GitHub CI</text><rect class="track" x="130" y="110" width="600" height="22" rx="4"/><rect class="fill" x="130" y="110" width="600" height="22" rx="4"/>
+      </svg>
+      <details><summary><span lang="ko">[자세히] 변경 파일</span><span lang="en">[Details] Changed files</span></summary>
+        <table><thead><tr><th>File</th><th lang="ko">역할</th><th lang="en">Role</th></tr></thead><tbody>
+          <tr><td><code>.gitignore</code></td><td lang="ko">원본·파생 미디어·비공개 경로 제외</td><td lang="en">Exclude sources, derived media, and private paths</td></tr>
+          <tr><td><code>scripts/check-private-materials.ps1</code></td><td lang="ko">추적 파일 공통 검사</td><td lang="en">Shared tracked-file scanner</td></tr>
+          <tr><td><code>scripts/test-private-materials-guard.ps1</code></td><td lang="ko">차단·허용 회귀 테스트</td><td lang="en">Block/allow regression tests</td></tr>
+          <tr><td><code>.githooks/pre-commit</code></td><td lang="ko">커밋 전 검사</td><td lang="en">Pre-commit enforcement</td></tr>
+          <tr><td><code>.github/workflows/private-materials-guard.yml</code></td><td lang="ko">push·PR 재검사</td><td lang="en">Push and pull-request enforcement</td></tr>
+          <tr><td><code>README.md</code></td><td lang="ko">공개·비공개 경계 문서화</td><td lang="en">Document the public/private boundary</td></tr>
+        </tbody></table>
+      </details>
+    </section>
+
+    <section class="section">
+      <h2 lang="ko">검증 상태</h2><h2 lang="en">Verification</h2>
+      <p class="easy" lang="ko">영문·한글 이름을 포함한 위험 파일 여섯 종류는 모두 멈췄고, 공개 문서는 정상 통과했습니다.</p>
+      <p class="easy" lang="en">Six risky cases, including a Korean file name, were blocked and one public document case was allowed.</p>
+      <p class="expert" lang="ko">영문·한글 PPTX, 비공개 디렉터리, PDF, DWG, ZIP 차단과 공개 Markdown 허용을 임시 Git index에서 검증했습니다. 전체 추적 파일 검사와 <code>git diff --check</code>도 통과했습니다.</p>
+      <p class="expert" lang="en">Tests use an isolated Git index to validate English and Korean PPTX names, private directories, PDF, DWG, ZIP, and an allowed public Markdown path. Full tracked-file scanning and <code>git diff --check</code> also passed.</p>
+      <details><summary><span lang="ko">[자세히] 테스트 기준</span><span lang="en">[Details] Test criteria</span></summary>
+        <ul>
+          <li lang="ko">위험 확장자 또는 비공개 경로는 종료 코드 1</li><li lang="en">Blocked extensions or private paths return exit code 1</li>
+          <li lang="ko">승인 가능한 공개 문서는 종료 코드 0</li><li lang="en">A public documentation path returns exit code 0</li>
+          <li lang="ko">로컬과 CI가 같은 검사기를 실행</li><li lang="en">Local and CI enforcement run the same checker</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="section">
+      <h2 lang="ko">남은 위험과 롤백</h2><h2 lang="en">Residual risk and rollback</h2>
+      <p class="easy" lang="ko">이미지나 HTML에 내용을 복사하면 확장자만으로는 알아낼 수 없습니다. 공개 전 사람이 화면과 문장을 확인해야 합니다.</p>
+      <p class="easy" lang="en">A copied image or HTML excerpt cannot be identified by extension alone. A person must review content before publishing.</p>
+      <p class="expert" lang="ko">정책은 경로·확장자 방어이며 내용 기반 DLP는 아닙니다. 합성 도면과 승인된 공개 자산만 저장소에 넣습니다. push 전 발견하면 해당 커밋을 수정·제거하고 검사를 다시 실행합니다. 이미 공개 원격에 올라간 비공개 자료는 <code>git revert</code>만으로 지워지지 않으므로 즉시 접근을 제한하고, 노출된 시크릿을 폐기한 뒤 승인된 절차로 Git 이력을 정리하고 영향받은 ref를 갱신해야 합니다.</p>
+      <p class="expert" lang="en">This is path-and-extension enforcement, not content-aware DLP. Only synthetic or explicitly approved assets should be tracked. Before push, amend or remove the offending commit and rerun the checks. If private material has reached a public remote, <code>git revert</code> alone does not remove the blob: restrict access, rotate exposed credentials, purge the Git history through the approved incident process, and then update affected refs.</p>
+      <details><summary><span lang="ko">[자세히] 수동 공개 검토</span><span lang="en">[Details] Manual publication review</span></summary>
+        <p lang="ko">회사 식별자, 도면번호, 설비명, 치수, 사용자명, 로컬 경로, 슬라이드 화면과 발표자 노트가 복사되지 않았는지 확인합니다.</p>
+        <p lang="en">Check for company identifiers, drawing numbers, equipment names, dimensions, user names, local paths, slide images, and copied speaker notes.</p>
+      </details>
+    </section>
+
+    <section class="section next">
+      <h2 lang="ko">다음 단계</h2><h2 lang="en">Next step</h2>
+      <p class="easy" lang="ko">보호 경계가 생겼으므로 이제 강의 내용을 장면별로 나누고 첫 번째 파일럿 차시를 설계할 수 있습니다.</p>
+      <p class="easy" lang="en">With the boundary in place, the course can now be split into scenes and the first pilot lesson designed.</p>
+      <p class="expert" lang="ko">다음 작업은 비공개 작업공간에서 원본 분석 → 학습목표 → Scene 계획 → 내레이션 → 타임코드 → 모션 → 스냅샷·싱크·전체 렌더 검증 순서로 진행합니다.</p>
+      <p class="expert" lang="en">The next phase runs in the private workspace: source analysis → learning outcomes → scene plan → narration → timecodes → motion → snapshot, sync, and full-render verification.</p>
+    </section>
+
+    <footer>
+      <span lang="ko">생성 시각: 2026-08-12 02:14:40 KST · 브랜치: chore/protect-private-materials</span>
+      <span lang="en">Generated: 2026-08-12 02:14:40 KST · Branch: chore/protect-private-materials</span>
+    </footer>
+  </main>
+  <script>
+    const body=document.body, buttons=[...document.querySelectorAll('button')];
+    buttons.forEach(button=>button.addEventListener('click',()=>{
+      const group=button.dataset.lang?'lang':'mode', value=button.dataset[group];
+      body.className=body.className.replace(new RegExp(`${group}-(ko|en|easy|expert)`),`${group}-${value}`);
+      buttons.filter(item=>item.dataset[group]).forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      if(group==='lang') document.documentElement.lang=value;
+    }));
+  </script>
+</body>
+</html>

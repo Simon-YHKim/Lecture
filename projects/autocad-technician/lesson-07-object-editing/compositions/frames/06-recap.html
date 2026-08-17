@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        #root { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; color:#111111; font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif; }
+        * { box-sizing:border-box; }
+        .clip { position:absolute; inset:0; width:100%; height:100%; padding:72px 96px 64px; background:#FFFFFF; }
+        .topline { display:flex; align-items:end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid #A4A3A4; }
+        .index { color:#C7004C; font-size:24px; font-weight:600; letter-spacing:.08em; }
+        h1 { margin:0; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:64px; font-weight:600; letter-spacing:-.035em; }
+        .message { color:#666666; font-size:32px; }
+        .map { display:grid; grid-template-columns:1fr 470px 1fr; gap:28px; align-items:center; height:610px; padding-top:42px; }
+        .command-list { display:grid; gap:18px; }
+        .command { display:grid; grid-template-columns:180px 1fr; align-items:center; min-height:82px; border-bottom:2px solid #A4A3A4; }
+        .command b { font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; color:#C7004C; font-size:34px; }
+        .command span { font-size:30px; font-weight:600; }
+        .center { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .center svg { width:440px; height:360px; }
+        .shape,.feature { fill:none; stroke:#111111; stroke-width:14; stroke-linejoin:round; }
+        .center-label { margin-top:10px; font-size:31px; font-weight:600; }
+        .right-list { display:grid; gap:18px; }
+        .principle { min-height:82px; padding:18px 22px; background:#F5F5F3; border-left:4px solid #C7004C; font-size:28px; line-height:1.4; }
+        .next { display:grid; grid-template-columns:1fr 160px 1fr; align-items:center; margin-top:20px; padding:30px 38px; border-top:3px solid #111111; border-bottom:3px solid #111111; }
+        .next div { font-size:38px; font-weight:600; text-align:center; }
+        .arrow { color:#C7004C; font-size:56px!important; }
+        .draft-grid { position:absolute; inset:0; pointer-events:none; opacity:.12; background-image:linear-gradient(#A4A3A4 1px,transparent 1px),linear-gradient(90deg,#A4A3A4 1px,transparent 1px); background-size:80px 80px; }
+        .center-pulse { position:absolute; left:50%; top:52%; width:420px; height:420px; margin:-210px 0 0 -210px; border:3px solid #C7004C; border-radius:50%; opacity:0; pointer-events:none; }
+      </style>
+      <div data-hf-id="hf-c82q" id="root" data-composition-id="frame-06-recap" data-start="0" data-duration="45" data-width="1920" data-height="1080">
+        <section data-hf-id="hf-gm91" id="frame-06-layout" class="clip" data-start="0" data-duration="45" data-track-index="1">
+          <div data-hf-id="continuity-l7f6" style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #A4A3A4;background:#FFFFFF;color:#666666;font-size:18px"><b style="color:#C7004C">EDU-SB-01 · L06_PATTERNED_FEATURES → L07_GEOMETRY_FINAL</b><span>A3 가로 · 제3각법 · OUTLINE/CENTER/HIDDEN · 시험 감점 위험 점검</span></div>
+          <div data-hf-id="hf-csbz" class="draft-grid" aria-hidden="true"></div>
+          <div data-hf-id="hf-8lrq" class="center-pulse" aria-hidden="true"></div>
+          <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-bnfk" class="index">06 · CHECKPOINT</div><h1 data-hf-id="hf-9jm6">EDU-SB-01 형상 마감이 끝났습니다</h1></div><div data-hf-id="hf-4xzi" class="message">감점 위험 기록</div></header>
+          <main data-hf-id="hf-rk8a" class="map">
+            <section data-hf-id="hf-yb7k" class="command-list"><div data-hf-id="hf-ycor" class="command"><b data-hf-id="hf-pbjd">TRIM</b><span data-hf-id="hf-90et">제거</span></div><div data-hf-id="hf-94sb" class="command"><b data-hf-id="hf-e161">EXTEND</b><span data-hf-id="hf-tj6a">연장</span></div><div data-hf-id="hf-8qha" class="command"><b data-hf-id="hf-z3sp">FILLET</b><span data-hf-id="hf-mwz4">둥근 연결</span></div><div data-hf-id="hf-8c69" class="command"><b data-hf-id="hf-a2ad">CHAMFER</b><span data-hf-id="hf-qwxf">평평한 사선</span></div><div data-hf-id="hf-7xv8" class="command"><b data-hf-id="hf-f4c1">SCALE</b><span data-hf-id="hf-zoew">크기 조정</span></div></section>
+            <section data-hf-id="hf-jo7b" class="center"><svg data-hf-id="hf-cqzq" viewBox="0 0 440 360" aria-label="EDU-SB-01 센서 장착 브래킷"><path data-hf-id="hf-ciym" class="shape" d="M30 315 V140 H155 A75 75 0 0 1 305 140 H359.65 A25 25 0 0 1 377.32 147.32 L430 200 V290 L405 315 Z" /><rect class="feature" x="55" y="170" width="70" height="70"/><circle class="feature" cx="230" cy="205" r="50"/><polygon class="feature" points="316.61,205 273.3,130 186.7,130 143.4,205 186.7,280 273.3,280"/><path class="feature" d="M195 85 H265 A20 20 0 0 1 265 125 H195 A20 20 0 0 1 195 85 Z"/><circle class="feature" cx="105" cy="275" r="15"/><circle class="feature" cx="355" cy="275" r="15"/><circle class="feature" cx="307.94" cy="160" r="10"/><circle class="feature" cx="152.06" cy="160" r="10"/><circle class="feature" cx="230" cy="295" r="10"/></svg><div data-hf-id="hf-bo25" class="center-label">L07_GEOMETRY_FINAL</div></section>
+            <section data-hf-id="hf-nt9j" class="right-list"><div data-hf-id="hf-k1on" class="principle">OUTLINE 경계 완료</div><div data-hf-id="hf-eb7m" class="principle">어깨 R5 · 하단 C5</div><div data-hf-id="hf-al48" class="principle">센서 참조만 SCALE</div><div data-hf-id="hf-vdzr" class="principle">시험 지시·축척·Layer 감점 확인</div></section>
+          </main>
+          <footer data-hf-id="hf-8wfh" class="next"><div data-hf-id="hf-tqr1">형상 완성</div><div data-hf-id="hf-drib" class="arrow">→</div><div data-hf-id="hf-0sig">다음 차시 · 표현과 재사용</div></footer>
+        </section>
+      </div>
+      <script>
+        window.__timelines=window.__timelines||{};
+        const tl=gsap.timeline({paused:true});
+        const s="#frame-06-layout";
+        tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2);
+        tl.fromTo(`${s} .message`,{opacity:0,x:44},{opacity:1,x:0,duration:.46,ease:"power2.out"},.72);
+        const bracket=document.querySelector("#frame-06-layout .shape");
+        const len=bracket.getTotalLength();
+        bracket.style.strokeDasharray=`${len}`;
+        bracket.style.strokeDashoffset=`${len}`;
+        tl.to(bracket,{strokeDashoffset:0,duration:1.05,ease:"power2.out"},1.1);
+        tl.fromTo(`${s} .center-label`,{opacity:0,y:24},{opacity:1,y:0,duration:.42,ease:"power3.out"},1.92);
+        tl.fromTo(`${s} .command`,{opacity:0,x:-58},{opacity:1,x:0,duration:.34,ease:"power4.out",stagger:.1},3.0);
+        tl.fromTo(`${s} .principle`,{opacity:0,x:62},{opacity:1,x:0,duration:.38,ease:"power3.out",stagger:.12},6.2);
+        tl.fromTo(`${s} .center-pulse`,{opacity:.7,scale:.55},{opacity:0,scale:1.25,duration:.8,ease:"power3.out"},10.2);
+        tl.fromTo(`${s} .next`,{opacity:0,y:46},{opacity:1,y:0,duration:.62,ease:"power2.out"},28.0);
+        tl.fromTo(`${s} .arrow`,{opacity:0,x:-34},{opacity:1,x:0,duration:.42,ease:"back.out(1.4)"},28.36);
+        tl.to(`${s} .next div:last-child`,{color:"#C7004C",duration:.48,ease:"power1.inOut"},31.0);
+        tl.to(`${s} .draft-grid`,{opacity:.2,duration:5,ease:"sine.inOut",repeat:1,yoyo:true},32.0);
+        tl.to(`${s} .topline, ${s} .map, ${s} .next`,{opacity:0,duration:.65,ease:"power2.in"},44.1);
+        window.__timelines["frame-06-recap"]=tl;
+      </script>
+    </template>
+  </body>
+</html>

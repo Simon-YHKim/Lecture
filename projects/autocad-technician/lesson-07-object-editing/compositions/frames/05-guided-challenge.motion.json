@@ -1,0 +1,9 @@
+{
+  "duration": 180,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#frame-05-layout h1", "bySec": 1 },
+    { "kind": "before", "a": "#frame-05-layout .drawing", "b": "#frame-05-layout .check" },
+    { "kind": "appearsBy", "selector": "#frame-05-layout .commands b", "bySec": 56 },
+    { "kind": "staysInFrame", "selector": "#frame-05-layout .drawing" }
+  ]
+}

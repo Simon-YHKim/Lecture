@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l09f06-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        h1 {
+          margin: 52px 0 34px;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 76px;
+        }
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+        }
+        .card {
+          min-height: 190px;
+          padding: 24px;
+          border: 2px solid #a4a3a4;
+          background: #f5f5f3;
+        }
+        .card b {
+          display: block;
+          color: #c7004c;
+          font-size: 25px;
+        }
+        .card strong {
+          display: block;
+          margin-top: 18px;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 38px;
+        }
+        .next {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          margin-top: 40px;
+          padding: 26px 30px;
+          border-top: 4px solid #c7004c;
+          font-size: 32px;
+        }
+        .next b {
+          color: #c7004c;
+        }
+        .line {
+          display: block;
+          width: 350px;
+          height: 4px;
+          background: #c7004c;
+          transform-origin: left center;
+        }
+      </style>
+      <div
+        id="l09f06-root"
+        data-composition-id="l09-frame-06-recap"
+        data-start="0"
+        data-duration="60"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l09f06-scene"
+          class="clip"
+          data-start="0"
+          data-duration="60"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L08_REPRESENTED → L09_RELEASE_CANDIDATE</b><span>A3 가로 · 제3각법 · DIM/OUTLINE/CENTER · 시험 감점 위험 점검</span></div>
+          <header class="top">
+            <div class="index">06 · RECAP</div>
+            <div class="lesson">Lesson 09 · 치수로 의도를 전달하기</div>
+          </header>
+          <h1>EDU-SB-01 릴리스 후보가 준비됐습니다</h1>
+          <div class="grid">
+            <div class="card"><b>DIMSTYLE</b><strong>공통 규칙</strong></div>
+            <div class="card"><b>DIMLINEAR</b><strong>투영 길이</strong></div>
+            <div class="card"><b>DIMALIGNED</b><strong>실제 길이</strong></div>
+            <div class="card"><b>DIMANGULAR</b><strong>각도</strong></div>
+            <div class="card"><b>DIMRADIUS</b><strong>반지름</strong></div>
+            <div class="card"><b>DIMDIAMETER</b><strong>지름</strong></div>
+          </div>
+          <div class="next">
+            <span>L09_RELEASE_CANDIDATE</span><i class="line"></i
+            ><b>다음: 제한시간 7개 감점 게이트</b>
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l09f06-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 58 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" },
+          0.6,
+        );
+        tl.fromTo(
+          `${s} .card`,
+          { opacity: 0, y: 46 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power4.out",
+            stagger: 0.09,
+          },
+          1.3,
+        );
+        tl.fromTo(
+          `${s} .next`,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          30,
+        );
+        tl.fromTo(
+          `${s} .line`,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.7, ease: "power2.out" },
+          30.2,
+        );
+        window.__timelines["l09-frame-06-recap"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "duration": 180,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#frame-04-layout h1", "bySec": 1 },
+    { "kind": "before", "a": "#frame-04-layout .concept", "b": "#frame-04-layout .recording-stage" },
+    { "kind": "staysInFrame", "selector": "#frame-04-layout .verification" }
+  ]
+}

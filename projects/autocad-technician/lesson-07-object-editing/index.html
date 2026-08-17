@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      body {
+        font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      #root > [data-composition-src] {
+        position: absolute;
+        inset: 0;
+      }
+      .transition-clip {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .seam {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+      .wipe-block {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+      .wipe-magenta {
+        background: #c7004c;
+      }
+      .wipe-ink {
+        background: #111111;
+      }
+      .wipe-white {
+        background: #ffffff;
+      }
+      .split-top,
+      .split-bottom {
+        position: absolute;
+        left: 0;
+        width: 1920px;
+        height: 540px;
+      }
+      .split-top {
+        top: 0;
+        background: #c7004c;
+      }
+      .split-bottom {
+        bottom: 0;
+        background: #111111;
+      }
+      .hard-flash {
+        position: absolute;
+        inset: 0;
+        background: #ffffff;
+      }
+      .hard-rule {
+        position: absolute;
+        left: 0;
+        top: 532px;
+        width: 1920px;
+        height: 16px;
+        background: #c7004c;
+      }
+    </style>
+  <style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></head>
+  <body>
+    <div data-hf-id="hf-199x" id="root" data-composition-id="main" data-start="0" data-duration="855" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-1jay" id="slot-frame-01" class="clip" data-composition-id="frame-01-course-orientation" data-composition-src="compositions/frames/01-course-orientation.html" data-start="0" data-duration="60" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-6k8g" id="slot-frame-02" class="clip" data-composition-id="frame-02-trim-extend" data-composition-src="compositions/frames/02-trim-extend.html" data-start="60" data-duration="195" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-kyz1" id="slot-frame-03" class="clip" data-composition-id="frame-03-fillet-chamfer" data-composition-src="compositions/frames/03-fillet-chamfer.html" data-start="255" data-duration="195" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-czkd" id="slot-frame-04" class="clip" data-composition-id="frame-04-scale" data-composition-src="compositions/frames/04-scale.html" data-start="450" data-duration="180" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-4etg" id="slot-frame-05" class="clip" data-composition-id="frame-05-guided-challenge" data-composition-src="compositions/frames/05-guided-challenge.html" data-start="630" data-duration="180" data-track-index="1" data-width="1920" data-height="1080"></div>
+      <div data-hf-id="hf-1hz1" id="slot-frame-06" class="clip" data-composition-id="frame-06-recap" data-composition-src="compositions/frames/06-recap.html" data-start="810" data-duration="45" data-track-index="1" data-width="1920" data-height="1080"></div>
+
+      <div data-hf-id="hf-hfmj" id="transition-track" class="clip transition-clip" data-start="0" data-duration="855" data-track-index="2" data-layout-allow-occlusion data-layout-allow-overflow>
+        <div data-hf-id="hf-3hb6" id="seam-01" class="seam"><div data-hf-id="hf-6hok" class="wipe-block wipe-magenta seam-a"></div><div data-hf-id="hf-coak" class="wipe-block wipe-ink seam-b"></div></div>
+        <div data-hf-id="hf-zj75" id="seam-02" class="seam"><div data-hf-id="hf-lmkm" class="wipe-block wipe-white seam-a"></div><div data-hf-id="hf-f5kf" class="wipe-block wipe-magenta seam-b"></div></div>
+        <div data-hf-id="hf-yrjc" id="seam-03" class="seam"><div data-hf-id="hf-zfre" class="split-top"></div><div data-hf-id="hf-fp5k" class="split-bottom"></div></div>
+        <div data-hf-id="hf-sltj" id="seam-04" class="seam"><div data-hf-id="hf-wif2" class="hard-flash"></div><div data-hf-id="hf-hlzm" class="hard-rule"></div></div>
+        <div data-hf-id="hf-onpi" id="seam-05" class="seam"><div data-hf-id="hf-jygs" class="wipe-block wipe-magenta seam-a"></div><div data-hf-id="hf-hogl" class="wipe-block wipe-white seam-b"></div></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      function coverWipe(id, at) {
+        tl.fromTo(`${id} .seam-a`, { x: -1920 }, { x: 0, duration: 0.25, ease: "power3.inOut" }, at);
+        tl.fromTo(`${id} .seam-b`, { x: -1920 }, { x: 0, duration: 0.25, ease: "power3.inOut" }, at + 0.06);
+        tl.to(`${id} .seam-a`, { x: 1920, duration: 0.25, ease: "power3.inOut" }, at + 0.34);
+        tl.to(`${id} .seam-b`, { x: 1920, duration: 0.25, ease: "power3.inOut" }, at + 0.4);
+      }
+      coverWipe("#seam-01", 59.65);
+      coverWipe("#seam-02", 254.65);
+      tl.fromTo("#seam-03 .split-top", { x: -1920 }, { x: 0, duration: 0.28, ease: "power3.inOut" }, 449.65);
+      tl.fromTo("#seam-03 .split-bottom", { x: 1920 }, { x: 0, duration: 0.28, ease: "power3.inOut" }, 449.65);
+      tl.to("#seam-03 .split-top", { x: 1920, duration: 0.28, ease: "power3.inOut" }, 450.01);
+      tl.to("#seam-03 .split-bottom", { x: -1920, duration: 0.28, ease: "power3.inOut" }, 450.01);
+      tl.fromTo("#seam-04 .hard-flash", { opacity: 0 }, { opacity: 1, duration: 0.07, ease: "power4.out", repeat: 1, yoyo: true }, 629.9);
+      tl.fromTo("#seam-04 .hard-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.12, ease: "expo.out" }, 629.9);
+      tl.to("#seam-04 .hard-rule", { opacity: 0, duration: 0.04, ease: "power1.in" }, 630.04);
+      coverWipe("#seam-05", 809.65);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

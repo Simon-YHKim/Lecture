@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"></head>
+<body>
+<template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+<style>
+*{box-sizing:border-box}#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111111;font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif}.clip{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;gap:20px;padding:72px 96px 64px;background:#FFFFFF}.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}h1{margin:0;font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:62px}.prompt{color:#666666;font-size:27px}.split{display:grid;grid-template-columns:1fr 4px 1fr;gap:32px;min-height:0}.divider{background:#C7004C}.side{display:grid;grid-template-rows:auto 1fr auto;min-height:0}.head{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px}.command{font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;font-size:46px}.meaning{padding:8px 14px;border:2px solid #C7004C;color:#C7004C;font-size:22px;font-weight:600}.viewport{display:grid;place-items:center;min-height:0;overflow:hidden;background:#F5F5F3;border:2px solid #A4A3A4}.world{width:570px;height:340px;transform-origin:center}.world svg{width:100%;height:100%}.shape{fill:none;stroke:#111111;stroke-width:10}.point{fill:#C7004C}.vector{fill:none;stroke:#C7004C;stroke-width:7}.svg-text{font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;font-size:24px;fill:#111111}.readout{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:14px}.readout div{padding:13px 15px;background:#F5F5F3;border-top:3px solid #111111;font-size:22px}.readout b{display:block;color:#C7004C;font-size:19px}.check{display:flex;align-items:center;gap:22px;padding:15px 22px;border-left:8px solid #C7004C;background:#F5F5F3;font-size:23px}.check b{flex:0 0 auto;color:#C7004C;font-size:20px;letter-spacing:.08em}
+</style>
+<div id="root" data-composition-id="l2-frame-03-view-coordinate" data-start="0" data-duration="150" data-width="1920" data-height="1080">
+  <section id="l2f3" class="clip" data-start="0" data-duration="150" data-track-index="1">
+    <header class="topline">
+      <div><div class="index">03 · A3 BORDER / TITLE</div><h1>도면틀과 표제란을 입력값으로 만듭니다</h1></div>
+      <div class="prompt">LAYOUT 1:1 · A3 420 × 297</div>
+    </header>
+    <main class="split">
+      <section class="side">
+        <div class="head"><div class="command">BORDER</div><div class="meaning">사방 10 mm</div></div>
+        <div class="viewport"><div class="world">
+          <svg viewBox="0 0 650 410" aria-label="A3 가로형 용지와 사방 10 밀리미터 도면틀">
+            <rect class="shape" x="55" y="20" width="540" height="382"/>
+            <rect class="shape" x="68" y="33" width="514" height="356"/>
+            <path class="vector" d="M55 407H595M55 398V410M595 398V410"/>
+            <text class="svg-text" x="276" y="360">420 mm</text>
+          </svg>
+        </div></div>
+        <div class="readout"><div><b>PAPER / LAYOUT</b>420 × 297 mm · 1:1</div><div><b>VIEWPORT</b>Model 1:1 참조 · 축척 잠금</div></div>
+      </section>
+      <div class="divider"></div>
+      <section class="side">
+        <div class="head"><div class="command">TITLE</div><div class="meaning">우측 하단</div></div>
+        <div class="viewport"><div class="world">
+          <svg viewBox="0 0 650 410" aria-label="사번과 이름 셀로 구성된 교육용 표제란">
+            <rect class="shape" x="75" y="174" width="500" height="75"/>
+            <line class="shape" x1="325" y1="174" x2="325" y2="249"/>
+            <text class="svg-text" x="190" y="220">사번</text>
+            <text class="svg-text" x="440" y="220">이름</text>
+            <path class="vector" d="M75 290H575M75 270V310M575 270V310"/>
+            <circle class="point" cx="75" cy="290" r="9"/>
+          </svg>
+        </div></div>
+        <div class="readout"><div><b>SIZE</b>200 × 30 mm</div><div><b>CELLS / TEXT</b>100+100 · 10 mm</div></div>
+      </section>
+    </main>
+    <div class="check"><b>시험·감점 CHECK</b><span>과정 기본은 Layout/Paper Space 도면틀 1:1입니다. 시험 제공 DWT/DWG의 공간 구조·수치가 다르면 제공 파일을 우선합니다.</span></div>
+  </section>
+</div>
+<script>
+window.__timelines=window.__timelines||{};
+const tl=gsap.timeline({paused:true});const s="#l2f3";
+tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2)
+  .fromTo(`${s} .prompt`,{opacity:0,x:44},{opacity:1,x:0,duration:.44,ease:"power2.out"},.72)
+  .fromTo(`${s} .divider`,{scaleY:0},{scaleY:1,duration:.7,ease:"power3.out"},.95)
+  .fromTo(`${s} .side:first-child`,{opacity:0,x:-110,scale:.98},{opacity:1,x:0,scale:1,duration:.72,ease:"power4.out"},1.05)
+  .fromTo(`${s} .side:nth-of-type(2)`,{opacity:0,x:110,scale:.98},{opacity:1,x:0,scale:1,duration:.72,ease:"power3.out"},1.2);
+const ps=document.querySelectorAll("#l2f3 .shape,#l2f3 .vector");
+ps.forEach(p=>{const l=p.getTotalLength();p.style.strokeDasharray=`${l}`;p.style.strokeDashoffset=`${l}`});
+tl.to(ps,{strokeDashoffset:0,duration:.9,ease:"power2.out",stagger:.14},2.1)
+  .to(`${s} .side:first-child .world`,{scale:1.18,x:35,y:-15,duration:1.2,ease:"power3.inOut"},30)
+  .to(`${s} .side:first-child .world`,{scale:1,x:0,y:0,duration:1.2,ease:"power3.inOut"},50)
+  .to(`${s} .side:nth-of-type(2) .vector`,{strokeDashoffset:0,duration:1.2,ease:"power2.out"},74)
+  .to(`${s} .side:nth-of-type(2) .point`,{scale:1.45,duration:.22,ease:"back.out(1.5)",repeat:1,yoyo:true,transformOrigin:"center"},92)
+  .fromTo(`${s} .check`,{opacity:0,y:28},{opacity:1,y:0,duration:.58,ease:"power4.out"},126);
+window.__timelines["l2-frame-03-view-coordinate"]=tl;
+</script>
+</template>
+</body>
+</html>

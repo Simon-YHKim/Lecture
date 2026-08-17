@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l08f02-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 4px 0 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 64px;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 32px;
+        }
+        .compare {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+          margin-top: 38px;
+        }
+        .panel {
+          height: 520px;
+          padding: 28px 32px;
+          border: 2px solid #a4a3a4;
+          background: #f5f5f3;
+        }
+        .panel-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .panel-head b {
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 42px;
+        }
+        .panel-head span {
+          color: #c7004c;
+          font-size: 26px;
+          font-weight: 600;
+        }
+        .shape {
+          width: 100%;
+          height: 330px;
+          margin-top: 26px;
+        }
+        .outline {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 12;
+          stroke-linejoin: miter;
+        }
+        .gap {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 14;
+        }
+        .hatch {
+          fill: url(#l08f02-hatch-pattern);
+          stroke: none;
+        }
+        .note {
+          margin-top: 12px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .cue {
+          display: grid;
+          grid-template-columns: 220px 1fr 380px;
+          align-items: center;
+          gap: 26px;
+          margin-top: 28px;
+          padding: 22px 26px;
+          border: 3px solid #c7004c;
+        }
+        .cue b {
+          color: #c7004c;
+          font-size: 25px;
+          letter-spacing: 0.07em;
+        }
+        .cue strong {
+          font-size: 34px;
+        }
+        .checks {
+          display: grid;
+          gap: 5px;
+          padding-left: 24px;
+          border-left: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 25px;
+        }
+        .record {
+          position: absolute;
+          inset: 216px 96px 64px;
+          display: grid;
+          grid-template-rows: 58px 1fr;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .record-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 22px;
+          border-bottom: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 23px;
+        }
+        .record-bar b {
+          color: #c7004c;
+          letter-spacing: 0.08em;
+        }
+        .record-canvas {
+          position: relative;
+          display: grid;
+          place-items: center;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 48px 48px;
+        }
+        .placeholder {
+          width: 760px;
+          padding: 42px;
+          text-align: center;
+          background: #ffffff;
+          border: 3px solid #c7004c;
+        }
+        .placeholder strong {
+          display: block;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .placeholder span {
+          display: block;
+          margin-top: 14px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .error-card {
+          position: absolute;
+          right: 138px;
+          bottom: 104px;
+          width: 600px;
+          padding: 26px 30px;
+          background: #ffffff;
+          border-left: 8px solid #c7004c;
+          font-size: 30px;
+          line-height: 1.4;
+          opacity: 0;
+        }
+        .error-card b {
+          display: block;
+          color: #c7004c;
+          font-size: 23px;
+          letter-spacing: 0.08em;
+        }
+      </style>
+      <div
+        id="l08f02-root"
+        data-composition-id="l08-frame-02-hatch"
+        data-start="0"
+        data-duration="150"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l08f02-scene"
+          class="clip"
+          data-start="0"
+          data-duration="150"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L07_GEOMETRY_FINAL → L08_REPRESENTED</b><span>A3 가로 · 제3각법 · BORDER/TITLE/HATCH/OUTLINE/CENTER/HIDDEN · 시험 감점 위험</span></div>
+          <header class="top">
+            <div>
+              <div class="index">02 · A–A SECTION / HATCH</div>
+              <h1>절단된 재료 영역만 표현합니다</h1>
+            </div>
+            <div class="prompt">닫혔는가?</div>
+          </header>
+          <div class="compare">
+            <section class="panel">
+              <div class="panel-head">
+                <b>열린 경계</b><span>HATCH 실패</span>
+              </div>
+              <svg class="shape" viewBox="0 0 700 330" aria-label="EDU-SB-01 A–A 열린 경계 오류">
+                <path class="outline" d="M250 290V40H450V290H360 M250 60H450V100H250Z M250 105H350V130H450V230H350V255H250Z M250 260H450V280H250Z" />
+                <path class="gap" d="M360 290H340" />
+                <text x="465" y="88" font-size="22" fill="#666666">SLOT 22×8 · THRU</text>
+                <text x="465" y="185" font-size="22" fill="#666666">Ø20 · THRU</text>
+                <text x="70" y="190" font-size="22" fill="#666666">AF30 · DEPTH 4</text>
+                <text x="465" y="278" font-size="22" fill="#666666">Ø4 PCD · THRU</text>
+                <text x="300" y="320" font-size="24" fill="#C7004C">A–A · Y50 × Z8</text>
+              </svg>
+              <div class="note">
+                끝점이 연결되지 않으면 영역을 찾지 못합니다.
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <b>닫힌 경계</b><span>의미 표현</span>
+              </div>
+              <svg class="shape" viewBox="0 0 700 330" aria-hidden="true">
+                <defs>
+                  <pattern
+                    id="l08f02-hatch-pattern"
+                    width="28"
+                    height="28"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(45)"
+                  >
+                    <line
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="28"
+                      stroke="#C7004C"
+                      stroke-width="6"
+                    />
+                  </pattern>
+                </defs>
+                <path class="hatch" d="M250 40H450V290H250Z M250 60H450V100H250Z M250 105H350V130H450V230H350V255H250Z M250 260H450V280H250Z" fill-rule="evenodd" />
+                <path class="outline" d="M250 40H450V290H250Z M250 60H450V100H250Z M250 105H350V130H450V230H350V255H250Z M250 260H450V280H250Z" />
+                <text x="465" y="88" font-size="22" fill="#666666">SLOT 22×8 · THRU</text>
+                <text x="465" y="185" font-size="22" fill="#666666">Ø20 · THRU</text>
+                <text x="70" y="190" font-size="22" fill="#666666">AF30 · DEPTH 4</text>
+                <text x="465" y="278" font-size="22" fill="#666666">Ø4 PCD · THRU</text>
+                <text x="300" y="320" font-size="24" fill="#C7004C">A–A · Y50 × Z8</text>
+              </svg>
+              <div class="note">A–A 재료만 HATCH하고 Ø4·AF30·Ø20·장공의 네 빈 영역은 비웁니다.</div>
+            </section>
+          </div>
+          <div class="cue">
+            <div><b>DEMO-01</b><strong>HATCH</strong></div>
+            <div>패턴 선택 → 점 지정 → 스케일 확인</div>
+            <div class="checks">
+              <span>경계가 닫혔는가</span><span>네 빈 영역을 침범하지 않는가</span>
+            </div>
+          </div>
+          <section
+            class="record"
+            aria-label="DEMO-01 HATCH 사용자 화면 녹화 삽입 자리"
+          >
+            <div class="record-bar">
+              <b>DEMO-01 · USER RECORDING</b
+              ><span>HATCH · boundary / scale</span>
+            </div>
+            <div class="record-canvas">
+              <div class="placeholder">
+                <strong>AutoCAD 화면 녹화</strong
+                ><span>사용자 촬영본이 이 프레임을 대체합니다</span>
+              </div>
+            </div>
+          </section>
+          <div class="error-card">
+            <b>L08 GATE 01</b>A–A 해칭이 새면 패턴이 아니라 OUTLINE 경계 틈부터 찾습니다.
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l08f02-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .panel:first-child`,
+          { opacity: 0, x: -110 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power4.out" },
+          0.8,
+        );
+        tl.fromTo(
+          `${s} .panel:last-child`,
+          { opacity: 0, x: 110 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power3.out" },
+          0.95,
+        );
+        document.querySelectorAll("#l08f02-scene .outline, #l08f02-scene .gap").forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = `${n}`;
+          p.style.strokeDashoffset = `${n}`;
+        });
+        tl.to(
+          `${s} .outline,${s} .gap`,
+          {
+            strokeDashoffset: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: 0.1,
+          },
+          1.5,
+        );
+        tl.fromTo(
+          `${s} .hatch`,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.55, ease: "power1.out" },
+          2.5,
+        );
+        tl.fromTo(
+          `${s} .cue`,
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+          18,
+        );
+        tl.to(
+          `${s} .compare,${s} .cue`,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          34,
+        );
+        tl.fromTo(
+          `${s} .record`,
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" },
+          34.12,
+        );
+        tl.fromTo(
+          `${s} .placeholder`,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.52, ease: "power3.out" },
+          34.4,
+        );
+        tl.fromTo(
+          `${s} .error-card`,
+          { opacity: 0, x: 62 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power4.out" },
+          126,
+        );
+        window.__timelines["l08-frame-02-hatch"] = tl;
+      </script></template
+    >
+  </body>
+</html>

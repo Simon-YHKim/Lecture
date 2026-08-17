@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        #root { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; color:#111111; font-family:"LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif; }
+        * { box-sizing:border-box; }
+        .clip { position:absolute; inset:0; width:100%; height:100%; padding:72px 96px 64px; background:#FFFFFF; }
+        .topline { display:flex; align-items:end; justify-content:space-between; padding-bottom:18px; border-bottom:2px solid #A4A3A4; }
+        .index { color:#C7004C; font-size:24px; font-weight:600; letter-spacing:.08em; }
+        h1 { margin:0; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:64px; font-weight:600; letter-spacing:-.035em; }
+        .question { margin:36px 0 28px; font-size:38px; color:#666666; }
+        .compare { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+        .panel { height:380px; padding:30px 34px; border:2px solid #A4A3A4; background:#F5F5F3; }
+        .panel-head { display:flex; justify-content:space-between; align-items:center; }
+        .command { font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:54px; font-weight:600; }
+        .meaning { color:#C7004C; font-size:28px; font-weight:600; }
+        .diagram { width:100%; height:230px; margin-top:20px; }
+        .guide { stroke:#A4A3A4; stroke-width:8; }
+        .object { stroke:#111111; stroke-width:12; stroke-linecap:square; }
+        .change { stroke:#C7004C; stroke-width:14; stroke-dasharray:18 12; }
+        .demo { display:grid; grid-template-columns:250px 1fr 360px; align-items:center; gap:30px; height:220px; margin-top:28px; padding:26px 30px; border:3px solid #C7004C; }
+        .demo-label { font-size:25px; color:#C7004C; font-weight:600; letter-spacing:.07em; }
+        .demo-title { font-size:38px; font-weight:600; }
+        .demo-note { display:grid; gap:8px; color:#666666; font-size:27px; line-height:1.35; }
+        .decision { display:grid; gap:8px; padding-left:28px; border-left:2px solid #A4A3A4; font-size:28px; line-height:1.35; }
+        .decision b { color:#C7004C; }
+        .recording-stage { position:absolute; inset:250px 96px 64px; display:grid; grid-template-rows:54px 1fr; border:3px solid #111111; background:#F5F5F3; opacity:0; overflow:hidden; }
+        .recording-bar { display:flex; align-items:center; justify-content:space-between; padding:0 22px; color:#666666; border-bottom:2px solid #A4A3A4; font-size:23px; }
+        .recording-bar b { color:#C7004C; letter-spacing:.08em; }
+        .recording-canvas { position:relative; display:grid; place-items:center; background-image:linear-gradient(rgba(164,163,164,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(164,163,164,.34) 1px,transparent 1px); background-size:44px 44px; }
+        .recording-placeholder { width:720px; padding:42px; text-align:center; background:#FFFFFF; border:3px solid #C7004C; }
+        .recording-placeholder strong { display:block; font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif; font-size:44px; }
+        .recording-placeholder span { display:block; margin-top:14px; color:#666666; font-size:27px; }
+        .demo-cursor { position:absolute; left:280px; top:470px; width:34px; height:34px; border:4px solid #C7004C; border-radius:50%; }
+        .demo-cursor::after { content:""; position:absolute; left:11px; top:11px; width:8px; height:8px; background:#C7004C; border-radius:50%; }
+        .demo-ripple { position:absolute; left:1248px; top:350px; width:90px; height:90px; border:3px solid #C7004C; border-radius:50%; opacity:0; }
+        .decision-card { position:absolute; right:138px; bottom:102px; width:560px; padding:28px 32px; background:#FFFFFF; border-left:8px solid #C7004C; font-size:32px; line-height:1.35; opacity:0; }
+        .decision-card b { display:block; margin-bottom:6px; color:#C7004C; font-size:24px; letter-spacing:.08em; }
+      </style>
+      <div data-hf-id="hf-jn5a" id="root" data-composition-id="frame-02-trim-extend" data-start="0" data-duration="195" data-width="1920" data-height="1080">
+        <section data-hf-id="hf-i01j" id="frame-02-layout" class="clip" data-start="0" data-duration="195" data-track-index="1">
+          <div data-hf-id="continuity-l7f2" style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #A4A3A4;background:#FFFFFF;color:#666666;font-size:18px"><b style="color:#C7004C">EDU-SB-01 · L06_PATTERNED_FEATURES → L07_GEOMETRY_FINAL</b><span>A3 가로 · 제3각법 · OUTLINE/CENTER/HIDDEN · 시험 감점 위험 점검</span></div>
+          <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-pj81" class="index">02 · OUTLINE 불변</div><h1 data-hf-id="hf-aguv">투영선만 정리합니다</h1></div><div data-hf-id="hf-y4pa" class="question">CONSTRUCTION 정리 · HIDDEN 범위 완성</div></header>
+          <div data-hf-id="hf-krut" class="compare">
+            <section data-hf-id="hf-u5b2" class="panel">
+              <div data-hf-id="hf-95fx" class="panel-head"><div data-hf-id="hf-lzer" class="command">TRIM</div><div data-hf-id="hf-qs65" class="meaning">잘라내기</div></div>
+              <svg data-hf-id="hf-hz80" class="diagram" viewBox="0 0 700 230" aria-hidden="true"><line data-hf-id="hf-m1of" class="guide" x1="350" y1="24" x2="350" y2="206" /><line data-hf-id="hf-lrkq" class="object" x1="90" y1="115" x2="610" y2="115" /><line data-hf-id="hf-frzq" class="change" x1="350" y1="115" x2="610" y2="115" /><text data-hf-id="hf-zxdm" x="392" y="82" font-size="26" fill="#C7004C">뷰 밖 CONSTRUCTION 제거</text></svg>
+            </section>
+            <section data-hf-id="hf-a0xu" class="panel">
+              <div data-hf-id="hf-uupt" class="panel-head"><div data-hf-id="hf-47o3" class="command">EXTEND</div><div data-hf-id="hf-90ae" class="meaning">연장하기</div></div>
+              <svg data-hf-id="hf-ruqw" class="diagram" viewBox="0 0 700 230" aria-hidden="true"><line data-hf-id="hf-byax" class="guide" x1="540" y1="24" x2="540" y2="206" /><line data-hf-id="hf-dvlr" class="object" x1="90" y1="115" x2="350" y2="115" /><line data-hf-id="hf-9o3i" class="change" x1="350" y1="115" x2="540" y2="115" /><text data-hf-id="hf-w8dp" x="350" y="82" font-size="26" fill="#C7004C">HIDDEN 투상 범위까지</text></svg>
+            </section>
+          </div>
+          <section data-hf-id="hf-3uzd" class="demo">
+            <div data-hf-id="hf-y7yw"><div data-hf-id="hf-s8p1" class="demo-label">DEMO-01</div><div data-hf-id="hf-k4es" class="demo-title">AutoCAD 화면 녹화</div></div>
+            <div data-hf-id="hf-z5z2" class="demo-note"><span data-hf-id="hf-zyvh">TRIM · 뷰 외피 → 넘은 CONSTRUCTION 클릭</span><span data-hf-id="hf-bfsr">EXTEND · 정본 투상 경계 → 짧은 HIDDEN 끝</span></div>
+            <div data-hf-id="hf-tlgq" class="decision"><b data-hf-id="hf-5sm7">자가 질문</b><span data-hf-id="hf-6b7h">“어느 쪽을 남길 것인가?”</span></div>
+          </section>
+          <section data-hf-id="hf-0mgh" id="frame-02-recording" class="recording-stage" aria-label="DEMO-01 화면 녹화 삽입 자리">
+            <div data-hf-id="hf-6s6p" class="recording-bar"><b data-hf-id="hf-rlhp">DEMO-01 · USER RECORDING</b><span data-hf-id="hf-8ncw">TRIM / EXTEND</span></div>
+            <div data-hf-id="hf-udpm" class="recording-canvas">
+              <div data-hf-id="hf-zzbp" class="recording-placeholder"><strong data-hf-id="hf-z94i">AutoCAD 화면 녹화</strong><span data-hf-id="hf-hm58">사용자 촬영본이 이 프레임을 대체합니다</span></div>
+              <div data-hf-id="hf-z1ef" class="demo-cursor" aria-hidden="true"></div>
+              <div data-hf-id="hf-l58v" class="demo-ripple" aria-hidden="true"></div>
+            </div>
+          </section>
+          <div data-hf-id="hf-g6x4" class="decision-card"><b data-hf-id="hf-n8rv">L07 GATE 01</b>OUTLINE 불변, CONSTRUCTION 정리, HIDDEN 투상 범위를 확인합니다.</div>
+        </section>
+      </div>
+      <script>
+        window.__timelines=window.__timelines||{};
+        const tl=gsap.timeline({paused:true});
+        const s="#frame-02-layout";
+        tl.fromTo(`${s} .topline`,{opacity:0,y:-24},{opacity:1,y:0,duration:.58,ease:"power3.out"},.2);
+        tl.fromTo(`${s} .question`,{opacity:0,x:42},{opacity:1,x:0,duration:.46,ease:"power2.out"},.62);
+        tl.fromTo(`${s} .panel:first-child`,{opacity:0,x:-120,scale:.96},{opacity:1,x:0,scale:1,duration:.72,ease:"power4.out"},1.0);
+        tl.fromTo(`${s} .panel:last-child`,{opacity:0,x:120,scale:.96},{opacity:1,x:0,scale:1,duration:.72,ease:"power3.out"},1.14);
+        const paths=document.querySelectorAll("#frame-02-layout .change");
+        paths.forEach((p)=>{const len=p.getTotalLength();p.style.strokeDasharray=`${len}`;p.style.strokeDashoffset=`${len}`;});
+        tl.to(paths,{strokeDashoffset:0,duration:.86,ease:"power2.out",stagger:.14},2.0);
+        tl.fromTo(`${s} .meaning`,{opacity:0,y:28},{opacity:1,y:0,duration:.38,ease:"back.out(1.35)",stagger:.12},2.58);
+        tl.fromTo(`${s} .demo`,{opacity:0,y:38},{opacity:1,y:0,duration:.52,ease:"power3.out"},19.8);
+        tl.to(`${s} .compare, ${s} .demo`,{opacity:0,duration:.32,ease:"power2.in"},41.7);
+        tl.fromTo(`${s} .recording-stage`,{opacity:0,scale:.975},{opacity:1,scale:1,duration:.62,ease:"power3.out"},41.82);
+        tl.fromTo(`${s} .recording-placeholder`,{opacity:0,y:34},{opacity:1,y:0,duration:.58,ease:"power2.out"},42.15);
+        tl.fromTo(`${s} .demo-cursor`,{opacity:0,x:0,y:0},{opacity:1,x:936,y:-130,duration:1.2,ease:"power2.inOut"},45.2);
+        tl.to(`${s} .demo-cursor`,{scale:.82,duration:.1,ease:"power2.in",repeat:1,yoyo:true},46.42);
+        tl.fromTo(`${s} .demo-ripple`,{opacity:.8,scale:0},{opacity:0,scale:4.2,duration:.72,ease:"power3.out"},46.44);
+        tl.fromTo(`${s} .decision-card`,{opacity:0,x:64},{opacity:1,x:0,duration:.58,ease:"power4.out"},168.0);
+        window.__timelines["frame-02-trim-extend"]=tl;
+      </script>
+    </template>
+  </body>
+</html>

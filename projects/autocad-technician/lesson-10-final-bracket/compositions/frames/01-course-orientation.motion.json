@@ -1,0 +1,1 @@
+{"duration":75,"assertions":[{"kind":"appearsBy","selector":"#l10f01-scene h1","bySec":2},{"kind":"before","a":"#l10f01-scene h1","b":"#l10f01-scene .steps"},{"kind":"staysInFrame","selector":"#l10f01-scene .layout"}]}

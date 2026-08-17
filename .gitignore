@@ -1,0 +1,91 @@
+# Private presentation sources and exports
+*.ppt
+*.pptx
+*.pptm
+*.pps
+*.ppsx
+*.ppsm
+*.pot
+*.potx
+*.potm
+*.odp
+~$*
+
+# AutoCAD source and recovery files
+*.dwg
+*.dxf
+*.dwt
+*.dws
+*.sv$
+*.ac$
+*.dwl
+*.dwl2
+
+# Derived course media that belongs in the private delivery system
+*.pdf
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.wav
+*.m4a
+*.mp3
+*.srt
+*.vtt
+
+# Licensed local font binaries (style references may remain in code)
+*.ttf
+*.ttc
+*.otf
+*.woff
+*.woff2
+
+# Raster/vector exports can reproduce confidential presentation slides
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.avif
+*.svg
+
+# Archives can conceal blocked source material
+*.zip
+*.7z
+*.rar
+*.tar
+*.tgz
+*.gz
+*.bz2
+*.xz
+
+# Known private planning-source naming pattern
+AutoCAD_Technician_Video_Course_MasterPlan_*.html
+
+# Private-only working directories
+private/
+_private/
+private-materials/
+source-materials/
+raw-materials/
+local-materials/
+course-source/
+private-work/
+
+# HyperFrames local preview cache
+.thumbnails/
+.hyperframes/
+snapshots/
+
+# Local JavaScript dependencies used by preview and QA tooling
+node_modules/
+
+# Explicitly reviewed public AutoCAD course artifacts. Keep the global image and
+# planning-source blocks above; only these exact deliverable paths are public.
+!projects/autocad-technician/lesson-*/snapshots/
+!projects/autocad-technician/lesson-*/snapshots/**
+!docs/autocad-technician/reference/a3-landscape-template-reference.png
+!docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html

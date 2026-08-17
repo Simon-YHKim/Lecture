@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        @font-face {
+          font-family: "LG EI Text TTF Regular";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Text";
+          src: local("LG EI Text TTF Regular");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "Malgun Gothic";
+          src: local("Malgun Gothic");
+          font-weight: 400;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Semibold";
+          src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }
+        @font-face {
+          font-family: "LG EI Headline TTF Regular";
+          src: local("LG EI Headline TTF Regular");
+          font-weight: 400;
+        }
+    @font-face {
+      font-family: "LG EI Headline";
+      src: local("LG EI Headline TTF Semibold");
+          font-weight: 600;
+        }</style
+      ><style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family:
+            "LG EI Text TTF Regular", "LG EI Text", "Malgun Gothic", sans-serif;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.15;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 80px 80px;
+        }
+        .topline {
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .eyebrow {
+          color: #c7004c;
+          font-size: 26px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        .lesson {
+          color: #666666;
+          font-size: 24px;
+        }
+        .main {
+          position: relative;
+          display: grid;
+          grid-template-columns: 0.96fr 1.04fr;
+          gap: 60px;
+          height: 760px;
+          padding-top: 52px;
+        }
+        .copy {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .kicker {
+          color: #666666;
+          font-size: 30px;
+        }
+        h1 {
+          margin: 18px 0 28px;
+          font-family:
+            "LG EI Headline TTF Semibold", "LG EI Headline TTF Regular",
+            "LG EI Headline", "Malgun Gothic", sans-serif;
+          font-size: 96px;
+          line-height: 1.06;
+          letter-spacing: -0.045em;
+        }
+        .thesis {
+          color: #666666;
+          font-size: 35px;
+          line-height: 1.45;
+        }
+        .ready {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+        .ready div {
+          min-height: 96px;
+          padding: 18px;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+          font-size: 27px;
+          font-weight: 600;
+        }
+        .ready b {
+          display: block;
+          margin-bottom: 7px;
+          color: #c7004c;
+          font-size: 20px;
+        }
+        .sequence {
+          display: grid;
+          gap: 10px;
+          align-content: center;
+          padding-left: 46px;
+          border-left: 4px solid #c7004c;
+        }
+        .step {
+          display: grid;
+          grid-template-columns: 72px 1fr auto;
+          align-items: center;
+          min-height: 98px;
+          padding: 14px 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .step b {
+          color: #c7004c;
+          font-size: 28px;
+        }
+        .step strong {
+          font-size: 32px;
+        }
+        .step span {
+          color: #666666;
+          font-size: 22px;
+        }
+      </style>
+      <div
+        id="root"
+        data-composition-id="l2-frame-01-orientation"
+        data-start="0"
+        data-duration="60"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l2f1"
+          class="clip"
+          data-start="0"
+          data-duration="60"
+          data-track-index="1"
+        >
+          <div class="grid"></div>
+          <header class="topline">
+            <div class="eyebrow">EDU-SB-01 · L01_FEATURE_MAP</div>
+            <div class="lesson">Lesson 02 · A3 시험 환경 구축</div>
+          </header>
+          <main class="main">
+            <section class="copy">
+              <div>
+                <div class="kicker">L01_FEATURE_MAP → L02_SETUP</div>
+                <h1>문제 해독을<br />작업 파일로 바꿉니다</h1>
+                <p class="thesis">
+                  acadiso.dwt · A3 가로형 · 제3각법 · 전체 Layer를 먼저 고정해
+                  시험 감점 위험을 줄입니다.
+                </p>
+              </div>
+              <div class="ready">
+                <div><b>ISO</b>acadiso.dwt</div>
+                <div><b>A3</b>420 × 297</div>
+                <div><b>FRAME</b>사방 10 mm</div>
+                <div><b>TITLE</b>200 × 30</div>
+              </div>
+            </section>
+            <section class="sequence">
+              <div class="step">
+                <b>01</b><strong>TEMPLATE · UNIT</strong
+                ><span>millimeter · 1:1</span>
+              </div>
+              <div class="step">
+                <b>02</b><strong>BORDER · TITLE</strong
+                ><span>도면틀과 표제란</span>
+              </div>
+              <div class="step">
+                <b>03</b><strong>8 LAYERS</strong><span>ByLayer 규칙</span>
+              </div>
+              <div class="step">
+                <b>04</b><strong>THIRD-ANGLE</strong><span>뷰 작업 자리</span>
+              </div>
+            </section>
+          </main>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l2f1";
+        tl.fromTo(
+          `${s} .topline`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.62, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .kicker`,
+          { opacity: 0, x: -48 },
+          { opacity: 1, x: 0, duration: 0.44, ease: "power2.out" },
+          0.5,
+        );
+        tl.fromTo(
+          `${s} h1`,
+          { opacity: 0, y: 70, scale: 0.97 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.84, ease: "expo.out" },
+          0.7,
+        );
+        tl.fromTo(
+          `${s} .thesis`,
+          { opacity: 0, x: -38 },
+          { opacity: 1, x: 0, duration: 0.58, ease: "power4.out" },
+          1.25,
+        );
+        tl.fromTo(
+          `${s} .ready div`,
+          { opacity: 0, y: 44 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "back.out(1.25)",
+            stagger: 0.1,
+          },
+          7,
+        );
+        tl.fromTo(
+          `${s} .sequence`,
+          { opacity: 0, x: 84 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+          18,
+        );
+        tl.fromTo(
+          `${s} .step`,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.36,
+            ease: "power4.out",
+            stagger: 0.1,
+          },
+          19,
+        );
+        tl.to(
+          `${s} .step:first-child`,
+          {
+            backgroundColor: "#C7004C",
+            color: "#FFFFFF",
+            duration: 0.42,
+            ease: "power2.inOut",
+          },
+          52,
+        );
+        tl.to(
+          `${s} .step:first-child b,${s} .step:first-child span`,
+          { color: "#FFFFFF", duration: 0.3 },
+          52,
+        );
+        tl.fromTo(
+          `${s} .grid`,
+          { opacity: 0.1 },
+          {
+            opacity: 0.18,
+            duration: 7,
+            ease: "sine.inOut",
+            repeat: 6,
+            yoyo: true,
+          },
+          0.4,
+        );
+        window.__timelines["l2-frame-01-orientation"] = tl;
+      </script></template
+    >
+  </body>
+</html>

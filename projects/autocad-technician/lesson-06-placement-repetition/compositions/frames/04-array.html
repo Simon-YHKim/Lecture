@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template
+      ><style>
+        * {
+          box-sizing: border-box;
+        }
+        #l06-f04-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .scene {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 64px;
+          letter-spacing: -0.035em;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 30px;
+        }
+        .layout {
+          display: grid;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 48px;
+          padding-top: 38px;
+        }
+        .stage {
+          height: 700px;
+          padding: 28px;
+          background: #f5f5f3;
+          border: 2px solid #a4a3a4;
+        }
+        .stage svg {
+          width: 100%;
+          height: 100%;
+        }
+        .plate {
+          fill: none;
+          stroke: #111111;
+          stroke-width: 13;
+        }
+        .slot {
+          fill: #ffffff;
+          stroke: #111111;
+          stroke-width: 10;
+        }
+        .slot.copy {
+          stroke: #c7004c;
+        }
+        .measure {
+          fill: none;
+          stroke: #c7004c;
+          stroke-width: 6;
+        }
+        .guide {
+          fill: none;
+          stroke: #a4a3a4;
+          stroke-width: 5;
+          stroke-dasharray: 16 10;
+        }
+        .label {
+          fill: #c7004c;
+          font-size: 28px;
+          font-weight: 600;
+        }
+        .side {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 700px;
+        }
+        .settings {
+          border-top: 4px solid #c7004c;
+          background: #f5f5f3;
+          padding: 24px;
+        }
+        .settings small {
+          color: #666666;
+          font-size: 22px;
+        }
+        .field {
+          display: flex;
+          justify-content: space-between;
+          padding: 16px 0;
+          border-bottom: 2px solid #a4a3a4;
+          font-size: 28px;
+        }
+        .field b {
+          color: #c7004c;
+        }
+        .steps div {
+          display: grid;
+          grid-template-columns: 58px 1fr;
+          align-items: center;
+          min-height: 78px;
+          border-bottom: 2px solid #a4a3a4;
+          font-size: 28px;
+        }
+        .steps b {
+          color: #c7004c;
+        }
+        .verify {
+          padding: 22px;
+          border: 2px solid #111111;
+          font-size: 26px;
+          line-height: 1.4;
+        }
+        .verify b {
+          display: block;
+          color: #c7004c;
+          font-size: 22px;
+        }
+        .recording {
+          position: absolute;
+          inset: 250px 96px 64px;
+          display: grid;
+          grid-template-rows: 58px 1fr;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .record-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 24px;
+          border-bottom: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 23px;
+        }
+        .record-bar b {
+          color: #c7004c;
+          letter-spacing: 0.08em;
+        }
+        .record-body {
+          position: relative;
+          display: grid;
+          place-items: center;
+        }
+        .placeholder {
+          width: 800px;
+          padding: 42px;
+          text-align: center;
+          background: #ffffff;
+          border: 3px solid #c7004c;
+        }
+        .placeholder strong {
+          display: block;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .placeholder span {
+          display: block;
+          margin-top: 14px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .cursor {
+          position: absolute;
+          left: 310px;
+          top: 470px;
+          width: 34px;
+          height: 34px;
+          border: 4px solid #c7004c;
+        }
+        .ripple {
+          position: absolute;
+          left: 1310px;
+          top: 355px;
+          width: 88px;
+          height: 88px;
+          border: 3px solid #c7004c;
+          opacity: 0;
+        }
+        .decision {
+          position: absolute;
+          right: 140px;
+          bottom: 96px;
+          width: 610px;
+          padding: 26px 30px;
+          background: #ffffff;
+          border-left: 8px solid #c7004c;
+          font-size: 28px;
+          opacity: 0;
+        }
+        .decision b {
+          display: block;
+          color: #c7004c;
+          font-size: 22px;
+          margin-bottom: 6px;
+        }
+      </style>
+      <div
+        id="l06-f04-root"
+        data-composition-id="l06-frame-04-array"
+        data-start="0"
+        data-duration="160"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l06-f04-scene"
+          class="clip scene"
+          data-start="0"
+          data-duration="160"
+          data-track-index="1"
+        >
+          <header class="top">
+            <div>
+              <div class="index">04 · EDU-SB-01 센서 구멍</div>
+              <h1>3 × Ø4 · PCD Ø36</h1>
+            </div>
+            <div class="prompt">Polar ARRAY · 중심 · 개수 · 전체 각도</div>
+          </header>
+          <main class="layout">
+            <section class="stage">
+              <svg viewBox="0 0 1080 700">
+                <path class="plate draw" d="M100 600 V250 H350 A150 150 0 0 1 650 250 H780 L900 370 V600 Z" />
+                <circle class="plate draw" cx="500" cy="380" r="100" />
+                <polygon class="plate draw" points="673.21,380 586.6,230 413.4,230 326.79,380 413.4,530 586.6,530" />
+                <path class="plate draw" d="M430 140 H570 A40 40 0 0 1 570 220 H430 A40 40 0 0 1 430 140 Z" />
+                <rect class="plate draw" x="150" y="310" width="140" height="140" />
+                <circle class="plate draw" cx="250" cy="520" r="30" />
+                <circle class="plate draw" cx="750" cy="520" r="30" />
+                <circle class="guide draw" cx="500" cy="380" r="180" />
+                <path class="measure draw" d="M300 380 H700 M500 160 V600" />
+                <circle class="slot" cx="655.88" cy="290" r="20" />
+                <circle class="slot copy" cx="344.12" cy="290" r="20" />
+                <circle class="slot copy" cx="500" cy="560" r="20" />
+                <circle class="guide draw" cx="500" cy="380" r="10" />
+                <text class="label" x="535" y="370">ARRAY CENTER</text>
+                <text class="label" x="330" y="660">3 holes · 120° · PCD Ø36</text>
+              </svg>
+            </section>
+            <aside class="side">
+              <div class="settings">
+                <small>POLAR ARRAY</small>
+                <div class="field"><span>Items</span><b>3</b></div>
+                <div class="field"><span>Fill angle</span><b>360°</b></div>
+                <div class="field"><span>Pitch circle</span><b>Ø36</b></div>
+              </div>
+              <div class="steps">
+                <div><b>01</b><span>기준 객체 선택</span></div>
+                <div><b>02</b><span>중앙 ARRAY 중심</span></div>
+                <div><b>03</b><span>3개 · 360° 설정</span></div>
+                <div><b>04</b><span>PCD Ø36 측정</span></div>
+              </div>
+              <div class="verify">
+                <b>VERIFY</b>Ø4 Seed, 중앙, 3개, 120도 간격, PCD Ø36을 측정합니다.
+              </div>
+            </aside>
+          </main>
+          <section
+            class="recording"
+            aria-label="DEMO-03 사용자 화면 녹화 자리"
+          >
+            <div class="record-bar">
+              <b>DEMO-03 · USER RECORDING</b
+              ><span>POLAR ARRAY · 3 × Ø4 · PCD Ø36</span>
+            </div>
+            <div class="record-body">
+              <div class="placeholder">
+                <strong>AutoCAD 화면 녹화</strong
+                ><span>EDU-SB-01 센서 구멍 Polar ARRAY 녹화로 교체됩니다</span>
+              </div>
+              <div class="cursor"></div>
+              <div class="ripple"></div>
+            </div>
+          </section>
+          <div class="decision">
+            <b>ARRAY CHECK</b>Seed, ARRAY 중심, 항목 수 3, 360도, PCD와 세 뷰를 확인합니다.
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l06-f04-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .stage`,
+          { opacity: 0, x: -88 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power4.out" },
+          0.9,
+        );
+        tl.fromTo(
+          `${s} .side`,
+          { opacity: 0, x: 84 },
+          { opacity: 1, x: 0, duration: 0.68, ease: "power3.out" },
+          1.05,
+        );
+        const paths = document.querySelectorAll("#l06-f04-scene .draw");
+        paths.forEach((p) => {
+          const n = p.getTotalLength();
+          p.style.strokeDasharray = n;
+          p.style.strokeDashoffset = n;
+        });
+        tl.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            duration: 0.86,
+            ease: "power2.out",
+            stagger: 0.12,
+          },
+          1.8,
+        );
+        tl.fromTo(
+          `${s} .slot.copy`,
+          { opacity: 0, scale: 0.72 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.48,
+            ease: "back.out(1.35)",
+            stagger: 0.16,
+          },
+          3.2,
+        );
+        tl.fromTo(
+          `${s} .field`,
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.32,
+            ease: "power3.out",
+            stagger: 0.08,
+          },
+          4,
+        );
+        tl.to(
+          `${s} .layout`,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          38,
+        );
+        tl.fromTo(
+          `${s} .recording`,
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" },
+          38.1,
+        );
+        tl.fromTo(
+          `${s} .placeholder`,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          38.4,
+        );
+        tl.fromTo(
+          `${s} .cursor`,
+          { opacity: 0, x: 0, y: 0 },
+          { opacity: 1, x: 970, y: -135, duration: 1.1, ease: "power2.inOut" },
+          42,
+        );
+        tl.to(
+          `${s} .cursor`,
+          {
+            scale: 0.84,
+            duration: 0.1,
+            ease: "power2.in",
+            repeat: 1,
+            yoyo: true,
+          },
+          43.1,
+        );
+        tl.fromTo(
+          `${s} .ripple`,
+          { opacity: 0.8, scale: 0 },
+          { opacity: 0, scale: 4, duration: 0.7, ease: "power3.out" },
+          43.12,
+        );
+        tl.fromTo(
+          `${s} .decision`,
+          { opacity: 0, x: 60 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power4.out" },
+          136,
+        );
+        window.__timelines["l06-frame-04-array"] = tl;
+      </script><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style></template>
+  </body>
+</html>

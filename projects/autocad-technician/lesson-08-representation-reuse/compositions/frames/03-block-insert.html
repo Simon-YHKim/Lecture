@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Text";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"LG EI Headline TTF Regular";src:local("LG EI Headline TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline";src:local("LG EI Headline TTF Semibold");font-weight:600}</style>
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+        #l08f03-root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: hidden;
+          color: #111111;
+          font-family: "LG EI Text TTF Regular","LG EI Text","Malgun Gothic",sans-serif;
+        }
+        .clip {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 72px 96px 64px;
+          background: #ffffff;
+        }
+        .top {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          padding-bottom: 18px;
+          border-bottom: 2px solid #a4a3a4;
+        }
+        .index {
+          color: #c7004c;
+          font-size: 24px;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+        }
+        h1 {
+          margin: 4px 0 0;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 64px;
+        }
+        .prompt {
+          color: #666666;
+          font-size: 30px;
+        }
+        .body {
+          display: grid;
+          grid-template-columns: 520px 1fr;
+          gap: 56px;
+          height: 740px;
+          padding-top: 42px;
+        }
+        .definition {
+          padding: 30px;
+          border: 3px solid #c7004c;
+          background: #f5f5f3;
+        }
+        .definition h2 {
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .definition p {
+          margin-top: 14px;
+          color: #666666;
+          font-size: 28px;
+          line-height: 1.4;
+        }
+        .symbol {
+          width: 100%;
+          height: 310px;
+          margin-top: 24px;
+        }
+        .symbol-shape {
+          fill: #ffffff;
+          stroke: #111111;
+          stroke-width: 10;
+        }
+        .anchor {
+          fill: #c7004c;
+        }
+        .fields {
+          display: grid;
+          gap: 10px;
+          margin-top: 12px;
+        }
+        .field {
+          display: grid;
+          grid-template-columns: 130px 1fr;
+          padding: 12px 0;
+          border-top: 2px solid #a4a3a4;
+          font-size: 25px;
+        }
+        .field b {
+          color: #c7004c;
+        }
+        .instances {
+          position: relative;
+          border-left: 2px solid #a4a3a4;
+        }
+        .instance {
+          position: absolute;
+          width: 260px;
+          padding: 18px;
+          background: #ffffff;
+          border: 2px solid #111111;
+          text-align: center;
+        }
+        .instance svg {
+          width: 100%;
+          height: 150px;
+        }
+        .instance:nth-child(1) {
+          left: 100px;
+          top: 60px;
+        }
+        .instance:nth-child(2) {
+          right: 70px;
+          top: 220px;
+        }
+        .instance:nth-child(3) {
+          left: 180px;
+          bottom: 40px;
+        }
+        .instance b {
+          color: #c7004c;
+          font-size: 22px;
+        }
+        .link {
+          position: absolute;
+          height: 3px;
+          background: #c7004c;
+          transform-origin: left center;
+        }
+        .link.one {
+          left: 0;
+          top: 245px;
+          width: 290px;
+        }
+        .link.two {
+          left: 0;
+          top: 330px;
+          width: 590px;
+        }
+        .link.three {
+          left: 0;
+          top: 420px;
+          width: 380px;
+        }
+        .record {
+          position: absolute;
+          inset: 216px 96px 64px;
+          display: grid;
+          grid-template-rows: 58px 1fr;
+          border: 3px solid #111111;
+          background: #f5f5f3;
+          opacity: 0;
+          overflow: hidden;
+        }
+        .record-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 22px;
+          border-bottom: 2px solid #a4a3a4;
+          color: #666666;
+          font-size: 23px;
+        }
+        .record-bar b {
+          color: #c7004c;
+          letter-spacing: 0.08em;
+        }
+        .record-canvas {
+          display: grid;
+          place-items: center;
+          background-image:
+            linear-gradient(#a4a3a4 1px, transparent 1px),
+            linear-gradient(90deg, #a4a3a4 1px, transparent 1px);
+          background-size: 48px 48px;
+        }
+        .placeholder {
+          width: 800px;
+          padding: 42px;
+          text-align: center;
+          background: #ffffff;
+          border: 3px solid #c7004c;
+        }
+        .placeholder strong {
+          display: block;
+          font-family:"LG EI Headline TTF Semibold","LG EI Headline TTF Regular","LG EI Headline","Malgun Gothic",sans-serif;
+          font-size: 44px;
+        }
+        .placeholder span {
+          display: block;
+          margin-top: 14px;
+          color: #666666;
+          font-size: 27px;
+        }
+        .check {
+          position: absolute;
+          right: 138px;
+          bottom: 104px;
+          width: 620px;
+          padding: 26px 30px;
+          background: #ffffff;
+          border-left: 8px solid #c7004c;
+          font-size: 29px;
+          line-height: 1.4;
+          opacity: 0;
+        }
+        .check b {
+          display: block;
+          color: #c7004c;
+          font-size: 23px;
+          letter-spacing: 0.08em;
+        }
+      </style>
+      <div
+        id="l08f03-root"
+        data-composition-id="l08-frame-03-block-insert"
+        data-start="0"
+        data-duration="180"
+        data-width="1920"
+        data-height="1080"
+      >
+        <section
+          id="l08f03-scene"
+          class="clip"
+          data-start="0"
+          data-duration="180"
+          data-track-index="1"
+        >
+          <div style="position:absolute;left:96px;right:96px;bottom:22px;z-index:50;display:flex;justify-content:space-between;align-items:center;padding-top:7px;border-top:2px solid #a4a3a4;background:#ffffff;color:#666666;font-size:18px"><b style="color:#c7004c">EDU-SB-01 · L07_GEOMETRY_FINAL → L08_REPRESENTED</b><span>A3 가로 · 제3각법 · BORDER/TITLE/HATCH/OUTLINE/CENTER/HIDDEN · 시험 감점 위험</span></div>
+          <header class="top">
+            <div>
+              <div class="index">03 · BLOCK / INSERT</div>
+              <h1>센서 심볼 하나를 정의해 배치합니다</h1>
+            </div>
+            <div class="prompt">정의 ≠ 복사본</div>
+          </header>
+          <main class="body">
+            <section class="definition">
+              <h2>EDU_SENSOR_MARK</h2>
+              <p>CENTER 교차 기준점과 OUTLINE 외곽이 하나의 센서 심볼 정의를 만듭니다.</p>
+              <svg class="symbol" viewBox="0 0 430 310" aria-hidden="true">
+                <path
+                  class="symbol-shape"
+                  d="M70 70H360V240H70ZM165 105H265V205H165Z"
+                />
+                <circle class="anchor" cx="70" cy="240" r="14" />
+                <path
+                  d="M45 240H95M70 215V265"
+                  stroke="#C7004C"
+                  stroke-width="5"
+                />
+              </svg>
+              <div class="fields">
+                <div class="field"><b>NAME</b><span>EDU_SENSOR_MARK</span></div>
+                <div class="field"><b>BASE</b><span>CENTER 교차점</span></div>
+                <div class="field"><b>OBJECTS</b><span>OUTLINE + CENTER</span></div>
+              </div>
+            </section>
+            <section class="instances">
+              <div class="link one"></div>
+              <div class="link two"></div>
+              <div class="link three"></div>
+              <div class="instance">
+                <b>INSTANCE 01</b
+                ><svg viewBox="0 0 220 150">
+                  <path
+                    class="symbol-shape"
+                    d="M30 25H190V125H30ZM82 48H138V102H82Z"
+                  />
+                </svg>
+              </div>
+              <div class="instance">
+                <b>INSTANCE 02</b
+                ><svg viewBox="0 0 220 150">
+                  <path
+                    class="symbol-shape"
+                    d="M30 25H190V125H30ZM82 48H138V102H82Z"
+                  />
+                </svg>
+              </div>
+              <div class="instance">
+                <b>INSTANCE 03</b
+                ><svg viewBox="0 0 220 150">
+                  <path
+                    class="symbol-shape"
+                    d="M30 25H190V125H30ZM82 48H138V102H82Z"
+                  />
+                </svg>
+              </div>
+            </section>
+          </main>
+          <section
+            class="record"
+            aria-label="DEMO-02 BLOCK INSERT 사용자 화면 녹화 삽입 자리"
+          >
+            <div class="record-bar">
+              <b>DEMO-02 · USER RECORDING</b
+              ><span>BLOCK · INSERT · redefine</span>
+            </div>
+            <div class="record-canvas">
+              <div class="placeholder">
+                <strong>AutoCAD 화면 녹화</strong
+                ><span>사용자 촬영본이 이 프레임을 대체합니다</span>
+              </div>
+            </div>
+          </section>
+          <div class="check">
+            <b>L08 GATE 02</b>센서 정의 이름 · CENTER 기준점 · 포함 Layer를 확인합니다.
+          </div>
+        </section>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        const s = "#l08f03-scene";
+        tl.fromTo(
+          `${s} .top`,
+          { opacity: 0, y: -22 },
+          { opacity: 1, y: 0, duration: 0.56, ease: "power3.out" },
+          0.2,
+        );
+        tl.fromTo(
+          `${s} .definition`,
+          { opacity: 0, x: -90 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power4.out" },
+          0.8,
+        );
+        tl.fromTo(
+          `${s} .anchor`,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" },
+          1.8,
+        );
+        tl.fromTo(
+          `${s} .field`,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.36,
+            ease: "power3.out",
+            stagger: 0.1,
+          },
+          2.2,
+        );
+        tl.fromTo(
+          `${s} .instance`,
+          { opacity: 0, x: -220, y: 0, scale: 0.7 },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.16,
+          },
+          6.8,
+        );
+        tl.fromTo(
+          `${s} .link`,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.62, ease: "power2.out", stagger: 0.13 },
+          7.0,
+        );
+        tl.to(
+          `${s} .body`,
+          { opacity: 0, duration: 0.3, ease: "power2.in" },
+          42,
+        );
+        tl.fromTo(
+          `${s} .record`,
+          { opacity: 0, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" },
+          42.12,
+        );
+        tl.fromTo(
+          `${s} .placeholder`,
+          { opacity: 0, y: 34 },
+          { opacity: 1, y: 0, duration: 0.52, ease: "power3.out" },
+          42.4,
+        );
+        tl.fromTo(
+          `${s} .check`,
+          { opacity: 0, x: 64 },
+          { opacity: 1, x: 0, duration: 0.55, ease: "power4.out" },
+          151,
+        );
+        window.__timelines["l08-frame-03-block-insert"] = tl;
+      </script></template
+    >
+  </body>
+</html>

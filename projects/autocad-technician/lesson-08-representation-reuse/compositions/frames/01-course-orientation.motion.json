@@ -1,0 +1,8 @@
+{
+  "duration": 60,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#l08f01-scene h1", "bySec": 2 },
+    { "kind": "before", "a": "#l08f01-scene h1", "b": "#l08f01-scene .agenda" },
+    { "kind": "staysInFrame", "selector": "#l08f01-scene .triad" }
+  ]
+}
