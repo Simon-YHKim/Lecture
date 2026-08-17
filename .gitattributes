@@ -1,0 +1,16 @@
+# Byte-exact checkout contract.
+#
+# docs/autocad-technician/public-artifact-manifest.json binds every approved
+# artifact to the exact byte count and SHA-256 of its repository bytes, and
+# scripts/check-private-materials.ps1 verifies each working-tree file against
+# that manifest. Any end-of-line translation rewrites those bytes on checkout,
+# after which the manifest fails validation and the guard blocks every
+# manifest-bound artifact.
+#
+# Git for Windows ships core.autocrlf=true in its system configuration, so a
+# default clone on Windows would otherwise convert every tracked text file to
+# CRLF and break verification locally while Linux CI still passed.
+#
+# Disable all end-of-line translation so the working tree matches the
+# repository bytes on every platform.
+* -text
