@@ -252,7 +252,7 @@ $contentRules = [ordered]@{
     'bearer credential'           = '(?i)\bBearer\s+[A-Za-z0-9._~+/=-]{12,}'
     'credential assignment'       = '(?i)\b(api[_-]?key|access[_-]?token|auth[_-]?token|password|client[_-]?secret)\b\s*[:=]\s*["'']?[A-Za-z0-9_./+=-]{8,}'
 }
-$scannableExtensions = @('.html', '.htm', '.md', '.json', '.txt', '.ps1', '.psm1', '.psd1', '.yml', '.yaml', '.js', '.mjs', '.cjs', '.ts', '.css', '.xml', '.csv')
+$scannableExtensions = @('.html', '.htm', '.md', '.json', '.txt', '.ps1', '.psm1', '.psd1', '.yml', '.yaml', '.js', '.mjs', '.cjs', '.ts', '.css', '.xml', '.csv', '.py', '.pyi')
 $contentScanExclusions = @(
     'scripts/check-private-materials.ps1',
     'scripts/test-private-materials-guard.ps1',

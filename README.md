@@ -69,6 +69,45 @@ geometry from `master-part-geometry.json`, exact scene continuity,
 Storyboard/HTML/Motion duration parity, registered timeline keys, the declared number
 of `USER RECORDING` cues, and the cumulative checkpoint chain for every lesson.
 
+## Narration timing
+
+`frame.md` makes the recorded Korean narration the master timeline, and requires
+emphasis animation to lead its narration keyword. Both rules need measured word
+times, so the tracked scene durations stay planning values until a recording
+exists.
+
+Two scripts close that gap. Create the local Python environment once from the
+repository root:
+
+```powershell
+py -3.12 -m venv .venv
+./.venv/Scripts/python.exe -m pip install faster-whisper
+```
+
+Then transcribe the recording and derive its timing:
+
+```powershell
+./scripts/transcribe-narration.ps1 -AudioPath <recording> -TranscriptPath <private-output>
+./scripts/build-narration-timing.ps1 -LessonPath projects/autocad-technician/lesson-01-drawing-language -TranscriptPath <private-output>
+```
+
+The transcript is private and the first script refuses to write one inside this
+repository. Only `narration-timing.json` is publishable: frame identifiers,
+measured start and end seconds, drift against the planned window, alignment
+confidence, and recording-cue times, with no spoken text. The second script
+verifies that before it returns.
+
+Speech recognition supplies only the clock. Canonical identifiers such as
+`EDU-SB-01`, `REFERENCE_READONLY`, and `L01_FEATURE_MAP` cannot be recovered from
+audio, because an underscore has no sound, so the words come from `SCRIPT.md` and
+the two are aligned character by character. A frame dense in Layer names aligns
+less tightly; its `matchedRatio` records that rather than hiding it.
+
+Recognition is not bit-reproducible: two runs over the same recording can place a
+scene boundary a few seconds apart. Treat `narration-timing.json` the way the
+artifact manifest is treated. Generate it once, review the drift, commit it, and
+regenerate only when the recording itself changes. Do not rebuild it in CI.
+
 ## AutoCAD Technician course
 
 The course is organized as ten connected HyperFrames projects under
