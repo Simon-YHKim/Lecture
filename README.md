@@ -25,6 +25,12 @@ The repository uses three layers of protection:
 2. A pre-commit hook blocks prohibited files even when they were force-added.
 3. GitHub Actions scans every push and pull request.
 
+`.gitattributes` disables end-of-line translation for every tracked file. The
+approved artifact manifest binds each reviewed asset to the exact byte count and
+SHA-256 of its repository bytes, so a checkout that rewrote line endings would
+fail manifest validation and block every manifest-bound artifact. Do not enable
+end-of-line translation for this repository.
+
 GitHub Actions is a secondary detection and merge gate; it cannot retract a blob
 that has already reached a public remote. Run the local staged guard before every
 push. If private material is ever published, follow the incident process to restrict
