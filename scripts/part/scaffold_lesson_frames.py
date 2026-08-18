@@ -1,9 +1,17 @@
-"""Generate the lesson-01 HyperFrames compositions.
+"""Scaffold a lesson's HyperFrames compositions. RUN ONCE PER LESSON.
 
-The part outline is injected from edu_ib_02.py rather than redrawn, so a frame
-can never disagree with master-part-geometry.json. Run from the repository root:
+This writes a first draft of the frame HTML with the part outline injected from
+edu_ib_02.py, so the drawing starts out agreeing with master-part-geometry.json.
 
-    python scripts/part/build_lesson_frames.py projects/autocad-technician/lesson-01-part-and-template
+After that the frames are ordinary authored compositions: preview them with
+`npm run dev` and edit them in HyperFrames Studio, which is the framework's
+own authoring loop. Studio stamps data-hf-id attributes and writes edits back
+into these files, and re-running this scaffold would discard both.
+
+    python scripts/part/scaffold_lesson_frames.py projects/autocad-technician/lesson-01-part-and-template
+
+If the part geometry itself changes, regenerate the SVG separately and paste it
+into the affected frame rather than re-scaffolding the whole lesson.
 """
 
 import os
@@ -68,7 +76,7 @@ def part_svg(profile="front"):
 
 def write(name, comp_id, duration, body, timeline):
     html = (HEAD
-            + f'  <div id="root" data-composition-id="{comp_id}" data-start="0" data-duration="{duration}"'
+            + f'  <div id="{comp_id}-root" data-composition-id="{comp_id}" data-start="0" data-duration="{duration}"'
               f' data-width="1920" data-height="1080">\n'
             + f'    <section id="{comp_id}" class="clip" data-start="0" data-duration="{duration}"'
               f' data-track-index="1">\n{body}\n    </section>\n  </div>\n'
