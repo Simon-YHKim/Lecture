@@ -39,8 +39,19 @@ def put(name, text):
         fh.write(text)
 
 
+MEASURED = beats.load_measured(LESSON)
+_at = [0.0]
+
+
 def frame(stem, comp, line_no, items, build, fixed=None):
     spans, dur = beats.plan(SCRIPT[line_no], duration=fixed)
+    # A recorded and aligned narration replaces the syllable estimate.
+    if MEASURED.get(line_no):
+        got = beats.measured_plan(SCRIPT[line_no], MEASURED[line_no],
+                                  _at[0], _at[0] + dur)
+        if got:
+            spans = got
+    _at[0] += dur
     html, asserts = build(comp, dur, spans)
     put(stem + ".html", html)
     with open(os.path.join(FRAMES, stem + ".motion.json"), "w", encoding="utf-8", newline="\n") as fh:

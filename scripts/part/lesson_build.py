@@ -210,13 +210,29 @@ def build(lesson_dir, L):
         "%s: SCRIPT.md 단계 %d개, 체크리스트 %d개" % (name, len(steps), len(L["steps"])))
     script[5] = list(steps)
 
+    # Once a recording exists its real length replaces the estimate, and once the
+    # narration is aligned the beats sit where they were actually spoken.
+    rec = os.path.join(lesson_dir, "recording.json")
+    demo_sec = None
+    if os.path.isfile(rec):
+        with open(rec, encoding="utf-8") as fh:
+            demo_sec = int(round(json.load(fh)["durationSec"]))
+    measured = beats.load_measured(lesson_dir)
+
     built, warn = [], []
+    frame_start = 0.0
     for i, (stem, fn, line_no, key) in enumerate(PLAN, 1):
         fixed = 12 if line_no == 1 else None
         if line_no == 5:
-            fixed = int(round(sum(beats.read_seconds(t) for _, t in steps)
-                              * DEMO_FACTOR / 10.0)) * 10
+            fixed = demo_sec or int(round(sum(beats.read_seconds(t) for _, t in steps)
+                                          * DEMO_FACTOR / 10.0)) * 10
         spans, dur = beats.plan(script[line_no], duration=fixed)
+        if measured.get(i):
+            got = beats.measured_plan(script[line_no], measured[i],
+                                      frame_start, frame_start + dur)
+            if got:
+                spans = got
+        frame_start += dur
         comp = "l%df%d" % (L["no"], i)
         html, asserts = fn(comp, dur, spans, L)
         with open(os.path.join(frames_dir, stem + ".html"), "w",

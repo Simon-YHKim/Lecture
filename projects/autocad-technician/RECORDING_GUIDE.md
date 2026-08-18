@@ -22,7 +22,39 @@
 4. 명령행이 보이게 둔다. 학습자가 따라 칠 값이 거기 뜬다.
 5. 마지막 단계는 언제나 새 이름으로 저장이다. 저장까지 녹화한다.
 
+## 녹화한 뒤
+
+녹화 파일은 **저장소 밖 비공개 위치**에 둔다. 옮겨 오지 않는다.
+
+    python scripts/part/ingest_recording.py <차시> <녹화파일>
+
+이 명령이 두 파일을 쓴다.
+
+- `recording.json` — 길이·해상도·프레임레이트만. 공개되고 커밋된다.
+- `media.local.json` — 파일의 절대경로. gitignore 되며 미리보기만 읽는다.
+
+그다음 그 차시를 다시 만들면 DEMO 프레임이 **예상치가 아니라 실제 길이**가 된다.
+
+    python scripts/part/scaffold_lessons_3_7.py <차시번호>
+
+현재 상태는 언제든 확인할 수 있다.
+
+    python scripts/part/ingest_recording.py --list
+
+## 목소리를 녹음했다면
+
+화면 녹화와 별개로 나레이션을 녹음했다면, 항목이 등장하는 시각을
+**추정이 아니라 실제 음성**에 맞출 수 있다.
+
+    pwsh -File scripts/transcribe-narration.ps1 -AudioPath <음성파일>
+    pwsh -File scripts/build-narration-timing.ps1 -LessonPath <차시> -TranscriptPath <위 결과>
+
+받아쓴 글은 비공개 위치에 남고, 저장소에는 숫자만 담긴 `narration-timing.json` 만
+들어온다. 그 파일이 있으면 스캐폴드가 음절 추정 대신 실측 시각을 쓴다.
+지금 타이밍은 초당 5.0음절 가정이라, 실제 낭독이 그보다 빠르거나 느리면
+화면이 말보다 앞서거나 뒤처진다.
+
 ## 길이가 다르면
 
-예상치와 실제가 크게 다르면 프레임을 억지로 맞추지 말고 `SCRIPT.md` Line 5 를
-고친 뒤 스캐폴드를 다시 돌린다. 길이의 원본은 대본이다 (`LESSON_STYLE.md` 14번).
+손으로 프레임을 맞추지 않는다. 대본을 고치고 다시 만들거나, 위 방법으로
+실측값을 넣는다. 길이의 원본은 대본이다 (`LESSON_STYLE.md` 14번).

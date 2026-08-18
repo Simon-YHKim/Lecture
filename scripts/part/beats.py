@@ -15,7 +15,9 @@ timeline, so scrubbing backwards in Studio unwinds them; a callback only fires
 when time moves forward past it and leaves the frame stuck in a later state.
 """
 
+import json
 import math
+import os
 import re
 import unicodedata
 
@@ -157,6 +159,54 @@ def plan(segments, duration=None, lead=LEAD_SEC, tail=TAIL_SEC):
 def beat_spans(spans):
     """Only the segments that map to an on-screen item, in beat order."""
     return [(i, a, b) for i, a, b in spans if i is not None]
+
+
+def load_measured(lesson_dir):
+    """Measured beat times from a recorded and aligned narration, if any.
+
+    Returns {frame_number: {beat: (start, end)}}. Until a recording exists the
+    syllable estimate is the best available answer; once one does, the estimate
+    stops being an answer at all.
+    """
+    path = os.path.join(lesson_dir, "narration-timing.json")
+    if not os.path.isfile(path):
+        return {}
+    with open(path, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    out = {}
+    for b in doc.get("beats", []):
+        out.setdefault(b["frame"], {})[b["beat"]] = (b["observedStart"], b["observedEnd"])
+    return out
+
+
+def measured_plan(segments, frame_beats, frame_start, frame_end):
+    """Lay segments out on the measured clock.
+
+    Beats sit where they were actually spoken. A gap paragraph has no marker to
+    align on, so it fills the space between its neighbours; that is a gap's job
+    anyway — nothing is emphasised during one.
+    """
+    known = {}
+    for i, (idx, _t) in enumerate(segments):
+        if idx is not None and idx in frame_beats:
+            a, b = frame_beats[idx]
+            known[i] = (round(a - frame_start, 2), round(b - frame_start, 2))
+    if not known:
+        return None
+
+    span = round(frame_end - frame_start, 2)
+    spans, prev_end = [], 0.0
+    for i, (idx, _t) in enumerate(segments):
+        if i in known:
+            a, b = known[i]
+        else:
+            later = [known[j][0] for j in sorted(known) if j > i]
+            a, b = prev_end, (later[0] if later else span)
+        a = max(a, prev_end)
+        b = max(b, a + 0.8)
+        spans.append((idx, round(a, 2), round(b, 2)))
+        prev_end = b
+    return spans
 
 
 # --------------------------------------------------------------- emitting
