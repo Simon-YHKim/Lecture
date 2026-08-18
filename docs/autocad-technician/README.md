@@ -8,7 +8,6 @@ exam-input analysis through a timed release drawing.
 
 - [Course MasterPlan](master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html)
 - [A3 landscape template reference](reference/a3-landscape-template-reference.png)
-- [Bilingual completion report](reports/AutoCAD_Technician_All_Lessons_Completion_260812.html)
 - [Public release completion report](reports/AutoCAD_Technician_Publication_Completion_260814.html)
 - [Approved artifact hash manifest](public-artifact-manifest.json)
 - 125 reviewed HyperFrames QA images under
