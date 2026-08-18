@@ -1,0 +1,64 @@
+---
+workflow: general-video
+flow: automation
+storyboard: yes
+message: "안쪽 형상은 전부 원에서 출발하고, 명령마다 기본값이 먼저 발목을 잡는다."
+destination: desktop-course
+aspect: 1920x1080
+language: ko
+audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
+length: 26m57s
+angle: lesson-04-circles-arcs
+narration: user-recorded
+style_preset: lg-training
+part_id: EDU-IB-02
+checkpoint_in: L03_PROFILE
+checkpoint_out: L04_FEATURES
+paper: A3-landscape
+projection: third-angle
+recording_slots: 1
+---
+
+## Intent
+
+`L03_PROFILE` 을 열어 `EDU-IB-02 아이들러 풀리 브래킷` 정면도의 외곽 안쪽 형상 네 가지를 채우는 차시다. 축 구멍 Ø25, 피치원 Ø44 위의 탭 4-M5, 장공 2-R5, 목과 베이스 사이의 필렛 2-R10 을 CIRCLE·OFFSET·FILLET·ARRAYPOLAR 네 명령으로 넣는다. 모든 값은 확정 치수표에서 그대로 가져오거나 그 값에서 계산해 쓰고, 계산 과정을 말로 밝힌다 — 오프셋 6은 (56−44)÷2, 보조선 22는 44의 절반, 접선 높이 13과 3은 8±5, 필렛 중심 26은 16+10이다. 종료 상태는 `L04_FEATURES`.
+
+## Must have
+
+- 타이틀 화면 (`LESSON_STYLE.md` 8번)
+- 오늘 그릴 것 카드 4장 — 축 구멍 Ø25 / 탭 4-M5 원형 배열 / 장공 2-R5 / 필렛 2-R10
+- CIRCLE 의 다섯 가지 방법 **전부** — 중심-반지름, 중심-지름, 2점, 3점, 접선-접선-반지름 (`LESSON_STYLE.md` 4번)
+- OFFSET · FILLET · ARRAYPOLAR 의 옵션까지 — 도면층(현재/원본), 반지름 R 선설정, 항목 수·사이의 각도·연관 여부
+- 도면 위 표 6행 — 축 구멍 / 보스(기준) / 피치원 / 탭 / 장공 / 필렛. 설명하는 동안 도면에서 그 부위를 강조
+- 표에 없는 값은 표의 값에서 계산해 쓰고 계산 과정을 낭독한다 — 6=(56−44)÷2, 22=44÷2, 13=8+5, 3=8−5, 41=29+12, 26=16+10, 90=360÷4
+- DEMO 15단계 — 1단계는 `L03_PROFILE` 열기, 15단계는 `SAVEAS` 로 `EDU-IB-02_L04_FEATURES`
+- 조작은 명령어·입력값·엔터·대화상자 항목·기능키까지 (`LESSON_STYLE.md` 7번)
+- 레이어 규율 — 피치원은 중심선, 나머지 형상은 외형선. OFFSET 도면층 옵션을 현재로 바꾸는 이유까지
+- 실수 카드 4장 — 반지름/지름 혼동, 배열 각도 45 대 90, 필렛 반지름 미설정, 장공 안쪽 선 미절단
+- 2분할 마무리 — 이번에 한 일 / 다음
+- 인사 화면 — 「고생하셨습니다」 + 다음 차시 안내 (`LESSON_STYLE.md` 8번)
+
+## Must not
+
+- 확정 치수표에 없는 숫자를 지어내는 것 (`LESSON_STYLE.md` 6번). 참고 치수 95.7 은 괄호 친 값이므로 입력하지 않는다
+- AutoCAD 명령의 동작을 추측해서 쓰는 것. TRIM 처럼 버전에 따라 프롬프트가 갈리는 명령은 두 경우를 모두 안내한다
+- 시험 제한시간·배점·합격 기준 언급 (확인된 바 없다)
+- 목차나 과정 안내, 학습 순서 제시 (1차시 소관, `LESSON_STYLE.md` 5번)
+- 체크포인트 파일명을 로드맵처럼 나열하는 것. 실제로 타이핑하는 자리에만 쓴다 (`LESSON_STYLE.md` 22번)
+- 나사 표현(골지름·바깥지름 3/4 원), 해칭, 치수 기입의 **실습** — 개념만 언급하고 뒤 차시로 넘긴다
+- 이모지, 느낌표 남발, "자!" "여러분" 같은 호객
+
+## Frames
+
+| # | 파일 | 길이 | 비트 |
+| --- | --- | --- | --- |
+| 1 | `01-title` | 12s | — |
+| 2 | `02-today` | 126s | 4 |
+| 3 | `03-concept` | 169s | 4 |
+| 4 | `04-on-the-drawing` | 256s | 6 |
+| 5 | `05-demo` | 800s | 16 |
+| 6 | `06-check` | 135s | 4 |
+| 7 | `07-recap` | 106s | 2 |
+| 8 | `08-closing` | 13s | 2 |
+
+프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

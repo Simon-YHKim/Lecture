@@ -1,86 +1,94 @@
 {
-  "schemaVersion": 1,
-  "partId": "EDU-SB-01",
-  "partName": "교육용 센서 장착 브래킷",
-  "geometrySpec": "master-part-geometry.json",
-  "recordingMap": "recording-map.json",
-  "paper": {
-    "series": "ISO-A",
-    "format": "A3",
-    "orientation": "landscape",
-    "widthMm": 420,
-    "heightMm": 297,
-    "courseFrameInsetMm": 10,
-    "titleBlock": {
-      "position": "bottom-right-inside-frame",
-      "widthMm": 200,
-      "heightMm": 30,
-      "cells": [
-        { "label": "사번", "widthMm": 100 },
-        { "label": "이름", "widthMm": 100 }
-      ],
-      "textHeightMm": 10
-    },
-    "authority": "course-default-from-user-capture; exam-instructions-override"
-  },
-  "workspace": {
-    "courseDefault": "layout-paper-space",
-    "paperGeometryScale": "1:1 millimeters in Layout",
-    "modelGeometryScale": "1:1 millimeters in Model Space",
-    "modelViewArrangement": "front, top, and right 2D views are manually projected and aligned together at 1:1 in Model Space",
-    "viewports": "one locked Layout viewport references the Model Space third-angle arrangement and carries the instructed output scale",
-    "authority": "exam-provided DWT/DWG workspace structure overrides the course default"
-  },
-  "startup": {
-    "template": "acadiso.dwt",
-    "units": "millimeters",
-    "modelGeometryScale": "1:1",
-    "outputScale": "follow-exam-instructions"
-  },
-  "projection": {
-    "method": "third-angle",
-    "topView": "above-front",
-    "rightView": "right-of-front",
-    "authority": "course-exam-requirement; exam-instructions-override"
-  },
+  "part": "EDU-IB-02",
+  "partName": "아이들러 풀리 브래킷",
+  "paper": "A3-landscape",
+  "projection": "third-angle",
   "layers": [
-    { "name": "OUTLINE", "purpose": "visible-outline", "color": 7, "linetype": "Continuous", "lineweightMm": 0.50 },
-    { "name": "CENTER", "purpose": "center-and-symmetry", "color": 1, "linetype": "CENTER2", "lineweightMm": 0.25 },
-    { "name": "HIDDEN", "purpose": "hidden-geometry", "color": 3, "linetype": "HIDDEN2", "lineweightMm": 0.25 },
-    { "name": "DIM", "purpose": "dimensions", "color": 2, "linetype": "Continuous", "lineweightMm": 0.25 },
-    { "name": "BORDER", "purpose": "sheet-frame", "color": 7, "linetype": "Continuous", "lineweightMm": 0.50 },
-    { "name": "TITLE", "purpose": "title-block-and-notes", "color": 7, "linetype": "Continuous", "lineweightMm": 0.25 },
-    { "name": "HATCH", "purpose": "section-hatching", "color": 8, "linetype": "Continuous", "lineweightMm": 0.18 },
-    { "name": "CONSTRUCTION", "purpose": "projection-construction", "color": 9, "linetype": "Continuous", "lineweightMm": 0.18 }
+    "외형선",
+    "중심선",
+    "숨은선",
+    "치수선"
   ],
-  "requiredCoreLayers": ["OUTLINE", "CENTER", "HIDDEN", "DIM"],
-  "checkpoints": [
-    { "lesson": "lesson-01-drawing-language", "in": "REFERENCE_READONLY", "out": "L01_FEATURE_MAP", "increment": "read-3d-dimensions-instructions", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "DIM"] },
-    { "lesson": "lesson-02-work-environment", "in": "L01_FEATURE_MAP", "out": "L02_SETUP", "increment": "iso-metric-a3-frame-title-layers", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "DIM", "BORDER", "TITLE", "HATCH", "CONSTRUCTION"] },
-    { "lesson": "lesson-03-lines-polylines", "in": "L02_SETUP", "out": "L03_BASE_PROFILE", "increment": "front-view-base-profile", "layersUsed": ["OUTLINE", "CONSTRUCTION"] },
-    { "lesson": "lesson-04-curves-offset", "in": "L03_BASE_PROFILE", "out": "L04_PRIMARY_FEATURES", "increment": "circles-arcs-pocket-slot-offset", "layersUsed": ["OUTLINE", "CENTER", "CONSTRUCTION"] },
-    { "lesson": "lesson-05-orthographic-reading", "in": "L04_PRIMARY_FEATURES", "out": "L05_THIRD_ANGLE_VIEWS", "increment": "third-angle-top-right-hidden-center", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "CONSTRUCTION"] },
-    { "lesson": "lesson-06-placement-repetition", "in": "L05_THIRD_ANGLE_VIEWS", "out": "L06_PATTERNED_FEATURES", "increment": "mirrored-and-arrayed-features", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "CONSTRUCTION"] },
-    { "lesson": "lesson-07-object-editing", "in": "L06_PATTERNED_FEATURES", "out": "L07_GEOMETRY_FINAL", "increment": "trim-extend-projectors-fillet-chamfer-reference-scale", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "CONSTRUCTION"] },
-    { "lesson": "lesson-08-representation-reuse", "in": "L07_GEOMETRY_FINAL", "out": "L08_REPRESENTED", "increment": "hatch-block-group-title-notes", "layersUsed": ["BORDER", "TITLE", "HATCH", "OUTLINE", "CENTER", "HIDDEN"] },
-    { "lesson": "lesson-09-dimensioning", "in": "L08_REPRESENTED", "out": "L09_RELEASE_CANDIDATE", "increment": "dimensions-and-scale-review", "layersUsed": ["DIM", "OUTLINE", "CENTER"] },
-    { "lesson": "lesson-10-final-bracket", "in": "L09_RELEASE_CANDIDATE", "out": "L10_RELEASE", "increment": "timed-exam-and-final-compliance-audit", "layersUsed": ["OUTLINE", "CENTER", "HIDDEN", "DIM", "BORDER", "TITLE", "HATCH"] }
-  ],
-  "examDisclosure": {
-    "input": ["3d-model", "dimensions", "instructions"],
-    "constraint": "complete-within-allotted-time",
-    "variableByExam": ["paper", "template", "layer-names", "colors", "linetypes", "lineweights", "scale", "title-block"],
-    "deductionRisks": [
-      "third-angle-noncompliance",
-      "outline-center-hidden-dimension-layer-misuse",
-      "scale-missing-or-wrong",
-      "sheet-frame-missing",
-      "title-or-note-block-missing",
-      "required-layer-missing",
-      "color-mismatch",
-      "linetype-mismatch",
-      "instruction-noncompliance"
-    ],
-    "authority": "official-exam-sheet-and-latest-notice-override"
-  }
+  "lessonCount": 7,
+  "totalSec": 11294,
+  "note": "차시마다 새 파일을 열지 않는다. 앞 차시의 checkpointOut 파일을 열어 이어 그린다. 이 파일은 scripts/part/write_course_docs.py 가 만든다.",
+  "lessons": [
+    {
+      "no": 1,
+      "slug": "lesson-01-orientation",
+      "topic": "오리엔테이션",
+      "durationSec": 377,
+      "frames": 6,
+      "checkpointIn": null,
+      "checkpointOut": null,
+      "demoId": null,
+      "demoSec": 0
+    },
+    {
+      "no": 2,
+      "slug": "lesson-02-part-and-template",
+      "topic": "부품 이해와 도면 환경",
+      "durationSec": 1319,
+      "frames": 10,
+      "checkpointIn": null,
+      "checkpointOut": "L02_TEMPLATE",
+      "demoId": "DEMO-01",
+      "demoSec": 450
+    },
+    {
+      "no": 3,
+      "slug": "lesson-03-baseline-profile",
+      "topic": "기준선과 외곽",
+      "durationSec": 1745,
+      "frames": 8,
+      "checkpointIn": "L02_TEMPLATE",
+      "checkpointOut": "L03_PROFILE",
+      "demoId": "DEMO-01",
+      "demoSec": 920
+    },
+    {
+      "no": 4,
+      "slug": "lesson-04-circles-arcs",
+      "topic": "원·호·오프셋",
+      "durationSec": 1617,
+      "frames": 8,
+      "checkpointIn": "L03_PROFILE",
+      "checkpointOut": "L04_FEATURES",
+      "demoId": "DEMO-01",
+      "demoSec": 800
+    },
+    {
+      "no": 5,
+      "slug": "lesson-05-three-views",
+      "topic": "제3각법 3뷰와 반복",
+      "durationSec": 1969,
+      "frames": 8,
+      "checkpointIn": "L04_FEATURES",
+      "checkpointOut": "L05_VIEWS",
+      "demoId": "DEMO-01",
+      "demoSec": 1320
+    },
+    {
+      "no": 6,
+      "slug": "lesson-06-editing-symbols",
+      "topic": "편집과 표현",
+      "durationSec": 1917,
+      "frames": 8,
+      "checkpointIn": "L05_VIEWS",
+      "checkpointOut": "L06_REPRESENTED",
+      "demoId": "DEMO-01",
+      "demoSec": 1030
+    },
+    {
+      "no": 7,
+      "slug": "lesson-07-dimensioning-release",
+      "topic": "치수와 출도",
+      "durationSec": 2350,
+      "frames": 8,
+      "checkpointIn": "L06_REPRESENTED",
+      "checkpointOut": "L07_RELEASE",
+      "demoId": "DEMO-01",
+      "demoSec": 1500
+    }
+  ]
 }

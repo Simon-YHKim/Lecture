@@ -1,0 +1,1 @@
+{"duration": 135, "assertions": [{"kind": "appearsBy", "selector": "#l7f7 h1", "bySec": 3}, {"kind": "appearsBy", "selector": "#l7f7 .p-done", "bySec": 4.6}, {"kind": "appearsBy", "selector": "#l7f7 .p-next", "bySec": 72.7}, {"kind": "before", "a": "#l7f7 .p-done", "b": "#l7f7 .p-next"}, {"kind": "staysInFrame", "selector": "#l7f7 .body"}]}

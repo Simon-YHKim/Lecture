@@ -1,36 +1,59 @@
 {
-  "schemaVersion": 1,
-  "totalSlots": 29,
-  "authority": "STORYBOARD frame source and in-frame USER RECORDING label are canonical; recording guide and course plan must match.",
-  "slots": [
-    { "lesson": "lesson-01-drawing-language", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-drawing-purpose.html" },
-    { "lesson": "lesson-01-drawing-language", "demoId": "DEMO-02", "frame": 4, "src": "compositions/frames/04-three-views.html" },
-    { "lesson": "lesson-02-work-environment", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-saveas-units.html" },
-    { "lesson": "lesson-02-work-environment", "demoId": "DEMO-02", "frame": 4, "src": "compositions/frames/04-layer.html" },
-    { "lesson": "lesson-02-work-environment", "demoId": "DEMO-03", "frame": 5, "src": "compositions/frames/05-osnap-ortho.html" },
-    { "lesson": "lesson-03-lines-polylines", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-line-vs-pline.html" },
-    { "lesson": "lesson-03-lines-polylines", "demoId": "DEMO-02", "frame": 4, "src": "compositions/frames/04-rectangle-values.html" },
-    { "lesson": "lesson-03-lines-polylines", "demoId": "DEMO-03", "frame": 5, "src": "compositions/frames/05-closed-contour.html" },
-    { "lesson": "lesson-04-curves-offset", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-circle-arc.html" },
-    { "lesson": "lesson-04-curves-offset", "demoId": "DEMO-02", "frame": 3, "src": "compositions/frames/03-polygon.html" },
-    { "lesson": "lesson-04-curves-offset", "demoId": "DEMO-03", "frame": 4, "src": "compositions/frames/04-offset.html" },
-    { "lesson": "lesson-05-orthographic-reading", "demoId": "DEMO-01", "frame": 3, "src": "compositions/frames/03-view-navigation.html" },
-    { "lesson": "lesson-05-orthographic-reading", "demoId": "DEMO-02", "frame": 4, "src": "compositions/frames/04-feature-tracing.html" },
-    { "lesson": "lesson-06-placement-repetition", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-move-copy.html" },
-    { "lesson": "lesson-06-placement-repetition", "demoId": "DEMO-02", "frame": 3, "src": "compositions/frames/03-rotate-mirror.html" },
-    { "lesson": "lesson-06-placement-repetition", "demoId": "DEMO-03", "frame": 4, "src": "compositions/frames/04-array.html" },
-    { "lesson": "lesson-07-object-editing", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-trim-extend.html" },
-    { "lesson": "lesson-07-object-editing", "demoId": "DEMO-02", "frame": 3, "src": "compositions/frames/03-fillet-chamfer.html" },
-    { "lesson": "lesson-07-object-editing", "demoId": "DEMO-03", "frame": 4, "src": "compositions/frames/04-scale.html" },
-    { "lesson": "lesson-08-representation-reuse", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-hatch.html" },
-    { "lesson": "lesson-08-representation-reuse", "demoId": "DEMO-02", "frame": 3, "src": "compositions/frames/03-block-insert.html" },
-    { "lesson": "lesson-08-representation-reuse", "demoId": "DEMO-03", "frame": 4, "src": "compositions/frames/04-group-compare.html" },
-    { "lesson": "lesson-09-dimensioning", "demoId": "DEMO-01", "frame": 2, "src": "compositions/frames/02-dimstyle.html" },
-    { "lesson": "lesson-09-dimensioning", "demoId": "DEMO-02", "frame": 3, "src": "compositions/frames/03-linear-aligned-angular.html" },
-    { "lesson": "lesson-09-dimensioning", "demoId": "DEMO-03", "frame": 4, "src": "compositions/frames/04-radius-diameter.html" },
-    { "lesson": "lesson-10-final-bracket", "demoId": "DEMO-01", "frame": 3, "src": "compositions/frames/03-environment-outline.html" },
-    { "lesson": "lesson-10-final-bracket", "demoId": "DEMO-02", "frame": 4, "src": "compositions/frames/04-holes-repetition.html" },
-    { "lesson": "lesson-10-final-bracket", "demoId": "DEMO-03", "frame": 5, "src": "compositions/frames/05-edit-represent.html" },
-    { "lesson": "lesson-10-final-bracket", "demoId": "DEMO-04", "frame": 6, "src": "compositions/frames/06-dimension-final-check.html" }
+  "note": "녹화 구간은 차시마다 하나이고 언제나 DEMO-01 이다. lengthSec 은 낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 녹화가 다르면 SCRIPT.md Line 5 를 고치고 스캐폴드를 다시 돌린다.",
+  "recordings": [
+    {
+      "lesson": 2,
+      "slug": "lesson-02-part-and-template",
+      "demoId": "DEMO-01",
+      "lengthSec": 450,
+      "steps": 15,
+      "opens": null,
+      "saves": "L02_TEMPLATE"
+    },
+    {
+      "lesson": 3,
+      "slug": "lesson-03-baseline-profile",
+      "demoId": "DEMO-01",
+      "lengthSec": 920,
+      "steps": 16,
+      "opens": "L02_TEMPLATE",
+      "saves": "L03_PROFILE"
+    },
+    {
+      "lesson": 4,
+      "slug": "lesson-04-circles-arcs",
+      "demoId": "DEMO-01",
+      "lengthSec": 800,
+      "steps": 16,
+      "opens": "L03_PROFILE",
+      "saves": "L04_FEATURES"
+    },
+    {
+      "lesson": 5,
+      "slug": "lesson-05-three-views",
+      "demoId": "DEMO-01",
+      "lengthSec": 1320,
+      "steps": 16,
+      "opens": "L04_FEATURES",
+      "saves": "L05_VIEWS"
+    },
+    {
+      "lesson": 6,
+      "slug": "lesson-06-editing-symbols",
+      "demoId": "DEMO-01",
+      "lengthSec": 1030,
+      "steps": 15,
+      "opens": "L05_VIEWS",
+      "saves": "L06_REPRESENTED"
+    },
+    {
+      "lesson": 7,
+      "slug": "lesson-07-dimensioning-release",
+      "demoId": "DEMO-01",
+      "lengthSec": 1500,
+      "steps": 16,
+      "opens": "L06_REPRESENTED",
+      "saves": "L07_RELEASE"
+    }
   ]
 }

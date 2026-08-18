@@ -5,7 +5,8 @@ drift apart: `--json` writes master-part-geometry.json, and the default writes
 the drawing as inline SVG for embedding in a lesson frame.
 
     python scripts/part/edu_ib_02.py out.svg                 full three-view
-    python scripts/part/edu_ib_02.py out.svg --profile front  front view only
+    python scripts/part/edu_ib_02.py out.svg --profile front     front view, no dimensions
+    python scripts/part/edu_ib_02.py out.svg --profile frontdim  front view with its dimensions
     python scripts/part/edu_ib_02.py out.json --json          canonical geometry
     python scripts/part/edu_ib_02.py out.svg --audit          print the checks
 
@@ -130,8 +131,13 @@ W, H = RX + DEPTH + 52, FY + 66
 TXT, ARROW = 3.4, 2.6
 out = []
 
-PROFILE = "front" if "--profile" in sys.argv and "front" in sys.argv else "full"
+PROFILE = ("frontdim" if "frontdim" in sys.argv
+           else "front" if "--profile" in sys.argv and "front" in sys.argv
+           else "full")
+# The front view and its dimensions belong together; the other two views do not.
+FRONT_ONLY = PROFILE in ("front", "frontdim")
 _feature = None
+_dim = None
 
 
 def feature(name):
@@ -139,8 +145,29 @@ def feature(name):
     _feature = name
 
 
+def dimid(name):
+    """The dimension currently being emitted.
+
+    data-feature groups by machined surface, which is the right grain for the
+    machining screen. The drawing-reading screens walk one dimension at a time,
+    and "the bore" cannot separate 25 from H7 from 62, so dimensions carry their
+    own handle as well.
+    """
+    global _dim
+    _dim = name
+
+
+def D(name, fn, *a, **k):
+    dimid(name)
+    fn(*a, **k)
+    dimid(None)
+
+
 def _tag():
-    return f' data-feature="{_feature}"' if _feature else ""
+    t = f' data-feature="{_feature}"' if _feature else ""
+    if _dim:
+        t += f' data-dim="{_dim}"'
+    return t
 
 
 def F(x, y):
@@ -173,7 +200,7 @@ def circle(cx, cy, r, cls):
 
 def text(x, y, s, anchor="middle", cls="dimtext", rot=None):
     t = f' transform="rotate({rot} {x:.3f} {y:.3f})"' if rot is not None else ""
-    em(f'<text class="{cls}" x="{x:.3f}" y="{y:.3f}" text-anchor="{anchor}"{t}>{s}</text>')
+    em(f'<text class="{cls}"{_tag()} x="{x:.3f}" y="{y:.3f}" text-anchor="{anchor}"{t}>{s}</text>')
 
 
 def arrow(x, y, ang):
@@ -247,8 +274,26 @@ d += [
      "L%.3f %.3f" % F(*FT_WEB_L)]
 d += ["L%.3f %.3f" % F(*q) for q in fillet_pts(FC_L, FT_WEB_L, FT_BASE_L)[1:]]
 d += ["L%.3f %.3f" % F(c5, BASE_H), "L%.3f %.3f" % F(0, BASE_H - c5), "Z"]
-feature("profile")
+feature(None)
 path(" ".join(d), "outline")
+
+# Highlight overlays. The outline above is a single path, so lighting a
+# feature that is only part of it would light the whole part. These trace
+# the individual segments and carry no stroke until .hot is set.
+def _hl(pts):
+    path("M" + " L".join("%.3f %.3f" % F(*q) for q in pts), "hl")
+
+feature("fillet")
+_hl(fillet_pts(FC, FT_BASE, FT_WEB))
+_hl(fillet_pts(FC_L, FT_WEB_L, FT_BASE_L))
+feature("profile")
+_hl([(c5, BASE_H), (0, BASE_H - c5), (0, 0), (BASE_W, 0),
+     (BASE_W, BASE_H - c5), (BASE_W - c5, BASE_H)])
+_hl([FT_WEB, TR])
+_hl([TL, FT_WEB_L])
+feature("boss")
+_hl(arc_pts(BOSS_C, BOSS_R, 0.0, 360.0))
+feature(None)
 
 feature("boss")
 bcx, bcy = F(*BOSS_C)
@@ -287,7 +332,67 @@ for fcx, fcy in (FC, FC_L):                    # fillet arc centres
 
 feature(None)
 
-if PROFILE == "full":
+# The front view carries its own dimensions; lessons that use the drawing
+# as a map rather than as a source of numbers ask for "front" instead.
+if PROFILE != "front":
+ # ============================================================= dimensioning
+ D("w120", dim_h, 0, BASE_W, 0, FY + 40, f"{BASE_W:g}")
+ L0 = SLOT_C[0][0] - SLOT_CTC / 2
+ D("s12", dim_h, L0, L0 + SLOT_CTC, SLOT_C[0][1], FY + 10, "12")
+ D("s29", dim_h, 0, L0, 0, FY + 20, f"{L0:g}")
+ D("s50", dim_h, L0, SLOT_C[1][0] - SLOT_CTC / 2, SLOT_C[0][1], FY + 30,
+  f"{SLOT_C[1][0] - SLOT_C[0][0]:g}")
+ # Theoretical web foot: the corner the fillet removes, and the point the tangent
+ # line is drawn from. Dimensioned to the intersection, as is usual for a filleted
+ # corner, with the resulting tangent point given as a reference value.
+ D("w80", dim_h, BASE_W - WEB_FOOT, WEB_FOOT, 0, FY + 20, f"{2 * WEB_FOOT - BASE_W:g}")
+ D("f26", dim_v, 0, FC[1], BASE_W, FX + BASE_W + 38, f"{FC[1]:g}")
+ D("f95", dim_h, FC_L[0], FC[0], 0, FY + 50, f"({FC[0] - FC_L[0]:.1f})")
+ D("h16", dim_v, 0, BASE_H, 0, FX - 13, "16")
+ D("c62", dim_v, 0, BOSS_C[1], 0, FX - 25, "62")
+ D("h90", dim_v, 0, TOP_Y, 0, FX - 37, "90")
+ D("s8", dim_v, 0, SLOT_C[0][1], BASE_W, FX + BASE_W + 26, "8")
+ D("c60", dim_h, 0, BOSS_C[0], TOP_Y, FY - TOP_Y - 20, f"{BOSS_C[0]:g}")
+
+ D("d25", leader, bcx, bcy, SHAFT_D / 2, 200, "&#216;25 H7")
+ D("d56", leader, bcx, bcy, BOSS_R, 288, "&#216;56", length=19)
+ D("pcd", leader, bcx, bcy, TAP_PCD / 2, 236, "PCD &#216;44")
+ p0 = F(*tap_xy[0])
+ D("m5", leader, p0[0], p0[1], TAP_D / 2, 40, "4-M5 &#44618;&#51060; 10")
+ fp = F(*FT_WEB)
+ dimid("r10")
+ line(fp[0], fp[1], fp[0] + 16, fp[1] - 12, "dim")
+ line(fp[0] + 16, fp[1] - 12, fp[0] + 25, fp[1] - 12, "dim")
+ arrow(fp[0], fp[1], 323)
+ text(fp[0] + 26, fp[1] - 13.2, f"2-R{FILLET_R:g}", anchor="start")
+ dimid(None)
+ ps = F(*SLOT_C[0])
+ D("sr5", leader, ps[0], ps[1], SLOT_W / 2, 210, "2-&#51109;&#44277; R5", length=22)
+
+ dimid("a45")
+ a0 = math.radians(TAP_START)
+ r_arc = TAP_PCD / 2 + 9
+ ax0, ay0 = bcx + r_arc, bcy
+ ax1, ay1 = bcx + r_arc * math.cos(-a0), bcy + r_arc * math.sin(-a0)
+ line(bcx, bcy, bcx + r_arc + 5, bcy, "center")
+ # Built from computed points: an SVG arc command would leave the centre
+ # ambiguous, which is exactly how the boss profile went wrong earlier.
+ pts = [(bcx + r_arc * math.cos(-math.radians(TAP_START) * k / 24),
+         bcy + r_arc * math.sin(-math.radians(TAP_START) * k / 24)) for k in range(25)]
+ path(' '.join(['M%.3f %.3f' % pts[0]] + ['L%.3f %.3f' % q for q in pts[1:]]), 'dim')
+ arrow(ax1, ay1, 45)
+ text(bcx + r_arc + 3.0, bcy - r_arc * 0.30, "45&#176;", anchor="start")
+ dimid(None)
+
+ cx1, cy1 = F(BASE_W - c5 / 2, BASE_H - c5 / 2)
+ dimid("c5")
+ line(cx1, cy1, cx1 + 15, cy1 - 11, "dim")
+ line(cx1 + 15, cy1 - 11, cx1 + 24, cy1 - 11, "dim")
+ arrow(cx1, cy1, 143)
+ text(cx1 + 25, cy1 - 12.2, "2-C5", anchor="start")
+ dimid(None)
+
+if not FRONT_ONLY:
  # ============================================================ TOP VIEW
  path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f Z"
       % (*T(0, PLATE_Z[0]), *T(BASE_W, PLATE_Z[0]), *T(BASE_W, PLATE_Z[1]), *T(0, PLATE_Z[1])), "outline")
@@ -334,60 +439,14 @@ if PROFILE == "full":
  line(*R(PLATE_Z[0], FT_WEB[1]), *R(PLATE_Z[1], FT_WEB[1]), "tangent")
  line(*R(-6, BOSS_C[1]), *R(DEPTH + 6, BOSS_C[1]), "center")
 
- # ============================================================= dimensioning
- dim_h(0, BASE_W, 0, FY + 40, f"{BASE_W:g}")
- L0 = SLOT_C[0][0] - SLOT_CTC / 2
- dim_h(L0, L0 + SLOT_CTC, SLOT_C[0][1], FY + 10, "12")
- dim_h(0, L0, 0, FY + 20, f"{L0:g}")
- dim_h(L0, SLOT_C[1][0] - SLOT_CTC / 2, SLOT_C[0][1], FY + 30, f"{SLOT_C[1][0] - SLOT_C[0][0]:g}")
- # Theoretical web foot: the corner the fillet removes, and the point the tangent
- # line is drawn from. Dimensioned to the intersection, as is usual for a filleted
- # corner, with the resulting tangent point given as a reference value.
- dim_h(BASE_W - WEB_FOOT, WEB_FOOT, 0, FY + 20, f"{2 * WEB_FOOT - BASE_W:g}")
- dim_v(0, FC[1], BASE_W, FX + BASE_W + 38, f"{FC[1]:g}")
- dim_h(FC_L[0], FC[0], 0, FY + 50, f"({FC[0] - FC_L[0]:.1f})")
- dim_v(0, BASE_H, 0, FX - 13, "16")
- dim_v(0, BOSS_C[1], 0, FX - 25, "62")
- dim_v(0, TOP_Y, 0, FX - 37, "90")
- dim_v(0, SLOT_C[0][1], BASE_W, FX + BASE_W + 26, "8")
- dim_h(0, BOSS_C[0], TOP_Y, FY - TOP_Y - 20, f"{BOSS_C[0]:g}")
-
- leader(bcx, bcy, SHAFT_D / 2, 200, "&#216;25 H7")
- leader(bcx, bcy, BOSS_R, 288, "&#216;56", length=19)
- leader(bcx, bcy, TAP_PCD / 2, 236, "PCD &#216;44")
- p0 = F(*tap_xy[0])
- leader(p0[0], p0[1], TAP_D / 2, 40, "4-M5 &#44618;&#51060; 10")
- fp = F(*FT_WEB)
- line(fp[0], fp[1], fp[0] + 16, fp[1] - 12, "dim")
- line(fp[0] + 16, fp[1] - 12, fp[0] + 25, fp[1] - 12, "dim")
- arrow(fp[0], fp[1], 323)
- text(fp[0] + 26, fp[1] - 13.2, f"2-R{FILLET_R:g}", anchor="start")
- ps = F(*SLOT_C[0])
- leader(ps[0], ps[1], SLOT_W / 2, 210, "2-&#51109;&#44277; R5", length=22)
-
- a0 = math.radians(TAP_START)
- r_arc = TAP_PCD / 2 + 9
- ax0, ay0 = bcx + r_arc, bcy
- ax1, ay1 = bcx + r_arc * math.cos(-a0), bcy + r_arc * math.sin(-a0)
- line(bcx, bcy, bcx + r_arc + 5, bcy, "center")
- # Built from computed points: an SVG arc command would leave the centre
- # ambiguous, which is exactly how the boss profile went wrong earlier.
- pts = [(bcx + r_arc * math.cos(-math.radians(TAP_START) * k / 24),
-         bcy + r_arc * math.sin(-math.radians(TAP_START) * k / 24)) for k in range(25)]
- em('<path class="dim" d="M' + ' L'.join(f'{x:.3f} {y:.3f}' for x, y in pts) + '"/>')
- arrow(ax1, ay1, 45)
- text(bcx + r_arc + 3.0, bcy - r_arc * 0.30, "45&#176;", anchor="start")
-
- cx1, cy1 = F(BASE_W - c5 / 2, BASE_H - c5 / 2)
- line(cx1, cy1, cx1 + 15, cy1 - 11, "dim")
- line(cx1 + 15, cy1 - 11, cx1 + 24, cy1 - 11, "dim")
- arrow(cx1, cy1, 143)
- text(cx1 + 25, cy1 - 12.2, "2-C5", anchor="start")
-
+ dimid("t12")
  dline(*T(BASE_W + 12, PLATE_Z[0]), *T(BASE_W + 12, PLATE_Z[1]), "12",
        ext_from=(T(BASE_W, PLATE_Z[0]), T(BASE_W, PLATE_Z[1])), out_arrows=True, rot=-90)
+ dimid(None)
+ dimid("t20")
  dline(*T(BASE_W + 24, 0), *T(BASE_W + 24, DEPTH), "20",
        ext_from=(T(BOSS_C[0] + BOSS_R, 0), T(BASE_W, DEPTH)), rot=-90)
+ dimid(None)
 
  text(*F(BASE_W / 2, -60), "정면도", cls="vl")
  text(FX + BASE_W / 2, TY - DEPTH - 24, "평면도", cls="vl")
@@ -401,6 +460,8 @@ if "--check" in sys.argv:
 
 if PROFILE == "front":
     VB = (FX - 10, FY - TOP_Y - 10, BASE_W + 20, TOP_Y + 20)
+elif PROFILE == "frontdim":
+    VB = (FX - 46, FY - TOP_Y - 30, BASE_W + 92, TOP_Y + 92)
 else:
     VB = (0, 0, W, H)
 
@@ -413,6 +474,7 @@ svg = f'''<svg class="dwg" xmlns="http://www.w3.org/2000/svg" viewBox="{VB[0]:.0
  .tangent{{fill:none;stroke:#111;stroke-width:.25}}
  .arrow{{fill:#111;stroke:none}}
  .chk{{fill:none;stroke:#C7004C;stroke-width:.18;stroke-dasharray:1.5 1.5;opacity:.85}}
+ .hl{{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:0}}
  text{{font-family:"Malgun Gothic",sans-serif;fill:#111}}
  .dimtext{{font-size:{TXT}px}} .vl{{font-size:4.4px;font-weight:600;letter-spacing:.06em}}
 </style>
@@ -560,9 +622,9 @@ print(f"  M8 관통 Ø9 <= 장공 폭 {SLOT_W:g} :", 9.0 <= SLOT_W)
 print(f"  조정 여유(중심거리) = {SLOT_CTC:g} mm")
 
 AUDIT = [
-    ("베이스 100×16",       "외형선",                 "판 사각 z8~20",          "판 사각 z8~20"),
-    ("모따기 2-C5",         "모서리 절단",            "실선 x=5, x=95",         "실선 y=11"),
-    ("목 밑동 80",          "외형선(접선)",           "판 윤곽 안",             "판 윤곽 안"),
+    (f"베이스 {BASE_W:g}×{BASE_H:g}",   "외형선",                 f"판 사각 z{PLATE_Z[0]:g}~{PLATE_Z[1]:g}", f"판 사각 z{PLATE_Z[0]:g}~{PLATE_Z[1]:g}"),
+    (f"모따기 2-C{CHAMFER:g}",       "모서리 절단",            f"실선 x={CHAMFER:g}, x={BASE_W - CHAMFER:g}", f"실선 y={PLATE_Z[0]+CHAMFER-2:g}"),
+    (f"목 밑동 {2 * WEB_FOOT - BASE_W:g}",  "외형선(접선)",           "판 윤곽 안",             "판 윤곽 안"),
     ("베이스 윗면 y=16",    "외형선",                 "z=8 선과 일치",          "실선 y=16"),
     ("필렛 2-R10",          "참값 원호 + 중심선",      "가는 실선 x=12.1/107.9", "가는 실선 y=23.6"),
     ("웹(접선)",            "외형선",                 "판 윤곽 안",             "판 윤곽 안"),
