@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
+  <style>
+#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+*{box-sizing:border-box}
+.clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
+.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
+.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}
+h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:58px;letter-spacing:-.035em}
+.prompt{color:#666;font-size:26px}
+.body{display:grid;gap:38px;height:724px;padding-top:36px}
+.panel{background:#F5F5F3;border:2px solid #A4A3A4;display:grid;place-items:center;overflow:hidden}
+.panel svg{width:100%;height:100%}
+.dwg .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
+.dwg .hidden{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:2.4 1.2}
+.dwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2}
+.dwg .dim,.dwg .ext,.dwg .tangent{fill:none;stroke:#111;stroke-width:.25}
+.dwg .arrow{fill:#111;stroke:none}
+.dwg .hl{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:0}
+.card{border:2px solid #A4A3A4;background:#FFF;padding:20px 24px;color:#111}
+.ico{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
+.card.wide{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start}
+.card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
+.card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
+.card span{display:block;color:#666;font-size:21px;line-height:1.45}
+.note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
+.note b{color:#C7004C}
+table.spec{width:100%;border-collapse:collapse;font-size:22px}
+table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
+table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+.title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
+.title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.title h2{margin:18px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.title .rule{margin-top:42px;width:220px;height:3px;background:#C7004C}
+.title .sub{margin-top:28px;font-size:29px;color:#FFF;letter-spacing:.02em}
+.close{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.close .rule{width:220px;height:3px;background:#C7004C}
+.close h2{margin:40px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
+.close .next em{font-style:normal;color:#C7004C}
+.close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+  </style>
+  <div id="l6f5-root" data-composition-id="l6f5" data-start="0" data-duration="1030" data-width="1920" data-height="1080">
+    <section id="l6f5" class="clip" data-start="0" data-duration="1030" data-track-index="1">
+      <header class="topline"><div><div class="index">04 · DEMO-01</div><h1>정리와 표현 — 파일 열기부터 새 이름 저장까지</h1></div><div class="prompt">USER RECORDING · L05_VIEWS → L06_REPRESENTED</div></header>
+      <main class="body" style="grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)"><section class="panel rec" style="border-style:dashed;position:relative"><div style="text-align:center;color:#666"><div style="font-size:29px;letter-spacing:.12em;color:#C7004C">USER RECORDING</div><div style="font-size:23px;margin-top:12px">DEMO-01 · 화면 녹화 삽입</div></div><div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:#DCDBD7"><div class="prog" style="height:100%;width:100%;background:#C7004C;transform-origin:left center"></div></div></section><section><ol style="list-style:none;margin:0;padding:0;font-size:21px;line-height:1.5"><li class="st st1">지난 파일 열기</li><li class="st st2">정리 전 상태 확인하기</li><li class="st st3">편집 명령과 레이어의 관계</li><li class="st st4">TRIM으로 투상선 자르기</li><li class="st st5">EXTEND로 모자란 선 늘리기</li><li class="st st6">Shift로 자르기·늘리기 전환</li><li class="st st7">남은 보조선 지우기</li><li class="st st8">MIRROR로 장공 대칭 맞추기</li><li class="st st9">MATCHPROP으로 레이어 고치기</li><li class="st st10">LAYER로 레이어 점검하기</li><li class="st st11">QSELECT로 레이어별로 골라 보기</li><li class="st st12">색상·선종류 ByLayer 통일</li><li class="st st13">중심선·숨은선 축척 0.5</li><li class="st st14">LTSCALE로 도면 전체 맞추기</li><li class="st st15">새 이름으로 저장</li></ol><div class="note"><b>우선순위</b> 과제 지시가 다른 값을 지정하면 그 지시가 우선합니다. 여기 값은 이 과정의 연습용 기본값입니다.</div></section></main>
+    </section>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};
+    const tl=gsap.timeline({paused:true});
+    tl.fromTo("#l6f5 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
+    tl.fromTo("#l6f5 .st1,#l6f5 .st2,#l6f5 .st3,#l6f5 .st4,#l6f5 .st5,#l6f5 .st6,#l6f5 .st7,#l6f5 .st8,#l6f5 .st9,#l6f5 .st10,#l6f5 .st11,#l6f5 .st12,#l6f5 .st13,#l6f5 .st14,#l6f5 .st15",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.8,stagger:0.06,ease:"power2.out"},0.64);
+    tl.to("#l6f5 .st1",{opacity:1.0,duration:0.8,ease:"power2.inOut"},1.6);
+    tl.to("#l6f5 .st1",{opacity:0.64,duration:0.8,ease:"power2.inOut"},34.36);
+    tl.to("#l6f5 .st2",{opacity:1.0,duration:0.8,ease:"power2.inOut"},34.36);
+    tl.to("#l6f5 .st2",{opacity:0.64,duration:0.8,ease:"power2.inOut"},86.34);
+    tl.to("#l6f5 .st3",{opacity:1.0,duration:0.8,ease:"power2.inOut"},86.34);
+    tl.to("#l6f5 .st3",{opacity:0.64,duration:0.8,ease:"power2.inOut"},137.3);
+    tl.to("#l6f5 .st4",{opacity:1.0,duration:0.8,ease:"power2.inOut"},137.3);
+    tl.to("#l6f5 .st4",{opacity:0.64,duration:0.8,ease:"power2.inOut"},208.26);
+    tl.to("#l6f5 .st5",{opacity:1.0,duration:0.8,ease:"power2.inOut"},208.26);
+    tl.to("#l6f5 .st5",{opacity:0.64,duration:0.8,ease:"power2.inOut"},255.88);
+    tl.to("#l6f5 .st6",{opacity:1.0,duration:0.8,ease:"power2.inOut"},255.88);
+    tl.to("#l6f5 .st6",{opacity:0.64,duration:0.8,ease:"power2.inOut"},293.0);
+    tl.to("#l6f5 .st7",{opacity:1.0,duration:0.8,ease:"power2.inOut"},293.0);
+    tl.to("#l6f5 .st7",{opacity:0.64,duration:0.8,ease:"power2.inOut"},357.03);
+    tl.to("#l6f5 .st8",{opacity:1.0,duration:0.8,ease:"power2.inOut"},357.03);
+    tl.to("#l6f5 .st8",{opacity:0.64,duration:0.8,ease:"power2.inOut"},532.35);
+    tl.to("#l6f5 .st9",{opacity:1.0,duration:0.8,ease:"power2.inOut"},532.35);
+    tl.to("#l6f5 .st9",{opacity:0.64,duration:0.8,ease:"power2.inOut"},618.43);
+    tl.to("#l6f5 .st10",{opacity:1.0,duration:0.8,ease:"power2.inOut"},618.43);
+    tl.to("#l6f5 .st10",{opacity:0.64,duration:0.8,ease:"power2.inOut"},705.8);
+    tl.to("#l6f5 .st11",{opacity:1.0,duration:0.8,ease:"power2.inOut"},705.8);
+    tl.to("#l6f5 .st11",{opacity:0.64,duration:0.8,ease:"power2.inOut"},771.38);
+    tl.to("#l6f5 .st12",{opacity:1.0,duration:0.8,ease:"power2.inOut"},771.38);
+    tl.to("#l6f5 .st12",{opacity:0.64,duration:0.8,ease:"power2.inOut"},837.21);
+    tl.to("#l6f5 .st13",{opacity:1.0,duration:0.8,ease:"power2.inOut"},837.21);
+    tl.to("#l6f5 .st13",{opacity:0.64,duration:0.8,ease:"power2.inOut"},885.6);
+    tl.to("#l6f5 .st14",{opacity:1.0,duration:0.8,ease:"power2.inOut"},885.6);
+    tl.to("#l6f5 .st14",{opacity:0.64,duration:0.8,ease:"power2.inOut"},970.15);
+    tl.to("#l6f5 .st15",{opacity:1.0,duration:0.8,ease:"power2.inOut"},970.15);
+    tl.to("#l6f5 .st15",{opacity:0.64,duration:0.8,ease:"power2.inOut"},1028.8);
+    tl.fromTo("#l6f5 .prog",{scaleX:0},{scaleX:1,duration:1028.0,ease:"none"},1.0);
+    tl.fromTo("#l6f5 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},1018.0);
+    tl.to("#l6f5 .topline,#l6f5 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},1028.95);
+    window.__timelines["l6f5"]=tl;
+  </script>
+</template></body></html>

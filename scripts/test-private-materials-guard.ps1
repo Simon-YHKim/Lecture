@@ -45,16 +45,13 @@ try {
     $manifestPath = 'docs/autocad-technician/public-artifact-manifest.json'
     $manifestFile = Join-Path $repoRoot $manifestPath
     $productionManifest = Get-Content -LiteralPath $manifestFile -Raw -Encoding UTF8 | ConvertFrom-Json
-    $fixtureAssetPaths = @(
-        'docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html',
-        'docs/autocad-technician/reference/a3-landscape-template-reference.png',
-        'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/frame-00-at-30s.png',
-        'projects/autocad-technician/lesson-10-final-bracket/snapshots/final-approval/contact-sheet.jpg',
-        'projects/autocad-technician/lesson-07-object-editing/snapshots/finding-01-text_occluded.png'
-    )
-    $fixtureAssets = @($productionManifest.assets | Where-Object { $fixtureAssetPaths -contains [string]$_.path })
-    if ($fixtureAssets.Count -ne $fixtureAssetPaths.Count) {
-        throw 'Unable to build the minimal approved artifact fixture manifest.'
+    # Take whatever the manifest currently approves. Naming assets here meant
+    # that removing one broke the test instead of the behaviour it guards.
+    $fixtureAssets = @($productionManifest.assets | Where-Object {
+        Test-Path -LiteralPath (Join-Path $repoRoot ([string]$_.path).Replace('/', [IO.Path]::DirectorySeparatorChar)) -PathType Leaf
+    })
+    if ($fixtureAssets.Count -lt 1) {
+        throw 'Unable to build the approved artifact fixture manifest: no approved asset exists on disk.'
     }
     $manifestObject = [PSCustomObject]@{
         schemaVersion = 1
@@ -206,24 +203,23 @@ try {
         Assert-Blocked 'exports/lecture".pptx'
         Assert-Blocked "exports/lecture`tcopy.pptx"
     }
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/source-slide-01.png'
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/arbitrary.json'
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/snapshots/final-approval/source-slide-01.png'
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/snapshots/arbitrary.json'
     Assert-Blocked 'docs/autocad-technician/reference/unreviewed.png'
     Assert-Blocked 'planning/AutoCAD_Technician_Video_Course_MasterPlan_260811.html'
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/transcript.json'
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/lesson-01.transcript.json'
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/transcript.tsv'
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/transcript.json'
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/lesson-01.transcript.json'
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/transcript.tsv'
     Assert-Blocked 'assets/transcripts/lesson-01.json'
     Assert-Blocked 'docs/captions/lesson-01.json'
     Assert-Blocked 'notes/transcript.md'
     Assert-Allowed 'docs/public-course-outline.md'
-    Assert-Allowed 'projects/autocad-technician/lesson-01-drawing-language/narration-timing.json'
-    Assert-AllowedRepositoryPath 'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/frame-00-at-30s.png'
-    Assert-AllowedRepositoryPath 'projects/autocad-technician/lesson-10-final-bracket/snapshots/final-approval/contact-sheet.jpg'
-    Assert-AllowedRepositoryPath 'projects/autocad-technician/lesson-07-object-editing/snapshots/finding-01-text_occluded.png'
-    Assert-AllowedRepositoryPath 'docs/autocad-technician/reference/a3-landscape-template-reference.png'
-    Assert-AllowedRepositoryPath 'docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html'
-    Assert-Blocked 'projects/autocad-technician/lesson-01-drawing-language/snapshots/final-approval/frame-00-at-30s.png'
+    Assert-Allowed 'projects/autocad-technician/lesson-03-baseline-profile/narration-timing.json'
+    foreach ($approved in $fixtureAssets) {
+        Assert-AllowedRepositoryPath ([string]$approved.path)
+    }
+    # The same bytes under a path the manifest does not list must still be blocked.
+    Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/snapshots/final-approval/frame-00-at-30s.png'
     Assert-BlockedMissingStagedManifest
 
     $forgedShaManifest = $manifestJson | ConvertFrom-Json
@@ -247,7 +243,7 @@ try {
 
     $ghostManifest = $manifestJson | ConvertFrom-Json
     $ghostManifest.assets += [PSCustomObject]@{
-        path = 'projects/autocad-technician/lesson-01-drawing-language/snapshots/ghost.png'
+        path = 'projects/autocad-technician/lesson-03-baseline-profile/snapshots/ghost.png'
         bytes = 4
         sha256 = ('0' * 64)
         gitBlob = ('0' * 40)

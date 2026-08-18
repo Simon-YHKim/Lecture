@@ -1,0 +1,61 @@
+---
+workflow: general-video
+flow: automation
+storyboard: yes
+message: "정면도 하나에서 나머지 두 뷰가 나오고, 투상선이 그 다리를 놓는다."
+destination: desktop-course
+aspect: 1920x1080
+language: ko
+audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
+length: 32m49s
+angle: lesson-05-three-views
+narration: user-recorded
+style_preset: lg-training
+part_id: EDU-IB-02
+checkpoint_in: L04_FEATURES
+checkpoint_out: L05_VIEWS
+paper: A3-landscape
+projection: third-angle
+recording_slots: 1
+---
+
+## Intent
+
+완성된 정면도 하나에서 평면도와 우측면도를 뽑아내는 차시다. 학습자는 제3각법이 왜 정면도 위에 평면도, 오른쪽에 우측면도를 놓는지 이해하고, 구성선으로 폭과 높이를 받아오고 45도 선으로 깊이를 옮기는 방법을 익힌다. 그다음 축 구멍·탭·장공이 서로 다른 구간에 점선으로 들어가는 이유를 판단하며 숨은선을 넣고, 대칭인 것은 대칭 복사로 만든다. 종료 상태는 `L05_VIEWS`.
+
+## Must have
+
+- 타이틀 화면 (`LESSON_STYLE.md` 8번)
+- 제3각법 배치의 근거 — 본 방향에 그 뷰를 놓는다, 정면도 위가 평면도·오른쪽이 우측면도, 제1각법과의 차이
+- 투상선의 역할 — 같은 값을 두 번 재지 않는다, 도면에 남지 않는 선이므로 치수선 레이어에 긋고 끝나면 지운다
+- 45도 선으로 평면도의 깊이를 우측면도로 옮기는 방법과 그 선이 지나야 하는 점
+- 평면도 두께 12와 보스 자리 20 (12 더하기 8), 우측면도 높이 90 (62 더하기 28) — 계산 과정을 밝힌다
+- 숨은선 세 가지를 서로 다른 구간으로 — 축 구멍 관통 20, 탭 깊이 10에서 끝남, 장공 판 두께 12 구간
+- MIRROR 로 대칭 형상 만들기 — 우측면도 아래쪽 탭, 평면도 오른쪽 장공
+- 조작 대본은 명령어·옵션 문자·입력값·엔터·스냅 종류·대화상자 항목까지 (`LESSON_STYLE.md` 7번)
+- 1단계는 지난 차시 파일 열기, 마지막 단계는 새 이름으로 SAVEAS
+- 2분할 마무리와 인사 화면 (`LESSON_STYLE.md` 8번)
+
+## Must not
+
+- 확정 치수표에 없는 값을 지어내는 것 — 뷰 간격 30, 중심선 여유 5 같은 작도 선택은 정해진 값이 아님을 대본에서 밝힌다
+- 목차나 과정 안내 (1차시 소관, `LESSON_STYLE.md` 5번)
+- 체크포인트 파일명을 로드맵처럼 나열하는 것 — 실제로 타이핑하는 자리에만 (`LESSON_STYLE.md` 22번)
+- 시험 제한시간·배점·합격 기준 언급
+- 필렛 R10과 모따기 C5 작도 및 그 투상선 (다음 차시)
+- 치수 기입
+
+## Frames
+
+| # | 파일 | 길이 | 비트 |
+| --- | --- | --- | --- |
+| 1 | `01-title` | 12s | — |
+| 2 | `02-today` | 85s | 4 |
+| 3 | `03-concept` | 123s | 4 |
+| 4 | `04-on-the-drawing` | 163s | 6 |
+| 5 | `05-demo` | 1320s | 16 |
+| 6 | `06-check` | 116s | 4 |
+| 7 | `07-recap` | 130s | 2 |
+| 8 | `08-closing` | 20s | 2 |
+
+프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

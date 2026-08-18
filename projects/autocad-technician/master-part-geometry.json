@@ -1,155 +1,192 @@
 {
-  "schemaVersion": 1,
-  "partId": "EDU-SB-01",
+  "schemaVersion": 2,
+  "partId": "EDU-IB-02",
+  "name": "아이들러 풀리 브래킷",
   "units": "millimeters",
+  "authority": "공개용 합성 교육 형상. 실제 시험의 문제지와 감독 지시가 모든 교육용 기본값에 우선한다.",
   "coordinateSystem": {
     "origin": "front-view-lower-left",
     "x": "front-view-right",
     "y": "front-view-up",
-    "z": "depth-away-from-front",
-    "datumA": { "type": "plane", "equation": "y=0" },
-    "datumB": { "type": "plane", "equation": "x=40" },
-    "datumC": { "type": "front-face", "equation": "z=0" }
-  },
-  "envelope": { "widthX": 80, "heightY": 50, "thicknessZ": 8 },
-  "frontOuterProfile": {
-    "baseTopY": 35,
-    "lesson03Construction": {
-      "purpose": "reproducible line-and-polyline seed before ARC, FILLET, and CHAMFER",
-      "orderedPolylineVertices": [[0, 0], [0, 35], [25, 35], [40, 50], [55, 35], [68, 35], [80, 23], [80, 0], [0, 0]],
-      "futureReplacements": [
-        { "seedVertices": [[25, 35], [40, 50], [55, 35]], "replaceWith": "R15 arc centered at (40,35) in Lesson 04" },
-        { "seedVertex": [68, 35], "replaceWith": "R5 fillet in Lesson 07" },
-        { "seedVertex": [80, 0], "replaceWith": "C5 chamfer from (80,5) to (75,0) in Lesson 07" }
-      ]
+    "z": "depth-toward-viewer",
+    "datumA": {
+      "type": "plane",
+      "equation": "y=0",
+      "role": "프레임 접촉 기준면"
     },
-    "segments": [
-      { "type": "line", "from": [0, 0], "to": [0, 35] },
-      { "type": "line", "from": [0, 35], "to": [25, 35] },
-      { "type": "arc", "center": [40, 35], "radius": 15, "from": [25, 35], "via": [40, 50], "to": [55, 35] },
-      { "type": "line", "from": [55, 35], "to": [65.929, 35] },
-      { "type": "fillet", "nominalCorner": [68, 35], "radius": 5, "from": [65.929, 35], "to": [69.464, 33.536] },
-      { "type": "line", "from": [69.464, 33.536], "to": [80, 23] },
-      { "type": "line", "from": [80, 23], "to": [80, 5] },
-      { "type": "chamfer", "distance": 5, "from": [80, 5], "to": [75, 0] },
-      { "type": "line", "from": [75, 0], "to": [0, 0] }
-    ]
-  },
-  "features": {
-    "centralSensorHole": { "type": "through-hole", "center": [40, 22], "diameter": 20, "layer": "OUTLINE" },
-    "centralHexPocket": {
-      "type": "hex-pocket",
-      "center": [40, 22],
-      "acrossFlats": 30,
-      "flatOrientation": "horizontal",
-      "vertices": [[57.321, 22], [48.660, 37], [31.340, 37], [22.679, 22], [31.340, 7], [48.660, 7]],
-      "depth": 4,
-      "layer": "OUTLINE"
-    },
-    "bottomMountingHoles": {
-      "type": "through-hole-pattern",
-      "diameter": 6,
-      "centers": [[15, 8], [65, 8]],
-      "quantity": 2,
-      "layer": "OUTLINE"
-    },
-    "sensorPattern": {
-      "type": "polar-through-hole-pattern",
-      "diameter": 4,
-      "patternCenter": [40, 22],
-      "pitchCircleDiameter": 36,
-      "quantity": 3,
-      "startAngleDeg": 30,
-      "direction": "counterclockwise",
-      "centers": [[55.588, 31], [24.412, 31], [40, 4]],
-      "layer": "OUTLINE"
-    },
-    "upperSlot": {
-      "type": "through-slot",
-      "center": [40, 42],
-      "axis": "x",
-      "width": 8,
-      "endCenterDistance": 14,
-      "endCenters": [[33, 42], [47, 42]],
-      "overallLength": 22,
-      "layer": "OUTLINE"
-    },
-    "localShallowPocket": {
-      "type": "closed-pocket",
-      "depth": 2,
-      "construction": "offset-local-construction-window-inward-5",
-      "seedWindow": { "lowerLeft": [0, 10], "upperRight": [24, 34], "layer": "CONSTRUCTION" },
-      "nominalOffset": 5,
-      "offsetDirection": "inward",
-      "finalBoundary": { "type": "rectangle", "lowerLeft": [5, 15], "upperRight": [19, 29], "cornerRadius": 0 },
-      "layer": "OUTLINE"
+    "datumB": {
+      "type": "plane",
+      "equation": "x=60",
+      "role": "좌우 대칭 중심"
     }
   },
-  "sectionAA": {
-    "plane": "x=40",
-    "planeType": "parallel-to-yz",
-    "viewDirection": "+x",
-    "passesThrough": ["sensorPattern", "centralSensorHole", "centralHexPocket", "upperSlot"],
-    "outerEnvelopeYZ": { "z": [0, 8], "y": [0, 50] },
-    "voidsYZ": [
-      { "feature": "sensorPattern", "z": [0, 8], "y": [2, 6], "kind": "through" },
-      { "feature": "centralHexPocket", "z": [0, 4], "y": [7, 37], "kind": "blind-pocket" },
-      { "feature": "centralSensorHole", "z": [0, 8], "y": [12, 32], "kind": "through" },
-      { "feature": "upperSlot", "z": [0, 8], "y": [38, 46], "kind": "through" }
-    ],
-    "hatchLayer": "HATCH"
+  "depthConvention": {
+    "bossFront": 0.0,
+    "bossPlateBoundary": 8.0,
+    "plateBack": 20.0,
+    "note": "뒷면은 프레임에 밀착하므로 평면으로 두고 보스는 앞으로 돌출한다."
   },
-  "orthographic": {
-    "method": "third-angle-course-requirement",
-    "front": { "axes": ["x", "y"], "envelope": [80, 50] },
-    "top": { "axes": ["x", "z"], "envelope": [80, 8], "placement": "above-front" },
-    "right": { "axes": ["z", "y"], "envelope": [8, 50], "placement": "right-of-front" },
-    "projectedFeatures": {
-      "centralSensorHole": {
-        "top": { "hiddenParallelEdgesX": [30, 50], "zExtent": [0, 8], "centerAxisX": 40 },
-        "right": { "hiddenParallelEdgesY": [12, 32], "zExtent": [0, 8], "centerAxisY": 22 }
-      },
-      "centralHexPocket": {
-        "top": { "hiddenParallelEdgesX": [22.679, 57.321], "zExtent": [0, 4], "centerAxisX": 40 },
-        "right": { "hiddenParallelEdgesY": [7, 37], "zExtent": [0, 4], "centerAxisY": 22 }
-      },
-      "upperSlot": {
-        "top": { "hiddenParallelEdgesX": [29, 51], "zExtent": [0, 8], "centerAxisX": 40 },
-        "right": { "hiddenParallelEdgesY": [38, 46], "zExtent": [0, 8], "centerAxisY": 42 }
-      },
-      "localShallowPocket": {
-        "top": { "hiddenParallelEdgesX": [5, 19], "zExtent": [0, 2], "centerAxisX": 12 },
-        "right": { "hiddenParallelEdgesY": [15, 29], "zExtent": [0, 2], "centerAxisY": 22 }
-      },
-      "bottomMountingHoles": {
-        "top": { "hiddenParallelEdgesX": [[12, 18], [62, 68]], "zExtent": [0, 8], "centerAxesX": [15, 65] },
-        "right": { "hiddenParallelEdgesY": [5, 11], "zExtent": [0, 8], "centerAxisY": 8 }
-      },
-      "sensorPattern": {
-        "top": { "hiddenParallelEdgesX": [[53.588, 57.588], [22.412, 26.412], [38, 42]], "zExtent": [0, 8], "centerAxesX": [55.588, 24.412, 40] },
-        "right": { "hiddenParallelEdgesY": [[29, 33], [29, 33], [2, 6]], "zExtent": [0, 8], "centerAxesY": [31, 4] }
-      }
+  "envelope": {
+    "widthX": 120.0,
+    "heightY": 90.0,
+    "depthZ": 20.0
+  },
+  "features": {
+    "base": {
+      "width": 120.0,
+      "height": 16.0,
+      "z": [
+        8.0,
+        20.0
+      ],
+      "purpose": "프레임 접촉 장착면"
     },
-    "centerlineRequirement": "Every cylindrical or symmetric feature shown as hidden parallel edges in top/right views also receives its CENTER axis."
+    "chamfer": {
+      "type": "chamfer",
+      "size": 5.0,
+      "at": "베이스 바깥 상단 모서리 2곳",
+      "purpose": "취급 중 손 베임과 조립 간섭 방지"
+    },
+    "slots": {
+      "type": "through-slot",
+      "quantity": 2,
+      "width": 10.0,
+      "endRadius": 5.0,
+      "centreDistance": 12.0,
+      "centres": [
+        [
+          35.0,
+          8.0
+        ],
+        [
+          85.0,
+          8.0
+        ]
+      ],
+      "endCentres": [
+        [
+          29.0,
+          8.0
+        ],
+        [
+          79.0,
+          8.0
+        ],
+        [
+          41.0,
+          8.0
+        ],
+        [
+          91.0,
+          8.0
+        ]
+      ],
+      "bolt": "M8",
+      "purpose": "프레임 고정과 벨트 장력에 따른 좌우 조정"
+    },
+    "web": {
+      "type": "tangent-web",
+      "footSpan": 80.0,
+      "theoreticalCorners": [
+        [
+          100.0,
+          16.0
+        ],
+        [
+          20.0,
+          16.0
+        ]
+      ],
+      "tangentPoints": [
+        [
+          87.207,
+          68.615
+        ],
+        [
+          32.793,
+          68.615
+        ]
+      ],
+      "purpose": "축 하중을 보스에서 베이스로 전달. 밑동이 가장 두껍다."
+    },
+    "fillet": {
+      "type": "fillet",
+      "radius": 10.0,
+      "centres": [
+        [
+          107.86,
+          26.0
+        ],
+        [
+          12.14,
+          26.0
+        ]
+      ],
+      "tangentOnBase": [
+        107.86,
+        16.0
+      ],
+      "tangentOnWeb": [
+        98.143,
+        23.637
+      ],
+      "purpose": "목과 베이스가 만나는 안쪽 모서리의 응력 집중 완화"
+    },
+    "boss": {
+      "type": "boss",
+      "centre": [
+        60.0,
+        62.0
+      ],
+      "diameter": 56.0,
+      "z": [
+        0.0,
+        8.0
+      ],
+      "purpose": "축 구멍 주변 살 두께와 베어링 폭 확보"
+    },
+    "bore": {
+      "type": "through-hole",
+      "centre": [
+        60.0,
+        62.0
+      ],
+      "diameter": 25.0,
+      "fit": "H7",
+      "purpose": "아이들러 축 끼워맞춤"
+    },
+    "taps": {
+      "type": "tapped-hole-pattern",
+      "thread": "M5",
+      "quantity": 4,
+      "pitchCircleDiameter": 44.0,
+      "startAngleDeg": 45.0,
+      "depth": 10.0,
+      "centres": [
+        [
+          75.556,
+          77.556
+        ],
+        [
+          44.444,
+          77.556
+        ],
+        [
+          44.444,
+          46.444
+        ],
+        [
+          75.556,
+          46.444
+        ]
+      ],
+      "purpose": "축 커버 고정"
+    }
   },
-  "clearanceRules": {
-    "minimumMaterialClearanceMm": 1,
-    "intentionalNesting": [
-      ["centralSensorHole", "centralHexPocket"],
-      ["localShallowPocket", "frontOuterProfile"]
-    ],
-    "requiredNonOverlap": [
-      ["sensorPattern", "upperSlot"],
-      ["sensorPattern", "bottomMountingHoles"],
-      ["sensorPattern", "centralSensorHole"],
-      ["sensorPattern", "centralHexPocket"],
-      ["upperSlot", "centralHexPocket"],
-      ["upperSlot", "frontOuterProfile"],
-      ["bottomMountingHoles", "frontOuterProfile"],
-      ["localShallowPocket", "bottomMountingHoles"],
-      ["localShallowPocket", "sensorPattern"],
-      ["localShallowPocket", "centralHexPocket"]
-    ]
-  },
-  "courseAuthority": "Synthetic public training geometry. Official exam model, dimensions, and instructions override every course default."
+  "verification": {
+    "bossPointRadiusErrorMm": 1.066e-14,
+    "webTangentPerpendicularErrorRad": 4.441e-16,
+    "filletWebTangentOffLineMm": 4.441e-16,
+    "outlineApexY": 90.0
+  }
 }
