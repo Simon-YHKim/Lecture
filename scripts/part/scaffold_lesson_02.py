@@ -363,7 +363,8 @@ STEP_LABELS = ["acadiso.dwt 새 도면", "SAVEAS · L02_TEMPLATE", "UNITS 단위
                "LIMITS 420×297", "ZOOM All", "LINETYPE 로드 · CENTER/HIDDEN",
                "LAYER 네 개 생성", "색상 · 선 종류 지정", "외형선 현재 레이어",
                "REC 용지선 · 도면선", "중심 마크 네 개", "REC 표제란 200×30",
-               "DTEXT 이름 · 사번", "OSNAP · F8 · F3 · 선가중치", "Ctrl+S 저장"]
+               "STYLE 한글 글꼴 지정", "DTEXT 이름 · 사번",
+               "OSNAP · F8 · F3 · 선가중치", "Ctrl+S 저장"]
 assert len(STEPS) == len(STEP_LABELS), "SCRIPT.md 단계 수와 체크리스트 항목 수가 다르다"
 
 

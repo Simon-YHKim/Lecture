@@ -10,7 +10,7 @@
     "치수선"
   ],
   "lessonCount": 8,
-  "totalSec": 13272,
+  "totalSec": 13692,
   "note": "차시마다 새 파일을 열지 않는다. 앞 차시의 checkpointOut 파일을 열어 이어 그린다. 이 파일은 scripts/part/write_course_docs.py 가 만든다.",
   "lessons": [
     {
@@ -28,18 +28,18 @@
       "no": 2,
       "slug": "lesson-02-part-and-template",
       "topic": "부품 이해와 도면 환경",
-      "durationSec": 1555,
+      "durationSec": 1663,
       "frames": 11,
       "checkpointIn": null,
       "checkpointOut": "L02_TEMPLATE",
       "demoId": "DEMO-01",
-      "demoSec": 480
+      "demoSec": 590
     },
     {
       "no": 3,
       "slug": "lesson-03-baseline-profile",
       "topic": "기준선과 외곽",
-      "durationSec": 1971,
+      "durationSec": 1958,
       "frames": 9,
       "checkpointIn": "L02_TEMPLATE",
       "checkpointOut": "L03_PROFILE",
@@ -50,40 +50,40 @@
       "no": 4,
       "slug": "lesson-04-circles-arcs",
       "topic": "원·호·오프셋",
-      "durationSec": 1866,
+      "durationSec": 1994,
       "frames": 9,
       "checkpointIn": "L03_PROFILE",
       "checkpointOut": "L04_FEATURES",
       "demoId": "DEMO-01",
-      "demoSec": 820
+      "demoSec": 980
     },
     {
       "no": 5,
       "slug": "lesson-05-three-views",
       "topic": "제3각법 3뷰와 반복",
-      "durationSec": 2211,
+      "durationSec": 2307,
       "frames": 9,
       "checkpointIn": "L04_FEATURES",
       "checkpointOut": "L05_VIEWS",
       "demoId": "DEMO-01",
-      "demoSec": 1390
+      "demoSec": 1470
     },
     {
       "no": 6,
       "slug": "lesson-06-editing-symbols",
       "topic": "편집과 표현",
-      "durationSec": 2148,
+      "durationSec": 2266,
       "frames": 9,
       "checkpointIn": "L05_VIEWS",
       "checkpointOut": "L06_REPRESENTED",
       "demoId": "DEMO-01",
-      "demoSec": 1070
+      "demoSec": 1190
     },
     {
       "no": 7,
       "slug": "lesson-07-dimensioning-release",
       "topic": "치수와 출도",
-      "durationSec": 2571,
+      "durationSec": 2552,
       "frames": 9,
       "checkpointIn": "L06_REPRESENTED",
       "checkpointOut": "L07_RELEASE",
@@ -94,7 +94,7 @@
       "no": 8,
       "slug": "lesson-08-exam-and-qa",
       "topic": "시험 안내와 Q&A",
-      "durationSec": 523,
+      "durationSec": 525,
       "frames": 7,
       "checkpointIn": null,
       "checkpointOut": null,

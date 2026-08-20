@@ -351,6 +351,7 @@ COMMANDS = {
     "UCSICON": ("UCSICON", "좌표계 아이콘 표시를 정한다", "옮긴 원점이 어디인지 눈으로 확인할 때"),
     "LWDISPLAY": ("LWDISPLAY", "선가중치를 화면에 보일지 정한다", "굵기 차이를 화면에서 확인할 때"),
     "MIRRTEXT": ("MIRRTEXT", "대칭할 때 문자를 뒤집을지 정한다", "문자가 포함된 것을 대칭 복사하기 전"),
+    "ST": ("STYLE", "문자 스타일과 글꼴을 정한다", "한글이 물음표로 나올 때. 글자를 쓰기 전"),
 }
 
 # Backticked in the scripts but not something typed at a prompt — a fit grade,
@@ -358,8 +359,11 @@ COMMANDS = {
 NOT_COMMANDS = {"H7"}
 
 # A command in one lesson, an option inside a running command in another.
-# Counted only where the step introduces it by its full name.
-AMBIGUOUS_KEYS = {"D"}
+# Counted only where the step introduces it by its full name. `D` starts
+# DIMSTYLE in lesson 7 and answers CIRCLE's radius prompt in lessons 3 and 4;
+# `M` is only ever the multiline-text option inside DIMRADIUS and DIMDIAMETER,
+# so counting it as MOVE claimed a command no recording runs.
+AMBIGUOUS_KEYS = {"D", "M"}
 
 # Typed inside a running command as an option or a snap, not on a blank prompt.
 OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "OR", "ON",
