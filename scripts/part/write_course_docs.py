@@ -28,6 +28,7 @@ TOPIC = {
     "lesson-05-three-views": "제3각법 3뷰와 반복",
     "lesson-06-editing-symbols": "편집과 표현",
     "lesson-07-dimensioning-release": "치수와 출도",
+    "lesson-08-exam-and-qa": "시험 안내와 Q&A",
 }
 
 
@@ -92,7 +93,8 @@ def main():
             encoding="utf-8", newline="\n").write(
         "# COURSE PLAN — AutoCAD Technician\n\n"
         "LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나를 일곱 차시에 걸쳐\n"
-        "처음부터 끝까지 그린다. 도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.\n\n"
+        "처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.\n"
+        "도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.\n\n"
         "전체 %s · A3 가로 · 제3각법 · 레이어 네 개\n\n" % clock(total)
         + "| 차시 | 주제 | 길이 | 프레임 | 여는 파일 | 저장하는 상태 |\n"
           "| --- | --- | --- | --- | --- | --- |\n"
@@ -114,7 +116,8 @@ def main():
           "## 다시 만들기\n\n"
           "    python scripts/part/scaffold_lesson_01.py projects/autocad-technician/lesson-01-orientation\n"
           "    python scripts/part/scaffold_lesson_02.py projects/autocad-technician/lesson-02-part-and-template\n"
-          "    python scripts/part/scaffold_lessons_3_7.py\n\n"
+          "    python scripts/part/scaffold_lessons_3_7.py\n"
+          "    python scripts/part/lesson_eight.py\n\n"
           "스캐폴드는 한 번만 돌린다. 그 뒤 프레임은 HyperFrames Studio 에서 직접 편집하는\n"
           "저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.\n\n"
           "이전 10차시 구성은 `_archive/` 에 있다. 빌드·검사 대상이 아니다.\n")
@@ -137,9 +140,28 @@ def main():
           "3. 화면 배율을 100%로 두고 1920×1080 으로 녹화한다. 프레임 안 삽입 영역이 그 비율이다.\n"
           "4. 명령행이 보이게 둔다. 학습자가 따라 칠 값이 거기 뜬다.\n"
           "5. 마지막 단계는 언제나 새 이름으로 저장이다. 저장까지 녹화한다.\n\n"
+          "## 녹화한 뒤\n\n"
+          "녹화 파일은 **저장소 밖 비공개 위치**에 둔다. 옮겨 오지 않는다.\n\n"
+          "    python scripts/part/ingest_recording.py <차시> <녹화파일>\n\n"
+          "이 명령이 두 파일을 쓴다.\n\n"
+          "- `recording.json` — 길이·해상도·프레임레이트만. 공개되고 커밋된다.\n"
+          "- `media.local.json` — 파일의 절대경로. gitignore 되며 미리보기만 읽는다.\n\n"
+          "그다음 그 차시를 다시 만들면 DEMO 프레임이 **예상치가 아니라 실제 길이**가 된다.\n\n"
+          "    python scripts/part/scaffold_lessons_3_7.py <차시번호>\n\n"
+          "현재 상태는 언제든 확인할 수 있다.\n\n"
+          "    python scripts/part/ingest_recording.py --list\n\n"
+          "## 목소리를 녹음했다면\n\n"
+          "화면 녹화와 별개로 나레이션을 녹음했다면, 항목이 등장하는 시각을\n"
+          "**추정이 아니라 실제 음성**에 맞출 수 있다.\n\n"
+          "    pwsh -File scripts/transcribe-narration.ps1 -AudioPath <음성파일>\n"
+          "    pwsh -File scripts/build-narration-timing.ps1 -LessonPath <차시> -TranscriptPath <위 결과>\n\n"
+          "받아쓴 글은 비공개 위치에 남고, 저장소에는 숫자만 담긴 `narration-timing.json` 만\n"
+          "들어온다. 그 파일이 있으면 스캐폴드가 음절 추정 대신 실측 시각을 쓴다.\n"
+          "지금 타이밍은 초당 5.0음절 가정이라, 실제 낭독이 그보다 빠르거나 느리면\n"
+          "화면이 말보다 앞서거나 뒤처진다.\n\n"
           "## 길이가 다르면\n\n"
-          "예상치와 실제가 크게 다르면 프레임을 억지로 맞추지 말고 `SCRIPT.md` Line 5 를\n"
-          "고친 뒤 스캐폴드를 다시 돌린다. 길이의 원본은 대본이다 (`LESSON_STYLE.md` 14번).\n")
+          "손으로 프레임을 맞추지 않는다. 대본을 고치고 다시 만들거나, 위 방법으로\n"
+          "실측값을 넣는다. 길이의 원본은 대본이다 (`LESSON_STYLE.md` 14번).\n")
 
     print("과정 문서 4개 재생성 — 전체 %s, %d차시" % (clock(total), len(L)))
     for x in L:

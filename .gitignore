@@ -108,3 +108,6 @@ __pycache__/
 !projects/autocad-technician/lesson-*/snapshots/**
 !docs/autocad-technician/reference/a3-landscape-template-reference.png
 !docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html
+
+# Absolute paths to private recordings, written by scripts/part/ingest_recording.py
+media.local.json

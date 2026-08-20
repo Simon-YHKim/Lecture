@@ -1,4 +1,4 @@
-"""Verify the seven-lesson course against its own scripts.
+"""Verify the eight-lesson course against its own scripts.
 
 The guard this replaces listed each lesson's duration as a literal, which is the
 same mistake the compositions used to make: a number written in two places
@@ -34,13 +34,18 @@ LESSONS = [
     ("lesson-05-three-views", "L04_FEATURES", "L05_VIEWS"),
     ("lesson-06-editing-symbols", "L05_VIEWS", "L06_REPRESENTED"),
     ("lesson-07-dimensioning-release", "L06_REPRESENTED", "L07_RELEASE"),
+    # No CAD work of its own: the exam briefing and the questions that follow it.
+    ("lesson-08-exam-and-qa", None, None),
 ]
 
 REQUIRED = ("BRIEF.md", "SCRIPT.md", "STORYBOARD.md", "frame.md",
             "index.html", "meta.json", "hyperframes.json", "package.json")
 
 PALETTE = {"#111", "#111111", "#666", "#666666", "#a4a3a4", "#c7004c", "#f5f5f3",
-           "#fff", "#ffffff", "#dcdbd7", "#fdfafb", "#8a8788", "#6f6d70"}
+           "#fff", "#ffffff", "#dcdbd7", "#fdfafb", "#8a8788", "#6f6d70",
+           # the recording strip's own neutrals, dark enough to sit on #111
+           # without competing with the video behind it
+           "#333032", "#626061", "#4a4749"}
 
 # Absolute local paths, the source deck, and embedded binaries must not reach
 # the public repository. Brand words are fine — the title card carries them by
@@ -134,6 +139,17 @@ def check_lesson(slug, cp_in, cp_out):
         for col in set(x.lower() for x in re.findall(r"(?<![&\w])#[0-9A-Fa-f]{3,6}\b", html)):
             if col not in PALETTE:
                 fail(slug, "%s 팔레트 밖의 색 %s" % (stem, col))
+
+    # A frame file nothing plays. Adding a frame renumbers the stems, and the
+    # old file survives the rebuild with no slot pointing at it — five stale
+    # 08-closing.html sat in the tree from before the keys frame, still
+    # carrying Studio edits, invisible to every check that starts from a slot.
+    fdir = os.path.join(d, "compositions", "frames")
+    played = {stem for stem, _s, _dur in slots}
+    for f in sorted(os.listdir(fdir)):
+        stem = re.sub(r"\.(?:html|motion\.json)$", "", f)
+        if stem not in played:
+            fail(slug, "%s 은 어느 슬롯도 재생하지 않는다 — 옛 프레임 파일" % f)
 
     brief = io.open(os.path.join(d, "BRIEF.md"), encoding="utf-8").read()
     for key, want in (("checkpoint_in", cp_in), ("checkpoint_out", cp_out)):

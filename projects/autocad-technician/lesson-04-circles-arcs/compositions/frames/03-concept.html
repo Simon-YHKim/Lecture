@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -24,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -41,28 +61,50 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l4f3-root" data-composition-id="l4f3" data-start="0" data-duration="169" data-width="1920" data-height="1080">
-    <section id="l4f3" class="clip" data-start="0" data-duration="169" data-track-index="1">
-      <header class="topline"><div><div class="index">02 · HOW</div><h1>이 네 개를 알면 남는 건 순서뿐입니다</h1></div><div class="prompt">명령을 먼저 정리하고 그린다</div></header>
-      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card tk tk1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><circle cx="16" cy="16" r="10"/><path d="M16 12.5v7M12.5 16h7"/><path d="M16 16l7.1-7.1" stroke-dasharray="3 2" stroke-linecap="butt"/></svg><b style="margin-top:16px">CIRCLE</b><strong>단축키 C, 그리는 법이 다섯</strong><span>기본은 중심과 반지름. 그 밖에 지름, 2점, 3점, 접선-접선-반지름. 표기대로 따라간다.</span></div><div class="card tk tk2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M6 25V12l6-5h9v18z"/><path d="M2 28V10l8-7h15v25z"/></svg><b style="margin-top:16px">OFFSET</b><strong>중심을 다시 찍지 않는다</strong><span>단축키 O. 원을 띄우면 동심원이라 중심이 어긋날 수 없다. 도면층 기본값은 원본.</span></div><div class="card tk tk3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M5 27V16a8 8 0 0 1 8-8h14"/><path d="M5 8h8M13 8v8" stroke-dasharray="2.5 2" stroke-linecap="butt"/></svg><b style="margin-top:16px">FILLET</b><strong>반지름을 먼저, 선은 나중에</strong><span>단축키 F. 기본값이 0이라 R 옵션으로 넣지 않으면 호 대신 각진 모서리가 된다.</span></div><div class="card tk tk4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><circle cx="16" cy="16" r="10" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt"/><circle cx="16" cy="6" r="2.6"/><circle cx="26" cy="16" r="2.6"/><circle cx="16" cy="26" r="2.6"/><circle cx="6" cy="16" r="2.6"/></svg><b style="margin-top:16px">ARRAYPOLAR</b><strong>이름 전체를 치는 명령</strong><span>객체와 중심점, 항목 수와 각도만 주면 복사된다. 연관은 꺼 둔다 — 개별 수정이 막힌다.</span></div></section><div class="note"><b>기억할 것</b> 네 명령 모두 기본값이 발목을 잡는다. 선을 고르기 전에 옵션부터 손본다.</div></main>
+  <div id="l4f3-root" data-composition-id="l4f3" data-start="0" data-duration="194" data-width="1920" data-height="1080">
+    <section id="l4f3" class="clip" data-start="0" data-duration="194" data-track-index="1">
+      <header class="topline"><div><div class="index">02 · HOW</div><h1>이 네 <span class="kw">개를</span> <span class="kw">알면</span> <span class="kw">남는</span> 건 <span class="kw">순서뿐입니다</span></h1></div><div class="prompt"><span class="kw">명령을</span> <span class="kw">먼저</span> <span class="kw">정리하고</span> <span class="kw">그린다</span></div></header>
+      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card tk tk1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><circle cx="16" cy="16" r="10"/><path d="M16 12.5v7M12.5 16h7"/><path d="M16 16l7.1-7.1" stroke-dasharray="3 2" stroke-linecap="butt"/></svg><b style="margin-top:16px">CIRCLE</b><strong><span class="kw">단축키</span> C, <span class="kw">그리는</span> <span class="kw">법이</span> <span class="kw">다섯</span></strong><span><span class="kw">기본은</span> <span class="kw">중심과</span> <span class="kw">반지름.</span> 그 <span class="kw">밖에</span> <span class="kw">지름,</span> 2점, 3점, <span class="kw">접선-접선-반지름.</span> <span class="kw">표기대로</span> <span class="kw">따라간다.</span></span></div><div class="card tk tk2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M6 25V12l6-5h9v18z"/><path d="M2 28V10l8-7h15v25z"/></svg><b style="margin-top:16px">OFFSET</b><strong><span class="kw">중심을</span> <span class="kw">다시</span> <span class="kw">찍지</span> <span class="kw">않는다</span></strong><span><span class="kw">단축키</span> O. <span class="kw">원을</span> <span class="kw">띄우면</span> <span class="kw">동심원이라</span> <span class="kw">중심이</span> <span class="kw">어긋날</span> 수 <span class="kw">없다.</span> <span class="kw">도면층</span> <span class="kw">기본값은</span> <span class="kw">원본.</span></span></div><div class="card tk tk3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M5 27V16a8 8 0 0 1 8-8h14"/><path d="M5 8h8M13 8v8" stroke-dasharray="2.5 2" stroke-linecap="butt"/></svg><b style="margin-top:16px">FILLET</b><strong><span class="kw">반지름을</span> <span class="kw">먼저,</span> <span class="kw">선은</span> <span class="kw">나중에</span></strong><span><span class="kw">단축키</span> F. <span class="kw">기본값이</span> <span class="kw">0이라</span> R <span class="kw">옵션으로</span> <span class="kw">넣지</span> <span class="kw">않으면</span> 호 <span class="kw">대신</span> <span class="kw">각진</span> <span class="kw">모서리가</span> <span class="kw">된다.</span></span></div><div class="card tk tk4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><circle cx="16" cy="16" r="10" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt"/><circle cx="16" cy="6" r="2.6"/><circle cx="26" cy="16" r="2.6"/><circle cx="16" cy="26" r="2.6"/><circle cx="6" cy="16" r="2.6"/></svg><b style="margin-top:16px">ARRAYPOLAR</b><strong><span class="kw">이름</span> <span class="kw">전체를</span> <span class="kw">치는</span> <span class="kw">명령</span></strong><span><span class="kw">객체와</span> <span class="kw">중심점,</span> <span class="kw">항목</span> <span class="kw">수와</span> <span class="kw">각도만</span> <span class="kw">주면</span> <span class="kw">복사된다.</span> <span class="kw">연관은</span> 꺼 <span class="kw">둔다</span> — <span class="kw">개별</span> <span class="kw">수정이</span> <span class="kw">막힌다.</span></span></div></section><div class="note"><b><span class="kw">기억할</span> 것</b> 네 <span class="kw">명령</span> <span class="kw">모두</span> <span class="kw">기본값이</span> <span class="kw">발목을</span> <span class="kw">잡는다.</span> <span class="kw">선을</span> <span class="kw">고르기</span> <span class="kw">전에</span> <span class="kw">옵션부터</span> <span class="kw">손본다.</span></div></main>
     </section>
   </div>
   <script>
     window.__timelines=window.__timelines||{};
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l4f3 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
-    tl.fromTo("#l4f3 .tk1,#l4f3 .tk2,#l4f3 .tk3,#l4f3 .tk4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},7.78);
-    tl.to("#l4f3 .tk1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},10.18);
-    tl.to("#l4f3 .tk1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},55.71);
-    tl.to("#l4f3 .tk2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},55.71);
-    tl.to("#l4f3 .tk2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},99.63);
-    tl.to("#l4f3 .tk3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},99.63);
-    tl.to("#l4f3 .tk3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},131.91);
-    tl.to("#l4f3 .tk4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},131.91);
-    tl.to("#l4f3 .tk4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},167.8);
-    tl.fromTo("#l4f3 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},155.0);
-    tl.to("#l4f3 .topline,#l4f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},167.95);
+    tl.fromTo("#l4f3 .tk1,#l4f3 .tk2,#l4f3 .tk3,#l4f3 .tk4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},6.76);
+    tl.to("#l4f3 .tk1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},9.16);
+    tl.to("#l4f3 .tk1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},62.38);
+    tl.to("#l4f3 .tk2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},62.38);
+    tl.to("#l4f3 .tk2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},117.8);
+    tl.to("#l4f3 .tk3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},117.8);
+    tl.to("#l4f3 .tk3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},155.2);
+    tl.to("#l4f3 .tk4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},155.2);
+    tl.to("#l4f3 .tk4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},192.8);
+    tl.fromTo("#l4f3 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},180.0);
+    tl.to("#l4f3 .topline,#l4f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},192.95);
     window.__timelines["l4f3"]=tl;
   </script>
 </template></body></html>

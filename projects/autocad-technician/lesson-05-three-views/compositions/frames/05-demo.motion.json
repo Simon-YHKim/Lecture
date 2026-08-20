@@ -1,1 +1,1 @@
-{"duration": 1320, "assertions": [{"kind": "appearsBy", "selector": "#l5f5 h1", "bySec": 3}, {"kind": "staysInFrame", "selector": "#l5f5 .body"}]}
+{"duration": 1470, "assertions": [{"kind": "appearsBy", "selector": "#l5f5 .strip", "bySec": 3}, {"kind": "staysInFrame", "selector": "#l5f5 .strip"}]}

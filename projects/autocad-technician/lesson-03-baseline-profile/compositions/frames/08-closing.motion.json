@@ -1,1 +1,0 @@
-{"duration": 17, "assertions": [{"kind": "appearsBy", "selector": "#l3f8 h2", "bySec": 5}, {"kind": "before", "a": "#l3f8 h2", "b": "#l3f8 .next"}, {"kind": "staysInFrame", "selector": "#l3f8 .close"}]}

@@ -7,6 +7,8 @@ lessons at once instead of being re-typed per lesson.
 Scaffolds import this; they do not copy it.
 """
 
+import re
+
 FONTS = (
     '<style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}'
     '@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}'
@@ -14,8 +16,21 @@ FONTS = (
 )
 
 BASE_CSS = """
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -37,11 +52,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -54,6 +76,28 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
 """
 
 HEAD = ('<!DOCTYPE html>\n<html lang="ko"><head><meta charset="UTF-8"></head><body><template>'
@@ -81,6 +125,24 @@ TAIL = "</template></body></html>\n"
 # Arrowheads: run 3, half-rise 1.0 — an included 36 degrees. ISO wants 15-30,
 # but below about 36 the head stops reading as an arrow at this size.
 ICONS = {
+    # --- 8차시 · 테크니션 업무 ---------------------------------------
+    # A jig is locating and clamping: the workpiece sits on supports and
+    # something presses it down. That is the whole idea, so that is the mark.
+    "jig": '<path d="M4 27h24"/><path d="M11 27v-7M21 27v-7"/>'
+           '<rect x="8" y="12" width="16" height="8"/>'
+           '<path d="M16 3v6M16 9l-1-3M16 9l1-3"/>',
+    # Layout checking is a footprint inside a space with a clearance that has
+    # to be measured, not eyeballed — hence the dimension, in the same
+    # vocabulary the course already teaches.
+    "layout": '<rect x="3" y="6" width="26" height="21"/>'
+              '<rect x="15" y="12" width="11" height="10"/>'
+              '<path d="M3.5 17h11"/>'
+              '<path d="M3.5 17l3-1M3.5 17l3 1M14.5 17l-3-1M14.5 17l-3 1"/>',
+    # Finding one part inside an assembly is done with a balloon and a leader.
+    # The drawing already has a symbol for this; no picture is invented for it.
+    "balloon": '<rect x="4" y="13" width="16" height="13"/><path d="M12 13v13"/>'
+               '<circle cx="25.5" cy="7" r="4.3"/><path d="M23.05 10.54L17.47 18.6"/>'
+               '<circle cx="16.5" cy="20" r="1.1"/>',
     # a shape with its size on it
     "shape": '<rect x="5" y="5" width="22" height="13"/><path d="M5 21v6M27 21v6"/>'
              '<path d="M5 24.5h22M5 24.5l3-1M5 24.5l3 1M27 24.5l-3-1M27 24.5l-3 1"/>',
@@ -230,11 +292,152 @@ ICONS = {
 }
 
 
+# AutoCAD commands the course actually uses, keyed by what a learner types.
+# Each entry is (full name, what it does, when you reach for it). The last field
+# is the one that matters outside the exam: a technician who only ever draws the
+# exam part will not remember a command, but one who knows the situation will.
+#
+# A script may only use commands listed here. `beats.shortcuts_in` looks up what
+# the steps type, and an unknown entry stops the build rather than quietly
+# leaving a gap in the summary table.
+COMMANDS = {
+    "L": ("LINE", "선을 긋는다", "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선"),
+    "PL": ("PLINE", "이어진 선을 하나의 객체로 긋는다",
+           "한 바퀴 도는 윤곽. 레이아웃에서 영역 넓이를 재거나 통째로 옮길 때"),
+    "C": ("CIRCLE", "원을 그린다", "구멍, 축, 피치원"),
+    "REC": ("RECTANG", "직사각형을 폴리선으로 그린다", "도면틀, 표제란, 판재 외곽"),
+    "XL": ("XLINE", "무한히 뻗는 구성선을 긋는다", "투상선. 도면에 남기지 않고 뷰를 맞출 때"),
+    "O": ("OFFSET", "일정 거리만큼 떨어진 같은 모양을 만든다",
+          "중심을 다시 찍지 않고 동심원·평행선. 벽체 두께, 여유 간격"),
+    "TR": ("TRIM", "경계까지 잘라낸다", "겹친 선, 튀어나온 토막"),
+    "EX": ("EXTEND", "경계까지 늘린다", "교차점에 못 미친 선"),
+    "F": ("FILLET", "두 선 사이에 라운드를 넣는다", "응력이 몰리는 안쪽 모서리. 반지름 0이면 각지게 잇는다"),
+    "MI": ("MIRROR", "대칭으로 복사한다", "좌우 대칭 형상. 한 번만 그리고 뒤집는다"),
+    "CO": ("COPY", "같은 것을 다른 자리에 둔다", "반복되는 부품, 같은 구멍"),
+    "M": ("MOVE", "옮긴다", "뷰 배치를 다시 잡을 때"),
+    "E": ("ERASE", "지운다", "보조선 정리"),
+    "ARRAYPOLAR": ("ARRAYPOLAR", "중심을 두고 원형으로 배열한다", "볼트 구멍처럼 각도로 균등 배치된 것"),
+    "MA": ("MATCHPROP", "특성을 다른 객체에 복사한다", "레이어가 틀린 선을 다시 그리지 않고 옮길 때"),
+    "LA": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
+    "OS": ("OSNAP", "객체 스냅 항목을 정한다", "끝점·중심·접점을 정확히 잡아야 할 때"),
+    "Z": ("ZOOM", "화면 배율을 바꾼다", "스냅이 어디 붙었는지 봐야 할 때"),
+    "D": ("DIMSTYLE", "치수 스타일을 정한다", "문자 높이·화살표·소수 자릿수를 도면 축척에 맞출 때"),
+    "DLI": ("DIMLINEAR", "수평·수직 치수를 넣는다", "가로 세로로 잰 값"),
+    "DAL": ("DIMALIGNED", "기울어진 변에 나란한 치수를 넣는다", "경사면의 실제 길이"),
+    "DDI": ("DIMDIAMETER", "지름 치수를 넣는다", "원과 구멍"),
+    "DRA": ("DIMRADIUS", "반지름 치수를 넣는다", "라운드와 호"),
+    "DAN": ("DIMANGULAR", "각도 치수를 넣는다", "두 선 사이의 각"),
+    "MLEADER": ("MLEADER", "지시선과 문자를 넣는다", "도형 밖에서 끌어와 설명할 때"),
+    "DIMEDIT": ("DIMEDIT", "이미 넣은 치수의 문자를 고친다", "참고 치수 괄호, 접두어"),
+    "DTEXT": ("DTEXT", "문자를 쓴다", "표제란, 주석"),
+    "LTSCALE": ("LTSCALE", "도면 전체의 선 종류 축척을 바꾼다", "점선이 실선처럼 보일 때"),
+    "QSELECT": ("QSELECT", "조건에 맞는 객체를 한 번에 고른다", "구성선만 골라 지울 때"),
+    "UCS": ("UCS", "좌표 원점과 방향을 옮긴다", "도면 안 특정 자리를 0,0 으로 삼을 때"),
+    "LIMITS": ("LIMITS", "도면 한계를 정한다", "용지 크기를 좌표로 잡을 때"),
+    "UNITS": ("UNITS", "단위와 정밀도를 정한다", "밀리미터인지 인치인지 확인할 때"),
+    "LINETYPE": ("LINETYPE", "선 종류를 불러온다", "CENTER·HIDDEN 을 레이어에 지정하기 전"),
+    "OPEN": ("OPEN", "파일을 연다", "매 차시 지난 상태에서 이어 그릴 때"),
+    "SAVEAS": ("SAVEAS", "새 이름으로 저장한다", "차시 종료 상태를 남길 때"),
+    "PLOT": ("PLOT", "출력한다", "종이나 PDF 로 내보낼 때"),
+    "EXPORTPDF": ("EXPORTPDF", "PDF 로 내보낸다", "제출용 파일"),
+    "LI": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
+    "DI": ("DIST", "두 점 사이 거리를 잰다", "치수를 넣기 전"),
+    "LIST": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
+    "LAYER": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
+    "QSAVE": ("QSAVE", "덮어써 저장한다", "Ctrl+S 와 같다"),
+    # System variables. Typed at the prompt like a command, so a learner meets
+    # them the same way, but they set a value rather than doing something.
+    "CLAYER": ("CLAYER", "현재 레이어를 바꾼다", "명령행으로 레이어를 바꿀 때. 드롭다운과 같은 일"),
+    "UCSICON": ("UCSICON", "좌표계 아이콘 표시를 정한다", "옮긴 원점이 어디인지 눈으로 확인할 때"),
+    "LWDISPLAY": ("LWDISPLAY", "선가중치를 화면에 보일지 정한다", "굵기 차이를 화면에서 확인할 때"),
+    "MIRRTEXT": ("MIRRTEXT", "대칭할 때 문자를 뒤집을지 정한다", "문자가 포함된 것을 대칭 복사하기 전"),
+    "ST": ("STYLE", "문자 스타일과 글꼴을 정한다", "한글이 물음표로 나올 때. 글자를 쓰기 전"),
+}
+
+# Backticked in the scripts but not something typed at a prompt — a fit grade,
+# a value, a file name.
+NOT_COMMANDS = {"H7"}
+
+# A command in one lesson, an option inside a running command in another.
+# Counted only where the step introduces it by its full name. `D` starts
+# DIMSTYLE in lesson 7 and answers CIRCLE's radius prompt in lessons 3 and 4;
+# `M` is only ever the multiline-text option inside DIMRADIUS and DIMDIAMETER,
+# so counting it as MOVE claimed a command no recording runs.
+AMBIGUOUS_KEYS = {"D", "M"}
+
+# Typed inside a running command as an option or a snap, not on a blank prompt.
+OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "OR", "ON",
+               "ALL", "AS", "FROM", "TAN", "CENTER", "HIDDEN", "RE", "SELECT"}
+
+FUNCTION_KEYS = [
+    ("F3", "객체 스냅", "끝점·중심·접점에 붙는다. 꺼져 있으면 눈대중이 된다"),
+    ("F8", "직교", "수평 수직으로만 움직인다"),
+    ("F10", "극좌표 추적", "정해진 각도마다 안내선이 뜬다"),
+    ("Ctrl+1", "특성 창", "고른 객체의 레이어·선종류 축척을 그 자리에서 고친다"),
+    ("Ctrl+S", "저장", "명령 한 번 끝날 때마다 눌러 두면 잃을 것이 없다"),
+    ("Ctrl+Z", "실행 취소", "명령 밖에서. 명령 안에서는 U"),
+]
+
+
 def icon(name, size=46):
     """A card's mark. Sized in the card, coloured by the card's own colour, so
     the read-along tint carries it without a second tween."""
     return ('<svg class="ico" viewBox="0 0 32 32" width="%d" height="%d" '
             'aria-hidden="true">%s</svg>' % (size, size, ICONS[name]))
+
+
+_SVG_BLOCK = re.compile(r"<svg[ >].*?</svg>", re.S | re.I)
+_TAG = re.compile(r"<[^>]*>")
+_HANGUL = re.compile(r"[가-힣]{2,}")
+
+
+def keep_words(html):
+    """Wrap every 어절 that contains Hangul in a nowrap span.
+
+    `word-break: keep-all` is the correct way to say this, and in a browser it
+    works — the same markup wraps 「모여서 / 본다」 in Chrome. The renderer does
+    not honour it: its snapshot of the very same frame put 「…모여서 본」 on one
+    line and 「다」 on the next, splitting the word mid-syllable, which reads as
+    a typo. `white-space: nowrap` does survive the renderer, so the rule is
+    expressed per word instead of per block.
+
+    The declaration stays in BASE_CSS as well — it is the correct statement of
+    intent, and it is what governs anything a browser renders directly.
+
+    SVG is skipped whole: a `<span>` inside `<text>` is not valid there, and
+    the drawing has no prose to break anyway.
+    """
+    keep, out = [], []
+
+    def stash(m):
+        keep.append(m.group(0))
+        return "@@%d@@" % (len(keep) - 1)
+
+    html = _SVG_BLOCK.sub(stash, html)
+    pos = 0
+    for m in _TAG.finditer(html):
+        out.append(_wrap_text(html[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(_wrap_text(html[pos:]))
+    text = "".join(out)
+    for i, block in enumerate(keep):
+        text = text.replace("@@%d@@" % i, block)
+    return text
+
+
+_WS = re.compile(r"(\s+)")
+
+
+def _wrap_text(run):
+    """Split on whitespace, keeping it: a run can carry the newlines and indent
+    the builders join their fragments with, and folding those into a span would
+    turn a line break into a space inside a word."""
+    if not run or "@@" in run or not _HANGUL.search(run):
+        return run
+    return "".join(part if _WS.fullmatch(part) or not _HANGUL.search(part)
+                   else '<span class="kw">%s</span>' % part
+                   for part in _WS.split(run))
 
 
 def frame_html(comp_id, duration, body, timeline):
@@ -244,6 +447,7 @@ def frame_html(comp_id, duration, body, timeline):
     index.html and with every other frame on the assembled page, and lint does
     not catch that.
     """
+    body = keep_words(body)
     return (HEAD
             + '  <div id="' + comp_id + '-root" data-composition-id="' + comp_id
             + '" data-start="0" data-duration="' + str(duration)
@@ -309,8 +513,11 @@ def closing_card(comp_id, duration, spans, next_no=None, next_title=None, final=
     if final:
         tail = final
     else:
-        tail = ('다음은 <em>%d차시 · %s</em> 입니다<br>그때 다시 뵙겠습니다'
-                % (next_no, next_title))
+        # The particle attaches to the noun: 「…출도입니다」, not 「…출도 입니다」.
+        # Both halves ride in one nowrap span — with no space between them a
+        # line could otherwise break between 도 and 입.
+        tail = ('다음은 <span class="kw"><em>%d차시 · %s</em>입니다</span><br>'
+                '그때 다시 뵙겠습니다' % (next_no, next_title))
     body = ('      <div class="close"><div class="rule"></div>'
             '<h2>고생하셨습니다</h2>'
             '<div class="next">' + tail + '</div>'

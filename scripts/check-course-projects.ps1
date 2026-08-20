@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    AutoCAD Technician 과정 7차시를 검사한다.
+    AutoCAD Technician 과정 8차시를 검사한다.
 
 .DESCRIPTION
     이전 버전은 차시별 길이를 상수로 적어 두고 대조했다. 그 방식은 컴포지션이

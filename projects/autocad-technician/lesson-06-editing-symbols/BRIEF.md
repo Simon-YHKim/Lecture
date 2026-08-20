@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "그려 놓은 것과 제대로 보이는 것은 다르다. 정리와 표기가 도면을 도면으로 만든다."
+message: "그려 놓은 것과 제대로 보이는 것은 다르다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 31m57s
+length: 37m46s
 angle: lesson-06-editing-symbols
 narration: user-recorded
 style_preset: lg-training
@@ -55,15 +55,16 @@ recording_slots: 1
 
 ## Frames
 
-| # | 파일 | 길이 | 비트 |
-| --- | --- | --- | --- |
-| 1 | `01-title` | 12s | — |
-| 2 | `02-today` | 134s | 4 |
-| 3 | `03-concept` | 145s | 4 |
-| 4 | `04-on-the-drawing` | 265s | 6 |
-| 5 | `05-demo` | 1030s | 15 |
-| 6 | `06-check` | 160s | 4 |
-| 7 | `07-recap` | 148s | 2 |
-| 8 | `08-closing` | 23s | 2 |
+| # | 파일 | 길이 | 화면 | 비트 |
+| --- | --- | --- | --- | --- |
+| 1 | `01-title` | 12s | 검정 타이틀 · **편집과 표현** | — |
+| 2 | `02-today` | 155s | 왼쪽 카드 4장(마크 포함) / 오른쪽 정면도 | 4 |
+| 3 | `03-concept` | 165s | 개념 카드 4장 + 하단 문단 | 4 |
+| 4 | `04-on-the-drawing` | 301s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
+| 5 | `05-demo` | 1190s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 | 16 |
+| 6 | `06-check` | 158s | 확인 카드 4장 + 하단 문단 | 4 |
+| 7 | `07-recap` | 164s | 2분할 마무리 | 2 |
+| 8 | `08-keys` | 98s | 오늘 친 단축키 표 + 기능키 | 13 |
+| 9 | `09-closing` | 23s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

@@ -15,7 +15,9 @@ timeline, so scrubbing backwards in Studio unwinds them; a callback only fires
 when time moves forward past it and leaves the frame stuck in a later state.
 """
 
+import json
 import math
+import os
 import re
 import unicodedata
 
@@ -159,6 +161,54 @@ def beat_spans(spans):
     return [(i, a, b) for i, a, b in spans if i is not None]
 
 
+def load_measured(lesson_dir):
+    """Measured beat times from a recorded and aligned narration, if any.
+
+    Returns {frame_number: {beat: (start, end)}}. Until a recording exists the
+    syllable estimate is the best available answer; once one does, the estimate
+    stops being an answer at all.
+    """
+    path = os.path.join(lesson_dir, "narration-timing.json")
+    if not os.path.isfile(path):
+        return {}
+    with open(path, encoding="utf-8") as fh:
+        doc = json.load(fh)
+    out = {}
+    for b in doc.get("beats", []):
+        out.setdefault(b["frame"], {})[b["beat"]] = (b["observedStart"], b["observedEnd"])
+    return out
+
+
+def measured_plan(segments, frame_beats, frame_start, frame_end):
+    """Lay segments out on the measured clock.
+
+    Beats sit where they were actually spoken. A gap paragraph has no marker to
+    align on, so it fills the space between its neighbours; that is a gap's job
+    anyway — nothing is emphasised during one.
+    """
+    known = {}
+    for i, (idx, _t) in enumerate(segments):
+        if idx is not None and idx in frame_beats:
+            a, b = frame_beats[idx]
+            known[i] = (round(a - frame_start, 2), round(b - frame_start, 2))
+    if not known:
+        return None
+
+    span = round(frame_end - frame_start, 2)
+    spans, prev_end = [], 0.0
+    for i, (idx, _t) in enumerate(segments):
+        if i in known:
+            a, b = known[i]
+        else:
+            later = [known[j][0] for j in sorted(known) if j > i]
+            a, b = prev_end, (later[0] if later else span)
+        a = max(a, prev_end)
+        b = max(b, a + 0.8)
+        spans.append((idx, round(a, 2), round(b, 2)))
+        prev_end = b
+    return spans
+
+
 # --------------------------------------------------------------- emitting
 def _sel(comp, s):
     return "#%s %s" % (comp, s)
@@ -287,6 +337,83 @@ def feature_highlight(comp, features, spans, lead=0.2):
 
 def dim_highlight(comp, dims, spans, lead=0.2):
     return attr_highlight(comp, "dim", dims, spans, lead)
+
+
+_TICK = re.compile(r"`([A-Za-z][A-Za-z0-9]{0,11})`")
+
+
+def shortcuts_in(path, line_no):
+    """The commands a lesson's recording actually types, in first-use order.
+
+    Read from the script rather than listed per lesson, so the summary table
+    cannot claim a command the demo never uses — or miss one it does. Option
+    letters typed inside a running command are filtered out; anything left that
+    the command table does not know stops the build, because a silent gap in
+    that table is exactly what nobody would notice.
+    """
+    import lesson_kit as kit
+
+    with open(path, encoding="utf-8") as fh:
+        lines = fh.read().splitlines()
+
+    inside, seen, unknown = False, [], []
+    for raw in lines:
+        m = _LINE_HEAD.match(raw)
+        if m:
+            inside = int(m.group(1)) == line_no
+            continue
+        if not inside:
+            continue
+        for tok in _TICK.findall(raw):
+            key = tok.upper()
+            if key in kit.NOT_COMMANDS or key in seen:
+                continue
+            # Some letters are a command in one lesson and an option inside a
+            # running command in another. `D` starts DIMSTYLE in lesson 7 and
+            # answers CIRCLE's radius prompt in lessons 3 and 4 — counted as
+            # DIMSTYLE everywhere, the summary claimed a command the recording
+            # never ran. The step says which it is: a command is introduced by
+            # name, an option is not.
+            if key in kit.AMBIGUOUS_KEYS:
+                if kit.COMMANDS.get(key, ("",))[0] in raw:
+                    seen.append(key)
+                continue
+            if key in kit.OPTION_KEYS:
+                continue
+            if key in kit.COMMANDS:
+                seen.append(key)
+            elif key not in unknown:
+                unknown.append(key)
+    if unknown:
+        raise SystemExit(
+            "%s Line %d 이 쓰는 명령이 lesson_kit.COMMANDS 에 없다: %s\n"
+            "표에 넣거나, 명령이 아니면 OPTION_KEYS 에 넣어라."
+            % (path, line_no, ", ".join(unknown)))
+    return seen
+
+
+def step_keys(path, line_no):
+    """What each recording step types, one entry per step.
+
+    Read from the step's own text rather than assigned by hand, so a checklist
+    row cannot show a command that step does not use. Steps that only look at
+    something return an empty string.
+    """
+    import lesson_kit as kit
+
+    out = []
+    for _no, text in parse_steps(path, line_no):
+        found = []
+        for tok in _TICK.findall(text):
+            key = tok.upper()
+            if key in kit.COMMANDS and key not in found:
+                found.append(key)
+        fk = re.findall(r"Ctrl\+[A-Za-z0-9]+|\bF(?:[3-9]|1[0-2])\b", text)
+        for k in fk:
+            if k not in found:
+                found.append(k)
+        out.append(" · ".join(found[:2]))
+    return out
 
 
 def segment_at(spans, i):

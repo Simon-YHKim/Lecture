@@ -26,6 +26,9 @@ FRAME_HEADING = re.compile(r"^##\s+Line\s+(\d+)\s*[—\-–]\s*(.*?)\s*\(Frame\s
 TIME_LINE = re.compile(r"^\*\*Time:\*\*\s*(\d{1,2}):(\d{2})\s*[–—\-]\s*(\d{1,2}):(\d{2})")
 NARRATION_LINE = re.compile(r"^\s{4}\S")
 DEMO_MENTION = re.compile(r"\bDEMO-(\d{2})\b")
+# A paragraph opening with a bracketed number is a beat, and the composition
+# cues that item at its start. See scripts/part/beats.py.
+BEAT_MARKER = re.compile(r"^\((\d+)")
 KEEP_CHARS = re.compile(r"[^0-9A-Za-z가-힣]")
 
 
@@ -53,6 +56,7 @@ def parse_script(script_path):
                 "plannedStart": None,
                 "plannedEnd": None,
                 "paragraphs": [],
+                "beats": [],
             }
             continue
         if current is None:
@@ -63,7 +67,12 @@ def parse_script(script_path):
             current["plannedEnd"] = int(timing.group(3)) * 60 + int(timing.group(4))
             continue
         if NARRATION_LINE.match(raw):
-            current["paragraphs"].append(raw.strip())
+            para = raw.strip()
+            if para.startswith(">"):
+                continue
+            current["paragraphs"].append(para)
+            beat = BEAT_MARKER.match(para)
+            current["beats"].append(int(beat.group(1)) if beat else None)
     if current:
         frames.append(current)
 
@@ -141,6 +150,41 @@ def frame_bounds(frames, script_owner, mapping, asr_owner, words):
             }
         )
     return bounds
+
+
+def beat_times(frames, mapping, asr_owner, words):
+    """Measured start and end for each numbered paragraph.
+
+    Built on a second character stream tagged by paragraph rather than by
+    frame, so a beat can be located inside the frame that contains it.
+    """
+    para_owner, offset_of = [], []
+    for f_index, frame in enumerate(frames):
+        for p_index, para in enumerate(frame["paragraphs"]):
+            offset_of.append((f_index, p_index))
+            para_owner.extend([len(offset_of) - 1] * len(normalize(para)))
+
+    per_para = {}
+    for script_index, asr_index in mapping.items():
+        if script_index < len(para_owner):
+            per_para.setdefault(para_owner[script_index], []).append(asr_index)
+
+    out = []
+    for slot, (f_index, p_index) in enumerate(offset_of):
+        beat = frames[f_index]["beats"][p_index]
+        if beat is None:
+            continue
+        matched = per_para.get(slot)
+        if not matched:
+            continue
+        out.append({
+            "frame": frames[f_index]["frame"],
+            "beat": beat,
+            "observedStart": round(words[asr_owner[min(matched)]]["start"], 3),
+            "observedEnd": round(words[asr_owner[max(matched)]]["end"], 3),
+            "matchedChars": len(matched),
+        })
+    return out
 
 
 def cue_times(frames, script_owner, mapping, asr_owner, words):
@@ -255,6 +299,7 @@ def main(argv):
         },
         "frames": entries,
         "cues": cue_times(frames, script_owner, mapping, asr_owner, words),
+        "beats": beat_times(frames, mapping, asr_owner, words),
     }
 
     with open(args.output, "w", encoding="utf-8") as handle:

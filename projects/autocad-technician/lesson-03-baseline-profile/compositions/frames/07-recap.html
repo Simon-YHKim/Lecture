@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -24,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -41,11 +61,33 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l3f7-root" data-composition-id="l3f7" data-start="0" data-duration="147" data-width="1920" data-height="1080">
-    <section id="l3f7" class="clip" data-start="0" data-duration="147" data-track-index="1">
-      <header class="topline"><div><div class="index">06 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L03_PROFILE 완료</div></header>
-      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>기준선을 세우고 외곽을 그었다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">템플릿 파일을 열고 UCS로 원점을 베이스 왼쪽 아래로 옮겼다</li><li class="p-done-li">중심선 레이어에서 세로·가로 중심선을 형상보다 먼저 세웠다</li><li class="p-done-li">베이스 외곽을 폴리선 하나로 — 120, 11, 모따기 5와 5, 윗면 110, 닫기</li><li class="p-done-li">절대·상대·상대극 세 가지 좌표를 한 도형에서 다 써 봤다</li><li class="p-done-li">보스 원 Ø56과 20,16 · 100,16에서 접선 둘, 꼭대기 90으로 검산</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>다음 차시</b><strong>곡선과 간격띄우기</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">목과 베이스가 만나는 안쪽 모서리에 필렛 2-R10을 넣는다</li><li class="p-next-li">이론상의 모서리 20,16과 100,16이 라운드로 바뀌며 사라진다</li><li class="p-next-li">목 선과 겹친 보스 원 아래쪽을 잘라내 외곽을 한 줄로 정리한다</li><li class="p-next-li">축 구멍 Ø25를 보스와 같은 중심에 — 어긋나면 힘이 한쪽으로 쏠린다</li><li class="p-next-li">간격띄우기로 같은 형상을 두 번 그리지 않는 법과 잘라내기</li></ul></section></main>
+  <div id="l3f7-root" data-composition-id="l3f7" data-start="0" data-duration="193" data-width="1920" data-height="1080">
+    <section id="l3f7" class="clip" data-start="0" data-duration="193" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · RECAP</div><h1><span class="kw">이번</span> <span class="kw">차시와</span> <span class="kw">다음</span> <span class="kw">차시</span></h1></div><div class="prompt">L03_PROFILE <span class="kw">완료</span></div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b><span class="kw">이번에</span> 한 일</b><strong><span class="kw">기준선을</span> <span class="kw">세우고</span> <span class="kw">외곽을</span> <span class="kw">그었다</span></strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li"><span class="kw">템플릿</span> <span class="kw">파일을</span> <span class="kw">열고</span> UCS로 <span class="kw">원점을</span> <span class="kw">베이스</span> <span class="kw">왼쪽</span> <span class="kw">아래로</span> <span class="kw">옮겼다</span></li><li class="p-done-li"><span class="kw">중심선</span> <span class="kw">레이어에서</span> <span class="kw">세로·가로</span> <span class="kw">중심선을</span> <span class="kw">형상보다</span> <span class="kw">먼저</span> <span class="kw">세웠다</span></li><li class="p-done-li"><span class="kw">베이스</span> <span class="kw">외곽을</span> <span class="kw">폴리선</span> <span class="kw">하나로</span> — 120, 11, <span class="kw">모따기</span> 5와 5, <span class="kw">윗면</span> 110, <span class="kw">닫기</span></li><li class="p-done-li"><span class="kw">절대·상대·상대극</span> 세 <span class="kw">가지</span> <span class="kw">좌표를</span> 한 <span class="kw">도형에서</span> 다 써 <span class="kw">봤다</span></li><li class="p-done-li"><span class="kw">보스</span> 원 Ø56과 20,16 · <span class="kw">100,16에서</span> <span class="kw">접선</span> 둘, <span class="kw">꼭대기</span> <span class="kw">90으로</span> <span class="kw">검산</span></li></ul></section><section class="card p-next" style="padding:30px 34px"><b><span class="kw">다음</span> <span class="kw">차시</span></b><strong><span class="kw">곡선과</span> <span class="kw">간격띄우기</span></strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li"><span class="kw">목과</span> <span class="kw">베이스가</span> <span class="kw">만나는</span> <span class="kw">안쪽</span> <span class="kw">모서리에</span> <span class="kw">필렛</span> 2-R10을 <span class="kw">넣는다</span></li><li class="p-next-li"><span class="kw">이론상의</span> <span class="kw">모서리</span> 20,16과 100,16이 <span class="kw">라운드로</span> <span class="kw">바뀌며</span> <span class="kw">사라진다</span></li><li class="p-next-li">목 <span class="kw">선과</span> <span class="kw">겹친</span> <span class="kw">보스</span> 원 <span class="kw">아래쪽을</span> <span class="kw">잘라내</span> <span class="kw">외곽을</span> 한 <span class="kw">줄로</span> <span class="kw">정리한다</span></li><li class="p-next-li">축 <span class="kw">구멍</span> Ø25를 <span class="kw">보스와</span> <span class="kw">같은</span> <span class="kw">중심에</span> — <span class="kw">어긋나면</span> <span class="kw">힘이</span> <span class="kw">한쪽으로</span> <span class="kw">쏠린다</span></li><li class="p-next-li"><span class="kw">간격띄우기로</span> <span class="kw">같은</span> <span class="kw">형상을</span> 두 번 <span class="kw">그리지</span> <span class="kw">않는</span> <span class="kw">법과</span> <span class="kw">잘라내기</span></li></ul></section></main>
     </section>
   </div>
   <script>
@@ -53,10 +95,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l3f7 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l3f7 .p-done",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},1.6);
-    tl.fromTo("#l3f7 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:14.64,ease:"power2.out"},2.5);
-    tl.fromTo("#l3f7 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},76.21);
-    tl.fromTo("#l3f7 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:13.64,ease:"power2.out"},77.11);
-    tl.to("#l3f7 .topline,#l3f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},145.95);
+    tl.fromTo("#l3f7 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:18.28,ease:"power2.out"},2.5);
+    tl.fromTo("#l3f7 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},94.4);
+    tl.fromTo("#l3f7 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:19.2,ease:"power2.out"},95.3);
+    tl.to("#l3f7 .topline,#l3f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},191.95);
     window.__timelines["l3f7"]=tl;
   </script>
 </template></body></html>

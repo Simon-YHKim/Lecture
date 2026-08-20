@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
+  <style>
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
+*{box-sizing:border-box}
+.clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
+.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
+.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}
+h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:58px;letter-spacing:-.035em}
+.prompt{color:#666;font-size:26px}
+.body{display:grid;gap:38px;height:724px;padding-top:36px}
+.panel{background:#F5F5F3;border:2px solid #A4A3A4;display:grid;place-items:center;overflow:hidden}
+.panel svg{width:100%;height:100%}
+.dwg .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
+.dwg .hidden{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:2.4 1.2}
+.dwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2}
+.dwg .dim,.dwg .ext,.dwg .tangent{fill:none;stroke:#111;stroke-width:.25}
+.dwg .arrow{fill:#111;stroke:none}
+.dwg .hl{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:0}
+.card{border:2px solid #A4A3A4;background:#FFF;padding:20px 24px;color:#111}
+.ico{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
+.card.wide{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start}
+.card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
+.card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
+.card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
+.note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
+.note b{color:#C7004C}
+table.spec{width:100%;border-collapse:collapse;font-size:22px}
+table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
+table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
+.title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
+.title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.title h2{margin:18px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.title .rule{margin-top:42px;width:220px;height:3px;background:#C7004C}
+.title .sub{margin-top:28px;font-size:29px;color:#FFF;letter-spacing:.02em}
+.close{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.close .rule{width:220px;height:3px;background:#C7004C}
+.close h2{margin:40px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
+.close .next em{font-style:normal;color:#C7004C}
+.close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
+  </style>
+  <div id="l8f5-root" data-composition-id="l8f5" data-start="0" data-duration="108" data-width="1920" data-height="1080">
+    <section id="l8f5" class="clip" data-start="0" data-duration="108" data-track-index="1">
+      <header class="topline"><div><div class="index">04 · FIELD</div><h1><span class="kw">현장에서</span> <span class="kw">자주</span> <span class="kw">꺼내</span> <span class="kw">쓰는</span> <span class="kw">명령</span></h1></div><div class="prompt"><span class="kw">작도</span> <span class="kw">밖에서</span> <span class="kw">쓰이는</span> <span class="kw">것들</span></div></header>
+      <main class="body" style="grid-template-rows:1fr auto"><section><table class="spec"><thead><tr><th><span class="kw">명령</span></th><th><span class="kw">어디서</span> <span class="kw">쓰나</span></th><th>왜 <span class="kw">쓰나</span></th></tr></thead><tbody><tr class="fk fk1"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">PL</td><td style="color:#111;white-space:nowrap"><span class="kw">레이아웃</span> <span class="kw">도면</span></td><td style="color:#666;font-size:21px"><span class="kw">설비</span> <span class="kw">자리를</span> 한 <span class="kw">바퀴</span> <span class="kw">둘러</span> <span class="kw">하나로</span> <span class="kw">묶는다.</span> <span class="kw">넓이가</span> 한 <span class="kw">번에</span> <span class="kw">나오고</span> <span class="kw">통째로</span> <span class="kw">옮겨진다</span></td></tr><tr class="fk fk2"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">O</td><td style="color:#111;white-space:nowrap"><span class="kw">여유</span> <span class="kw">잡기</span></td><td style="color:#666;font-size:21px"><span class="kw">벽체</span> <span class="kw">두께와</span> <span class="kw">통로</span> <span class="kw">여유.</span> <span class="kw">중심을</span> <span class="kw">다시</span> <span class="kw">찍지</span> <span class="kw">않고</span> <span class="kw">같은</span> <span class="kw">모양을</span> <span class="kw">띄운다</span></td></tr><tr class="fk fk3"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">DI</td><td style="color:#111;white-space:nowrap"><span class="kw">간섭</span> <span class="kw">확인</span></td><td style="color:#666;font-size:21px"><span class="kw">설비가</span> <span class="kw">들어갈</span> <span class="kw">폭이</span> <span class="kw">나오는지</span> 그 <span class="kw">자리에서</span> <span class="kw">잰다.</span> <span class="kw">도면에</span> <span class="kw">아무것도</span> <span class="kw">남기지</span> <span class="kw">않는다</span></td></tr><tr class="fk fk4"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LI</td><td style="color:#111;white-space:nowrap"><span class="kw">받은</span> <span class="kw">도면</span> <span class="kw">확인</span></td><td style="color:#666;font-size:21px"><span class="kw">눈으로는</span> <span class="kw">같아</span> <span class="kw">보이는</span> <span class="kw">선의</span> <span class="kw">실제</span> <span class="kw">값을</span> <span class="kw">확인한다</span></td></tr><tr class="fk fk5"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">MA</td><td style="color:#111;white-space:nowrap"><span class="kw">남의</span> <span class="kw">도면</span> <span class="kw">정리</span></td><td style="color:#666;font-size:21px"><span class="kw">레이어가</span> <span class="kw">섞인</span> <span class="kw">선을</span> <span class="kw">다시</span> <span class="kw">그리지</span> <span class="kw">않고</span> <span class="kw">제자리로</span> <span class="kw">보낸다</span></td></tr><tr class="fk fk6"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">PLOT</td><td style="color:#111;white-space:nowrap"><span class="kw">가공집과</span> <span class="kw">소통</span></td><td style="color:#666;font-size:21px"><span class="kw">화면이</span> <span class="kw">아니라</span> <span class="kw">종이를</span> <span class="kw">기준으로</span> <span class="kw">넘긴다.</span> <span class="kw">축척을</span> <span class="kw">확인하고</span> <span class="kw">나간다</span></td></tr></tbody></table></section><div class="note"><b><span class="kw">외우지</span> <span class="kw">않아도</span> <span class="kw">됩니다</span></b> <span class="kw">명령</span> <span class="kw">이름</span> <span class="kw">대신</span> <b><span class="kw">상황을</span> <span class="kw">기억하세요</span></b>. 그 <span class="kw">자리에</span> <span class="kw">서면</span> <span class="kw">명령이</span> <span class="kw">떠오릅니다.</span> <span class="kw">연습</span> <span class="kw">도면은</span> <span class="kw">따로</span> <span class="kw">제공할</span> <span class="kw">예정입니다.</span></div></main>
+    </section>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};
+    const tl=gsap.timeline({paused:true});
+    tl.fromTo("#l8f5 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
+    tl.fromTo("#l8f5 thead",{opacity:0,y:8},{opacity:1,y:0,duration:0.7,ease:"power2.out"},1.5);
+    tl.fromTo("#l8f5 .fk1,#l8f5 .fk2,#l8f5 .fk3,#l8f5 .fk4,#l8f5 .fk5,#l8f5 .fk6",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},7.57);
+    tl.to("#l8f5 .fk1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},9.97);
+    tl.to("#l8f5 .fk1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},33.56);
+    tl.to("#l8f5 .fk2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},33.56);
+    tl.to("#l8f5 .fk2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},47.14);
+    tl.to("#l8f5 .fk3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},47.14);
+    tl.to("#l8f5 .fk3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},59.31);
+    tl.to("#l8f5 .fk4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},59.31);
+    tl.to("#l8f5 .fk4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},72.69);
+    tl.to("#l8f5 .fk5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},72.69);
+    tl.to("#l8f5 .fk5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},85.06);
+    tl.to("#l8f5 .fk6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},85.06);
+    tl.to("#l8f5 .fk6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},98.03);
+    tl.fromTo("#l8f5 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},94.0);
+    tl.to("#l8f5 .topline,#l8f5 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},106.95);
+    window.__timelines["l8f5"]=tl;
+  </script>
+</template></body></html>

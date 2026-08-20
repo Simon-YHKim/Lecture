@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "안쪽 형상은 전부 원에서 출발하고, 명령마다 기본값이 먼저 발목을 잡는다."
+message: "안쪽 형상은 전부 원에서 출발한다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 26m57s
+length: 33m14s
 angle: lesson-04-circles-arcs
 narration: user-recorded
 style_preset: lg-training
@@ -50,15 +50,16 @@ recording_slots: 1
 
 ## Frames
 
-| # | 파일 | 길이 | 비트 |
-| --- | --- | --- | --- |
-| 1 | `01-title` | 12s | — |
-| 2 | `02-today` | 126s | 4 |
-| 3 | `03-concept` | 169s | 4 |
-| 4 | `04-on-the-drawing` | 256s | 6 |
-| 5 | `05-demo` | 800s | 16 |
-| 6 | `06-check` | 135s | 4 |
-| 7 | `07-recap` | 106s | 2 |
-| 8 | `08-closing` | 13s | 2 |
+| # | 파일 | 길이 | 화면 | 비트 |
+| --- | --- | --- | --- | --- |
+| 1 | `01-title` | 12s | 검정 타이틀 · **원·호·오프셋** | — |
+| 2 | `02-today` | 128s | 왼쪽 카드 4장(마크 포함) / 오른쪽 정면도 | 4 |
+| 3 | `03-concept` | 194s | 개념 카드 4장 + 하단 문단 | 4 |
+| 4 | `04-on-the-drawing` | 295s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
+| 5 | `05-demo` | 980s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 | 16 |
+| 6 | `06-check` | 140s | 확인 카드 4장 + 하단 문단 | 4 |
+| 7 | `07-recap` | 123s | 2분할 마무리 | 2 |
+| 8 | `08-keys` | 109s | 오늘 친 단축키 표 + 기능키 | 15 |
+| 9 | `09-closing` | 13s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.
