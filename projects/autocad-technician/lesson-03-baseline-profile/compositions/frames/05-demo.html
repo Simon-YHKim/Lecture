@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,53 +61,74 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l3f5-root" data-composition-id="l3f5" data-start="0" data-duration="920" data-width="1920" data-height="1080">
-    <section id="l3f5" class="clip" data-start="0" data-duration="920" data-track-index="1">
-      <header class="topline"><div><div class="index">04 · DEMO-01</div><h1>지난 파일을 열어 중심선과 외곽을 긋습니다</h1></div><div class="prompt">L02_TEMPLATE → L03_PROFILE</div></header>
-      <main class="body" style="grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)"><section class="panel rec" style="border-style:dashed;position:relative"><div style="text-align:center;color:#666"><div style="font-size:29px;letter-spacing:.12em;color:#C7004C">USER RECORDING</div><div style="font-size:23px;margin-top:12px">DEMO-01 · 화면 녹화 삽입</div></div><div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:#DCDBD7"><div class="prog" style="height:100%;width:100%;background:#C7004C;transform-origin:left center"></div></div></section><section><ol style="list-style:none;margin:0;padding:0;font-size:21px;line-height:1.5"><li class="st st1"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">OPEN</b><span>지난 차시 파일 열기</span></li><li class="st st2"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">Z</b><span>객체 스냅과 레이어 확인</span></li><li class="st st3"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">UCS · UCSICON</b><span>UCS로 원점 옮기기</span></li><li class="st st4"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">CLAYER</b><span>중심선 레이어로 바꾸기</span></li><li class="st st5"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">L</b><span>세로 중심선 · 절대좌표</span></li><li class="st st6"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">L · Ctrl+1</b><span>가로 중심선과 선종류축척</span></li><li class="st st7"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">Z</b><span>외형선 레이어와 윈도우 줌</span></li><li class="st st8"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">PL</b><span>PLINE으로 외곽 시작</span></li><li class="st st9"><b style="display:inline-block;min-width:96px">&nbsp;</b><span>오른쪽 모따기 @-5,5</span></li><li class="st st10"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">C</b><span>윗면·왼쪽 모따기·닫기</span></li><li class="st st11"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">LIST</b><span>폴리선 하나인지 확인</span></li><li class="st st12"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">C · D</b><span>보스 원 Ø56 그리기</span></li><li class="st st13"><b style="display:inline-block;min-width:96px">&nbsp;</b><span>목 시작점 20,16과 100,16</span></li><li class="st st14"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">L</b><span>왼쪽 목 접선 · TAN</span></li><li class="st st15"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">L</b><span>오른쪽 목 접선 · TAN</span></li><li class="st st16"><b style="display:inline-block;min-width:96px;color:#C7004C;font-family:ui-monospace,Consolas,monospace;font-size:20px">SAVEAS</b><span>L03_PROFILE로 저장</span></li></ol><div class="note"><b>우선순위</b> 과제 지시가 다른 값을 지정하면 그 지시가 우선합니다. 여기 값은 이 과정의 연습용 기본값입니다.</div></section></main>
+  <div id="l3f5-root" data-composition-id="l3f5" data-start="0" data-duration="980" data-width="1920" data-height="1080">
+    <section id="l3f5" class="clip" data-start="0" data-duration="980" data-track-index="1">
+      <div class="film"><div class="rec"><div class="recmark">USER RECORDING</div><div class="recsub">DEMO-01 &#183; L02_TEMPLATE → L03_PROFILE</div></div><div class="tag"><span class="kw">지난</span> <span class="kw">파일을</span> <span class="kw">열어</span> <span class="kw">중심선과</span> <span class="kw">외곽을</span> <span class="kw">긋습니다</span></div><div class="strip"><div class="sp sp1" data-layout-allow-overlap><span class="no">01<i>&#8201;/&#8201;16</i></span><span class="key">OPEN</span><span class="what"><span class="kw">지난</span> <span class="kw">차시</span> <span class="kw">파일</span> <span class="kw">열기</span></span></div><div class="sp sp2" data-layout-allow-overlap><span class="no">02<i>&#8201;/&#8201;16</i></span><span class="key">Z</span><span class="what"><span class="kw">객체</span> <span class="kw">스냅과</span> <span class="kw">레이어</span> <span class="kw">확인</span></span></div><div class="sp sp3" data-layout-allow-overlap><span class="no">03<i>&#8201;/&#8201;16</i></span><span class="key">UCS · UCSICON</span><span class="what">UCS로 <span class="kw">원점</span> <span class="kw">옮기기</span></span></div><div class="sp sp4" data-layout-allow-overlap><span class="no">04<i>&#8201;/&#8201;16</i></span><span class="key">CLAYER</span><span class="what"><span class="kw">중심선</span> <span class="kw">레이어로</span> <span class="kw">바꾸기</span></span></div><div class="sp sp5" data-layout-allow-overlap><span class="no">05<i>&#8201;/&#8201;16</i></span><span class="key">L</span><span class="what"><span class="kw">세로</span> <span class="kw">중심선</span> · <span class="kw">절대좌표</span></span></div><div class="sp sp6" data-layout-allow-overlap><span class="no">06<i>&#8201;/&#8201;16</i></span><span class="key">L · Ctrl+1</span><span class="what"><span class="kw">가로</span> <span class="kw">중심선과</span> <span class="kw">선종류축척</span></span></div><div class="sp sp7" data-layout-allow-overlap><span class="no">07<i>&#8201;/&#8201;16</i></span><span class="key">Z</span><span class="what"><span class="kw">외형선</span> <span class="kw">레이어와</span> <span class="kw">윈도우</span> 줌</span></div><div class="sp sp8" data-layout-allow-overlap><span class="no">08<i>&#8201;/&#8201;16</i></span><span class="key">PL</span><span class="what"><span class="kw">PLINE으로</span> <span class="kw">외곽</span> <span class="kw">시작</span></span></div><div class="sp sp9" data-layout-allow-overlap><span class="no">09<i>&#8201;/&#8201;16</i></span><span class="key">&#183;</span><span class="what"><span class="kw">오른쪽</span> <span class="kw">모따기</span> @-5,5</span></div><div class="sp sp10" data-layout-allow-overlap><span class="no">10<i>&#8201;/&#8201;16</i></span><span class="key">C</span><span class="what"><span class="kw">윗면·왼쪽</span> <span class="kw">모따기·닫기</span></span></div><div class="sp sp11" data-layout-allow-overlap><span class="no">11<i>&#8201;/&#8201;16</i></span><span class="key">LIST</span><span class="what"><span class="kw">폴리선</span> <span class="kw">하나인지</span> <span class="kw">확인</span></span></div><div class="sp sp12" data-layout-allow-overlap><span class="no">12<i>&#8201;/&#8201;16</i></span><span class="key">C · D</span><span class="what"><span class="kw">보스</span> 원 Ø56 <span class="kw">그리기</span></span></div><div class="sp sp13" data-layout-allow-overlap><span class="no">13<i>&#8201;/&#8201;16</i></span><span class="key">&#183;</span><span class="what">목 <span class="kw">시작점</span> 20,16과 100,16</span></div><div class="sp sp14" data-layout-allow-overlap><span class="no">14<i>&#8201;/&#8201;16</i></span><span class="key">L</span><span class="what"><span class="kw">왼쪽</span> 목 <span class="kw">접선</span> · TAN</span></div><div class="sp sp15" data-layout-allow-overlap><span class="no">15<i>&#8201;/&#8201;16</i></span><span class="key">L</span><span class="what"><span class="kw">오른쪽</span> 목 <span class="kw">접선</span> · TAN</span></div><div class="sp sp16" data-layout-allow-overlap><span class="no">16<i>&#8201;/&#8201;16</i></span><span class="key">SAVEAS</span><span class="what">L03_PROFILE로 <span class="kw">저장</span></span></div><div class="track"><i class="prog"></i></div></div></div>
     </section>
   </div>
   <script>
     window.__timelines=window.__timelines||{};
     const tl=gsap.timeline({paused:true});
-    tl.fromTo("#l3f5 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
-    tl.fromTo("#l3f5 .st1,#l3f5 .st2,#l3f5 .st3,#l3f5 .st4,#l3f5 .st5,#l3f5 .st6,#l3f5 .st7,#l3f5 .st8,#l3f5 .st9,#l3f5 .st10,#l3f5 .st11,#l3f5 .st12,#l3f5 .st13,#l3f5 .st14,#l3f5 .st15,#l3f5 .st16",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.8,stagger:0.06,ease:"power2.out"},0.64);
-    tl.to("#l3f5 .st1",{opacity:1.0,duration:0.8,ease:"power2.inOut"},1.6);
-    tl.to("#l3f5 .st1",{opacity:0.64,duration:0.8,ease:"power2.inOut"},31.31);
-    tl.to("#l3f5 .st2",{opacity:1.0,duration:0.8,ease:"power2.inOut"},31.31);
-    tl.to("#l3f5 .st2",{opacity:0.64,duration:0.8,ease:"power2.inOut"},78.23);
-    tl.to("#l3f5 .st3",{opacity:1.0,duration:0.8,ease:"power2.inOut"},78.23);
-    tl.to("#l3f5 .st3",{opacity:0.64,duration:0.8,ease:"power2.inOut"},183.92);
-    tl.to("#l3f5 .st4",{opacity:1.0,duration:0.8,ease:"power2.inOut"},183.92);
-    tl.to("#l3f5 .st4",{opacity:0.64,duration:0.8,ease:"power2.inOut"},209.53);
-    tl.to("#l3f5 .st5",{opacity:1.0,duration:0.8,ease:"power2.inOut"},209.53);
-    tl.to("#l3f5 .st5",{opacity:0.64,duration:0.8,ease:"power2.inOut"},265.43);
-    tl.to("#l3f5 .st6",{opacity:1.0,duration:0.8,ease:"power2.inOut"},265.43);
-    tl.to("#l3f5 .st6",{opacity:0.64,duration:0.8,ease:"power2.inOut"},356.24);
-    tl.to("#l3f5 .st7",{opacity:1.0,duration:0.8,ease:"power2.inOut"},356.24);
-    tl.to("#l3f5 .st7",{opacity:0.64,duration:0.8,ease:"power2.inOut"},399.55);
-    tl.to("#l3f5 .st8",{opacity:1.0,duration:0.8,ease:"power2.inOut"},399.55);
-    tl.to("#l3f5 .st8",{opacity:0.64,duration:0.8,ease:"power2.inOut"},444.16);
-    tl.to("#l3f5 .st9",{opacity:1.0,duration:0.8,ease:"power2.inOut"},444.16);
-    tl.to("#l3f5 .st9",{opacity:0.64,duration:0.8,ease:"power2.inOut"},503.39);
-    tl.to("#l3f5 .st10",{opacity:1.0,duration:0.8,ease:"power2.inOut"},503.39);
-    tl.to("#l3f5 .st10",{opacity:0.64,duration:0.8,ease:"power2.inOut"},565.19);
-    tl.to("#l3f5 .st11",{opacity:1.0,duration:0.8,ease:"power2.inOut"},565.19);
-    tl.to("#l3f5 .st11",{opacity:0.64,duration:0.8,ease:"power2.inOut"},609.28);
-    tl.to("#l3f5 .st12",{opacity:1.0,duration:0.8,ease:"power2.inOut"},609.28);
-    tl.to("#l3f5 .st12",{opacity:0.64,duration:0.8,ease:"power2.inOut"},678.27);
-    tl.to("#l3f5 .st13",{opacity:1.0,duration:0.8,ease:"power2.inOut"},678.27);
-    tl.to("#l3f5 .st13",{opacity:0.64,duration:0.8,ease:"power2.inOut"},738.53);
-    tl.to("#l3f5 .st14",{opacity:1.0,duration:0.8,ease:"power2.inOut"},738.53);
-    tl.to("#l3f5 .st14",{opacity:0.64,duration:0.8,ease:"power2.inOut"},821.64);
-    tl.to("#l3f5 .st15",{opacity:1.0,duration:0.8,ease:"power2.inOut"},821.64);
-    tl.to("#l3f5 .st15",{opacity:0.64,duration:0.8,ease:"power2.inOut"},886.26);
-    tl.to("#l3f5 .st16",{opacity:1.0,duration:0.8,ease:"power2.inOut"},886.26);
-    tl.to("#l3f5 .st16",{opacity:0.64,duration:0.8,ease:"power2.inOut"},918.8);
-    tl.fromTo("#l3f5 .prog",{scaleX:0},{scaleX:1,duration:918.0,ease:"none"},1.0);
-    tl.fromTo("#l3f5 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},908.0);
-    tl.to("#l3f5 .topline,#l3f5 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},918.95);
+    tl.fromTo("#l3f5 .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,ease:"power3.out"},.35);
+    tl.fromTo("#l3f5 .strip",{opacity:0,y:26},{opacity:1,y:0,duration:.9,ease:"power3.out"},.7);
+    tl.fromTo("#l3f5 .sp1",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},1.6);
+    tl.to("#l3f5 .sp1",{opacity:0,duration:0.8,ease:"power2.inOut"},30.89);
+    tl.fromTo("#l3f5 .sp2",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},30.89);
+    tl.to("#l3f5 .sp2",{opacity:0,duration:0.8,ease:"power2.inOut"},79.24);
+    tl.fromTo("#l3f5 .sp3",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},79.24);
+    tl.to("#l3f5 .sp3",{opacity:0,duration:0.8,ease:"power2.inOut"},187.58);
+    tl.fromTo("#l3f5 .sp4",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},187.58);
+    tl.to("#l3f5 .sp4",{opacity:0,duration:0.8,ease:"power2.inOut"},213.26);
+    tl.fromTo("#l3f5 .sp5",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},213.26);
+    tl.to("#l3f5 .sp5",{opacity:0,duration:0.8,ease:"power2.inOut"},270.62);
+    tl.fromTo("#l3f5 .sp6",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},270.62);
+    tl.to("#l3f5 .sp6",{opacity:0,duration:0.8,ease:"power2.inOut"},365.06);
+    tl.fromTo("#l3f5 .sp7",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},365.06);
+    tl.to("#l3f5 .sp7",{opacity:0,duration:0.8,ease:"power2.inOut"},409.8);
+    tl.fromTo("#l3f5 .sp8",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},409.8);
+    tl.to("#l3f5 .sp8",{opacity:0,duration:0.8,ease:"power2.inOut"},455.05);
+    tl.fromTo("#l3f5 .sp9",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},455.05);
+    tl.to("#l3f5 .sp9",{opacity:0,duration:0.8,ease:"power2.inOut"},516.01);
+    tl.fromTo("#l3f5 .sp10",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},516.01);
+    tl.to("#l3f5 .sp10",{opacity:0,duration:0.8,ease:"power2.inOut"},576.72);
+    tl.fromTo("#l3f5 .sp11",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},576.72);
+    tl.to("#l3f5 .sp11",{opacity:0,duration:0.8,ease:"power2.inOut"},622.23);
+    tl.fromTo("#l3f5 .sp12",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},622.23);
+    tl.to("#l3f5 .sp12",{opacity:0,duration:0.8,ease:"power2.inOut"},728.26);
+    tl.fromTo("#l3f5 .sp13",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},728.26);
+    tl.to("#l3f5 .sp13",{opacity:0,duration:0.8,ease:"power2.inOut"},792.57);
+    tl.fromTo("#l3f5 .sp14",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},792.57);
+    tl.to("#l3f5 .sp14",{opacity:0,duration:0.8,ease:"power2.inOut"},878.25);
+    tl.fromTo("#l3f5 .sp15",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},878.25);
+    tl.to("#l3f5 .sp15",{opacity:0,duration:0.8,ease:"power2.inOut"},945.13);
+    tl.fromTo("#l3f5 .sp16",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},945.13);
+    tl.to("#l3f5 .sp16",{opacity:0,duration:0.8,ease:"power2.inOut"},978.8);
+    tl.fromTo("#l3f5 .prog",{scaleX:0},{scaleX:1,duration:977.6,ease:"none"},1.2);
+    tl.to("#l3f5 .tag",{opacity:0,duration:1.0,ease:"power2.in"},30.0);
+    tl.to("#l3f5 .strip",{opacity:0,y:18,duration:.9,ease:"power2.in"},978.95);
     window.__timelines["l3f5"]=tl;
   </script>
 </template></body></html>

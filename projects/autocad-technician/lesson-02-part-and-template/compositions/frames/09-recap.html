@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,11 +61,33 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l2f9-root" data-composition-id="l2f9" data-start="0" data-duration="94" data-width="1920" data-height="1080">
-    <section id="l2f9" class="clip" data-start="0" data-duration="94" data-track-index="1">
-      <header class="topline"><div><div class="index">08 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L02_TEMPLATE 완료</div></header>
-      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>부품을 읽고 도면 환경을 만들었습니다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">아이들러 풀리 브래킷이 벨트 장력을 잡는 바퀴의 축을 붙드는 부품이고, 장력이 맞아야 동력 전달과 부품 수명이 유지된다는 것</li><li class="p-done-li">면마다 가공과 표면 거칠기가 다른 이유 — 축이 닿는 구멍은 곱게, 볼트가 통과만 하는 장공은 거칠어도 된다는 판단 기준</li><li class="p-done-li">형상마다의 근거 — 넓은 베이스는 모멘트, 장공은 조정 여유, 굵은 밑동은 굽힘, 필렛은 응력 집중</li><li class="p-done-li">도면 위 모든 표기가 무엇을 지시하는지 — 치수 여덟 개와 기호 여덟 개</li><li class="p-done-li">A3 용지에 사방 10 도면틀과 중심 마크, 200×30 표제란을 만들고 네 개 레이어를 설정해 템플릿 파일로 저장</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>다음</b><strong>3차시 · 기준선과 외곽</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">절대·상대·극좌표로 점을 찍는 세 가지 방법과 각각을 언제 쓰는지</li><li class="p-next-li">LINE과 PLINE의 차이 — 왜 외곽은 하나로 이어진 객체여야 하는지</li><li class="p-next-li">원점과 기준면을 정하고 120 × 16 베이스를 좌표 입력으로 작도</li><li class="p-next-li">오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그린다</li><li class="p-next-li">마치면 L03_PROFILE 상태로 저장한다</li></ul></section></main>
+  <div id="l2f9-root" data-composition-id="l2f9" data-start="0" data-duration="102" data-width="1920" data-height="1080">
+    <section id="l2f9" class="clip" data-start="0" data-duration="102" data-track-index="1">
+      <header class="topline"><div><div class="index">08 · RECAP</div><h1><span class="kw">이번</span> <span class="kw">차시와</span> <span class="kw">다음</span> <span class="kw">차시</span></h1></div><div class="prompt">L02_TEMPLATE <span class="kw">완료</span></div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b><span class="kw">이번에</span> 한 일</b><strong><span class="kw">부품을</span> <span class="kw">읽고</span> <span class="kw">도면</span> <span class="kw">환경을</span> <span class="kw">만들었습니다</span></strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li"><span class="kw">아이들러</span> <span class="kw">풀리</span> <span class="kw">브래킷이</span> <span class="kw">벨트</span> <span class="kw">장력을</span> <span class="kw">잡는</span> <span class="kw">바퀴의</span> <span class="kw">축을</span> <span class="kw">붙드는</span> <span class="kw">부품이고,</span> <span class="kw">장력이</span> <span class="kw">맞아야</span> <span class="kw">동력</span> <span class="kw">전달과</span> <span class="kw">부품</span> <span class="kw">수명이</span> <span class="kw">유지된다는</span> 것</li><li class="p-done-li"><span class="kw">면마다</span> <span class="kw">가공과</span> <span class="kw">표면</span> <span class="kw">거칠기가</span> <span class="kw">다른</span> <span class="kw">이유</span> — <span class="kw">축이</span> <span class="kw">닿는</span> <span class="kw">구멍은</span> <span class="kw">곱게,</span> <span class="kw">볼트가</span> <span class="kw">통과만</span> <span class="kw">하는</span> <span class="kw">장공은</span> <span class="kw">거칠어도</span> <span class="kw">된다는</span> <span class="kw">판단</span> <span class="kw">기준</span></li><li class="p-done-li"><span class="kw">형상마다의</span> <span class="kw">근거</span> — <span class="kw">넓은</span> <span class="kw">베이스는</span> <span class="kw">모멘트,</span> <span class="kw">장공은</span> <span class="kw">조정</span> <span class="kw">여유,</span> <span class="kw">굵은</span> <span class="kw">밑동은</span> <span class="kw">굽힘,</span> <span class="kw">필렛은</span> <span class="kw">응력</span> <span class="kw">집중</span></li><li class="p-done-li"><span class="kw">도면</span> 위 <span class="kw">모든</span> <span class="kw">표기가</span> <span class="kw">무엇을</span> <span class="kw">지시하는지</span> — <span class="kw">치수</span> <span class="kw">여덟</span> <span class="kw">개와</span> <span class="kw">기호</span> <span class="kw">여덟</span> 개</li><li class="p-done-li">A3 <span class="kw">용지에</span> <span class="kw">사방</span> 10 <span class="kw">도면틀과</span> <span class="kw">중심</span> <span class="kw">마크,</span> 200×30 <span class="kw">표제란을</span> <span class="kw">만들고</span> 네 개 <span class="kw">레이어를</span> <span class="kw">설정해</span> <span class="kw">템플릿</span> <span class="kw">파일로</span> <span class="kw">저장</span></li></ul></section><section class="card p-next" style="padding:30px 34px"><b><span class="kw">다음</span></b><strong><span class="kw">3차시</span> · <span class="kw">기준선과</span> <span class="kw">외곽</span></strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li"><span class="kw">절대·상대·극좌표로</span> <span class="kw">점을</span> <span class="kw">찍는</span> 세 <span class="kw">가지</span> <span class="kw">방법과</span> <span class="kw">각각을</span> <span class="kw">언제</span> <span class="kw">쓰는지</span></li><li class="p-next-li">LINE과 PLINE의 <span class="kw">차이</span> — 왜 <span class="kw">외곽은</span> <span class="kw">하나로</span> <span class="kw">이어진</span> <span class="kw">객체여야</span> <span class="kw">하는지</span></li><li class="p-next-li"><span class="kw">원점과</span> <span class="kw">기준면을</span> <span class="kw">정하고</span> 120 × 16 <span class="kw">베이스를</span> <span class="kw">좌표</span> <span class="kw">입력으로</span> <span class="kw">작도</span></li><li class="p-next-li"><span class="kw">오늘</span> 켜 둔 <span class="kw">접점</span> <span class="kw">스냅으로</span> <span class="kw">보스</span> <span class="kw">원에</span> <span class="kw">접하는</span> 목 <span class="kw">선을</span> <span class="kw">그린다</span></li><li class="p-next-li"><span class="kw">마치면</span> L03_PROFILE <span class="kw">상태로</span> <span class="kw">저장한다</span></li></ul></section></main>
     </section>
   </div>
   <script>
@@ -56,10 +95,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l2f9 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l2f9 .p-done",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},1.6);
-    tl.fromTo("#l2f9 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:11.01,ease:"power2.out"},2.5);
-    tl.fromTo("#l2f9 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},58.06);
-    tl.fromTo("#l2f9 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:6.67,ease:"power2.out"},58.96);
-    tl.to("#l2f9 .topline,#l2f9 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},92.95);
+    tl.fromTo("#l2f9 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:2.61,ease:"power2.out"},2.5);
+    tl.fromTo("#l2f9 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},65.91);
+    tl.fromTo("#l2f9 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:3.45,ease:"power2.out"},66.81);
+    tl.to("#l2f9 .topline,#l2f9 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},100.95);
     window.__timelines["l2f9"]=tl;
   </script>
 </template></body></html>

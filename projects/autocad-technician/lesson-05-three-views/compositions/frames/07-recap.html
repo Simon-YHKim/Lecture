@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,11 +61,33 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l5f7-root" data-composition-id="l5f7" data-start="0" data-duration="130" data-width="1920" data-height="1080">
-    <section id="l5f7" class="clip" data-start="0" data-duration="130" data-track-index="1">
-      <header class="topline"><div><div class="index">06 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L05_VIEWS 완료</div></header>
-      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>정면도 하나에서 뷰 두 개</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">정면도의 모서리와 원 사분점에서 구성선을 뽑아 폭 120과 높이 90을 그대로 받아왔습니다.</li><li class="p-done-li">오늘 새로 정한 값은 판 두께 12와 보스 자리 20뿐이었습니다.</li><li class="p-done-li">평면도는 격자를 그려 잘라내는 방법으로, 우측면도는 교차점을 따라 이어 그리는 방법으로 만들었습니다.</li><li class="p-done-li">깊이는 45도 선을 거쳐 옮겼기 때문에 두 뷰의 두께가 어긋날 수 없습니다.</li><li class="p-done-li">숨은선은 축 구멍 20 전체·탭 10까지·장공 12 구간으로 다르게 넣고 L05_VIEWS로 저장했습니다.</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>다음 차시</b><strong>그려 놓은 것을 정리합니다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">뷰를 맞추려고 그은 구성선을 한 번에 골라 걷어냅니다.</li><li class="p-next-li">남은 형상선 토막은 TRIM으로 자르고, 못 미친 선은 EXTEND로 늘리고, 경계가 없는 선은 지웁니다.</li><li class="p-next-li">대칭 형상은 MIRROR로 다시 맞추고, 레이어가 틀린 선은 MATCHPROP으로 제자리에 옮깁니다.</li><li class="p-next-li">색·선 종류·선가중치를 ByLayer로 통일하고, 축척 0.5와 LTSCALE로 파선 간격을 맞춥니다.</li><li class="p-next-li">표면 거칠기·기하 공차·재질·열처리 지시가 각각 무엇을 지시하는지 읽고 넘어갑니다.</li></ul></section></main>
+  <div id="l5f7-root" data-composition-id="l5f7" data-start="0" data-duration="139" data-width="1920" data-height="1080">
+    <section id="l5f7" class="clip" data-start="0" data-duration="139" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · RECAP</div><h1><span class="kw">이번</span> <span class="kw">차시와</span> <span class="kw">다음</span> <span class="kw">차시</span></h1></div><div class="prompt">L05_VIEWS <span class="kw">완료</span></div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b><span class="kw">이번에</span> 한 일</b><strong><span class="kw">정면도</span> <span class="kw">하나에서</span> 뷰 두 개</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li"><span class="kw">정면도의</span> <span class="kw">모서리와</span> 원 <span class="kw">사분점에서</span> <span class="kw">구성선을</span> <span class="kw">뽑아</span> 폭 120과 <span class="kw">높이</span> 90을 <span class="kw">그대로</span> <span class="kw">받아왔습니다.</span></li><li class="p-done-li"><span class="kw">오늘</span> <span class="kw">새로</span> <span class="kw">정한</span> <span class="kw">값은</span> 판 <span class="kw">두께</span> 12와 <span class="kw">보스</span> <span class="kw">자리</span> <span class="kw">20뿐이었습니다.</span></li><li class="p-done-li"><span class="kw">평면도는</span> <span class="kw">격자를</span> <span class="kw">그려</span> <span class="kw">잘라내는</span> <span class="kw">방법으로,</span> <span class="kw">우측면도는</span> <span class="kw">교차점을</span> <span class="kw">따라</span> <span class="kw">이어</span> <span class="kw">그리는</span> <span class="kw">방법으로</span> <span class="kw">만들었습니다.</span></li><li class="p-done-li"><span class="kw">깊이는</span> 45도 <span class="kw">선을</span> <span class="kw">거쳐</span> <span class="kw">옮겼기</span> <span class="kw">때문에</span> 두 <span class="kw">뷰의</span> <span class="kw">두께가</span> <span class="kw">어긋날</span> 수 <span class="kw">없습니다.</span></li><li class="p-done-li"><span class="kw">숨은선은</span> 축 <span class="kw">구멍</span> 20 <span class="kw">전체·탭</span> <span class="kw">10까지·장공</span> 12 <span class="kw">구간으로</span> <span class="kw">다르게</span> <span class="kw">넣고</span> L05_VIEWS로 <span class="kw">저장했습니다.</span></li></ul></section><section class="card p-next" style="padding:30px 34px"><b><span class="kw">다음</span> <span class="kw">차시</span></b><strong><span class="kw">그려</span> <span class="kw">놓은</span> <span class="kw">것을</span> <span class="kw">정리합니다</span></strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li"><span class="kw">뷰를</span> <span class="kw">맞추려고</span> <span class="kw">그은</span> <span class="kw">구성선을</span> 한 <span class="kw">번에</span> <span class="kw">골라</span> <span class="kw">걷어냅니다.</span></li><li class="p-next-li"><span class="kw">남은</span> <span class="kw">형상선</span> <span class="kw">토막은</span> <span class="kw">TRIM으로</span> <span class="kw">자르고,</span> 못 <span class="kw">미친</span> <span class="kw">선은</span> EXTEND로 <span class="kw">늘리고,</span> <span class="kw">경계가</span> <span class="kw">없는</span> <span class="kw">선은</span> <span class="kw">지웁니다.</span></li><li class="p-next-li"><span class="kw">대칭</span> <span class="kw">형상은</span> MIRROR로 <span class="kw">다시</span> <span class="kw">맞추고,</span> <span class="kw">레이어가</span> <span class="kw">틀린</span> <span class="kw">선은</span> <span class="kw">MATCHPROP으로</span> <span class="kw">제자리에</span> <span class="kw">옮깁니다.</span></li><li class="p-next-li">색·선 <span class="kw">종류·선가중치를</span> ByLayer로 <span class="kw">통일하고,</span> <span class="kw">축척</span> 0.5와 LTSCALE로 <span class="kw">파선</span> <span class="kw">간격을</span> <span class="kw">맞춥니다.</span></li><li class="p-next-li"><span class="kw">표면</span> <span class="kw">거칠기·기하</span> <span class="kw">공차·재질·열처리</span> <span class="kw">지시가</span> <span class="kw">각각</span> <span class="kw">무엇을</span> <span class="kw">지시하는지</span> <span class="kw">읽고</span> <span class="kw">넘어갑니다.</span></li></ul></section></main>
     </section>
   </div>
   <script>
@@ -56,10 +95,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l5f7 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l5f7 .p-done",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},1.6);
-    tl.fromTo("#l5f7 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:13.74,ease:"power2.out"},2.5);
-    tl.fromTo("#l5f7 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},71.72);
-    tl.fromTo("#l5f7 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:11.14,ease:"power2.out"},72.62);
-    tl.to("#l5f7 .topline,#l5f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},128.95);
+    tl.fromTo("#l5f7 .p-done-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:14.47,ease:"power2.out"},2.5);
+    tl.fromTo("#l5f7 .p-next",{opacity:0,y:26},{opacity:1,y:0,duration:1.0,ease:"power3.out"},75.33);
+    tl.fromTo("#l5f7 .p-next-li",{opacity:0,x:18},{opacity:1,x:0,duration:.8,stagger:12.21,ease:"power2.out"},76.23);
+    tl.to("#l5f7 .topline,#l5f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},137.95);
     window.__timelines["l5f7"]=tl;
   </script>
 </template></body></html>

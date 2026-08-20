@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,10 +61,32 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l5f9-root" data-composition-id="l5f9" data-start="0" data-duration="20" data-width="1920" data-height="1080">
-    <section id="l5f9" class="clip" data-start="0" data-duration="20" data-track-index="1">
-      <div class="close"><div class="rule"></div><h2>고생하셨습니다</h2><div class="next">다음은 <em>6차시 · 편집과 표현</em> 입니다<br>그때 다시 뵙겠습니다</div><div class="brand">LG이노텍 &nbsp;·&nbsp; for technician</div></div>
+  <div id="l5f9-root" data-composition-id="l5f9" data-start="0" data-duration="17" data-width="1920" data-height="1080">
+    <section id="l5f9" class="clip" data-start="0" data-duration="17" data-track-index="1">
+      <div class="close"><div class="rule"></div><h2><span class="kw">고생하셨습니다</span></h2><div class="next"><span class="kw">다음은</span> <em><span class="kw">6차시</span> · <span class="kw">편집과</span> <span class="kw">표현</span></em> <span class="kw">입니다</span><br><span class="kw">그때</span> <span class="kw">다시</span> <span class="kw">뵙겠습니다</span></div><div class="brand"><span class="kw">LG이노텍</span> &nbsp;·&nbsp; for technician</div></div>
     </section>
   </div>
   <script>
@@ -55,9 +94,9 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l5f9 .rule",{scaleX:0,transformOrigin:"left center"},{scaleX:1,duration:1.0,ease:"power2.inOut"},0.8);
     tl.fromTo("#l5f9 h2",{opacity:0,y:22},{opacity:1,y:0,duration:1.2,ease:"power3.out"},1.6);
-    tl.fromTo("#l5f9 .next",{opacity:0,y:14},{opacity:1,y:0,duration:1.0,ease:"power2.out"},10.83);
-    tl.fromTo("#l5f9 .brand",{opacity:0},{opacity:1,duration:1.0},12.03);
-    tl.to("#l5f9 .rule,#l5f9 h2,#l5f9 .next,#l5f9 .brand",{opacity:0,duration:.9,ease:"power2.in"},18.95);
+    tl.fromTo("#l5f9 .next",{opacity:0,y:14},{opacity:1,y:0,duration:1.0,ease:"power2.out"},10.41);
+    tl.fromTo("#l5f9 .brand",{opacity:0},{opacity:1,duration:1.0},11.61);
+    tl.to("#l5f9 .rule,#l5f9 h2,#l5f9 .next,#l5f9 .brand",{opacity:0,duration:.9,ease:"power2.in"},15.95);
     window.__timelines["l5f9"]=tl;
   </script>
 </template></body></html>

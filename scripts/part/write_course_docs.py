@@ -28,6 +28,7 @@ TOPIC = {
     "lesson-05-three-views": "제3각법 3뷰와 반복",
     "lesson-06-editing-symbols": "편집과 표현",
     "lesson-07-dimensioning-release": "치수와 출도",
+    "lesson-08-exam-and-qa": "시험 안내와 Q&A",
 }
 
 
@@ -92,7 +93,8 @@ def main():
             encoding="utf-8", newline="\n").write(
         "# COURSE PLAN — AutoCAD Technician\n\n"
         "LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나를 일곱 차시에 걸쳐\n"
-        "처음부터 끝까지 그린다. 도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.\n\n"
+        "처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.\n"
+        "도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.\n\n"
         "전체 %s · A3 가로 · 제3각법 · 레이어 네 개\n\n" % clock(total)
         + "| 차시 | 주제 | 길이 | 프레임 | 여는 파일 | 저장하는 상태 |\n"
           "| --- | --- | --- | --- | --- | --- |\n"
@@ -114,7 +116,8 @@ def main():
           "## 다시 만들기\n\n"
           "    python scripts/part/scaffold_lesson_01.py projects/autocad-technician/lesson-01-orientation\n"
           "    python scripts/part/scaffold_lesson_02.py projects/autocad-technician/lesson-02-part-and-template\n"
-          "    python scripts/part/scaffold_lessons_3_7.py\n\n"
+          "    python scripts/part/scaffold_lessons_3_7.py\n"
+          "    python scripts/part/lesson_eight.py\n\n"
           "스캐폴드는 한 번만 돌린다. 그 뒤 프레임은 HyperFrames Studio 에서 직접 편집하는\n"
           "저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.\n\n"
           "이전 10차시 구성은 `_archive/` 에 있다. 빌드·검사 대상이 아니다.\n")

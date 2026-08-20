@@ -4,12 +4,12 @@
 
 | 차시 | 주제 | 여는 파일 | 저장하는 상태 | 단계 | 예상 길이 |
 | --- | --- | --- | --- | --- | --- |
-| 2 | 부품 이해와 도면 환경 | — | L02_TEMPLATE | 15 | 7:30 |
-| 3 | 기준선과 외곽 | L02_TEMPLATE | L03_PROFILE | 16 | 15:20 |
-| 4 | 원·호·오프셋 | L03_PROFILE | L04_FEATURES | 16 | 13:20 |
-| 5 | 제3각법 3뷰와 반복 | L04_FEATURES | L05_VIEWS | 16 | 22:00 |
-| 6 | 편집과 표현 | L05_VIEWS | L06_REPRESENTED | 15 | 17:10 |
-| 7 | 치수와 출도 | L06_REPRESENTED | L07_RELEASE | 16 | 25:00 |
+| 2 | 부품 이해와 도면 환경 | — | L02_TEMPLATE | 15 | 8:00 |
+| 3 | 기준선과 외곽 | L02_TEMPLATE | L03_PROFILE | 16 | 16:20 |
+| 4 | 원·호·오프셋 | L03_PROFILE | L04_FEATURES | 16 | 13:40 |
+| 5 | 제3각법 3뷰와 반복 | L04_FEATURES | L05_VIEWS | 16 | 23:10 |
+| 6 | 편집과 표현 | L05_VIEWS | L06_REPRESENTED | 15 | 17:50 |
+| 7 | 치수와 출도 | L06_REPRESENTED | L07_RELEASE | 16 | 25:50 |
 
 예상 길이는 그 차시 `SCRIPT.md` Line 5 의 낭독 시간 × 1.3 이다.
 타이핑과 대화상자와 기다리는 시간은 말하지 않기 때문이다.

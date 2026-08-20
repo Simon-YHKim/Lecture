@@ -26,6 +26,7 @@ import tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
 import lesson_build as lb  # noqa: E402
+import lesson_docs  # noqa: E402
 import lesson_kit as kit  # noqa: E402
 
 LESSON = sys.argv[1] if len(sys.argv) > 1 else "projects/autocad-technician/lesson-02-part-and-template"
@@ -367,33 +368,46 @@ assert len(STEPS) == len(STEP_LABELS), "SCRIPT.md 단계 수와 체크리스트 
 
 
 def build_demo(comp, dur, spans):
-    chk = "".join('<li class="st st%d">%s</li>' % (i, t) for i, t in enumerate(STEP_LABELS, 1))
-    body = (kit.header("07 · DEMO-01", "템플릿 만들기", "USER RECORDING · acadiso.dwt → L02_TEMPLATE")
-            + '\n      <main class="body" style="grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)">'
-            + '<section class="panel rec" style="border-style:dashed;position:relative">'
-              '<div style="text-align:center;color:#666">'
-              '<div style="font-size:29px;letter-spacing:.12em;color:#C7004C">USER RECORDING</div>'
-              '<div style="font-size:23px;margin-top:12px">DEMO-01 · 화면 녹화 삽입</div></div>'
-              '<div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:#DCDBD7">'
-              '<div class="prog" style="height:100%;width:100%;background:#C7004C;'
-              'transform-origin:left center"></div></div></section>'
-            + '<section><ol style="list-style:none;margin:0;padding:0;font-size:23px;line-height:1.5">'
-            + chk + '</ol>'
-            + '<div class="note"><b>우선순위</b> 과제가 템플릿을 제공하면 제공 파일을 우선하고 '
-            + '교육용 기본값으로 덮어쓰지 않습니다.</div></section></main>')
-    items = [beats.item(".st%d" % i, kind="plain") for i in range(1, len(STEP_LABELS) + 1)]
+    """The recording fills the frame; a strip along the bottom carries the step.
+
+    Same treatment as lessons 3-7 (`LESSON_STYLE.md` 27). Splitting the frame
+    shrank AutoCAD's command line with the video, and that is the text a
+    learner reads to follow along.
+    """
+    keys = beats.step_keys(os.path.join(LESSON, "SCRIPT.md"), 8)
+    n = len(STEP_LABELS)
+    strips = "".join(
+        '<div class="sp sp%d" data-layout-allow-overlap><span class="no">%02d<i>&#8201;/&#8201;%02d</i></span>'
+        '<span class="key">%s</span><span class="what">%s</span></div>'
+        % (i, i, n, k or "&#183;", t)
+        for i, (t, k) in enumerate(zip(STEP_LABELS, keys), 1))
+
+    body = ('      <div class="film">'
+            '<div class="rec"><div class="recmark">USER RECORDING</div>'
+            '<div class="recsub">DEMO-01 &#183; acadiso.dwt &#8594; L02_TEMPLATE</div></div>'
+            '<div class="tag">템플릿 만들기</div>'
+            '<div class="strip">%s'
+            '<div class="track"><i class="prog"></i></div></div></div>' % strips)
+
+    items = [beats.item(".sp%d" % i, kind="plain", mode="reveal", dy=12, read=0)
+             for i in range(1, n + 1)]
     tl = "\n".join([
-        beats.chrome(comp, drawing=0),
-        beats.read_along(comp, items, spans, entrance=0.8, group_stagger=0.07),
-        # The placeholder is the widest thing on screen and cannot animate. A bar
-        # tracking progress through the fifteen steps stops the frame reading as
-        # seven frozen minutes.
-        '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.0);'
-        % (comp, round(dur - 2.0, 2)),
-        beats.cue(comp, ".note", round(dur - 12.0, 2), dy=12),
-        beats.outro(comp, dur),
+        '    tl.fromTo("#%s .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,'
+        'ease:"power3.out"},.35);' % comp,
+        '    tl.fromTo("#%s .strip",{opacity:0,y:26},{opacity:1,y:0,duration:.9,'
+        'ease:"power3.out"},.7);' % comp,
+        beats.read_along(comp, items, spans),
+        '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.2);'
+        % (comp, round(dur - 2.4, 2)),
+        '    tl.to("#%s .tag",{opacity:0,duration:1.0,ease:"power2.in"},%s);'
+        % (comp, round(min(dur * .06, 30.0), 2)),
+        '    tl.to("#%s .strip",{opacity:0,y:18,duration:.9,ease:"power2.in"},%s);'
+        % (comp, round(dur - 1.05, 2)),
     ])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), [
+        {"kind": "appearsBy", "selector": "#%s .strip" % comp, "bySec": 3},
+        {"kind": "staysInFrame", "selector": "#%s .strip" % comp},
+    ]
 
 
 # The recording runs longer than its narration: typing, dialogs and waiting are
@@ -468,4 +482,22 @@ for _stem, _comp, _dur in built:
 beats.stamp_times(os.path.join(LESSON, "SCRIPT.md"), ranges, start)
 
 kit.write_project(LESSON, NAME, slots, start, os, json)
+
+# One line per frame, in the order they play. lesson_docs.refresh() refuses to
+# run if this list and the built slots disagree.
+DESCS = [
+    "검정 타이틀 · **부품 이해와 도면 환경**",
+    "왼쪽 카드 4장 / 오른쪽 정면도",
+    "왼쪽 정면도 / 오른쪽 가공 표 6행 + 이유 문단",
+    "왼쪽 정면도 / 오른쪽 근거 카드 5장",
+    "왼쪽 3뷰 / 오른쪽 치수 8행",
+    "왼쪽 3뷰 / 오른쪽 기호 8행",
+    "왼쪽 A3 규격도 / 오른쪽 레이어 표 + 두 문단",
+    "전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키",
+    "2분할 마무리",
+    "오늘 친 단축키 표 + 기능키",
+    "인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시",
+]
+lesson_docs.refresh(LESSON, DESCS)
+
 print("\n%s — 프레임 %d개, 전체 %ds = %d:%02d" % (NAME, len(built), start, start // 60, start % 60))

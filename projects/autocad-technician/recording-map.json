@@ -5,7 +5,7 @@
       "lesson": 2,
       "slug": "lesson-02-part-and-template",
       "demoId": "DEMO-01",
-      "lengthSec": 450,
+      "lengthSec": 480,
       "steps": 15,
       "opens": null,
       "saves": "L02_TEMPLATE"
@@ -14,7 +14,7 @@
       "lesson": 3,
       "slug": "lesson-03-baseline-profile",
       "demoId": "DEMO-01",
-      "lengthSec": 920,
+      "lengthSec": 980,
       "steps": 16,
       "opens": "L02_TEMPLATE",
       "saves": "L03_PROFILE"
@@ -23,7 +23,7 @@
       "lesson": 4,
       "slug": "lesson-04-circles-arcs",
       "demoId": "DEMO-01",
-      "lengthSec": 800,
+      "lengthSec": 820,
       "steps": 16,
       "opens": "L03_PROFILE",
       "saves": "L04_FEATURES"
@@ -32,7 +32,7 @@
       "lesson": 5,
       "slug": "lesson-05-three-views",
       "demoId": "DEMO-01",
-      "lengthSec": 1320,
+      "lengthSec": 1390,
       "steps": 16,
       "opens": "L04_FEATURES",
       "saves": "L05_VIEWS"
@@ -41,7 +41,7 @@
       "lesson": 6,
       "slug": "lesson-06-editing-symbols",
       "demoId": "DEMO-01",
-      "lengthSec": 1030,
+      "lengthSec": 1070,
       "steps": 15,
       "opens": "L05_VIEWS",
       "saves": "L06_REPRESENTED"
@@ -50,7 +50,7 @@
       "lesson": 7,
       "slug": "lesson-07-dimensioning-release",
       "demoId": "DEMO-01",
-      "lengthSec": 1500,
+      "lengthSec": 1550,
       "steps": 16,
       "opens": "L06_REPRESENTED",
       "saves": "L07_RELEASE"

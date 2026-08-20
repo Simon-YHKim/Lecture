@@ -1,19 +1,21 @@
 # COURSE PLAN — AutoCAD Technician
 
 LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나를 일곱 차시에 걸쳐
-처음부터 끝까지 그린다. 도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.
+처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.
+도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.
 
-전체 200:04 · A3 가로 · 제3각법 · 레이어 네 개
+전체 221:12 · A3 가로 · 제3각법 · 레이어 네 개
 
 | 차시 | 주제 | 길이 | 프레임 | 여는 파일 | 저장하는 상태 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 오리엔테이션 | 6:17 | 6 | — | — |
-| 2 | 부품 이해와 도면 환경 | 23:52 | 11 | — | L02_TEMPLATE |
-| 3 | 기준선과 외곽 | 30:52 | 9 | L02_TEMPLATE | L03_PROFILE |
-| 4 | 원·호·오프셋 | 29:18 | 9 | L03_PROFILE | L04_FEATURES |
-| 5 | 제3각법 3뷰와 반복 | 34:41 | 9 | L04_FEATURES | L05_VIEWS |
-| 6 | 편집과 표현 | 33:45 | 9 | L05_VIEWS | L06_REPRESENTED |
-| 7 | 치수와 출도 | 41:19 | 9 | L06_REPRESENTED | L07_RELEASE |
+| 1 | 오리엔테이션 | 7:07 | 6 | — | — |
+| 2 | 부품 이해와 도면 환경 | 25:55 | 11 | — | L02_TEMPLATE |
+| 3 | 기준선과 외곽 | 32:51 | 9 | L02_TEMPLATE | L03_PROFILE |
+| 4 | 원·호·오프셋 | 31:06 | 9 | L03_PROFILE | L04_FEATURES |
+| 5 | 제3각법 3뷰와 반복 | 36:51 | 9 | L04_FEATURES | L05_VIEWS |
+| 6 | 편집과 표현 | 35:48 | 9 | L05_VIEWS | L06_REPRESENTED |
+| 7 | 치수와 출도 | 42:51 | 9 | L06_REPRESENTED | L07_RELEASE |
+| 8 | 시험 안내와 Q&A | 8:43 | 7 | — | — |
 
 ## 이 과정이 스스로 지키는 것
 
@@ -37,6 +39,7 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
     python scripts/part/scaffold_lesson_01.py projects/autocad-technician/lesson-01-orientation
     python scripts/part/scaffold_lesson_02.py projects/autocad-technician/lesson-02-part-and-template
     python scripts/part/scaffold_lessons_3_7.py
+    python scripts/part/lesson_eight.py
 
 스캐폴드는 한 번만 돌린다. 그 뒤 프레임은 HyperFrames Studio 에서 직접 편집하는
 저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.

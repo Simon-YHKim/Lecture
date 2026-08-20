@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,10 +61,32 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l2f5-root" data-composition-id="l2f5" data-start="0" data-duration="105" data-width="1920" data-height="1080">
-    <section id="l2f5" class="clip" data-start="0" data-duration="105" data-track-index="1">
-      <header class="topline"><div><div class="index">04 · READ 1</div><h1>치수가 형상을 확정합니다</h1></div><div class="prompt">숫자 하나하나가 무엇을 재는가</div></header>
+  <div id="l2f5-root" data-composition-id="l2f5" data-start="0" data-duration="125" data-width="1920" data-height="1080">
+    <section id="l2f5" class="clip" data-start="0" data-duration="125" data-track-index="1">
+      <header class="topline"><div><div class="index">04 · READ 1</div><h1><span class="kw">치수가</span> <span class="kw">형상을</span> <span class="kw">확정합니다</span></h1></div><div class="prompt"><span class="kw">숫자</span> <span class="kw">하나하나가</span> <span class="kw">무엇을</span> <span class="kw">재는가</span></div></header>
       <main class="body" style="grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)"><section class="panel" style="padding:22px"><svg class="dwg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296 274">
 <style>
  .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
@@ -259,7 +298,7 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 <text class="vl" x="118.000" y="268.000" text-anchor="middle">정면도</text>
 <text class="vl" x="118.000" y="40.000" text-anchor="middle">평면도</text>
 <text class="vl" x="234.000" y="238.000" text-anchor="middle">우측면도</text>
-</svg></section><section><table class="spec"><thead><tr><th>표기</th><th>무엇인가</th><th>무엇을 지시하는가</th></tr></thead><tbody><tr class="nt nt1"><td style="color:#C7004C;white-space:nowrap;font-size:22px">120 · 90</td><td style="color:#111;white-space:nowrap">전체 크기</td><td style="color:#666;font-size:21px">가로 세로 바깥 치수. 재료를 얼마나 잘라야 하는지 정한다</td></tr><tr class="nt nt2"><td style="color:#C7004C;white-space:nowrap;font-size:22px">60 · 62</td><td style="color:#111;white-space:nowrap">보스 중심 위치</td><td style="color:#666;font-size:21px">왼쪽 끝과 바닥에서 잰 값. 이 두 값이 축의 자리를 확정한다</td></tr><tr class="nt nt3"><td style="color:#C7004C;white-space:nowrap;font-size:22px">16</td><td style="color:#111;white-space:nowrap">베이스 높이</td><td style="color:#666;font-size:21px">프레임에 닿는 판의 두께가 아니라 정면에서 본 높이</td></tr><tr class="nt nt4"><td style="color:#C7004C;white-space:nowrap;font-size:22px">80</td><td style="color:#111;white-space:nowrap">목 밑동 폭</td><td style="color:#666;font-size:21px">필렛이 지워 버린 이론 모서리까지의 거리. 목 선을 그릴 시작점</td></tr><tr class="nt nt5"><td style="color:#C7004C;white-space:nowrap;font-size:22px">29 · 50 · 12</td><td style="color:#111;white-space:nowrap">장공 위치와 중심거리</td><td style="color:#666;font-size:21px">왼쪽 끝에서 첫 끝원까지 29, 두 장공의 끝원 사이 50, 한 장공의 두 끝원 간격 12</td></tr><tr class="nt nt6"><td style="color:#C7004C;white-space:nowrap;font-size:22px">8</td><td style="color:#111;white-space:nowrap">장공 중심 높이</td><td style="color:#666;font-size:21px">바닥에서 잰 값. 볼트 머리가 판 안에 들어오는지 여기서 정해진다</td></tr><tr class="nt nt7"><td style="color:#C7004C;white-space:nowrap;font-size:22px">26 · (95.7)</td><td style="color:#111;white-space:nowrap">필렛 중심</td><td style="color:#666;font-size:21px">R10의 중심이 놓이는 높이와, 참고 치수로 표기한 가로 위치</td></tr><tr class="nt nt8"><td style="color:#C7004C;white-space:nowrap;font-size:22px">12 · 20</td><td style="color:#111;white-space:nowrap">두께</td><td style="color:#666;font-size:21px">평면도에서 읽는다. 판은 12, 보스가 있는 자리는 20</td></tr></tbody></table></section></main>
+</svg></section><section><table class="spec"><thead><tr><th><span class="kw">표기</span></th><th><span class="kw">무엇인가</span></th><th><span class="kw">무엇을</span> <span class="kw">지시하는가</span></th></tr></thead><tbody><tr class="nt nt1"><td style="color:#C7004C;white-space:nowrap;font-size:22px">120 · 90</td><td style="color:#111;white-space:nowrap"><span class="kw">전체</span> <span class="kw">크기</span></td><td style="color:#666;font-size:21px"><span class="kw">가로</span> <span class="kw">세로</span> <span class="kw">바깥</span> <span class="kw">치수.</span> <span class="kw">재료를</span> <span class="kw">얼마나</span> <span class="kw">잘라야</span> <span class="kw">하는지</span> <span class="kw">정한다</span></td></tr><tr class="nt nt2"><td style="color:#C7004C;white-space:nowrap;font-size:22px">60 · 62</td><td style="color:#111;white-space:nowrap"><span class="kw">보스</span> <span class="kw">중심</span> <span class="kw">위치</span></td><td style="color:#666;font-size:21px"><span class="kw">왼쪽</span> <span class="kw">끝과</span> <span class="kw">바닥에서</span> 잰 값. 이 두 <span class="kw">값이</span> <span class="kw">축의</span> <span class="kw">자리를</span> <span class="kw">확정한다</span></td></tr><tr class="nt nt3"><td style="color:#C7004C;white-space:nowrap;font-size:22px">16</td><td style="color:#111;white-space:nowrap"><span class="kw">베이스</span> <span class="kw">높이</span></td><td style="color:#666;font-size:21px"><span class="kw">프레임에</span> <span class="kw">닿는</span> <span class="kw">판의</span> <span class="kw">두께가</span> <span class="kw">아니라</span> <span class="kw">정면에서</span> 본 <span class="kw">높이</span></td></tr><tr class="nt nt4"><td style="color:#C7004C;white-space:nowrap;font-size:22px">80</td><td style="color:#111;white-space:nowrap">목 <span class="kw">밑동</span> 폭</td><td style="color:#666;font-size:21px"><span class="kw">필렛이</span> <span class="kw">지워</span> <span class="kw">버린</span> <span class="kw">이론</span> <span class="kw">모서리까지의</span> <span class="kw">거리.</span> 목 <span class="kw">선을</span> <span class="kw">그릴</span> <span class="kw">시작점</span></td></tr><tr class="nt nt5"><td style="color:#C7004C;white-space:nowrap;font-size:22px">29 · 50 · 12</td><td style="color:#111;white-space:nowrap"><span class="kw">장공</span> <span class="kw">위치와</span> <span class="kw">중심거리</span></td><td style="color:#666;font-size:21px"><span class="kw">왼쪽</span> <span class="kw">끝에서</span> 첫 <span class="kw">끝원까지</span> 29, 두 <span class="kw">장공의</span> <span class="kw">끝원</span> <span class="kw">사이</span> 50, 한 <span class="kw">장공의</span> 두 <span class="kw">끝원</span> <span class="kw">간격</span> 12</td></tr><tr class="nt nt6"><td style="color:#C7004C;white-space:nowrap;font-size:22px">8</td><td style="color:#111;white-space:nowrap"><span class="kw">장공</span> <span class="kw">중심</span> <span class="kw">높이</span></td><td style="color:#666;font-size:21px"><span class="kw">바닥에서</span> 잰 값. <span class="kw">볼트</span> <span class="kw">머리가</span> 판 <span class="kw">안에</span> <span class="kw">들어오는지</span> <span class="kw">여기서</span> <span class="kw">정해진다</span></td></tr><tr class="nt nt7"><td style="color:#C7004C;white-space:nowrap;font-size:22px">26 · (95.7)</td><td style="color:#111;white-space:nowrap"><span class="kw">필렛</span> <span class="kw">중심</span></td><td style="color:#666;font-size:21px">R10의 <span class="kw">중심이</span> <span class="kw">놓이는</span> <span class="kw">높이와,</span> <span class="kw">참고</span> <span class="kw">치수로</span> <span class="kw">표기한</span> <span class="kw">가로</span> <span class="kw">위치</span></td></tr><tr class="nt nt8"><td style="color:#C7004C;white-space:nowrap;font-size:22px">12 · 20</td><td style="color:#111;white-space:nowrap"><span class="kw">두께</span></td><td style="color:#666;font-size:21px"><span class="kw">평면도에서</span> <span class="kw">읽는다.</span> <span class="kw">판은</span> 12, <span class="kw">보스가</span> <span class="kw">있는</span> <span class="kw">자리는</span> 20</td></tr></tbody></table></section></main>
     </section>
   </div>
   <script>
@@ -268,72 +307,72 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     tl.fromTo("#l2f5 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l2f5 .panel",{opacity:0,x:-60},{opacity:1,x:0,duration:.85,ease:"power3.out"},.75);
     tl.fromTo("#l2f5 thead",{opacity:0,y:8},{opacity:1,y:0,duration:0.7,ease:"power2.out"},1.5);
-    tl.fromTo("#l2f5 .nt1,#l2f5 .nt2,#l2f5 .nt3,#l2f5 .nt4,#l2f5 .nt5,#l2f5 .nt6,#l2f5 .nt7,#l2f5 .nt8",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},7.19);
-    tl.to("#l2f5 .nt1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},9.59);
-    tl.to("#l2f5 .nt1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},18.17);
-    tl.to("#l2f5 .nt2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},18.17);
-    tl.to("#l2f5 .nt2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},27.56);
-    tl.to("#l2f5 .nt3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},27.56);
-    tl.to("#l2f5 .nt3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},35.95);
-    tl.to("#l2f5 .nt4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},35.95);
-    tl.to("#l2f5 .nt4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},52.78);
-    tl.to("#l2f5 .nt5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},52.78);
-    tl.to("#l2f5 .nt5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},69.0);
-    tl.to("#l2f5 .nt6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},69.0);
-    tl.to("#l2f5 .nt6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},77.99);
-    tl.to("#l2f5 .nt7",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},77.99);
-    tl.to("#l2f5 .nt7",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},93.81);
-    tl.to("#l2f5 .nt8",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},93.81);
-    tl.to("#l2f5 .nt8",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},103.8);
-    tl.to("#l2f5 [data-dim='w120']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='h90']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},9.79);
-    tl.to("#l2f5 [data-dim='w120']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='h90']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},18.17);
-    tl.to("#l2f5 .arrow[data-dim='w120'],#l2f5 text[data-dim='w120'],#l2f5 .arrow[data-dim='h90'],#l2f5 text[data-dim='h90']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},9.79);
-    tl.to("#l2f5 .arrow[data-dim='w120'],#l2f5 text[data-dim='w120'],#l2f5 .arrow[data-dim='h90'],#l2f5 text[data-dim='h90']",{fill:'#111',duration:0.7,ease:"power2.inOut"},18.17);
-    tl.to("#l2f5 .hl[data-dim='w120'],#l2f5 .hl[data-dim='h90']",{opacity:1,duration:0.7,ease:"power2.inOut"},9.79);
-    tl.to("#l2f5 .hl[data-dim='w120'],#l2f5 .hl[data-dim='h90']",{opacity:0,duration:0.7,ease:"power2.inOut"},18.17);
-    tl.to("#l2f5 [data-dim='c60']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='c62']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},18.37);
-    tl.to("#l2f5 [data-dim='c60']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='c62']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},27.56);
-    tl.to("#l2f5 .arrow[data-dim='c60'],#l2f5 text[data-dim='c60'],#l2f5 .arrow[data-dim='c62'],#l2f5 text[data-dim='c62']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},18.37);
-    tl.to("#l2f5 .arrow[data-dim='c60'],#l2f5 text[data-dim='c60'],#l2f5 .arrow[data-dim='c62'],#l2f5 text[data-dim='c62']",{fill:'#111',duration:0.7,ease:"power2.inOut"},27.56);
-    tl.to("#l2f5 .hl[data-dim='c60'],#l2f5 .hl[data-dim='c62']",{opacity:1,duration:0.7,ease:"power2.inOut"},18.37);
-    tl.to("#l2f5 .hl[data-dim='c60'],#l2f5 .hl[data-dim='c62']",{opacity:0,duration:0.7,ease:"power2.inOut"},27.56);
-    tl.to("#l2f5 [data-dim='h16']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},27.76);
-    tl.to("#l2f5 [data-dim='h16']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},35.95);
-    tl.to("#l2f5 .arrow[data-dim='h16'],#l2f5 text[data-dim='h16']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},27.76);
-    tl.to("#l2f5 .arrow[data-dim='h16'],#l2f5 text[data-dim='h16']",{fill:'#111',duration:0.7,ease:"power2.inOut"},35.95);
-    tl.to("#l2f5 .hl[data-dim='h16']",{opacity:1,duration:0.7,ease:"power2.inOut"},27.76);
-    tl.to("#l2f5 .hl[data-dim='h16']",{opacity:0,duration:0.7,ease:"power2.inOut"},35.95);
-    tl.to("#l2f5 [data-dim='w80']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},36.15);
-    tl.to("#l2f5 [data-dim='w80']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},52.78);
-    tl.to("#l2f5 .arrow[data-dim='w80'],#l2f5 text[data-dim='w80']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},36.15);
-    tl.to("#l2f5 .arrow[data-dim='w80'],#l2f5 text[data-dim='w80']",{fill:'#111',duration:0.7,ease:"power2.inOut"},52.78);
-    tl.to("#l2f5 .hl[data-dim='w80']",{opacity:1,duration:0.7,ease:"power2.inOut"},36.15);
-    tl.to("#l2f5 .hl[data-dim='w80']",{opacity:0,duration:0.7,ease:"power2.inOut"},52.78);
-    tl.to("#l2f5 [data-dim='s29']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s50']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s12']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},52.98);
-    tl.to("#l2f5 [data-dim='s29']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s50']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s12']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},69.0);
-    tl.to("#l2f5 .arrow[data-dim='s29'],#l2f5 text[data-dim='s29'],#l2f5 .arrow[data-dim='s50'],#l2f5 text[data-dim='s50'],#l2f5 .arrow[data-dim='s12'],#l2f5 text[data-dim='s12']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},52.98);
-    tl.to("#l2f5 .arrow[data-dim='s29'],#l2f5 text[data-dim='s29'],#l2f5 .arrow[data-dim='s50'],#l2f5 text[data-dim='s50'],#l2f5 .arrow[data-dim='s12'],#l2f5 text[data-dim='s12']",{fill:'#111',duration:0.7,ease:"power2.inOut"},69.0);
-    tl.to("#l2f5 .hl[data-dim='s29'],#l2f5 .hl[data-dim='s50'],#l2f5 .hl[data-dim='s12']",{opacity:1,duration:0.7,ease:"power2.inOut"},52.98);
-    tl.to("#l2f5 .hl[data-dim='s29'],#l2f5 .hl[data-dim='s50'],#l2f5 .hl[data-dim='s12']",{opacity:0,duration:0.7,ease:"power2.inOut"},69.0);
-    tl.to("#l2f5 [data-dim='s8']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},69.2);
-    tl.to("#l2f5 [data-dim='s8']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},77.99);
-    tl.to("#l2f5 .arrow[data-dim='s8'],#l2f5 text[data-dim='s8']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},69.2);
-    tl.to("#l2f5 .arrow[data-dim='s8'],#l2f5 text[data-dim='s8']",{fill:'#111',duration:0.7,ease:"power2.inOut"},77.99);
-    tl.to("#l2f5 .hl[data-dim='s8']",{opacity:1,duration:0.7,ease:"power2.inOut"},69.2);
-    tl.to("#l2f5 .hl[data-dim='s8']",{opacity:0,duration:0.7,ease:"power2.inOut"},77.99);
-    tl.to("#l2f5 [data-dim='f26']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='f95']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},78.19);
-    tl.to("#l2f5 [data-dim='f26']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='f95']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},93.81);
-    tl.to("#l2f5 .arrow[data-dim='f26'],#l2f5 text[data-dim='f26'],#l2f5 .arrow[data-dim='f95'],#l2f5 text[data-dim='f95']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},78.19);
-    tl.to("#l2f5 .arrow[data-dim='f26'],#l2f5 text[data-dim='f26'],#l2f5 .arrow[data-dim='f95'],#l2f5 text[data-dim='f95']",{fill:'#111',duration:0.7,ease:"power2.inOut"},93.81);
-    tl.to("#l2f5 .hl[data-dim='f26'],#l2f5 .hl[data-dim='f95']",{opacity:1,duration:0.7,ease:"power2.inOut"},78.19);
-    tl.to("#l2f5 .hl[data-dim='f26'],#l2f5 .hl[data-dim='f95']",{opacity:0,duration:0.7,ease:"power2.inOut"},93.81);
-    tl.to("#l2f5 [data-dim='t12']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='t20']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},94.01);
-    tl.to("#l2f5 [data-dim='t12']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='t20']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},103.8);
-    tl.to("#l2f5 .arrow[data-dim='t12'],#l2f5 text[data-dim='t12'],#l2f5 .arrow[data-dim='t20'],#l2f5 text[data-dim='t20']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},94.01);
-    tl.to("#l2f5 .arrow[data-dim='t12'],#l2f5 text[data-dim='t12'],#l2f5 .arrow[data-dim='t20'],#l2f5 text[data-dim='t20']",{fill:'#111',duration:0.7,ease:"power2.inOut"},103.8);
-    tl.to("#l2f5 .hl[data-dim='t12'],#l2f5 .hl[data-dim='t20']",{opacity:1,duration:0.7,ease:"power2.inOut"},94.01);
-    tl.to("#l2f5 .hl[data-dim='t12'],#l2f5 .hl[data-dim='t20']",{opacity:0,duration:0.7,ease:"power2.inOut"},103.8);
-    tl.to("#l2f5 .topline,#l2f5 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},103.95);
+    tl.fromTo("#l2f5 .nt1,#l2f5 .nt2,#l2f5 .nt3,#l2f5 .nt4,#l2f5 .nt5,#l2f5 .nt6,#l2f5 .nt7,#l2f5 .nt8",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},20.52);
+    tl.to("#l2f5 .nt1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},22.92);
+    tl.to("#l2f5 .nt1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},32.07);
+    tl.to("#l2f5 .nt2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},32.07);
+    tl.to("#l2f5 .nt2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},42.03);
+    tl.to("#l2f5 .nt3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},42.03);
+    tl.to("#l2f5 .nt3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},51.19);
+    tl.to("#l2f5 .nt4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},51.19);
+    tl.to("#l2f5 .nt4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},70.16);
+    tl.to("#l2f5 .nt5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},70.16);
+    tl.to("#l2f5 .nt5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},87.52);
+    tl.to("#l2f5 .nt6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},87.52);
+    tl.to("#l2f5 .nt6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},96.48);
+    tl.to("#l2f5 .nt7",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},96.48);
+    tl.to("#l2f5 .nt7",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},113.24);
+    tl.to("#l2f5 .nt8",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},113.24);
+    tl.to("#l2f5 .nt8",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},123.8);
+    tl.to("#l2f5 [data-dim='w120']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='h90']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},23.12);
+    tl.to("#l2f5 [data-dim='w120']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='h90']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},32.07);
+    tl.to("#l2f5 .arrow[data-dim='w120'],#l2f5 text[data-dim='w120'],#l2f5 .arrow[data-dim='h90'],#l2f5 text[data-dim='h90']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},23.12);
+    tl.to("#l2f5 .arrow[data-dim='w120'],#l2f5 text[data-dim='w120'],#l2f5 .arrow[data-dim='h90'],#l2f5 text[data-dim='h90']",{fill:'#111',duration:0.7,ease:"power2.inOut"},32.07);
+    tl.to("#l2f5 .hl[data-dim='w120'],#l2f5 .hl[data-dim='h90']",{opacity:1,duration:0.7,ease:"power2.inOut"},23.12);
+    tl.to("#l2f5 .hl[data-dim='w120'],#l2f5 .hl[data-dim='h90']",{opacity:0,duration:0.7,ease:"power2.inOut"},32.07);
+    tl.to("#l2f5 [data-dim='c60']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='c62']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},32.27);
+    tl.to("#l2f5 [data-dim='c60']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='c62']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},42.03);
+    tl.to("#l2f5 .arrow[data-dim='c60'],#l2f5 text[data-dim='c60'],#l2f5 .arrow[data-dim='c62'],#l2f5 text[data-dim='c62']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},32.27);
+    tl.to("#l2f5 .arrow[data-dim='c60'],#l2f5 text[data-dim='c60'],#l2f5 .arrow[data-dim='c62'],#l2f5 text[data-dim='c62']",{fill:'#111',duration:0.7,ease:"power2.inOut"},42.03);
+    tl.to("#l2f5 .hl[data-dim='c60'],#l2f5 .hl[data-dim='c62']",{opacity:1,duration:0.7,ease:"power2.inOut"},32.27);
+    tl.to("#l2f5 .hl[data-dim='c60'],#l2f5 .hl[data-dim='c62']",{opacity:0,duration:0.7,ease:"power2.inOut"},42.03);
+    tl.to("#l2f5 [data-dim='h16']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},42.23);
+    tl.to("#l2f5 [data-dim='h16']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},51.19);
+    tl.to("#l2f5 .arrow[data-dim='h16'],#l2f5 text[data-dim='h16']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},42.23);
+    tl.to("#l2f5 .arrow[data-dim='h16'],#l2f5 text[data-dim='h16']",{fill:'#111',duration:0.7,ease:"power2.inOut"},51.19);
+    tl.to("#l2f5 .hl[data-dim='h16']",{opacity:1,duration:0.7,ease:"power2.inOut"},42.23);
+    tl.to("#l2f5 .hl[data-dim='h16']",{opacity:0,duration:0.7,ease:"power2.inOut"},51.19);
+    tl.to("#l2f5 [data-dim='w80']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},51.39);
+    tl.to("#l2f5 [data-dim='w80']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},70.16);
+    tl.to("#l2f5 .arrow[data-dim='w80'],#l2f5 text[data-dim='w80']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},51.39);
+    tl.to("#l2f5 .arrow[data-dim='w80'],#l2f5 text[data-dim='w80']",{fill:'#111',duration:0.7,ease:"power2.inOut"},70.16);
+    tl.to("#l2f5 .hl[data-dim='w80']",{opacity:1,duration:0.7,ease:"power2.inOut"},51.39);
+    tl.to("#l2f5 .hl[data-dim='w80']",{opacity:0,duration:0.7,ease:"power2.inOut"},70.16);
+    tl.to("#l2f5 [data-dim='s29']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s50']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s12']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},70.36);
+    tl.to("#l2f5 [data-dim='s29']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s50']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='s12']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},87.52);
+    tl.to("#l2f5 .arrow[data-dim='s29'],#l2f5 text[data-dim='s29'],#l2f5 .arrow[data-dim='s50'],#l2f5 text[data-dim='s50'],#l2f5 .arrow[data-dim='s12'],#l2f5 text[data-dim='s12']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},70.36);
+    tl.to("#l2f5 .arrow[data-dim='s29'],#l2f5 text[data-dim='s29'],#l2f5 .arrow[data-dim='s50'],#l2f5 text[data-dim='s50'],#l2f5 .arrow[data-dim='s12'],#l2f5 text[data-dim='s12']",{fill:'#111',duration:0.7,ease:"power2.inOut"},87.52);
+    tl.to("#l2f5 .hl[data-dim='s29'],#l2f5 .hl[data-dim='s50'],#l2f5 .hl[data-dim='s12']",{opacity:1,duration:0.7,ease:"power2.inOut"},70.36);
+    tl.to("#l2f5 .hl[data-dim='s29'],#l2f5 .hl[data-dim='s50'],#l2f5 .hl[data-dim='s12']",{opacity:0,duration:0.7,ease:"power2.inOut"},87.52);
+    tl.to("#l2f5 [data-dim='s8']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},87.72);
+    tl.to("#l2f5 [data-dim='s8']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},96.48);
+    tl.to("#l2f5 .arrow[data-dim='s8'],#l2f5 text[data-dim='s8']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},87.72);
+    tl.to("#l2f5 .arrow[data-dim='s8'],#l2f5 text[data-dim='s8']",{fill:'#111',duration:0.7,ease:"power2.inOut"},96.48);
+    tl.to("#l2f5 .hl[data-dim='s8']",{opacity:1,duration:0.7,ease:"power2.inOut"},87.72);
+    tl.to("#l2f5 .hl[data-dim='s8']",{opacity:0,duration:0.7,ease:"power2.inOut"},96.48);
+    tl.to("#l2f5 [data-dim='f26']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='f95']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},96.68);
+    tl.to("#l2f5 [data-dim='f26']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='f95']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},113.24);
+    tl.to("#l2f5 .arrow[data-dim='f26'],#l2f5 text[data-dim='f26'],#l2f5 .arrow[data-dim='f95'],#l2f5 text[data-dim='f95']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},96.68);
+    tl.to("#l2f5 .arrow[data-dim='f26'],#l2f5 text[data-dim='f26'],#l2f5 .arrow[data-dim='f95'],#l2f5 text[data-dim='f95']",{fill:'#111',duration:0.7,ease:"power2.inOut"},113.24);
+    tl.to("#l2f5 .hl[data-dim='f26'],#l2f5 .hl[data-dim='f95']",{opacity:1,duration:0.7,ease:"power2.inOut"},96.68);
+    tl.to("#l2f5 .hl[data-dim='f26'],#l2f5 .hl[data-dim='f95']",{opacity:0,duration:0.7,ease:"power2.inOut"},113.24);
+    tl.to("#l2f5 [data-dim='t12']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='t20']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},113.44);
+    tl.to("#l2f5 [data-dim='t12']:not(.hl):not(.arrow):not(text),#l2f5 [data-dim='t20']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},123.8);
+    tl.to("#l2f5 .arrow[data-dim='t12'],#l2f5 text[data-dim='t12'],#l2f5 .arrow[data-dim='t20'],#l2f5 text[data-dim='t20']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},113.44);
+    tl.to("#l2f5 .arrow[data-dim='t12'],#l2f5 text[data-dim='t12'],#l2f5 .arrow[data-dim='t20'],#l2f5 text[data-dim='t20']",{fill:'#111',duration:0.7,ease:"power2.inOut"},123.8);
+    tl.to("#l2f5 .hl[data-dim='t12'],#l2f5 .hl[data-dim='t20']",{opacity:1,duration:0.7,ease:"power2.inOut"},113.44);
+    tl.to("#l2f5 .hl[data-dim='t12'],#l2f5 .hl[data-dim='t20']",{opacity:0,duration:0.7,ease:"power2.inOut"},123.8);
+    tl.to("#l2f5 .topline,#l2f5 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},123.95);
     window.__timelines["l2f5"]=tl;
   </script>
 </template></body></html>

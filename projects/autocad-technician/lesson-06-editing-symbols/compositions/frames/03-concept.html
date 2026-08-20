@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,28 +61,50 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l6f3-root" data-composition-id="l6f3" data-start="0" data-duration="145" data-width="1920" data-height="1080">
-    <section id="l6f3" class="clip" data-start="0" data-duration="145" data-track-index="1">
-      <header class="topline"><div><div class="index">02 · HOW</div><h1>오늘 쓰는 명령은 무엇을 바꾸는가</h1></div><div class="prompt">이름이 아니라 바꾸는 대상을</div></header>
-      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card tk tk1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M16 3v26"/><path d="M4 11h10"/><path d="M18 11h10" stroke-dasharray="2.5 2.5" stroke-linecap="butt"/><path d="M4 21h10"/><path d="M18 21h10" stroke-dasharray="2.5 2.5" stroke-linecap="butt"/></svg><b style="margin-top:16px">TRIM · EXTEND</b><strong>둘 다 기준선이 먼저입니다</strong><span>지우면 교차점까지 사라지지만 자르면 그 자리에 남는다. 기준까지 없애거나 기준까지 채운다.</span></div><div class="card tk tk2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 26V12l7-6v20z"/><path d="M28 26V12l-7-6v20z"/><path d="M16 3v26" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt"/></svg><b style="margin-top:16px">MIRROR</b><strong>대칭축은 좌표로 넣습니다</strong><span>좌우를 손으로 각각 그리면 소수점에서 틀어지고 눈에 안 보인다. 클릭으로 축을 잡으면 그 순간 깨진다.</span></div><div class="card tk tk3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 21l12-5 12 5-12 5z"/><path d="M4 15l12-5 12 5"/><path d="M4 9l12-5 12 5"/></svg><b style="margin-top:16px">MATCHPROP</b><strong>형상은 두고 소속만 바꿉니다</strong><span>지우고 다시 그리면 위치를 또 맞춰야 한다. 제대로 된 선을 찍어 레이어와 색을 발라 준다.</span></div><div class="card tk tk4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 6.25h24" stroke-width="2"/><path d="M4 12.75h24" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt" stroke-width="1.2"/><path d="M4 19.25h24" stroke-dasharray="3.6 1.5" stroke-linecap="butt" stroke-width="1.2"/><path d="M4 25.75h24M4 25.75l3-1M4 25.75l3 1M28 25.75l-3-1M28 25.75l-3 1" stroke-width="1.2"/></svg><b style="margin-top:16px">LTSCALE</b><strong>형상은 1도 안 움직입니다</strong><span>바뀌는 건 파선의 획과 틈뿐이다. 화면 간격은 이 전체 값과 개체마다의 값을 곱한 결과다.</span></div></section><div class="note"><b>기억할 것</b> 이름만 외우면 손이 안 움직인다. 무엇을 바꾸는 명령인지 알아야 어디에 쓸지가 보인다.</div></main>
+  <div id="l6f3-root" data-composition-id="l6f3" data-start="0" data-duration="165" data-width="1920" data-height="1080">
+    <section id="l6f3" class="clip" data-start="0" data-duration="165" data-track-index="1">
+      <header class="topline"><div><div class="index">02 · HOW</div><h1><span class="kw">오늘</span> <span class="kw">쓰는</span> <span class="kw">명령은</span> <span class="kw">무엇을</span> <span class="kw">바꾸는가</span></h1></div><div class="prompt"><span class="kw">이름이</span> <span class="kw">아니라</span> <span class="kw">바꾸는</span> <span class="kw">대상을</span></div></header>
+      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card tk tk1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M16 3v26"/><path d="M4 11h10"/><path d="M18 11h10" stroke-dasharray="2.5 2.5" stroke-linecap="butt"/><path d="M4 21h10"/><path d="M18 21h10" stroke-dasharray="2.5 2.5" stroke-linecap="butt"/></svg><b style="margin-top:16px">TRIM · EXTEND</b><strong>둘 다 <span class="kw">기준선이</span> <span class="kw">먼저입니다</span></strong><span><span class="kw">지우면</span> <span class="kw">교차점까지</span> <span class="kw">사라지지만</span> <span class="kw">자르면</span> 그 <span class="kw">자리에</span> <span class="kw">남는다.</span> <span class="kw">기준까지</span> <span class="kw">없애거나</span> <span class="kw">기준까지</span> <span class="kw">채운다.</span></span></div><div class="card tk tk2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 26V12l7-6v20z"/><path d="M28 26V12l-7-6v20z"/><path d="M16 3v26" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt"/></svg><b style="margin-top:16px">MIRROR</b><strong><span class="kw">대칭축은</span> <span class="kw">좌표로</span> <span class="kw">넣습니다</span></strong><span><span class="kw">좌우를</span> <span class="kw">손으로</span> <span class="kw">각각</span> <span class="kw">그리면</span> <span class="kw">소수점에서</span> <span class="kw">틀어지고</span> <span class="kw">눈에</span> 안 <span class="kw">보인다.</span> <span class="kw">클릭으로</span> <span class="kw">축을</span> <span class="kw">잡으면</span> 그 <span class="kw">순간</span> <span class="kw">깨진다.</span></span></div><div class="card tk tk3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 21l12-5 12 5-12 5z"/><path d="M4 15l12-5 12 5"/><path d="M4 9l12-5 12 5"/></svg><b style="margin-top:16px">MATCHPROP</b><strong><span class="kw">형상은</span> <span class="kw">두고</span> <span class="kw">소속만</span> <span class="kw">바꿉니다</span></strong><span><span class="kw">지우고</span> <span class="kw">다시</span> <span class="kw">그리면</span> <span class="kw">위치를</span> 또 <span class="kw">맞춰야</span> <span class="kw">한다.</span> <span class="kw">제대로</span> 된 <span class="kw">선을</span> <span class="kw">찍어</span> <span class="kw">레이어와</span> <span class="kw">색을</span> <span class="kw">발라</span> <span class="kw">준다.</span></span></div><div class="card tk tk4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 6.25h24" stroke-width="2"/><path d="M4 12.75h24" stroke-dasharray="5 1.5 1.5 1.5" stroke-linecap="butt" stroke-width="1.2"/><path d="M4 19.25h24" stroke-dasharray="3.6 1.5" stroke-linecap="butt" stroke-width="1.2"/><path d="M4 25.75h24M4 25.75l3-1M4 25.75l3 1M28 25.75l-3-1M28 25.75l-3 1" stroke-width="1.2"/></svg><b style="margin-top:16px">LTSCALE</b><strong><span class="kw">형상은</span> 1도 안 <span class="kw">움직입니다</span></strong><span><span class="kw">바뀌는</span> 건 <span class="kw">파선의</span> <span class="kw">획과</span> <span class="kw">틈뿐이다.</span> <span class="kw">화면</span> <span class="kw">간격은</span> 이 <span class="kw">전체</span> <span class="kw">값과</span> <span class="kw">개체마다의</span> <span class="kw">값을</span> <span class="kw">곱한</span> <span class="kw">결과다.</span></span></div></section><div class="note"><b><span class="kw">기억할</span> 것</b> <span class="kw">이름만</span> <span class="kw">외우면</span> <span class="kw">손이</span> 안 <span class="kw">움직인다.</span> <span class="kw">무엇을</span> <span class="kw">바꾸는</span> <span class="kw">명령인지</span> <span class="kw">알아야</span> <span class="kw">어디에</span> <span class="kw">쓸지가</span> <span class="kw">보인다.</span></div></main>
     </section>
   </div>
   <script>
     window.__timelines=window.__timelines||{};
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l6f3 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
-    tl.fromTo("#l6f3 .tk1,#l6f3 .tk2,#l6f3 .tk3,#l6f3 .tk4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},14.04);
-    tl.to("#l6f3 .tk1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},16.44);
-    tl.to("#l6f3 .tk1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},54.21);
-    tl.to("#l6f3 .tk2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},54.21);
-    tl.to("#l6f3 .tk2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},84.75);
-    tl.to("#l6f3 .tk3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},84.75);
-    tl.to("#l6f3 .tk3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},112.87);
-    tl.to("#l6f3 .tk4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},112.87);
-    tl.to("#l6f3 .tk4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},143.8);
-    tl.fromTo("#l6f3 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},131.0);
-    tl.to("#l6f3 .topline,#l6f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},143.95);
+    tl.fromTo("#l6f3 .tk1,#l6f3 .tk2,#l6f3 .tk3,#l6f3 .tk4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},15.23);
+    tl.to("#l6f3 .tk1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},17.63);
+    tl.to("#l6f3 .tk1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},55.58);
+    tl.to("#l6f3 .tk2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},55.58);
+    tl.to("#l6f3 .tk2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},93.73);
+    tl.to("#l6f3 .tk3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},93.73);
+    tl.to("#l6f3 .tk3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},133.29);
+    tl.to("#l6f3 .tk4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},133.29);
+    tl.to("#l6f3 .tk4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},163.8);
+    tl.fromTo("#l6f3 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},151.0);
+    tl.to("#l6f3 .topline,#l6f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},163.95);
     window.__timelines["l6f3"]=tl;
   </script>
 </template></body></html>

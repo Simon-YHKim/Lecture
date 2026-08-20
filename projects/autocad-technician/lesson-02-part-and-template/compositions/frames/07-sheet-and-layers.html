@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,11 +61,33 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l2f7-root" data-composition-id="l2f7" data-start="0" data-duration="125" data-width="1920" data-height="1080">
-    <section id="l2f7" class="clip" data-start="0" data-duration="125" data-track-index="1">
-      <header class="topline"><div><div class="index">06 · SHEET</div><h1>종이와 선의 규칙을 먼저 정합니다</h1></div><div class="prompt">A3 가로 · 레이어 네 개</div></header>
-      <main class="body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)"><section class="panel" style="padding:40px"><svg viewBox="-34 -30 488 372" style="width:100%;height:auto;max-height:100%"><g stroke="#111" fill="none"><rect class="sh-paper" x="0" y="0" width="420" height="297" stroke-width="1.6"/><rect class="sh-frame" x="10" y="10" width="400" height="277" stroke-width="1.6" stroke="#C7004C"/><g class="sh-mark" stroke="#C7004C" stroke-width="1.6"><line x1="210" y1="0" x2="210" y2="10"/><line x1="210" y1="287" x2="210" y2="297"/><line x1="0" y1="148.5" x2="10" y2="148.5"/><line x1="410" y1="148.5" x2="420" y2="148.5"/></g><g class="sh-title" stroke="#C7004C" stroke-width="1.6"><rect x="210" y="257" width="200" height="30"/><line x1="310" y1="257" x2="310" y2="287"/></g></g><g font-family="Malgun Gothic,sans-serif" fill="#111"><text class="sh-title" x="260" y="277" font-size="13" text-anchor="middle">홍길동</text><text class="sh-title" x="360" y="277" font-size="13" text-anchor="middle">사번</text><text class="sh-gap" x="210" y="-10" font-size="13" fill="#666" text-anchor="middle">용지선과 도면선 간격 · 사방 10</text><text class="sh-title" x="260" y="252" font-size="12" fill="#666" text-anchor="middle">100</text><text class="sh-title" x="360" y="252" font-size="12" fill="#666" text-anchor="middle">100</text><text class="sh-title" x="196" y="277" font-size="12" fill="#666" text-anchor="end">30</text><text class="sh-size" x="210" y="322" font-size="14" text-anchor="middle">A3  420 × 297 · 문자 높이 10</text></g></svg></section><section style="display:grid;grid-template-rows:auto auto 1fr;gap:16px;align-content:start"><table class="spec"><thead><tr><th>레이어</th><th>선 종류</th><th>축척</th><th>색상</th><th>용도</th></tr></thead><tbody><tr class="ly ly1"><td style="color:#111">외형선</td><td style="color:#666">Continuous</td><td style="color:#666">1</td><td style="color:#666">흰색 (7)</td><td style="color:#666;font-size:20px">보이는 모양</td></tr><tr class="ly ly2"><td style="color:#111">중심선</td><td style="color:#666">Center</td><td style="color:#666">0.5</td><td style="color:#666">빨강 (1)</td><td style="color:#666;font-size:20px">중심과 대칭축</td></tr><tr class="ly ly3"><td style="color:#111">숨은선</td><td style="color:#666">Hidden</td><td style="color:#666">0.5</td><td style="color:#666">노랑 (2)</td><td style="color:#666;font-size:20px">가려진 모양</td></tr><tr class="ly ly4"><td style="color:#111">치수선</td><td style="color:#666">Continuous</td><td style="color:#666">1</td><td style="color:#666">보라 (6)</td><td style="color:#666;font-size:20px">치수 기입</td></tr></tbody></table><div class="note note1" style="margin-top:4px"><b>축척</b> 선가중치가 아니라 선 종류의 축척입니다. 중심선과 숨은선의 점선 간격이 이 값으로 정해집니다. 화면에서 점선이 실선처럼 보이면 이 값을 조정합니다.</div><div class="note note2"><b>우선순위</b> 과제 지시가 다른 이름·색상·축척을 지정하면 그 지시가 우선합니다.</div></section></main>
+  <div id="l2f7-root" data-composition-id="l2f7" data-start="0" data-duration="145" data-width="1920" data-height="1080">
+    <section id="l2f7" class="clip" data-start="0" data-duration="145" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · SHEET</div><h1><span class="kw">종이와</span> <span class="kw">선의</span> <span class="kw">규칙을</span> <span class="kw">먼저</span> <span class="kw">정합니다</span></h1></div><div class="prompt">A3 <span class="kw">가로</span> · <span class="kw">레이어</span> 네 개</div></header>
+      <main class="body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)"><section class="panel" style="padding:40px"><svg viewBox="-34 -30 488 372" style="width:100%;height:auto;max-height:100%"><g stroke="#111" fill="none"><rect class="sh-paper" x="0" y="0" width="420" height="297" stroke-width="1.6"/><rect class="sh-frame" x="10" y="10" width="400" height="277" stroke-width="1.6" stroke="#C7004C"/><g class="sh-mark" stroke="#C7004C" stroke-width="1.6"><line x1="210" y1="0" x2="210" y2="10"/><line x1="210" y1="287" x2="210" y2="297"/><line x1="0" y1="148.5" x2="10" y2="148.5"/><line x1="410" y1="148.5" x2="420" y2="148.5"/></g><g class="sh-title" stroke="#C7004C" stroke-width="1.6"><rect x="210" y="257" width="200" height="30"/><line x1="310" y1="257" x2="310" y2="287"/></g></g><g font-family="Malgun Gothic,sans-serif" fill="#111"><text class="sh-title" x="260" y="277" font-size="13" text-anchor="middle">홍길동</text><text class="sh-title" x="360" y="277" font-size="13" text-anchor="middle">사번</text><text class="sh-gap" x="210" y="-10" font-size="13" fill="#666" text-anchor="middle">용지선과 도면선 간격 · 사방 10</text><text class="sh-title" x="260" y="252" font-size="12" fill="#666" text-anchor="middle">100</text><text class="sh-title" x="360" y="252" font-size="12" fill="#666" text-anchor="middle">100</text><text class="sh-title" x="196" y="277" font-size="12" fill="#666" text-anchor="end">30</text><text class="sh-size" x="210" y="322" font-size="14" text-anchor="middle">A3  420 × 297 · 문자 높이 10</text></g></svg></section><section style="display:grid;grid-template-rows:auto auto 1fr;gap:16px;align-content:start"><table class="spec"><thead><tr><th><span class="kw">레이어</span></th><th>선 <span class="kw">종류</span></th><th><span class="kw">축척</span></th><th><span class="kw">색상</span></th><th><span class="kw">용도</span></th></tr></thead><tbody><tr class="ly ly1"><td style="color:#111"><span class="kw">외형선</span></td><td style="color:#666">Continuous</td><td style="color:#666">1</td><td style="color:#666"><span class="kw">흰색</span> (7)</td><td style="color:#666;font-size:20px"><span class="kw">보이는</span> <span class="kw">모양</span></td></tr><tr class="ly ly2"><td style="color:#111"><span class="kw">중심선</span></td><td style="color:#666">Center</td><td style="color:#666">0.5</td><td style="color:#666"><span class="kw">빨강</span> (1)</td><td style="color:#666;font-size:20px"><span class="kw">중심과</span> <span class="kw">대칭축</span></td></tr><tr class="ly ly3"><td style="color:#111"><span class="kw">숨은선</span></td><td style="color:#666">Hidden</td><td style="color:#666">0.5</td><td style="color:#666"><span class="kw">노랑</span> (2)</td><td style="color:#666;font-size:20px"><span class="kw">가려진</span> <span class="kw">모양</span></td></tr><tr class="ly ly4"><td style="color:#111"><span class="kw">치수선</span></td><td style="color:#666">Continuous</td><td style="color:#666">1</td><td style="color:#666"><span class="kw">보라</span> (6)</td><td style="color:#666;font-size:20px"><span class="kw">치수</span> <span class="kw">기입</span></td></tr></tbody></table><div class="note note1" style="margin-top:4px"><b><span class="kw">축척</span></b> <span class="kw">선가중치가</span> <span class="kw">아니라</span> 선 <span class="kw">종류의</span> <span class="kw">축척입니다.</span> <span class="kw">중심선과</span> <span class="kw">숨은선의</span> <span class="kw">점선</span> <span class="kw">간격이</span> 이 <span class="kw">값으로</span> <span class="kw">정해집니다.</span> <span class="kw">화면에서</span> <span class="kw">점선이</span> <span class="kw">실선처럼</span> <span class="kw">보이면</span> 이 <span class="kw">값을</span> <span class="kw">조정합니다.</span></div><div class="note note2"><b><span class="kw">우선순위</span></b> <span class="kw">과제</span> <span class="kw">지시가</span> <span class="kw">다른</span> <span class="kw">이름·색상·축척을</span> <span class="kw">지정하면</span> 그 <span class="kw">지시가</span> <span class="kw">우선합니다.</span></div></section></main>
     </section>
   </div>
   <script>
@@ -56,27 +95,27 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l2f7 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l2f7 .panel",{opacity:0,x:-60},{opacity:1,x:0,duration:.85,ease:"power3.out"},.75);
-    tl.fromTo("#l2f7 .sh-size",{opacity:0,y:6},{opacity:1,y:0,duration:0.8,ease:"power3.out"},6.98);
-    tl.fromTo("#l2f7 .sh-gap",{opacity:0,y:6},{opacity:1,y:0,duration:0.8,ease:"power3.out"},15.79);
-    tl.fromTo("#l2f7 .ly1,#l2f7 .ly2,#l2f7 .ly3,#l2f7 .ly4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},3.58);
-    tl.fromTo("#l2f7 .sh-paper",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},5.98);
-    tl.fromTo("#l2f7 .sh-frame",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},14.79);
-    tl.fromTo("#l2f7 .sh-mark",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},33.26);
-    tl.fromTo("#l2f7 .sh-title",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},43.27);
-    tl.fromTo("#l2f7 thead",{opacity:0,x:0,y:8},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},56.91);
-    tl.to("#l2f7 .ly1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},64.51);
-    tl.to("#l2f7 .ly1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},72.51);
-    tl.to("#l2f7 .ly2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},72.51);
-    tl.to("#l2f7 .ly2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},79.51);
-    tl.to("#l2f7 .ly3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},79.51);
-    tl.to("#l2f7 .ly3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},86.91);
-    tl.to("#l2f7 .ly4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},86.91);
-    tl.to("#l2f7 .ly4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},93.5);
-    tl.fromTo("#l2f7 .note1",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},93.5);
-    tl.to("#l2f7 .note1",{opacity:0.64,duration:0.8,ease:"power2.inOut"},112.78);
-    tl.fromTo("#l2f7 .note2",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},112.78);
-    tl.to("#l2f7 .note2",{opacity:0.64,duration:0.8,ease:"power2.inOut"},123.8);
-    tl.to("#l2f7 .topline,#l2f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},123.95);
+    tl.fromTo("#l2f7 .sh-size",{opacity:0,y:6},{opacity:1,y:0,duration:0.8,ease:"power3.out"},20.96);
+    tl.fromTo("#l2f7 .sh-gap",{opacity:0,y:6},{opacity:1,y:0,duration:0.8,ease:"power3.out"},29.74);
+    tl.fromTo("#l2f7 .ly1,#l2f7 .ly2,#l2f7 .ly3,#l2f7 .ly4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},17.56);
+    tl.fromTo("#l2f7 .sh-paper",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},19.96);
+    tl.fromTo("#l2f7 .sh-frame",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},28.74);
+    tl.fromTo("#l2f7 .sh-mark",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},47.95);
+    tl.fromTo("#l2f7 .sh-title",{opacity:0,x:0,y:0},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},57.93);
+    tl.fromTo("#l2f7 thead",{opacity:0,x:0,y:8},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},71.72);
+    tl.to("#l2f7 .ly1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},79.3);
+    tl.to("#l2f7 .ly1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},87.87);
+    tl.to("#l2f7 .ly2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},87.87);
+    tl.to("#l2f7 .ly2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},94.85);
+    tl.to("#l2f7 .ly3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},94.85);
+    tl.to("#l2f7 .ly3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},102.22);
+    tl.to("#l2f7 .ly4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},102.22);
+    tl.to("#l2f7 .ly4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},108.79);
+    tl.fromTo("#l2f7 .note1",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},108.79);
+    tl.to("#l2f7 .note1",{opacity:0.64,duration:0.8,ease:"power2.inOut"},128.4);
+    tl.fromTo("#l2f7 .note2",{opacity:0,x:0,y:12},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},128.4);
+    tl.to("#l2f7 .note2",{opacity:0.64,duration:0.8,ease:"power2.inOut"},143.8);
+    tl.to("#l2f7 .topline,#l2f7 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},143.95);
     window.__timelines["l2f7"]=tl;
   </script>
 </template></body></html>

@@ -7,6 +7,8 @@ lessons at once instead of being re-typed per lesson.
 Scaffolds import this; they do not copy it.
 """
 
+import re
+
 FONTS = (
     '<style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}'
     '@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}'
@@ -14,11 +16,21 @@ FONTS = (
 )
 
 BASE_CSS = """
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -40,11 +52,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -57,6 +76,28 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
 """
 
 HEAD = ('<!DOCTYPE html>\n<html lang="ko"><head><meta charset="UTF-8"></head><body><template>'
@@ -84,6 +125,24 @@ TAIL = "</template></body></html>\n"
 # Arrowheads: run 3, half-rise 1.0 — an included 36 degrees. ISO wants 15-30,
 # but below about 36 the head stops reading as an arrow at this size.
 ICONS = {
+    # --- 8차시 · 테크니션 업무 ---------------------------------------
+    # A jig is locating and clamping: the workpiece sits on supports and
+    # something presses it down. That is the whole idea, so that is the mark.
+    "jig": '<path d="M4 27h24"/><path d="M11 27v-7M21 27v-7"/>'
+           '<rect x="8" y="12" width="16" height="8"/>'
+           '<path d="M16 3v6M16 9l-1-3M16 9l1-3"/>',
+    # Layout checking is a footprint inside a space with a clearance that has
+    # to be measured, not eyeballed — hence the dimension, in the same
+    # vocabulary the course already teaches.
+    "layout": '<rect x="3" y="6" width="26" height="21"/>'
+              '<rect x="15" y="12" width="11" height="10"/>'
+              '<path d="M3.5 17h11"/>'
+              '<path d="M3.5 17l3-1M3.5 17l3 1M14.5 17l-3-1M14.5 17l-3 1"/>',
+    # Finding one part inside an assembly is done with a balloon and a leader.
+    # The drawing already has a symbol for this; no picture is invented for it.
+    "balloon": '<rect x="4" y="13" width="16" height="13"/><path d="M12 13v13"/>'
+               '<circle cx="25.5" cy="7" r="4.3"/><path d="M23.05 10.54L17.47 18.6"/>'
+               '<circle cx="16.5" cy="20" r="1.1"/>',
     # a shape with its size on it
     "shape": '<rect x="5" y="5" width="22" height="13"/><path d="M5 21v6M27 21v6"/>'
              '<path d="M5 24.5h22M5 24.5l3-1M5 24.5l3 1M27 24.5l-3-1M27 24.5l-3 1"/>',
@@ -319,6 +378,60 @@ def icon(name, size=46):
             'aria-hidden="true">%s</svg>' % (size, size, ICONS[name]))
 
 
+_SVG_BLOCK = re.compile(r"<svg[ >].*?</svg>", re.S | re.I)
+_TAG = re.compile(r"<[^>]*>")
+_HANGUL = re.compile(r"[가-힣]{2,}")
+
+
+def keep_words(html):
+    """Wrap every 어절 that contains Hangul in a nowrap span.
+
+    `word-break: keep-all` is the correct way to say this, and in a browser it
+    works — the same markup wraps 「모여서 / 본다」 in Chrome. The renderer does
+    not honour it: its snapshot of the very same frame put 「…모여서 본」 on one
+    line and 「다」 on the next, splitting the word mid-syllable, which reads as
+    a typo. `white-space: nowrap` does survive the renderer, so the rule is
+    expressed per word instead of per block.
+
+    The declaration stays in BASE_CSS as well — it is the correct statement of
+    intent, and it is what governs anything a browser renders directly.
+
+    SVG is skipped whole: a `<span>` inside `<text>` is not valid there, and
+    the drawing has no prose to break anyway.
+    """
+    keep, out = [], []
+
+    def stash(m):
+        keep.append(m.group(0))
+        return "@@%d@@" % (len(keep) - 1)
+
+    html = _SVG_BLOCK.sub(stash, html)
+    pos = 0
+    for m in _TAG.finditer(html):
+        out.append(_wrap_text(html[pos:m.start()]))
+        out.append(m.group(0))
+        pos = m.end()
+    out.append(_wrap_text(html[pos:]))
+    text = "".join(out)
+    for i, block in enumerate(keep):
+        text = text.replace("@@%d@@" % i, block)
+    return text
+
+
+_WS = re.compile(r"(\s+)")
+
+
+def _wrap_text(run):
+    """Split on whitespace, keeping it: a run can carry the newlines and indent
+    the builders join their fragments with, and folding those into a span would
+    turn a line break into a space inside a word."""
+    if not run or "@@" in run or not _HANGUL.search(run):
+        return run
+    return "".join(part if _WS.fullmatch(part) or not _HANGUL.search(part)
+                   else '<span class="kw">%s</span>' % part
+                   for part in _WS.split(run))
+
+
 def frame_html(comp_id, duration, body, timeline):
     """Wrap a sub-composition.
 
@@ -326,6 +439,7 @@ def frame_html(comp_id, duration, body, timeline):
     index.html and with every other frame on the assembled page, and lint does
     not catch that.
     """
+    body = keep_words(body)
     return (HEAD
             + '  <div id="' + comp_id + '-root" data-composition-id="' + comp_id
             + '" data-start="0" data-duration="' + str(duration)

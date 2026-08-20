@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,10 +61,32 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l2f3-root" data-composition-id="l2f3" data-start="0" data-duration="212" data-width="1920" data-height="1080">
-    <section id="l2f3" class="clip" data-start="0" data-duration="212" data-track-index="1">
-      <header class="topline"><div><div class="index">02 · SURFACE</div><h1>면마다 다르게 깎습니다</h1></div><div class="prompt">무엇이 닿느냐가 가공을 정한다</div></header>
+  <div id="l2f3-root" data-composition-id="l2f3" data-start="0" data-duration="216" data-width="1920" data-height="1080">
+    <section id="l2f3" class="clip" data-start="0" data-duration="216" data-track-index="1">
+      <header class="topline"><div><div class="index">02 · SURFACE</div><h1><span class="kw">면마다</span> <span class="kw">다르게</span> <span class="kw">깎습니다</span></h1></div><div class="prompt"><span class="kw">무엇이</span> <span class="kw">닿느냐가</span> <span class="kw">가공을</span> <span class="kw">정한다</span></div></header>
       <main class="body" style="grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)"><section class="panel"><svg class="dwg" xmlns="http://www.w3.org/2000/svg" viewBox="48 108 140 110">
 <style>
  .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
@@ -99,7 +138,7 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 <line class="center" data-feature="fillet" x1="165.860" y1="174.000" x2="165.860" y2="190.000"/>
 <line class="center" data-feature="fillet" x1="62.140" y1="182.000" x2="78.140" y2="182.000"/>
 <line class="center" data-feature="fillet" x1="70.140" y1="174.000" x2="70.140" y2="190.000"/>
-</svg></section><section style="display:grid;grid-template-rows:auto 1fr;gap:18px"><table class="spec"><thead><tr><th>부위</th><th>가공</th><th>표면 거칠기</th></tr></thead><tbody><tr class="sf sf1"><td style="color:#111;font-size:23px;white-space:nowrap">축 구멍 Ø25 H7</td><td style="color:#666;white-space:nowrap">드릴 Ø24 → 리머</td><td style="color:#C7004C;white-space:nowrap">곱게 (Ra 1.6)</td></tr><tr class="sf sf2"><td style="color:#111;font-size:23px;white-space:nowrap">탭 4-M5 깊이 10</td><td style="color:#666;white-space:nowrap">드릴 Ø4.2 → 탭</td><td style="color:#C7004C;white-space:nowrap">지정 없음</td></tr><tr class="sf sf3"><td style="color:#111;font-size:23px;white-space:nowrap">장착 장공 2-R5</td><td style="color:#666;white-space:nowrap">Ø10 드릴 2회 → 엔드밀 연결</td><td style="color:#C7004C;white-space:nowrap">거칠어도 됨 (Ra 12.5)</td></tr><tr class="sf sf4"><td style="color:#111;font-size:23px;white-space:nowrap">보스 앞면 Ø56</td><td style="color:#666;white-space:nowrap">단차 밀링</td><td style="color:#C7004C;white-space:nowrap">보통 (Ra 6.3)</td></tr><tr class="sf sf5"><td style="color:#111;font-size:23px;white-space:nowrap">목과 외곽</td><td style="color:#666;white-space:nowrap">윤곽 밀링</td><td style="color:#C7004C;white-space:nowrap">거칠어도 됨 (Ra 12.5)</td></tr><tr class="sf sf6"><td style="color:#111;font-size:23px;white-space:nowrap">필렛 R10</td><td style="color:#666;white-space:nowrap">엔드밀 코너 R</td><td style="color:#C7004C;white-space:nowrap">지정 없음</td></tr></tbody></table><div class="card" style="position:relative;padding:24px 26px;font-size:23px;line-height:1.5;color:#666"><div class="wy wy1" style="position:absolute;inset:0;opacity:0">회전하는 축이 들어가는 자리다. 표면이 거칠면 축과 구멍이 서로 긁으며 마찰과 발열이 늘고, 둘 다 닳아 끼워맞춤이 헐거워진다. 곱게 다듬으면 마찰이 줄어 축이 매끄럽게 돌고 부품 수명이 유지된다. H7은 드릴만으로는 낼 수 없는 등급이라 리머로 한 번 더 다듬는다.</div><div class="wy wy2" style="position:absolute;inset:0;opacity:0">축 커버를 고정하는 나사 자리다. 나사산이 직접 하중을 받으므로 드릴 지름이 정확해야 산이 제대로 남는다. 네 개를 균등 배치해 커버가 한쪽으로 기울지 않게 한다.</div><div class="wy wy3" style="position:absolute;inset:0;opacity:0">볼트가 통과만 하는 구멍이다. 볼트는 머리와 프레임 사이에서 눌러 잡는 것이지 구멍 벽에 닿아 힘을 받지 않는다. 그래서 벽면을 곱게 다듬을 이유가 없다. 곱게 하면 가공비만 오른다.</div><div class="wy wy4" style="position:absolute;inset:0;opacity:0">커버가 덮이는 면이다. 평평하면 되고 곱기까지 요구하지 않는다. 판 전체를 두껍게 하는 대신 필요한 곳만 앞으로 8 키워 축 둘레 살 두께를 확보했다.</div><div class="wy wy5" style="position:absolute;inset:0;opacity:0">다른 부품과 닿지 않고 힘만 전달하는 면이다. 형상만 맞으면 되고 표면 상태는 문제되지 않는다.</div><div class="wy wy6" style="position:absolute;inset:0;opacity:0">목이 베이스로 꺾이는 안쪽 모서리다. 각지게 만나면 그 한 점에 힘이 몰려 거기서부터 금이 간다. 라운드로 힘을 퍼뜨린다. 하중이 가장 큰 자리라 R을 크게 잡았다.</div></div></section></main>
+</svg></section><section style="display:grid;grid-template-rows:auto 1fr;gap:18px"><table class="spec"><thead><tr><th><span class="kw">부위</span></th><th><span class="kw">가공</span></th><th><span class="kw">표면</span> <span class="kw">거칠기</span></th></tr></thead><tbody><tr class="sf sf1"><td style="color:#111;font-size:23px;white-space:nowrap">축 <span class="kw">구멍</span> Ø25 H7</td><td style="color:#666;white-space:nowrap"><span class="kw">드릴</span> Ø24 → <span class="kw">리머</span></td><td style="color:#C7004C;white-space:nowrap"><span class="kw">곱게</span> (Ra 1.6)</td></tr><tr class="sf sf2"><td style="color:#111;font-size:23px;white-space:nowrap">탭 4-M5 <span class="kw">깊이</span> 10</td><td style="color:#666;white-space:nowrap"><span class="kw">드릴</span> Ø4.2 → 탭</td><td style="color:#C7004C;white-space:nowrap"><span class="kw">지정</span> <span class="kw">없음</span></td></tr><tr class="sf sf3"><td style="color:#111;font-size:23px;white-space:nowrap"><span class="kw">장착</span> <span class="kw">장공</span> 2-R5</td><td style="color:#666;white-space:nowrap">Ø10 <span class="kw">드릴</span> 2회 → <span class="kw">엔드밀</span> <span class="kw">연결</span></td><td style="color:#C7004C;white-space:nowrap"><span class="kw">거칠어도</span> 됨 (Ra 12.5)</td></tr><tr class="sf sf4"><td style="color:#111;font-size:23px;white-space:nowrap"><span class="kw">보스</span> <span class="kw">앞면</span> Ø56</td><td style="color:#666;white-space:nowrap"><span class="kw">단차</span> <span class="kw">밀링</span></td><td style="color:#C7004C;white-space:nowrap"><span class="kw">보통</span> (Ra 6.3)</td></tr><tr class="sf sf5"><td style="color:#111;font-size:23px;white-space:nowrap"><span class="kw">목과</span> <span class="kw">외곽</span></td><td style="color:#666;white-space:nowrap"><span class="kw">윤곽</span> <span class="kw">밀링</span></td><td style="color:#C7004C;white-space:nowrap"><span class="kw">거칠어도</span> 됨 (Ra 12.5)</td></tr><tr class="sf sf6"><td style="color:#111;font-size:23px;white-space:nowrap"><span class="kw">필렛</span> R10</td><td style="color:#666;white-space:nowrap"><span class="kw">엔드밀</span> <span class="kw">코너</span> R</td><td style="color:#C7004C;white-space:nowrap"><span class="kw">지정</span> <span class="kw">없음</span></td></tr></tbody></table><div class="card" style="position:relative;padding:24px 26px;font-size:23px;line-height:1.5;color:#666"><div class="wy wy1" style="position:absolute;inset:0;opacity:0"><span class="kw">회전하는</span> <span class="kw">축이</span> <span class="kw">들어가는</span> <span class="kw">자리다.</span> <span class="kw">표면이</span> <span class="kw">거칠면</span> <span class="kw">축과</span> <span class="kw">구멍이</span> <span class="kw">서로</span> <span class="kw">긁으며</span> <span class="kw">마찰과</span> <span class="kw">발열이</span> <span class="kw">늘고,</span> 둘 다 <span class="kw">닳아</span> <span class="kw">끼워맞춤이</span> <span class="kw">헐거워진다.</span> <span class="kw">곱게</span> <span class="kw">다듬으면</span> <span class="kw">마찰이</span> <span class="kw">줄어</span> <span class="kw">축이</span> <span class="kw">매끄럽게</span> <span class="kw">돌고</span> <span class="kw">부품</span> <span class="kw">수명이</span> <span class="kw">유지된다.</span> H7은 <span class="kw">드릴만으로는</span> 낼 수 <span class="kw">없는</span> <span class="kw">등급이라</span> <span class="kw">리머로</span> 한 번 더 <span class="kw">다듬는다.</span></div><div class="wy wy2" style="position:absolute;inset:0;opacity:0">축 <span class="kw">커버를</span> <span class="kw">고정하는</span> <span class="kw">나사</span> <span class="kw">자리다.</span> <span class="kw">나사산이</span> <span class="kw">직접</span> <span class="kw">하중을</span> <span class="kw">받으므로</span> <span class="kw">드릴</span> <span class="kw">지름이</span> <span class="kw">정확해야</span> <span class="kw">산이</span> <span class="kw">제대로</span> <span class="kw">남는다.</span> 네 <span class="kw">개를</span> <span class="kw">균등</span> <span class="kw">배치해</span> <span class="kw">커버가</span> <span class="kw">한쪽으로</span> <span class="kw">기울지</span> <span class="kw">않게</span> <span class="kw">한다.</span></div><div class="wy wy3" style="position:absolute;inset:0;opacity:0"><span class="kw">볼트가</span> <span class="kw">통과만</span> <span class="kw">하는</span> <span class="kw">구멍이다.</span> <span class="kw">볼트는</span> <span class="kw">머리와</span> <span class="kw">프레임</span> <span class="kw">사이에서</span> <span class="kw">눌러</span> <span class="kw">잡는</span> <span class="kw">것이지</span> <span class="kw">구멍</span> <span class="kw">벽에</span> <span class="kw">닿아</span> <span class="kw">힘을</span> <span class="kw">받지</span> <span class="kw">않는다.</span> <span class="kw">그래서</span> <span class="kw">벽면을</span> <span class="kw">곱게</span> <span class="kw">다듬을</span> <span class="kw">이유가</span> <span class="kw">없다.</span> <span class="kw">곱게</span> <span class="kw">하면</span> <span class="kw">가공비만</span> <span class="kw">오른다.</span></div><div class="wy wy4" style="position:absolute;inset:0;opacity:0"><span class="kw">커버가</span> <span class="kw">덮이는</span> <span class="kw">면이다.</span> <span class="kw">평평하면</span> <span class="kw">되고</span> <span class="kw">곱기까지</span> <span class="kw">요구하지</span> <span class="kw">않는다.</span> 판 <span class="kw">전체를</span> <span class="kw">두껍게</span> <span class="kw">하는</span> <span class="kw">대신</span> <span class="kw">필요한</span> <span class="kw">곳만</span> <span class="kw">앞으로</span> 8 <span class="kw">키워</span> 축 <span class="kw">둘레</span> 살 <span class="kw">두께를</span> <span class="kw">확보했다.</span></div><div class="wy wy5" style="position:absolute;inset:0;opacity:0"><span class="kw">다른</span> <span class="kw">부품과</span> <span class="kw">닿지</span> <span class="kw">않고</span> <span class="kw">힘만</span> <span class="kw">전달하는</span> <span class="kw">면이다.</span> <span class="kw">형상만</span> <span class="kw">맞으면</span> <span class="kw">되고</span> <span class="kw">표면</span> <span class="kw">상태는</span> <span class="kw">문제되지</span> <span class="kw">않는다.</span></div><div class="wy wy6" style="position:absolute;inset:0;opacity:0"><span class="kw">목이</span> <span class="kw">베이스로</span> <span class="kw">꺾이는</span> <span class="kw">안쪽</span> <span class="kw">모서리다.</span> <span class="kw">각지게</span> <span class="kw">만나면</span> 그 한 <span class="kw">점에</span> <span class="kw">힘이</span> <span class="kw">몰려</span> <span class="kw">거기서부터</span> <span class="kw">금이</span> <span class="kw">간다.</span> <span class="kw">라운드로</span> <span class="kw">힘을</span> <span class="kw">퍼뜨린다.</span> <span class="kw">하중이</span> <span class="kw">가장</span> 큰 <span class="kw">자리라</span> R을 <span class="kw">크게</span> <span class="kw">잡았다.</span></div></div></section></main>
     </section>
   </div>
   <script>
@@ -108,68 +147,68 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
     tl.fromTo("#l2f3 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
     tl.fromTo("#l2f3 .panel",{opacity:0,x:-60},{opacity:1,x:0,duration:.85,ease:"power3.out"},.75);
     tl.fromTo("#l2f3 thead",{opacity:0,y:8},{opacity:1,y:0,duration:0.7,ease:"power2.out"},1.5);
-    tl.fromTo("#l2f3 .sf1,#l2f3 .sf2,#l2f3 .sf3,#l2f3 .sf4,#l2f3 .sf5,#l2f3 .sf6",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},12.01);
-    tl.to("#l2f3 .sf1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},14.41);
-    tl.to("#l2f3 .sf1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},30.42);
-    tl.to("#l2f3 .sf2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},62.71);
-    tl.to("#l2f3 .sf2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},93.8);
-    tl.to("#l2f3 .sf3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},93.8);
-    tl.to("#l2f3 .sf3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},108.01);
-    tl.to("#l2f3 .sf4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},132.86);
-    tl.to("#l2f3 .sf4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},157.72);
-    tl.to("#l2f3 .sf5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},157.72);
-    tl.to("#l2f3 .sf5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},171.53);
-    tl.to("#l2f3 .sf6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},171.53);
-    tl.to("#l2f3 .sf6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},196.59);
-    tl.to("#l2f3 [data-feature='bore']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},14.61);
-    tl.to("#l2f3 [data-feature='bore']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},30.42);
-    tl.to("#l2f3 .arrow[data-feature='bore'],#l2f3 text[data-feature='bore']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},14.61);
-    tl.to("#l2f3 .arrow[data-feature='bore'],#l2f3 text[data-feature='bore']",{fill:'#111',duration:0.7,ease:"power2.inOut"},30.42);
-    tl.to("#l2f3 .hl[data-feature='bore']",{opacity:1,duration:0.7,ease:"power2.inOut"},14.61);
-    tl.to("#l2f3 .hl[data-feature='bore']",{opacity:0,duration:0.7,ease:"power2.inOut"},30.42);
-    tl.to("#l2f3 [data-feature='tap']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},62.91);
-    tl.to("#l2f3 [data-feature='tap']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},93.8);
-    tl.to("#l2f3 .arrow[data-feature='tap'],#l2f3 text[data-feature='tap']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},62.91);
-    tl.to("#l2f3 .arrow[data-feature='tap'],#l2f3 text[data-feature='tap']",{fill:'#111',duration:0.7,ease:"power2.inOut"},93.8);
-    tl.to("#l2f3 .hl[data-feature='tap']",{opacity:1,duration:0.7,ease:"power2.inOut"},62.91);
-    tl.to("#l2f3 .hl[data-feature='tap']",{opacity:0,duration:0.7,ease:"power2.inOut"},93.8);
-    tl.to("#l2f3 [data-feature='slot']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},94.0);
-    tl.to("#l2f3 [data-feature='slot']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},108.01);
-    tl.to("#l2f3 .arrow[data-feature='slot'],#l2f3 text[data-feature='slot']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},94.0);
-    tl.to("#l2f3 .arrow[data-feature='slot'],#l2f3 text[data-feature='slot']",{fill:'#111',duration:0.7,ease:"power2.inOut"},108.01);
-    tl.to("#l2f3 .hl[data-feature='slot']",{opacity:1,duration:0.7,ease:"power2.inOut"},94.0);
-    tl.to("#l2f3 .hl[data-feature='slot']",{opacity:0,duration:0.7,ease:"power2.inOut"},108.01);
-    tl.to("#l2f3 [data-feature='boss']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},133.06);
-    tl.to("#l2f3 [data-feature='boss']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},157.72);
-    tl.to("#l2f3 .arrow[data-feature='boss'],#l2f3 text[data-feature='boss']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},133.06);
-    tl.to("#l2f3 .arrow[data-feature='boss'],#l2f3 text[data-feature='boss']",{fill:'#111',duration:0.7,ease:"power2.inOut"},157.72);
-    tl.to("#l2f3 .hl[data-feature='boss']",{opacity:1,duration:0.7,ease:"power2.inOut"},133.06);
-    tl.to("#l2f3 .hl[data-feature='boss']",{opacity:0,duration:0.7,ease:"power2.inOut"},157.72);
-    tl.to("#l2f3 [data-feature='profile']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},157.92);
-    tl.to("#l2f3 [data-feature='profile']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},171.53);
-    tl.to("#l2f3 .arrow[data-feature='profile'],#l2f3 text[data-feature='profile']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},157.92);
-    tl.to("#l2f3 .arrow[data-feature='profile'],#l2f3 text[data-feature='profile']",{fill:'#111',duration:0.7,ease:"power2.inOut"},171.53);
-    tl.to("#l2f3 .hl[data-feature='profile']",{opacity:1,duration:0.7,ease:"power2.inOut"},157.92);
-    tl.to("#l2f3 .hl[data-feature='profile']",{opacity:0,duration:0.7,ease:"power2.inOut"},171.53);
-    tl.to("#l2f3 [data-feature='fillet']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},171.73);
-    tl.to("#l2f3 [data-feature='fillet']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},196.59);
-    tl.to("#l2f3 .arrow[data-feature='fillet'],#l2f3 text[data-feature='fillet']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},171.73);
-    tl.to("#l2f3 .arrow[data-feature='fillet'],#l2f3 text[data-feature='fillet']",{fill:'#111',duration:0.7,ease:"power2.inOut"},196.59);
-    tl.to("#l2f3 .hl[data-feature='fillet']",{opacity:1,duration:0.7,ease:"power2.inOut"},171.73);
-    tl.to("#l2f3 .hl[data-feature='fillet']",{opacity:0,duration:0.7,ease:"power2.inOut"},196.59);
-    tl.fromTo("#l2f3 .wy1",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},14.41);
-    tl.to("#l2f3 .wy1",{opacity:0,duration:0.8,ease:"power2.inOut"},30.42);
-    tl.fromTo("#l2f3 .wy2",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},62.71);
-    tl.to("#l2f3 .wy2",{opacity:0,duration:0.8,ease:"power2.inOut"},93.8);
-    tl.fromTo("#l2f3 .wy3",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},93.8);
-    tl.to("#l2f3 .wy3",{opacity:0,duration:0.8,ease:"power2.inOut"},108.01);
-    tl.fromTo("#l2f3 .wy4",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},132.86);
-    tl.to("#l2f3 .wy4",{opacity:0,duration:0.8,ease:"power2.inOut"},157.72);
-    tl.fromTo("#l2f3 .wy5",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},157.72);
-    tl.to("#l2f3 .wy5",{opacity:0,duration:0.8,ease:"power2.inOut"},171.53);
-    tl.fromTo("#l2f3 .wy6",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},171.53);
-    tl.to("#l2f3 .wy6",{opacity:0,duration:0.8,ease:"power2.inOut"},196.59);
-    tl.to("#l2f3 .topline,#l2f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},210.95);
+    tl.fromTo("#l2f3 .sf1,#l2f3 .sf2,#l2f3 .sf3,#l2f3 .sf4,#l2f3 .sf5,#l2f3 .sf6",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},11.36);
+    tl.to("#l2f3 .sf1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},13.76);
+    tl.to("#l2f3 .sf1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},29.12);
+    tl.to("#l2f3 .sf2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},62.64);
+    tl.to("#l2f3 .sf2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},79.81);
+    tl.to("#l2f3 .sf3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},94.97);
+    tl.to("#l2f3 .sf3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},108.93);
+    tl.to("#l2f3 .sf4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},136.65);
+    tl.to("#l2f3 .sf4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},150.8);
+    tl.to("#l2f3 .sf5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},161.16);
+    tl.to("#l2f3 .sf5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},175.52);
+    tl.to("#l2f3 .sf6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},175.52);
+    tl.to("#l2f3 .sf6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},190.28);
+    tl.to("#l2f3 [data-feature='bore']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},13.96);
+    tl.to("#l2f3 [data-feature='bore']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},29.12);
+    tl.to("#l2f3 .arrow[data-feature='bore'],#l2f3 text[data-feature='bore']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},13.96);
+    tl.to("#l2f3 .arrow[data-feature='bore'],#l2f3 text[data-feature='bore']",{fill:'#111',duration:0.7,ease:"power2.inOut"},29.12);
+    tl.to("#l2f3 .hl[data-feature='bore']",{opacity:1,duration:0.7,ease:"power2.inOut"},13.96);
+    tl.to("#l2f3 .hl[data-feature='bore']",{opacity:0,duration:0.7,ease:"power2.inOut"},29.12);
+    tl.to("#l2f3 [data-feature='tap']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},62.84);
+    tl.to("#l2f3 [data-feature='tap']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},79.81);
+    tl.to("#l2f3 .arrow[data-feature='tap'],#l2f3 text[data-feature='tap']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},62.84);
+    tl.to("#l2f3 .arrow[data-feature='tap'],#l2f3 text[data-feature='tap']",{fill:'#111',duration:0.7,ease:"power2.inOut"},79.81);
+    tl.to("#l2f3 .hl[data-feature='tap']",{opacity:1,duration:0.7,ease:"power2.inOut"},62.84);
+    tl.to("#l2f3 .hl[data-feature='tap']",{opacity:0,duration:0.7,ease:"power2.inOut"},79.81);
+    tl.to("#l2f3 [data-feature='slot']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},95.17);
+    tl.to("#l2f3 [data-feature='slot']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},108.93);
+    tl.to("#l2f3 .arrow[data-feature='slot'],#l2f3 text[data-feature='slot']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},95.17);
+    tl.to("#l2f3 .arrow[data-feature='slot'],#l2f3 text[data-feature='slot']",{fill:'#111',duration:0.7,ease:"power2.inOut"},108.93);
+    tl.to("#l2f3 .hl[data-feature='slot']",{opacity:1,duration:0.7,ease:"power2.inOut"},95.17);
+    tl.to("#l2f3 .hl[data-feature='slot']",{opacity:0,duration:0.7,ease:"power2.inOut"},108.93);
+    tl.to("#l2f3 [data-feature='boss']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},136.85);
+    tl.to("#l2f3 [data-feature='boss']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},150.8);
+    tl.to("#l2f3 .arrow[data-feature='boss'],#l2f3 text[data-feature='boss']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},136.85);
+    tl.to("#l2f3 .arrow[data-feature='boss'],#l2f3 text[data-feature='boss']",{fill:'#111',duration:0.7,ease:"power2.inOut"},150.8);
+    tl.to("#l2f3 .hl[data-feature='boss']",{opacity:1,duration:0.7,ease:"power2.inOut"},136.85);
+    tl.to("#l2f3 .hl[data-feature='boss']",{opacity:0,duration:0.7,ease:"power2.inOut"},150.8);
+    tl.to("#l2f3 [data-feature='profile']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},161.36);
+    tl.to("#l2f3 [data-feature='profile']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},175.52);
+    tl.to("#l2f3 .arrow[data-feature='profile'],#l2f3 text[data-feature='profile']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},161.36);
+    tl.to("#l2f3 .arrow[data-feature='profile'],#l2f3 text[data-feature='profile']",{fill:'#111',duration:0.7,ease:"power2.inOut"},175.52);
+    tl.to("#l2f3 .hl[data-feature='profile']",{opacity:1,duration:0.7,ease:"power2.inOut"},161.36);
+    tl.to("#l2f3 .hl[data-feature='profile']",{opacity:0,duration:0.7,ease:"power2.inOut"},175.52);
+    tl.to("#l2f3 [data-feature='fillet']:not(.hl):not(.arrow):not(text)",{stroke:'#C7004C',duration:0.7,ease:"power2.inOut"},175.72);
+    tl.to("#l2f3 [data-feature='fillet']:not(.hl):not(.arrow):not(text)",{stroke:'#111',duration:0.7,ease:"power2.inOut"},190.28);
+    tl.to("#l2f3 .arrow[data-feature='fillet'],#l2f3 text[data-feature='fillet']",{fill:'#C7004C',duration:0.7,ease:"power2.inOut"},175.72);
+    tl.to("#l2f3 .arrow[data-feature='fillet'],#l2f3 text[data-feature='fillet']",{fill:'#111',duration:0.7,ease:"power2.inOut"},190.28);
+    tl.to("#l2f3 .hl[data-feature='fillet']",{opacity:1,duration:0.7,ease:"power2.inOut"},175.72);
+    tl.to("#l2f3 .hl[data-feature='fillet']",{opacity:0,duration:0.7,ease:"power2.inOut"},190.28);
+    tl.fromTo("#l2f3 .wy1",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},13.76);
+    tl.to("#l2f3 .wy1",{opacity:0,duration:0.8,ease:"power2.inOut"},29.12);
+    tl.fromTo("#l2f3 .wy2",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},62.64);
+    tl.to("#l2f3 .wy2",{opacity:0,duration:0.8,ease:"power2.inOut"},79.81);
+    tl.fromTo("#l2f3 .wy3",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},94.97);
+    tl.to("#l2f3 .wy3",{opacity:0,duration:0.8,ease:"power2.inOut"},108.93);
+    tl.fromTo("#l2f3 .wy4",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},136.65);
+    tl.to("#l2f3 .wy4",{opacity:0,duration:0.8,ease:"power2.inOut"},150.8);
+    tl.fromTo("#l2f3 .wy5",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},161.16);
+    tl.to("#l2f3 .wy5",{opacity:0,duration:0.8,ease:"power2.inOut"},175.52);
+    tl.fromTo("#l2f3 .wy6",{opacity:0,x:0,y:10},{opacity:1.0,x:0,y:0,duration:1.0999999999999999,ease:"power3.out"},175.52);
+    tl.to("#l2f3 .wy6",{opacity:0,duration:0.8,ease:"power2.inOut"},190.28);
+    tl.to("#l2f3 .topline,#l2f3 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},214.95);
     window.__timelines["l2f3"]=tl;
   </script>
 </template></body></html>

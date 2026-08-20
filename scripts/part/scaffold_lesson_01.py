@@ -23,6 +23,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import lesson_docs  # noqa: E402
 import lesson_kit as kit  # noqa: E402
 
 LESSON = sys.argv[1] if len(sys.argv) > 1 else "projects/autocad-technician/lesson-01-orientation"
@@ -158,7 +159,8 @@ ROAD = [("1", "오리엔테이션", "지금 보고 있는 차시"),
         ("4", "원·호·오프셋", "축 구멍, 보스, 장공, 필렛을 넣는다"),
         ("5", "제3각법 3뷰와 반복", "투상해 세 뷰를 만들고 탭을 배열한다"),
         ("6", "편집과 표현", "남은 보조선을 정리하고 도면 기호를 읽는다"),
-        ("7", "치수와 출도", "치수를 기입하고 축척을 확인해 내보낸다")]
+        ("7", "치수와 출도", "치수를 기입하고 축척을 확인해 내보낸다"),
+        ("8", "시험 안내와 Q&amp;A", "시험이 어떻게 진행되는지와 자주 나온 질문")]
 
 
 def build_roadmap(comp, dur, spans):
@@ -166,7 +168,7 @@ def build_roadmap(comp, dur, spans):
                    '<td style="color:#111;font-size:26px;width:34%%">%s</td>'
                    '<td style="color:#666;font-size:24px">%s</td></tr>'
                    % (i, n, t, d) for i, (n, t, d) in enumerate(ROAD, 1))
-    body = (kit.header("03 · ROADMAP", "부품 하나를 일곱 차시에 걸쳐 완성합니다",
+    body = (kit.header("03 · ROADMAP", "부품 하나를 끝까지 그리고 시험을 준비합니다",
                        "EDU-IB-02 아이들러 풀리 브래킷")
             + '\n      <main class="body" style="grid-template-rows:auto 1fr">'
             + '<section class="lead" style="font-size:30px;color:#666;max-width:1500px">'
@@ -174,7 +176,7 @@ def build_roadmap(comp, dur, spans):
             + '한 차시를 놓치더라도 그 지점부터 이어 갈 수 있습니다.</section>'
             + '<section><table class="spec"><thead><tr><th>차시</th><th>주제</th><th>하는 일</th>'
             + '</tr></thead><tbody>' + rows + '</tbody></table></section></main>')
-    items = [beats.item(".rd%d" % i, kind="row") for i in range(1, 8)]
+    items = [beats.item(".rd%d" % i, kind="row") for i in range(1, len(ROAD) + 1)]
     # The lead sentence is the third framing paragraph. Showing it at t=0 let the
     # viewer finish reading it seventeen seconds before it was spoken, and the
     # table header sat complete above an empty body for the same stretch.
@@ -242,4 +244,17 @@ for _stem, _comp, _dur in built:
 beats.stamp_times(os.path.join(LESSON, "SCRIPT.md"), ranges, start)
 
 kit.write_project(LESSON, NAME, slots, start, os, json)
+
+# One line per frame, in the order they play. lesson_docs.refresh() refuses to
+# run if this list and the built slots disagree.
+DESCS = [
+    "검정 타이틀 · **오리엔테이션**",
+    "도입 문장 + 요건 카드 5장 + 하단 문단",
+    "과제 카드 4장 + 하단 문단",
+    "안내 문장 + 로드맵 표(차시·주제·하는 일)",
+    "2분할 마무리",
+    "인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시",
+]
+lesson_docs.refresh(LESSON, DESCS)
+
 print("\n%s — 프레임 %d개, 전체 %ds = %d:%02d" % (NAME, len(built), start, start // 60, start % 60))

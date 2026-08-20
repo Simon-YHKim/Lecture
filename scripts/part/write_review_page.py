@@ -37,6 +37,8 @@ TOPIC = {
     "lesson-05-three-views": ("제3각법 3뷰와 반복", "투상해 평면도와 우측면도를 만든다"),
     "lesson-06-editing-symbols": ("편집과 표현", "보조선을 정리하고 도면 기호를 읽는다"),
     "lesson-07-dimensioning-release": ("치수와 출도", "치수를 기입하고 내보낸다"),
+    "lesson-08-exam-and-qa": ("시험 안내와 Q&amp;A",
+                              "시험이 어떻게 진행되는지와 자주 나온 질문"),
 }
 
 
@@ -290,7 +292,7 @@ def build(shots_path, out_path):
 
 <section>
   <div class="eyebrow">02 · 차시</div>
-  <h2 style="margin-top:12px">일곱 차시</h2>
+  <h2 style="margin-top:12px">여덟 차시</h2>
   %s
 </section>
 

@@ -1,4 +1,4 @@
-"""Verify the seven-lesson course against its own scripts.
+"""Verify the eight-lesson course against its own scripts.
 
 The guard this replaces listed each lesson's duration as a literal, which is the
 same mistake the compositions used to make: a number written in two places
@@ -34,13 +34,18 @@ LESSONS = [
     ("lesson-05-three-views", "L04_FEATURES", "L05_VIEWS"),
     ("lesson-06-editing-symbols", "L05_VIEWS", "L06_REPRESENTED"),
     ("lesson-07-dimensioning-release", "L06_REPRESENTED", "L07_RELEASE"),
+    # No CAD work of its own: the exam briefing and the questions that follow it.
+    ("lesson-08-exam-and-qa", None, None),
 ]
 
 REQUIRED = ("BRIEF.md", "SCRIPT.md", "STORYBOARD.md", "frame.md",
             "index.html", "meta.json", "hyperframes.json", "package.json")
 
 PALETTE = {"#111", "#111111", "#666", "#666666", "#a4a3a4", "#c7004c", "#f5f5f3",
-           "#fff", "#ffffff", "#dcdbd7", "#fdfafb", "#8a8788", "#6f6d70"}
+           "#fff", "#ffffff", "#dcdbd7", "#fdfafb", "#8a8788", "#6f6d70",
+           # the recording strip's own neutrals, dark enough to sit on #111
+           # without competing with the video behind it
+           "#333032", "#626061", "#4a4749"}
 
 # Absolute local paths, the source deck, and embedded binaries must not reach
 # the public repository. Brand words are fine — the title card carries them by

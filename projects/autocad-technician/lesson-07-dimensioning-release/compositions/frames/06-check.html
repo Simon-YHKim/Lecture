@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
-#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+/* Both selectors on purpose. `#root` is the host page in index.html; inside a
+   frame the root carries id="<comp>-root", so a bare #root rule reaches
+   nothing there — which is how word-break:keep-all sat in this file for a
+   commit without ever applying to a single line of Korean on screen. */
+#root,[data-composition-id]{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
  font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
  /* Korean breaks between 어절, not inside one. Without this a word splits
-    mid-syllable at the line end and reads as a typo. */
- word-break:keep-all;overflow-wrap:anywhere}
+    mid-syllable at the line end and reads as a typo.
+
+    overflow-wrap must be break-word, not anywhere: `anywhere` lets the browser
+    break mid-word to fill a line even when the whole 어절 would fit on the
+    next one, which put 「모여서 본 / 다」 and 「사번_이 / 름」 on screen with
+    keep-all already set. break-word only splits a word that cannot fit a line
+    by itself. */
+ word-break:keep-all;overflow-wrap:break-word}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -27,11 +37,18 @@ h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif
 .card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
 .card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
 .card span{display:block;color:#666;font-size:21px;line-height:1.45}
+/* span.kw, not .kw: `.card span{display:block;color:#666;font-size:21px}` has
+   the same specificity and would otherwise win by order — every 어절 on its own
+   line, and a word inside a coloured label repainted grey while the one-syllable
+   words beside it, too short to be wrapped, kept the colour. The inherits put
+   the span back to being invisible to the cascade. */
+span.kw{display:inline;white-space:nowrap;color:inherit;font:inherit;line-height:inherit;letter-spacing:inherit}
 .note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
 .note b{color:#C7004C}
 table.spec{width:100%;border-collapse:collapse;font-size:22px}
 table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
 table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+table.spec.tight th,table.spec.tight td{padding:6px 8px}
 .title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
 .title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
 .title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
@@ -44,28 +61,50 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+/* The recording gets the whole frame. Anything the course needs to say during
+   it rides on top, because shrinking the video to make room shrinks AutoCAD's
+   command line with it — and that is the text a learner follows. */
+.film{position:absolute;inset:0;background:#111;overflow:hidden}
+.film .rec{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;
+ gap:12px;border:2px dashed #4A4749}
+.film .recmark{font-size:34px;letter-spacing:.14em;color:#C7004C}
+.film .recsub{font-size:25px;color:#8A8788}
+.film .tag{position:absolute;top:44px;left:56px;font-size:30px;color:#FFF;
+ background:rgba(17,17,17,.82);padding:12px 22px;border-left:3px solid #C7004C}
+.film .strip{position:absolute;left:0;right:0;bottom:0;height:132px;
+ background:rgba(17,17,17,.93);border-top:1px solid #4A4749}
+.film .sp{position:absolute;left:56px;right:56px;top:26px;display:flex;align-items:baseline;
+ gap:30px;opacity:0}
+.film .sp .no{font-family:ui-monospace,Consolas,monospace;font-size:28px;color:#8A8788;
+ letter-spacing:.04em;white-space:nowrap}
+.film .sp .no i{font-style:normal;color:#626061}
+.film .sp .key{font-family:ui-monospace,Consolas,monospace;font-size:40px;color:#C7004C;
+ min-width:190px;white-space:nowrap}
+.film .sp .what{font-size:34px;color:#FFF;letter-spacing:-.01em}
+.film .track{position:absolute;left:0;right:0;bottom:0;height:5px;background:#333032}
+.film .prog{display:block;height:100%;width:100%;background:#C7004C;transform-origin:left center}
   </style>
-  <div id="l7f6-root" data-composition-id="l7f6" data-start="0" data-duration="154" data-width="1920" data-height="1080">
-    <section id="l7f6" class="clip" data-start="0" data-duration="154" data-track-index="1">
-      <header class="topline"><div><div class="index">05 · CHECK</div><h1>치수 기입에서 가장 자주 나오는 넷입니다</h1></div><div class="prompt">저장하기 전에 확인합니다</div></header>
-      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card ck ck1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 21l12-5 12 5-12 5z"/><path d="M4 15l12-5 12 5"/><path d="M4 9l12-5 12 5"/></svg><b style="margin-top:16px">레이어</b><strong>바꾸고 나서 넣는다</strong><span>치수가 외형선 레이어에 들어가면 흰색으로 나와 형상과 구분이 안 되고, 외형선만 껐다 켜서 확인할 수가 없다. 치수 하나를 클릭해 유사 선택으로 잡고 한꺼번에 옮긴다.</span></div><div class="card ck ck2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="3" y="6" width="17" height="20"/><path d="M6 11h11M6 15h11M6 19h7"/><path d="M21 16h8M29 16l-3.2-1.8M29 16l-3.2 1.8"/></svg><b style="margin-top:16px">문자 높이</b><strong>종이에서 읽히는지 본다</strong><span>화면에서 멀쩡해도 A3로 뽑으면 깨알만 하거나 형상을 덮는다. 확인은 플롯 미리보기다. 아무리 고쳐도 안 바뀌면 맞춤 탭의 전체 축척이 1이 아닌 것이고, 이 값이 문자 높이에 곱해진다.</span></div><div class="card ck ck3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="2" y="9" width="10" height="14"/><path d="M2 19h10"/><rect x="20" y="9" width="10" height="14"/><path d="M20 19h10"/><path d="M15 14.5h2M15 17.5h2"/></svg><b style="margin-top:16px">중복 치수</b><strong>한 값은 한 번만</strong><span>장공에 폭 10과 R5를 같이, 좌우 필렛에 R10을 각각, 정면도와 평면도에 같은 120을 두 번 적는 것이다. 한쪽만 고쳐지면 두 값이 서로 다른 말을 하고, 만드는 사람은 어느 쪽도 믿을 수 없다.</span></div><div class="card ck ck4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="5" y="5" width="22" height="13"/><path d="M5 21v6M27 21v6"/><path d="M5 24.5h22M5 24.5l3-1M5 24.5l3 1M27 24.5l-3-1M27 24.5l-3 1"/></svg><b style="margin-top:16px">참고 치수 괄호</b><strong>괄호가 검사 여부를 가른다</strong><span>95.7에 괄호를 빼먹으면 검사 대상이 되는데, 계산돼 나오는 값이라 반올림으로 어긋나 멀쩡한 부품이 불합격된다. 반대로 검사할 값에 괄호를 치면 아무도 재지 않고 지나간다.</span></div></section><div class="note"><b>고치는 법</b> 네 가지 다 지금 이 도면에서 바로 확인할 수 있다.</div></main>
+  <div id="l7f6-root" data-composition-id="l7f6" data-start="0" data-duration="150" data-width="1920" data-height="1080">
+    <section id="l7f6" class="clip" data-start="0" data-duration="150" data-track-index="1">
+      <header class="topline"><div><div class="index">05 · CHECK</div><h1><span class="kw">치수</span> <span class="kw">기입에서</span> <span class="kw">가장</span> <span class="kw">자주</span> <span class="kw">나오는</span> <span class="kw">넷입니다</span></h1></div><div class="prompt"><span class="kw">저장하기</span> <span class="kw">전에</span> <span class="kw">확인합니다</span></div></header>
+      <main class="body" style="grid-template-rows:1fr auto"><section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-content:center"><div class="card ck ck1" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><path d="M4 21l12-5 12 5-12 5z"/><path d="M4 15l12-5 12 5"/><path d="M4 9l12-5 12 5"/></svg><b style="margin-top:16px"><span class="kw">레이어</span></b><strong><span class="kw">바꾸고</span> <span class="kw">나서</span> <span class="kw">넣는다</span></strong><span><span class="kw">치수가</span> <span class="kw">외형선</span> <span class="kw">레이어에</span> <span class="kw">들어가면</span> <span class="kw">흰색으로</span> <span class="kw">나와</span> <span class="kw">형상과</span> <span class="kw">구분이</span> 안 <span class="kw">되고,</span> <span class="kw">외형선만</span> <span class="kw">껐다</span> <span class="kw">켜서</span> <span class="kw">확인할</span> <span class="kw">수가</span> <span class="kw">없다.</span> <span class="kw">치수</span> <span class="kw">하나를</span> <span class="kw">클릭해</span> <span class="kw">유사</span> <span class="kw">선택으로</span> <span class="kw">잡고</span> <span class="kw">한꺼번에</span> <span class="kw">옮긴다.</span></span></div><div class="card ck ck2" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="3" y="6" width="17" height="20"/><path d="M6 11h11M6 15h11M6 19h7"/><path d="M21 16h8M29 16l-3.2-1.8M29 16l-3.2 1.8"/></svg><b style="margin-top:16px"><span class="kw">문자</span> <span class="kw">높이</span></b><strong><span class="kw">종이에서</span> <span class="kw">읽히는지</span> <span class="kw">본다</span></strong><span><span class="kw">화면에서</span> <span class="kw">멀쩡해도</span> A3로 <span class="kw">뽑으면</span> <span class="kw">깨알만</span> <span class="kw">하거나</span> <span class="kw">형상을</span> <span class="kw">덮는다.</span> <span class="kw">확인은</span> <span class="kw">플롯</span> <span class="kw">미리보기다.</span> <span class="kw">아무리</span> <span class="kw">고쳐도</span> 안 <span class="kw">바뀌면</span> <span class="kw">맞춤</span> <span class="kw">탭의</span> <span class="kw">전체</span> <span class="kw">축척이</span> 1이 <span class="kw">아닌</span> <span class="kw">것이고,</span> 이 <span class="kw">값이</span> <span class="kw">문자</span> <span class="kw">높이에</span> <span class="kw">곱해진다.</span></span></div><div class="card ck ck3" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="2" y="9" width="10" height="14"/><path d="M2 19h10"/><rect x="20" y="9" width="10" height="14"/><path d="M20 19h10"/><path d="M15 14.5h2M15 17.5h2"/></svg><b style="margin-top:16px"><span class="kw">중복</span> <span class="kw">치수</span></b><strong>한 <span class="kw">값은</span> 한 <span class="kw">번만</span></strong><span><span class="kw">장공에</span> 폭 10과 R5를 <span class="kw">같이,</span> <span class="kw">좌우</span> <span class="kw">필렛에</span> R10을 <span class="kw">각각,</span> <span class="kw">정면도와</span> <span class="kw">평면도에</span> <span class="kw">같은</span> 120을 두 번 <span class="kw">적는</span> <span class="kw">것이다.</span> <span class="kw">한쪽만</span> <span class="kw">고쳐지면</span> 두 <span class="kw">값이</span> <span class="kw">서로</span> <span class="kw">다른</span> <span class="kw">말을</span> <span class="kw">하고,</span> <span class="kw">만드는</span> <span class="kw">사람은</span> <span class="kw">어느</span> <span class="kw">쪽도</span> <span class="kw">믿을</span> 수 <span class="kw">없다.</span></span></div><div class="card ck ck4" style="padding:26px 26px 24px"><svg class="ico" viewBox="0 0 32 32" width="58" height="58" aria-hidden="true"><rect x="5" y="5" width="22" height="13"/><path d="M5 21v6M27 21v6"/><path d="M5 24.5h22M5 24.5l3-1M5 24.5l3 1M27 24.5l-3-1M27 24.5l-3 1"/></svg><b style="margin-top:16px"><span class="kw">참고</span> <span class="kw">치수</span> <span class="kw">괄호</span></b><strong><span class="kw">괄호가</span> <span class="kw">검사</span> <span class="kw">여부를</span> <span class="kw">가른다</span></strong><span>95.7에 <span class="kw">괄호를</span> <span class="kw">빼먹으면</span> <span class="kw">검사</span> <span class="kw">대상이</span> <span class="kw">되는데,</span> <span class="kw">계산돼</span> <span class="kw">나오는</span> <span class="kw">값이라</span> <span class="kw">반올림으로</span> <span class="kw">어긋나</span> <span class="kw">멀쩡한</span> <span class="kw">부품이</span> <span class="kw">불합격된다.</span> <span class="kw">반대로</span> <span class="kw">검사할</span> <span class="kw">값에</span> <span class="kw">괄호를</span> <span class="kw">치면</span> <span class="kw">아무도</span> <span class="kw">재지</span> <span class="kw">않고</span> <span class="kw">지나간다.</span></span></div></section><div class="note"><b><span class="kw">고치는</span> 법</b> 네 <span class="kw">가지</span> 다 <span class="kw">지금</span> 이 <span class="kw">도면에서</span> <span class="kw">바로</span> <span class="kw">확인할</span> 수 <span class="kw">있다.</span></div></main>
     </section>
   </div>
   <script>
     window.__timelines=window.__timelines||{};
     const tl=gsap.timeline({paused:true});
     tl.fromTo("#l7f6 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
-    tl.fromTo("#l7f6 .ck1,#l7f6 .ck2,#l7f6 .ck3,#l7f6 .ck4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},10.18);
-    tl.to("#l7f6 .ck1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},12.58);
-    tl.to("#l7f6 .ck1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},52.65);
-    tl.to("#l7f6 .ck2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},52.65);
-    tl.to("#l7f6 .ck2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},89.11);
-    tl.to("#l7f6 .ck3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},89.11);
-    tl.to("#l7f6 .ck3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},120.96);
-    tl.to("#l7f6 .ck4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},120.96);
-    tl.to("#l7f6 .ck4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},152.8);
-    tl.fromTo("#l7f6 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},140.0);
-    tl.to("#l7f6 .topline,#l7f6 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},152.95);
+    tl.fromTo("#l7f6 .ck1,#l7f6 .ck2,#l7f6 .ck3,#l7f6 .ck4",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},9.75);
+    tl.to("#l7f6 .ck1",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},12.15);
+    tl.to("#l7f6 .ck1",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},52.32);
+    tl.to("#l7f6 .ck2",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},52.32);
+    tl.to("#l7f6 .ck2",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},87.68);
+    tl.to("#l7f6 .ck3",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},87.68);
+    tl.to("#l7f6 .ck3",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},117.44);
+    tl.to("#l7f6 .ck4",{opacity:1.0,borderColor:'#C7004C',backgroundColor:'#FDFAFB',color:'#C7004C',duration:0.8,ease:"power2.inOut"},117.44);
+    tl.to("#l7f6 .ck4",{opacity:0.64,borderColor:'#A4A3A4',backgroundColor:'#FFF',color:'#111',duration:0.8,ease:"power2.inOut"},148.8);
+    tl.fromTo("#l7f6 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},136.0);
+    tl.to("#l7f6 .topline,#l7f6 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},148.95);
     window.__timelines["l7f6"]=tl;
   </script>
 </template></body></html>

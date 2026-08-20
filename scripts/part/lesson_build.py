@@ -17,6 +17,7 @@ import sys
 import tempfile
 
 import beats
+import lesson_docs
 import lesson_kit as kit
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -123,40 +124,50 @@ def f_ondrawing(comp, dur, spans, L):
 
 
 def f_demo(comp, dur, spans, L):
-    # Each step shows what you type beside what it does. A checklist that only
-    # names the action leaves the viewer hunting for the command in the video.
-    def step(i, label, typed):
-        key = ('<b style="display:inline-block;min-width:96px;color:#C7004C;'
-               'font-family:ui-monospace,Consolas,monospace;font-size:20px">%s</b>' % typed
-               if typed else
-               '<b style="display:inline-block;min-width:96px">&nbsp;</b>')
-        return '<li class="st st%d">%s<span>%s</span></li>' % (i, key, label)
+    """The recording fills the frame; a strip along the bottom carries the step.
 
-    chk = "".join(step(i, t, k) for i, (t, k)
-                  in enumerate(zip(L["steps"], L["stepKeys"]), 1))
-    body = (kit.header("04 · DEMO-01", L["demo_title"], L["cp"])
-            + '\n      <main class="body" style="grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)">'
-            + '<section class="panel rec" style="border-style:dashed;position:relative">'
-              '<div style="text-align:center;color:#666">'
-              '<div style="font-size:29px;letter-spacing:.12em;color:#C7004C">USER RECORDING</div>'
-              '<div style="font-size:23px;margin-top:12px">DEMO-01 · 화면 녹화 삽입</div></div>'
-              '<div style="position:absolute;left:0;right:0;bottom:0;height:4px;background:#DCDBD7">'
-              '<div class="prog" style="height:100%;width:100%;background:#C7004C;'
-              'transform-origin:left center"></div></div></section>'
-            + '<section><ol style="list-style:none;margin:0;padding:0;font-size:21px;line-height:1.5">'
-            + chk + '</ol>'
-            + '<div class="note"><b>우선순위</b> 과제 지시가 다른 값을 지정하면 그 지시가 우선합니다. '
-              '여기 값은 이 과정의 연습용 기본값입니다.</div></section></main>')
-    items = [beats.item(".st%d" % i, kind="plain") for i in range(1, len(L["steps"]) + 1)]
+    Only one step is on screen at a time, so the strip stays short enough to
+    read at a glance while the video behind it keeps every pixel it was filmed
+    with.
+    """
+    n = len(L["steps"])
+    # Only one step is meant to be readable at a time; the pair overlaps only
+    # during the crossfade between them, which is the intent.
+    strips = "".join(
+        '<div class="sp sp%d" data-layout-allow-overlap>'
+        '<span class="no">%02d<i>&#8201;/&#8201;%02d</i></span>'
+        '<span class="key">%s</span><span class="what">%s</span></div>'
+        % (i, i, n, k or "&#183;", t)
+        for i, (t, k) in enumerate(zip(L["steps"], L["stepKeys"]), 1))
+
+    body = ('      <div class="film">'
+            '<div class="rec"><div class="recmark">USER RECORDING</div>'
+            '<div class="recsub">DEMO-01 &#183; %s</div></div>'
+            '<div class="tag">%s</div>'
+            '<div class="strip">%s'
+            '<div class="track"><i class="prog"></i></div></div></div>'
+            % (L["cp"], L["demo_title"], strips))
+
+    items = [beats.item(".sp%d" % i, kind="plain", mode="reveal", dy=12, read=0)
+             for i in range(1, n + 1)]
     tl = "\n".join([
-        beats.chrome(comp, drawing=0),
-        beats.read_along(comp, items, spans, entrance=0.8, group_stagger=0.06),
-        '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.0);'
-        % (comp, round(dur - 2.0, 2)),
-        beats.cue(comp, ".note", round(dur - 12.0, 2), dy=12),
-        beats.outro(comp, dur),
+        '    tl.fromTo("#%s .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,'
+        'ease:"power3.out"},.35);' % comp,
+        '    tl.fromTo("#%s .strip",{opacity:0,y:26},{opacity:1,y:0,duration:.9,'
+        'ease:"power3.out"},.7);' % comp,
+        beats.read_along(comp, items, spans),
+        '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.2);'
+        % (comp, round(dur - 2.4, 2)),
+        # the title tag is orientation, not something to read for seven minutes
+        '    tl.to("#%s .tag",{opacity:0,duration:1.0,ease:"power2.in"},%s);'
+        % (comp, round(min(dur * .06, 30.0), 2)),
+        '    tl.to("#%s .strip",{opacity:0,y:18,duration:.9,ease:"power2.in"},%s);'
+        % (comp, round(dur - 1.05, 2)),
     ])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), [
+        {"kind": "appearsBy", "selector": "#%s .strip" % comp, "bySec": 3},
+        {"kind": "staysInFrame", "selector": "#%s .strip" % comp},
+    ]
 
 
 def f_check(comp, dur, spans, L):
@@ -180,29 +191,45 @@ def f_keys(comp, dur, spans, L):
     """What was typed today, with the situation it belongs to.
 
     A learner who only ever draws the exam part forgets the command. One who
-    knows the situation reaches for it again, which is the point — the third
+    knows the situation reaches for it again, which is the point — the last
     column is the part that survives the exam.
+
+    A long lesson types sixteen commands, and sixteen rows at reading size do
+    not fit under the function-key note; the first version of this frame ran
+    250px past the bottom of the body and simply lost its last five rows. Past
+    nine the table splits into two columns instead of shrinking further.
     """
-    rows = "".join(
-        '<tr class="ky ky%d"><td style="color:#C7004C;white-space:nowrap;'
-        'font-family:ui-monospace,Consolas,monospace;font-size:23px">%s</td>'
-        '<td style="color:#666;white-space:nowrap;font-size:20px">%s</td>'
-        '<td style="color:#111;white-space:nowrap">%s</td>'
-        '<td style="color:#666;font-size:20px">%s</td></tr>'
-        % (i, key, kit.COMMANDS[key][0] if kit.COMMANDS[key][0] != key else "",
-           kit.COMMANDS[key][1], kit.COMMANDS[key][2])
-        for i, key in enumerate(L["keys"], 1))
+    keys = L["keys"]
+
+    def table(part, first):
+        rows = "".join(
+            '<tr class="ky ky%d"><td style="color:#C7004C;white-space:nowrap;'
+            'font-family:ui-monospace,Consolas,monospace;font-size:22px">%s</td>'
+            '<td style="color:#111;white-space:nowrap">%s</td>'
+            '<td style="color:#666;font-size:19px">%s</td></tr>'
+            % (first + j, key, kit.COMMANDS[key][1], kit.COMMANDS[key][2])
+            for j, key in enumerate(part))
+        return ('<table class="spec tight" style="font-size:20px">'
+                '<thead><tr><th>입력</th><th>무엇을 하나</th><th>언제 쓰나</th>'
+                '</tr></thead><tbody>' + rows + '</tbody></table>')
+
+    if len(keys) > 9:
+        half = (len(keys) + 1) // 2
+        inner = table(keys[:half], 1) + table(keys[half:], half + 1)
+        sec = ('<section style="display:grid;grid-template-columns:1fr 1fr;gap:26px;'
+               'align-content:start;overflow:hidden">' + inner + '</section>')
+    else:
+        sec = '<section style="overflow:hidden">' + table(keys, 1) + '</section>'
+
     fk = "".join('<span style="display:inline-block;margin:0 22px 8px 0">'
                  '<b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">%s</b>'
                  ' <span style="color:#666">%s</span></span>' % (k, what)
                  for k, what, _why in kit.FUNCTION_KEYS)
-    body = (kit.header("06 · KEYS", "오늘 친 것", "명령보다 상황을 기억하세요")
+    body = (kit.header("07 · KEYS", "오늘 친 것", "명령보다 상황을 기억하세요")
             + '\n      <main class="body" style="grid-template-rows:1fr auto">'
-            + '<section style="overflow:hidden"><table class="spec" style="font-size:21px">'
-              '<thead><tr><th>입력</th><th>명령</th><th>무엇을 하나</th><th>언제 쓰나</th>'
-              '</tr></thead><tbody>' + rows + '</tbody></table></section>'
+            + sec
             + '<div class="note"><b>기능키</b> ' + fk + '</div></main>')
-    items = [beats.item(".ky%d" % i, kind="row") for i in range(1, len(L["keys"]) + 1)]
+    items = [beats.item(".ky%d" % i, kind="row") for i in range(1, len(keys) + 1)]
     tl = "\n".join([
         beats.chrome(comp),
         beats.cue(comp, "thead", 1.5, dy=8, dur=0.7, ease="power2.out"),
@@ -245,6 +272,20 @@ PLAN = [("01-title", f_title, 1, None),
 # The recording runs longer than its narration: typing, dialogs and waiting are
 # not spoken. Measured narration x 1.3, rounded to the nearest ten seconds.
 DEMO_FACTOR = 1.3
+
+# One line per frame in PLAN order. lesson_docs.refresh() refuses to run if the
+# two lists disagree, so a frame cannot be added without saying what is on it.
+DESCS = [
+    "검정 타이틀 · **%s**",
+    "왼쪽 카드 4장(마크 포함) / 오른쪽 정면도",
+    "개념 카드 4장 + 하단 문단",
+    "왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다",
+    "전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키",
+    "확인 카드 4장 + 하단 문단",
+    "2분할 마무리",
+    "오늘 친 단축키 표 + 기능키",
+    "인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시",
+]
 
 
 def build(lesson_dir, L):
@@ -306,6 +347,9 @@ def build(lesson_dir, L):
 
     beats.stamp_times(script_path, ranges, start)
     kit.write_project(lesson_dir, name, slots, start, os, json)
+    descs = list(DESCS)
+    descs[0] = descs[0] % L["title"]
+    lesson_docs.refresh(lesson_dir, descs)
     for w in warn:
         print("      ! " + w)
     print("\n%s — 프레임 %d개, 전체 %ds = %d:%02d"
