@@ -2,7 +2,10 @@
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
 #root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -42,10 +45,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
   </style>
-  <div data-hf-id="hf-76rj" id="l4f7-root" data-composition-id="l4f7" data-start="0" data-duration="106" data-width="1920" data-height="1080">
-    <section data-hf-id="hf-a9bv" id="l4f7" class="clip" data-start="0" data-duration="106" data-track-index="1">
-      <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-bnfk" class="index">06 · RECAP</div><h1 data-hf-id="hf-lvd2">이번 차시와 다음 차시</h1></div><div data-hf-id="hf-djt0" class="prompt">L04_FEATURES 완료</div></header>
-      <main data-hf-id="hf-s3tr" class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section data-hf-id="hf-5xl8" class="card p-done" style="padding:30px 34px"><b data-hf-id="hf-qe6r">이번에 한 일</b><strong data-hf-id="hf-3e6q">정면도의 형상이 전부 들어갔습니다</strong><ul data-hf-id="hf-u27b" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-jwe3" class="p-done-li">축 구멍 Ø25를 보스와 같은 중심 60, 62에 그렸다. 지름으로 적힌 값은 D 옵션으로 넣는다.</li><li data-hf-id="hf-jejn" class="p-done-li">보스 Ø56을 안쪽으로 6 오프셋해 피치원 Ø44를 만들고 중심선 레이어에 넣었다. 중심을 다시 입력하지 않았으니 두 원의 중심이 어긋날 수 없다.</li><li data-hf-id="hf-ldgl" class="p-done-li">탭 구멍은 45도 보조선으로 첫 자리를 잡고 원형 배열로 90도씩 네 개를 만들었다.</li><li data-hf-id="hf-st6p" class="p-done-li">장공은 끝원 두 개를 중심거리 12로 놓고 접선을 그은 뒤 안쪽 반원을 잘라 알약을 만들고, 세로 중심선 60을 기준으로 대칭 복사했다.</li><li data-hf-id="hf-j68m" class="p-done-li">목과 베이스 사이를 반지름 10으로 둥글리고, 중심 높이 26이 16 더하기 10이라는 것도 검산했다.</li></ul></section><section data-hf-id="hf-2qib" class="card p-next" style="padding:30px 34px"><b data-hf-id="hf-p4gm">5차시 제3각법 투상</b><strong data-hf-id="hf-qem0">정면도 하나에서 도면 전체를 만듭니다</strong><ul data-hf-id="hf-ctaf" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-p9xd" class="p-next-li">제3각법으로 투상해 평면도를 위쪽에, 우측면도를 오른쪽에 놓는다.</li><li data-hf-id="hf-55nw" class="p-next-li">정면도의 어느 점이 평면도의 어느 점이 되는지, 보조선을 어떻게 끌어 쓰는지가 핵심이다.</li><li data-hf-id="hf-pemw" class="p-next-li">오늘 그린 축 구멍과 탭 구멍은 옆에서 보면 가려져서 숨은선으로 나온다.</li><li data-hf-id="hf-tsho" class="p-next-li">2차시에 만들어 둔 숨은선 레이어를 여기서 처음 쓴다.</li><li data-hf-id="hf-xdn5" class="p-next-li">보스가 앞으로 8만큼 나오고 그 자리 두께가 20이라는 값이 평면도에서 처음으로 그림이 된다.</li></ul></section></main>
+  <div id="l4f7-root" data-composition-id="l4f7" data-start="0" data-duration="106" data-width="1920" data-height="1080">
+    <section id="l4f7" class="clip" data-start="0" data-duration="106" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L04_FEATURES 완료</div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>정면도의 형상이 전부 들어갔습니다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">축 구멍 Ø25를 보스와 같은 중심 60, 62에 그렸다. 지름으로 적힌 값은 D 옵션으로 넣는다.</li><li class="p-done-li">보스 Ø56을 안쪽으로 6 오프셋해 피치원 Ø44를 만들고 중심선 레이어에 넣었다. 중심을 다시 입력하지 않았으니 두 원의 중심이 어긋날 수 없다.</li><li class="p-done-li">탭 구멍은 45도 보조선으로 첫 자리를 잡고 원형 배열로 90도씩 네 개를 만들었다.</li><li class="p-done-li">장공은 끝원 두 개를 중심거리 12로 놓고 접선을 그은 뒤 안쪽 반원을 잘라 알약을 만들고, 세로 중심선 60을 기준으로 대칭 복사했다.</li><li class="p-done-li">목과 베이스 사이를 반지름 10으로 둥글리고, 중심 높이 26이 16 더하기 10이라는 것도 검산했다.</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>5차시 제3각법 투상</b><strong>정면도 하나에서 도면 전체를 만듭니다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">제3각법으로 투상해 평면도를 위쪽에, 우측면도를 오른쪽에 놓는다.</li><li class="p-next-li">정면도의 어느 점이 평면도의 어느 점이 되는지, 보조선을 어떻게 끌어 쓰는지가 핵심이다.</li><li class="p-next-li">오늘 그린 축 구멍과 탭 구멍은 옆에서 보면 가려져서 숨은선으로 나온다.</li><li class="p-next-li">2차시에 만들어 둔 숨은선 레이어를 여기서 처음 쓴다.</li><li class="p-next-li">보스가 앞으로 8만큼 나오고 그 자리 두께가 20이라는 값이 평면도에서 처음으로 그림이 된다.</li></ul></section></main>
     </section>
   </div>
   <script>

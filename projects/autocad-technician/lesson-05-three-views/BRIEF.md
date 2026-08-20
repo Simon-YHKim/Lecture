@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "정면도 하나에서 나머지 두 뷰가 나오고, 투상선이 그 다리를 놓는다."
+message: "정면도 하나에서 나머지 두 뷰가 나온다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 32m49s
+length: 34m41s
 angle: lesson-05-three-views
 narration: user-recorded
 style_preset: lg-training
@@ -56,6 +56,7 @@ recording_slots: 1
 | 5 | `05-demo` | 1320s | 16 |
 | 6 | `06-check` | 116s | 4 |
 | 7 | `07-recap` | 130s | 2 |
-| 8 | `08-closing` | 20s | 2 |
+| 8 | `08-keys` | 112s | 12 |
+| 9 | `09-closing` | 20s | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

@@ -25,6 +25,7 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import lesson_build as lb  # noqa: E402
 import lesson_kit as kit  # noqa: E402
 
 LESSON = sys.argv[1] if len(sys.argv) > 1 else "projects/autocad-technician/lesson-02-part-and-template"
@@ -430,6 +431,19 @@ def build_recap(comp, dur, spans):
 frame("09-recap", "l2f9", 9, [1, 1], build_recap)
 
 
+# ------------------------------------------------------------- 10 keys
+# What the recording typed, read back from the script so the table cannot list
+# a command the demo never used. Shared with lessons 3-7.
+KEYS = beats.shortcuts_in(os.path.join(LESSON, "SCRIPT.md"), 8)
+
+
+def build_keys(comp, dur, spans):
+    return lb.f_keys(comp, dur, spans, {"keys": KEYS})
+
+
+frame("10-keys", "l2f10", 10, [1] * len(KEYS), build_keys)
+
+
 # ------------------------------------------------------------ 10 closing
 def build_closing(comp, dur, spans):
     return (kit.closing_card(comp, dur, spans, next_no=3, next_title="기준선과 외곽"),
@@ -438,7 +452,7 @@ def build_closing(comp, dur, spans):
              {"kind": "staysInFrame", "selector": "#%s .close" % comp}])
 
 
-frame("10-closing", "l2f10", 10, [1, 1], build_closing)
+frame("11-closing", "l2f11", 11, [1, 1], build_closing)
 
 # ------------------------------------------------------------ assemble
 slots, start = [], 0

@@ -15,7 +15,10 @@ FONTS = (
 
 BASE_CSS = """
 #root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -228,6 +231,85 @@ ICONS = {
     "plot": '<rect x="3" y="6" width="17" height="20"/><path d="M6 11h11M6 15h11M6 19h7"/>'
             '<path d="M21 16h8M29 16l-3.2-1.8M29 16l-3.2 1.8"/>',
 }
+
+
+# AutoCAD commands the course actually uses, keyed by what a learner types.
+# Each entry is (full name, what it does, when you reach for it). The last field
+# is the one that matters outside the exam: a technician who only ever draws the
+# exam part will not remember a command, but one who knows the situation will.
+#
+# A script may only use commands listed here. `beats.shortcuts_in` looks up what
+# the steps type, and an unknown entry stops the build rather than quietly
+# leaving a gap in the summary table.
+COMMANDS = {
+    "L": ("LINE", "선을 긋는다", "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선"),
+    "PL": ("PLINE", "이어진 선을 하나의 객체로 긋는다",
+           "한 바퀴 도는 윤곽. 레이아웃에서 영역 넓이를 재거나 통째로 옮길 때"),
+    "C": ("CIRCLE", "원을 그린다", "구멍, 축, 피치원"),
+    "REC": ("RECTANG", "직사각형을 폴리선으로 그린다", "도면틀, 표제란, 판재 외곽"),
+    "XL": ("XLINE", "무한히 뻗는 구성선을 긋는다", "투상선. 도면에 남기지 않고 뷰를 맞출 때"),
+    "O": ("OFFSET", "일정 거리만큼 떨어진 같은 모양을 만든다",
+          "중심을 다시 찍지 않고 동심원·평행선. 벽체 두께, 여유 간격"),
+    "TR": ("TRIM", "경계까지 잘라낸다", "겹친 선, 튀어나온 토막"),
+    "EX": ("EXTEND", "경계까지 늘린다", "교차점에 못 미친 선"),
+    "F": ("FILLET", "두 선 사이에 라운드를 넣는다", "응력이 몰리는 안쪽 모서리. 반지름 0이면 각지게 잇는다"),
+    "MI": ("MIRROR", "대칭으로 복사한다", "좌우 대칭 형상. 한 번만 그리고 뒤집는다"),
+    "CO": ("COPY", "같은 것을 다른 자리에 둔다", "반복되는 부품, 같은 구멍"),
+    "M": ("MOVE", "옮긴다", "뷰 배치를 다시 잡을 때"),
+    "E": ("ERASE", "지운다", "보조선 정리"),
+    "ARRAYPOLAR": ("ARRAYPOLAR", "중심을 두고 원형으로 배열한다", "볼트 구멍처럼 각도로 균등 배치된 것"),
+    "MA": ("MATCHPROP", "특성을 다른 객체에 복사한다", "레이어가 틀린 선을 다시 그리지 않고 옮길 때"),
+    "LA": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
+    "OS": ("OSNAP", "객체 스냅 항목을 정한다", "끝점·중심·접점을 정확히 잡아야 할 때"),
+    "Z": ("ZOOM", "화면 배율을 바꾼다", "스냅이 어디 붙었는지 봐야 할 때는 크게"),
+    "D": ("DIMSTYLE", "치수 스타일을 정한다", "문자 높이·화살표·소수 자릿수를 도면 축척에 맞출 때"),
+    "DLI": ("DIMLINEAR", "수평·수직 치수를 넣는다", "가로 세로로 잰 값"),
+    "DAL": ("DIMALIGNED", "기울어진 변에 나란한 치수를 넣는다", "경사면의 실제 길이"),
+    "DDI": ("DIMDIAMETER", "지름 치수를 넣는다", "원과 구멍"),
+    "DRA": ("DIMRADIUS", "반지름 치수를 넣는다", "라운드와 호"),
+    "DAN": ("DIMANGULAR", "각도 치수를 넣는다", "두 선 사이의 각"),
+    "MLEADER": ("MLEADER", "지시선과 문자를 넣는다", "도형 밖에서 끌어와 설명할 때"),
+    "DIMEDIT": ("DIMEDIT", "이미 넣은 치수의 문자를 고친다", "참고 치수 괄호, 접두어"),
+    "DTEXT": ("DTEXT", "문자를 쓴다", "표제란, 주석"),
+    "LTSCALE": ("LTSCALE", "도면 전체의 선 종류 축척을 바꾼다", "점선이 실선처럼 보일 때"),
+    "QSELECT": ("QSELECT", "조건에 맞는 객체를 한 번에 고른다", "구성선만 골라 지울 때"),
+    "UCS": ("UCS", "좌표 원점과 방향을 옮긴다", "도면 안 특정 자리를 0,0 으로 삼을 때"),
+    "LIMITS": ("LIMITS", "도면 한계를 정한다", "용지 크기를 좌표로 잡을 때"),
+    "UNITS": ("UNITS", "단위와 정밀도를 정한다", "밀리미터인지 인치인지 확인"),
+    "LINETYPE": ("LINETYPE", "선 종류를 불러온다", "CENTER·HIDDEN 을 레이어에 지정하기 전"),
+    "OPEN": ("OPEN", "파일을 연다", "매 차시 지난 상태에서 이어 그릴 때"),
+    "SAVEAS": ("SAVEAS", "새 이름으로 저장한다", "차시 종료 상태를 남길 때"),
+    "PLOT": ("PLOT", "출력한다", "종이나 PDF 로 내보낼 때"),
+    "EXPORTPDF": ("EXPORTPDF", "PDF 로 내보낸다", "제출용 파일"),
+    "LI": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
+    "DI": ("DIST", "두 점 사이 거리를 잰다", "치수를 넣기 전 확인"),
+    "LIST": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
+    "LAYER": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
+    "QSAVE": ("QSAVE", "덮어써 저장한다", "Ctrl+S 와 같다"),
+    # System variables. Typed at the prompt like a command, so a learner meets
+    # them the same way, but they set a value rather than doing something.
+    "CLAYER": ("CLAYER", "현재 레이어를 바꾼다", "명령행으로 레이어를 바꿀 때. 드롭다운과 같은 일"),
+    "UCSICON": ("UCSICON", "좌표계 아이콘 표시를 정한다", "옮긴 원점이 어디인지 눈으로 확인할 때"),
+    "LWDISPLAY": ("LWDISPLAY", "선가중치를 화면에 보일지 정한다", "굵기 차이를 화면에서 확인할 때"),
+    "MIRRTEXT": ("MIRRTEXT", "대칭할 때 문자를 뒤집을지 정한다", "문자가 포함된 것을 대칭 복사하기 전"),
+}
+
+# Backticked in the scripts but not something typed at a prompt — a fit grade,
+# a value, a file name.
+NOT_COMMANDS = {"H7"}
+
+# Typed inside a running command as an option or a snap, not on a blank prompt.
+OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "OR", "ON",
+               "ALL", "AS", "FROM", "TAN", "CENTER", "HIDDEN", "RE", "SELECT"}
+
+FUNCTION_KEYS = [
+    ("F3", "객체 스냅", "끝점·중심·접점에 붙는다. 꺼져 있으면 눈대중이 된다"),
+    ("F8", "직교", "수평 수직으로만 움직인다"),
+    ("F10", "극좌표 추적", "정해진 각도마다 안내선이 뜬다"),
+    ("Ctrl+1", "특성 창", "고른 객체의 레이어·선종류 축척을 그 자리에서 고친다"),
+    ("Ctrl+S", "저장", "명령 한 번 끝날 때마다 눌러 두면 잃을 것이 없다"),
+    ("Ctrl+Z", "실행 취소", "명령 밖에서. 명령 안에서는 U"),
+]
 
 
 def icon(name, size=46):

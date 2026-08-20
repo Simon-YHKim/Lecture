@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "정확하게 그린다는 것은 점을 정확하게 찍는다는 뜻이고, 기준선은 형상보다 먼저 선다."
+message: "정확하게 그린다는 것은 점을 정확하게 찍는다는 뜻이다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 29m05s
+length: 30m52s
 angle: lesson-03-baseline-profile
 narration: user-recorded
 style_preset: lg-training
@@ -60,6 +60,7 @@ recording_slots: 1
 | 5 | `05-demo` | 920s | 16 |
 | 6 | `06-check` | 172s | 4 |
 | 7 | `07-recap` | 147s | 2 |
-| 8 | `08-closing` | 17s | 2 |
+| 8 | `08-keys` | 107s | 11 |
+| 9 | `09-closing` | 17s | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

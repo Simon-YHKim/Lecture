@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 21m59s
+length: 23m52s
 angle: part-reading-and-drawing-environment
 narration: user-recorded
 style_preset: lg-training
@@ -57,4 +57,5 @@ recording_slots: 1
 | 7 | `07-sheet-and-layers` | 125s | A3 규격과 레이어 네 개 |
 | 8 | `08-build-template` | 450s | **DEMO-01 화면 녹화** |
 | 9 | `09-recap` | 94s | 2분할 마무리 |
-| 10 | `10-closing` | 13s | 인사 — 고생하셨습니다 · 다음 차시 |
+| 10 | `10-keys` | 113s | 오늘 친 것 — 단축키 13개와 상황 |
+| 11 | `11-closing` | 13s | 인사 — 고생하셨습니다 · 다음 차시 |

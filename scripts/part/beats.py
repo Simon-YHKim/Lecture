@@ -339,6 +339,71 @@ def dim_highlight(comp, dims, spans, lead=0.2):
     return attr_highlight(comp, "dim", dims, spans, lead)
 
 
+_TICK = re.compile(r"`([A-Za-z][A-Za-z0-9]{0,11})`")
+
+
+def shortcuts_in(path, line_no):
+    """The commands a lesson's recording actually types, in first-use order.
+
+    Read from the script rather than listed per lesson, so the summary table
+    cannot claim a command the demo never uses — or miss one it does. Option
+    letters typed inside a running command are filtered out; anything left that
+    the command table does not know stops the build, because a silent gap in
+    that table is exactly what nobody would notice.
+    """
+    import lesson_kit as kit
+
+    with open(path, encoding="utf-8") as fh:
+        lines = fh.read().splitlines()
+
+    inside, seen, unknown = False, [], []
+    for raw in lines:
+        m = _LINE_HEAD.match(raw)
+        if m:
+            inside = int(m.group(1)) == line_no
+            continue
+        if not inside:
+            continue
+        for tok in _TICK.findall(raw):
+            key = tok.upper()
+            if key in kit.OPTION_KEYS or key in kit.NOT_COMMANDS or key in seen:
+                continue
+            if key in kit.COMMANDS:
+                seen.append(key)
+            elif key not in unknown:
+                unknown.append(key)
+    if unknown:
+        raise SystemExit(
+            "%s Line %d 이 쓰는 명령이 lesson_kit.COMMANDS 에 없다: %s\n"
+            "표에 넣거나, 명령이 아니면 OPTION_KEYS 에 넣어라."
+            % (path, line_no, ", ".join(unknown)))
+    return seen
+
+
+def step_keys(path, line_no):
+    """What each recording step types, one entry per step.
+
+    Read from the step's own text rather than assigned by hand, so a checklist
+    row cannot show a command that step does not use. Steps that only look at
+    something return an empty string.
+    """
+    import lesson_kit as kit
+
+    out = []
+    for _no, text in parse_steps(path, line_no):
+        found = []
+        for tok in _TICK.findall(text):
+            key = tok.upper()
+            if key in kit.COMMANDS and key not in found:
+                found.append(key)
+        fk = re.findall(r"Ctrl\+[A-Za-z0-9]+|\bF(?:[3-9]|1[0-2])\b", text)
+        for k in fk:
+            if k not in found:
+                found.append(k)
+        out.append(" · ".join(found[:2]))
+    return out
+
+
 def segment_at(spans, i):
     """Start of the i-th segment counting gaps, so an element that illustrates a
     framing paragraph can be cued to that paragraph instead of to t=0."""

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
+  <style>
+#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
+*{box-sizing:border-box}
+.clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
+.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
+.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}
+h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:58px;letter-spacing:-.035em}
+.prompt{color:#666;font-size:26px}
+.body{display:grid;gap:38px;height:724px;padding-top:36px}
+.panel{background:#F5F5F3;border:2px solid #A4A3A4;display:grid;place-items:center;overflow:hidden}
+.panel svg{width:100%;height:100%}
+.dwg .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
+.dwg .hidden{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:2.4 1.2}
+.dwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2}
+.dwg .dim,.dwg .ext,.dwg .tangent{fill:none;stroke:#111;stroke-width:.25}
+.dwg .arrow{fill:#111;stroke:none}
+.dwg .hl{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:0}
+.card{border:2px solid #A4A3A4;background:#FFF;padding:20px 24px;color:#111}
+.ico{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
+.card.wide{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start}
+.card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
+.card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
+.card span{display:block;color:#666;font-size:21px;line-height:1.45}
+.note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
+.note b{color:#C7004C}
+table.spec{width:100%;border-collapse:collapse;font-size:22px}
+table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
+table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+.title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
+.title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.title h2{margin:18px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.title .rule{margin-top:42px;width:220px;height:3px;background:#C7004C}
+.title .sub{margin-top:28px;font-size:29px;color:#FFF;letter-spacing:.02em}
+.close{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.close .rule{width:220px;height:3px;background:#C7004C}
+.close h2{margin:40px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
+.close .next em{font-style:normal;color:#C7004C}
+.close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+  </style>
+  <div id="l2f10-root" data-composition-id="l2f10" data-start="0" data-duration="113" data-width="1920" data-height="1080">
+    <section id="l2f10" class="clip" data-start="0" data-duration="113" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · KEYS</div><h1>오늘 친 것</h1></div><div class="prompt">명령보다 상황을 기억하세요</div></header>
+      <main class="body" style="grid-template-rows:1fr auto"><section style="overflow:hidden"><table class="spec" style="font-size:21px"><thead><tr><th>입력</th><th>명령</th><th>무엇을 하나</th><th>언제 쓰나</th></tr></thead><tbody><tr class="ky ky1"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">SAVEAS</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">새 이름으로 저장한다</td><td style="color:#666;font-size:20px">차시 종료 상태를 남길 때</td></tr><tr class="ky ky2"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">UNITS</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">단위와 정밀도를 정한다</td><td style="color:#666;font-size:20px">밀리미터인지 인치인지 확인</td></tr><tr class="ky ky3"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LIMITS</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">도면 한계를 정한다</td><td style="color:#666;font-size:20px">용지 크기를 좌표로 잡을 때</td></tr><tr class="ky ky4"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">Z</td><td style="color:#666;white-space:nowrap;font-size:20px">ZOOM</td><td style="color:#111;white-space:nowrap">화면 배율을 바꾼다</td><td style="color:#666;font-size:20px">스냅이 어디 붙었는지 봐야 할 때는 크게</td></tr><tr class="ky ky5"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LINETYPE</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">선 종류를 불러온다</td><td style="color:#666;font-size:20px">CENTER·HIDDEN 을 레이어에 지정하기 전</td></tr><tr class="ky ky6"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LAYER</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">레이어를 만들고 관리한다</td><td style="color:#666;font-size:20px">선 종류·색상을 개체가 아니라 레이어로 정할 때</td></tr><tr class="ky ky7"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LTSCALE</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">도면 전체의 선 종류 축척을 바꾼다</td><td style="color:#666;font-size:20px">점선이 실선처럼 보일 때</td></tr><tr class="ky ky8"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">REC</td><td style="color:#666;white-space:nowrap;font-size:20px">RECTANG</td><td style="color:#111;white-space:nowrap">직사각형을 폴리선으로 그린다</td><td style="color:#666;font-size:20px">도면틀, 표제란, 판재 외곽</td></tr><tr class="ky ky9"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">L</td><td style="color:#666;white-space:nowrap;font-size:20px">LINE</td><td style="color:#111;white-space:nowrap">선을 긋는다</td><td style="color:#666;font-size:20px">낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선</td></tr><tr class="ky ky10"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">DTEXT</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">문자를 쓴다</td><td style="color:#666;font-size:20px">표제란, 주석</td></tr><tr class="ky ky11"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">OS</td><td style="color:#666;white-space:nowrap;font-size:20px">OSNAP</td><td style="color:#111;white-space:nowrap">객체 스냅 항목을 정한다</td><td style="color:#666;font-size:20px">끝점·중심·접점을 정확히 잡아야 할 때</td></tr><tr class="ky ky12"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">LWDISPLAY</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">선가중치를 화면에 보일지 정한다</td><td style="color:#666;font-size:20px">굵기 차이를 화면에서 확인할 때</td></tr><tr class="ky ky13"><td style="color:#C7004C;white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:23px">QSAVE</td><td style="color:#666;white-space:nowrap;font-size:20px"></td><td style="color:#111;white-space:nowrap">덮어써 저장한다</td><td style="color:#666;font-size:20px">Ctrl+S 와 같다</td></tr></tbody></table></section><div class="note"><b>기능키</b> <span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">F3</b> <span style="color:#666">객체 스냅</span></span><span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">F8</b> <span style="color:#666">직교</span></span><span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">F10</b> <span style="color:#666">극좌표 추적</span></span><span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">Ctrl+1</b> <span style="color:#666">특성 창</span></span><span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">Ctrl+S</b> <span style="color:#666">저장</span></span><span style="display:inline-block;margin:0 22px 8px 0"><b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">Ctrl+Z</b> <span style="color:#666">실행 취소</span></span></div></main>
+    </section>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};
+    const tl=gsap.timeline({paused:true});
+    tl.fromTo("#l2f10 .topline",{opacity:0,y:-22},{opacity:1,y:0,duration:.7,ease:"power3.out"},.25);
+    tl.fromTo("#l2f10 thead",{opacity:0,y:8},{opacity:1,y:0,duration:0.7,ease:"power2.out"},1.5);
+    tl.fromTo("#l2f10 .ky1,#l2f10 .ky2,#l2f10 .ky3,#l2f10 .ky4,#l2f10 .ky5,#l2f10 .ky6,#l2f10 .ky7,#l2f10 .ky8,#l2f10 .ky9,#l2f10 .ky10,#l2f10 .ky11,#l2f10 .ky12,#l2f10 .ky13",{opacity:0,y:14},{opacity:0.34,y:0,duration:0.95,stagger:0.1,ease:"power2.out"},9.36);
+    tl.to("#l2f10 .ky1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},11.76);
+    tl.to("#l2f10 .ky1",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},17.72);
+    tl.to("#l2f10 .ky2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},17.72);
+    tl.to("#l2f10 .ky2",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},24.08);
+    tl.to("#l2f10 .ky3",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},24.08);
+    tl.to("#l2f10 .ky3",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},30.04);
+    tl.to("#l2f10 .ky4",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},30.04);
+    tl.to("#l2f10 .ky4",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},37.2);
+    tl.to("#l2f10 .ky5",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},37.2);
+    tl.to("#l2f10 .ky5",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},44.36);
+    tl.to("#l2f10 .ky6",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},44.36);
+    tl.to("#l2f10 .ky6",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},52.32);
+    tl.to("#l2f10 .ky7",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},52.32);
+    tl.to("#l2f10 .ky7",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},59.28);
+    tl.to("#l2f10 .ky8",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},59.28);
+    tl.to("#l2f10 .ky8",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},66.44);
+    tl.to("#l2f10 .ky9",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},66.44);
+    tl.to("#l2f10 .ky9",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},73.8);
+    tl.to("#l2f10 .ky10",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},73.8);
+    tl.to("#l2f10 .ky10",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},77.95);
+    tl.to("#l2f10 .ky11",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},77.95);
+    tl.to("#l2f10 .ky11",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},85.51);
+    tl.to("#l2f10 .ky12",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},85.51);
+    tl.to("#l2f10 .ky12",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},93.48);
+    tl.to("#l2f10 .ky13",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8,ease:"power2.inOut"},93.48);
+    tl.to("#l2f10 .ky13",{opacity:0.64,backgroundColor:'rgba(0,0,0,0)',duration:0.8,ease:"power2.inOut"},98.43);
+    tl.fromTo("#l2f10 .note",{opacity:0,y:12},{opacity:1,y:0,duration:0.9,ease:"power3.out"},101.0);
+    tl.to("#l2f10 .topline,#l2f10 .body",{opacity:0,y:-12,duration:0.9,ease:"power2.in"},111.95);
+    window.__timelines["l2f10"]=tl;
+  </script>
+</template></body></html>

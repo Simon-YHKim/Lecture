@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "안쪽 형상은 전부 원에서 출발하고, 명령마다 기본값이 먼저 발목을 잡는다."
+message: "안쪽 형상은 전부 원에서 출발한다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 26m57s
+length: 29m18s
 angle: lesson-04-circles-arcs
 narration: user-recorded
 style_preset: lg-training
@@ -59,6 +59,7 @@ recording_slots: 1
 | 5 | `05-demo` | 800s | 16 |
 | 6 | `06-check` | 135s | 4 |
 | 7 | `07-recap` | 106s | 2 |
-| 8 | `08-closing` | 13s | 2 |
+| 8 | `08-keys` | 141s | 16 |
+| 9 | `09-closing` | 13s | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

@@ -2,7 +2,10 @@
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
 #root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -42,10 +45,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
   </style>
-  <div data-hf-id="hf-fpg6" id="l5f7-root" data-composition-id="l5f7" data-start="0" data-duration="130" data-width="1920" data-height="1080">
-    <section data-hf-id="hf-vg3x" id="l5f7" class="clip" data-start="0" data-duration="130" data-track-index="1">
-      <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-bnfk" class="index">06 · RECAP</div><h1 data-hf-id="hf-lvd2">이번 차시와 다음 차시</h1></div><div data-hf-id="hf-kj1s" class="prompt">L05_VIEWS 완료</div></header>
-      <main data-hf-id="hf-s3tr" class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section data-hf-id="hf-5xl8" class="card p-done" style="padding:30px 34px"><b data-hf-id="hf-qe6r">이번에 한 일</b><strong data-hf-id="hf-rwe7">정면도 하나에서 뷰 두 개</strong><ul data-hf-id="hf-u27b" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-tdb5" class="p-done-li">정면도의 모서리와 원 사분점에서 구성선을 뽑아 폭 120과 높이 90을 그대로 받아왔습니다.</li><li data-hf-id="hf-lbuy" class="p-done-li">오늘 새로 정한 값은 판 두께 12와 보스 자리 20뿐이었습니다.</li><li data-hf-id="hf-t9u9" class="p-done-li">평면도는 격자를 그려 잘라내는 방법으로, 우측면도는 교차점을 따라 이어 그리는 방법으로 만들었습니다.</li><li data-hf-id="hf-62xg" class="p-done-li">깊이는 45도 선을 거쳐 옮겼기 때문에 두 뷰의 두께가 어긋날 수 없습니다.</li><li data-hf-id="hf-wutf" class="p-done-li">숨은선은 축 구멍 20 전체·탭 10까지·장공 12 구간으로 다르게 넣고 L05_VIEWS로 저장했습니다.</li></ul></section><section data-hf-id="hf-2qib" class="card p-next" style="padding:30px 34px"><b data-hf-id="hf-puhv">다음 차시</b><strong data-hf-id="hf-08kw">그려 놓은 것을 정리합니다</strong><ul data-hf-id="hf-ctaf" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-ktgj" class="p-next-li">뷰를 맞추려고 그은 구성선을 한 번에 골라 걷어냅니다.</li><li data-hf-id="hf-uyuk" class="p-next-li">남은 형상선 토막은 TRIM으로 자르고, 못 미친 선은 EXTEND로 늘리고, 경계가 없는 선은 지웁니다.</li><li data-hf-id="hf-b7bf" class="p-next-li">대칭 형상은 MIRROR로 다시 맞추고, 레이어가 틀린 선은 MATCHPROP으로 제자리에 옮깁니다.</li><li data-hf-id="hf-g4yl" class="p-next-li">색·선 종류·선가중치를 ByLayer로 통일하고, 축척 0.5와 LTSCALE로 파선 간격을 맞춥니다.</li><li data-hf-id="hf-wflp" class="p-next-li">표면 거칠기·기하 공차·재질·열처리 지시가 각각 무엇을 지시하는지 읽고 넘어갑니다.</li></ul></section></main>
+  <div id="l5f7-root" data-composition-id="l5f7" data-start="0" data-duration="130" data-width="1920" data-height="1080">
+    <section id="l5f7" class="clip" data-start="0" data-duration="130" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L05_VIEWS 완료</div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>정면도 하나에서 뷰 두 개</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">정면도의 모서리와 원 사분점에서 구성선을 뽑아 폭 120과 높이 90을 그대로 받아왔습니다.</li><li class="p-done-li">오늘 새로 정한 값은 판 두께 12와 보스 자리 20뿐이었습니다.</li><li class="p-done-li">평면도는 격자를 그려 잘라내는 방법으로, 우측면도는 교차점을 따라 이어 그리는 방법으로 만들었습니다.</li><li class="p-done-li">깊이는 45도 선을 거쳐 옮겼기 때문에 두 뷰의 두께가 어긋날 수 없습니다.</li><li class="p-done-li">숨은선은 축 구멍 20 전체·탭 10까지·장공 12 구간으로 다르게 넣고 L05_VIEWS로 저장했습니다.</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>다음 차시</b><strong>그려 놓은 것을 정리합니다</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">뷰를 맞추려고 그은 구성선을 한 번에 골라 걷어냅니다.</li><li class="p-next-li">남은 형상선 토막은 TRIM으로 자르고, 못 미친 선은 EXTEND로 늘리고, 경계가 없는 선은 지웁니다.</li><li class="p-next-li">대칭 형상은 MIRROR로 다시 맞추고, 레이어가 틀린 선은 MATCHPROP으로 제자리에 옮깁니다.</li><li class="p-next-li">색·선 종류·선가중치를 ByLayer로 통일하고, 축척 0.5와 LTSCALE로 파선 간격을 맞춥니다.</li><li class="p-next-li">표면 거칠기·기하 공차·재질·열처리 지시가 각각 무엇을 지시하는지 읽고 넘어갑니다.</li></ul></section></main>
     </section>
   </div>
   <script>

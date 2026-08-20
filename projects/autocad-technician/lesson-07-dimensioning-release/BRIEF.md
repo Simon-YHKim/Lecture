@@ -2,12 +2,12 @@
 workflow: general-video
 flow: automation
 storyboard: yes
-message: "치수가 없으면 그림이지 도면이 아니다. 마지막은 축척을 확인하고 종이로 내보내는 일이다."
+message: "치수가 없으면 그림이지 도면이 아니다."
 destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 39m10s
+length: 41m19s
 angle: lesson-07-dimensioning-release
 narration: user-recorded
 style_preset: lg-training
@@ -61,6 +61,7 @@ recording_slots: 1
 | 5 | `05-demo` | 1500s | 16 |
 | 6 | `06-check` | 154s | 4 |
 | 7 | `07-recap` | 135s | 2 |
-| 8 | `08-closing` | 19s | 2 |
+| 8 | `08-keys` | 129s | 16 |
+| 9 | `09-closing` | 19s | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

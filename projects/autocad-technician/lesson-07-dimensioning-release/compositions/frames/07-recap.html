@@ -2,7 +2,10 @@
 <html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
   <style>
 #root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
- font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif}
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
 *{box-sizing:border-box}
 .clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
 .topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
@@ -42,10 +45,10 @@ table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
 .close .next em{font-style:normal;color:#C7004C}
 .close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
   </style>
-  <div data-hf-id="hf-zp6l" id="l7f7-root" data-composition-id="l7f7" data-start="0" data-duration="135" data-width="1920" data-height="1080">
-    <section data-hf-id="hf-dnau" id="l7f7" class="clip" data-start="0" data-duration="135" data-track-index="1">
-      <header data-hf-id="hf-bzaz" class="topline"><div data-hf-id="hf-yeow"><div data-hf-id="hf-bnfk" class="index">06 · RECAP</div><h1 data-hf-id="hf-lvd2">이번 차시와 다음 차시</h1></div><div data-hf-id="hf-nbcb" class="prompt">L07_RELEASE 완료</div></header>
-      <main data-hf-id="hf-s3tr" class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section data-hf-id="hf-5xl8" class="card p-done" style="padding:30px 34px"><b data-hf-id="hf-qe6r">이번에 한 일</b><strong data-hf-id="hf-t9ak">스타일부터 PDF까지</strong><ul data-hf-id="hf-u27b" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-h5eb" class="p-done-li">치수 스타일을 새로 만들어 문자 5, 화살표 5, 자릿수 0으로 통일</li><li data-hf-id="hf-805m" class="p-done-li">가로세로는 선형, 경사면은 정렬, 완전한 원은 지름, 호는 반지름, 벌어진 각은 각도</li><li data-hf-id="hf-q6cc" class="p-done-li">120과 90, 16, 60과 62, 29·50·12·8, 목 밑동 80을 기준면에서 기입</li><li data-hf-id="hf-kbjz" class="p-done-li">Ø25 H7, Ø56, 2-R10, 2-R5, PCD Ø44와 45도, 두께 12와 20, (95.7)과 26</li><li data-hf-id="hf-733o" class="p-done-li">숫자로 안 되는 표기는 지시선으로 2-C5와 4-M5 깊이 10, A3 1대1 확인 후 PDF</li></ul></section><section data-hf-id="hf-2qib" class="card p-next" style="padding:30px 34px"><b data-hf-id="hf-rxrd">이 도면으로</b><strong data-hf-id="hf-8nbj">이제 할 수 있는 것</strong><ul data-hf-id="hf-ctaf" style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li data-hf-id="hf-tqos" class="p-next-li">레이어를 하나씩 껐다 켜면 무엇이 어느 레이어에 있는지 스스로 검사된다</li><li data-hf-id="hf-x56n" class="p-next-li">최종 판정은 화면이 아니라 플롯 미리보기다</li><li data-hf-id="hf-dy9q" class="p-next-li">오늘 쓴 값은 지시가 없을 때의 기본값이고, 과제 지시가 언제나 우선한다</li><li data-hf-id="hf-0hlo" class="p-next-li">다른 부품도 순서는 같다. 용도를 읽고, 기준면을 정하고, 그 기준에서 잰다</li><li data-hf-id="hf-usj4" class="p-next-li">도면은 그림이 아니라 지시 문서다. 숫자 하나가 이만큼 깎으라는 문장이었다</li></ul></section></main>
+  <div id="l7f7-root" data-composition-id="l7f7" data-start="0" data-duration="135" data-width="1920" data-height="1080">
+    <section id="l7f7" class="clip" data-start="0" data-duration="135" data-track-index="1">
+      <header class="topline"><div><div class="index">06 · RECAP</div><h1>이번 차시와 다음 차시</h1></div><div class="prompt">L07_RELEASE 완료</div></header>
+      <main class="body" style="grid-template-columns:repeat(2,minmax(0,1fr))"><section class="card p-done" style="padding:30px 34px"><b>이번에 한 일</b><strong>스타일부터 PDF까지</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-done-li">치수 스타일을 새로 만들어 문자 5, 화살표 5, 자릿수 0으로 통일</li><li class="p-done-li">가로세로는 선형, 경사면은 정렬, 완전한 원은 지름, 호는 반지름, 벌어진 각은 각도</li><li class="p-done-li">120과 90, 16, 60과 62, 29·50·12·8, 목 밑동 80을 기준면에서 기입</li><li class="p-done-li">Ø25 H7, Ø56, 2-R10, 2-R5, PCD Ø44와 45도, 두께 12와 20, (95.7)과 26</li><li class="p-done-li">숫자로 안 되는 표기는 지시선으로 2-C5와 4-M5 깊이 10, A3 1대1 확인 후 PDF</li></ul></section><section class="card p-next" style="padding:30px 34px"><b>이 도면으로</b><strong>이제 할 수 있는 것</strong><ul style="margin:14px 0 0;padding-left:1.1em;color:#666;font-size:22px;line-height:1.55"><li class="p-next-li">레이어를 하나씩 껐다 켜면 무엇이 어느 레이어에 있는지 스스로 검사된다</li><li class="p-next-li">최종 판정은 화면이 아니라 플롯 미리보기다</li><li class="p-next-li">오늘 쓴 값은 지시가 없을 때의 기본값이고, 과제 지시가 언제나 우선한다</li><li class="p-next-li">다른 부품도 순서는 같다. 용도를 읽고, 기준면을 정하고, 그 기준에서 잰다</li><li class="p-next-li">도면은 그림이 아니라 지시 문서다. 숫자 하나가 이만큼 깎으라는 문장이었다</li></ul></section></main>
     </section>
   </div>
   <script>

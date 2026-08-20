@@ -123,7 +123,17 @@ def f_ondrawing(comp, dur, spans, L):
 
 
 def f_demo(comp, dur, spans, L):
-    chk = "".join('<li class="st st%d">%s</li>' % (i, t) for i, t in enumerate(L["steps"], 1))
+    # Each step shows what you type beside what it does. A checklist that only
+    # names the action leaves the viewer hunting for the command in the video.
+    def step(i, label, typed):
+        key = ('<b style="display:inline-block;min-width:96px;color:#C7004C;'
+               'font-family:ui-monospace,Consolas,monospace;font-size:20px">%s</b>' % typed
+               if typed else
+               '<b style="display:inline-block;min-width:96px">&nbsp;</b>')
+        return '<li class="st st%d">%s<span>%s</span></li>' % (i, key, label)
+
+    chk = "".join(step(i, t, k) for i, (t, k)
+                  in enumerate(zip(L["steps"], L["stepKeys"]), 1))
     body = (kit.header("04 · DEMO-01", L["demo_title"], L["cp"])
             + '\n      <main class="body" style="grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr)">'
             + '<section class="panel rec" style="border-style:dashed;position:relative">'
@@ -166,6 +176,43 @@ def f_check(comp, dur, spans, L):
     return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
 
 
+def f_keys(comp, dur, spans, L):
+    """What was typed today, with the situation it belongs to.
+
+    A learner who only ever draws the exam part forgets the command. One who
+    knows the situation reaches for it again, which is the point — the third
+    column is the part that survives the exam.
+    """
+    rows = "".join(
+        '<tr class="ky ky%d"><td style="color:#C7004C;white-space:nowrap;'
+        'font-family:ui-monospace,Consolas,monospace;font-size:23px">%s</td>'
+        '<td style="color:#666;white-space:nowrap;font-size:20px">%s</td>'
+        '<td style="color:#111;white-space:nowrap">%s</td>'
+        '<td style="color:#666;font-size:20px">%s</td></tr>'
+        % (i, key, kit.COMMANDS[key][0] if kit.COMMANDS[key][0] != key else "",
+           kit.COMMANDS[key][1], kit.COMMANDS[key][2])
+        for i, key in enumerate(L["keys"], 1))
+    fk = "".join('<span style="display:inline-block;margin:0 22px 8px 0">'
+                 '<b style="font-family:ui-monospace,Consolas,monospace;color:#C7004C">%s</b>'
+                 ' <span style="color:#666">%s</span></span>' % (k, what)
+                 for k, what, _why in kit.FUNCTION_KEYS)
+    body = (kit.header("06 · KEYS", "오늘 친 것", "명령보다 상황을 기억하세요")
+            + '\n      <main class="body" style="grid-template-rows:1fr auto">'
+            + '<section style="overflow:hidden"><table class="spec" style="font-size:21px">'
+              '<thead><tr><th>입력</th><th>명령</th><th>무엇을 하나</th><th>언제 쓰나</th>'
+              '</tr></thead><tbody>' + rows + '</tbody></table></section>'
+            + '<div class="note"><b>기능키</b> ' + fk + '</div></main>')
+    items = [beats.item(".ky%d" % i, kind="row") for i in range(1, len(L["keys"]) + 1)]
+    tl = "\n".join([
+        beats.chrome(comp),
+        beats.cue(comp, "thead", 1.5, dy=8, dur=0.7, ease="power2.out"),
+        beats.read_along(comp, items, spans),
+        beats.cue(comp, ".note", max(dur - 12.0, 4.0), dy=12),
+        beats.outro(comp, dur),
+    ])
+    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+
+
 def f_recap(comp, dur, spans, L):
     bs = beats.beat_spans(spans)
     return (kit.recap_card(comp, dur, "06 · RECAP", "이번 차시와 다음 차시",
@@ -192,7 +239,8 @@ PLAN = [("01-title", f_title, 1, None),
         ("05-demo", f_demo, 5, "steps"),
         ("06-check", f_check, 6, "check"),
         ("07-recap", f_recap, 7, None),
-        ("08-closing", f_closing, 8, None)]
+        ("08-keys", f_keys, 8, "keys"),
+        ("09-closing", f_closing, 9, None)]
 
 # The recording runs longer than its narration: typing, dialogs and waiting are
 # not spoken. Measured narration x 1.3, rounded to the nearest ten seconds.
@@ -209,6 +257,10 @@ def build(lesson_dir, L):
     assert len(steps) == len(L["steps"]), (
         "%s: SCRIPT.md 단계 %d개, 체크리스트 %d개" % (name, len(steps), len(L["steps"])))
     script[5] = list(steps)
+    # The commands the recording actually types, read from the script itself so
+    # the summary table cannot list one the demo never used.
+    L["keys"] = beats.shortcuts_in(script_path, 5)
+    L["stepKeys"] = beats.step_keys(script_path, 5)
 
     # Once a recording exists its real length replaces the estimate, and once the
     # narration is aligned the beats sit where they were actually spoken.

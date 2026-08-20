@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"></head><body><template><style>@font-face{font-family:"LG EI Text TTF Regular";src:local("LG EI Text TTF Regular");font-weight:400}@font-face{font-family:"LG EI Headline TTF Semibold";src:local("LG EI Headline TTF Semibold");font-weight:600}@font-face{font-family:"Malgun Gothic";src:local("Malgun Gothic");font-weight:400}</style>
+  <style>
+#root{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;color:#111;
+ font-family:"LG EI Text TTF Regular","Malgun Gothic",sans-serif;
+ /* Korean breaks between 어절, not inside one. Without this a word splits
+    mid-syllable at the line end and reads as a typo. */
+ word-break:keep-all;overflow-wrap:anywhere}
+*{box-sizing:border-box}
+.clip{position:absolute;inset:0;width:100%;height:100%;padding:72px 96px 64px;background:#FFF}
+.topline{display:flex;justify-content:space-between;align-items:end;padding-bottom:18px;border-bottom:2px solid #A4A3A4}
+.index{color:#C7004C;font-size:24px;font-weight:600;letter-spacing:.08em}
+h1{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:58px;letter-spacing:-.035em}
+.prompt{color:#666;font-size:26px}
+.body{display:grid;gap:38px;height:724px;padding-top:36px}
+.panel{background:#F5F5F3;border:2px solid #A4A3A4;display:grid;place-items:center;overflow:hidden}
+.panel svg{width:100%;height:100%}
+.dwg .outline{fill:none;stroke:#111;stroke-width:.5;stroke-linejoin:round;stroke-linecap:round}
+.dwg .hidden{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:2.4 1.2}
+.dwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2}
+.dwg .dim,.dwg .ext,.dwg .tangent{fill:none;stroke:#111;stroke-width:.25}
+.dwg .arrow{fill:#111;stroke:none}
+.dwg .hl{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-linejoin:round;stroke-linecap:round;opacity:0}
+.card{border:2px solid #A4A3A4;background:#FFF;padding:20px 24px;color:#111}
+.ico{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block}
+.card.wide{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start}
+.card b{display:block;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;color:#C7004C;font-size:28px}
+.card strong{display:block;margin:6px 0 4px;color:#111;font-size:24px}
+.card span{display:block;color:#666;font-size:21px;line-height:1.45}
+.note{margin-top:14px;padding-top:14px;border-top:4px solid #111;font-size:24px;line-height:1.45}
+.note b{color:#C7004C}
+table.spec{width:100%;border-collapse:collapse;font-size:22px}
+table.spec th{text-align:left;padding:8px 10px;color:#666;font-size:19px;letter-spacing:.06em;border-bottom:2px solid #A4A3A4}
+table.spec td{padding:9px 10px;border-bottom:1px solid #DCDBD7}
+.title{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.title .brand{font-size:29px;letter-spacing:.22em;color:#FFF}
+.title .cert{margin-top:28px;font-size:32px;letter-spacing:.09em;color:#C7004C;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.title h2{margin:18px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.title .rule{margin-top:42px;width:220px;height:3px;background:#C7004C}
+.title .sub{margin-top:28px;font-size:29px;color:#FFF;letter-spacing:.02em}
+.close{position:absolute;inset:0;background:#111;display:grid;align-content:center;padding:0 140px}
+.close .rule{width:220px;height:3px;background:#C7004C}
+.close h2{margin:40px 0 0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;font-size:92px;letter-spacing:-.04em;line-height:1.06;color:#FFF}
+.close .next{margin-top:34px;font-size:34px;color:#FFF;letter-spacing:.01em}
+.close .next em{font-style:normal;color:#C7004C}
+.close .brand{margin-top:58px;font-size:25px;letter-spacing:.22em;color:#8A8788}
+  </style>
+  <div id="l3f9-root" data-composition-id="l3f9" data-start="0" data-duration="17" data-width="1920" data-height="1080">
+    <section id="l3f9" class="clip" data-start="0" data-duration="17" data-track-index="1">
+      <div class="close"><div class="rule"></div><h2>고생하셨습니다</h2><div class="next">다음은 <em>4차시 · 원·호·오프셋</em> 입니다<br>그때 다시 뵙겠습니다</div><div class="brand">LG이노텍 &nbsp;·&nbsp; for technician</div></div>
+    </section>
+  </div>
+  <script>
+    window.__timelines=window.__timelines||{};
+    const tl=gsap.timeline({paused:true});
+    tl.fromTo("#l3f9 .rule",{scaleX:0,transformOrigin:"left center"},{scaleX:1,duration:1.0,ease:"power2.inOut"},0.8);
+    tl.fromTo("#l3f9 h2",{opacity:0,y:22},{opacity:1,y:0,duration:1.2,ease:"power3.out"},1.6);
+    tl.fromTo("#l3f9 .next",{opacity:0,y:14},{opacity:1,y:0,duration:1.0,ease:"power2.out"},9.63);
+    tl.fromTo("#l3f9 .brand",{opacity:0},{opacity:1,duration:1.0},10.83);
+    tl.to("#l3f9 .rule,#l3f9 h2,#l3f9 .next,#l3f9 .brand",{opacity:0,duration:.9,ease:"power2.in"},15.95);
+    window.__timelines["l3f9"]=tl;
+  </script>
+</template></body></html>
