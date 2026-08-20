@@ -366,7 +366,19 @@ def shortcuts_in(path, line_no):
             continue
         for tok in _TICK.findall(raw):
             key = tok.upper()
-            if key in kit.OPTION_KEYS or key in kit.NOT_COMMANDS or key in seen:
+            if key in kit.NOT_COMMANDS or key in seen:
+                continue
+            # Some letters are a command in one lesson and an option inside a
+            # running command in another. `D` starts DIMSTYLE in lesson 7 and
+            # answers CIRCLE's radius prompt in lessons 3 and 4 — counted as
+            # DIMSTYLE everywhere, the summary claimed a command the recording
+            # never ran. The step says which it is: a command is introduced by
+            # name, an option is not.
+            if key in kit.AMBIGUOUS_KEYS:
+                if kit.COMMANDS.get(key, ("",))[0] in raw:
+                    seen.append(key)
+                continue
+            if key in kit.OPTION_KEYS:
                 continue
             if key in kit.COMMANDS:
                 seen.append(key)

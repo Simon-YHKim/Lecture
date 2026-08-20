@@ -320,7 +320,7 @@ COMMANDS = {
     "MA": ("MATCHPROP", "특성을 다른 객체에 복사한다", "레이어가 틀린 선을 다시 그리지 않고 옮길 때"),
     "LA": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
     "OS": ("OSNAP", "객체 스냅 항목을 정한다", "끝점·중심·접점을 정확히 잡아야 할 때"),
-    "Z": ("ZOOM", "화면 배율을 바꾼다", "스냅이 어디 붙었는지 봐야 할 때는 크게"),
+    "Z": ("ZOOM", "화면 배율을 바꾼다", "스냅이 어디 붙었는지 봐야 할 때"),
     "D": ("DIMSTYLE", "치수 스타일을 정한다", "문자 높이·화살표·소수 자릿수를 도면 축척에 맞출 때"),
     "DLI": ("DIMLINEAR", "수평·수직 치수를 넣는다", "가로 세로로 잰 값"),
     "DAL": ("DIMALIGNED", "기울어진 변에 나란한 치수를 넣는다", "경사면의 실제 길이"),
@@ -334,14 +334,14 @@ COMMANDS = {
     "QSELECT": ("QSELECT", "조건에 맞는 객체를 한 번에 고른다", "구성선만 골라 지울 때"),
     "UCS": ("UCS", "좌표 원점과 방향을 옮긴다", "도면 안 특정 자리를 0,0 으로 삼을 때"),
     "LIMITS": ("LIMITS", "도면 한계를 정한다", "용지 크기를 좌표로 잡을 때"),
-    "UNITS": ("UNITS", "단위와 정밀도를 정한다", "밀리미터인지 인치인지 확인"),
+    "UNITS": ("UNITS", "단위와 정밀도를 정한다", "밀리미터인지 인치인지 확인할 때"),
     "LINETYPE": ("LINETYPE", "선 종류를 불러온다", "CENTER·HIDDEN 을 레이어에 지정하기 전"),
     "OPEN": ("OPEN", "파일을 연다", "매 차시 지난 상태에서 이어 그릴 때"),
     "SAVEAS": ("SAVEAS", "새 이름으로 저장한다", "차시 종료 상태를 남길 때"),
     "PLOT": ("PLOT", "출력한다", "종이나 PDF 로 내보낼 때"),
     "EXPORTPDF": ("EXPORTPDF", "PDF 로 내보낸다", "제출용 파일"),
     "LI": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
-    "DI": ("DIST", "두 점 사이 거리를 잰다", "치수를 넣기 전 확인"),
+    "DI": ("DIST", "두 점 사이 거리를 잰다", "치수를 넣기 전"),
     "LIST": ("LIST", "객체의 정보를 보여준다", "그린 것이 정말 그 값인지 검산할 때"),
     "LAYER": ("LAYER", "레이어를 만들고 관리한다", "선 종류·색상을 개체가 아니라 레이어로 정할 때"),
     "QSAVE": ("QSAVE", "덮어써 저장한다", "Ctrl+S 와 같다"),
@@ -356,6 +356,10 @@ COMMANDS = {
 # Backticked in the scripts but not something typed at a prompt — a fit grade,
 # a value, a file name.
 NOT_COMMANDS = {"H7"}
+
+# A command in one lesson, an option inside a running command in another.
+# Counted only where the step introduces it by its full name.
+AMBIGUOUS_KEYS = {"D"}
 
 # Typed inside a running command as an option or a snap, not on a blank prompt.
 OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "OR", "ON",

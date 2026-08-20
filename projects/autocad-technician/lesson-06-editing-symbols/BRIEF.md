@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 35m48s
+length: 35m32s
 angle: lesson-06-editing-symbols
 narration: user-recorded
 style_preset: lg-training
@@ -63,8 +63,8 @@ recording_slots: 1
 | 4 | `04-on-the-drawing` | 301s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
 | 5 | `05-demo` | 1070s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 | 15 |
 | 6 | `06-check` | 158s | 확인 카드 4장 + 하단 문단 | 4 |
-| 7 | `07-recap` | 161s | 2분할 마무리 | 2 |
-| 8 | `08-keys` | 108s | 오늘 친 단축키 표 + 기능키 | 12 |
+| 7 | `07-recap` | 160s | 2분할 마무리 | 2 |
+| 8 | `08-keys` | 93s | 오늘 친 단축키 표 + 기능키 | 12 |
 | 9 | `09-closing` | 23s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.
