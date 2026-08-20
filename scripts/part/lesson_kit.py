@@ -505,8 +505,11 @@ def closing_card(comp_id, duration, spans, next_no=None, next_title=None, final=
     if final:
         tail = final
     else:
-        tail = ('다음은 <em>%d차시 · %s</em> 입니다<br>그때 다시 뵙겠습니다'
-                % (next_no, next_title))
+        # The particle attaches to the noun: 「…출도입니다」, not 「…출도 입니다」.
+        # Both halves ride in one nowrap span — with no space between them a
+        # line could otherwise break between 도 and 입.
+        tail = ('다음은 <span class="kw"><em>%d차시 · %s</em>입니다</span><br>'
+                '그때 다시 뵙겠습니다' % (next_no, next_title))
     body = ('      <div class="close"><div class="rule"></div>'
             '<h2>고생하셨습니다</h2>'
             '<div class="next">' + tail + '</div>'

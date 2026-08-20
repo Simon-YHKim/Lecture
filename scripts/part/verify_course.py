@@ -140,6 +140,17 @@ def check_lesson(slug, cp_in, cp_out):
             if col not in PALETTE:
                 fail(slug, "%s 팔레트 밖의 색 %s" % (stem, col))
 
+    # A frame file nothing plays. Adding a frame renumbers the stems, and the
+    # old file survives the rebuild with no slot pointing at it — five stale
+    # 08-closing.html sat in the tree from before the keys frame, still
+    # carrying Studio edits, invisible to every check that starts from a slot.
+    fdir = os.path.join(d, "compositions", "frames")
+    played = {stem for stem, _s, _dur in slots}
+    for f in sorted(os.listdir(fdir)):
+        stem = re.sub(r"\.(?:html|motion\.json)$", "", f)
+        if stem not in played:
+            fail(slug, "%s 은 어느 슬롯도 재생하지 않는다 — 옛 프레임 파일" % f)
+
     brief = io.open(os.path.join(d, "BRIEF.md"), encoding="utf-8").read()
     for key, want in (("checkpoint_in", cp_in), ("checkpoint_out", cp_out)):
         if want is None:

@@ -63,7 +63,8 @@ def spec(no, d):
         L["next_no"] = s["nextNo"]
         L["next_title"] = s["nextTitle"]
     else:
-        L["final"] = ('이것으로 <em>AutoCAD 기본 과정</em> 을 마칩니다<br>'
+        L["final"] = ('이것으로 <span class="kw"><em>AutoCAD 기본 과정</em>을</span> '
+                      '마칩니다<br>'
                       '도면 한 장을 처음부터 끝까지 그려 보셨습니다')
     return L
 
