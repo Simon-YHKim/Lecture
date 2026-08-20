@@ -25,6 +25,7 @@ import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 import lesson_build as lb  # noqa: E402
 import lesson_docs  # noqa: E402
 import lesson_kit as kit  # noqa: E402
@@ -483,6 +484,9 @@ for _stem, _comp, _dur in built:
 beats.stamp_times(os.path.join(LESSON, "SCRIPT.md"), ranges, start)
 
 kit.write_project(LESSON, NAME, slots, start, os, json)
+for _n, (_f, _t, _s, _fr) in enumerate(
+        kit.write_episodes(LESSON, slots, episodes.episodes_for(NAME), os), 1):
+    print("    %d편 %-22s %d:%02d" % (_n, _t, int(_s) // 60, int(_s) % 60))
 
 # One line per frame, in the order they play. lesson_docs.refresh() refuses to
 # run if this list and the built slots disagree.

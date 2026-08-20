@@ -16,6 +16,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 import verify_course as vc  # noqa: E402
 
 ROOT = "projects/autocad-technician"
@@ -51,8 +52,17 @@ def scan():
             "durationSec": int(round(total)), "frames": len(slots),
             "checkpointIn": cp_in, "checkpointOut": cp_out,
             "demoId": "DEMO-01" if demo else None,
-            "demoSec": int(round(float(demo[0][2]))) if demo else 0,
+            "demoSec": int(round(sum(float(x[2]) for x in demo))) if demo else 0,
+            "demoParts": [{"id": "DEMO-01" + "ABCDEFGH"[k],
+                           "lengthSec": int(round(float(x[2])))}
+                          for k, x in enumerate(demo)] if len(demo) > 1 else [],
+            "cutAfterStep": episodes.cuts_for(slug),
             "steps": len(steps),
+            "episodes": [{"title": e["title"],
+                          "lengthSec": int(round(sum(
+                              float(s[2]) for s in slots if s[0] in e["frames"]))),
+                          "frames": e["frames"]}
+                         for e in episodes.episodes_for(slug)],
         })
     return out
 
@@ -79,14 +89,18 @@ def main():
 
     io.open(os.path.join(ROOT, "recording-map.json"), "w",
             encoding="utf-8", newline="\n").write(json.dumps({
-                "note": ("녹화 구간은 차시마다 하나이고 언제나 DEMO-01 이다. lengthSec 은 "
-                         "낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 녹화가 다르면 "
-                         "SCRIPT.md Line 5 를 고치고 스캐폴드를 다시 돌린다."),
+                "note": ("한 차시의 녹화는 편 수만큼 나뉜다. cutAfterStep 이 비어 있으면 "
+                         "한 번에 찍고, 값이 있으면 그 단계를 끝낸 자리에서 끊는다. "
+                         "lengthSec 은 낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 "
+                         "녹화가 들어오면 그 길이가 기준이 된다."),
                 "recordings": [{
                     "lesson": x["no"], "slug": x["slug"], "demoId": x["demoId"],
                     "lengthSec": x["demoSec"], "steps": x["steps"],
+                    "cutAfterStep": x["cutAfterStep"], "parts": x["demoParts"],
                     "opens": x["checkpointIn"], "saves": x["checkpointOut"],
                 } for x in L if x["demoId"]],
+                "episodes": [{"lesson": x["no"], "slug": x["slug"],
+                              "list": x["episodes"]} for x in L],
             }, ensure_ascii=False, indent=2) + "\n")
 
     io.open(os.path.join(ROOT, "COURSE_PLAN.md"), "w",
@@ -101,6 +115,17 @@ def main():
         + "\n".join("| %d | %s | %s | %d | %s | %s |"
                    % (x["no"], x["topic"], clock(x["durationSec"]), x["frames"],
                       x["checkpointIn"] or "—", x["checkpointOut"] or "—") for x in L)
+        + "\n\n## 편\n\n한 편이 영상 하나다. 20분을 넘기지 않는다. "
+          "`npm run render -- -c compositions/episodes/ep1.html` 로 편 하나를 뽑는다.\n\n"
+        + "| 차시 | 편 | 제목 | 길이 | 프레임 |\n| --- | --- | --- | --- | --- |\n"
+        + "\n".join(
+            "| %d | %d편 | %s | %s | %s |"
+            % (x["no"], n, e["title"], clock(e["lengthSec"]),
+               " · ".join("`%s`" % f for f in e["frames"]))
+            for x in L for n, e in enumerate(x["episodes"], 1))
+        + "\n\n합계 %d편. 끊는 자리와 그 이유는 "
+          "`scripts/part/episodes.json` 에 있다.\n"
+          % sum(len(x["episodes"]) for x in L)
         + "\n\n## 이 과정이 스스로 지키는 것\n\n"
           "- **길이는 대본이 정한다.** 프레임 길이도 항목 등장 시각도 `SCRIPT.md` 에서 계산된다.\n"
           "  손으로 적은 숫자는 대본이 바뀌는 순간 조용히 어긋난다 (`LESSON_STYLE.md` 13·14번).\n"
@@ -125,15 +150,22 @@ def main():
     io.open(os.path.join(ROOT, "RECORDING_GUIDE.md"), "w",
             encoding="utf-8", newline="\n").write(
         "# RECORDING GUIDE\n\n"
-        "차시마다 화면 녹화 구간이 하나씩 있다. 슬롯 이름은 언제나 `DEMO-01` 이다.\n\n"
-        + "| 차시 | 주제 | 여는 파일 | 저장하는 상태 | 단계 | 예상 길이 |\n"
-          "| --- | --- | --- | --- | --- | --- |\n"
-        + "\n".join("| %d | %s | %s | %s | %d | %s |"
+        "한 차시가 20분짜리 **편** 여럿으로 나간다. 녹화도 그만큼 나뉜다.\n"
+        "「끊는 자리」 칸의 단계를 끝내고 저장한 뒤 녹화를 멈춘다. 다음 부분은 그 "
+        "파일을 다시 열고 이어서 찍는다.\n\n"
+        + "| 차시 | 주제 | 여는 파일 | 저장하는 상태 | 단계 | 끊는 자리 | 예상 길이 |\n"
+          "| --- | --- | --- | --- | --- | --- | --- |\n"
+        + "\n".join("| %d | %s | %s | %s | %d | %s | %s |"
                    % (x["no"], x["topic"], x["checkpointIn"] or "—",
-                      x["checkpointOut"] or "—", x["steps"], clock(x["demoSec"]))
+                      x["checkpointOut"] or "—", x["steps"],
+                      " · ".join("%d단계 뒤" % c for c in x["cutAfterStep"]) or "—",
+                      " + ".join(clock(p["lengthSec"]) for p in x["demoParts"])
+                      or clock(x["demoSec"]))
                    for x in L if x["demoId"])
         + "\n\n예상 길이는 그 차시 `SCRIPT.md` Line 5 의 낭독 시간 × 1.3 이다.\n"
           "타이핑과 대화상자와 기다리는 시간은 말하지 않기 때문이다.\n\n"
+          "끊는 자리는 시계가 아니라 작업이 한 덩어리로 끝나는 곳으로 정했다. "
+          "이유는 `scripts/part/episodes.json` 의 `why` 에 차시마다 적혀 있다.\n\n"
           "## 녹화하기 전에\n\n"
           "1. 그 차시 `SCRIPT.md` 의 Line 5 를 처음부터 끝까지 읽는다. 단계 순서가 곧 녹화 순서다.\n"
           "2. **여는 파일**을 연다. 새로 만들지 않는다. 앞 차시가 저장한 상태에서 이어 그린다.\n"

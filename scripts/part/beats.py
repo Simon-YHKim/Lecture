@@ -534,9 +534,15 @@ def stamp_times(path, ranges, total):
     def clock(t):
         return "%d:%02d" % (int(t) // 60, int(t) % 60)
 
+    want = sum(1 for raw in lines if raw.startswith("**Time:**"))
+    if want != len(ranges):
+        raise SystemExit(
+            "%s: Time 줄 %d개인데 프레임 구간은 %d개다. 하나가 조용히 버려진다."
+            % (path, want, len(ranges)))
+
     out, i, no = [], 0, 0
     for raw in lines:
-        if raw.startswith("**Time:**") and no < len(ranges):
+        if raw.startswith("**Time:**"):
             a, b = ranges[no]
             note = raw.split("(", 1)[1].rsplit(")", 1)[0] if "(" in raw else None
             out.append("**Time:** %s–%s%s" % (clock(a), clock(b),
@@ -554,6 +560,44 @@ def stamp_times(path, ranges, total):
         fh.write("\n".join(out) + "\n")
     return no
 
+
+
+def split_steps(steps, cuts):
+    """Slice the recording's steps at `cuts`, renumbering each slice from 1.
+
+    `cuts` are step numbers to cut *after*, so [6, 14] gives 1–6, 7–14, 15–end.
+    Each slice is renumbered because read_along, assertions and audit all index
+    beats by position within their frame. The absolute number stays available
+    as the returned offset, which is what the strip on screen shows — a learner
+    watching part two should see 07 / 16, not 01 / 10.
+    """
+    bounds = list(cuts) + [len(steps)]
+    out, prev = [], 0
+    for c in bounds:
+        piece = steps[prev:c]
+        if not piece:
+            raise ValueError("빈 조각이 생기는 컷: %r" % (cuts,))
+        out.append((prev, [(i, t) for i, (_n, t) in enumerate(piece, 1)]))
+        prev = c
+    if prev != len(steps):
+        raise ValueError("컷이 단계 수를 넘는다: %r" % (cuts,))
+    return out
+
+
+def split_lengths(total, weights):
+    """Divide `total` by weight so the pieces sum to exactly `total`.
+
+    Cumulative rounding, not per-piece: rounding each share on its own leaves a
+    remainder, and verify_course recomputes this same division and compares.
+    """
+    s = float(sum(weights)) or 1.0
+    out, acc, run = [], 0.0, 0
+    for w in weights:
+        acc += w
+        cut = int(round(total * acc / s))
+        out.append(cut - run)
+        run = cut
+    return out
 
 def report(name, spans, duration):
     n = len(beat_spans(spans))

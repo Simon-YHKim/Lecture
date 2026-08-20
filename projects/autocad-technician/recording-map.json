@@ -1,5 +1,5 @@
 {
-  "note": "녹화 구간은 차시마다 하나이고 언제나 DEMO-01 이다. lengthSec 은 낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 녹화가 다르면 SCRIPT.md Line 5 를 고치고 스캐폴드를 다시 돌린다.",
+  "note": "한 차시의 녹화는 편 수만큼 나뉜다. cutAfterStep 이 비어 있으면 한 번에 찍고, 값이 있으면 그 단계를 끝낸 자리에서 끊는다. lengthSec 은 낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 녹화가 들어오면 그 길이가 기준이 된다.",
   "recordings": [
     {
       "lesson": 2,
@@ -7,6 +7,8 @@
       "demoId": "DEMO-01",
       "lengthSec": 810,
       "steps": 16,
+      "cutAfterStep": [],
+      "parts": [],
       "opens": null,
       "saves": "L02_TEMPLATE"
     },
@@ -16,6 +18,19 @@
       "demoId": "DEMO-01",
       "lengthSec": 1210,
       "steps": 16,
+      "cutAfterStep": [
+        6
+      ],
+      "parts": [
+        {
+          "id": "DEMO-01A",
+          "lengthSec": 455
+        },
+        {
+          "id": "DEMO-01B",
+          "lengthSec": 755
+        }
+      ],
       "opens": "L02_TEMPLATE",
       "saves": "L03_PROFILE"
     },
@@ -25,6 +40,24 @@
       "demoId": "DEMO-01",
       "lengthSec": 1210,
       "steps": 16,
+      "cutAfterStep": [
+        6,
+        14
+      ],
+      "parts": [
+        {
+          "id": "DEMO-01A",
+          "lengthSec": 430
+        },
+        {
+          "id": "DEMO-01B",
+          "lengthSec": 618
+        },
+        {
+          "id": "DEMO-01C",
+          "lengthSec": 162
+        }
+      ],
       "opens": "L03_PROFILE",
       "saves": "L04_FEATURES"
     },
@@ -34,6 +67,24 @@
       "demoId": "DEMO-01",
       "lengthSec": 1780,
       "steps": 16,
+      "cutAfterStep": [
+        6,
+        12
+      ],
+      "parts": [
+        {
+          "id": "DEMO-01A",
+          "lengthSec": 598
+        },
+        {
+          "id": "DEMO-01B",
+          "lengthSec": 633
+        },
+        {
+          "id": "DEMO-01C",
+          "lengthSec": 549
+        }
+      ],
       "opens": "L04_FEATURES",
       "saves": "L05_VIEWS"
     },
@@ -43,6 +94,24 @@
       "demoId": "DEMO-01",
       "lengthSec": 1390,
       "steps": 16,
+      "cutAfterStep": [
+        7,
+        13
+      ],
+      "parts": [
+        {
+          "id": "DEMO-01A",
+          "lengthSec": 446
+        },
+        {
+          "id": "DEMO-01B",
+          "lengthSec": 689
+        },
+        {
+          "id": "DEMO-01C",
+          "lengthSec": 255
+        }
+      ],
       "opens": "L05_VIEWS",
       "saves": "L06_REPRESENTED"
     },
@@ -52,8 +121,268 @@
       "demoId": "DEMO-01",
       "lengthSec": 1840,
       "steps": 16,
+      "cutAfterStep": [
+        5,
+        14
+      ],
+      "parts": [
+        {
+          "id": "DEMO-01A",
+          "lengthSec": 476
+        },
+        {
+          "id": "DEMO-01B",
+          "lengthSec": 1099
+        },
+        {
+          "id": "DEMO-01C",
+          "lengthSec": 265
+        }
+      ],
       "opens": "L06_REPRESENTED",
       "saves": "L07_RELEASE"
+    }
+  ],
+  "episodes": [
+    {
+      "lesson": 1,
+      "slug": "lesson-01-orientation",
+      "list": [
+        {
+          "title": "오리엔테이션",
+          "lengthSec": 440,
+          "frames": [
+            "01-title",
+            "02-why-drawings",
+            "03-how-assessed",
+            "04-roadmap",
+            "05-recap",
+            "06-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 2,
+      "slug": "lesson-02-part-and-template",
+      "list": [
+        {
+          "title": "부품과 도면 규칙",
+          "lengthSec": 960,
+          "frames": [
+            "01-title",
+            "02-what-is-this-part",
+            "03-surfaces",
+            "04-why-this-shape",
+            "05-reading-dimensions",
+            "06-reading-symbols",
+            "07-sheet-and-layers"
+          ]
+        },
+        {
+          "title": "A3 템플릿 만들기",
+          "lengthSec": 1061,
+          "frames": [
+            "08-build-template",
+            "09-recap",
+            "10-keys",
+            "11-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 3,
+      "slug": "lesson-03-baseline-profile",
+      "list": [
+        {
+          "title": "원점과 중심선",
+          "lengthSec": 1021,
+          "frames": [
+            "01-title",
+            "02-today",
+            "03-concept",
+            "04-on-the-drawing",
+            "05-demo-a"
+          ]
+        },
+        {
+          "title": "베이스 외곽과 목",
+          "lengthSec": 755,
+          "frames": [
+            "05-demo-b"
+          ]
+        },
+        {
+          "title": "검산과 정리",
+          "lengthSec": 521,
+          "frames": [
+            "06-check",
+            "07-recap",
+            "08-keys",
+            "09-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 4,
+      "slug": "lesson-04-circles-arcs",
+      "list": [
+        {
+          "title": "축 구멍과 탭 네 개",
+          "lengthSec": 1139,
+          "frames": [
+            "01-title",
+            "02-today",
+            "03-concept",
+            "04-on-the-drawing",
+            "05-demo-a"
+          ]
+        },
+        {
+          "title": "장공과 필렛",
+          "lengthSec": 618,
+          "frames": [
+            "05-demo-b"
+          ]
+        },
+        {
+          "title": "검산과 정리",
+          "lengthSec": 594,
+          "frames": [
+            "05-demo-c",
+            "06-check",
+            "07-recap",
+            "08-keys",
+            "09-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 5,
+      "slug": "lesson-05-three-views",
+      "list": [
+        {
+          "title": "평면도",
+          "lengthSec": 1091,
+          "frames": [
+            "01-title",
+            "02-today",
+            "03-concept",
+            "04-on-the-drawing",
+            "05-demo-a"
+          ]
+        },
+        {
+          "title": "우측면도와 축 구멍",
+          "lengthSec": 633,
+          "frames": [
+            "05-demo-b"
+          ]
+        },
+        {
+          "title": "숨은선과 정리",
+          "lengthSec": 959,
+          "frames": [
+            "05-demo-c",
+            "06-check",
+            "07-recap",
+            "08-keys",
+            "09-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 6,
+      "slug": "lesson-06-editing-symbols",
+      "list": [
+        {
+          "title": "투상선 정리",
+          "lengthSec": 1121,
+          "frames": [
+            "01-title",
+            "02-today",
+            "03-concept",
+            "04-on-the-drawing",
+            "05-demo-a"
+          ]
+        },
+        {
+          "title": "대칭 검산과 레이어",
+          "lengthSec": 689,
+          "frames": [
+            "05-demo-b"
+          ]
+        },
+        {
+          "title": "선 종류 축척과 정리",
+          "lengthSec": 740,
+          "frames": [
+            "05-demo-c",
+            "06-check",
+            "07-recap",
+            "08-keys",
+            "09-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 7,
+      "slug": "lesson-07-dimensioning-release",
+      "list": [
+        {
+          "title": "치수 스타일과 전체 크기",
+          "lengthSec": 1086,
+          "frames": [
+            "01-title",
+            "02-today",
+            "03-concept",
+            "04-on-the-drawing",
+            "05-demo-a"
+          ]
+        },
+        {
+          "title": "치수 기입",
+          "lengthSec": 1099,
+          "frames": [
+            "05-demo-b"
+          ]
+        },
+        {
+          "title": "축척 확인과 출도",
+          "lengthSec": 758,
+          "frames": [
+            "05-demo-c",
+            "06-check",
+            "07-recap",
+            "08-keys",
+            "09-closing"
+          ]
+        }
+      ]
+    },
+    {
+      "lesson": 8,
+      "slug": "lesson-08-exam-and-qa",
+      "list": [
+        {
+          "title": "시험 안내와 Q&A",
+          "lengthSec": 581,
+          "frames": [
+            "01-title",
+            "02-exam",
+            "03-qa",
+            "04-technician-work",
+            "05-field-commands",
+            "06-recap",
+            "07-closing"
+          ]
+        }
+      ]
     }
   ]
 }

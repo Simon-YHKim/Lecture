@@ -17,6 +17,7 @@ import sys
 import tempfile
 
 import beats
+import episodes
 import lesson_docs
 import lesson_kit as kit
 
@@ -129,27 +130,36 @@ def f_demo(comp, dur, spans, L):
     Only one step is on screen at a time, so the strip stays short enough to
     read at a glance while the video behind it keeps every pixel it was filmed
     with.
+
+    When the recording is cut into parts, `L["stepSlice"]` says which steps this
+    frame shows and where they start. The strip goes on counting against the
+    whole lesson — part two opens at 「07 / 16」, not at 「01 / 10」 — but the
+    class names restart at 1, because the beats handed to read_along are
+    numbered within this frame.
     """
+    lo, hi = L.get("stepSlice", (0, len(L["steps"])))
     n = len(L["steps"])
+    titles = L["steps"][lo:hi]
+    keys = L["stepKeys"][lo:hi]
     # Only one step is meant to be readable at a time; the pair overlaps only
     # during the crossfade between them, which is the intent.
     strips = "".join(
         '<div class="sp sp%d" data-layout-allow-overlap>'
         '<span class="no">%02d<i>&#8201;/&#8201;%02d</i></span>'
         '<span class="key">%s</span><span class="what">%s</span></div>'
-        % (i, i, n, k or "&#183;", t)
-        for i, (t, k) in enumerate(zip(L["steps"], L["stepKeys"]), 1))
+        % (i, lo + i, n, k or "&#183;", t)
+        for i, (t, k) in enumerate(zip(titles, keys), 1))
 
     body = ('      <div class="film">'
             '<div class="rec"><div class="recmark">USER RECORDING</div>'
-            '<div class="recsub">DEMO-01 &#183; %s</div></div>'
+            '<div class="recsub">%s &#183; %s</div></div>'
             '<div class="tag">%s</div>'
             '<div class="strip">%s'
             '<div class="track"><i class="prog"></i></div></div></div>'
-            % (L["cp"], L["demo_title"], strips))
+            % (L.get("demoId", "DEMO-01"), L["cp"], L["demo_title"], strips))
 
     items = [beats.item(".sp%d" % i, kind="plain", mode="reveal", dy=12, read=0)
-             for i in range(1, n + 1)]
+             for i in range(1, len(titles) + 1)]
     tl = "\n".join([
         '    tl.fromTo("#%s .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,'
         'ease:"power3.out"},.35);' % comp,
@@ -305,27 +315,64 @@ def build(lesson_dir, L):
     # Once a recording exists its real length replaces the estimate, and once the
     # narration is aligned the beats sit where they were actually spoken.
     rec = os.path.join(lesson_dir, "recording.json")
-    demo_sec = None
+    demo_sec, demo_parts = None, None
     if os.path.isfile(rec):
         with open(rec, encoding="utf-8") as fh:
-            demo_sec = int(round(json.load(fh)["durationSec"]))
+            doc = json.load(fh)
+        demo_sec = int(round(doc["durationSec"]))
+        if doc.get("parts"):
+            demo_parts = [int(round(p["durationSec"])) for p in doc["parts"]]
     measured = beats.load_measured(lesson_dir)
+
+    cuts = episodes.cuts_for(name)
+    demo_total = demo_sec or int(round(
+        sum(beats.read_seconds(t) for _, t in steps) * DEMO_FACTOR / 10.0)) * 10
+
+    # One script Line can now produce several frames. The frame *number* stays
+    # what the script's "(Frame N)" heading says, because narration-timing is
+    # keyed by it — the parts of the recording share number 5 and differ by
+    # letter. Nothing after the recording moves.
+    sched = []
+    for i, (stem, fn, line_no, key) in enumerate(PLAN, 1):
+        if line_no != 5 or not cuts:
+            sched.append((stem, fn, line_no, key, i, "", None, None))
+            continue
+        slices = beats.split_steps(steps, cuts)
+        # Weight is only how you guess. Real takes are measured.
+        lens = demo_parts or beats.split_lengths(
+            demo_total, [sum(beats.read_seconds(t) for _, t in sl)
+                         for _off, sl in slices])
+        if len(lens) != len(slices):
+            raise SystemExit("%s: 녹화 %d개인데 컷은 %d조각이다"
+                             % (name, len(lens), len(slices)))
+        for k, ((off, sl), d) in enumerate(zip(slices, lens)):
+            sched.append((stem + "-" + "abcdefgh"[k], fn, line_no, key, i,
+                          "abcdefgh"[k], (off, off + len(sl), sl), d))
 
     built, warn = [], []
     frame_start = 0.0
-    for i, (stem, fn, line_no, key) in enumerate(PLAN, 1):
-        fixed = 12 if line_no == 1 else None
-        if line_no == 5:
-            fixed = demo_sec or int(round(sum(beats.read_seconds(t) for _, t in steps)
-                                          * DEMO_FACTOR / 10.0)) * 10
-        spans, dur = beats.plan(script[line_no], duration=fixed)
-        if measured.get(i):
-            got = beats.measured_plan(script[line_no], measured[i],
+    for stem, fn, line_no, key, idx, suffix, part, fixed in sched:
+        if line_no == 1:
+            fixed = 12
+        elif line_no == 5 and fixed is None:
+            fixed = demo_total
+        segs = script[line_no] if part is None else part[2]
+        spans, dur = beats.plan(segs, duration=fixed)
+        # The recording has no narration to align against; its own file length
+        # is the measurement, and that arrives through recording.json.
+        if part is None and measured.get(idx):
+            got = beats.measured_plan(script[line_no], measured[idx],
                                       frame_start, frame_start + dur)
             if got:
                 spans = got
         frame_start += dur
-        comp = "l%df%d" % (L["no"], i)
+        comp = "l%df%d%s" % (L["no"], idx, suffix)
+        if part is None:
+            L.pop("stepSlice", None)
+            L.pop("demoId", None)
+        else:
+            L["stepSlice"] = (part[0], part[1])
+            L["demoId"] = "DEMO-01" + suffix.upper()
         html, asserts = fn(comp, dur, spans, L)
         with open(os.path.join(frames_dir, stem + ".html"), "w",
                   encoding="utf-8", newline="\n") as fh:
@@ -333,21 +380,39 @@ def build(lesson_dir, L):
         with open(os.path.join(frames_dir, stem + ".motion.json"), "w",
                   encoding="utf-8", newline="\n") as fh:
             json.dump({"duration": dur, "assertions": asserts}, fh, ensure_ascii=False)
-        built.append((stem, comp, dur))
+        built.append((stem, comp, dur, line_no))
         print(beats.report(stem, spans, dur))
-        for w in beats.audit(L.get(key) or [1] * len(beats.beat_spans(spans)), spans, dur):
+        want = L.get(key)
+        if part is not None:
+            want = [1] * len(part[2])
+        for w in beats.audit(want or [1] * len(beats.beat_spans(spans)), spans, dur):
             warn.append("%s: %s" % (stem, w))
+    L.pop("stepSlice", None)
+    L.pop("demoId", None)
 
     slots, start, ranges = [], 0, []
-    for i, (stem, comp, dur) in enumerate(built, 1):
+    for i, (stem, comp, dur, line_no) in enumerate(built, 1):
         slots.append(("l%d-slot-%02d" % (L["no"], i), comp, stem, start, dur))
-        ranges.append((start, start + dur))
+        # One Time line per script Line, so the parts of the recording report
+        # as the single span they add up to.
+        if ranges and ranges[-1][2] == line_no:
+            ranges[-1] = (ranges[-1][0], start + dur, line_no)
+        else:
+            ranges.append((start, start + dur, line_no))
         start += dur
 
-    beats.stamp_times(script_path, ranges, start)
+    beats.stamp_times(script_path, [(a, b) for a, b, _ln in ranges], start)
     kit.write_project(lesson_dir, name, slots, start, os, json)
+    eps = kit.write_episodes(lesson_dir, slots, episodes.episodes_for(name), os)
+    for n, (_f, title, sec, _fr) in enumerate(eps, 1):
+        print("    %d편 %-22s %d:%02d" % (n, title, int(sec) // 60, int(sec) % 60))
     descs = list(DESCS)
     descs[0] = descs[0] % L["title"]
+    if cuts:
+        demo_at = [i for i, p in enumerate(PLAN) if p[2] == 5][0]
+        descs[demo_at:demo_at + 1] = [
+            descs[demo_at] + " (%d/%d)" % (k + 1, len(cuts) + 1)
+            for k in range(len(cuts) + 1)]
     lesson_docs.refresh(lesson_dir, descs)
     for w in warn:
         print("      ! " + w)

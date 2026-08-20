@@ -12,7 +12,8 @@ frame, so the length of that frame stops being an estimate. `media.local.json`
 is what preview reads to actually play the file, and it is the only place an
 absolute path to your private storage appears.
 
-    python scripts/part/ingest_recording.py <lesson-dir> <video-path>
+    python scripts/part/ingest_recording.py <lesson-dir> <video> [<video> ...]
+        끊어 찍은 차시는 부분 수만큼 순서대로 넘긴다.
     python scripts/part/ingest_recording.py --list
 """
 
@@ -24,6 +25,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import episodes  # noqa: E402
 import verify_course as vc  # noqa: E402
 
 ROOT = "projects/autocad-technician"
@@ -53,42 +55,66 @@ def probe(path):
     }
 
 
-def ingest(lesson_dir, video):
+def ingest(lesson_dir, videos):
     repo = os.path.abspath(".")
-    full = os.path.abspath(video)
-    if full.lower().startswith(repo.lower() + os.sep):
-        raise SystemExit(
-            "녹화 파일이 저장소 안에 있습니다: %s\n"
-            "원본은 저장소 밖 비공개 위치에 두세요. 이 스크립트는 읽기만 합니다." % full)
-    if not os.path.isfile(full):
-        raise SystemExit("파일이 없습니다: %s" % full)
-
-    info = probe(full)
-    if info["width"] != 1920 or info["height"] != 1080:
-        print("  주의: %sx%s 입니다. 삽입 영역은 1920x1080 기준입니다."
-              % (info["width"], info["height"]))
-
     slug = os.path.basename(os.path.normpath(lesson_dir))
-    rec = dict(info)
-    rec.update({"schemaVersion": 1, "lesson": slug, "demoId": "DEMO-01"})
+    want = len(episodes.cuts_for(slug)) + 1
+    if len(videos) != want:
+        raise SystemExit(
+            "%s 는 녹화가 %d개입니다 (%s). %d개를 받았습니다.\n"
+            "끊는 자리는 RECORDING_GUIDE.md 와 episodes.json 에 있습니다."
+            % (slug, want,
+               " · ".join("%d단계 뒤" % c for c in episodes.cuts_for(slug)) or "안 끊음",
+               len(videos)))
+
+    parts, paths = [], {}
+    for k, video in enumerate(videos):
+        full = os.path.abspath(video)
+        if full.lower().startswith(repo.lower() + os.sep):
+            raise SystemExit(
+                "녹화 파일이 저장소 안에 있습니다: %s\n"
+                "원본은 저장소 밖 비공개 위치에 두세요. 이 스크립트는 읽기만 합니다." % full)
+        if not os.path.isfile(full):
+            raise SystemExit("파일이 없습니다: %s" % full)
+        info = probe(full)
+        if info["width"] != 1920 or info["height"] != 1080:
+            print("  주의: %sx%s 입니다. 삽입 영역은 1920x1080 기준입니다."
+                  % (info["width"], info["height"]))
+        demo_id = "DEMO-01" + ("ABCDEFGH"[k] if want > 1 else "")
+        info["demoId"] = demo_id
+        parts.append(info)
+        paths[demo_id] = full.replace("\\", "/")
+
+    total = round(sum(p["durationSec"] for p in parts), 3)
+    first = parts[0]
+    rec = {"schemaVersion": 2, "lesson": slug, "demoId": "DEMO-01",
+           "durationSec": total,
+           "width": first["width"], "height": first["height"],
+           "fps": first["fps"],
+           "parts": [{"demoId": p["demoId"], "durationSec": p["durationSec"]}
+                     for p in parts]}
     with open(os.path.join(lesson_dir, "recording.json"), "w",
               encoding="utf-8", newline="\n") as fh:
         json.dump(rec, fh, ensure_ascii=False, indent=2)
         fh.write("\n")
 
+    local = {"note": "비공개 경로. 커밋되지 않습니다."}
+    local.update(paths)
     with open(os.path.join(lesson_dir, "media.local.json"), "w",
               encoding="utf-8", newline="\n") as fh:
-        json.dump({"note": "비공개 경로. 커밋되지 않습니다.",
-                   "DEMO-01": full.replace("\\", "/")}, fh, ensure_ascii=False, indent=2)
+        json.dump(local, fh, ensure_ascii=False, indent=2)
         fh.write("\n")
 
     print("  %s" % slug)
-    print("    길이 %d:%02d · %sx%s · %g fps"
-          % (int(info["durationSec"]) // 60, int(info["durationSec"]) % 60,
-             info["width"], info["height"], info["fps"]))
+    for p in parts:
+        print("    %s  %d:%02d" % (p["demoId"], int(p["durationSec"]) // 60,
+                                   int(p["durationSec"]) % 60))
+    print("    합계 %d:%02d · %sx%s · %g fps"
+          % (int(total) // 60, int(total) % 60,
+             first["width"], first["height"], first["fps"]))
     print("    recording.json  기록 (공개)")
     print("    media.local.json 기록 (비공개, gitignore)")
-    print("\n  이제 그 차시를 다시 만들면 DEMO 프레임이 실제 길이가 됩니다.")
+    print("\n  이제 그 차시를 다시 만들면 실습 프레임이 실제 길이가 됩니다.")
     return rec
 
 
@@ -113,7 +139,7 @@ def main(argv):
     os.chdir(here)
     if not argv or argv[0] in ("--list", "-l"):
         return status()
-    if len(argv) != 2:
+    if len(argv) < 2:
         raise SystemExit(__doc__)
     lesson = argv[0]
     if not os.path.isdir(lesson):
@@ -121,7 +147,7 @@ def main(argv):
         if len(cand) != 1:
             raise SystemExit("차시를 특정할 수 없습니다: %s" % argv[0])
         lesson = os.path.join(ROOT, cand[0])
-    ingest(lesson, argv[1])
+    ingest(lesson, argv[1:])
 
 
 if __name__ == "__main__":

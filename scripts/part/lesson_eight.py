@@ -20,6 +20,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 import lesson_build as lb  # noqa: E402
 import lesson_kit as kit  # noqa: E402
 
@@ -289,6 +290,10 @@ def main():
 
     beats.stamp_times(os.path.join(LESSON, "SCRIPT.md"), ranges, start)
     kit.write_project(LESSON, os.path.basename(LESSON), slots, start, os, json)
+    for _n, (_f, _t, _s, _fr) in enumerate(
+            kit.write_episodes(LESSON, slots,
+                               episodes.episodes_for(os.path.basename(LESSON)), os), 1):
+        print("    %d편 %-22s %d:%02d" % (_n, _t, int(_s) // 60, int(_s) % 60))
     write_docs(rows, start)
     # The house sheet and the agent notes are the same for every lesson.
     for f in ("frame.md", "AGENTS.md", "CLAUDE.md"):
