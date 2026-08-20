@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 27m43s
+length: 33m41s
 angle: part-reading-and-drawing-environment
 narration: user-recorded
 style_preset: lg-training
@@ -49,13 +49,13 @@ recording_slots: 1
 | # | 파일 | 길이 | 화면 | 비트 |
 | --- | --- | --- | --- | --- |
 | 1 | `01-title` | 12s | 검정 타이틀 · **부품 이해와 도면 환경** | — |
-| 2 | `02-what-is-this-part` | 134s | 왼쪽 카드 4장 / 오른쪽 정면도 | 4 |
-| 3 | `03-surfaces` | 218s | 왼쪽 정면도 / 오른쪽 가공 표 6행 + 이유 문단 | 6 |
+| 2 | `02-what-is-this-part` | 142s | 왼쪽 카드 4장 / 오른쪽 정면도 | 4 |
+| 3 | `03-surfaces` | 234s | 왼쪽 정면도 / 오른쪽 가공 표 6행 + 이유 문단 | 6 |
 | 4 | `04-why-this-shape` | 100s | 왼쪽 정면도 / 오른쪽 근거 카드 5장 | 5 |
-| 5 | `05-reading-dimensions` | 125s | 왼쪽 3뷰 / 오른쪽 치수 8행 | 8 |
-| 6 | `06-reading-symbols` | 115s | 왼쪽 3뷰 / 오른쪽 기호 8행 | 8 |
-| 7 | `07-sheet-and-layers` | 145s | 왼쪽 A3 규격도 / 오른쪽 레이어 표 + 두 문단 | 11 |
-| 8 | `08-build-template` | 590s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 | 16 |
-| 9 | `09-recap` | 105s | 2분할 마무리 | 2 |
-| 10 | `10-keys` | 106s | 오늘 친 단축키 표 + 기능키 | 14 |
-| 11 | `11-closing` | 13s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |
+| 5 | `05-reading-dimensions` | 140s | 왼쪽 3뷰 / 오른쪽 치수 8행 | 8 |
+| 6 | `06-reading-symbols` | 130s | 왼쪽 3뷰 / 오른쪽 기호 8행 | 8 |
+| 7 | `07-sheet-and-layers` | 202s | 왼쪽 A3 규격도 / 오른쪽 레이어 표 + 두 문단 | 11 |
+| 8 | `08-build-template` | 810s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 | 16 |
+| 9 | `09-recap` | 112s | 2분할 마무리 | 2 |
+| 10 | `10-keys` | 125s | 오늘 친 단축키 표 + 기능키 | 14 |
+| 11 | `11-closing` | 14s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |

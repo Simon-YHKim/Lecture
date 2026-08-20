@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "AutoCAD 기본 과정 1~7차시를 마친 Technician 인증 응시자"
-length: 8m45s
+length: 9m41s
 angle: lesson-08-exam-and-qa
 narration: user-recorded
 style_preset: lg-training
@@ -42,12 +42,12 @@ recording_slots: 0
 | # | 파일 | 길이 | 비트 |
 | --- | --- | --- | --- |
 | 1 | `01-title` | 12s | — |
-| 2 | `02-exam` | 104s | 6 |
-| 3 | `03-qa` | 109s | 5 |
-| 4 | `04-technician-work` | 82s | 3 |
-| 5 | `05-field-commands` | 108s | 6 |
-| 6 | `06-recap` | 96s | 2 |
-| 7 | `07-closing` | 14s | 2 |
+| 2 | `02-exam` | 118s | 6 |
+| 3 | `03-qa` | 118s | 5 |
+| 4 | `04-technician-work` | 90s | 3 |
+| 5 | `05-field-commands` | 119s | 6 |
+| 6 | `06-recap` | 109s | 2 |
+| 7 | `07-closing` | 15s | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다
 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

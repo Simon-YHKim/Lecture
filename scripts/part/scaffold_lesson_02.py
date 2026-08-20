@@ -411,9 +411,9 @@ def build_demo(comp, dur, spans):
     ]
 
 
-# The recording runs longer than its narration: typing, dialogs and waiting are
-# not spoken. Measured narration x 1.3, rounded to the nearest ten seconds.
-DEMO_SEC = int(round(sum(beats.read_seconds(t) for _, t in STEPS) * 1.3 / 10.0)) * 10
+# Narration x beats.DEMO_FACTOR, rounded to the nearest ten seconds.
+DEMO_SEC = int(round(sum(beats.read_seconds(t) for _, t in STEPS)
+                     * beats.DEMO_FACTOR / 10.0)) * 10
 SCRIPT[8] = list(STEPS)
 frame("08-build-template", "l2f8", 8, STEP_LABELS, build_demo, fixed=DEMO_SEC)
 

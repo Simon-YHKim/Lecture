@@ -19,14 +19,28 @@ import json
 import math
 import os
 import re
+import sys
 import unicodedata
 
-# A calm teaching pace. Korean narration for instruction sits well below the
-# ~7/s of read-aloud news; 5.0 matches the recorded pace of this course.
-SYL_PER_SEC = 5.0
-GAP_SEC = 0.55          # breath between paragraphs
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import speech  # noqa: E402
+
+# How long the words take is measured, not assumed — see speech.py. What is
+# left here is what happens around them on screen.
+#
+# There is no gap between paragraphs any more. There used to be, because the
+# old estimate ended on the last syllable and something had to stand in for the
+# breath. The measured model already includes a paragraph's own edges, so a gap
+# on top would be the same silence counted twice.
+GAP_SEC = 0.0
 LEAD_SEC = 1.6          # header lands before the first beat
 TAIL_SEC = 1.2          # the frame does not cut on the last syllable
+MIN_BEAT_SEC = 1.2      # a card has to be readable, however briefly it is named
+
+# The recording runs longer than its narration: typing, dialog boxes and mouse
+# work are not spoken. This is the one timing number still not measured — the
+# first real recording replaces it, since ingest reads the file's own length.
+DEMO_FACTOR = 1.3
 
 # Read-along states. The contrast is deliberately mild — the ask was for
 # emphasis that reads as natural, not a spotlight.
@@ -60,7 +74,8 @@ def syllables(text):
 
 
 def read_seconds(text):
-    return syllables(text) / SYL_PER_SEC
+    """Seconds to say this paragraph, from the measured model in speech.py."""
+    return speech.read_seconds(text)
 
 
 # --------------------------------------------------------------- parsing
@@ -141,7 +156,7 @@ def plan(segments, duration=None, lead=LEAD_SEC, tail=TAIL_SEC):
     duration given, the segments are scaled to fill it so a fixed-length frame
     (a screen recording) still tracks the script's proportions.
     """
-    raw = [max(read_seconds(t), 1.2) + GAP_SEC for _, t in segments]
+    raw = [max(read_seconds(t), MIN_BEAT_SEC) + GAP_SEC for _, t in segments]
     need = sum(raw)
     if duration is None:
         duration = math.ceil(need + lead + tail)

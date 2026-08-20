@@ -269,9 +269,8 @@ PLAN = [("01-title", f_title, 1, None),
         ("08-keys", f_keys, 8, "keys"),
         ("09-closing", f_closing, 9, None)]
 
-# The recording runs longer than its narration: typing, dialogs and waiting are
-# not spoken. Measured narration x 1.3, rounded to the nearest ten seconds.
-DEMO_FACTOR = 1.3
+# Narration x beats.DEMO_FACTOR, rounded to the nearest ten seconds.
+DEMO_FACTOR = beats.DEMO_FACTOR
 
 # One line per frame in PLAN order. lesson_docs.refresh() refuses to run if the
 # two lists disagree, so a frame cannot be added without saying what is on it.

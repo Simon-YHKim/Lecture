@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 7m07s
+length: 7m20s
 angle: orientation
 narration: user-recorded
 style_preset: lg-training
@@ -45,8 +45,8 @@ recording_slots: 0
 | # | 파일 | 길이 | 화면 | 비트 |
 | --- | --- | --- | --- | --- |
 | 1 | `01-title` | 12s | 검정 타이틀 · **오리엔테이션** | — |
-| 2 | `02-why-drawings` | 135s | 도입 문장 + 요건 카드 5장 + 하단 문단 | 6 |
-| 3 | `03-how-assessed` | 93s | 과제 카드 4장 + 하단 문단 | 5 |
-| 4 | `04-roadmap` | 108s | 안내 문장 + 로드맵 표(차시·주제·하는 일) | 8 |
-| 5 | `05-recap` | 63s | 2분할 마무리 | 2 |
-| 6 | `06-closing` | 16s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |
+| 2 | `02-why-drawings` | 141s | 도입 문장 + 요건 카드 5장 + 하단 문단 | 6 |
+| 3 | `03-how-assessed` | 95s | 과제 카드 4장 + 하단 문단 | 5 |
+| 4 | `04-roadmap` | 112s | 안내 문장 + 로드맵 표(차시·주제·하는 일) | 8 |
+| 5 | `05-recap` | 62s | 2분할 마무리 | 2 |
+| 6 | `06-closing` | 18s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 다음 차시 | 2 |

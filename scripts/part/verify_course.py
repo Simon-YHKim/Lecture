@@ -112,7 +112,7 @@ def check_lesson(slug, cp_in, cp_out):
         fixed = 12 if line_no == 1 else None
         if steps and line_no == demo_line:
             fixed = int(round(sum(beats.read_seconds(t) for _, t in steps)
-                              * 1.3 / 10.0)) * 10
+                              * beats.DEMO_FACTOR / 10.0)) * 10
         spans, want = beats.plan(script[line_no], duration=fixed)
         if abs(dur - want) > 0.01:
             fail(slug, "%s 길이 %.0f 인데 SCRIPT.md 기준은 %.0f "
