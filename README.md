@@ -13,9 +13,17 @@ Only the following belong here:
 - synthetic training diagrams authored as inline SVG inside reviewed HTML;
 - validation scripts and CI configuration.
 - reviewed HyperFrames QA snapshots rendered from the public synthetic course scenes;
-- explicitly reviewed public references listed in `docs/autocad-technician/README.md`.
+- explicitly reviewed public references listed in `docs/autocad-technician/README.md`;
+- the `EDU-IB-02` bracket model under `model/`, which the course author built and cleared for publication.
 
-Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
+Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files, 3D CAD sources, and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
+
+The bracket model is such an exception, and it is the only one. Its four files
+ride the same path-and-hash allowlist as the other public artifacts, so renaming
+or editing one blocks the commit until
+`scripts/update-public-artifact-manifest.ps1` is run again and the change is
+reviewed. Any other Inventor, SolidWorks or neutral-exchange file is blocked on
+sight.
 
 Narration recordings and the Whisper transcripts produced from them stay private.
 Transcript and caption paths are blocked unconditionally and cannot be bypassed by

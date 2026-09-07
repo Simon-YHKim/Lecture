@@ -736,8 +736,8 @@
     {
      "type": "note",
      "tone": "tip",
-     "ko": "`LTSCALE` 의 정답 숫자는 정해져 있지 않아요. 값을 넣고 화면을 보고 다시 넣는 식으로 좁혀 가세요. 설비 레이아웃에서는 이게 특히 중요합니다. 벽이나 판 뒤에 가린 것은 숨은선으로 그리거든요. 그게 실선으로 보이면 가려진 것을 못 알아봅니다.",
-     "en": "There is no single correct LTSCALE number. Enter a value, look, enter another, and close in on it. This matters most on a plant layout: whatever sits behind a wall or a plate is drawn hidden, and if it reads continuous you cannot tell what is behind what."
+     "ko": "이 과정에서 `LTSCALE` 은 **1** 입니다. 처음 값 그대로 두는 거예요. 개체 값 0.5 에 전체 값 1 을 곱해 화면 간격이 0.5 로 그려집니다. 값을 올리고 내리는 건 화면이 그 계산과 다르게 보일 때뿐입니다. 설비 레이아웃에서는 이게 특히 중요합니다. 벽이나 판 뒤에 가린 것은 숨은선으로 그리거든요. 그게 실선으로 보이면 가려진 것을 못 알아봅니다.",
+     "en": "In this course `LTSCALE` stays at **1**, its starting value. The object value of 0.5 times the global value of 1 puts the on-screen spacing at 0.5. You only reach for a different number when the screen disagrees with that arithmetic. It matters most on a machine layout: anything behind a wall or a plate is drawn hidden, and if that reads as a solid line you cannot tell what is covered."
     }
    ]
   },
@@ -2116,12 +2116,12 @@
   },
   {
    "what": {
-    "ko": "파선이 파선으로 보임",
-    "en": "Broken lines reading as broken"
+    "ko": "선 종류 축척 — 개체 0.5 · 전체 1",
+    "en": "Linetype scale — 0.5 on the object, 1 overall"
    },
    "how": {
-    "ko": "선종류축척을 `0.5` 로 넣고 화면을 봅니다. 긴 획과 짧은 획이 번갈아 보여야 해요. 실선처럼 보이면 `LTSCALE` 을 키우고, 듬성듬성하면 줄이세요.",
-    "en": "After setting the linetype scale to 0.5, look. Long dash and short dash must alternate. Still continuous? Raise LTSCALE. Scattered? Lower it."
+    "ko": "`LTSCALE` 엔터로 꺾쇠 안 현재 값이 `1` 인지 봅니다. 그다음 중심선 하나를 클릭해 `Ctrl+1` 로 선종류축척이 `0.5` 인지 봅니다. 두 값의 곱 0.5 가 화면 간격이에요. 두 숫자가 맞는데도 실선처럼 보이면 `RE` 로 재생성합니다.",
+    "en": "Type `LTSCALE`, press Enter, and read the current value in the angle brackets: it should be `1`. Then click one centerline and open `Ctrl+1` to read its linetype scale: `0.5`. Their product, 0.5, is the spacing on screen. If both numbers are right and it still looks solid, run `RE` to regenerate."
    }
   },
   {
@@ -2497,8 +2497,8 @@
     "en": "You set color, linetype, and lineweight to ByLayer. The layer now owns the color."
    },
    {
-    "ko": "중심선과 숨은선의 선 종류 축척을 `0.5` 로 넣었습니다. `LTSCALE` 로 전체 파선 간격을 눈으로 맞췄어요.",
-    "en": "You set the center and hidden layers to linetype scale 0.5 and tuned the drawing's spacing by eye with LTSCALE."
+    "ko": "중심선과 숨은선의 선 종류 축척을 `0.5` 로 넣고, `LTSCALE` 은 `1` 로 두었습니다.",
+    "en": "You set the linetype scale on the center and hidden layers to `0.5` and left `LTSCALE` at `1`."
    },
    {
     "ko": "표면 거칠기 기호와 기하 공차, 재질과 열처리 표기가 무엇을 지시하는지 읽었습니다. 그리지는 않지만 읽을 수는 있어야 하는 것들입니다.",

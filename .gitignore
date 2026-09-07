@@ -121,6 +121,11 @@ node_modules/
 __pycache__/
 *.pyc
 
+# The bracket model is the course author's own work, cleared for publication.
+# Everything else matching those extensions stays blocked.
+!model/
+!model/**
+
 # Explicitly reviewed public AutoCAD course artifacts. Keep the global image and
 # planning-source blocks above; only these exact deliverable paths are public.
 !projects/autocad-technician/lesson-*/snapshots/

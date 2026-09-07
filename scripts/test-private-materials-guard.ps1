@@ -2,6 +2,11 @@
 param()
 
 $ErrorActionPreference = 'Stop'
+# Windows PowerShell pipes to native commands using the console code page, which
+# mangles non-ASCII paths on their way into `git hash-object`. The fixture
+# manifest carries Korean file names, so pin the pipe to UTF-8 or every approved
+# asset with a Korean name fails its allow assertion.
+$OutputEncoding = [Text.UTF8Encoding]::new($false)
 $repoRoot = (& git rev-parse --show-toplevel).Trim()
 $checker = Join-Path $repoRoot 'scripts/check-private-materials.ps1'
 $temporaryIndex = [IO.Path]::GetTempFileName()
@@ -225,6 +230,10 @@ try {
     }
     # The same bytes under a path the manifest does not list must still be blocked.
     Assert-Blocked 'projects/autocad-technician/lesson-03-baseline-profile/snapshots/final-approval/frame-00-at-30s.png'
+    # model/ is an exception for the reviewed bracket only. A CAD file that is not
+    # in the manifest stays blocked, inside model/ and anywhere else.
+    Assert-Blocked 'model/unreviewed.ipt'
+    Assert-Blocked 'model/sub/unreviewed.iam'
     Assert-BlockedMissingStagedManifest
 
     $forgedShaManifest = $manifestJson | ConvertFrom-Json

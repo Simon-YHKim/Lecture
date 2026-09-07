@@ -3775,16 +3775,6 @@
   },
   {
    "item": {
-    "ko": "LTSCALE의 최종값",
-    "en": "The final LTSCALE value"
-   },
-   "blocks": {
-    "ko": "대본은 「그대로 두려면 1」과 「화면을 보며 좁혀 가라」까지만 말합니다. 그래서 6차시 검산에 판정 기준값을 둘 수 없고 「긴 획과 짧은 획이 번갈아 보이는가」라는 눈 판정만 남았습니다. 객관 판정을 원하면 이 도면에서의 권장값 하나가 필요합니다.",
-    "en": "The script goes as far as “leave it at 1” and “close it up while watching the screen”. That leaves the lesson 6 cross-check with an eye judgement — long dash, short dash, alternating — and no number to test against. One recommended value for this drawing would make it objective."
-   }
-  },
-  {
-   "item": {
     "ko": "시험 운영 — 일시 · 장소 · 제출 · 시험장 PC",
     "en": "Exam logistics — date, venue, submission, exam-room PCs"
    },
@@ -3809,7 +3799,7 @@
   "en": "This self-study material is derived from the public scripts of the in-house video course (8 lessons, 19 episodes, 264 minutes). Dimensions and coordinates come from `master-part-geometry.json`, the sheet and layers from `MASTER_DRAWING_SPEC.md`, and the lesson chain from `course-continuity.json`. Where an actual assignment says something different, that instruction always wins."
  },
  "settledNote": {
-  "ko": "2026-09-08 에 여섯 건이 닫혔습니다. **참고 치수 (95.7)** 은 좌우 필렛 중심 사이 거리입니다 — 107.86 − 12.14 = 95.72. **목 상단 폭 54** 는 보스 원과 만나는 두 접점 사이입니다 — 87.207 − 32.793 = 54.414. 둘 다 `master-part-geometry.json` 에서 바로 계산됩니다. **레이어 값**은 `MASTER_DRAWING_SPEC.md` 를 정본으로 씁니다(정본 기하에서 생성되는 문서입니다). 2차시 화면 표는 굵기 열이 없고 축척이 달라 아직 어긋나 있어요. **표면 거칠기**는 2차시 대본이 말한 Ra 1.6 · 6.3 · 12.5 를 씁니다. **4차시 제목**은 `COURSE_PLAN.md` 와 `course-continuity.json` 을 따라 「원·호·오프셋」입니다. **영문 글꼴**은 설치된 LG EI 를 먼저 부르고 없으면 운영체제 UI 글꼴로 물러섭니다. 배포 라이선스가 필요 없습니다.",
-  "en": "Six items closed on 2026-09-08. The **reference dimension (95.7)** spans the two fillet centers — 107.86 − 12.14 = 95.72. The **54 across the top of the web** spans the two points where the web meets the boss circle — 87.207 − 32.793 = 54.414. Both fall straight out of `master-part-geometry.json`. **Layer values** follow `MASTER_DRAWING_SPEC.md`, which is generated from that same geometry; the on-screen table in lesson 2 still disagrees on lineweights and scales. **Surface roughness** uses the Ra 1.6 / 6.3 / 12.5 the lesson 2 script states. **Lesson 4 is titled** “Circles, arcs and offset”, following `COURSE_PLAN.md` and `course-continuity.json`. **English type** asks for an installed LG EI face first and falls back to the operating system UI font, so no font is redistributed."
+  "ko": "2026-09-08 에 여섯 건이 닫혔습니다. **참고 치수 (95.7)** 은 좌우 필렛 중심 사이 거리입니다 — 107.86 − 12.14 = 95.72. **목 상단 폭 54** 는 보스 원과 만나는 두 접점 사이입니다 — 87.207 − 32.793 = 54.414. 둘 다 `master-part-geometry.json` 에서 바로 계산됩니다. **레이어 값**은 `MASTER_DRAWING_SPEC.md` 를 정본으로 씁니다(정본 기하에서 생성되는 문서입니다). 2차시 화면 표는 굵기 열이 없고 축척이 달라 아직 어긋나 있어요. **표면 거칠기**는 2차시 대본이 말한 Ra 1.6 · 6.3 · 12.5 를 씁니다. **4차시 제목**은 `COURSE_PLAN.md` 와 `course-continuity.json` 을 따라 「원·호·오프셋」입니다. **영문 글꼴**은 설치된 LG EI 를 먼저 부르고 없으면 운영체제 UI 글꼴로 물러섭니다. 배포 라이선스가 필요 없습니다. **LTSCALE** 은 `1` 입니다 — 6차시 대본이 「그대로 두려면 1」이라고 이미 정해 둔 값이에요. 개체 축척 0.5 와 곱해 화면 간격이 0.5 가 됩니다. 6차시 검산이 눈 판정에서 두 숫자를 읽는 판정으로 바뀌었습니다.",
+  "en": "Six items closed on 2026-09-08. The **reference dimension (95.7)** spans the two fillet centers — 107.86 − 12.14 = 95.72. The **54 across the top of the web** spans the two points where the web meets the boss circle — 87.207 − 32.793 = 54.414. Both fall straight out of `master-part-geometry.json`. **Layer values** follow `MASTER_DRAWING_SPEC.md`, which is generated from that same geometry; the on-screen table in lesson 2 still disagrees on lineweights and scales. **Surface roughness** uses the Ra 1.6 / 6.3 / 12.5 the lesson 2 script states. **Lesson 4 is titled** “Circles, arcs and offset”, following `COURSE_PLAN.md` and `course-continuity.json`. **English type** asks for an installed LG EI face first and falls back to the operating system UI font, so no font is redistributed. **LTSCALE** is `1` — the lesson 6 script already fixed it with “leave it at 1”. Times the object scale of 0.5, the spacing on screen is 0.5. The lesson 6 cross-check now reads two numbers instead of judging dashes by eye."
  }
 }
