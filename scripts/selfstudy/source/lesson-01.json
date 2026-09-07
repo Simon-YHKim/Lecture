@@ -1,0 +1,1347 @@
+{
+ "no": 1,
+ "slug": "lesson-01-orientation",
+ "title": {
+  "ko": "오리엔테이션",
+  "en": "Orientation"
+ },
+ "videoLength": "07:20",
+ "selfStudyMin": 28,
+ "opens": null,
+ "saves": null,
+ "summary": {
+  "what": {
+   "ko": "도면을 한 줄도 그리지 않는 차시입니다. 이 과정이 왜 있고 무엇으로 평가하는지를 정리합니다. AutoCAD는 아직 열지 않아도 괜찮아요.",
+   "en": "This lesson draws nothing. It settles why the course exists and what it assesses. You do not need AutoCAD open yet."
+  },
+  "why": {
+   "ko": "뒤 차시는 「오늘은 무엇을 한다」를 다시 안내하지 않습니다. 전체 지도를 여기서 한 번만 폅니다. 여기를 건너뛰면 파일 이름과 레이어 값을 규격으로 착각하게 돼요.",
+   "en": "Later lessons never repeat a 'here is today's plan' page. The map is opened once, here. Skip it and you will mistake file names and layer values for a standard."
+  },
+  "where": {
+   "ko": "부품은 아직 한 선도 그려지지 않았습니다. 1차시는 열 파일도 저장할 파일도 없습니다. 첫 파일은 2차시에서 만듭니다.",
+   "en": "Not one line of the part is drawn yet. Lesson 1 opens no file and saves none. The first file is created in Lesson 2."
+  }
+ },
+ "objectives": [
+  {
+   "ko": "말로 전한 지시가 왜 사람마다 다르게 전달되는지 설명할 수 있습니다. 도면이 그 문제를 어떻게 없애는지도 말할 수 있습니다.",
+   "en": "You can explain why a spoken instruction reaches each listener differently. You can also say how a drawing removes that."
+  },
+  {
+   "ko": "도면의 다섯 요건을 빠짐없이 댈 수 있습니다 — 도형·크기·모양 / 자세·위치 / 표면·재료·가공 / 모호하지 않게 / 보존·검색·이용.",
+   "en": "You can list all five requirements: shape and size, orientation and position, surface, material and machining, free of ambiguity, storable and retrievable."
+  },
+  {
+   "ko": "테크니션이 도면으로 하는 일 셋을 자기 업무에 대응시켜 말할 수 있습니다 — 지그 제안, 레이아웃 확인, 스페어 파트 긴급 공수.",
+   "en": "You can map the three technician jobs onto your own work: proposing a jig, checking a layout, urgent spare-part sourcing."
+  },
+  {
+   "ko": "실습 과제의 두 형태를 구분할 수 있습니다. 눈대중이 왜 안 되는지도 설명합니다. 네 종류의 선이 각자 레이어에 들어가야 하는 이유도 압니다.",
+   "en": "You can tell the two task formats apart. You can also explain why eyeballing fails. You also know why each of the four line types needs its own layer."
+  },
+  {
+   "ko": "여덟 차시가 파일로 이어지는 순서와 이 자습본을 쓰는 법을 압니다. 과제 지시가 이 교재의 값보다 앞선다는 것도 압니다.",
+   "en": "You know how the eight lessons chain together through files, and how to use this workbook. You also know that a task instruction outranks any value in it."
+  }
+ ],
+ "before": {
+  "checklist": [
+   {
+    "ko": "AutoCAD가 설치된 PC를 준비합니다. 준비물은 이것 하나면 됩니다.",
+    "en": "A PC with AutoCAD installed. That is all you need."
+   },
+   {
+    "ko": "템플릿 목록에 `acadiso.dwt` 가 있는지 봅니다.",
+    "en": "Check that `acadiso.dwt` is in the template list."
+   },
+   {
+    "ko": "파일을 모아 둘 폴더 한 곳을 정합니다. 차시마다 하나씩 쌓여요.",
+    "en": "Pick one folder for the files. One file accumulates per lesson."
+   },
+   {
+    "ko": "본인 이름과 사번을 손에 두세요. 표제란에 들어가는 값입니다.",
+    "en": "Keep your name and employee number to hand. They go in the title block."
+   }
+  ],
+  "recovery": {
+   "ko": "1차시는 열 파일도 저장할 파일도 없습니다. 건너뛰어도 2차시가 막히지 않습니다. 다만 두 절은 읽고 가세요. 「여덟 차시와 체크포인트 사슬」과 「과제 지시 우선」입니다. 이 둘을 건너뛰면 파일 이름을 임의로 바꾸게 됩니다. 이 교재의 레이어 색상을 시험 규격으로 착각하기도 해요. 「이 자습본을 쓰는 법」은 3차시에서 막혔을 때 돌아와도 됩니다.",
+   "en": "Lesson 1 opens no file and saves none, so skipping it does not block Lesson 2. Read two sections anyway: 'The eight lessons and the checkpoint chain' and 'The task instruction wins'. Skip those two and you will rename files arbitrarily. You may also mistake this workbook's layer colors for exam requirements. 'How to use this workbook' can wait until you first get stuck in Lesson 3."
+  }
+ },
+ "sections": [
+  {
+   "id": "how-to-use",
+   "kind": "orient",
+   "label": {
+    "ko": "이 자습본을 쓰는 법",
+    "en": "How to use this workbook"
+   },
+   "lede": {
+    "ko": "강사가 쥐고 있던 진행 제어를 이제 직접 쥡니다. 어디에 무엇이 있는지 먼저 보고 가세요.",
+    "en": "The instructor used to control the pace. Now you do. Look at what sits where before you start."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "LG이노텍 테크니션 인증제, 그린스타 실습과정입니다. 여기는 AutoCAD 기본 과정의 첫 시간, 오리엔테이션이에요.",
+     "en": "This is the Green Star practical course of the LG Innotek technician certification programme. This is its first session: the orientation for the AutoCAD basics course."
+    },
+    {
+     "type": "p",
+     "ko": "영상에는 없던 절입니다. 옆에서 물어볼 사람이 없거든요. 대신 쓸 장치를 여기서 한 번에 소개할게요.",
+     "en": "This section was not in the video. Nobody is sitting next to you. Here are the tools that replace them."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "자습본의 장치 일곱 가지",
+      "en": "Seven devices in this workbook"
+     },
+     "head": [
+      {
+       "ko": "장치",
+       "en": "Device"
+      },
+      {
+       "ko": "어디에 있는가",
+       "en": "Where it is"
+      },
+      {
+       "ko": "이럴 때 씁니다",
+       "en": "Use it when"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "차시 머리의 표",
+        "en": "The table at the head of the lesson"
+       },
+       {
+        "ko": "요약 탭",
+        "en": "On the overview tab"
+       },
+       {
+        "ko": "자습에 걸리는 시간과 여는 파일, 저장하는 파일을 봅니다.",
+        "en": "It gives the self-study time, the file to open, and the file to save."
+       }
+      ],
+      [
+       {
+        "ko": "탭 넷 — 요약 · 개념 · 실습 · 점검",
+        "en": "Four tabs: overview, concepts, practice, check"
+       },
+       {
+        "ko": "차시 제목 바로 아래",
+        "en": "Right under the lesson title"
+       },
+       {
+        "ko": "읽을 것과 손을 쓸 것을 갈라 보고 싶을 때 누릅니다.",
+        "en": "Press one to separate what you read from what you do."
+       }
+      ],
+      [
+       {
+        "ko": "단계마다 붙는 세 칸",
+        "en": "Three panels under every step"
+       },
+       {
+        "ko": "조작 단계 아래",
+        "en": "Below each operation step"
+       },
+       {
+        "ko": "「이렇게 되면 맞습니다」로 결과를 대조합니다. 「왜 이 순서인가」로 이유를 봅니다.",
+        "en": "Compare your screen against 'You did it right if'. Then read 'Why this order'."
+       }
+      ],
+      [
+       {
+        "ko": "안 되면 여기",
+        "en": "If it went wrong"
+       },
+       {
+        "ko": "세 칸의 마지막",
+        "en": "The last of those three panels"
+       },
+       {
+        "ko": "화면이 다르게 나왔을 때 먼저 봅니다. 증상과 그 자리에서 고치는 법이 있습니다.",
+        "en": "Read it first when your screen differs. It names the symptom and the fix on the spot."
+       }
+      ],
+      [
+       {
+        "ko": "완료 체크와 진도 막대",
+        "en": "Step ticks and the progress bar"
+       },
+       {
+        "ko": "단계 오른쪽과 요약 탭",
+        "en": "Beside each step, and on the overview tab"
+       },
+       {
+        "ko": "어디까지 했는지 남깁니다. 브라우저에만 저장되고 다른 사람은 못 봐요.",
+        "en": "Mark how far you got. It stays in your browser and nobody else sees it."
+       }
+      ],
+      [
+       {
+        "ko": "접힌 정답",
+        "en": "Folded answers"
+       },
+       {
+        "ko": "점검 탭의 자가 점검",
+        "en": "'Check yourself' on the check tab"
+       },
+       {
+        "ko": "먼저 답을 적고 펼쳐서 대조합니다. 먼저 펼치면 확인이 안 돼요.",
+        "en": "Write your answer first, then unfold and compare. Unfolding first proves nothing."
+       }
+      ],
+      [
+       {
+        "ko": "검산 표",
+        "en": "The cross-check table"
+       },
+       {
+        "ko": "실습 탭의 끝",
+        "en": "End of the practice tab"
+       },
+       {
+        "ko": "눈대중이 아니라 개수와 값으로 판정합니다. 통과하지 못하면 돌아갈 절이 적혀 있습니다.",
+        "en": "It judges by counts and values, not by eye. It names the section to go back to."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "한 자리에서 다 끝내지 않아도 괜찮아요. 절이 끝나는 자리에서 쉬세요. 국문과 영문은 머리의 토글로 한 번에 바꿉니다. 인쇄하면 접힌 블록이 펼쳐진 채로 나옵니다.",
+     "en": "You do not have to finish in one sitting. Stop where a section ends. The toggle at the top switches the whole page between Korean and English. Print it and every folded block comes out open.",
+     "label": {
+      "ko": "멈춰도 되는 자리",
+      "en": "Where you may stop"
+     }
+    }
+   ]
+  },
+  {
+   "id": "drawing",
+   "kind": "concept",
+   "label": {
+    "ko": "도면",
+    "en": "The drawing"
+   },
+   "lede": {
+    "ko": "도면은 말을 대신합니다. 작성자의 의도를 정확하게 전달하려고 그립니다.",
+    "en": "A drawing stands in for speech. You draw it to carry the author's intent exactly."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "설비 앞에서 이런 말, 해 보셨을 겁니다. 「여기를 이만큼만 깎아 주세요」. 말한 사람은 분명히 말했다고 생각합니다.",
+     "en": "You have probably said something like this at a machine: 'just take this much off here'. The speaker is sure the message was clear."
+    },
+    {
+     "type": "p",
+     "ko": "그런데 듣는 사람마다 다르게 알아듣습니다. 왜 그럴까요?",
+     "en": "But every listener hears it differently. Why is that?"
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "「여기」는 위치를, 「이만큼」은 수량을 가리킵니다. 둘 다 말한 사람 머릿속에만 있습니다. 듣는 사람은 각자 자기 해석으로 빈칸을 채우거든요.",
+     "en": "'Here' points to a position, 'this much' to a quantity. Both exist only in the speaker's head. Each listener fills those blanks with their own reading.",
+     "label": {
+      "ko": "「여기」와 「이만큼」",
+      "en": "'Here' and 'this much'"
+     }
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "같은 지시를 두 가지로 적으면",
+      "en": "The same instruction, said two ways"
+     },
+     "head": [
+      {
+       "ko": "말로 하면",
+       "en": "Said out loud"
+      },
+      {
+       "ko": "도면으로 적으면",
+       "en": "Written on a drawing"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "「여기」",
+        "en": "'here'"
+       },
+       {
+        "ko": "기준면에서 몇 밀리미터 떨어진 자리인지 값으로 적습니다.",
+        "en": "A value: how many millimeters from the datum face."
+       }
+      ],
+      [
+       {
+        "ko": "「이만큼」",
+        "en": "'this much'"
+       },
+       {
+        "ko": "깎아 낼 깊이를 값으로 적습니다.",
+        "en": "A value: the depth to be removed."
+       }
+      ],
+      [
+       {
+        "ko": "확인",
+        "en": "Confirming"
+       },
+       {
+        "ko": "말로 설명하고 다시 확인하는 왕복이 없어집니다.",
+        "en": "The round trip of explaining and re-confirming disappears."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "도면은 그 말을 누가 읽어도 같게 만듭니다. 치수와 형상으로 적으면 해석이 하나로 고정됩니다. 그래서 도면에는 갖춰야 할 요건이 있습니다.",
+     "en": "A drawing makes the same words read the same to everyone. Written as dimensions and geometry, the reading is fixed to one. That is why a drawing has requirements to meet."
+    }
+   ]
+  },
+  {
+   "id": "five-requirements",
+   "kind": "concept",
+   "label": {
+    "ko": "도면의 다섯 요건",
+    "en": "The five requirements"
+   },
+   "lede": {
+    "ko": "다섯 가지입니다. 하나가 빠지면 읽는 사람이 다시 물어봐요.",
+    "en": "There are five. Leave one out and the reader comes back with a question."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "id": "fig-l01-five",
+     "caption": {
+      "ko": "다섯 요건의 표시. 셋째의 기호는 이 과정이 실제로 가르치는 표면 거칠기 기호입니다.",
+      "en": "The five marks. The third is the surface roughness symbol this course actually teaches."
+     },
+     "alt": {
+      "ko": "왼쪽부터 치수선이 붙은 직사각형, 십자 중심선이 지나가는 원, 두 다리가 60도로 기운 표면 거칠기 기호, 같게 읽히는 도면 두 장과 등호, 오른쪽 아래에 표제란이 있는 시트입니다.",
+      "en": "From the left: a rectangle with a dimension line, a circle crossed by centerlines, the surface roughness symbol with legs at 60 degrees, two sheets that read alike joined by an equals sign, and a sheet with a title block in its lower right."
+     },
+     "svg": "<svg viewBox=\"0 0 600 76\" width=\"600\" height=\"76\"><g transform=\"translate(40.8 4) scale(1.2)\"><rect class=\"si\" x=\"4\" y=\"5\" width=\"24\" height=\"13\"/><path class=\"sd\" d=\"M4 20v7M28 20v7M4 25h24M4 25l4 -2.5M4 25l4 2.5M28 25l-4 -2.5M28 25l-4 2.5\"/></g><text class=\"sl\" x=\"60\" y=\"66\" text-anchor=\"middle\">도형·크기·모양</text><g transform=\"translate(160.8 4) scale(1.2)\"><circle class=\"si\" cx=\"16\" cy=\"16\" r=\"9\"/><path class=\"sc\" d=\"M16 3v26M3 16h26\"/></g><text class=\"sl\" x=\"180\" y=\"66\" text-anchor=\"middle\">자세·위치</text><g transform=\"translate(280.8 4) scale(1.2)\"><path class=\"si\" d=\"M4 16.5L9.5 26L21 6M21 6h9\"/></g><text class=\"sl\" x=\"300\" y=\"66\" text-anchor=\"middle\">표면·재료·가공</text><g transform=\"translate(400.8 4) scale(1.2)\"><rect class=\"si\" x=\"2\" y=\"8\" width=\"11\" height=\"16\"/><rect class=\"si\" x=\"19\" y=\"8\" width=\"11\" height=\"16\"/><path class=\"sd\" d=\"M15 14h2M15 18h2\"/></g><text class=\"sl\" x=\"420\" y=\"66\" text-anchor=\"middle\">모호하지 않게</text><g transform=\"translate(520.8 4) scale(1.2)\"><rect class=\"si\" x=\"3\" y=\"6\" width=\"26\" height=\"20\"/><rect class=\"sd\" x=\"19\" y=\"20\" width=\"9\" height=\"5\"/></g><text class=\"sl\" x=\"540\" y=\"66\" text-anchor=\"middle\">보존·검색·이용</text></svg>"
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "도형·크기·모양",
+        "en": "Shape and size"
+       },
+       "body": {
+        "ko": "무엇을 만드는지 담습니다. 대상물의 형태와 치수입니다. 이것이 없으면 만들 대상 자체가 특정되지 않습니다. 재료를 자르는 크기와 만들 형상이 여기서 정해져요.",
+        "en": "It carries what you are making: the form and the dimensions of the object. Without it the object itself is not pinned down. The stock size and the shape to cut are settled here."
+       }
+      },
+      {
+       "label": {
+        "ko": "자세·위치",
+        "en": "Orientation and position"
+       },
+       "body": {
+        "ko": "그 형상이 어디에 어떤 방향으로 놓이는지입니다. 같은 구멍이라도 기준면에서 떨어진 거리가 다르면 다른 부품입니다. 그래서 도면만 보고 두 부품을 구분할 수 있어요.",
+        "en": "Where the shape sits and which way it faces. The same hole at a different distance from the datum face makes a different part. That is how two parts are told apart from the drawings alone."
+       }
+      },
+      {
+       "label": {
+        "ko": "표면·재료·가공",
+        "en": "Surface, material and machining"
+       },
+       "body": {
+        "ko": "무엇으로 어떻게 만드는지입니다. 필요하면 여기까지 적습니다. 형상과 치수만으로는 만드는 방법이 정해지지 않거든요. 여기까지 적으면 가공하는 쪽이 추가로 물어볼 것이 줄어들어요.",
+        "en": "What it is made of and how it is made. Write this far when it matters. Form and size alone do not settle the method. Written down, the shop has less to ask about."
+       }
+      },
+      {
+       "label": {
+        "ko": "모호하지 않게",
+        "en": "Free of ambiguity"
+       },
+       "body": {
+        "ko": "읽는 사람마다 다르게 해석되면 그건 도면이 아닙니다. 도면의 존재 이유가 해석을 하나로 만드는 것입니다. 해석이 갈리는 순간 목적 자체가 무너져요.",
+        "en": "If two readers take it two ways, it is not a drawing. A drawing exists to make the reading single. The moment readings split, the purpose collapses."
+       }
+      },
+      {
+       "label": {
+        "ko": "보존·검색·이용",
+        "en": "Storable and retrievable"
+       },
+       "body": {
+        "ko": "오늘 그린 도면을 몇 년 뒤에 누군가 다시 꺼내 봅니다. 그래서 찾아 쓸 수 있는 양식을 갖춥니다. 설비가 멈춰 급할 때 이 요건이 값을 해요.",
+        "en": "Someone will pull today's drawing out again years from now. So it needs a form that can be filed and found. This is the requirement that pays off when a machine is down."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "다섯 개를 순서대로 외울 필요는 없어요. 다만 다섯 개가 다 나와야 합니다. 넷만 나왔다면 카드 다섯 장을 다시 훑어보세요.",
+     "en": "You do not need them in order. You do need all five. If only four came out, run back over the five cards.",
+     "label": {
+      "ko": "외우는 방법",
+      "en": "How to hold on to them"
+     }
+    }
+   ]
+  },
+  {
+   "id": "technician",
+   "kind": "concept",
+   "label": {
+    "ko": "테크니션의 도면 활용",
+    "en": "What a technician does with drawings"
+   },
+   "lede": {
+    "ko": "설비를 직접 다루는 사람이 도면을 읽고 그릴 줄 알면 일이 달라집니다.",
+    "en": "When the person who works the machine can read and draw, the work changes."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "테크니션에게 이게 왜 필요할까요? 문제를 처음 보는 사람이 도면도 그릴 줄 안다고 해 보세요. 그러면 문제와 해법 사이에 통역이 끼지 않습니다.",
+     "en": "Why does a technician need this? Suppose the person who first sees the problem can also draw. Then no translator sits between problem and fix."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "지그 제안",
+        "en": "Proposing a jig"
+       },
+       "body": {
+        "ko": "작업이 불편하면 치구를 직접 그려서 제안합니다. 말로 부탁하는 것과 도면을 내미는 것은 다릅니다. 제안이 부탁이 아니라 도면이 돼요.",
+        "en": "When the work is awkward, draw the jig yourself and propose it. Asking in words and handing over a drawing are not the same thing. The proposal stops being a favor and becomes a drawing."
+       }
+      },
+      {
+       "label": {
+        "ko": "레이아웃 확인",
+        "en": "Checking a layout"
+       },
+       "body": {
+        "ko": "새 설비가 들어올 자리를 도면에서 미리 봅니다. 동선이 막히는지, 어디가 간섭하는지를 먼저 확인합니다. 설비를 들이기 전에 간섭을 미리 잡아내요.",
+        "en": "Look at the spot for new equipment on the drawing first. Check whether the walkways choke and where things clash. You catch the clash before the machine arrives."
+       }
+      },
+      {
+       "label": {
+        "ko": "스페어 파트 긴급 공수",
+        "en": "Urgent spare-part sourcing"
+       },
+       "body": {
+        "ko": "설비가 멈추면 조립도를 열어 그 부품을 찾습니다. 그다음 부품 도면을 확인합니다. 그 도면을 들고 가공집과 이야기합니다.",
+        "en": "When a machine stops, open the assembly drawing and find the part. Then check that part's own drawing. Then take it to the machine shop and talk."
+       }
+      }
+     ]
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "스페어 파트 공수의 사슬과 끊기는 자리",
+      "en": "The spare-part chain and where it breaks"
+     },
+     "head": [
+      {
+       "ko": "단계",
+       "en": "Step"
+      },
+      {
+       "ko": "하는 일",
+       "en": "What you do"
+      },
+      {
+       "ko": "도면을 못 읽으면",
+       "en": "If you cannot read drawings"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "① 설비 정지",
+        "en": "1 Machine down"
+       },
+       {
+        "ko": "어느 부품이 깨졌는지 확인합니다.",
+        "en": "Identify which part failed."
+       },
+       {
+        "ko": "여기까지는 갑니다.",
+        "en": "You get this far."
+       }
+      ],
+      [
+       {
+        "ko": "② 조립도",
+        "en": "2 Assembly drawing"
+       },
+       {
+        "ko": "조립도를 열어 그 부품을 찾습니다.",
+        "en": "Open the assembly drawing and find the part."
+       },
+       {
+        "ko": "부품이 어느 것인지 짚지 못합니다.",
+        "en": "You cannot point to which item it is."
+       }
+      ],
+      [
+       {
+        "ko": "③ 부품 도면",
+        "en": "3 Part drawing"
+       },
+       {
+        "ko": "그 부품의 도면을 확인합니다.",
+        "en": "Check that part's drawing."
+       },
+       {
+        "ko": "치수와 재질을 읽어 내지 못합니다.",
+        "en": "You cannot read off the sizes and the material."
+       }
+      ],
+      [
+       {
+        "ko": "④ 가공집",
+        "en": "4 Machine shop"
+       },
+       {
+        "ko": "그 도면을 들고 가공집과 이야기합니다.",
+        "en": "Take the drawing to the shop and talk it through."
+       },
+       {
+        "ko": "말로 설명하고 다시 확인하는 왕복이 생깁니다.",
+        "en": "You are back to explaining in words and confirming again."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "이 셋은 뒤 차시에서 계속 되돌아옵니다. 조작을 하나 배울 때마다 「이건 현장에서 언제 쓰나」가 붙습니다. 그 답이 이 셋 중 하나예요.",
+     "en": "These three keep coming back in later lessons. Every operation you learn ends with 'when do I use this on the floor'. The answer is one of these three.",
+     "label": {
+      "ko": "이 셋의 이름을 기억하세요",
+      "en": "Hold on to these three names"
+     }
+    },
+    {
+     "type": "p",
+     "ko": "정확하게 소통하려고 도면을 읽고 그리는 것입니다. 말로 설명하고 다시 확인하는 과정이 없어집니다.",
+     "en": "You read and draw in order to communicate exactly. The explain-and-re-confirm loop goes away."
+    }
+   ]
+  },
+  {
+   "id": "task-formats",
+   "kind": "concept",
+   "label": {
+    "ko": "실습 과제의 두 형태",
+    "en": "The two task formats"
+   },
+   "lede": {
+    "ko": "이 과정을 마치면 무엇을 할 수 있어야 할까요? 실습 과제로 확인합니다.",
+    "en": "What must you be able to do when the course ends? The practical task is what settles it."
+   },
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "형상과 치수",
+        "en": "Shape and dimensions"
+       },
+       "body": {
+        "ko": "과제에서 주어지는 것입니다. 삼차원 형상 그림이 나오기도 합니다. 도면 조각과 필요한 치수가 함께 나오기도 해요.",
+        "en": "This is what the task gives you. Sometimes it is a three-dimensional picture of the shape. Sometimes it is a fragment of a drawing with the dimensions you need."
+       }
+      },
+      {
+       "label": {
+        "ko": "치수에 맞게 작성",
+        "en": "Draw to the given dimensions"
+       },
+       "body": {
+        "ko": "해야 하는 일 중 하나입니다. 주어진 치수 그대로 작도합니다. 여기서 중요한 말은 「그대로」예요.",
+        "en": "One of the two things you may be asked to do. Draw exactly to the dimensions given. The word that matters here is 'exactly'."
+       }
+      },
+      {
+       "label": {
+        "ko": "정투상으로 투상",
+        "en": "Project it orthographically"
+       },
+       "body": {
+        "ko": "다른 하나예요. 한 방향에서 본 모습만 주어집니다. 나머지를 정면도와 평면도, 우측면도로 만듭니다.",
+        "en": "The other one. You are given the view from a single direction. You build the rest as front view, top view, and right side view."
+       }
+      },
+      {
+       "label": {
+        "ko": "선이 제자리에 있는가",
+        "en": "Is each line in its place"
+       },
+       "body": {
+        "ko": "채점에서 보는 것입니다. 외형선, 중심선, 숨은선, 치수선이 각자 자기 레이어에 들어가야 합니다. 형상만 맞고 선이 뒤섞이면 도면으로 인정받기 어렵습니다.",
+        "en": "This is what the assessment looks at. The visible line, centerline, hidden line, and dimension line must each sit on their own layer. Correct geometry with the lines mixed up is hard to accept as a drawing."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "화면에서 비슷해 보인다고 눈대중으로 맞추면 안 됩니다. 화면 배율은 계속 바뀝니다. 눈으로 맞춘 값은 확대하면 어긋나 있어요. 좌표를 입력하거나 치수를 지정해서 그립니다.",
+     "en": "Do not match it by eye because it looks close on screen. The zoom keeps changing. A value matched by eye is wrong once you zoom in. Enter coordinates, or specify the dimension, and draw from that.",
+     "label": {
+      "ko": "눈대중이 안 되는 이유",
+      "en": "Why eyeballing fails"
+     }
+    },
+    {
+     "type": "p",
+     "ko": "현장에서도 마찬가지입니다. 선이 뒤섞인 도면을 받으면 읽는 사람이 다시 물어봐요.",
+     "en": "The floor works the same way. Hand over a drawing with the lines mixed up and the reader comes back asking."
+    },
+    {
+     "type": "note",
+     "tone": "pend",
+     "ko": "배점, 제한시간, 합격선은 아직 공유받지 못했습니다. 지어내지 않고 자리만 비워 둡니다. 시험이 어떻게 진행되는지는 8차시에서 안내합니다.",
+     "en": "Marks, time limit, and pass mark have not been shared yet. Rather than invent them, the slot is left empty. How the exam runs is explained in Lesson 8.",
+     "label": {
+      "ko": "배점 · 제한시간 · 합격선 — 공유 예정",
+      "en": "Marks, time limit, pass mark - To be shared"
+     }
+    }
+   ]
+  },
+  {
+   "id": "line-types",
+   "kind": "concept",
+   "label": {
+    "ko": "네 가지 선과 레이어",
+    "en": "Four line types and their layers"
+   },
+   "lede": {
+    "ko": "선의 종류가 곧 그 선의 뜻입니다. 넷 중 외형선만 굵습니다.",
+    "en": "The type of a line is what it means. Of the four, only the visible line is thick."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "id": "fig-l01-lines",
+     "caption": {
+      "ko": "네 가지 선의 견본. 굵기와 획 간격이 서로 다릅니다.",
+      "en": "The four line types. Weight and dash spacing differ."
+     },
+     "alt": {
+      "ko": "외형선은 굵은 실선입니다. 중심선은 긴 획과 짧은 획이 번갈아 나오는 가는 일점쇄선입니다. 숨은선은 짧은 획이 고르게 반복되는 가는 파선입니다. 치수선은 양끝에 화살표가 붙은 가는 실선이고 양끝에 보조선이 서 있습니다.",
+      "en": "The visible line is a thick continuous line. The centerline is a thin chain line alternating long and short dashes. The hidden line is a thin dashed line of even short strokes. The dimension line is a thin continuous line with an arrowhead at each end and a short extension line standing at each end."
+     },
+     "svg": "<svg viewBox=\"0 0 600 158\" width=\"600\" height=\"158\"><text class=\"sl\" x=\"8\" y=\"28\">외형선 visible line</text><path class=\"si\" d=\"M162 24h150\"/><text class=\"sl\" x=\"330\" y=\"28\">보이는 모양 / visible edges</text><text class=\"sl\" x=\"8\" y=\"64\">중심선 centerline</text><path class=\"sc\" d=\"M162 60h150\"/><text class=\"sl\" x=\"330\" y=\"64\">중심과 대칭축 / centers and axes</text><text class=\"sl\" x=\"8\" y=\"100\">숨은선 hidden line</text><path class=\"sn\" d=\"M162 96h150\"/><text class=\"sl\" x=\"330\" y=\"100\">가려진 모양 / hidden edges</text><text class=\"sl\" x=\"8\" y=\"136\">치수선 dimension line</text><path class=\"sd\" d=\"M162 132h150\"/><path class=\"sd\" d=\"M162 132l9 -3M162 132l9 3M312 132l-9 -3M312 132l-9 3\"/><path class=\"sd\" d=\"M162 141v-9M312 141v-9\"/><text class=\"sl\" x=\"330\" y=\"136\">치수와 보조선 / dimensions</text></svg>"
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "네 가지 선이 뜻하는 것",
+      "en": "What each of the four lines means"
+     },
+     "head": [
+      {
+       "ko": "선",
+       "en": "Line"
+      },
+      {
+       "ko": "나타내는 것",
+       "en": "What it shows"
+      },
+      {
+       "ko": "보이는 모양",
+       "en": "How it looks"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "외형선",
+        "en": "visible line (object line)"
+       },
+       {
+        "ko": "눈에 보이는 모양",
+        "en": "Edges you can see"
+       },
+       {
+        "ko": "굵은 실선",
+        "en": "Thick continuous"
+       }
+      ],
+      [
+       {
+        "ko": "중심선",
+        "en": "centerline"
+       },
+       {
+        "ko": "중심과 대칭축",
+        "en": "Centers and axes of symmetry"
+       },
+       {
+        "ko": "가는 일점쇄선",
+        "en": "Thin chain line"
+       }
+      ],
+      [
+       {
+        "ko": "숨은선",
+        "en": "hidden line"
+       },
+       {
+        "ko": "재료에 가려진 모양",
+        "en": "Edges hidden behind material"
+       },
+       {
+        "ko": "가는 파선",
+        "en": "Thin dashed"
+       }
+      ],
+      [
+       {
+        "ko": "치수선",
+        "en": "dimension line"
+       },
+       {
+        "ko": "치수와 보조선",
+        "en": "Dimensions and extension lines"
+       },
+       {
+        "ko": "양끝에 화살표가 붙은 가는 실선",
+        "en": "Thin continuous with arrowheads"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "왜 레이어로 나눌까요? 선을 하나씩 지정하면 같은 일을 계속 되풀이합니다. 레이어는 색과 굵기를 묶음으로 정합니다. 그래서 채점도 「이 선이 어느 묶음에 있는가」로 봐요.",
+     "en": "Why split them into layers? Setting each line one at a time repeats the same work over and over. A layer sets color and weight for the whole group. That is also why assessment asks which group a line sits in.",
+     "label": {
+      "ko": "레이어가 하는 일",
+      "en": "What a layer does"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "이 네 개의 이름과 색상, 굵기, 선 종류 축척은 2차시에서 정합니다. 지금은 이름과 뜻만 알고 가면 돼요. 그 값들은 이 과정의 연습용 기본값입니다. 과제 지시가 있으면 지시를 따릅니다.",
+     "en": "The names, colors, weights, and linetype scales for these four are set in Lesson 2. For now the name and the meaning are enough. Those values are practice defaults for this course. A task instruction overrides them.",
+     "label": {
+      "ko": "값은 아직 정하지 않습니다",
+      "en": "The values come later"
+     }
+    }
+   ]
+  },
+  {
+   "id": "task-instruction",
+   "kind": "concept",
+   "label": {
+    "ko": "과제 지시 우선",
+    "en": "The task instruction wins"
+   },
+   "lede": {
+    "ko": "한 가지 미리 말씀드립니다. 과제마다 용지 크기나 레이어 이름, 색상이 다를 수 있습니다.",
+    "en": "One thing to settle up front. Sheet size, layer names, and colors can differ from task to task."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "이 과정에서 정하는 값은 연습용 기본값입니다. 실제 과제에 지시가 적혀 있으면 그 지시가 언제나 우선입니다.",
+     "en": "The values set in this course are practice defaults. Where the actual task states an instruction, that instruction always wins."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "과제지를 받으면 이 순서로",
+      "en": "The order to work in when a task sheet arrives"
+     },
+     "head": [
+      {
+       "ko": "순서",
+       "en": "Order"
+      },
+      {
+       "ko": "하는 일",
+       "en": "What you do"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "① 지시 확인",
+        "en": "1 Read the instruction"
+       },
+       {
+        "ko": "과제지의 용지 크기, 레이어 이름, 색상 지시를 먼저 읽습니다.",
+        "en": "Read the sheet size, layer names, and colors the task sheet asks for."
+       }
+      ],
+      [
+       {
+        "ko": "② 다른 곳 표시",
+        "en": "2 Mark the differences"
+       },
+       {
+        "ko": "이 교재의 값과 다른 항목을 표시합니다.",
+        "en": "Mark every item that differs from this workbook."
+       }
+      ],
+      [
+       {
+        "ko": "③ 수정",
+        "en": "3 Change them"
+       },
+       {
+        "ko": "표시한 항목을 과제지 쪽으로 고칩니다.",
+        "en": "Change the marked items to match the task sheet."
+       }
+      ],
+      [
+       {
+        "ko": "④ 재검수",
+        "en": "4 Check again"
+       },
+       {
+        "ko": "다 그린 뒤 지시와 한 번 더 대조합니다.",
+        "en": "When the drawing is finished, compare it against the instruction once more."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "이 교재의 값을 규격으로 외우지 마세요. 규격은 과제를 내는 쪽이 정합니다. 외워 두면 지시와 부딪히는 자리에서 교재 쪽을 따르게 돼요.",
+     "en": "Do not memorise this workbook's values as a standard. The standard is set by whoever sets the task. Memorise them and you will follow the workbook where it clashes with the instruction.",
+     "label": {
+      "ko": "외우지 않습니다",
+      "en": "Do not memorise them"
+     }
+    }
+   ]
+  },
+  {
+   "id": "roadmap",
+   "kind": "orient",
+   "label": {
+    "ko": "여덟 차시와 체크포인트 사슬",
+    "en": "The eight lessons and the checkpoint chain"
+   },
+   "lede": {
+    "ko": "예제를 여러 개 그리지 않습니다. 부품 하나를 끝까지 완성합니다.",
+    "en": "You will not draw a series of examples. You will finish one part."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "도면 번호 EDU-IB-02, 아이들러 풀리 브래킷입니다. 차시마다 새 파일을 여는 것이 아닙니다. 지난 시간에 저장한 파일을 열어 이어 그립니다.",
+     "en": "The drawing number is EDU-IB-02, an idler pulley bracket. You do not open a new file each lesson. You open the file you saved last time and carry on."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "여덟 차시",
+      "en": "The eight lessons"
+     },
+     "head": [
+      {
+       "ko": "차시",
+       "en": "Lesson"
+      },
+      {
+       "ko": "주제",
+       "en": "Topic"
+      },
+      {
+       "ko": "하는 일",
+       "en": "What happens"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "1차시",
+        "en": "Lesson 1"
+       },
+       {
+        "ko": "오리엔테이션",
+        "en": "Orientation"
+       },
+       {
+        "ko": "지금 보고 있는 차시입니다.",
+        "en": "The lesson you are reading now."
+       }
+      ],
+      [
+       {
+        "ko": "2차시",
+        "en": "Lesson 2"
+       },
+       {
+        "ko": "부품 이해와 도면 환경",
+        "en": "Reading the Part, Building the Sheet"
+       },
+       {
+        "ko": "부품이 왜 그 모양인지 읽습니다. A3 용지에 도면틀과 레이어를 만들어 템플릿으로 남겨요.",
+        "en": "Read why the part has that shape. Then build the border and the layers on an A3 sheet and save it as a template."
+       }
+      ],
+      [
+       {
+        "ko": "3차시",
+        "en": "Lesson 3"
+       },
+       {
+        "ko": "기준선과 외곽",
+        "en": "Datum Lines and the Outline"
+       },
+       {
+        "ko": "좌표를 입력해 베이스와 목의 외곽을 그립니다.",
+        "en": "Enter coordinates and draw the outline of the base and the web."
+       }
+      ],
+      [
+       {
+        "ko": "4차시",
+        "en": "Lesson 4"
+       },
+       {
+        "ko": "원·호·오프셋",
+        "en": "Circles, Arcs, Offset"
+       },
+       {
+        "ko": "축 구멍과 보스, 장공, 목의 필렛을 넣습니다.",
+        "en": "Add the bore, the boss, the slots, and the fillets on the web."
+       }
+      ],
+      [
+       {
+        "ko": "5차시",
+        "en": "Lesson 5"
+       },
+       {
+        "ko": "제3각법 3뷰와 반복",
+        "en": "Third-Angle Views and Repetition"
+       },
+       {
+        "ko": "투상해 세 뷰를 만들고 탭 구멍을 배열로 반복합니다.",
+        "en": "Project the three views, then repeat the tapped holes with an array."
+       }
+      ],
+      [
+       {
+        "ko": "6차시",
+        "en": "Lesson 6"
+       },
+       {
+        "ko": "편집과 표현",
+        "en": "Cleaning Up and Reading the Symbols"
+       },
+       {
+        "ko": "남은 보조선을 정리하고 도면 기호를 읽습니다.",
+        "en": "Clear the leftover construction lines and read the drawing symbols."
+       }
+      ],
+      [
+       {
+        "ko": "7차시",
+        "en": "Lesson 7"
+       },
+       {
+        "ko": "치수와 출도",
+        "en": "Dimensioning and Release"
+       },
+       {
+        "ko": "치수를 기입하고 축척을 확인해 내보냅니다.",
+        "en": "Dimension the drawing, check the scale, and export it."
+       }
+      ],
+      [
+       {
+        "ko": "8차시",
+        "en": "Lesson 8"
+       },
+       {
+        "ko": "시험 안내와 Q&A",
+        "en": "Exam Briefing and Q&A"
+       },
+       {
+        "ko": "그리지 않습니다. 시험 진행과 자주 나온 질문을 다룹니다.",
+        "en": "No drawing. It covers how the exam runs and the questions that come up most."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "figure",
+     "id": "fig-l01-chain",
+     "caption": {
+      "ko": "차시마다 저장하는 상태. 다음 차시는 그 파일을 열어 이어 그립니다.",
+      "en": "The state each lesson saves. The next lesson opens that file and carries on."
+     },
+     "alt": {
+      "ko": "1차시는 파일이 없습니다. 2차시가 EDU-IB-02_L02_TEMPLATE을 저장하고 3차시가 그 파일을 엽니다. 3차시는 EDU-IB-02_L03_PROFILE, 4차시는 EDU-IB-02_L04_FEATURES, 5차시는 EDU-IB-02_L05_VIEWS, 6차시는 EDU-IB-02_L06_REPRESENTED, 7차시는 EDU-IB-02_L07_RELEASE를 저장합니다. 8차시는 파일이 없습니다.",
+      "en": "Lesson 1 has no file. Lesson 2 saves EDU-IB-02_L02_TEMPLATE and Lesson 3 opens it. Lesson 3 saves EDU-IB-02_L03_PROFILE, Lesson 4 EDU-IB-02_L04_FEATURES, Lesson 5 EDU-IB-02_L05_VIEWS, Lesson 6 EDU-IB-02_L06_REPRESENTED, and Lesson 7 EDU-IB-02_L07_RELEASE. Lesson 8 has no file."
+     },
+     "svg": "<svg viewBox=\"0 0 420 396\" width=\"420\" height=\"396\"><text class=\"sl\" x=\"14\" y=\"18\">차시 / lesson</text><text class=\"sl\" x=\"128\" y=\"18\">저장하는 상태 / saved state</text><rect class=\"si\" x=\"14\" y=\"26\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"44\" text-anchor=\"middle\">1차시</text><path class=\"sd\" d=\"M100 40h24m-7 -4l7 4l-7 4\"/><rect class=\"sn\" x=\"128\" y=\"26\" width=\"180\" height=\"28\"/><text class=\"sl\" x=\"136\" y=\"44\">파일 없음 / no file</text><rect class=\"si\" x=\"14\" y=\"72\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"90\" text-anchor=\"middle\">2차시</text><path class=\"sd\" d=\"M100 86h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"72\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"90\">EDU-IB-02_L02_TEMPLATE</text><path class=\"si\" d=\"M140 100v9h-83v9m-4 -6l4 6l4 -6\"/><rect class=\"si\" x=\"14\" y=\"118\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"136\" text-anchor=\"middle\">3차시</text><path class=\"sd\" d=\"M100 132h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"118\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"136\">EDU-IB-02_L03_PROFILE</text><path class=\"si\" d=\"M140 146v9h-83v9m-4 -6l4 6l4 -6\"/><rect class=\"si\" x=\"14\" y=\"164\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"182\" text-anchor=\"middle\">4차시</text><path class=\"sd\" d=\"M100 178h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"164\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"182\">EDU-IB-02_L04_FEATURES</text><path class=\"si\" d=\"M140 192v9h-83v9m-4 -6l4 6l4 -6\"/><rect class=\"si\" x=\"14\" y=\"210\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"228\" text-anchor=\"middle\">5차시</text><path class=\"sd\" d=\"M100 224h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"210\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"228\">EDU-IB-02_L05_VIEWS</text><path class=\"si\" d=\"M140 238v9h-83v9m-4 -6l4 6l4 -6\"/><rect class=\"si\" x=\"14\" y=\"256\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"274\" text-anchor=\"middle\">6차시</text><path class=\"sd\" d=\"M100 270h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"256\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"274\">EDU-IB-02_L06_REPRESENTED</text><path class=\"si\" d=\"M140 284v9h-83v9m-4 -6l4 6l4 -6\"/><rect class=\"si\" x=\"14\" y=\"302\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"320\" text-anchor=\"middle\">7차시</text><path class=\"sd\" d=\"M100 316h24m-7 -4l7 4l-7 4\"/><rect class=\"sh\" x=\"128\" y=\"302\" width=\"180\" height=\"28\"/><text class=\"slh\" x=\"136\" y=\"320\">EDU-IB-02_L07_RELEASE</text><rect class=\"si\" x=\"14\" y=\"348\" width=\"86\" height=\"28\"/><text class=\"sl\" x=\"57\" y=\"366\" text-anchor=\"middle\">8차시</text><path class=\"sd\" d=\"M100 362h24m-7 -4l7 4l-7 4\"/><rect class=\"sn\" x=\"128\" y=\"348\" width=\"180\" height=\"28\"/><text class=\"sl\" x=\"136\" y=\"366\">파일 없음 / no file</text><text class=\"sl\" x=\"150\" y=\"114\">다음 차시가 연다 / opened next</text></svg>"
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "한 차시를 놓치면 어떻게 하나요? 그 지점부터 이어 가면 돼요. 다만 시작 파일은 따로 배포하지 않습니다. 건너뛴 차시의 따라 하기를 그대로 해서 그 상태를 직접 만드세요.",
+     "en": "What if you miss a lesson? Pick up from that point. Starter files are not handed out, though. Work through the skipped lesson's steps and build that state yourself.",
+     "label": {
+      "ko": "한 차시를 건너뛰었다면",
+      "en": "If you skipped a lesson"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "4차시의 오프셋은 현장에서도 자주 씁니다. 벽체 두께를 잡거나 통로 여유를 잡을 때예요.",
+     "en": "The offset you use in Lesson 4 comes up often on the floor - setting a wall thickness, or the clearance along a walkway.",
+     "label": {
+      "ko": "오프셋은 현장에서도 씁니다",
+      "en": "Offset gets used on the floor too"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "대본은 「일곱 차시에 걸쳐 완성한다」고 말합니다. 로드맵은 여덟 차시입니다. 실제로 도면을 그리는 차시는 2차시부터 7차시까지 여섯 개예요. 1차시와 8차시는 그리지 않습니다.",
+     "en": "The narration says the part is finished 'over seven lessons'. The roadmap has eight, and the lessons that actually draw are the six from 2 to 7. Lessons 1 and 8 draw nothing.",
+     "label": {
+      "ko": "일곱 차시와 여덟 차시",
+      "en": "Seven lessons or eight"
+     }
+    }
+   ]
+  },
+  {
+   "id": "before-start",
+   "kind": "practice",
+   "label": {
+    "ko": "시작하기 전 점검",
+    "en": "Before you start"
+   },
+   "lede": {
+    "ko": "1차시는 열 파일도 저장할 파일도 없습니다. 대신 2차시에 들어가기 전에 네 가지만 확인하고 가요.",
+    "en": "Lesson 1 opens no file and saves none. Instead, confirm four things before you go into Lesson 2."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "네 가지 중 하나라도 아니면 다음 차시의 첫 단계에서 그대로 막힙니다. 여기서 걸러 냅니다.",
+     "en": "Miss any one of the four and you stall at the very first step of the next lesson. Catch it here."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 1,
+       "title": {
+        "ko": "AutoCAD를 실행합니다",
+        "en": "Launch AutoCAD"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "바탕화면이나 시작 메뉴에서 AutoCAD를 엽니다.",
+          "en": "Open AutoCAD from the desktop or the Start menu."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "시작 화면이 뜨고 새 도면을 만들 수 있는 상태가 됩니다.",
+        "en": "The start screen appears and you are able to create a new drawing."
+       },
+       "why": {
+        "ko": "이 과정의 조작은 전부 AutoCAD 안에서 일어납니다. 실행이 안 되면 다음 차시의 첫 단계에서 그대로 멈춥니다.",
+        "en": "Every operation in this course happens inside AutoCAD. If it will not launch, you stop at the first step of the next lesson."
+       },
+       "pitfall": {
+        "ko": "실행이 안 되거나 라이선스 창이 뜨면 여기서 멈추세요. 담당자에게 문의하면 됩니다. 1차시의 나머지 절은 PC 없이도 읽을 수 있어요.",
+        "en": "If it will not start, or a licence dialog appears, stop here. Ask your administrator. The rest of Lesson 1 reads fine without a PC."
+       }
+      },
+      {
+       "n": 2,
+       "title": {
+        "ko": "밀리미터 템플릿이 있는지 봅니다",
+        "en": "Check the millimeter template is there"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "새 도면을 만드는 화면에서 템플릿 목록을 펼칩니다. `acadiso.dwt` 라는 이름을 찾습니다.",
+          "en": "Open the template list on the new-drawing screen. Look for the name `acadiso.dwt`."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "목록에 `acadiso.dwt` 가 보입니다. 이름만 확인하면 됩니다. 지금 고르지 않아도 괜찮아요.",
+        "en": "You can see `acadiso.dwt` in the list. Seeing the name is enough. You do not have to select it now."
+       },
+       "why": {
+        "ko": "이 템플릿이 밀리미터 단위입니다. 인치 템플릿으로 시작하면 뒤에 입력하는 좌표 값이 전부 어긋납니다.",
+        "en": "That template works in millimeters. Start from an inch template and every coordinate you type later lands in the wrong place."
+       },
+       "pitfall": {
+        "ko": "목록에 이름이 안 보이면 담당자에게 요청하세요. 기다리는 동안 나머지 절을 읽으면 돼요.",
+        "en": "If the name is not in the list, ask your administrator for it. Read the remaining sections while you wait."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
+        "ko": "파일을 모아 둘 폴더를 정합니다",
+        "en": "Pick one folder for the files"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "탐색기에서 폴더를 하나 만들고 그 경로를 적어 둡니다.",
+          "en": "Create one folder in Explorer and write down its path."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "폴더 경로 한 줄이 손에 남습니다.",
+        "en": "You end up with one line: the folder path."
+       },
+       "why": {
+        "ko": "차시마다 파일이 하나씩 쌓입니다. 흩어지면 다음 차시에서 열 파일을 못 찾습니다.",
+        "en": "One file accumulates per lesson. Scatter them and you will not find the file the next lesson needs to open."
+       },
+       "pitfall": {
+        "ko": "바탕화면보다는 문서 폴더 아래가 찾기 쉬워요. 경로를 적어 두지 않으면 다음 차시에 또 헤매게 됩니다.",
+        "en": "Somewhere under Documents is easier to find again than the desktop. Without the path written down you will hunt for it again next lesson."
+       }
+      },
+      {
+       "n": 4,
+       "title": {
+        "ko": "이름과 사번을 적어 둡니다",
+        "en": "Have your name and employee number ready"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "본인 이름과 사번을 폴더 경로 옆에 함께 메모합니다.",
+          "en": "Note your own name and employee number next to that folder path."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "이름과 사번이 손에 있습니다.",
+        "en": "Your name and employee number are to hand."
+       },
+       "why": {
+        "ko": "표제란에 들어가는 값입니다. 도면을 누가 그렸는지 남기는 칸이에요.",
+        "en": "These are the values that go in the title block, the cell that records who drew it."
+       },
+       "pitfall": {
+        "ko": "사번이 기억나지 않으면 사원증이나 사내 시스템에서 확인하세요. 나중에 고치는 것보다 지금 적어 두는 편이 빨라요.",
+        "en": "If you cannot recall the number, check your badge or the company system. Writing it down now is faster than correcting it later."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "네 가지가 다 되면 2차시로 가도 돼요. 하나라도 아니면 여기서 해결하고 가세요. 오늘은 여기까지입니다. 고생하셨습니다.",
+     "en": "With all four done, you are ready for Lesson 2. If any one is missing, sort it out here first. That is it for today - nice work.",
+     "label": {
+      "ko": "여기까지 하면 준비가 끝납니다",
+      "en": "That completes the preparation"
+     }
+    }
+   ]
+  }
+ ],
+ "verify": [
+  {
+   "what": {
+    "ko": "네 종류의 선 이름과 각각의 뜻을 화면을 덮고 적습니다.",
+    "en": "Cover the screen and write the four line types and what each one means."
+   },
+   "how": {
+    "ko": "외형선, 중심선, 숨은선, 치수선 네 개가 다 나오면 통과입니다. 셋 이하면 「네 가지 선과 레이어」 절의 견본과 대조하세요.",
+    "en": "All four - visible line, centerline, hidden line, dimension line - and you pass. Three or fewer, compare against the samples in 'Four line types and their layers'."
+   }
+  },
+  {
+   "what": {
+    "ko": "테크니션이 도면으로 하는 일 셋을 적습니다.",
+    "en": "Write the three jobs a technician does with drawings."
+   },
+   "how": {
+    "ko": "지그 제안, 레이아웃 확인, 스페어 파트 긴급 공수. 셋이 다 나오면 통과예요.",
+    "en": "Proposing a jig, checking a layout, urgent spare-part sourcing. All three and you pass."
+   }
+  },
+  {
+   "what": {
+    "ko": "「여기를 이만큼만 깎아 주세요」를 도면이 쓰는 말로 바꿔 적습니다.",
+    "en": "Rewrite 'just take this much off here' the way a drawing would put it."
+   },
+   "how": {
+    "ko": "위치와 수량이 둘 다 값으로 바뀌었으면 통과입니다. 하나라도 「여기」나 「이만큼」으로 남아 있습니까? 그러면 「도면」 절로 돌아가세요.",
+    "en": "Pass if both the position and the quantity became values. If either is still 'here' or 'this much', go back to 'The drawing'."
+   }
+  },
+  {
+   "what": {
+    "ko": "여덟 차시 중 작도가 없는 차시와, 파일을 처음 만드는 차시를 적습니다.",
+    "en": "Name the lessons with no drawing, and the lesson that creates the first file."
+   },
+   "how": {
+    "ko": "1차시와 8차시가 작도 없음, 2차시가 첫 파일입니다. 「여덟 차시와 체크포인트 사슬」 도해에서 확인하세요.",
+    "en": "Lessons 1 and 8 draw nothing; Lesson 2 makes the first file. Check it on the chain diagram in 'The eight lessons and the checkpoint chain'."
+   }
+  },
+  {
+   "what": {
+    "ko": "준비 네 항목을 실제로 확인합니다.",
+    "en": "Actually run through the four preparation items."
+   },
+   "how": {
+    "ko": "AutoCAD 실행, `acadiso.dwt` 확인, 저장 폴더, 이름과 사번. 네 개가 다 되면 2차시로 가세요.",
+    "en": "AutoCAD launches, `acadiso.dwt` is listed, the folder is chosen, name and number are ready. All four done, move on to Lesson 2."
+   }
+  }
+ ],
+ "checks": [
+  {
+   "q": {
+    "ko": "다섯 가지 요건을 순서대로 말해 보세요. 몇 개가 나왔습니까?",
+    "en": "List the five requirements in order. How many did you get?"
+   },
+   "a": {
+    "ko": "도형·크기·모양 / 자세·위치 / 표면·재료·가공 / 모호하지 않을 것 / 보존하고 찾아 쓸 수 있을 것. 다섯 개가 다 나오면 통과입니다. 넷 이하면 「도면의 다섯 요건」 절로 돌아가세요.",
+    "en": "Shape and size / orientation and position / surface, material and machining / free of ambiguity / storable and retrievable. Five out of five passes. Four or fewer, go back to 'The five requirements'."
+   }
+  },
+  {
+   "q": {
+    "ko": "「여기를 이만큼만 깎아 주세요」가 왜 사람마다 다르게 전달됩니까? 한 문장으로 쓰세요.",
+    "en": "Why does 'just take this much off here' reach each listener differently? Answer in one sentence."
+   },
+   "a": {
+    "ko": "「여기」가 가리키는 위치와 「이만큼」이 가리키는 수량 때문입니다. 둘 다 말한 사람 머릿속에만 있습니다. 그래서 듣는 사람이 각자 자기 해석으로 빈칸을 채웁니다. 이 두 단어가 답에 들어 있으면 통과입니다.",
+    "en": "It comes down to the position 'here' points to and the quantity 'this much' points to. Both exist only in the speaker's head. Each listener fills the blanks with their own reading. If both words appear in your answer, you pass."
+   }
+  },
+  {
+   "q": {
+    "ko": "실습 과제의 두 가지 형태는 무엇입니까?",
+    "en": "What are the two task formats?"
+   },
+   "a": {
+    "ko": "① 주어진 치수대로 그대로 작성 ② 한 방향만 주어진 형상을 정면도·평면도·우측면도로 투상. 둘 다 나와야 통과입니다.",
+    "en": "(1) Draw exactly to the given dimensions. (2) Project a shape given in one direction into front, top, and right side views. Both must appear to pass."
+   }
+  },
+  {
+   "q": {
+    "ko": "과제지에 이 교재와 다른 용지 크기나 레이어 색상이 적혀 있습니다. 무엇을 따릅니까?",
+    "en": "If the task sheet specifies a different sheet size or layer color than this workbook, which do you follow?"
+   },
+   "a": {
+    "ko": "과제 지시입니다. 이 교재의 값은 연습용 기본값입니다.",
+    "en": "The task instruction. The values in this workbook are practice defaults."
+   }
+  },
+  {
+   "q": {
+    "ko": "여덟 차시 중 도면을 그리지 않는 차시는 어디입니까? 파일을 만드는 첫 차시는 어디입니까?",
+    "en": "Which lessons involve no drawing, and which lesson first creates a file?"
+   },
+   "a": {
+    "ko": "그리지 않는 차시는 1차시와 8차시입니다. 파일을 처음 만드는 차시는 2차시입니다. EDU-IB-02_L02_TEMPLATE으로 저장합니다.",
+    "en": "Lessons 1 and 8 involve no drawing. Lesson 2 creates the first file and saves it as EDU-IB-02_L02_TEMPLATE."
+   }
+  }
+ ],
+ "exercise": {
+  "title": {
+   "ko": "내 업무에 대응시키기",
+   "en": "Map it to your own work"
+  },
+  "body": {
+   "ko": "지그 제안, 레이아웃 확인, 스페어 파트 긴급 공수. 셋 중 하나를 고르세요. 내 설비에서 도면이 있었으면 달랐을 상황을 세 줄로 적습니다. ① 무슨 일이 있었나 ② 그때 말로 어떻게 전달했나 ③ 도면이었다면 어느 값을 적었을까. 7차시를 마친 뒤 이 메모를 다시 여세요. ③에 적은 값을 도면에 기입할 수 있는지 확인합니다.",
+   "en": "Pick one of the three: proposing a jig, checking a layout, urgent spare-part sourcing. Then write three lines about a situation on your own equipment where a drawing would have changed the outcome. (1) What happened. (2) How you conveyed it in words at the time. (3) Which values you would have written on a drawing instead. After finishing Lesson 7, reopen this note and check whether you can now actually dimension the values you listed in (3)."
+  },
+  "criteria": [
+   {
+    "ko": "세 줄이 다 채워졌습니다. 하나라도 비면 다시 고르는 게 나아요.",
+    "en": "All three lines are filled in. If one is blank, pick a different situation."
+   },
+   {
+    "ko": "③에 적은 것이 값입니다. 「이만큼」이 아니라 숫자와 위치예요.",
+    "en": "Line 3 holds values - a number and a location, not 'this much'."
+   },
+   {
+    "ko": "셋 중 어느 업무인지 한 단어로 적혀 있습니다.",
+    "en": "The note says in one word which of the three jobs it belongs to."
+   }
+  ]
+ },
+ "shortcuts": [],
+ "recap": {
+  "did": [
+   {
+    "ko": "도면은 작성자의 의도를 누가 읽어도 같게 전달하는 수단입니다.",
+    "en": "A drawing is how the author's intent reaches every reader the same way."
+   },
+   {
+    "ko": "도면이 갖춰야 할 다섯 요건을 봤습니다 — 도형·크기·모양, 자세·위치, 표면·재료·가공, 모호하지 않게, 보존·검색·이용.",
+    "en": "You saw the five requirements a drawing must meet: shape and size, orientation and position, surface, material and machining, free of ambiguity, storable and retrievable."
+   },
+   {
+    "ko": "실습 과제는 치수에 맞게 작성하거나 정투상으로 그리는 방식입니다. 채점은 선이 자기 레이어에 있는지도 봅니다.",
+    "en": "A task asks you either to draw to given dimensions or to project orthographically. The assessment also looks at whether each line sits on its own layer."
+   },
+   {
+    "ko": "부품 하나를 차시마다 이어 그려 완성합니다. 도면 번호는 EDU-IB-02, 아이들러 풀리 브래킷입니다.",
+    "en": "One part is carried forward and finished lesson by lesson: drawing EDU-IB-02, the idler pulley bracket."
+   }
+  ],
+  "next": {
+   "ko": "2차시 · 부품 이해와 도면 환경입니다. 아이들러 풀리 브래킷이 무엇인지 봅니다. 각 면을 어떤 방법으로 가공하는지 봅니다. 왜 그 가공을 골랐는지까지 이야기합니다. 그게 부품 수명과 성능에 어떻게 영향을 주는지도 다룹니다. 도면 위 표기 하나하나가 무엇을 지시하는지도 전부 읽습니다. 그다음 A3 용지에 도면틀과 표제란을 만듭니다. 레이어 네 개를 설정해 템플릿 파일로 남깁니다. 준비물은 AutoCAD 하나면 됩니다.",
+   "en": "Lesson 2: the part and the drawing environment. You look at what the idler pulley bracket is, how each face is machined, and why that method was chosen. You also cover how the choice affects the life and the performance of the part. Every notation on the drawing is read for what it instructs. Then you build the border and title block on an A3 sheet and set up four layers, leaving a template file behind. All you need is AutoCAD."
+  }
+ }
+}

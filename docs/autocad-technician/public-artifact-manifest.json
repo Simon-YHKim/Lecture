@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "policy": "Only exact reviewed paths and hashes may bypass the default private-media block.",
-  "assetCount": 2,
+  "assetCount": 6,
   "assets": [
     {
       "path": "docs/autocad-technician/master-plan/AutoCAD_Technician_Video_Course_MasterPlan_260811.html",
@@ -14,6 +14,30 @@
       "bytes": 27752,
       "sha256": "e3f57c88827fcfc7a56be03783ecd5a21f6e0a8249e2c7f7fee5420c758736be",
       "gitBlob": "446fef20402fa8ca101f5a0ecf96972292f67ca8"
+    },
+    {
+      "path": "model/idler-pulley-bracket.ipt",
+      "bytes": 359936,
+      "sha256": "f0c104cf1fd0f3e4a757bc8cb69e1f8826db52fd7d8f06112dd82cc4cc21b5fb",
+      "gitBlob": "65b0f7d7d69ee030c4599a01932ec72a026d637b"
+    },
+    {
+      "path": "model/OldVersions/idler-pulley-bracket.0001.ipt",
+      "bytes": 314880,
+      "sha256": "03d407c447e626c455b51e9d4f1587140d9fe40ac1d254d93e9f0bf2e526c646",
+      "gitBlob": "ea3396c6508383e59fe8401a7a654c81ce6ceb53"
+    },
+    {
+      "path": "model/screenshot-2026-08-22-022452.png",
+      "bytes": 78488,
+      "sha256": "b40612fb7fb63afb6b1436fd7987b8c79772a2f62a82ae0f6a25150bde0955f9",
+      "gitBlob": "fb8381b93c80b70d366046d997fe0f427e647dbc"
+    },
+    {
+      "path": "model/screenshot-2026-08-22-022556.png",
+      "bytes": 192873,
+      "sha256": "1dfe67980b4edd52205e3b6ada06fff9b467a9ecf213a6133b305e4467de0c17",
+      "gitBlob": "ac7e5e9dae36f56a2c180a2c3045cf63124e617a"
     }
   ]
 }

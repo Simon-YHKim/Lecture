@@ -25,7 +25,23 @@ $explicitFiles = @(
     (Join-Path $RepoRoot 'docs\autocad-technician\reference\a3-landscape-template-reference.png'),
     (Join-Path $RepoRoot 'docs\autocad-technician\master-plan\AutoCAD_Technician_Video_Course_MasterPlan_260811.html')
 )
-$files = @($snapshotFiles.FullName) + $explicitFiles
+
+# The bracket model under model/ is the course author's own work, cleared for
+# publication. CAD sources and images are blocked by extension for everyone
+# else, so these files ride the same reviewed path-and-hash allowlist as the
+# other public artifacts: rename or edit one and the guard blocks it until this
+# script is run again and the change is reviewed.
+$modelRoot = Join-Path $RepoRoot 'model'
+$modelFiles = @()
+if (Test-Path -LiteralPath $modelRoot -PathType Container) {
+    $modelFiles = @(
+        Get-ChildItem -LiteralPath $modelRoot -Recurse -File |
+            Where-Object {
+                $_.Extension.ToLowerInvariant() -in @('.ipt', '.iam', '.idw', '.ipn', '.ipj', '.png', '.jpg', '.jpeg')
+            }
+    )
+}
+$files = @($snapshotFiles.FullName) + $explicitFiles + @($modelFiles.FullName)
 
 $assets = foreach ($file in ($files | Sort-Object -Unique)) {
     if (-not (Test-Path -LiteralPath $file -PathType Leaf)) {

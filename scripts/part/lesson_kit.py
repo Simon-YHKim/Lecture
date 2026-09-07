@@ -601,6 +601,42 @@ def index_html(slots, total):
             "</body></html>\n")
 
 
+def write_episodes(lesson_dir, slots, episodes, os_mod):
+    """Emit one composition per episode, playing a slice of the same frames.
+
+    An episode is a playlist, not a copy. `hyperframes render -c
+    compositions/episodes/ep1.html` renders it, the frames stay in
+    compositions/frames, and there is exactly one copy of each — so an episode
+    cannot quietly fall behind an edit to the master.
+
+    Returns [(file, title, seconds, [stem, ...]), ...].
+    """
+    by_stem = {s[2]: s for s in slots}
+    d = os_mod.path.join(lesson_dir, "compositions", "episodes")
+    if os_mod.path.isdir(d):
+        for f in os_mod.listdir(d):
+            os_mod.remove(os_mod.path.join(d, f))
+    os_mod.makedirs(d, exist_ok=True)
+
+    out = []
+    for n, ep in enumerate(episodes, 1):
+        rows, t = [], 0.0
+        for stem in ep["frames"]:
+            sid, cid, name, _start, dur = by_stem[stem]
+            rows.append((sid, cid, name, t, dur))
+            t += dur
+        # data-composition-src resolves against the project root, not against
+        # the file holding it, so an episode one directory deeper still names
+        # its frames the same way index.html does.
+        html = index_html(rows, t)
+        f = os_mod.path.join(d, "ep%d.html" % n)
+        with open(f, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(html)
+        out.append(("compositions/episodes/ep%d.html" % n, ep["title"], t,
+                    list(ep["frames"])))
+    return out
+
+
 def write_project(lesson_dir, name, slots, total, os_mod, json_mod):
     """Emit index.html and the three project files with LF endings."""
     def put(path, text):

@@ -1,0 +1,2374 @@
+{
+ "no": 3,
+ "slug": "lesson-03-baseline-profile",
+ "title": {
+  "ko": "기준선과 외곽",
+  "en": "Datum Lines and the Outline"
+ },
+ "videoLength": "38:17",
+ "selfStudyMin": 107,
+ "opens": "EDU-IB-02_L02_TEMPLATE",
+ "saves": "EDU-IB-02_L03_PROFILE",
+ "summary": {
+  "what": {
+   "ko": "지난 차시에 만든 A3 템플릿 파일을 열어 부품 선을 처음으로 긋습니다. 중심선 두 개를 먼저 세우고, 베이스 외곽과 보스 원, 목 선 두 개를 그립니다.",
+   "en": "You open the A3 template file you built last lesson and draw the first lines of the part. Two centerlines go in first, then the base outline, the boss circle, and the two web lines."
+  },
+  "why": {
+   "ko": "기준이 먼저 서 있어야 뒤에 오는 형상이 전부 같은 기준을 씁니다. 좌표 입력 세 가지와 LINE·PLINE의 차이도 이 한 도형 안에서 다 나와요.",
+   "en": "Every later feature uses the same datum, so the datum has to exist first. This one shape also uses all three ways to enter a point, plus LINE and PLINE."
+  },
+  "where": {
+   "ko": "지금 파일에는 도면틀과 표제란, 레이어 네 개만 있습니다. 오늘이 끝나면 정면도에 베이스 외곽과 보스 원, 목 접선 두 개까지 그려져 있어요.",
+   "en": "Right now the file holds only the border, the title block, and four layers. By the end of today the front view has its base outline, boss circle, and two web tangents."
+  }
+ },
+ "objectives": [
+  {
+   "ko": "지난 차시 파일을 열어 그 위에 이어 그립니다. 끝나면 새 이름으로 저장해 차시별 상태를 남길 수 있습니다.",
+   "en": "You can open the previous lesson's file, draw on top of it, and save under a new name to keep a per-lesson state."
+  },
+  {
+   "ko": "UCS로 좌표 원점을 정면도 자리로 옮깁니다. UCSICON 원점 옵션으로 그 자리를 확인합니다. 중심선은 형상 밖까지 먼저 세울 수 있습니다.",
+   "en": "You can move the origin to the front-view position with UCS, confirm it with the UCSICON origin option, and set the centerlines first."
+  },
+  {
+   "ko": "점 찍는 방법 세 가지를 구분해 씁니다. 절대좌표 x,y, 상대좌표 @dx,dy, 상대극좌표 @거리<각도입니다. LINE과 PLINE도 형상에 맞게 골라 쓸 수 있습니다.",
+   "en": "You can tell absolute, relative, and relative polar entry apart, and pick LINE or PLINE to suit the shape."
+  },
+  {
+   "ko": "모따기 2-C5가 만드는 11과 115와 110을 치수표에서 계산합니다. D 옵션과 62+28=90 으로 보스 원을 검산할 수 있습니다.",
+   "en": "You can derive 11, 115, and 110 from the dimension table, and cross-check the boss circle with the D option and 62 + 28 = 90."
+  },
+  {
+   "ko": "접점 스냅으로 목 접선을 긋고 클릭과 LIST로 폴리선을 검산합니다. 네 가지 흔한 실수도 화면에서 알아차려 고칠 수 있습니다.",
+   "en": "You can draw the web tangents with the tangent snap, verify the polyline by click and LIST, and spot and fix four common mistakes on screen."
+  }
+ ],
+ "before": {
+  "checklist": [
+   {
+    "ko": "EDU-IB-02_L02_TEMPLATE 파일을 찾아 둡니다.",
+    "en": "Have the EDU-IB-02_L02_TEMPLATE file to hand."
+   },
+   {
+    "ko": "AutoCAD를 켜고 그 파일을 엽니다. `Z` 엔터 `A` 엔터로 도면틀 전체를 화면에 넣습니다.",
+    "en": "Start AutoCAD, open that file, then type `Z` Enter `A` Enter to fit the whole border on screen."
+   },
+   {
+    "ko": "상태 막대에서 객체 스냅과 직교가 켜져 있는지 봅니다.",
+    "en": "Check the status bar: object snap and ortho should be on."
+   },
+   {
+    "ko": "레이어 드롭다운에 외형선·중심선·숨은선·치수선 네 개가 다 있는지 셉니다.",
+    "en": "Count four layers in the dropdown: visible, center, hidden, dimension."
+   },
+   {
+    "ko": "치수표에서 120 · 16 · 2-C5 · Ø56 · 80 다섯 값을 미리 읽어 둡니다.",
+    "en": "Read five values off the dimension table first: 120, 16, 2-C5, Ø56, and 80."
+   }
+  ],
+  "recovery": {
+   "ko": "EDU-IB-02_L02_TEMPLATE 이 없으면 2차시의 따라 하기부터 하세요. 읽기 절은 나중에 읽어도 됩니다. 이 파일은 2차시에서 직접 만드는 파일이에요. A3 도면틀과 중심 마크, 표제란, 레이어 네 개를 만듭니다. 저장하면 여기로 돌아옵니다.",
+   "en": "No EDU-IB-02_L02_TEMPLATE? Do the hands-on sections of Lesson 2 first; the reading can wait. That file is the one you build yourself in Lesson 2. Draw the A3 border, the centering marks, the title block, and the four layers. Save it and you are back here."
+  }
+ },
+ "sections": [
+  {
+   "id": "starting-state",
+   "kind": "concept",
+   "label": {
+    "ko": "출발 상태 — EDU-IB-02_L02_TEMPLATE",
+    "en": "Starting state - EDU-IB-02_L02_TEMPLATE"
+   },
+   "lede": {
+    "ko": "그리기 전에 화면에 무엇이 있어야 하는지부터 셉니다.",
+    "en": "Before you draw anything, count what has to be on screen."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "파일을 열면 `Z` 엔터 `A` 엔터로 도면틀 전체를 먼저 화면에 넣습니다. 그다음 여섯 가지를 셉니다. 여기서 확인하지 않고 그리기 시작하면 어떻게 될까요? 뒤에 가서 선이 엉뚱한 레이어에 들어가 있는 걸 발견합니다.",
+     "en": "Open the file, then type `Z` Enter `A` Enter to fit the whole border on screen. Now count six things. What happens if you skip the count? You find out much later that your lines are on the wrong layer."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "출발 상태 여섯 가지",
+      "en": "Six things that must already be there"
+     },
+     "head": [
+      {
+       "ko": "화면에 있어야 하는 것",
+       "en": "What must be on screen"
+      },
+      {
+       "ko": "없으면 돌아갈 곳",
+       "en": "Where to go back to if it is missing"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "용지선과 도면선, 사각형 두 개",
+        "en": "The sheet outline and the border, two rectangles"
+       },
+       {
+        "ko": "2차시의 도면틀 그리기",
+        "en": "Lesson 2, drawing the border"
+       }
+      ],
+      [
+       {
+        "ko": "네 변 한가운데의 중심 마크",
+        "en": "A centering mark at the middle of each edge"
+       },
+       {
+        "ko": "2차시의 중심 마크",
+        "en": "Lesson 2, the centering marks"
+       }
+      ],
+      [
+       {
+        "ko": "오른쪽 아래 표제란과 이름 · 사번",
+        "en": "The title block bottom right, with name and employee number"
+       },
+       {
+        "ko": "2차시의 표제란",
+        "en": "Lesson 2, the title block"
+       }
+      ],
+      [
+       {
+        "ko": "레이어 드롭다운에 정확히 네 개",
+        "en": "Exactly four entries in the layer dropdown"
+       },
+       {
+        "ko": "2차시의 레이어 만들기",
+        "en": "Lesson 2, creating the layers"
+       }
+      ],
+      [
+       {
+        "ko": "상태 막대의 객체 스냅과 직교가 켜짐",
+        "en": "Object snap and ortho on in the status bar"
+       },
+       {
+        "ko": "`F3` 과 `F8` 로 그 자리에서 켭니다",
+        "en": "Press `F3` and `F8` right there"
+       }
+      ],
+      [
+       {
+        "ko": "외형선이 나머지 셋보다 굵게 보임",
+        "en": "The visible line looks thicker than the other three"
+       },
+       {
+        "ko": "2차시의 선가중치 표시",
+        "en": "Lesson 2, showing lineweights"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "여섯 중 하나라도 없으면",
+      "en": "If any of the six is missing"
+     },
+     "ko": "열린 파일이 L02_TEMPLATE 이 아닐 수 있습니다. 새 도면으로 시작하면 도면틀도 레이어도 없어 3단계 이후가 전부 어긋납니다.",
+     "en": "The file you opened may not be L02_TEMPLATE. A new drawing has no border and no layers, so everything from step 3 on goes wrong."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "오늘 쓰는 기능키",
+      "en": "Function keys you use today"
+     },
+     "head": [
+      {
+       "ko": "키",
+       "en": "Key"
+      },
+      {
+       "ko": "무엇을 하나",
+       "en": "What it does"
+      },
+      {
+       "ko": "언제 쓰나",
+       "en": "When you use it"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "F3",
+        "en": "F3"
+       },
+       {
+        "ko": "객체 스냅 켜기 · 끄기",
+        "en": "Toggles object snap"
+       },
+       {
+        "ko": "스냅이 안 잡힐 때 가장 먼저 봅니다",
+        "en": "The first thing to check when a snap will not catch"
+       }
+      ],
+      [
+       {
+        "ko": "F8",
+        "en": "F8"
+       },
+       {
+        "ko": "직교 모드 켜기 · 끄기",
+        "en": "Toggles ortho mode"
+       },
+       {
+        "ko": "수평 수직선은 켜고, 접점을 잡을 때는 끕니다",
+        "en": "On for horizontal and vertical lines, off when taking a tangent"
+       }
+      ],
+      [
+       {
+        "ko": "F2",
+        "en": "F2"
+       },
+       {
+        "ko": "문자 창 열기 · 닫기",
+        "en": "Opens and closes the text window"
+       },
+       {
+        "ko": "LIST 결과를 보고 닫을 때 씁니다",
+        "en": "To read a LIST result and close it again"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+1",
+        "en": "Ctrl+1"
+       },
+       {
+        "ko": "특성 창",
+        "en": "The properties palette"
+       },
+       {
+        "ko": "선 종류 축척처럼 객체의 값을 직접 고칠 때 씁니다",
+        "en": "To change an object value directly, such as linetype scale"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+Z",
+        "en": "Ctrl+Z"
+       },
+       {
+        "ko": "실행 취소",
+        "en": "Undo"
+       },
+       {
+        "ko": "명령을 빠져나온 뒤 되돌릴 때 씁니다",
+        "en": "To undo after you have already left the command"
+       }
+      ],
+      [
+       {
+        "ko": "Esc",
+        "en": "Esc"
+       },
+       {
+        "ko": "선택 해제",
+        "en": "Clears the selection"
+       },
+       {
+        "ko": "값을 고친 뒤 선택을 풀 때 씁니다",
+        "en": "To drop the selection after changing a value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "레이어 값의 정본",
+      "en": "The layer values that govern"
+     },
+     "ko": "굵기는 외형선만 0.5이고 중심선 · 숨은선 · 치수선은 0.25입니다. 선 종류 축척 0.5는 중심선과 숨은선에만 붙습니다. 2차시 화면의 표와 다르게 보이면 이 값이 정본이에요.",
+     "en": "Only the visible layer is 0.5; center, hidden, and dimension are all 0.25. Linetype scale 0.5 applies to center and hidden only. Where the Lesson 2 screen table differs, these values govern."
+    }
+   ]
+  },
+  {
+   "id": "ucs-origin",
+   "kind": "concept",
+   "label": {
+    "ko": "좌표를 재는 기준 — UCS",
+    "en": "The ruler you measure from - UCS"
+   },
+   "lede": {
+    "ko": "움직인 것은 그림이 아니라 자입니다.",
+    "en": "What moves is the ruler, not the drawing."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "도면의 0,0은 A3 용지의 왼쪽 아래 구석입니다. 거기에 그리면 부품이 도면틀 밖 구석에 처박힙니다. 그래서 좌표를 재는 기준 자체를 정면도가 놓일 자리로 옮깁니다. 사용자 좌표계, UCS입니다.",
+     "en": "The drawing's 0,0 sits at the lower left corner of the A3 sheet. Draw there and the part ends up outside the border. So you move the ruler itself to where the front view belongs. That is the user coordinate system, UCS."
+    },
+    {
+     "type": "p",
+     "ko": "왜 하필 베이스의 왼쪽 아래 구석일까요? 이 부품의 치수가 대부분 왼쪽 끝과 바닥에서 나오거든요. 보스 중심의 60과 62가 그렇습니다. 장공 중심의 35와 85, 그 높이 8도 마찬가지입니다. 도면이 재는 기준과 좌표를 세는 기준을 맞춥니다. 그러면 도면에 적힌 숫자가 그대로 입력값이 됩니다.",
+     "en": "Why the lower left corner of the base? Because most of this part's dimensions run from the left end and the bottom. The boss center at 60 and 62 does. So do the slot centers at 35 and 85, and their height of 8. Line the coordinate origin up with what the drawing measures from. Then the number on the drawing is the number you type."
+    },
+    {
+     "type": "figure",
+     "id": "fig-ucs-shift",
+     "svg": "<svg viewBox=\"0 0 470 300\" width=\"470\" height=\"300\"><rect class=\"si\" x=\"30\" y=\"18\" width=\"378\" height=\"267\" fill=\"none\"/><rect class=\"sd\" x=\"39\" y=\"27\" width=\"360\" height=\"249\" fill=\"none\"/><rect class=\"sd\" x=\"219\" y=\"249\" width=\"180\" height=\"27\" fill=\"none\"/><text class=\"sl\" x=\"309\" y=\"266\" text-anchor=\"middle\">표제란 · title block</text><rect class=\"sh\" x=\"84\" y=\"141\" width=\"108\" height=\"81\" fill=\"none\"/><text class=\"slh\" x=\"138\" y=\"180\" text-anchor=\"middle\">정면도 120×90</text><text class=\"sl\" x=\"138\" y=\"195\" text-anchor=\"middle\">front view</text><rect class=\"sd\" x=\"84\" y=\"112\" width=\"108\" height=\"18\" fill=\"none\"/><text class=\"sl\" x=\"138\" y=\"125\" text-anchor=\"middle\">평면도 · top view</text><rect class=\"sd\" x=\"201\" y=\"141\" width=\"18\" height=\"81\" fill=\"none\"/><text class=\"sl\" x=\"228\" y=\"180\">우측면도</text><text class=\"sl\" x=\"228\" y=\"194\">right side view</text><path class=\"si\" d=\"M30 285 L30 265 M30 285 L54 285\" fill=\"none\"/><circle class=\"sh\" cx=\"30\" cy=\"285\" r=\"3\" fill=\"none\"/><text class=\"sl\" x=\"38\" y=\"297\">용지 원점 0,0 · sheet</text><path class=\"sh\" d=\"M84 222 L84 200 M84 222 L108 222\" fill=\"none\"/><circle class=\"sh\" cx=\"84\" cy=\"222\" r=\"3\" fill=\"none\"/><text class=\"slh\" x=\"92\" y=\"236\">옮긴 원점 0,0</text><text class=\"sl\" x=\"92\" y=\"249\">UCS 60,70</text><path class=\"sd\" d=\"M38 277 L76 231\" fill=\"none\" stroke-linecap=\"butt\"/><path class=\"sd\" d=\"M76 231 L79 239 M76 231 L69 234\" fill=\"none\"/><text class=\"sl\" x=\"33\" y=\"14\">용지선 · sheet outline</text><text class=\"sl\" x=\"45\" y=\"42\">도면틀 · border</text></svg>",
+     "caption": {
+      "ko": "용지 원점과 옮긴 원점. 정면도 자리가 새 0,0 입니다.",
+      "en": "The sheet origin and the moved origin. The front-view corner becomes the new 0,0."
+     },
+     "alt": {
+      "ko": "A3 용지 사각형 안에 도면틀과 오른쪽 아래 표제란이 있습니다. 왼쪽 아래 구석에 용지 원점 0,0 아이콘이 있습니다. 화살표가 그 자리에서 정면도 왼쪽 아래로 이어집니다. 정면도 자리는 가로 120 세로 90 사각형입니다. 그 위에 평면도, 오른쪽에 우측면도 자리가 비어 있습니다.",
+      "en": "Inside the A3 sheet rectangle sit the border and, bottom right, the title block. A 0,0 icon marks the sheet origin at the lower left. An arrow runs from there to the lower left of the front view. The front-view box is 120 by 90, with the top view above it and the right side view to its right."
+     }
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "ko": "정면도가 새 원점에서 오른쪽으로 120, 위로 90 뻗습니다.",
+       "en": "From the new origin the front view runs 120 to the right and 90 up."
+      },
+      {
+       "ko": "제3각법이라 평면도는 위쪽, 우측면도는 오른쪽에 놓입니다.",
+       "en": "In third-angle projection the top view goes above and the right side view to the right."
+      },
+      {
+       "ko": "그 자리를 남겨 두려고 60,70을 골랐어요.",
+       "en": "60,70 was chosen to leave room for both of them."
+      },
+      {
+       "ko": "도면틀은 움직이지 않았습니다. 움직인 것은 좌표를 재는 기준입니다.",
+       "en": "The border has not moved. What moved is the reference you measure from."
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "60과 70은 치수가 아닙니다",
+      "en": "60 and 70 are not dimensions"
+     },
+     "ko": "부품 치수가 아니라 배치를 정한 값이라 도면에 기입하지 않습니다. 다른 배치에서는 다른 값이 돼요. 원래대로 돌리려면 `UCS` 엔터 다음 `W` 엔터입니다.",
+     "en": "They place the view; they do not measure the part, so they are never dimensioned. Another layout would use other values. To go back, type `UCS` Enter then `W` Enter."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "지그 제안",
+      "en": "Proposing a jig"
+     },
+     "ko": "지그를 하나 그려 제안할 때도 순서가 같습니다. 어디를 0으로 볼지부터 정하고 시작해요.",
+     "en": "Proposing a jig starts the same way. You decide what counts as zero before you draw anything."
+    }
+   ]
+  },
+  {
+   "id": "datum-first",
+   "kind": "concept",
+   "label": {
+    "ko": "형상보다 기준이 먼저",
+    "en": "Datum before shape"
+   },
+   "lede": {
+    "ko": "부품 선보다 중심선이 먼저입니다.",
+    "en": "The centerlines come before any part line."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "이 부품은 세로 중심선을 기준으로 좌우 대칭입니다. 보스 원과 축 구멍, 탭 네 개가 전부 그 중심선 위의 한 점에서 시작합니다. 중심선을 먼저 세워 두면 형상마다 기준을 다시 찾지 않아도 돼요.",
+     "en": "This part is symmetrical about its vertical centerline. The boss circle, the bore, and the four tapped holes all start from one point on that line. Set it first and you never hunt for a datum again."
+    },
+    {
+     "type": "p",
+     "ko": "형상부터 그리면 어떻게 될까요? 중심선을 나중에 끼워 넣게 됩니다. 이미 그린 것들이 조금씩 어긋나 있어도 알아차릴 방법이 없어요.",
+     "en": "What happens if you draw the shape first? You end up squeezing the centerline in afterwards. By then nothing tells you that what you drew has drifted."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "세로 중심선 x = 60",
+        "en": "Vertical centerline, x = 60"
+       },
+       "body": {
+        "ko": "이유가 둘 겹칩니다. 베이스 폭 120의 절반이 60이고, 보스 중심의 가로 위치도 60입니다. 부품이 이 선을 기준으로 좌우 대칭이라는 뜻이에요.",
+        "en": "Two reasons land on the same number. Half of the 120 base width is 60, and the boss center also sits at 60. That is what makes this line the axis of symmetry."
+       }
+      },
+      {
+       "label": {
+        "ko": "가로 중심선 y = 62",
+        "en": "Horizontal centerline, y = 62"
+       },
+       "body": {
+        "ko": "보스 중심의 높이입니다. 원이 가로로 32에서 88까지를 차지하니, 5씩 더 내밀어 27에서 93까지 그어요.",
+        "en": "That is the height of the boss center. The circle spans 32 to 88 across, so the line runs 27 to 93, overrunning 5 at each end."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "내미는 5는 관례입니다",
+      "en": "The 5 overrun is a convention"
+     },
+     "ko": "형상 밖으로 내미는 5는 도면 치수가 아니라 제도 관례입니다. 3에서 5 사이면 됩니다. 중심선이 형상 안에서 끝나면 어디가 중심인지 읽히지 않아요.",
+     "en": "The 5 mm overrun is drafting practice, not a dimension. Anything from 3 to 5 works. A centerline that stops inside the shape does not read as a center at all."
+    }
+   ]
+  },
+  {
+   "id": "point-entry",
+   "kind": "concept",
+   "label": {
+    "ko": "좌표 입력 세 가지",
+    "en": "Three ways to enter a point"
+   },
+   "lede": {
+    "ko": "정확하게 그린다는 것은 점을 정확하게 찍는다는 뜻이에요.",
+    "en": "Drawing accurately means placing points accurately."
+   },
+   "blocks": [
+    {
+     "type": "table",
+     "caption": {
+      "ko": "점을 찍는 세 가지 방법",
+      "en": "Three ways to place a point"
+     },
+     "head": [
+      {
+       "ko": "표기",
+       "en": "Notation"
+      },
+      {
+       "ko": "무엇을 기준으로 재나",
+       "en": "What it measures from"
+      },
+      {
+       "ko": "이 차시의 예",
+       "en": "Examples from this lesson"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "절대좌표 x,y",
+        "en": "Absolute, x,y"
+       },
+       {
+        "ko": "원점에서 재는 자리",
+        "en": "The origin"
+       },
+       {
+        "ko": "60,62 · 0,0 · 20,16",
+        "en": "60,62 / 0,0 / 20,16"
+       }
+      ],
+      [
+       {
+        "ko": "상대좌표 @dx,dy",
+        "en": "Relative, @dx,dy"
+       },
+       {
+        "ko": "앞에 찍은 점에서 간 거리",
+        "en": "The previous point"
+       },
+       {
+        "ko": "@120,0 · @0,11 · @-5,5",
+        "en": "@120,0 / @0,11 / @-5,5"
+       }
+      ],
+      [
+       {
+        "ko": "상대극좌표 @거리<각도",
+        "en": "Relative polar, @distance<angle"
+       },
+       {
+        "ko": "앞에 찍은 점에서 간 방향과 거리",
+        "en": "Direction and distance from the previous point"
+       },
+       {
+        "ko": "@7.07<135",
+        "en": "@7.07<135"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "절대좌표는 도면에 원점 기준으로 위치가 적혀 있을 때 씁니다. 무엇이든 처음 시작하는 점에도 씁니다. 앞에 찍은 점이 없으니 기준으로 삼을 것이 원점밖에 없거든요.",
+     "en": "Use absolute entry when the drawing gives a position from the origin. Use it for any first point too. With no previous point, the origin is all you have to measure from."
+    },
+    {
+     "type": "p",
+     "ko": "상대좌표는 앞에 골뱅이를 붙입니다. 절대좌표와의 차이는 그것뿐입니다. `@120,0` 은 방금 찍은 점에서 오른쪽으로 120 간 자리입니다. 기계 도면의 치수는 대부분 이런 모양이라 도면에 적힌 숫자를 그대로 옮겨 넣어요.",
+     "en": "Relative entry adds an @ in front. That is the only difference. `@120,0` means 120 to the right of the point you just picked. Most mechanical dimensions read that way, so the number on the drawing goes straight in."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "각도 기준 — 오른쪽이 0도이고 반시계 방향으로 늘어납니다",
+      "en": "Angles start at 0 to the right and increase counter-clockwise"
+     },
+     "head": [
+      {
+       "ko": "각도",
+       "en": "Angle"
+      },
+      {
+       "ko": "방향",
+       "en": "Direction"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "0도",
+        "en": "0 degrees"
+       },
+       {
+        "ko": "오른쪽",
+        "en": "Right"
+       }
+      ],
+      [
+       {
+        "ko": "90도",
+        "en": "90 degrees"
+       },
+       {
+        "ko": "위",
+        "en": "Up"
+       }
+      ],
+      [
+       {
+        "ko": "135도",
+        "en": "135 degrees"
+       },
+       {
+        "ko": "왼쪽 위",
+        "en": "Up and to the left"
+       }
+      ],
+      [
+       {
+        "ko": "180도",
+        "en": "180 degrees"
+       },
+       {
+        "ko": "왼쪽",
+        "en": "Left"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "7.07을 쓰지 않는 이유",
+      "en": "Why not 7.07"
+     },
+     "ko": "모따기 한 줄은 `@7.07<135` 로도 됩니다. 다만 7.07은 5제곱 더하기 5제곱의 제곱근을 반올림한 값이에요. 그래서 아주 미세하게 어긋납니다. 도면에 적힌 값은 7.07이 아니라 5와 5입니다. 그래서 여기서는 `@-5,5` 가 맞습니다.",
+     "en": "The chamfer would also take `@7.07<135`. But 7.07 is the square root of 5 squared plus 5 squared, rounded, so it lands a hair off. The drawing states 5 and 5, not 7.07. Here `@-5,5` is the right entry."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "극좌표가 이기는 자리",
+      "en": "Where polar wins"
+     },
+     "ko": "상대극좌표는 각도와 거리가 도면에 그대로 적혀 있을 때 씁니다. 기울어진 선에 각도와 길이가 다 적혀 있으면 이게 가장 빨라요.",
+     "en": "Use relative polar when the drawing states the angle and the distance. For a sloped edge with both written on it, nothing is faster."
+    }
+   ]
+  },
+  {
+   "id": "line-vs-pline",
+   "kind": "concept",
+   "label": {
+    "ko": "LINE과 PLINE",
+    "en": "LINE and PLINE"
+   },
+   "lede": {
+    "ko": "한 바퀴 도는 윤곽은 폴리선 하나로, 뒤에 다듬을 조각은 낱개 선으로 둡니다.",
+    "en": "Draw a closed outline as one polyline; leave pieces you will edit later as separate lines."
+   },
+   "blocks": [
+    {
+     "type": "table",
+     "caption": {
+      "ko": "두 명령의 차이",
+      "en": "How the two differ"
+     },
+     "head": [
+      {
+       "ko": "보는 것",
+       "en": "What you compare"
+      },
+      {
+       "ko": "LINE",
+       "en": "LINE"
+      },
+      {
+       "ko": "PLINE",
+       "en": "PLINE"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "객체 수",
+        "en": "Object count"
+       },
+       {
+        "ko": "이어 그어도 한 줄마다 낱개",
+        "en": "Each segment stays separate"
+       },
+       {
+        "ko": "이어 그은 전체가 하나",
+        "en": "The whole run is one object"
+       }
+      ],
+      [
+       {
+        "ko": "클릭 한 번",
+        "en": "One click"
+       },
+       {
+        "ko": "한 변만 잡힙니다",
+        "en": "Grabs one edge"
+       },
+       {
+        "ko": "전체가 잡힙니다",
+        "en": "Grabs the whole outline"
+       }
+      ],
+      [
+       {
+        "ko": "면적 · 간격띄우기",
+        "en": "Area and offset"
+       },
+       {
+        "ko": "변마다 따로 걸립니다",
+        "en": "Apply edge by edge"
+       },
+       {
+        "ko": "윤곽 전체에 한 번에 걸립니다",
+        "en": "Apply to the whole outline at once"
+       }
+      ],
+      [
+       {
+        "ko": "닫기",
+        "en": "Closing"
+       },
+       {
+        "ko": "시작점을 손으로 다시 찍습니다",
+        "en": "You re-pick the start point by hand"
+       },
+       {
+        "ko": "닫기 옵션 C가 오차 없이 붙입니다",
+        "en": "The C option closes it exactly"
+       }
+      ],
+      [
+       {
+        "ko": "이 차시의 쓰임",
+        "en": "Used here for"
+       },
+       {
+        "ko": "목 선 두 개",
+        "en": "The two web lines"
+       },
+       {
+        "ko": "베이스 외곽 하나 · 정점 여섯",
+        "en": "The base outline, one object with six vertices"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "외곽처럼 한 바퀴 도는 윤곽은 PLINE으로 그립니다. 반대로 뒤에서 잘라내고 둥글릴 조각은 LINE으로 둡니다. 낱개로 있어야 하나씩 다룰 수 있거든요.",
+     "en": "Anything that closes on itself, like the outline, gets PLINE. Anything you will trim or fillet later stays LINE. Separate objects are what let you work on them one at a time."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "닫기 옵션을 쓰는 이유",
+      "en": "Why you use the close option"
+     },
+     "ko": "마지막 한 변을 손으로 찍지 않습니다. 닫기는 끝점을 시작점과 같은 좌표에 정확히 붙입니다. 사람이 찍으면 소수점 아래에서 어긋납니다. 겉보기에는 닫힌 도형인데 실제로는 열려 있어요. 열린 도형은 면적을 못 재고, 해치를 넣어도 안이 채워지지 않습니다.",
+     "en": "Do not pick the last edge by hand. Close puts the end point on exactly the same coordinate as the start. A hand-picked point misses below the decimal. The shape looks closed but is not. An open shape gives no area, and a hatch will not fill it."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "레이아웃 확인",
+      "en": "Checking a layout"
+     },
+     "ko": "설비가 들어갈 영역을 폴리선으로 두르면 넓이가 한 번에 나옵니다. 자리를 옮겨 볼 때도 통째로 잡아 끌어요.",
+     "en": "Ring the area a machine will occupy with a polyline and the area comes out in one go. You can also drag the whole ring to try another position."
+    }
+   ]
+  },
+  {
+   "id": "six-vertices",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "베이스 여섯 꼭짓점과 모따기 산술",
+    "en": "Six vertices and the chamfer arithmetic"
+   },
+   "lede": {
+    "ko": "모따기 때문에 베이스의 꼭짓점은 네 개가 아니라 여섯 개예요.",
+    "en": "The chamfers make the base a six-cornered outline, not a four-cornered one."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "id": "fig-frontdim",
+     "ref": "frontdim",
+     "caption": {
+      "ko": "정면도와 치수 전부. 오늘 쓰는 값은 120 · 16 · 2-C5 · Ø56 · 80 다섯입니다.",
+      "en": "The front view with all its dimensions. Today you use five of them: 120, 16, 2-C5, Ø56, and 80."
+     },
+     "alt": {
+      "ko": "아이들러 풀리 브래킷의 정면도에 치수가 모두 기입되어 있습니다. 아래 판은 가로 120, 높이 16입니다. 윗면 좌우 모서리에 2-C5 모따기가 있습니다. 판 안에는 볼트가 지나갈 장공 두 개가 뚫려 있어요. 위쪽에는 중심 높이 62인 Ø56 보스 원이 있습니다. 그 안에 축 구멍과 탭 자리가 보입니다. 베이스에서 보스로 밑동 80인 목이 올라갑니다. 목과 베이스가 만나는 자리에는 2-R10 라운드가 있습니다. 괄호를 친 참고 치수도 하나 보입니다.",
+      "en": "The front view of the idler pulley bracket with every dimension shown. The lower plate is 120 wide and 16 high. Each top corner carries a 2-C5 chamfer. Two mounting slots for bolts run through the plate. Above it sits the Ø56 boss circle with its center at height 62, with the bore and the tapped holes inside it. A web with an 80 foot rises from the base to the boss. Where the web meets the base there is a 2-R10 fillet on each side. One dimension appears in parentheses."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "괄호를 친 치수",
+      "en": "The dimension in parentheses"
+     },
+     "ko": "괄호를 친 값은 참고 치수입니다. 다른 값에서 계산돼 나오므로 만들 때 참고만 하고 검사할 때는 재지 않습니다. 오늘 입력할 값도 아니니 그냥 지나가도 괜찮아요.",
+     "en": "A value in parentheses is a reference dimension. It is derived from others, so it informs manufacture but is not inspected. You do not type it today either, so let it be."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "여섯 꼭짓점",
+      "en": "The six vertices"
+     },
+     "head": [
+      {
+       "ko": "번호",
+       "en": "No."
+      },
+      {
+       "ko": "좌표",
+       "en": "Coordinate"
+      },
+      {
+       "ko": "어디서 나온 값인가",
+       "en": "Where the value comes from"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "1",
+        "en": "1"
+       },
+       {
+        "ko": "(0,0)",
+        "en": "(0,0)"
+       },
+       {
+        "ko": "원점. 베이스 왼쪽 아래 구석입니다",
+        "en": "The origin, the lower left corner of the base"
+       }
+      ],
+      [
+       {
+        "ko": "2",
+        "en": "2"
+       },
+       {
+        "ko": "(120,0)",
+        "en": "(120,0)"
+       },
+       {
+        "ko": "베이스 폭 120이고, 이 값이 부품의 전체 가로입니다",
+        "en": "The base is 120 wide, and that is the overall width of the part"
+       }
+      ],
+      [
+       {
+        "ko": "3",
+        "en": "3"
+       },
+       {
+        "ko": "(120,11)",
+        "en": "(120,11)"
+       },
+       {
+        "ko": "16에서 모따기 5를 뺀 높이입니다",
+        "en": "16 minus the 5 mm chamfer"
+       }
+      ],
+      [
+       {
+        "ko": "4",
+        "en": "4"
+       },
+       {
+        "ko": "(115,16)",
+        "en": "(115,16)"
+       },
+       {
+        "ko": "120에서 모따기 5를 뺀 자리입니다",
+        "en": "120 minus the 5 mm chamfer"
+       }
+      ],
+      [
+       {
+        "ko": "5",
+        "en": "5"
+       },
+       {
+        "ko": "(5,16)",
+        "en": "(5,16)"
+       },
+       {
+        "ko": "왼쪽은 x = 60 을 기준으로 대칭입니다",
+        "en": "The left side mirrors about x = 60"
+       }
+      ],
+      [
+       {
+        "ko": "6",
+        "en": "6"
+       },
+       {
+        "ko": "(0,11)",
+        "en": "(0,11)"
+       },
+       {
+        "ko": "왼쪽 모따기가 끝나는 자리입니다",
+        "en": "Where the left chamfer meets the vertical edge"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "figure",
+     "id": "fig-six-vertices",
+     "svg": "<svg viewBox=\"0 0 600 200\" width=\"600\" height=\"200\"><polygon class=\"si\" points=\"45,140 525,140 525,96 505,76 65,76 45,96\" fill=\"none\"/><circle class=\"sh\" cx=\"45\" cy=\"140\" r=\"4\" fill=\"none\"/><circle class=\"sh\" cx=\"525\" cy=\"140\" r=\"4\" fill=\"none\"/><circle class=\"sh\" cx=\"525\" cy=\"96\" r=\"4\" fill=\"none\"/><circle class=\"sh\" cx=\"505\" cy=\"76\" r=\"4\" fill=\"none\"/><circle class=\"sh\" cx=\"65\" cy=\"76\" r=\"4\" fill=\"none\"/><circle class=\"sh\" cx=\"45\" cy=\"96\" r=\"4\" fill=\"none\"/><text class=\"slh\" x=\"36\" y=\"156\">1</text><text class=\"slh\" x=\"530\" y=\"156\">2</text><text class=\"slh\" x=\"536\" y=\"100\">3</text><text class=\"slh\" x=\"503\" y=\"66\">4</text><text class=\"slh\" x=\"62\" y=\"66\">5</text><text class=\"slh\" x=\"30\" y=\"100\">6</text><text class=\"sl\" x=\"285\" y=\"158\" text-anchor=\"middle\">@120,0</text><text class=\"sl\" x=\"285\" y=\"182\" text-anchor=\"middle\">아래변 120</text><text class=\"sl\" x=\"60\" y=\"170\">C = 닫기</text><text class=\"sl\" x=\"545\" y=\"122\">@0,11</text><text class=\"sl\" x=\"545\" y=\"86\">@-5,5</text><text class=\"sl\" x=\"285\" y=\"64\" text-anchor=\"middle\">@-110,0</text><text class=\"sl\" x=\"285\" y=\"40\" text-anchor=\"middle\">윗면 110</text><text class=\"sl\" x=\"4\" y=\"64\">@-5,-5</text><path class=\"sd\" d=\"M33 76 L33 140\" fill=\"none\"/><text class=\"sl\" x=\"14\" y=\"112\">16</text></svg>",
+     "caption": {
+      "ko": "여섯 꼭짓점과 각 변에 칠 입력값. 1번에서 출발해 반시계로 돌고 C로 닫습니다.",
+      "en": "The six vertices with the entry for each edge. Start at 1, run counter-clockwise, and close with C."
+     },
+     "alt": {
+      "ko": "베이스 외곽을 확대한 그림입니다. 꼭짓점에 1에서 6까지 번호가 붙어 있습니다. 1번 왼쪽 아래에서 오른쪽으로 @120,0 입니다. 거기서 위로 @0,11, 왼쪽 위로 @-5,5 입니다. 이어서 왼쪽으로 @-110,0, 왼쪽 아래로 @-5,-5 입니다. 마지막은 C로 닫습니다. 아래변이 120, 윗면이 110, 왼쪽 높이가 16으로 적혀 있습니다.",
+      "en": "A magnified view of the base outline with the vertices numbered 1 to 6. From vertex 1 at the lower left the entries run @120,0 to the right, then @0,11 up. Next come @-5,5 up-left, @-110,0 left, and @-5,-5 down-left. Finally C closes the outline. The bottom edge is marked 120, the top face 110, and the left height 16."
+     }
+    },
+    {
+     "type": "p",
+     "ko": "2-C5는 45도로 5를 잘라낸다는 표기입니다. 2는 개수, C는 모따기, 5는 잘라내는 변의 길이입니다. 45도는 가로로 간 만큼 세로로도 간다는 뜻이에요. 잘라낸 삼각형의 두 변이 각각 5입니다.",
+     "en": "2-C5 says two corners are cut 5 at 45 degrees. The 2 is the count, C is chamfer, 5 is the length of the cut edge. At 45 degrees you travel as far up as across, so the cut triangle has two 5 mm sides."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "치수표에 없는 세 값",
+      "en": "Three values the table does not print"
+     },
+     "head": [
+      {
+       "ko": "값",
+       "en": "Value"
+      },
+      {
+       "ko": "계산",
+       "en": "How it comes out"
+      },
+      {
+       "ko": "무엇인가",
+       "en": "What it is"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "11",
+        "en": "11"
+       },
+       {
+        "ko": "16 − 5",
+        "en": "16 - 5"
+       },
+       {
+        "ko": "오른쪽 세로변이 올라가는 높이입니다",
+        "en": "How far the vertical edge rises"
+       }
+      ],
+      [
+       {
+        "ko": "115",
+        "en": "115"
+       },
+       {
+        "ko": "120 − 5",
+        "en": "120 - 5"
+       },
+       {
+        "ko": "윗면이 시작하는 x입니다",
+        "en": "The x where the top face begins"
+       }
+      ],
+      [
+       {
+        "ko": "110",
+        "en": "110"
+       },
+       {
+        "ko": "120 − 5 − 5",
+        "en": "120 - 5 - 5"
+       },
+       {
+        "ko": "윗면의 실제 길이입니다",
+        "en": "The true length of the top face"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "16은 두께가 아닙니다",
+      "en": "16 is not a thickness"
+     },
+     "ko": "16은 정면에서 본 높이입니다. 두께 12는 평면도에서 읽는 값이고 오늘 정면도에는 나오지 않습니다. 이 높이가 오늘 그리는 것의 절반을 정해요. 목이 여기서 올라갑니다.",
+     "en": "16 is the height seen in the front view. The 12 thickness is read in the top view and does not appear here. This one height sets up half of today's work. The web starts from it."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "모서리를 자르는 이유",
+      "en": "Why the corners are cut"
+     },
+     "ko": "각진 모서리를 그대로 두면 손이 베입니다. 조립할 때 다른 부품과 부딪힙니다. 도장도 모서리에서 얇게 발려요. 5씩 잘라 두면 셋이 한꺼번에 없어집니다. 오늘은 모따기 명령을 따로 쓰지 않습니다. 좌표로 직접 그립니다.",
+     "en": "A sharp corner cuts the hands that handle it. It also fouls the next part at assembly. Paint goes on thin at a sharp edge too. Cut 5 off each corner and all three go away at once. Today you use no chamfer command. You type the coordinates instead."
+    }
+   ]
+  },
+  {
+   "id": "boss-and-web",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "보스 원과 목 접선",
+    "en": "The boss circle and the web tangents"
+   },
+   "lede": {
+    "ko": "목보다 원을 먼저 그립니다.",
+    "en": "The circle goes in before the web."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "id": "fig-front",
+     "ref": "front",
+     "caption": {
+      "ko": "정면도. 오늘 그리는 것은 베이스 외곽과 보스 원, 목 선 두 개입니다.",
+      "en": "The front view. Today you draw the base outline, the boss circle, and the two web lines."
+     },
+     "alt": {
+      "ko": "치수 없는 정면도입니다. 아래에 폭 120의 베이스 판이 있고 윗면 좌우가 모따기로 잘려 있습니다. 판 안에는 장공 두 개가 뚫려 있어요. 위쪽에는 큰 원이 있고 그 안에 축 구멍과 작은 탭 구멍 네 개가 있습니다. 베이스에서 원까지 좌우로 좁아지는 목이 이어집니다. 목의 밑동은 라운드로 둥글려져 있습니다. 중심선이 세로와 가로로 그어져 있습니다.",
+      "en": "The front view without dimensions. The 120 wide base plate sits at the bottom with both top corners chamfered. Two slots run through the plate. Above it is a large circle holding the bore and four small tapped holes. A web tapers up from the base to the circle. Its foot is rounded, not cornered. Vertical and horizontal centerlines cross at the boss."
+     }
+    },
+    {
+     "type": "p",
+     "ko": "지름 56, 중심은 60,62입니다. 목 선은 이 원에 접해야 합니다. 접한다는 게 무슨 뜻일까요? 스쳐 지나가는 한 점에서만 닿는다는 뜻이에요. 파고들지도, 못 미치지도 않습니다. 접할 대상이 화면에 없으면 접점을 잡을 수 없습니다. 그래서 목보다 원이 먼저입니다.",
+     "en": "Diameter 56, center at 60,62. The web lines have to touch this circle. What does touching mean here? It means meeting at exactly one point, in passing. The line neither cuts into the circle nor falls short. You cannot snap to a tangent on something that is not drawn yet. So the circle comes first."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "원을 그리면 검산이 하나 생깁니다",
+      "en": "The circle brings its own cross-check"
+     },
+     "ko": "중심 높이 62에 반지름 28을 더하면 90입니다. 부품의 전체 높이 90과 같습니다. 두 숫자가 맞으면 중심 위치와 지름이 둘 다 맞은 것입니다. 보스 원의 꼭대기가 이 부품의 맨 위예요.",
+     "en": "Center height 62 plus radius 28 makes 90, which equals the overall height of the part. If those agree, both the center and the diameter are right. The top of the boss circle is the top of the part."
+    },
+    {
+     "type": "p",
+     "ko": "목은 밑동 폭이 80입니다. 베이스 폭 120에서 80을 빼면 40이 남고, 좌우로 20씩 나뉩니다. 그래서 목이 시작하는 자리는 20,16과 100,16입니다.",
+     "en": "The web foot spans 80. Take 80 from the 120 base width and 40 is left, split 20 to each side. So the web starts at 20,16 and 100,16."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "이론상의 모서리",
+      "en": "A theoretical corner"
+     },
+     "ko": "실제 도면에는 그 자리에 R10 라운드가 있어 모서리가 없습니다. 80은 라운드가 지워 버린 이론상의 모서리까지 잰 값입니다. 지금은 그 이론상의 점에서 선을 시작해요.",
+     "en": "On the real drawing an R10 fillet sits there, so there is no corner at all. The 80 is measured to the corner the fillet erased. For now you start the line at that theoretical point."
+    },
+    {
+     "type": "figure",
+     "id": "fig-two-tangents",
+     "svg": "<svg viewBox=\"0 0 400 300\" width=\"400\" height=\"300\"><circle class=\"si\" cx=\"180\" cy=\"108\" r=\"90\" fill=\"none\"/><path class=\"sc\" d=\"M84 108 L276 108 M180 12 L180 204\" fill=\"none\" stroke-linecap=\"butt\"/><path class=\"si\" d=\"M26 255 L330 255\" fill=\"none\"/><text class=\"sl\" x=\"296\" y=\"272\">y = 16</text><path class=\"sh\" d=\"M52 255 L93 86\" fill=\"none\"/><path class=\"sn\" d=\"M52 255 L213 191\" fill=\"none\" stroke-linecap=\"butt\"/><circle class=\"sh\" cx=\"52\" cy=\"255\" r=\"4\" fill=\"none\"/><text class=\"slh\" x=\"10\" y=\"274\">(20,16)</text><circle class=\"sh\" cx=\"93\" cy=\"86\" r=\"4\" fill=\"none\"/><circle class=\"sd\" cx=\"213\" cy=\"191\" r=\"4\" fill=\"none\"/><text class=\"slh\" x=\"104\" y=\"70\">접선 1 · tangent 1</text><text class=\"sl\" x=\"226\" y=\"212\">접선 2 · tangent 2</text><text class=\"sl\" x=\"188\" y=\"122\">Ø56</text><path class=\"sd\" d=\"M78 50 L90 62 M90 50 L78 62\" fill=\"none\"/><text class=\"sl\" x=\"52\" y=\"42\">커서 A · cursor A</text><path class=\"sd\" d=\"M222 232 L234 244 M234 232 L222 244\" fill=\"none\"/><text class=\"sl\" x=\"214\" y=\"262\">커서 B · cursor B</text></svg>",
+     "caption": {
+      "ko": "(20,16)에서 보스 원에 그을 수 있는 접선은 둘입니다. 커서 위치가 어느 쪽인지 정합니다.",
+      "en": "Two tangents can be drawn from (20,16) to the boss circle. Where you put the cursor decides which."
+     },
+     "alt": {
+      "ko": "보스 원과 그 아래 베이스 윗면 선이 있습니다. 왼쪽 아래 점 (20,16)에서 선 두 개가 원으로 뻗습니다. 하나는 원의 왼쪽 위에 닿아 목의 바깥 윤곽이 됩니다. 다른 하나는 원의 오른쪽 아래에 닿아 원 밑을 스치듯 지나갑니다. 커서 A는 원의 왼쪽 위, 커서 B는 원의 오른쪽 아래에 표시되어 있습니다.",
+      "en": "The boss circle sits above the top face of the base. Two lines run from the point (20,16) at the lower left to the circle. One touches it on the upper left and forms the outer edge of the web. The other touches on the lower right and grazes underneath the circle. Cursor A is marked at the upper left of the circle, cursor B at the lower right."
+     }
+    },
+    {
+     "type": "p",
+     "ko": "접점의 좌표는 계산하지 않습니다. 원 밖의 한 점에서 원에 접하는 선은 자리가 이미 정해져 있어요. 그 자리를 AutoCAD가 찾아 줍니다. 사람이 소수점을 계산해 넣는 것보다 정확합니다. 지름이 바뀌어도 다시 계산할 필요가 없어요.",
+     "en": "You never calculate the tangent point. From a point outside a circle the tangent is already fixed, and AutoCAD finds it. That beats working out decimals by hand, and it survives a change of diameter."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "접선이 둘인 이유",
+      "en": "Why there are two tangents"
+     },
+     "ko": "한 점에서 원에 접하는 선은 둘입니다. 커서를 원의 아래쪽에 두면 반대편 접점이 잡힙니다. 그 선도 원에 접하지만 원 밑을 스치듯 지나가 부품 모양이 되지 않습니다. 어느 쪽을 잡을지는 커서 위치가 정해요.",
+     "en": "Any outside point has two tangents to a circle. Put the cursor low and you get the other one. It touches the circle too, but it grazes underneath and never forms the part. The cursor position picks the one you want."
+    }
+   ]
+  },
+  {
+   "id": "practice-1",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 1 — 원점을 옮기고 중심선 세우기",
+    "en": "Do it 1 - move the origin and set the centerlines"
+   },
+   "lede": {
+    "ko": "1단계부터 7단계까지입니다.",
+    "en": "Steps 1 through 7."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "여기서부터는 화면을 보며 그대로 따라 합니다. 백틱 안은 실제로 타이핑하는 값이고, 나머지는 화면에서 확인하거나 클릭하는 것입니다. 한 단계씩 끝내고 기대 결과를 맞춰 본 뒤 다음으로 가요.",
+     "en": "From here you work at the screen and follow along. What sits in backticks is typed; the rest you check or click. Finish one step, match it against the expected result, then move on."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 1,
+       "title": {
+        "ko": "지난 차시 파일 열기",
+        "en": "Open the previous lesson's file"
+       },
+       "actions": [
+        {
+         "type": "OPEN",
+         "do": {
+          "ko": "을 입력하고 엔터를 누릅니다.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "열기 대화상자에서 지난 시간에 저장한 파일을 찾습니다. 새로 만들지 않습니다.",
+          "en": "In the Open dialog, find the file you saved last time. Do not start a new drawing."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L02_TEMPLATE",
+         "do": {
+          "ko": "을 골라 엽니다.",
+          "en": "is the file to open."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "A3 도면틀과 중심 마크가 들어 있는 파일이 열립니다. 표제란과 레이어 네 개도 그대로 있습니다.",
+        "en": "The file opens with the A3 border and the centering marks. The title block and the four layers are there too."
+       },
+       "why": {
+        "ko": "매 차시 이렇게 지난 파일을 열어 그 위에 이어 그립니다. 앞 차시가 저장한 상태가 이번 차시의 출발점이에요.",
+        "en": "Every lesson opens the previous file and draws on top of it. What the last lesson saved is where this one starts."
+       },
+       "pitfall": {
+        "ko": "파일이 안 보이면 여기를 보세요. 새 도면으로 시작하면 도면틀도 레이어도 없어 3단계 이후가 전부 어긋납니다. 파일 이름이 L02_TEMPLATE 인지 확인하고 엽니다.",
+        "en": "If you cannot find it, look here. A new drawing has no border and no layers, so everything from step 3 on goes wrong. Check the name reads L02_TEMPLATE before you open it."
+       }
+      },
+      {
+       "n": 2,
+       "title": {
+        "ko": "상태 확인",
+        "en": "Check the state"
+       },
+       "actions": [
+        {
+         "type": "Z",
+         "do": {
+          "ko": "입력하고 엔터. 줌 명령이에요.",
+          "en": "then Enter. This is the zoom command."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "입력하고 엔터. 전체 옵션이라 도면틀 전체가 화면에 들어옵니다.",
+          "en": "then Enter. The All option fits the whole border on screen."
+         }
+        },
+        {
+         "do": {
+          "ko": "화면 아래 상태 막대에서 객체 스냅이 켜져 있는지 봅니다. 꺼져 있으면 `F3` 을 눌러 켭니다.",
+          "en": "Check the status bar at the bottom for object snap. If it is off, press `F3`."
+         }
+        },
+        {
+         "do": {
+          "ko": "`F8` 을 눌러 직교 모드도 켜 둡니다. 수평 수직선을 그을 때 편해요.",
+          "en": "Press `F8` to turn ortho on as well. It helps with horizontal and vertical lines."
+         }
+        },
+        {
+         "do": {
+          "ko": "레이어 드롭다운을 열어 외형선 · 중심선 · 숨은선 · 치수선 네 개를 셉니다.",
+          "en": "Open the layer dropdown and count four: visible, center, hidden, dimension."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "도면틀 전체가 화면에 들어옵니다. 상태 막대에 객체 스냅과 직교가 켜져 있고, 레이어 드롭다운에 네 개가 다 보입니다.",
+        "en": "The whole border fits on screen. Object snap and ortho show on in the status bar, and the dropdown lists four layers."
+       },
+       "why": {
+        "ko": "여기서 확인하지 않고 그리기 시작하면 어떻게 될까요? 뒤에 가서 선이 엉뚱한 레이어에 들어가 있는 걸 발견합니다.",
+        "en": "Skip this check and you find out much later that your lines went onto the wrong layer."
+       },
+       "pitfall": {
+        "ko": "네 개가 아니면 잠깐 멈추세요. 열린 파일이 L02_TEMPLATE 이 아닐 수 있어요. 객체 스냅이 꺼진 채로 진행하면 14단계와 15단계의 접점이 잡히지 않습니다.",
+        "en": "If there are not four, stop here. The file you opened may not be L02_TEMPLATE. Carry on with object snap off and the tangents in steps 14 and 15 will not catch."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
+        "ko": "좌표 원점을 정면도 자리로 옮기기",
+        "en": "Move the origin to the front view"
+       },
+       "actions": [
+        {
+         "type": "UCS",
+         "do": {
+          "ko": "입력하고 엔터. 사용자 좌표계 명령이에요.",
+          "en": "then Enter. This is the user coordinate system command."
+         }
+        },
+        {
+         "type": "60,70",
+         "do": {
+          "ko": "입력하고 엔터. 새 원점을 묻는 자리예요.",
+          "en": "then Enter. This is where it asks for the new origin."
+         }
+        },
+        {
+         "do": {
+          "ko": "X축 위의 점을 묻습니다. 아무것도 입력하지 말고 엔터만 누릅니다. 원점만 옮기고 축 방향은 그대로 둡니다.",
+          "en": "It then asks for a point on the X axis. Type nothing and press Enter. The origin moves; the axes keep their direction."
+         }
+        },
+        {
+         "type": "UCSICON",
+         "do": {
+          "ko": "입력하고 엔터. 좌표계 아이콘 표시 명령이에요.",
+          "en": "then Enter. This controls the coordinate icon."
+         }
+        },
+        {
+         "type": "OR",
+         "do": {
+          "ko": "입력하고 엔터. 원점 옵션이에요.",
+          "en": "then Enter. That is the origin option."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "좌표계 아이콘이 정면도가 놓일 자리로 이동합니다. 이제 저 아이콘이 서 있는 자리가 0,0입니다. 도면틀은 움직이지 않았습니다.",
+        "en": "The coordinate icon jumps to where the front view will sit. That is now 0,0. The border has not moved."
+       },
+       "why": {
+        "ko": "도면의 0,0은 A3 용지의 왼쪽 아래 구석입니다. 거기에 그리면 부품이 도면틀 밖 구석에 처박힙니다. 정면도가 새 원점에서 오른쪽으로 120, 위로 90 뻗습니다. 제3각법이라 위와 오른쪽에 뷰 자리를 남겨야 해요.",
+        "en": "The drawing's 0,0 is the lower left corner of the A3 sheet, and drawing there puts the part outside the border. From the new origin the front view runs 120 right and 90 up, and third-angle projection needs room above and to the right."
+       },
+       "pitfall": {
+        "ko": "아이콘이 안 움직이면 여기를 보세요. X축 점을 묻는 자리에서 값을 넣으면 축 방향까지 돌아갑니다. 원래대로 돌리려면 `UCS` 엔터 다음 `W` 엔터입니다. 60과 70은 배치값이라 도면에 기입하지 않습니다.",
+        "en": "If the icon does not move, look here. Typing a value at the X-axis prompt rotates the axes as well. To get back, type `UCS` Enter then `W` Enter. 60 and 70 place the view, so they are never dimensioned."
+       }
+      },
+      {
+       "n": 4,
+       "title": {
+        "ko": "중심선 레이어로 바꾸기",
+        "en": "Switch to the center layer"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "화면 위 레이어 드롭다운을 열고 중심선을 고릅니다.",
+          "en": "Open the layer dropdown at the top and pick the center layer."
+         }
+        },
+        {
+         "type": "CLAYER",
+         "do": {
+          "ko": "입력하고 엔터. 명령행으로 해도 같은 일이에요.",
+          "en": "then Enter. The command line does the same job."
+         }
+        },
+        {
+         "type": "중심선",
+         "do": {
+          "ko": "을 새 값으로 입력하고 엔터.",
+          "en": "is the new value; press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "드롭다운 표시가 중심선으로 바뀐 것을 눈으로 확인합니다.",
+          "en": "Check by eye that the dropdown now reads the center layer."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "레이어 표시가 중심선입니다. 지금부터 긋는 선은 빨간색 CENTER 선 종류로 들어갑니다.",
+        "en": "The layer indicator reads center. From here every line comes out red with the CENTER linetype."
+       },
+       "why": {
+        "ko": "형상보다 기준이 먼저입니다. 기준선이 중심선 레이어에 들어가야 색과 선 종류가 자동으로 맞아요.",
+        "en": "Datum before shape, and a datum belongs on the center layer so that color and linetype follow on their own."
+       },
+       "pitfall": {
+        "ko": "선 색이 이상하면 여기를 보세요. 레이어를 안 바꾸고 그으면 빨간 점선이어야 할 선이 흰 실선으로 나옵니다. 지우지 말고 그 선을 클릭해 드롭다운에서 레이어만 옮긴 뒤 `Esc` 로 선택을 풉니다.",
+        "en": "If the color looks wrong, look here. Draw without switching and a line that should be a red chain comes out white and solid. Do not erase it: select it, change its layer in the dropdown, then press `Esc`."
+       }
+      },
+      {
+       "n": 5,
+       "title": {
+        "ko": "세로 중심선 · 절대좌표",
+        "en": "The vertical centerline, absolute entry"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터. LINE 명령이에요.",
+          "en": "then Enter. This is the LINE command."
+         }
+        },
+        {
+         "type": "60,-5",
+         "do": {
+          "ko": "입력하고 엔터. 첫 점이에요.",
+          "en": "then Enter. That is the first point."
+         }
+        },
+        {
+         "type": "60,95",
+         "do": {
+          "ko": "입력하고 엔터. 다음 점이에요.",
+          "en": "then Enter. That is the next point."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터를 한 번 더 눌러 명령을 끝냅니다.",
+          "en": "Press Enter once more to end the command."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "x가 60인 자리에 빨간 세로 중심선이 서고, 부품 위아래로 5씩 나와 있습니다.",
+        "en": "A red vertical centerline stands at x = 60, overrunning the part by 5 at each end."
+       },
+       "why": {
+        "ko": "베이스 폭 120의 절반이 60이고 보스 중심의 가로 위치도 60입니다. 부품은 y가 0에서 90까지이므로 위아래로 5씩 내밀어 -5에서 95로 잡아요.",
+        "en": "Half of the 120 base width is 60, and the boss center sits at 60 as well. The part runs from y = 0 to y = 90, so the line runs -5 to 95, overrunning 5 at each end."
+       },
+       "pitfall": {
+        "ko": "선이 짧아 보이면 이렇게 해요. 5는 도면 치수가 아니라 제도 관례라 3에서 5 사이면 돼요. 중심선이 형상 안에서 끝나면 어디가 중심인지 읽히지 않습니다.",
+        "en": "If it looks short, do this. The 5 is drafting practice, not a dimension, and anything from 3 to 5 will do. A centerline that stops inside the shape does not read as a center."
+       }
+      },
+      {
+       "n": 6,
+       "title": {
+        "ko": "가로 중심선 · 상대좌표와 선 종류 축척",
+        "en": "The horizontal centerline, relative entry and linetype scale"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "type": "27,62",
+         "do": {
+          "ko": "입력하고 엔터. 첫 점이에요.",
+          "en": "then Enter. That is the first point."
+         }
+        },
+        {
+         "type": "@66,0",
+         "do": {
+          "ko": "입력하고 엔터. 앞에 찍은 점에서 오른쪽으로 66 갑니다.",
+          "en": "then Enter. That goes 66 to the right of the point you just picked."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터로 명령을 끝냅니다.",
+          "en": "Press Enter to end the command."
+         }
+        },
+        {
+         "do": {
+          "ko": "중심선이 실선처럼 보이면 방금 그은 두 선을 클릭해 선택합니다. `Ctrl+1` 로 특성 창을 엽니다.",
+          "en": "If the centerlines look solid, select both lines you just drew and press `Ctrl+1` for the properties palette."
+         }
+        },
+        {
+         "type": "0.5",
+         "do": {
+          "ko": "을 선종류축척 칸에 입력하고 엔터. `Esc` 로 선택을 풉니다.",
+          "en": "goes in the linetype scale box; press Enter, then `Esc` to clear the selection."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "보스 중심 높이 62에 가로 중심선이 27에서 93까지 놓입니다. 점선 간격도 제대로 보입니다.",
+        "en": "The horizontal centerline runs from 27 to 93 at the boss center height of 62, and the dashes now read properly."
+       },
+       "why": {
+        "ko": "보스 원이 가로로 32에서 88까지를 차지합니다. 5씩 더 내밀면 27에서 93이고, 그 길이가 66입니다. 절대좌표로 `93,62` 라고 써도 같은 자리입니다. 다만 길이가 먼저 손에 있을 때는 상대좌표가 뺄셈을 한 번 줄여 줘요.",
+        "en": "The boss circle spans 32 to 88 across. Overrun 5 at each end and you get 27 to 93, a length of 66. Absolute `93,62` lands on the same point, but when you already know the length, relative entry saves a subtraction."
+       },
+       "pitfall": {
+        "ko": "점선이 안 보이면 축척부터 봐요. 너무 크면 점선이 실선처럼 보이고, 너무 작으면 점이 뭉개집니다. 0.5는 지난 시간 레이어 표에 적어 둔 값입니다.",
+        "en": "If you see no dashes, check the scale first. Too large and the chain reads as a solid line; too small and the dashes smear together. 0.5 is the value written in the layer table last lesson."
+       }
+      },
+      {
+       "n": 7,
+       "title": {
+        "ko": "외형선 레이어로 바꾸고 화면 확대",
+        "en": "Switch to the visible layer and zoom in"
+       },
+       "actions": [
+        {
+         "type": "외형선",
+         "do": {
+          "ko": "을 레이어 드롭다운에서 고릅니다. 흰색 실선이에요.",
+          "en": "is what you pick in the layer dropdown. It is white and continuous."
+         }
+        },
+        {
+         "type": "Z",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "type": "W",
+         "do": {
+          "ko": "입력하고 엔터. 윈도우 줌이라 지정한 사각형 안이 화면을 채웁니다.",
+          "en": "then Enter. Window zoom fills the screen with the rectangle you specify."
+         }
+        },
+        {
+         "type": "-15,-15",
+         "do": {
+          "ko": "입력하고 엔터. 첫 구석이에요.",
+          "en": "then Enter. That is the first corner."
+         }
+        },
+        {
+         "type": "135,105",
+         "do": {
+          "ko": "입력하고 엔터. 반대 구석이에요.",
+          "en": "then Enter. That is the opposite corner."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "부품이 들어갈 120 곱하기 90 자리가 사방 15의 여유와 함께 화면을 채웁니다.",
+        "en": "The 120 by 90 area the part will occupy fills the screen, with 15 of margin on every side."
+       },
+       "why": {
+        "ko": "지금부터는 눈에 보이는 부품의 모양을 그리므로 레이어를 외형선으로 바꿉니다. 작게 보면서 그리면 스냅이 어디에 붙었는지 안 보여요.",
+        "en": "From here you draw what the part actually looks like, so the layer changes to visible. Draw it small and you cannot see what the snap has latched onto."
+       },
+       "pitfall": {
+        "ko": "화면이 엉뚱하게 잡히면 값을 다시 봐요. -15,-15 와 135,105 는 부품 치수가 아니라 화면을 잡는 값이에요. 도면에 기입하지 않습니다.",
+        "en": "If the view lands somewhere odd, check the two corners again. -15,-15 and 135,105 frame the screen; they are not part dimensions and are never written on the drawing."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "여기서 한 번 쉬어 가요",
+      "en": "A good place to stop"
+     },
+     "ko": "화면에 빨간 점선 두 개가 서 있고 레이어 표시는 외형선입니다. 이 상태면 다음으로 넘어가세요.",
+     "en": "Two red chain lines stand on screen and the layer indicator reads visible. That is the state to carry forward."
+    }
+   ]
+  },
+  {
+   "id": "practice-2",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 2 — 베이스 외곽 폴리선",
+    "en": "Do it 2 - the base outline as one polyline"
+   },
+   "lede": {
+    "ko": "8단계부터 11단계까지입니다.",
+    "en": "Steps 8 through 11."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "여기서부터 네 단계는 한 명령 안에서 이어집니다. 8단계에서 `PL` 을 치고 10단계의 닫기까지 명령을 끊지 않습니다. 중간에 엔터로 끝내 버리면 다시 시작해야 해요.",
+     "en": "The next four steps all happen inside one command. You type `PL` in step 8 and stay in it until you close in step 10. End it early with an Enter and you start over."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 8,
+       "title": {
+        "ko": "베이스 외곽 시작 · PLINE",
+        "en": "Start the base outline with PLINE"
+       },
+       "actions": [
+        {
+         "type": "PL",
+         "do": {
+          "ko": "입력하고 엔터. PLINE 명령이에요.",
+          "en": "then Enter. This is the PLINE command."
+         }
+        },
+        {
+         "type": "0,0",
+         "do": {
+          "ko": "입력하고 엔터. 베이스 왼쪽 아래 구석이고, 방금 옮긴 원점 자리예요.",
+          "en": "then Enter. That is the lower left corner of the base, the origin you just moved."
+         }
+        },
+        {
+         "type": "@120,0",
+         "do": {
+          "ko": "입력하고 엔터. 오른쪽으로 120, 베이스 폭이에요.",
+          "en": "then Enter. 120 to the right, the width of the base."
+         }
+        },
+        {
+         "type": "@0,11",
+         "do": {
+          "ko": "입력하고 엔터. 위로 11입니다.",
+          "en": "then Enter. 11 up."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "아래변 120과 오른쪽 세로변 11이 그어집니다. 명령행은 아직 다음 점을 묻고 있습니다.",
+        "en": "The 120 bottom edge and the 11 right-hand edge are drawn. The command line is still asking for the next point."
+       },
+       "why": {
+        "ko": "베이스 높이는 16인데 윗 모서리를 5만큼 잘라냅니다. 16에서 5를 빼면 11이고, 오른쪽 세로변은 여기까지만 올라가요.",
+        "en": "The base is 16 high, but the top corner is cut back by 5. 16 minus 5 is 11, and the right-hand edge stops there."
+       },
+       "pitfall": {
+        "ko": "**명령은 아직 끝나지 않았어요.** 여기서 엔터를 누르면 안 됩니다. 뒤의 닫기 옵션을 쓸 수 없습니다. 골뱅이를 빠뜨리면 절대좌표로 읽혀 선이 엉뚱한 데로 튑니다. 그 자리에서 `U` 엔터로 마지막 한 점만 취소합니다.",
+        "en": "**The command is not finished.** Press Enter now and you lose the close option later. Leave out the @ and the entry is read as absolute, sending the line somewhere else. Type `U` Enter to undo just that point."
+       }
+      },
+      {
+       "n": 9,
+       "title": {
+        "ko": "오른쪽 모따기",
+        "en": "The right-hand chamfer"
+       },
+       "actions": [
+        {
+         "type": "@-5,5",
+         "do": {
+          "ko": "입력하고 엔터. 왼쪽으로 5, 위로 5입니다.",
+          "en": "then Enter. 5 to the left and 5 up."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "커서가 115,16에 있고, 2-C5 중 오른쪽 하나가 45도로 그려져 있습니다.",
+        "en": "The cursor sits at 115,16 and the right-hand half of the 2-C5 is drawn at 45 degrees."
+       },
+       "why": {
+        "ko": "가로로 5 세로로 5면 기울기가 정확히 45도입니다. `@7.07<135` 로도 되지만 7.07은 반올림한 값이라 아주 미세하게 어긋납니다. 도면에 적힌 값은 5와 5입니다.",
+        "en": "5 across and 5 up gives exactly 45 degrees. `@7.07<135` would also work, but 7.07 is rounded and lands a hair off. What the drawing states is 5 and 5."
+       },
+       "pitfall": {
+        "ko": "도형이 벌어지면 부호를 봐요. 모따기가 가는 방향은 안쪽, 곧 왼쪽 위입니다. 부호를 반대로 넣으면 오른쪽 위로 나가요.",
+        "en": "If the shape opens out, check the signs. The chamfer runs inward, which here means up and to the left. Reverse the signs and it heads up and to the right instead."
+       }
+      },
+      {
+       "n": 10,
+       "title": {
+        "ko": "윗면과 왼쪽 모따기, 그리고 닫기",
+        "en": "The top face, the left chamfer, and close"
+       },
+       "actions": [
+        {
+         "type": "@-110,0",
+         "do": {
+          "ko": "입력하고 엔터. 왼쪽으로 110, 베이스 윗면이에요.",
+          "en": "then Enter. 110 to the left, the top face of the base."
+         }
+        },
+        {
+         "type": "@-5,-5",
+         "do": {
+          "ko": "입력하고 엔터. 왼쪽 모따기라 0,11에 도착합니다.",
+          "en": "then Enter. The left chamfer, arriving at 0,11."
+         }
+        },
+        {
+         "type": "C",
+         "do": {
+          "ko": "입력하고 엔터. 닫기 옵션이에요.",
+          "en": "then Enter. That is the close option."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "시작점 0,0까지 자동으로 이어지고 명령이 끝납니다. 꼭짓점 여섯 개짜리 닫힌 베이스 외곽이 완성됩니다.",
+        "en": "The outline runs back to 0,0 on its own and the command ends. The base outline is closed, with six vertices."
+       },
+       "why": {
+        "ko": "110은 120에서 좌우 모따기 5씩을 뺀 값입니다. 닫기는 끝점을 시작점과 같은 좌표에 정확히 붙입니다. 사람이 찍으면 소수점 아래에서 어긋나요.",
+        "en": "110 is 120 less 5 at each end. Close puts the end point on exactly the same coordinate as the start. A hand-picked point misses below the decimal."
+       },
+       "pitfall": {
+        "ko": "마지막 점을 0,0으로 직접 치지 마세요. 겉보기에는 닫힌 도형인데 실제로는 열려 있게 됩니다. 열린 도형은 면적을 못 재고, 해치를 넣어도 안이 채워지지 않습니다.",
+        "en": "Do not type 0,0 as the last point. The shape then looks closed but is not. An open shape gives no area, and a hatch will not fill it."
+       }
+      },
+      {
+       "n": 11,
+       "title": {
+        "ko": "하나의 객체인지 확인",
+        "en": "Confirm it is one object"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "방금 그린 외곽 위에 커서를 올리고 한 번 클릭합니다. 여섯 변이 한꺼번에 선택됩니까.",
+          "en": "Hover over the outline you just drew and click once. Do all six edges highlight together?"
+         }
+        },
+        {
+         "do": {
+          "ko": "`Esc` 를 눌러 선택을 풉니다.",
+          "en": "Press `Esc` to clear the selection."
+         }
+        },
+        {
+         "type": "LIST",
+         "do": {
+          "ko": "입력하고 엔터. 외곽을 클릭하고 다시 엔터를 누릅니다.",
+          "en": "then Enter. Click the outline and press Enter again."
+         }
+        },
+        {
+         "do": {
+          "ko": "`F2` 를 눌러 문자 창을 닫습니다.",
+          "en": "Press `F2` to close the text window."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "문자 창에 LWPOLYLINE 이라는 객체 종류가 보입니다. 정점이 여섯 개이고 닫힘이 예입니다.",
+        "en": "The text window reports the object type as LWPOLYLINE, with six vertices and closed set to yes."
+       },
+       "why": {
+        "ko": "폴리선 하나여야 클릭 한 번에 전체가 선택됩니다. 간격띄우기나 면적 계산도 윤곽 전체에 한 번에 걸려요.",
+        "en": "Only as one polyline does a single click take the whole outline. Only then do offset and area apply to all of it at once."
+       },
+       "pitfall": {
+        "ko": "한 변만 선택되면 되돌아가요. 낱개 선으로 그린 것이라 8단계부터 `PL` 로 다시 그립니다.",
+        "en": "If only one edge highlights, go back. You drew it with separate lines, so redraw from step 8 with `PL`."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "정점이 여섯 개가 아니면",
+      "en": "If there are not six vertices"
+     },
+     "ko": "모따기를 빠뜨렸거나 부호를 반대로 넣은 것입니다. 여섯 꼭짓점 표의 값과 하나씩 맞춰 봐요.",
+     "en": "You either missed a chamfer or reversed a sign. Compare them one by one against the table of six vertices."
+    }
+   ]
+  },
+  {
+   "id": "practice-3",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 3 — 보스 원과 목 접선, 저장",
+    "en": "Do it 3 - boss circle, web tangents, save"
+   },
+   "lede": {
+    "ko": "12단계부터 16단계까지입니다.",
+    "en": "Steps 12 through 16."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "원을 먼저 그리고 그 원에 접하는 선 두 개를 올립니다. 접점은 계산하지 않고 스냅으로 잡습니다. 마지막에 새 이름으로 저장해 이번 차시의 상태를 남겨요.",
+     "en": "Draw the circle first, then raise the two lines that touch it. You snap to the tangent instead of calculating it. At the end you save under a new name to keep this lesson's state."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 12,
+       "title": {
+        "ko": "보스 원 Ø56",
+        "en": "The Ø56 boss circle"
+       },
+       "actions": [
+        {
+         "type": "C",
+         "do": {
+          "ko": "입력하고 엔터. 아무 명령도 실행 중이 아닐 때 치는 C는 CIRCLE 명령이에요.",
+          "en": "then Enter. With no command running, C is the CIRCLE command."
+         }
+        },
+        {
+         "type": "60,62",
+         "do": {
+          "ko": "입력하고 엔터. 중심점이에요.",
+          "en": "then Enter. That is the center point."
+         }
+        },
+        {
+         "type": "D",
+         "do": {
+          "ko": "입력하고 엔터. 반지름을 묻는 자리에서 지름으로 바꿉니다.",
+          "en": "then Enter. That switches the radius prompt to a diameter prompt."
+         }
+        },
+        {
+         "type": "56",
+         "do": {
+          "ko": "입력하고 엔터. 지름 56입니다.",
+          "en": "then Enter. Diameter 56."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "중심 60,62에 지름 56 원이 그려집니다. 원의 맨 위를 보면 y가 90입니다.",
+        "en": "A 56 diameter circle appears centered on 60,62. Read the top of it and y is 90."
+       },
+       "why": {
+        "ko": "목 선이 이 원에 접해야 하므로 접할 대상이 먼저 화면에 있어야 합니다. 중심 높이 62에 반지름 28을 더한 90이 부품의 전체 높이와 같습니다.",
+        "en": "The web lines must touch this circle, so the circle has to exist first. Center height 62 plus radius 28 gives 90, the overall height of the part."
+       },
+       "pitfall": {
+        "ko": "원이 너무 크면 D를 확인해요. D를 누르지 않고 바로 56을 넣으면 반지름 56짜리 원이 나옵니다. 도면의 두 배 크기예요. 원에서 나는 실수는 거의 전부 여기서 납니다.",
+        "en": "If the circle looks too big, check the D. Skip D and type 56 and you get a radius of 56, twice the size on the drawing. Almost every circle mistake happens right here."
+       }
+      },
+      {
+       "n": 13,
+       "title": {
+        "ko": "목이 시작하는 두 점 확인",
+        "en": "Fix the two points where the web starts"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "`F8` 을 눌러 직교 모드를 끕니다.",
+          "en": "Press `F8` to turn ortho off."
+         }
+        },
+        {
+         "do": {
+          "ko": "상태 막대에서 직교 표시가 꺼졌는지 확인합니다.",
+          "en": "Check the status bar shows ortho off."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "목이 시작하는 자리가 20,16과 100,16으로 정해집니다. 상태 막대의 직교 표시도 꺼져 있습니다.",
+        "en": "The web starts at 20,16 and 100,16, and the status bar shows ortho off."
+       },
+       "why": {
+        "ko": "밑동 폭 80을 베이스 폭 120에서 빼면 40이 남아 좌우로 20씩 나뉩니다. 직교가 켜져 있으면 커서가 수평 수직으로 끌려가 접점을 잡기 번거로워요.",
+        "en": "Take the 80 web foot from the 120 base width and 40 is left, 20 to each side. With ortho on, the cursor is dragged to the horizontal and vertical, which makes tangents awkward."
+       },
+       "pitfall": {
+        "ko": "그 자리에 모서리가 안 보여도 괜찮아요. 실제 도면에는 R10 라운드가 있어 모서리가 없습니다. 지금 긋는 선은 라운드가 지울 이론상의 모서리에서 출발해요.",
+        "en": "It is fine that there is no corner to see. The real drawing has an R10 fillet there instead. The line you draw now starts at the theoretical corner the fillet will erase."
+       }
+      },
+      {
+       "n": 14,
+       "title": {
+        "ko": "왼쪽 목 접선",
+        "en": "The left web tangent"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "type": "20,16",
+         "do": {
+          "ko": "입력하고 엔터. 첫 점이에요.",
+          "en": "then Enter. That is the first point."
+         }
+        },
+        {
+         "type": "TAN",
+         "do": {
+          "ko": "입력하고 엔터. 이번 한 번만 접점 스냅을 쓰겠다는 뜻이에요.",
+          "en": "then Enter. That asks for a tangent snap this one time."
+         }
+        },
+        {
+         "do": {
+          "ko": "커서를 보스 원의 왼쪽, 왼쪽 사분점보다 조금 위로 가져갑니다. 접점 표식이 뜨면 클릭합니다.",
+          "en": "Move the cursor to the left of the boss circle, a little above the left quadrant. Click when the tangent marker appears."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터를 눌러 명령을 끝냅니다.",
+          "en": "Press Enter to end the command."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "20,16에서 출발해 보스 원 왼쪽 위에 정확히 접하는 선 하나가 생깁니다.",
+        "en": "One line runs from 20,16 and touches the boss circle exactly, on its upper left."
+       },
+       "why": {
+        "ko": "접점의 좌표는 계산하지 않았고 계산할 필요도 없습니다. 사람이 소수점을 계산해 넣는 것보다 정확합니다. 지름이 바뀌어도 다시 계산할 필요가 없어요.",
+        "en": "You did not calculate the tangent point and you never need to. It beats working out decimals by hand, and it still holds if the diameter changes."
+       },
+       "pitfall": {
+        "ko": "선이 원 밑을 스치면 커서 자리를 옮겨요. 한 점에서 원에 접하는 선은 둘이고, 어느 쪽을 잡을지는 커서 위치가 정합니다. 접점이 아예 안 잡히면 `F3` 으로 객체 스냅을 켭니다. `OS` 로 접점이 체크돼 있는지도 봅니다.",
+        "en": "If the line grazes under the circle, move the cursor. There are two tangents from any point, and the cursor picks one. If nothing catches at all, press `F3` for object snap and type `OS` to check that Tangent is ticked."
+       }
+      },
+      {
+       "n": 15,
+       "title": {
+        "ko": "오른쪽 목 접선",
+        "en": "The right web tangent"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "type": "100,16",
+         "do": {
+          "ko": "입력하고 엔터. 첫 점이에요.",
+          "en": "then Enter. That is the first point."
+         }
+        },
+        {
+         "type": "TAN",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "커서를 보스 원의 오른쪽, 오른쪽 사분점보다 조금 위에 둡니다. 접점 표식이 뜨면 클릭하고 엔터로 끝냅니다.",
+          "en": "Put the cursor to the right of the circle, a little above the right quadrant. Click on the tangent marker, then press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "두 목 선이 세로 중심선을 기준으로 좌우 대칭으로 보입니다.",
+        "en": "The two web lines now look symmetrical about the vertical centerline."
+       },
+       "why": {
+        "ko": "이 두 선은 LINE으로 그렸습니다. 아래쪽은 필렛으로 둥글리고 위쪽은 원에 접하는 자리에서 끝납니다. 아직 다듬을 조각이기 때문이에요.",
+        "en": "These two are LINE objects. Their lower ends will be filleted and their upper ends stop at the tangent, so they are still pieces you will edit."
+       },
+       "pitfall": {
+        "ko": "한쪽만 기울기가 다르면 시작점을 다시 봐요. 20과 100이 맞는지 확인합니다.",
+        "en": "If one slope differs from the other, check the start points. Make sure they read 20 and 100."
+       }
+      },
+      {
+       "n": 16,
+       "title": {
+        "ko": "새 이름으로 저장",
+        "en": "Save under a new name"
+       },
+       "actions": [
+        {
+         "type": "SAVEAS",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "then Enter."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L03_PROFILE",
+         "do": {
+          "ko": "을 파일 이름에 넣습니다.",
+          "en": "goes in the file name box."
+         }
+        },
+        {
+         "do": {
+          "ko": "파일 형식은 AutoCAD 도면 dwg 그대로 두고 저장을 누릅니다.",
+          "en": "Leave the file type as AutoCAD drawing dwg and click Save."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "L03_PROFILE 이름의 새 파일이 저장됩니다. 지난 차시 파일은 지워지지 않고 그대로 남습니다.",
+        "en": "A new file called L03_PROFILE is written. The previous lesson's file is untouched."
+       },
+       "why": {
+        "ko": "차시마다 이름을 바꿔 저장해 두면 어느 단계로든 되돌아갈 수 있습니다. 다음 시간에는 이 파일을 열어서 시작합니다.",
+        "en": "Saving under a new name each lesson lets you return to any stage. Next lesson opens this file to begin."
+       },
+       "pitfall": {
+        "ko": "덮어쓰기로 저장하지 마세요. 지난 차시 상태가 사라져요. 파일 형식도 dwg 가 아닌 것으로 바꾸지 않습니다.",
+        "en": "Do not save over the old file. That state would be gone. Do not change the file type away from dwg either."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "스페어 파트 긴급 공수",
+      "en": "Urgent spare-part sourcing"
+     },
+     "ko": "설비가 멈춰 스페어 파트를 급히 만들 때가 있습니다. 조립도에서 부품을 찾아 그 도면을 들고 가공집과 이야기해요. 지름과 반지름이 뒤바뀐 채 넘어가면 부품이 두 배로 나옵니다.",
+     "en": "Sometimes a machine is down and a spare is needed fast. You find the part on the assembly drawing and take its detail to the shop. Let a diameter go across as a radius and the part comes back twice the size."
+    },
+    {
+     "type": "note",
+     "tone": "pend",
+     "label": {
+      "ko": "공유 예정",
+      "en": "To be shared"
+     },
+     "ko": "시험의 배점과 제한시간, 합격선은 아직 정해진 것이 없습니다. 시험 일시와 장소, 제출 형식도 마찬가지예요. 확정되면 이 자리에 채웁니다.",
+     "en": "The marks, the time limit, and the pass mark for the exam are not set yet. Neither are the date, the place, or how you submit. This slot stays empty until they are shared."
+    }
+   ]
+  }
+ ],
+ "verify": [
+  {
+   "what": {
+    "ko": "베이스 외곽이 폴리선 하나인가",
+    "en": "Is the base outline a single polyline"
+   },
+   "how": {
+    "ko": "외곽 위를 한 번 클릭합니다. 여섯 변이 한꺼번에 선택되면 맞습니다.",
+    "en": "Click once on the outline. All six edges should highlight together."
+   }
+  },
+  {
+   "what": {
+    "ko": "LIST 결과가 맞는가",
+    "en": "Does LIST agree"
+   },
+   "how": {
+    "ko": "`LIST` 로 객체 종류가 LWPOLYLINE 인지 봅니다. 정점이 여섯 개이고 닫힘이 예인지도 봅니다.",
+    "en": "Run `LIST` and check the type reads LWPOLYLINE, with six vertices and closed set to yes."
+   }
+  },
+  {
+   "what": {
+    "ko": "보스 원의 중심과 지름",
+    "en": "The boss center and diameter"
+   },
+   "how": {
+    "ko": "원의 맨 위 y가 90인지 봅니다. 62에 28을 더한 값이고 부품 전체 높이와 같습니다.",
+    "en": "Read the top of the circle: y should be 90. That is 62 plus 28, and it matches the overall height."
+   }
+  },
+  {
+   "what": {
+    "ko": "윗면이 아래변보다 짧은가",
+    "en": "Is the top face shorter than the bottom edge"
+   },
+   "how": {
+    "ko": "윗면 110, 아래변 120입니다. 눈으로 봐도 윗면이 짧아 보여야 합니다.",
+    "en": "The top face is 110 and the bottom edge 120, so the top should visibly be the shorter one."
+   }
+  },
+  {
+   "what": {
+    "ko": "모따기 두 개의 크기",
+    "en": "The two chamfers"
+   },
+   "how": {
+    "ko": "좌우 모따기가 같은 크기로 보이는지 봅니다. 하나라도 다르면 좌표를 잘못 넣은 것입니다.",
+    "en": "Check that both chamfers look the same size. If one differs, a coordinate went in wrong."
+   }
+  },
+  {
+   "what": {
+    "ko": "두 목 선의 대칭",
+    "en": "Symmetry of the two web lines"
+   },
+   "how": {
+    "ko": "세로 중심선을 기준으로 좌우 대칭인지 봅니다. 한쪽만 기울기가 다르면 시작점 20과 100을 다시 봅니다.",
+    "en": "Check they mirror about the vertical centerline. If one slope differs, check the start points 20 and 100."
+   }
+  },
+  {
+   "what": {
+    "ko": "목 선과 보스 원이 닿는 자리",
+    "en": "Where the web lines meet the circle"
+   },
+   "how": {
+    "ko": "화면을 크게 확대해, 파고들거나 못 미치지 않고 한 점에서 닿는지 봅니다.",
+    "en": "Zoom right in and check they touch at one point, neither cutting in nor falling short."
+   }
+  },
+  {
+   "what": {
+    "ko": "레이어별 색과 선 종류",
+    "en": "Color and linetype by layer"
+   },
+   "how": {
+    "ko": "중심선 두 개가 빨간 CENTER 점선이고, 외곽과 목 선이 흰 실선인지 봅니다.",
+    "en": "The two centerlines should be red CENTER chain lines, the outline and web lines white and continuous."
+   }
+  },
+  {
+   "what": {
+    "ko": "중심선이 나온 길이",
+    "en": "How far the centerlines overrun"
+   },
+   "how": {
+    "ko": "세로 중심선이 위아래로 5씩 나와 있고, 가로 중심선이 27에서 93까지인지 봅니다.",
+    "en": "The vertical line should overrun 5 at each end, and the horizontal one should run from 27 to 93."
+   }
+  },
+  {
+   "what": {
+    "ko": "선 종류 축척 0.5",
+    "en": "Linetype scale 0.5"
+   },
+   "how": {
+    "ko": "값을 넣은 뒤 중심선이 실선이 아니라 점선으로 보이는지 봅니다.",
+    "en": "After the value goes in, the centerlines should read as chain lines, not as solid lines."
+   }
+  },
+  {
+   "what": {
+    "ko": "그리는 중에 선이 튀지 않았는가",
+    "en": "Did any line jump while you drew"
+   },
+   "how": {
+    "ko": "선이 방금 그리던 자리에서 뚝 떨어진 곳으로 튀었다면 골뱅이를 빠뜨린 거예요.",
+    "en": "A line that jumped far from where you were drawing means the @ was left out."
+   }
+  }
+ ],
+ "checks": [
+  {
+   "q": {
+    "ko": "모따기 자리에서 세로가 16이 아니라 11인 이유는 무엇입니까?",
+    "en": "Why is the vertical 11 and not 16 at the chamfer?"
+   },
+   "a": {
+    "ko": "베이스 높이는 16인데 윗 모서리를 45도로 5만큼 잘라냅니다. 그래서 16 − 5 = 11까지만 올라갑니다. 같은 이유로 윗면은 120 − 5 − 5 = 110이에요.",
+    "en": "The base is 16 high, but the top corner is cut 5 at 45 degrees. So the vertical edge only rises to 16 - 5 = 11. For the same reason the top face is 120 - 5 - 5 = 110."
+   }
+  },
+  {
+   "q": {
+    "ko": "선을 그었더니 방금 그리던 자리에서 뚝 떨어진 곳으로 튀었습니다. 무엇을 빠뜨렸고 어떻게 되돌립니까?",
+    "en": "Your line jumped far from where you were drawing. What did you omit and how do you undo it?"
+   },
+   "a": {
+    "ko": "골뱅이를 빠뜨려 상대좌표가 절대좌표로 읽혔습니다. 폴리선 명령이 진행 중이면 `U` 엔터로 마지막 한 점만 취소합니다. 명령을 이미 빠져나왔으면 `Ctrl+Z` 예요.",
+    "en": "You left out the @, so a relative entry was read as absolute. If the polyline command is still running, type `U` and Enter to undo just the last point. If you have already left the command, use `Ctrl+Z`."
+   }
+  },
+  {
+   "q": {
+    "ko": "보스 원을 그린 뒤 원의 맨 위 y를 봤더니 90이었습니다. 무엇이 맞았다는 뜻입니까?",
+    "en": "After drawing the boss circle, the top of it reads y = 90. What does that confirm?"
+   },
+   "a": {
+    "ko": "중심 높이 62와 지름 56이 둘 다 맞았다는 뜻입니다. 62 + 28 = 90이고 90은 부품 전체 높이와 같습니다. 다른 값이 나오면 중심을 잘못 찍었거나 D 옵션을 빠뜨려 반지름 56으로 그린 거예요.",
+    "en": "That both the center height 62 and the diameter 56 are right: 62 + 28 = 90, the overall height of the part. Any other value means the center is wrong, or the D option was skipped and you drew a radius of 56."
+   }
+  },
+  {
+   "q": {
+    "ko": "베이스 외곽을 한 번 클릭했더니 한 변만 선택됩니다. 무엇이 잘못됐고 어디로 돌아갑니까?",
+    "en": "Clicking the base outline selects only one edge. What went wrong and where do you go back to?"
+   },
+   "a": {
+    "ko": "PLINE이 아니라 LINE으로 그린 거예요. 폴리선 하나여야 클릭 한 번에 여섯 변이 잡힙니다. 8단계로 돌아가 `PL` 로 다시 그립니다.",
+    "en": "You drew it with LINE instead of PLINE. As one polyline a single click takes all six edges. Go back to step 8 and redraw with `PL`."
+   }
+  },
+  {
+   "q": {
+    "ko": "접점이 안 잡힙니다. 어디를 순서대로 확인합니까?",
+    "en": "The tangent snap will not catch. What do you check, in order?"
+   },
+   "a": {
+    "ko": "먼저 `F3` 으로 객체 스냅이 켜져 있는지 봅니다. 다음은 `OS` 대화상자에서 접점이 체크돼 있는지입니다. 그다음 명령 중에 `TAN` 을 1회용으로 입력했는지 봅니다. 마지막은 `F8` 직교가 커서를 끌어가고 있지 않은지예요.",
+    "en": "First press `F3` and check object snap is on. Next open the `OS` dialog and check Tangent is ticked. Then confirm you typed `TAN` as a one-shot snap inside the command. Last, check ortho `F8` is not dragging the cursor away."
+   }
+  },
+  {
+   "q": {
+    "ko": "레이어를 안 바꾸고 중심선을 그었습니다. 지우고 다시 그립니까?",
+    "en": "You drew a centerline without switching layers. Do you erase it and start again?"
+   },
+   "a": {
+    "ko": "지우지 않습니다. 흰 실선으로 나온 그 선을 클릭해 선택합니다. 레이어 드롭다운에서 중심선을 고르면 그 선이 옮겨 가요. `Esc` 로 선택을 풉니다. 반대도 있습니다. 외형선을 중심선 레이어에서 그으면 외곽이 빨간 점선으로 나옵니다. 고치는 방법은 같아요. 습관은 하나입니다. 명령을 치기 전에 레이어 표시를 먼저 봅니다.",
+    "en": "No. Select the line that came out white and continuous. Pick the center layer in the dropdown and the line moves. Press `Esc` to clear the selection. It happens the other way round too. Draw a visible edge on the center layer and the outline comes out as a red chain line. The fix is the same. There is one habit worth keeping: read the layer indicator before you type a command."
+   }
+  }
+ ],
+ "exercise": {
+  "title": {
+   "ko": "60 × 20 직사각형에 C3 모따기 하나",
+   "en": "A 60 x 20 rectangle with one C3 chamfer"
+  },
+  "body": {
+   "ko": "지금 그린 베이스 외곽은 그대로 두세요. 빈 자리에 같은 방법으로 60 × 20 직사각형을 폴리선 하나로 그립니다. 오른쪽 위 모서리만 C3으로 만듭니다. 3만큼 45도로 자른다는 뜻입니다. 좌표는 스스로 계산합니다. 세로변이 어디까지 올라가고 윗면이 얼마가 되는지 두 값을 먼저 종이에 적습니다. 그다음에 입력하세요. 확인이 끝나면 그 연습 도형만 지우고 저장합니다.",
+   "en": "Leave the base outline you just drew alone. In an empty area, draw a 60 x 20 rectangle as a single polyline the same way. Chamfer only the top right corner, C3, meaning a 3 mm cut at 45 degrees. Work the coordinates out yourself. Write down on paper how far the vertical edge rises and how long the top face becomes. Then type them in. When you have checked it, erase only that practice shape and save."
+  },
+  "criteria": [
+   {
+    "ko": "폴리선 하나이고 정점이 다섯 개입니다. 모따기가 하나라 네 꼭짓점 중 하나만 둘로 갈라집니다.",
+    "en": "One polyline with five vertices: a single chamfer splits just one of the four corners in two."
+   },
+   {
+    "ko": "`LIST` 결과의 닫힘이 예입니다. 마지막 변은 손으로 찍지 않고 닫기로 붙입니다.",
+    "en": "`LIST` reports closed as yes. The last edge is closed with the option, not picked by hand."
+   },
+   {
+    "ko": "세로변은 20에서 3을 뺀 17까지 올라갑니다.",
+    "en": "The vertical edge rises to 17, which is 20 less 3."
+   },
+   {
+    "ko": "윗면 길이는 60에서 3을 뺀 57입니다. 모따기가 한쪽뿐이라 3을 한 번만 뺍니다.",
+    "en": "The top face is 57, which is 60 less 3. With only one chamfer you subtract 3 once."
+   },
+   {
+    "ko": "연습 도형을 지운 뒤 저장했고, 베이스 외곽과 보스 원, 목 선은 그대로 남아 있습니다.",
+    "en": "The practice shape is erased and the file saved, with the base outline, boss circle, and web lines left intact."
+   }
+  ]
+ },
+ "shortcuts": [
+  {
+   "key": "OPEN",
+   "name": {
+    "ko": "열기",
+    "en": "Open"
+   },
+   "when": {
+    "ko": "매 차시 지난 상태에서 이어 그릴 때 써요.",
+    "en": "To carry on from the state the previous lesson saved."
+   }
+  },
+  {
+   "key": "Z",
+   "name": {
+    "ko": "ZOOM · 줌",
+    "en": "ZOOM"
+   },
+   "when": {
+    "ko": "스냅이 어디 붙었는지 봐야 할 때 씁니다. 전체는 A, 범위 지정은 W입니다.",
+    "en": "When you need to see what the snap has caught. A for all, W for a window."
+   }
+  },
+  {
+   "key": "A",
+   "name": {
+    "ko": "ZOOM 전체 옵션",
+    "en": "ZOOM All option"
+   },
+   "when": {
+    "ko": "도면틀 전체를 한 화면에 넣을 때 써요.",
+    "en": "To fit the whole border on one screen."
+   }
+  },
+  {
+   "key": "W",
+   "name": {
+    "ko": "ZOOM 윈도우 옵션 · UCS 표준 좌표계 옵션",
+    "en": "ZOOM Window option and UCS World option"
+   },
+   "when": {
+    "ko": "줌에서는 두 구석으로 범위를 지정할 때, UCS에서는 표준 좌표계로 돌아갈 때 씁니다.",
+    "en": "In ZOOM it takes two corners; in UCS it returns you to the world coordinate system."
+   }
+  },
+  {
+   "key": "UCS",
+   "name": {
+    "ko": "사용자 좌표계",
+    "en": "User coordinate system"
+   },
+   "when": {
+    "ko": "도면 안 특정 자리를 0,0 으로 삼을 때 씁니다.",
+    "en": "To make a chosen point inside the drawing your 0,0."
+   }
+  },
+  {
+   "key": "UCSICON",
+   "name": {
+    "ko": "좌표계 아이콘 표시",
+    "en": "Coordinate icon display"
+   },
+   "when": {
+    "ko": "옮긴 원점이 어디인지 눈으로 확인할 때 씁니다. 원점 옵션은 OR입니다.",
+    "en": "To see where the moved origin actually is. The origin option is OR."
+   }
+  },
+  {
+   "key": "OR",
+   "name": {
+    "ko": "UCSICON 원점 옵션",
+    "en": "UCSICON Origin option"
+   },
+   "when": {
+    "ko": "좌표계 아이콘을 새 원점 자리에 붙여 놓을 때 써요.",
+    "en": "To park the coordinate icon on the new origin."
+   }
+  },
+  {
+   "key": "CLAYER",
+   "name": {
+    "ko": "현재 레이어",
+    "en": "Current layer"
+   },
+   "when": {
+    "ko": "명령행으로 레이어를 바꿀 때 씁니다. 드롭다운과 같은 일이에요.",
+    "en": "To change layer from the command line. It does what the dropdown does."
+   }
+  },
+  {
+   "key": "L",
+   "name": {
+    "ko": "LINE · 선",
+    "en": "LINE"
+   },
+   "when": {
+    "ko": "낱개로 다뤄야 하는 조각에 씁니다. 뒤에 자르거나 둥글릴 선이에요.",
+    "en": "For pieces you need to handle one at a time, such as lines you will trim or fillet."
+   }
+  },
+  {
+   "key": "PL",
+   "name": {
+    "ko": "PLINE · 폴리선",
+    "en": "PLINE"
+   },
+   "when": {
+    "ko": "한 바퀴 도는 윤곽에 씁니다. 영역 넓이를 재거나 통째로 옮길 때도 씁니다.",
+    "en": "For an outline that closes on itself, and when you want an area or want to move the whole ring."
+   }
+  },
+  {
+   "key": "C",
+   "name": {
+    "ko": "CIRCLE · 원 / 폴리선 닫기 옵션",
+    "en": "CIRCLE, or the PLINE Close option"
+   },
+   "when": {
+    "ko": "아무 명령도 실행 중이 아닐 때는 원이고, 폴리선이 진행 중이면 닫기입니다.",
+    "en": "With no command running it is CIRCLE; inside a running PLINE it is Close."
+   }
+  },
+  {
+   "key": "D",
+   "name": {
+    "ko": "CIRCLE 지름 옵션",
+    "en": "CIRCLE Diameter option"
+   },
+   "when": {
+    "ko": "도면에 지름으로 적혀 있을 때 씁니다. 반지름을 묻는 자리에서 먼저 누릅니다.",
+    "en": "When the drawing states a diameter. Press it at the radius prompt, before the number."
+   }
+  },
+  {
+   "key": "LIST",
+   "name": {
+    "ko": "객체 정보",
+    "en": "Object information"
+   },
+   "when": {
+    "ko": "그린 것이 정말 그 값인지 검산할 때 써요.",
+    "en": "To cross-check that what you drew really carries the values you meant."
+   }
+  },
+  {
+   "key": "TAN",
+   "name": {
+    "ko": "접점 스냅",
+    "en": "Tangent snap"
+   },
+   "when": {
+    "ko": "원에 접하는 선을 그을 때 씁니다. 이번 한 번만 쓰는 1회용 스냅이에요.",
+    "en": "To draw a line tangent to a circle. It is a one-shot snap, used for that pick only."
+   }
+  },
+  {
+   "key": "OS",
+   "name": {
+    "ko": "객체 스냅 설정",
+    "en": "Object snap settings"
+   },
+   "when": {
+    "ko": "어떤 스냅이 켜져 있는지 확인하고 바꿀 때 써요.",
+    "en": "To see which snaps are on and change them."
+   }
+  },
+  {
+   "key": "U",
+   "name": {
+    "ko": "마지막 한 점 취소",
+    "en": "Undo the last point"
+   },
+   "when": {
+    "ko": "폴리선 명령이 진행 중인 상태에서 방금 찍은 점만 되돌릴 때 씁니다.",
+    "en": "Inside a running polyline, to take back just the point you last picked."
+   }
+  },
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save As"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 남길 때 써요.",
+    "en": "To leave the end-of-lesson state under its own name."
+   }
+  }
+ ],
+ "recap": {
+  "did": [
+   {
+    "ko": "지난 차시의 템플릿 파일을 열었습니다.",
+    "en": "You opened the template file from the previous lesson."
+   },
+   {
+    "ko": "좌표를 재는 원점을 정면도가 놓일 자리로 옮겼습니다. 베이스 왼쪽 아래가 0,0입니다.",
+    "en": "You moved the origin to where the front view sits, making the lower left of the base 0,0."
+   },
+   {
+    "ko": "중심선 레이어에서 세로와 가로 중심선을 세웠습니다. 형상보다 기준이 먼저입니다.",
+    "en": "On the center layer you set the vertical and horizontal centerlines. Datum before shape."
+   },
+   {
+    "ko": "외형선 레이어로 바꾸고 베이스 외곽을 폴리선 하나로 그렸습니다. 아래변 120, 오른쪽 11, 모따기 5와 5입니다. 이어서 윗면 110, 왼쪽 모따기, 그리고 닫기입니다.",
+    "en": "You switched to the visible layer and drew the base outline as one polyline. That is 120 along the bottom, 11 up the right, then a 5 and 5 chamfer. Then 110 across the top, the left chamfer, and close."
+   },
+   {
+    "ko": "좌표 입력 세 가지를 다 봤습니다. 시작점과 원 중심은 절대좌표, 이어지는 변은 상대좌표로 넣었습니다. 45도 모따기는 상대극좌표로도 된다는 것을 확인했어요.",
+    "en": "You met all three ways of entering a point: absolute for start points and the circle center, relative for the edges that follow. You also saw that the 45-degree chamfer could have gone in as relative polar."
+   },
+   {
+    "ko": "보스 원을 지름 56으로 그리고, 원 꼭대기가 90이라는 것으로 검산했습니다.",
+    "en": "You drew the boss circle at diameter 56 and cross-checked it: the top of the circle reads 90."
+   },
+   {
+    "ko": "20,16과 100,16에서 접점 스냅으로 원에 접하는 선 두 개를 올렸습니다.",
+    "en": "From 20,16 and 100,16 you raised two lines tangent to the circle, using the tangent snap."
+   },
+   {
+    "ko": "파일을 EDU-IB-02_L03_PROFILE 이름으로 저장했습니다.",
+    "en": "You saved the file as EDU-IB-02_L03_PROFILE."
+   },
+   {
+    "ko": "오늘 한 일은 시험용 절차만이 아닙니다. 지그를 하나 제안한다고 해도 순서는 똑같아요. 기준을 세우고, 외곽을 잡고, 원을 놓습니다.",
+    "en": "None of this is only exam procedure. Proposing a jig runs the same way: set the datum, fix the outline, then place the circle."
+   }
+  ],
+  "next": {
+   "ko": "다음은 4차시, 원·호·오프셋입니다. 오늘 남겨 둔 필렛 2-R10과 베이스 윗면 정리부터 시작해요.",
+   "en": "Next is Lesson 4, circles, arcs, and offset. It starts with what today left open: the 2-R10 fillets and tidying the top of the base."
+  }
+ }
+}

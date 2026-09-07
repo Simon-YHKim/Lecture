@@ -22,6 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 
 _SLOT = re.compile(r'data-composition-id="([^"]+)"\s+'
                    r'data-composition-src="compositions/frames/([^"]+)\.html"'
@@ -41,20 +42,33 @@ def slots(lesson_dir):
 def beat_counts(lesson_dir, n):
     """How many beats each frame's narration carries.
 
-    The demo frame is the exception: its beats are the numbered steps, not the
-    `(N …)` markers — the same rule the builder and the guard use.
+    The recording is the exception twice over: its beats are the numbered steps
+    rather than the `(N …)` markers, and when it is cut into parts one script
+    Line stands behind several frames. Both follow the same declaration the
+    builder reads, so the counts cannot disagree with what was built.
     """
     path = os.path.join(lesson_dir, "SCRIPT.md")
+    name = os.path.basename(os.path.normpath(lesson_dir))
     script = beats.parse_script(path)
+    demo_line, steps = None, None
     for line in (5, 8):
         steps = beats.parse_steps(path, line)
         if steps:
             script[line] = list(steps)
+            demo_line = line
             break
-    out = [len(beats.beat_spans(beats.plan(script[ln])[0])) for ln in sorted(script)]
+    cuts = episodes.cuts_for(name)
+
+    out = []
+    for ln in sorted(script):
+        if ln == demo_line and cuts:
+            for _off, sl in beats.split_steps(steps, cuts):
+                out.append(len(beats.beat_spans(beats.plan(sl)[0])))
+        else:
+            out.append(len(beats.beat_spans(beats.plan(script[ln])[0])))
     if len(out) != n:
-        raise SystemExit("%s: 대본 Line %d개 vs 프레임 %d개"
-                         % (os.path.basename(lesson_dir), len(out), n))
+        raise SystemExit("%s: 대본이 내놓는 프레임 %d개 vs 실제 %d개"
+                         % (name, len(out), n))
     return out
 
 
@@ -99,7 +113,12 @@ def refresh(lesson_dir, descs):
     t = re.sub(r"^전체 [^·]*·", "전체 %s ·" % clock(total), t, count=1, flags=re.M)
     demo = [d for _c, s, _a, d in sl if "demo" in s or "build-template" in s]
     if demo:
-        t = re.sub(r"\(`DEMO-01`[^)]*\)", "(`DEMO-01`, %s)" % clock(demo[0]), t, count=1)
+        # The whole recording, not just its first part.
+        note = clock(int(round(sum(demo))))
+        if len(demo) > 1:
+            note += " · %d편" % len(demo) + "".join(
+                " " + clock(int(round(x))) for x in demo)
+        t = re.sub(r"\(`DEMO-01`[^)]*\)", "(`DEMO-01`, %s)" % note, t, count=1)
     rows = (["| # | 컴포지션 | 시작 | 길이 | 화면 | 비트 |",
              "| --- | --- | --- | --- | --- | --- |"]
             + ["| %d | `%s` | %s | %ds | %s | %s |"

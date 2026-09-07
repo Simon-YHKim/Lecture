@@ -1,0 +1,3805 @@
+{
+ "courseTitle": {
+  "ko": "AutoCAD 기본 과정 — 브래킷 한 장을 끝까지",
+  "en": "AutoCAD Fundamentals — One Bracket, One Finished Sheet"
+ },
+ "subtitle": {
+  "ko": "영상 여덟 차시를 강사 없이 혼자 따라가는 자습 교재입니다. 부품 하나(EDU-IB-02 아이들러 풀리 브래킷)를 A3 도면 한 장으로 완성합니다.",
+  "en": "A self-paced workbook that stands in for the eight video lessons. You draw one part - the EDU-IB-02 idler pulley bracket - through to a finished A3 sheet."
+ },
+ "audience": {
+  "ko": "설비를 직접 다루는 테크니션입니다. AutoCAD를 오늘 처음 열어 보는 사람을 기준으로 씁니다. 도면을 읽어 본 적이 없어도 되고, 옆에서 물어볼 사람이 없다고 보고 씁니다.",
+  "en": "Technicians who work on equipment hands-on. Written for someone opening AutoCAD for the first time today, with no prior drawing-reading experience and nobody sitting next to them to ask."
+ },
+ "prerequisites": [
+  {
+   "ko": "AutoCAD가 설치된 Windows PC와 마우스. 터치패드만으로는 스냅을 정확히 집기 어렵습니다.",
+   "en": "A Windows PC with AutoCAD installed, and a mouse. A trackpad alone makes object snaps hard to hit accurately."
+  },
+  {
+   "ko": "밀리미터 단위 템플릿 acadiso.dwt에 접근할 수 있을 것. 2차시 1단계에서 이 파일을 고릅니다.",
+   "en": "Access to the millimeter template acadiso.dwt. You pick this file in Lesson 2, step 1."
+  },
+  {
+   "ko": "한 번에 40~60분씩 앉을 수 있는 시간. 차시 하나가 1시간 40분에서 2시간 30분이라 한 자리에서 끝내지 않아도 되게 절마다 멈춤점을 두었습니다.",
+   "en": "Blocks of 40 to 60 minutes. A lesson runs 1h40 to 2h30, so every section ends at a stop point - you are not expected to finish one in a single sitting."
+  },
+  {
+   "ko": "본인 이름과 사번. 2차시에서 표제란에 직접 넣습니다.",
+   "en": "Your own name and employee number. You type them into the title block in Lesson 2."
+  },
+  {
+   "ko": "저장할 폴더 한 곳. 차시마다 파일이 하나씩 쌓여 일곱 개가 됩니다. 지우지 않습니다.",
+   "en": "One folder to save into. One file per lesson accumulates to seven. Do not delete the earlier ones."
+  }
+ ],
+ "outcomes": [
+  {
+   "ko": "A3 가로 도면틀과 표제란, 레이어 네 개를 처음부터 만들어 템플릿으로 남길 수 있습니다.",
+   "en": "You can build an A3 landscape border, a title block, and four layers from scratch, and save them as a template."
+  },
+  {
+   "ko": "절대좌표·상대좌표·상대극좌표를 구분해 쓰고, 눈대중 없이 값으로 형상을 그릴 수 있습니다.",
+   "en": "You can tell absolute, relative, and relative polar coordinates apart, and draw to values instead of by eye."
+  },
+  {
+   "ko": "원·호·오프셋·필렛·원형 배열·대칭 복사로 구멍과 라운드를 계산된 자리에 넣을 수 있습니다.",
+   "en": "You can place holes and radii at calculated positions using circles, arcs, offset, fillet, polar array, and mirror."
+  },
+  {
+   "ko": "정면도 하나에서 제3각법으로 평면도와 우측면도를 뽑고, 세 구멍의 서로 다른 숨은선 길이를 판단해 그릴 수 있습니다.",
+   "en": "You can project a top view and a right side view from one front view in third-angle projection, and judge the three different hidden-line lengths the three holes need."
+  },
+  {
+   "ko": "투상선을 한 번에 걷어내고 모든 선이 제 레이어에 ByLayer로 들어가 있는지 스스로 점검할 수 있습니다.",
+   "en": "You can clear all construction lines in one pass and check for yourself that every line sits on its own layer as ByLayer."
+  },
+  {
+   "ko": "치수 스타일을 세우고 다섯 종류의 치수 명령을 대상에 맞춰 골라 도면 한 장을 치수까지 마칠 수 있습니다.",
+   "en": "You can set up a dimension style, pick the right one of five dimension commands for what you are measuring, and finish a sheet through dimensioning."
+  },
+  {
+   "ko": "A3 1대1 축척으로 출력해 종이의 120이 자로도 120밀리미터인지 확인할 수 있습니다.",
+   "en": "You can plot at A3 1:1 and confirm that 120 on the sheet measures 120 mm with a ruler."
+  },
+  {
+   "ko": "그린 것이 맞는지를 눈이 아니라 값으로 판정할 수 있습니다 — DI·LIST·QSELECT·레이어 껐다 켜기·산술 검산.",
+   "en": "You can judge your own work by numbers rather than by eye - DIST, LIST, QSELECT, toggling layers off and on, and arithmetic cross-checks."
+  },
+  {
+   "ko": "배운 것을 시험이 아니라 현장 세 가지 일에 대응시켜 말할 수 있습니다 — 지그 제안, 레이아웃 확인, 스페어 파트 긴급 공수.",
+   "en": "You can map what you learned onto three real jobs rather than onto an exam - proposing a jig, checking a layout, and sourcing a spare part in a hurry."
+  }
+ ],
+ "totalSelfStudyHours": 13.9,
+ "timeBasis": {
+  "ko": "영상 러닝타임에 배수를 곱한 값이 아닙니다. 자습본이 실제로 담을 항목 수를 세어 다시 계산했습니다. 네 가지를 더합니다. ① 읽기 = 개념 절 수 × 40초 (본문 30초 + 도해·표 대조 10초). ② 따라 하기 = 조작 항목 수 × 25초 + 조작 단계 수 × 90초. 조작 항목 하나는 명령 입력·좌표 입력·클릭·대화상자 선택 하나입니다. 25초의 근거는 3·4차시 녹화 예상 길이 20분 10초를 그 차시 조작 항목 수 108개·96개로 나눈 강사 페이스 약 11~13초이고, 자습자는 지시를 읽고 화면을 옮기고 입력한 뒤 결과를 대조하는 왕복을 혼자 하므로 두 배로 잡았습니다. 90초는 단계마다 붙는 「왜 이렇게 하나 / 이렇게 되면 맞습니다 / 안 되면 여기를 보세요」를 읽고 화면과 맞추는 시간입니다. ③ 검산 = 검산 항목 수 × 90초. DI·LIST·QSELECT·레이어 껐다 켜기는 명령을 실제로 쳐야 값이 나오므로 읽기 시간이 아닙니다. ④ 마무리 = 차시당 5분 (단축키 표 훑기, 체크포인트 파일 저장 확인). 8차시에는 40분 모의 작도 1회를 따로 더했습니다. 차시별 값은 28 · 130 · 107 · 100 · 144 · 93 · 137 · 97분이고 합계 836분 = 13.9시간입니다. 영상 264분의 3.2배입니다. 배수가 아니라 항목 수에서 나온 값이므로 집필 중 절이 늘거나 줄면 같은 식으로 다시 계산합니다. 영상 길이 자체가 추정치(실측 나레이션이 들어오면 바뀜)이므로 이 값도 확정값처럼 쓰지 않습니다.",
+  "en": "This is not the video runtime multiplied by a factor. It is recalculated from a count of what the workbook will actually contain. Four terms add up. (1) Reading = number of concept sections x 40 s (30 s of text plus 10 s checking it against the diagram or table). (2) Hands-on = number of operation items x 25 s + number of operation steps x 90 s. One operation item is a single command entry, coordinate entry, click, or dialog choice. The 25 s comes from the estimated recording length of Lessons 3 and 4 (20 min 10 s) divided by their operation-item counts (108 and 96), which gives an instructor pace of roughly 11-13 s; a self-study learner reads the instruction, switches windows, types, and checks the result alone, so the figure is doubled. The 90 s per step covers reading the 'why this way / this is what correct looks like / if it did not work, look here' block and matching it against the screen. (3) Cross-check = number of check items x 90 s, because DIST, LIST, QSELECT, and toggling layers all require actually running a command. (4) Wrap-up = 5 min per lesson (skimming the shortcut table, confirming the checkpoint file saved). Lesson 8 adds one 40-minute timed mock drawing. Per lesson: 28, 130, 107, 100, 144, 93, 137, 97 minutes; total 836 minutes = 13.9 hours, which is 3.2x the 264 minutes of video. Because the figure comes from item counts rather than a multiplier, recompute it the same way if sections are added or removed during writing. The video lengths are themselves estimates that will change once measured narration arrives, so do not present this number as settled either."
+ },
+ "modules": [
+  {
+   "no": 1,
+   "slug": "lesson-01-orientation",
+   "title": {
+    "ko": "오리엔테이션",
+    "en": "Orientation"
+   },
+   "videoLength": "07:20",
+   "selfStudyMin": 28,
+   "opens": null,
+   "saves": null,
+   "objectives": [
+    {
+     "ko": "말로 전한 지시가 왜 사람마다 다르게 전달되는지, 도면이 그 문제를 어떻게 없애는지 자기 말로 설명할 수 있습니다.",
+     "en": "You can explain in your own words why a spoken instruction reaches each listener differently, and how a drawing removes that."
+    },
+    {
+     "ko": "도면이 갖춰야 할 다섯 가지 요건을 빠짐없이 댈 수 있습니다 — 도형·크기·모양 / 자세·위치 / 표면·재료·가공 / 모호하지 않을 것 / 보존하고 찾아 쓸 수 있을 것.",
+     "en": "You can list all five requirements a drawing must meet: shape and size, orientation and position, surface, material and machining, freedom from ambiguity, and being storable and retrievable."
+    },
+    {
+     "ko": "테크니션이 도면을 읽고 그릴 때 달라지는 일 세 가지를 자기 업무에 대응시켜 말할 수 있습니다 — 지그 제안, 레이아웃 확인, 스페어 파트 긴급 공수.",
+     "en": "You can map the three jobs that change when a technician can read and draw - proposing a jig, checking a layout, sourcing a spare part urgently - onto your own work."
+    },
+    {
+     "ko": "실습 과제의 두 가지 형태를 구분하고, 눈대중이 왜 안 되는지 설명할 수 있습니다.",
+     "en": "You can distinguish the two task formats and explain why eyeballing does not work."
+    },
+    {
+     "ko": "외형선·중심선·숨은선·치수선이 각자 자기 레이어에 들어가야 한다는 채점 관점을 압니다.",
+     "en": "You know the assessment view that visible, center, hidden, and dimension lines must each sit on their own layer."
+    },
+    {
+     "ko": "이 과정에서 정하는 용지·레이어·색상 값은 연습용 기본값이고 실제 과제 지시가 언제나 우선한다는 것을 압니다.",
+     "en": "You know the sheet, layer, and color values here are practice defaults, and that an actual task instruction always overrides them."
+    },
+    {
+     "ko": "여덟 차시가 무엇을 어떤 순서로 다루는지, 차시마다 새 파일을 열지 않고 지난 파일을 이어 그린다는 것을 압니다.",
+     "en": "You know what the eight lessons cover and in what order, and that each lesson reopens the previous file rather than starting a new one."
+    },
+    {
+     "ko": "이 자습본을 어떻게 쓰는지 압니다 — 어디서 멈추고, 무엇을 확인하고, 막히면 어디를 보는지.",
+     "en": "You know how to use this workbook: where to stop, what to confirm, and where to look when you get stuck."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "이 자습본을 쓰는 법",
+      "en": "How to use this workbook"
+     },
+     "note": "영상에는 없던 절입니다. 강사가 쥐고 있던 진행 제어를 학습자에게 넘기는 장치를 여기서 한 번에 소개합니다. 다섯 가지를 그림으로 보여 줍니다 — ① 절 머리의 예상 소요 분, ② 절 끝의 멈춤점(다음으로 넘어가도 되는지 판정하는 한 줄), ③ 조작 단계마다 접혀 있는 「안 되면 여기를 보세요」, ④ 검산 표의 세 칸(무엇을 친다 / 나와야 하는 값 / 다르면 어디로), ⑤ 차시 머리의 체크포인트 배지(여는 파일 → 저장할 파일). 국문·영문 토글과 인쇄 시 동작도 여기서 한 줄로 안내합니다. 「오늘은 무엇을 한다」식 안내가 아니라 도구 설명이므로 LESSON_STYLE 5번의 중복 금지에 걸리지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "도면",
+      "en": "The drawing"
+     },
+     "note": "「여기를 이만큼만 깎아 주세요」가 왜 사람마다 다르게 전달되는지. 「여기」와 「이만큼」이 말한 사람 머릿속에만 있다는 점을 먼저 짚고, 도면이 그 둘을 값으로 고정한다는 결론까지 갑니다. 영상 프레임 2의 헤더 문구(「도면은 말을 대신합니다」, 「작성자의 의도를 정확하게 전달하기 위해」)는 내레이션에 없던 화면 문장이므로 자습본에서는 절 제목과 리드 문장으로 살립니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "도면의 다섯 요건",
+      "en": "The five requirements"
+     },
+     "note": "카드 다섯 장. 각 카드는 이름(도형·크기·모양 / 자세·위치 / 표면·재료·가공 / 모호하지 않게 / 보존·검색·이용) + 한 줄 설명 + 왜 + 그래서 어떤 효과 + 선 그림 마크. 마크는 지어내지 않고 lesson_kit.ICONS의 다섯 개를 그대로 씁니다 — 치수가 붙은 직사각형 / 원과 십자 중심선 / 표면 거칠기 기호(다리 60도, 장단비 ISO 1302의 2.1) / 같게 읽히는 도면 두 장 / 도면틀과 표제란이 있는 시트. 다섯 장을 한 화면에 다 띄우되 지금 읽는 카드만 강조합니다(정적 위계)."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "테크니션의 도면 활용",
+      "en": "What a technician does with drawings"
+     },
+     "note": "지그 제안 · 레이아웃 확인 · 스페어 파트 긴급 공수 셋을 각각 한 카드로. 스페어 파트는 사슬로 그립니다 — 설비가 선다 → 조립도를 연다 → 부품을 찾는다 → 부품 도면을 확인한다 → 가공집과 이야기한다. 도면을 못 읽으면 이 사슬이 어디서 끊기는지 화살표 위에 표시합니다. 이 세 가지가 뒤 차시의 「이 조작은 현장에서 언제 쓰나」 한 줄이 계속 되돌아오는 자리이므로 여기서 이름을 확정해 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "실습 과제의 두 형태",
+      "en": "The two task formats"
+     },
+     "note": "카드 네 장을 레이블 · 굵은 제목 · 설명 3단 구조 그대로 옮깁니다 — 「주어지는 것 / 형상과 치수」, 「해야 하는 것 / 치수에 맞게 작성」, 「또는 / 정투상으로 투상」, 「보는 것 / 선이 제자리에 있는가」. 마크는 아이소메트릭 육면체 / AutoCAD 십자 커서 / 제3각법 기호 / 네 가지 선 견본. 제3각법 기호는 원뿔대의 작은 끝이 원을 향해야 합니다 — 뒤집으면 제1각법을 가르치게 됩니다. 눈대중이 왜 안 되는지는 화면 배율이 계속 바뀐다는 이유까지 씁니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "네 가지 선과 레이어",
+      "en": "Four line types and their layers"
+     },
+     "note": "외형선·중심선·숨은선·치수선을 견본으로 그립니다. 외형선만 획 2, 나머지 1.2. 중심선 dash 5 1.5 1.5 1.5, 숨은선 dash 3.6 1.5, 치수선은 양끝 화살표, 파선 계열은 stroke-linecap butt. 선의 종류가 곧 그 선의 뜻이라는 것(보이는 모양 / 중심과 대칭축 / 가려진 모양 / 치수와 보조선)까지 갑니다. 색상·굵기·선 종류 축척의 실제 값은 2차시에서 정하므로 여기서는 이름만 두고 값을 쓰지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "과제 지시 우선",
+      "en": "The task instruction wins"
+     },
+     "note": "이 과정의 용지·레이어·색상은 연습용 기본값이라는 고지. 공포 문구가 아니라 작업 게이트로 씁니다 — 「지시 확인 → 다르면 지시를 따름 → 이 교재의 값은 그때 버림」. 이 절은 2차시 끝과 8차시 시험 준비에서 그대로 다시 참조되므로 문장을 확정해 한 곳에만 두고 나머지는 링크합니다."
+    },
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "여덟 차시와 체크포인트 사슬",
+      "en": "The eight lessons and the checkpoint chain"
+     },
+     "note": "3열 표(차시 / 주제 / 하는 일) 여덟 행. 영상 로드맵에는 일부러 없던 체크포인트 파일명 열을, 자습본에서는 표가 아니라 별도 도해로 붙입니다. 자습에서는 학습자가 실제로 그 이름을 입력하고 찾아야 하기 때문입니다(LESSON_STYLE 22번의 조건이 자습본에서는 충족됩니다). 도해는 사슬 그림 하나 — 1차시(파일 없음) → 2차시가 EDU-IB-02_L02_TEMPLATE을 만들고 → 3차시가 그걸 열어 L03_PROFILE을 남기고 → ... → 7차시가 L07_RELEASE에서 끝나고 → 8차시(파일 없음). 한 차시를 건너뛴 사람이 어느 고리로 돌아오는지도 이 그림에서 읽히게 합니다. 대본이 「일곱 차시에 걸쳐」라고 말하지만 실제 작도 차시는 2~7차시 여섯 개라는 점은 집필 전 확인 대상입니다(openQuestions)."
+    },
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "시작하기 전 점검",
+      "en": "Before you start"
+     },
+     "note": "1차시는 저장할 파일도 열 파일도 없습니다. 대신 2차시에 들어가기 전 확인할 것만 둡니다 — AutoCAD가 실행되는가, 템플릿 목록에 acadiso.dwt가 있는가, 저장할 폴더를 정했는가, 이름과 사번을 준비했는가. 네 항목 체크박스. 하나라도 아니면 2차시 1단계에서 막히므로 여기서 걸러 냅니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "1차시는 도면이 없어 좌표 검산을 할 수 없습니다. 대신 화면을 덮고 답하는 형식으로 둡니다 — 답을 먼저 쓰고 접힌 정답을 펼쳐 대조합니다. 판정 기준을 개수로 줍니다(다섯 요건 중 다섯 개가 나오면 통과 등). 「통과하지 못했으면 몇 번 절로 돌아가세요」를 항목마다 붙입니다."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "1차시에서 확정된 것",
+      "en": "Settled in Lesson 1"
+     },
+     "note": "이번 차시에 확정된 것 네 줄과, 다음 차시에서 무엇을 하는지 한 문단. 영상의 2분할 마무리를 그대로 옮기되 「미리 알아두기」 같은 세 번째 칸을 만들지 않습니다."
+    },
+    {
+     "kind": "exercise",
+     "label": {
+      "ko": "내 업무에 대응시키기",
+      "en": "Map it to your own work"
+     },
+     "note": "쓰는 과제 하나. 지그 제안 · 레이아웃 확인 · 스페어 파트 공수 중 지금 당장 도면이 필요한 상황을 하나 골라 세 줄로 적습니다. 정답이 없는 과제이므로 판정 기준 대신 「7차시를 마친 뒤 이 메모를 다시 열어 보세요」 안내를 붙입니다. 자습본이 메모를 저장할 수 있으면 여기에 앵커를 답니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d01-workbook-map",
+     "what": "자습본 한 장의 구조를 축소해 그린 안내도. 절 목차 · 예상 분 · 멈춤점 · 접힌 복구 블록 · 검산 표 · 체크포인트 배지에 번호를 달아 가리킵니다.",
+     "why": "강사가 쥐고 있던 진행 제어를 학습자가 쥐려면 어디에 무엇이 있는지 먼저 보여야 합니다. 글로 설명하면 길어지는 대상이라 그림이 맞습니다."
+    },
+    {
+     "id": "d01-five-requirements",
+     "what": "다섯 요건 카드의 선 그림 마크 다섯 개를 한 줄로 배치.",
+     "why": "카드마다 자기 그래픽이 있어야 훑어서 읽힙니다. 표면 거칠기 기호와 제3각법 기호는 이 과정이 실제로 가르치는 기호라 지어내지 않고 그대로 씁니다."
+    },
+    {
+     "id": "d01-four-linetypes",
+     "what": "외형선·중심선·숨은선·치수선 네 가지 선 견본과 각각의 뜻.",
+     "why": "선의 굵기 차이와 파선 간격은 말로 묘사하면 길고 그림으로는 한눈입니다. 뒤 차시의 레이어 표가 계속 이 그림을 참조합니다."
+    },
+    {
+     "id": "d01-checkpoint-chain",
+     "what": "여덟 차시의 체크포인트 사슬. 각 고리에 여는 파일과 저장하는 파일, 1·8차시는 파일 없음으로 표시하고, 건너뛴 사람이 되돌아오는 화살표를 따로 그립니다.",
+     "why": "차시 누적 구조와 복귀 경로를 한 그림으로 보여 주는 자리입니다. 표로 적으면 순서만 남고 의존 관계가 사라집니다."
+    },
+    {
+     "id": "d01-spare-part-chain",
+     "what": "스페어 파트 긴급 공수의 사슬 — 설비 정지 → 조립도 → 부품 찾기 → 부품 도면 확인 → 가공집. 도면을 못 읽을 때 끊기는 지점을 표시.",
+     "why": "테크니션이 도면을 배우는 이유를 추상적 이득이 아니라 끊기는 자리로 보여 주기 위해서입니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "다섯 가지 요건을 순서대로 말해 보세요. 몇 개가 나왔습니까?",
+     "en": "List the five requirements in order. How many did you get?",
+     "answer": {
+      "ko": "도형·크기·모양 / 자세·위치 / 표면·재료·가공 / 모호하지 않을 것 / 보존하고 찾아 쓸 수 있을 것. 다섯 개가 다 나오면 통과입니다. 넷 이하면 「도면의 다섯 요건」 절로 돌아가세요.",
+      "en": "Shape and size / orientation and position / surface, material and machining / free of ambiguity / storable and retrievable. Five out of five passes. Four or fewer, go back to 'The five requirements'."
+     }
+    },
+    {
+     "ko": "「여기를 이만큼만 깎아 주세요」가 왜 사람마다 다르게 전달됩니까? 한 문장으로 쓰세요.",
+     "en": "Why does 'just take this much off here' reach each listener differently? Answer in one sentence.",
+     "answer": {
+      "ko": "「여기」가 가리키는 위치와 「이만큼」이 가리키는 수량이 말한 사람 머릿속에만 있어서, 듣는 사람이 각자 자기 해석으로 빈칸을 채우기 때문입니다. 이 두 단어가 답에 들어 있으면 통과입니다.",
+      "en": "Because the position 'here' points to and the quantity 'this much' points to exist only in the speaker's head, so each listener fills the blanks with their own reading. If both words appear in your answer, you pass."
+     }
+    },
+    {
+     "ko": "실습 과제의 두 가지 형태는 무엇입니까?",
+     "en": "What are the two task formats?",
+     "answer": {
+      "ko": "① 주어진 치수대로 그대로 작성 ② 한 방향만 주어진 형상을 정면도·평면도·우측면도로 투상. 둘 다 나와야 통과입니다.",
+      "en": "(1) Draw exactly to the given dimensions. (2) Project a shape given in one direction into front, top, and right side views. Both must appear to pass."
+     }
+    },
+    {
+     "ko": "과제지에 이 교재와 다른 용지 크기나 레이어 색상이 적혀 있으면 무엇을 따릅니까?",
+     "en": "If the task sheet specifies a different sheet size or layer color than this workbook, which do you follow?",
+     "answer": {
+      "ko": "과제 지시입니다. 이 교재의 값은 연습용 기본값입니다.",
+      "en": "The task instruction. The values in this workbook are practice defaults."
+     }
+    },
+    {
+     "ko": "여덟 차시 중 도면을 그리지 않는 차시는 어디이고, 파일을 만드는 첫 차시는 어디입니까?",
+     "en": "Which lessons involve no drawing, and which lesson first creates a file?",
+     "answer": {
+      "ko": "그리지 않는 차시는 1차시와 8차시입니다. 파일을 처음 만드는 차시는 2차시이고 EDU-IB-02_L02_TEMPLATE으로 저장합니다.",
+      "en": "Lessons 1 and 8 involve no drawing. Lesson 2 creates the first file and saves it as EDU-IB-02_L02_TEMPLATE."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "지그 제안 · 레이아웃 확인 · 스페어 파트 긴급 공수 셋 중 하나를 고르고, 지금 내 설비에서 도면이 있었으면 달랐을 상황을 세 줄로 적으세요. ① 무슨 일이 있었나 ② 그때 말로 어떻게 전달했나 ③ 도면이었다면 어느 값을 적었을까. 7차시를 마친 뒤 이 메모를 다시 열어 ③에 적은 값을 실제로 도면에 기입할 수 있는지 확인하세요.",
+    "en": "Pick one of the three - proposing a jig, checking a layout, sourcing a spare part urgently - and write three lines about a situation on your own equipment where a drawing would have changed the outcome. (1) What happened. (2) How you conveyed it verbally at the time. (3) Which values you would have written on a drawing instead. After finishing Lesson 7, reopen this note and check whether you can now actually dimension the values you listed in (3)."
+   },
+   "recoveryNote": {
+    "ko": "1차시는 열 파일도 저장할 파일도 없어 건너뛰어도 2차시 작업이 막히지 않습니다. 다만 두 절은 읽고 가세요 — 「여덟 차시와 체크포인트 사슬」(파일이 어떻게 이어지는지)과 「과제 지시 우선」(이 교재의 값을 규격으로 외우지 않는 이유). 이 둘을 건너뛰면 2차시에서 파일 이름을 임의로 바꾸거나, 이 교재의 레이어 색상을 시험 규격으로 착각합니다. 「이 자습본을 쓰는 법」은 3차시 이후에 처음 막혔을 때 돌아와도 됩니다.",
+    "en": "Lesson 1 opens no file and saves none, so skipping it does not block Lesson 2. Read two sections anyway: 'The eight lessons and the checkpoint chain' (how the files link) and 'The task instruction wins' (why you must not memorise this workbook's values as a standard). Skip those two and you will rename files arbitrarily in Lesson 2, or mistake this workbook's layer colors for exam requirements. 'How to use this workbook' can wait until the first time you get stuck in Lesson 3 or later."
+   }
+  },
+  {
+   "no": 2,
+   "slug": "lesson-02-part-and-template",
+   "title": {
+    "ko": "부품 이해와 도면 환경",
+    "en": "Reading the Part, Building the Sheet"
+   },
+   "videoLength": "33:41",
+   "selfStudyMin": 130,
+   "opens": null,
+   "saves": "EDU-IB-02_L02_TEMPLATE",
+   "objectives": [
+    {
+     "ko": "아이들러 풀리 브래킷이 무엇을 붙드는 부품이고 벨트 장력이 왜 필요한지 설명할 수 있습니다.",
+     "en": "You can explain what the idler pulley bracket holds and why belt tension is needed."
+    },
+    {
+     "ko": "면마다 가공과 표면 거칠기가 다른 이유를 「무엇이 닿느냐」로 판단할 수 있습니다.",
+     "en": "You can decide why each face is machined and finished differently by asking what touches it."
+    },
+    {
+     "ko": "형상 다섯 가지(넓은 베이스·장공·좁아지는 목·앞으로만 나온 보스·동심 축 구멍)의 근거를 각각 댈 수 있습니다.",
+     "en": "You can give the reason behind each of five shape decisions: the wide base, the slots, the tapering web, the forward-only boss, and the concentric bore."
+    },
+    {
+     "ko": "도면 위 치수 여덟 항목이 각각 무엇을 재는 값인지 읽을 수 있습니다.",
+     "en": "You can read all eight dimension entries on the drawing and say what each one measures."
+    },
+    {
+     "ko": "Ø · H7 · PCD · M · R · C 기호가 무엇을 지시하는지 읽을 수 있습니다.",
+     "en": "You can read what the symbols diameter, H7, PCD, M, R, and C each specify."
+    },
+    {
+     "ko": "참고 치수(괄호)와 라운드가 지운 이론상 모서리를 구분할 수 있습니다.",
+     "en": "You can tell a reference dimension in parentheses from a theoretical corner that a fillet has erased."
+    },
+    {
+     "ko": "acadiso.dwt로 새 도면을 열고 단위와 도면 한계를 A3 가로에 맞출 수 있습니다.",
+     "en": "You can start a new drawing from acadiso.dwt and set units and drawing limits to A3 landscape."
+    },
+    {
+     "ko": "LINETYPE으로 CENTER·HIDDEN을 불러온 뒤 레이어 네 개를 색상·선 종류·선가중치까지 설정할 수 있습니다.",
+     "en": "You can load CENTER and HIDDEN with LINETYPE, then create four layers with color, linetype, and lineweight."
+    },
+    {
+     "ko": "좌표 입력만으로 용지선·도면선·중심 마크 네 개·표제란을 작도할 수 있습니다.",
+     "en": "You can draw the sheet outline, border, four centering marks, and title block using coordinate entry alone."
+    },
+    {
+     "ko": "한글이 물음표로 나오지 않게 문자 스타일 글꼴을 바꾸고 높이 0의 뜻을 설명할 수 있습니다.",
+     "en": "You can change the text style font so Korean does not render as question marks, and explain what a height of 0 means."
+    },
+    {
+     "ko": "객체 스냅 여섯 개(특히 접점)와 직교 모드·선가중치 표시를 켤 수 있습니다.",
+     "en": "You can turn on six object snaps (tangent above all), ortho mode, and lineweight display."
+    },
+    {
+     "ko": "EDU-IB-02_L02_TEMPLATE 파일을 저장해 3차시에서 이어 그릴 상태를 만들 수 있습니다.",
+     "en": "You can save EDU-IB-02_L02_TEMPLATE as the state Lesson 3 will continue from."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 — 여는 파일 없음",
+      "en": "Starting state - no file to open"
+     },
+     "note": "이 과정에서 새 파일로 시작하는 유일한 차시입니다. 체크포인트 배지는 「여는 파일: 없음 → 저장할 파일: EDU-IB-02_L02_TEMPLATE」으로 둡니다. 확인 항목 넷 — AutoCAD 실행, 템플릿 목록에 acadiso.dwt 있음, 저장 폴더 정함, 이름·사번 준비. 그리고 「오늘은 선을 한 줄도 긋지 않습니다. 먼저 읽습니다」 한 줄. 이 문장은 대본에 있는 것이라 그대로 씁니다. 학습 안내가 아니라 조작 순서에 대한 예고라서 중복 금지에 걸리지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "아이들러 풀리 브래킷",
+      "en": "The idler pulley bracket"
+     },
+     "note": "네 카드 — 용도 / 실제 역할 / 적용 예시 / 그 효과. 용도: V-벨트를 옆에서 눌러 장력을 잡는 바퀴의 축을 붙들고 프레임 수직면에 볼트 두 개로 고정됩니다. 실제 역할: 벨트가 늘어나면 미끄러지고, 미끄러지면 동력이 안 건너가고 마찰열로 벨트와 풀리가 함께 닳습니다. 적용 예시: 물류 창고 벨트 컨베이어의 모터→롤러 구간, 정비 때 브래킷을 옆으로 밀어 장력을 맞추고 볼트를 조입니다. 효과: 미끄러짐이 없어 동력 전달률이 유지되고 교체 주기가 길어지며, 너무 조이면 베어링에 무리가 갑니다. 마크는 지어내지 않고 V-벨트 구동계 / 미끄러지는 벨트 / 컨베이어 / V-벨트가 시브 홈에 물리는 단면 네 개를 씁니다 — 게이지나 톱니바퀴 같은 주제 밖 관용구를 쓰지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "면마다 다르게 깎는다",
+      "en": "Each face is machined differently"
+     },
+     "note": "원칙 한 줄(무엇이 닿느냐가 그 면의 가공을 정한다)을 먼저 두고 표 하나로 여섯 부위를 전부 훑습니다 — 부위 / 가공 / 표면 거칠기 / 왜 그런가. 축 구멍 Ø25 H7(드릴 Ø24 → 리머, Ra 1.6, 회전축이 닿는 면), 탭 4-M5(드릴 Ø4.2 → 탭, 거칠기 지정 없음, 하중을 받는 것은 면이 아니라 나사산), 장공 2-R5(드릴 Ø10 두 번 → 엔드밀, Ra 12.5, 볼트는 머리와 프레임 사이에서 눌러 잡음), 보스 앞면 Ø56(단차 밀링, Ra 6.3, 커버가 덮이기만 함), 목과 외곽(윤곽 밀링, Ra 12.5, 닿는 상대가 없음), 필렛 R10(엔드밀 코너 R, 지정 없음, 응력 집중 완화). 절 끝에 이 과정에서 그리지 않는 표기(표면 거칠기 기호·기하 공차·열처리 지시)를 한 문단으로 닫고 기호를 그려 넣지 않습니다. Ra 값은 2차시 대본에는 있으나 6차시 문서와 어긋나므로 집필 전 확인 대상입니다(openQuestions)."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "형상이 그 모양인 이유",
+      "en": "Why the shape is what it is"
+     },
+     "note": "도면 위에서 한 번에 하나씩 짚습니다. 베이스 120(위쪽 축이 만드는 비트는 힘을 볼트 두 개가 멀리 벌어져 받는다) / 장공 중심거리 12(장력은 조립 후에 맞추는 값이라 위치가 고정되면 안 된다) / 목 밑동 80(굽힘 모멘트가 가장 큰 곳이 밑동이라 밑이 넓고 위로 갈수록 좁다) / 보스 앞으로 8(뒷면 전체가 프레임에 밀착해야 하므로 뒤로는 안 나온다) / 축 구멍 동심(어긋나면 얇은 쪽 살부터 간다). 강조는 그 형상 자체의 겹선(class=hl)을 켜는 방식으로 하고 한 번에 하나만, 누적하지 않습니다. 중심선이나 치수선만 붉어지면 강조가 아니라 오해입니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "치수 여덟 항목 읽기",
+      "en": "Reading the eight dimensions"
+     },
+     "note": "표 하나에 여덟 행을 전부 싣습니다 — 120·90(전체, 재료 자르는 크기) / 60·62(보스 중심, 왼쪽 끝에서 60 바닥에서 62) / 16(베이스 높이이며 두께가 아님) / 80(목 밑동, 라운드가 지운 이론상 모서리까지 잰 값) / 29·50·12(장공의 위치와 조정 폭) / 8(장공 중심 높이, 볼트 머리가 판 안에 들어오는지를 정함) / 26·(95.7)(필렛 중심, 가로는 참고 치수라 괄호) / 12·20(두께, 정면도가 아니라 평면도에서 읽음). 행마다 도면 위 해당 치수가 강조됩니다. 대표 하나만 들고 나머지를 생략하지 않습니다 — 지면이 모자라면 이 절을 나눕니다. (95.7)의 두 점이 대본과 프레임 도면에서 다르므로 자습본은 값만 싣고 두 점을 단정하지 않습니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "기호 여덟 개 읽기",
+      "en": "Reading the eight symbols"
+     },
+     "note": "표 하나에 여덟 행 — Ø25 H7(Ø는 지름, H7은 헐겁지도 억지로 박지도 않는 끼워맞춤 등급이며 드릴로는 못 내고 리머가 필요) / Ø56(보스 바깥 지름, 축 둘레에 남길 살) / PCD Ø44(구멍 중심이 놓이는 원의 지름이지 구멍 지름이 아님 — 여기서 가장 많이 헷갈립니다) / 45도(첫 구멍이 놓이는 각도, 나머지 셋은 90도씩) / 4-M5 깊이 10(개수·규격·깊이 순) / 2-장공 R5(개수와 끝단 반원 반지름, 중심거리 12와 함께 형상을 확정) / 2-R10(둥글리기 반지름, 앞의 2는 좌우 두 개) / 2-C5(C는 모따기이며 45도로 잘라낸다는 뜻, 5는 잘라내는 변의 길이). 마지막에 「기호가 정확한 소통 수단이다 — 말로 풀어 쓰면 가공집과 서로 다르게 알아듣는다」로 닫습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "A3 도면 환경과 레이어 네 개",
+      "en": "The A3 sheet and its four layers"
+     },
+     "note": "먼저 규격도 한 장 — 용지선 420×297, 도면선은 사방 10 안쪽(인쇄 때 가장자리가 잘려도 내용이 살아 있어야 함), 네 변 한가운데 중심 마크(접거나 복사할 때의 기준), 오른쪽 아래 표제란 200×30을 100씩 둘로 나눠 왼쪽 이름 오른쪽 사번, 문자 높이 10. 이어서 레이어 표 — 이름 / 선 종류 / 색상 / 선가중치 / 선 종류 축척 / 용도 다섯 열. 외형선 Continuous 흰색7 0.5, 중심선 CENTER 빨강1 0.25 축척 0.5, 숨은선 HIDDEN 노랑2 0.25 축척 0.5, 치수선 Continuous 보라6 0.25. 굵기와 선 종류 축척이 다른 값이라는 것을 표 밑에 한 줄로 못 박습니다 — 굵기는 선의 두께(밀리미터)이고 외형선만 나머지의 두 배, 선 종류 축척은 점선의 간격이라 Continuous에는 조정할 값이 없습니다. 영상 프레임 7 화면 표와 정본 값이 어긋나므로 정본을 확정하기 전에는 이 표를 확정 인쇄하지 않습니다(openQuestions). 절 끝에 「과제 지시 우선」을 한 줄로 다시 붙이고 1차시 절로 링크합니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 그리기 전 환경 설정 (1~9단계)",
+      "en": "Do it 1 - set up before drawing (steps 1-9)"
+     },
+     "note": "새 도면(acadiso.dwt — iso 세 글자를 확인하고 고릅니다. acad.dwt는 인치라 처음부터 전부 어긋납니다) → SAVEAS로 이름부터 확정 → UNITS(십진 / 소수 두 자리 / 십진 도수 / 각도 정밀도 0 / 삽입 축척 밀리미터) → LIMITS 0,0 · 420,297 → Z A(화면에 변화가 없는 것이 정상이라고 미리 알려 줍니다) → LINETYPE 로드로 CENTER·HIDDEN → LAYER로 이름 네 개 → 색상·선 종류·선가중치 지정 → 외형선을 현재 레이어로. 명령행 프롬프트 문구를 지어내지 않고 「무엇을 묻는가 / 무엇을 입력하는가」 두 칸으로 적습니다. 5단계와 9단계처럼 화면에 확인할 것이 없는 단계에는 「지금은 확인할 것이 없습니다. 10단계에서 확인합니다」를 명시해 학습자가 자기 화면을 의심하지 않게 합니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 도면틀·중심 마크·표제란 (10~12단계)",
+      "en": "Do it 2 - border, centering marks, title block (steps 10-12)"
+     },
+     "note": "REC 0,0 · 420,297 → REC 10,10 · 410,287 → Z A → L로 중심 마크 넷(210,0-210,10 / 210,287-210,297 / 0,148.5-10,148.5 / 410,148.5-420,148.5. 148.5는 297의 절반이며 소수점을 빠뜨리면 한가운데가 아닙니다) → REC 210,10 · 410,40 표제란 → L 310,10 · 310,40 칸 나누기. 「엔터를 두 번 연달아 치는 것이 아니라 두 점을 찍고 마지막에 한 번 더 눌러 빠져나온다」를 그림으로 보여 줍니다. REC로 그린 사각형이 네 변 한 덩어리 폴리선이라는 것과, 가운데 세로선은 사각형이 아니므로 L로 그린다는 판단을 함께 둡니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — 한글 문자·스냅·저장 (13~16단계)",
+      "en": "Do it 3 - Korean text, snaps, save (steps 13-16)"
+     },
+     "note": "ST로 문자 스타일(txt.shx에는 한글 자형이 없어 이대로 치면 물음표가 나옵니다. 굴림 계열 또는 whgtxt.shx + 큰 글꼴 중 하나만 고릅니다. 높이는 0으로 두어야 글자를 쓸 때마다 높이를 묻습니다) → DTEXT 225,20 높이 10 각도 0으로 이름, 325,20으로 사번(왼쪽이 이름, 오른쪽이 사번 — 순서를 바꾸지 않습니다) → OS로 객체 스냅 여섯 개(끝점·중간점·중심·사분점·교차점·접점. 접점은 3차시에서 보스 원에 접하는 목 선을 그릴 때 씁니다. 다 켜면 원하지 않는 점에 붙습니다) → F3·F8·LWDISPLAY ON → Ctrl+S 저장. 마지막에 체크포인트 배지가 「EDU-IB-02_L02_TEMPLATE 저장됨」으로 바뀝니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "13항목을 「무엇을 본다 / 맞으면 이렇게 보인다 / 다르면 몇 단계로」 세 칸 표로. 객관 판정이 가능한 것부터 위에 둡니다 — 선가중치 표시를 켰을 때 외형선만 굵은가(다 같으면 8단계) / 안쪽 사각형이 사방 10씩 들어갔는가 / 사각형 한 번 클릭에 네 변이 같이 잡히는가(폴리선인가) / 표제란 오른쪽 아래 모서리가 도면선 모서리에 붙었는가 / 세로선이 310에 있어 100짜리 칸 둘인가 / 이름과 사번 글자 밑선이 둘 다 20이고 위아래 여백이 10씩 남는가 / 왼쪽이 이름 오른쪽이 사번인가 / 한글이 물음표가 아닌가(물음표면 13단계) / 좌우 중심 마크가 148.5, 위아래가 210인가 / 레이어가 정확히 넷이고 이름이 맞는가 / 중심선에 CENTER 숨은선에 HIDDEN이 지정됐는가(안 됐으면 6단계) / 현재 레이어가 외형선인가 / 파일 이름이 EDU-IB-02_L02_TEMPLATE인가."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "2차시에서 확정된 것",
+      "en": "Settled in Lesson 2"
+     },
+     "note": "부품을 읽은 결과(무엇이 닿느냐가 가공을 정한다 / 형상마다의 근거 / 치수 여덟과 기호 여덟)와 만든 환경(A3 도면틀·중심 마크·표제란·레이어 넷)을 각각 한 묶음으로. 「이 환경은 이 부품에만 쓰는 것이 아닙니다 — 현장에서 치구를 하나 그려 제안할 때도 그대로 씁니다」로 닫습니다. 다음 차시 예고는 한 문단."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "17개를 처음 쓴 순서대로. 마지막 열은 「무엇을 하나」가 아니라 「언제 쓰나」입니다. SAVEAS · UNITS · LIMITS · Z · LINETYPE · LAYER · LTSCALE(이름만 나오고 조정은 6차시) · REC · L · ST · DTEXT · OS · LWDISPLAY · QSAVE · F3 · F8 · Ctrl+S."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "도면 검산과 별개로 이해를 재는 문답 다섯. 답을 먼저 쓰고 접힌 정답을 펼칩니다. 틀린 항목마다 돌아갈 절 번호를 답에 넣습니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d02-belt-drive",
+     "what": "V-벨트 구동계 단면 — 모터 풀리, 종동 풀리, 벨트, 옆에서 누르는 아이들러 풀리와 그 축을 붙드는 브래킷. 장력이 빠졌을 때 벨트가 뜨는 모습을 흐린 겹선으로 병기.",
+     "why": "부품의 용도를 글로 설명하면 길고, 이 부품이 어디에 끼는지가 형상의 모든 이유의 출발점이기 때문입니다."
+    },
+    {
+     "id": "d02-face-map",
+     "what": "정면도 위에 여섯 부위(축 구멍·탭·장공·보스 앞면·목과 외곽·필렛)를 인출선으로 뽑아 가공과 거칠기를 붙인 지도.",
+     "why": "표만 있으면 어느 부위인지 찾느라 시선이 왕복합니다. 표의 행과 도면의 강조가 짝을 이뤄야 합니다."
+    },
+    {
+     "id": "d02-a3-layout",
+     "what": "A3 420×297 규격도 — 용지선, 사방 10 안쪽의 도면선, 네 변 중심 마크, 오른쪽 아래 200×30 표제란과 100/100 분할, 문자 높이 10. 실제 입력할 좌표를 그림 위에 병기.",
+     "why": "학습자가 따라 하기에서 칠 좌표가 그림 어디에 해당하는지 대응이 되어야 오타를 스스로 잡습니다."
+    },
+    {
+     "id": "d02-lineweight-vs-ltscale",
+     "what": "같은 길이의 선 두 벌 — 왼쪽은 굵기만 다르게(0.5 대 0.25), 오른쪽은 굵기는 같고 파선 간격만 다르게(축척 0.5 대 2).",
+     "why": "레이어 표에 숫자가 두 종류라 가장 많이 헷갈리는 자리입니다. 두 값이 무엇을 바꾸는지는 그림 두 장으로 끝납니다."
+    },
+    {
+     "id": "d02-title-block-text",
+     "what": "표제란 확대도 — 칸 경계 좌표(210·310·410, 10·40)와 글자 시작점(225,20 / 325,20), 글자 높이 10이 만드는 위아래 여백 10씩.",
+     "why": "14단계에서 학습자가 눈대중으로 클릭하는 것을 막는 그림입니다. 숫자가 어떻게 여백을 만드는지 보이면 좌표로 넣을 이유가 납득됩니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "축 구멍은 곱게 다듬고 장공은 거칠어도 됩니다. 판단 기준은 무엇입니까?",
+     "en": "The bore is finished fine, the slots may stay rough. What is the criterion?",
+     "answer": {
+      "ko": "무엇이 닿느냐입니다. 축 구멍은 회전하는 축이 닿아 계속 미끄럼 마찰이 일어나고, 장공은 볼트가 통과만 할 뿐 머리와 프레임 사이에서 눌러 잡으므로 구멍 벽이 힘을 받지 않습니다. 필요 없는 곳을 곱게 하면 공정이 하나 더 붙어 가공비만 오릅니다.",
+      "en": "What touches it. A rotating shaft runs in the bore, so sliding friction is continuous; a bolt only passes through the slot and clamps between its head and the frame, so the slot wall carries no load. Finishing a face that does not need it only adds a process and raises the cost."
+     }
+    },
+    {
+     "ko": "PCD Ø44는 무엇의 지름입니까?",
+     "en": "Diameter of what is PCD 44?",
+     "answer": {
+      "ko": "탭 구멍 네 개의 중심이 놓이는 원의 지름입니다. 구멍 자체의 지름이 아닙니다. 여기서 헷갈리면 구멍이 엉뚱하게 커집니다.",
+      "en": "The circle the four tapped-hole centers sit on. It is not the diameter of the holes themselves. Confusing the two makes the holes far too large."
+     }
+    },
+    {
+     "ko": "16은 판의 두께입니까?",
+     "en": "Is 16 the plate thickness?",
+     "answer": {
+      "ko": "아닙니다. 정면에서 본 베이스의 높이입니다. 두께는 평면도에서 읽고 판이 12, 보스가 있는 자리가 20입니다.",
+      "en": "No. It is the height of the base seen in the front view. Thickness is read in the top view: 12 for the plate, 20 where the boss is."
+     }
+    },
+    {
+     "ko": "도면선을 용지선에서 사방 10 띄우는 이유는 무엇입니까?",
+     "en": "Why is the border set 10 mm inside the sheet outline on all four sides?",
+     "answer": {
+      "ko": "인쇄할 때 가장자리가 잘릴 수 있기 때문입니다. 잘려도 도면 내용은 살아 있어야 합니다.",
+      "en": "Because the edges can be cropped when printing. The content of the drawing has to survive that."
+     }
+    },
+    {
+     "ko": "표제란에 이름을 넣었더니 물음표가 나왔습니다. 어느 단계로 돌아갑니까?",
+     "en": "Your name came out as question marks in the title block. Which step do you go back to?",
+     "answer": {
+      "ko": "13단계입니다. 문자 스타일의 글꼴이 아직 txt.shx이면 한글 자형이 없어 물음표가 나옵니다. 굴림 계열이나 whgtxt.shx 중 하나로 바꿉니다.",
+      "en": "Step 13. If the text style font is still txt.shx it has no Korean glyphs, so you get question marks. Change it to a Gulim-family font or to whgtxt.shx."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "지금 만든 EDU-IB-02_L02_TEMPLATE을 다른 이름(예: MY_A3_TEMPLATE)으로 한 벌 더 저장하고, 표제란 오른쪽 칸의 사번을 지운 뒤 빈 칸으로 두세요. 현장에서 치구를 하나 그려 제안할 때 이 파일을 열어 바로 시작할 수 있는 상태가 됩니다. 실습용 파일 EDU-IB-02_L02_TEMPLATE은 손대지 않습니다 — 3차시가 그 파일을 엽니다.",
+    "en": "Save a second copy of EDU-IB-02_L02_TEMPLATE under another name (for example MY_A3_TEMPLATE), then clear the employee-number cell in the title block and leave it blank. That copy is now ready to open whenever you want to sketch a jig proposal on the job. Do not touch EDU-IB-02_L02_TEMPLATE itself - Lesson 3 opens that one."
+   },
+   "recoveryNote": {
+    "ko": "2차시를 건너뛰면 3차시가 열 파일이 없어 아예 시작되지 않습니다. 3차시로 바로 가고 싶다면 「따라 하기 1~3」 세 절(1~16단계)만 하고 저장하면 됩니다 — 앞의 읽기 절은 나중에 읽어도 작도가 막히지 않습니다. 다만 「기호 여덟 개 읽기」는 4차시 전에 반드시 읽으세요. Ø와 R의 구분, PCD가 구멍 지름이 아니라는 것, C가 45도를 함께 지시한다는 것을 모르면 4차시에서 원이 두 배로 커지고 탭이 반 바퀴 안에 몰립니다. 파일 이름은 하이픈과 밑줄 위치까지 그대로 옮겨야 3차시에서 찾습니다.",
+    "en": "Skip Lesson 2 and Lesson 3 has no file to open, so it cannot start at all. If you want to jump ahead, do only the three 'Do it' sections (steps 1-16) and save - the reading sections can wait without blocking any drawing. But read 'Reading the eight symbols' before Lesson 4. Without knowing that a diameter callout differs from a radius, that PCD is not a hole diameter, and that C also implies 45 degrees, your circles come out twice too big in Lesson 4 and the tapped holes bunch into half a turn. Copy the file name exactly, hyphen and underscore included, or Lesson 3 will not find it."
+   }
+  },
+  {
+   "no": 3,
+   "slug": "lesson-03-baseline-profile",
+   "title": {
+    "ko": "기준선과 외곽",
+    "en": "Datum Lines and the Outline"
+   },
+   "videoLength": "38:17",
+   "selfStudyMin": 107,
+   "opens": "EDU-IB-02_L02_TEMPLATE",
+   "saves": "EDU-IB-02_L03_PROFILE",
+   "objectives": [
+    {
+     "ko": "지난 차시 파일을 열어 그 위에 이어 그리고, 끝나면 새 이름으로 저장해 차시별 상태를 남길 수 있습니다.",
+     "en": "You can open the previous lesson's file, draw on top of it, and save under a new name to keep a per-lesson state."
+    },
+    {
+     "ko": "UCS로 좌표 원점을 도면 안 원하는 자리로 옮기고, UCSICON 원점 옵션으로 눈으로 확인할 수 있습니다.",
+     "en": "You can move the coordinate origin into the sheet with UCS and confirm it visually with the UCSICON origin option."
+    },
+    {
+     "ko": "형상보다 기준선을 먼저 세워야 하는 이유를 말하고, 중심선 레이어에서 세로·가로 중심선을 형상 밖으로 알맞게 내밀어 그을 수 있습니다.",
+     "en": "You can say why datum lines come before shape, and draw vertical and horizontal centerlines on the center layer with the right overrun."
+    },
+    {
+     "ko": "절대좌표 x,y · 상대좌표 @dx,dy · 상대극좌표 @거리<각도를 구분해 쓰고 각각을 언제 쓰는지 근거를 들어 고를 수 있습니다.",
+     "en": "You can tell absolute, relative, and relative polar entry apart and justify which one to use where."
+    },
+    {
+     "ko": "LINE과 PLINE의 차이를 설명하고, 한 바퀴 도는 윤곽은 폴리선 하나로, 뒤에 다듬을 조각은 낱개 선으로 그릴 수 있습니다.",
+     "en": "You can explain LINE versus PLINE, and draw a closed outline as one polyline while leaving pieces you will edit later as separate lines."
+    },
+    {
+     "ko": "모따기 2-C5가 만드는 값(11 · 115 · 110)을 치수표의 값에서 직접 계산해 낼 수 있습니다.",
+     "en": "You can derive the values a 2-C5 chamfer produces (11, 115, 110) from the dimension table yourself."
+    },
+    {
+     "ko": "원 명령에서 D 옵션으로 지름을 입력하고, 62+28=90으로 중심 위치와 지름을 함께 검산할 수 있습니다.",
+     "en": "You can enter a diameter with the D option and cross-check both center height and diameter with 62 + 28 = 90."
+    },
+    {
+     "ko": "접점 스냅으로 원 밖의 점에서 원에 접하는 선을 긋고, 두 접선 중 부품 모양이 되는 쪽을 커서 위치로 고를 수 있습니다.",
+     "en": "You can draw a tangent from a point outside a circle using the tangent snap, and pick the one of the two tangents that forms the part by where you put the cursor."
+    },
+    {
+     "ko": "폴리선이 정말 하나의 객체이고 닫혀 있는지 클릭과 LIST로 확인할 수 있습니다.",
+     "en": "You can confirm with a click and with LIST that the polyline really is one closed object."
+    },
+    {
+     "ko": "좌표 오독 · 골뱅이 누락 · 레이어 미변경 · 접점 스냅 꺼짐 네 가지 실수를 화면에서 알아차리고 그 자리에서 고칠 수 있습니다.",
+     "en": "You can spot four mistakes on screen - misread coordinate, missing @, wrong current layer, tangent snap off - and fix each on the spot."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 확인 — EDU-IB-02_L02_TEMPLATE",
+      "en": "Starting state - EDU-IB-02_L02_TEMPLATE"
+     },
+     "note": "체크포인트 게이트입니다. 파일을 열고 화면에 있어야 하는 것 여섯을 체크박스로 셉니다 — ① 용지선과 도면선 두 사각형 ② 네 변의 중심 마크 ③ 오른쪽 아래 표제란과 이름·사번 ④ 레이어 드롭다운에 정확히 네 개 ⑤ 상태 막대의 객체 스냅과 직교가 켜짐 ⑥ 외형선이 나머지보다 굵게 보임. 하나라도 없으면 열린 파일이 L02_TEMPLATE이 아닐 수 있다고 판정하고, 2차시의 어느 단계로 돌아가는지 항목마다 지정합니다. 여기서 확인하지 않고 그리기 시작하면 뒤에 가서 선이 엉뚱한 레이어에 있는 것을 발견합니다. 「Z 엔터 A 엔터로 도면틀 전체를 먼저 화면에 넣으세요」를 첫 줄에 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "좌표를 재는 기준을 옮긴다 — UCS",
+      "en": "Moving the origin - UCS"
+     },
+     "note": "도면의 0,0은 A3 용지의 왼쪽 아래 구석이라 거기에 그리면 부품이 도면틀 밖 구석에 처박힙니다. 그래서 좌표를 재는 기준 자체를 정면도가 놓일 자리로 옮깁니다. 움직인 것은 그림이 아니라 자입니다 — 도면틀은 그대로입니다. 배치값 60,70은 부품 치수가 아니라 정면도가 오른쪽으로 120 위로 90 뻗고 제3각법이라 위와 오른쪽에 뷰 자리를 남겨야 해서 나온 값이므로 도면에 기입하지 않습니다. 원래대로 돌아가려면 UCS 엔터 다음 W 엔터입니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "형상보다 기준이 먼저",
+      "en": "Datum before shape"
+     },
+     "note": "중심선 두 개를 먼저 세우는 이유. 세로는 x=60인데 이유가 둘 겹칩니다 — 베이스 폭 120의 절반이 60이고, 보스 중심의 가로 위치도 60입니다. 부품이 이 선을 기준으로 좌우 대칭이라는 뜻이고, 4차시의 대칭 복사와 6차시의 대칭 검산이 전부 이 선을 씁니다. 가로는 y=62로 보스 중심 높이입니다. 중심선을 형상 밖으로 5씩 내미는 것은 도면 치수가 아니라 제도 관례이며 3에서 5 사이면 됩니다 — 자습본에서 값을 규격처럼 적지 않게 이 문장을 함께 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "좌표 입력 세 가지",
+      "en": "Three ways to enter a point"
+     },
+     "note": "표 하나에 세 행 — 절대좌표 x,y(원점에서 재는 자리. 시작점과 원 중심), 상대좌표 @dx,dy(앞에 찍은 점에서 얼마나 갔는지. 이어지는 변), 상대극좌표 @거리<각도(방향과 거리가 도면에 그대로 적혀 있을 때). 각 행에 이 차시에서 실제로 치는 값을 예로 답니다. 각도 기준(0도 오른쪽, 90도 위, 135도 왼쪽 위, 180도 왼쪽)을 시계 그림으로 붙입니다. 모따기를 @7.07<135로도 그릴 수 있지만 7.07은 반올림값이고 도면에 적힌 값은 5와 5라는 판단까지 씁니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "LINE과 PLINE",
+      "en": "LINE and PLINE"
+     },
+     "note": "한 바퀴 도는 윤곽은 폴리선 하나, 뒤에 다듬을 조각은 낱개 선. 베이스 외곽은 폴리선 1개 정점 6개, 목 선 두 개는 낱개 LINE입니다. 이유까지 갑니다 — 폴리선이어야 클릭 한 번에 전체가 잡히고 간격띄우기와 면적 계산이 윤곽 전체에 한 번에 걸립니다. 반대로 목 선은 아래를 필렛으로 둥글리고 위는 원에 접하는 자리에서 끝나는 아직 다듬을 조각이라 낱개로 있어야 하나씩 다룰 수 있습니다. 닫기 옵션 C를 손으로 시작점을 찍는 것과 비교합니다 — 사람이 찍으면 소수점 아래에서 어긋나 겉보기에는 닫힌 도형인데 실제로는 열려 있고, 열린 도형은 면적을 못 재고 해치가 안 채워집니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "베이스 여섯 꼭짓점과 모따기 산술",
+      "en": "Six vertices and the chamfer arithmetic"
+     },
+     "note": "모따기 때문에 베이스의 꼭짓점은 넷이 아니라 여섯입니다 — (0,0) (120,0) (120,11) (115,16) (5,16) (0,11). 세 값을 치수표에서 직접 계산해 보입니다: 11 = 16 − 5, 115 = 120 − 5, 110 = 120 − 5 − 5. 45도는 가로로 간 만큼 세로로도 간다는 뜻이라는 것을 삼각형 그림으로 붙입니다. 도면 위에서 여섯 점에 번호를 달고, 학습자가 8~10단계에서 칠 좌표가 어느 점인지 대응시킵니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "보스 원과 목 접선",
+      "en": "The boss circle and the web tangents"
+     },
+     "note": "목보다 원을 먼저 그립니다 — 접할 대상이 먼저 화면에 있어야 접선을 그릴 수 있습니다. 검산 하나를 여기서 미리 줍니다: 중심 높이 62 + 반지름 28 = 90이고 이 90이 부품 전체 높이입니다. 두 숫자가 맞으면 중심 위치와 지름이 둘 다 맞은 것입니다. 목이 시작하는 자리는 밑동 80에서 나옵니다 — 120 − 80 = 40, 40 ÷ 2 = 20이므로 (20,16)과 (100,16)입니다. 그 자리에는 실제로 R10 라운드가 있어 모서리가 없고, 지금 긋는 선은 라운드가 지울 이론상의 모서리에서 출발한다는 것을 도면 위에 흐린 점선으로 표시합니다. 접점의 좌표는 계산하지 않으며 자습본도 접점 좌표를 학습자가 입력할 값으로 제시하지 않습니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 원점을 옮기고 중심선 세우기 (1~7단계)",
+      "en": "Do it 1 - move the origin, set the centerlines (steps 1-7)"
+     },
+     "note": "OPEN → Z A와 상태 막대·레이어 확인 → UCS 60,70(원점만 옮기고 X축 점을 묻는 자리에서는 값을 넣지 않습니다 — 넣으면 축 방향까지 돌아갑니다) → UCSICON OR → 중심선 레이어로 → L 60,-5 → 60,95 → L 27,62 → @66,0. 27과 66이 어디서 나왔는지 계산을 그 자리에 씁니다: 보스 원이 가로 32~88을 차지하고 5씩 내밀면 27~93, 27에서 93까지가 66입니다. 이어서 두 선을 골라 Ctrl+1 특성 창의 선종류축척에 0.5. 그리고 외형선 레이어로 바꾸고 Z W −15,−15 · 135,105로 확대(이 네 값도 배치용이라 도면에 기입하지 않습니다)."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 베이스 외곽 폴리선 (8~11단계)",
+      "en": "Do it 2 - the base outline as one polyline (steps 8-11)"
+     },
+     "note": "PL 0,0 → @120,0 → @0,11 → @-5,5 → @-110,0 → @-5,-5 → C. 8단계 끝에서 「명령이 아직 끝나지 않았습니다. 여기서 엔터를 눌러 끝내면 닫기 옵션을 쓸 수 없습니다」를 굵게 둡니다. 9단계의 부호는 안쪽 곧 왼쪽 위이므로 @-5,5이며 @5,5로 넣으면 도형이 벌어집니다. 11단계에서 검산을 바로 붙입니다 — 클릭 한 번에 여섯 변이 잡히는가, LIST 결과가 LWPOLYLINE이고 정점 여섯 개이고 닫힘이 예인가. 한 변만 잡히면 8단계부터 다시 PLINE으로 그립니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — 보스 원과 목 접선, 저장 (12~16단계)",
+      "en": "Do it 3 - boss circle, web tangents, save (steps 12-16)"
+     },
+     "note": "C 60,62 → D → 56(D를 안 누르고 56을 넣으면 반지름 56, 도면의 두 배입니다. 원에서 나는 실수는 거의 전부 여기입니다) → 원 꼭대기 y가 90인지 확인 → F8로 직교를 끄고(켜져 있으면 커서가 수평 수직으로 끌려가 접점을 잡기 번거롭습니다) → L 20,16 → TAN → 보스 원의 왼쪽, 왼쪽 사분점보다 조금 위를 클릭 → L 100,16 → TAN → 오른쪽 사분점보다 조금 위 → SAVEAS EDU-IB-02_L03_PROFILE. 한 점에서 원에 접하는 선이 둘이라는 것과 어느 쪽이 잡힐지는 커서 위치가 정한다는 것을 그림으로 보여 줍니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "11항목을 세 칸 표로. 값으로 판정되는 것을 위에 둡니다 — LIST 결과가 LWPOLYLINE · 정점 6 · 닫힘 예인가 / 원 꼭대기 y가 90인가(62+28) / 윗면 110이 아래변 120보다 짧은가 / 모따기 둘이 같은 크기인가 / 클릭 한 번에 여섯 변이 잡히는가 / 두 목 선이 세로 중심선 기준으로 대칭인가 / 확대했을 때 목 선과 보스 원이 파고들거나 못 미치지 않고 한 점에서 닿는가 / 중심선이 빨간 CENTER 점선, 외곽과 목 선이 흰 실선인가 / 세로 중심선이 위아래로 5씩 나와 있고 가로가 27~93인가 / 선종류축척 0.5를 넣은 뒤 실선이 아니라 점선으로 보이는가 / 그리는 중에 선이 엉뚱한 데로 튀지 않았는가(튀었으면 골뱅이 누락)."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "3차시에서 확정된 것",
+      "en": "Settled in Lesson 3"
+     },
+     "note": "확정된 형상은 베이스 외곽 폴리선, 모따기 둘, 보스 원, 목 접선 둘, 중심선 둘입니다. 누적 도면 언어를 여기서 처음 씁니다 — 이번 차시에서 추가한 형상을 마젠타로, 아직 배우지 않은 형상(구멍·장공·필렛)을 회색 점선으로 보여 주는 완료 상태 그림 한 장. 이 그림이 4차시 첫 절의 출발 상태 그림과 정확히 같아야 합니다. 마지막에 「오늘 한 일은 시험용 절차만이 아닙니다 — 치구를 하나 제안한다고 해도 순서는 똑같습니다. 기준을 세우고, 외곽을 잡고, 원을 놓습니다」를 둡니다."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "처음 쓴 순서대로. OPEN · Z · A · W · UCS · UCSICON · OR · CLAYER · L · PL · C · D · LIST · TAN · OS · U · SAVEAS · F3 · F8 · F2 · Ctrl+1 · Ctrl+Z · Esc. C가 상황에 따라 원 명령이기도 하고 폴리선 닫기이기도 하다는 것, W가 줌 윈도우이기도 하고 UCS 표준 좌표계이기도 하다는 것을 「언제 쓰나」 칸에서 갈라 씁니다."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "네 가지 흔한 실수를 증상으로 제시하고 원인과 복구를 답하게 하는 형식으로 씁니다. 실수 목록은 좌표 오독 · 골뱅이 누락 · 레이어 미변경 · 접점 스냅 꺼짐입니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d03-ucs-shift",
+     "what": "A3 도면틀 안에 정면도·평면도·우측면도 자리를 잡아 놓고, 도면 원점(용지 왼쪽 아래)과 옮긴 UCS 원점(정면도 왼쪽 아래)을 두 개의 좌표 아이콘으로 표시.",
+     "why": "'움직인 것은 그림이 아니라 자'라는 문장은 그림 없이는 잘 안 읽힙니다. 60,70이 왜 그 자리인지도 뷰 배치와 함께 봐야 납득됩니다."
+    },
+    {
+     "id": "d03-six-vertices",
+     "what": "베이스 외곽에 번호를 붙인 여섯 꼭짓점과 각 변에 붙은 입력값(@120,0 / @0,11 / @-5,5 / @-110,0 / @-5,-5 / C).",
+     "why": "학습자가 칠 좌표와 도면 위 위치를 1대1로 잇는 그림입니다. 이것이 없으면 부호를 반대로 넣고도 어디가 틀렸는지 못 찾습니다."
+    },
+    {
+     "id": "d03-chamfer-triangle",
+     "what": "모따기 자리 확대 — 가로 5, 세로 5의 직각삼각형과 그것이 만드는 11 · 115 · 110. 빗변에 7.07을 흐리게 병기하고 '도면에 적힌 값은 5와 5'라고 표시.",
+     "why": "45도가 왜 가로와 세로를 같게 만드는지, 그리고 왜 극좌표 7.07을 쓰지 않는지를 한 그림에서 봅니다."
+    },
+    {
+     "id": "d03-two-tangents",
+     "what": "점 (20,16)에서 보스 원에 그을 수 있는 접선 두 개. 부품 모양이 되는 위쪽 접선은 진하게, 원 밑을 스치는 아래쪽 접선은 흐리게. 커서 위치 두 곳을 표시.",
+     "why": "'커서 위치가 어느 접점을 잡을지 정한다'는 조작 규칙은 글로는 반드시 오해됩니다."
+    },
+    {
+     "id": "d03-state-out",
+     "what": "3차시 완료 상태. 확정 형상은 검정, 이번에 추가한 것은 마젠타, 아직 없는 구멍·장공·필렛은 회색 점선.",
+     "why": "누적 도면 언어의 첫 적용이고, 4차시 출발 상태 그림과 시각적으로 같아야 학습자가 자기 화면과 대조할 수 있습니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "모따기 자리에서 세로가 16이 아니라 11인 이유는 무엇입니까?",
+     "en": "Why is the vertical 11 and not 16 at the chamfer?",
+     "answer": {
+      "ko": "베이스 높이가 16인데 윗 모서리를 45도로 5만큼 잘라내므로 16 − 5 = 11까지만 올라갑니다. 같은 이유로 윗면은 120 − 5 − 5 = 110입니다.",
+      "en": "The base is 16 high, but the top corner is cut 5 at 45 degrees, so the vertical edge only rises to 16 - 5 = 11. For the same reason the top face is 120 - 5 - 5 = 110."
+     }
+    },
+    {
+     "ko": "선을 그었더니 방금 그리던 자리에서 뚝 떨어진 곳으로 튀었습니다. 무엇을 빠뜨렸고 어떻게 되돌립니까?",
+     "en": "Your line jumped far away from where you were drawing. What did you omit and how do you undo it?",
+     "answer": {
+      "ko": "골뱅이(@)를 빠뜨려 상대좌표가 절대좌표로 읽혔습니다. 폴리선 명령이 진행 중이면 U 엔터로 마지막 한 점만 취소하고, 명령을 이미 빠져나왔으면 Ctrl+Z입니다.",
+      "en": "You left out the @, so a relative entry was read as absolute. If the polyline command is still running, type U and Enter to undo just the last point; if you already exited the command, use Ctrl+Z."
+     }
+    },
+    {
+     "ko": "보스 원을 그린 뒤 원의 맨 위 y를 봤더니 90이었습니다. 무엇이 맞았다는 뜻입니까?",
+     "en": "After drawing the boss circle, the top of the circle reads y = 90. What does that confirm?",
+     "answer": {
+      "ko": "중심 높이 62와 지름 56이 둘 다 맞았다는 뜻입니다. 62 + 28 = 90이고 90은 부품 전체 높이와 같습니다. 다른 값이 나오면 중심을 잘못 찍었거나 D 옵션을 빠뜨려 반지름 56으로 그린 것입니다.",
+      "en": "That both the center height 62 and the diameter 56 are correct: 62 + 28 = 90, which equals the overall height of the part. Any other value means you picked the wrong center, or omitted the D option and drew a radius of 56."
+     }
+    },
+    {
+     "ko": "베이스 외곽을 한 번 클릭했더니 한 변만 선택됩니다. 무엇이 잘못됐고 어디로 돌아갑니까?",
+     "en": "Clicking the base outline selects only one edge. What went wrong and where do you go back to?",
+     "answer": {
+      "ko": "PLINE이 아니라 LINE으로 그린 것입니다. 폴리선 하나여야 클릭 한 번에 여섯 변이 잡힙니다. 8단계로 돌아가 PL로 다시 그립니다.",
+      "en": "You drew it with LINE instead of PLINE. As one polyline, a single click grabs all six edges. Go back to step 8 and redraw with PL."
+     }
+    },
+    {
+     "ko": "접점이 안 잡힙니다. 어디를 순서대로 확인합니까?",
+     "en": "The tangent snap will not catch. What do you check, in order?",
+     "answer": {
+      "ko": "① F3으로 객체 스냅이 켜져 있는지 ② OS 대화상자에서 접점이 체크돼 있는지 ③ 명령 중에 TAN을 1회용으로 입력했는지 ④ F8 직교가 켜져 있어 커서가 끌려가지는 않는지.",
+      "en": "(1) Is object snap on - press F3. (2) Is Tangent ticked in the OS dialog. (3) Did you type TAN as a one-shot snap inside the command. (4) Is ortho (F8) on and dragging the cursor away."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "지금 그린 베이스 외곽을 지우지 말고, 빈 자리에 같은 방법으로 60 × 20 직사각형을 폴리선 하나로 그리고 오른쪽 위 모서리만 C3(3만큼 45도로 자르기)로 만들어 보세요. 좌표는 스스로 계산합니다 — 세로변이 어디까지 올라가고 윗면이 얼마가 되는지 두 값을 먼저 종이에 적은 뒤 입력하세요. 확인이 끝나면 그 연습 도형만 지우고 저장합니다.",
+    "en": "Leave the base outline alone and, in an empty area, draw a 60 x 20 rectangle as a single polyline the same way, with only the top-right corner chamfered C3 (3 mm cut at 45 degrees). Work the coordinates out yourself: write down on paper how far the vertical edge rises and how long the top face becomes before you type anything. When you have checked it, erase only that practice shape and save."
+   },
+   "recoveryNote": {
+    "ko": "3차시를 건너뛰면 4차시가 열 파일(EDU-IB-02_L03_PROFILE)이 없습니다. 되돌아오는 길은 둘입니다. ① EDU-IB-02_L02_TEMPLATE을 열어 이 차시의 「따라 하기 1~3」(1~16단계)만 하고 L03_PROFILE로 저장합니다 — 읽기 절은 나중에 읽어도 됩니다. ② L02_TEMPLATE도 없으면 2차시의 따라 하기부터 해야 합니다. 어느 쪽이든 「보스 원과 목 접선」 절은 반드시 읽으세요. 4차시의 필렛과 5차시의 사분점 잡기가 이 원과 두 접선을 전제로 합니다. 접점 스냅이 꺼져 있으면 목 선이 원에 안 닿고, 그 상태로 4차시 필렛을 걸면 호가 엉뚱한 자리에 들어갑니다.",
+    "en": "Skip Lesson 3 and Lesson 4 has no EDU-IB-02_L03_PROFILE to open. Two ways back. (1) Open EDU-IB-02_L02_TEMPLATE, do only this lesson's 'Do it 1-3' (steps 1-16) and save as L03_PROFILE - the reading sections can wait. (2) If you do not have L02_TEMPLATE either, start from Lesson 2's hands-on sections. Either way, read 'The boss circle and the web tangents'. Lesson 4's fillets and Lesson 5's quadrant picks both assume that circle and those two tangents exist. If the tangent snap was off, the web lines will not meet the circle, and filleting on top of that in Lesson 4 puts the arc in the wrong place."
+   }
+  },
+  {
+   "no": 4,
+   "slug": "lesson-04-circles-arcs",
+   "title": {
+    "ko": "원·호·오프셋",
+    "en": "Circles, Arcs, Offset"
+   },
+   "videoLength": "39:11",
+   "selfStudyMin": 100,
+   "opens": "EDU-IB-02_L03_PROFILE",
+   "saves": "EDU-IB-02_L04_FEATURES",
+   "objectives": [
+    {
+     "ko": "도면의 Ø 표기와 R 표기를 보고 CIRCLE에서 지름 입력과 반지름 입력을 골라 쓸 수 있습니다.",
+     "en": "You can pick diameter or radius entry in CIRCLE according to whether the drawing says diameter or R."
+    },
+    {
+     "ko": "축 구멍 Ø25를 보스와 같은 중심 60,62에 좌표로 그릴 수 있습니다.",
+     "en": "You can draw the 25 mm bore at 60,62 by coordinate, concentric with the boss."
+    },
+    {
+     "ko": "보스 Ø56을 안쪽으로 6 오프셋해 피치원 PCD Ø44를 만들고, 그 6이 (56−44)÷2에서 나온 값임을 설명할 수 있습니다.",
+     "en": "You can offset the 56 boss inward by 6 to make the 44 bolt circle, and explain that 6 comes from (56 - 44) / 2."
+    },
+    {
+     "ko": "OFFSET의 도면층 옵션을 현재로 바꿔 보조 원을 중심선 레이어에 넣을 수 있습니다.",
+     "en": "You can switch OFFSET's layer option to Current so the construction circle lands on the center layer."
+    },
+    {
+     "ko": "@22<45로 45도 보조선을 그어 탭 첫 구멍 자리를 정확히 잡을 수 있습니다.",
+     "en": "You can draw a 45-degree construction line with @22<45 to locate the first tapped hole exactly."
+    },
+    {
+     "ko": "ARRAYPOLAR에서 항목 수 4, 사이의 각도 90, 연관 끄기를 지정해 탭 네 개를 45·135·225·315도에 배치할 수 있습니다.",
+     "en": "You can set ARRAYPOLAR to 4 items, 90 degrees between them, association off, placing the taps at 45, 135, 225, and 315 degrees."
+    },
+    {
+     "ko": "끝원 두 개와 접선 두 개를 그리고 안쪽 반원을 잘라 장공을 만들 수 있고, 잘린 원이 호로 바뀐다는 것을 압니다.",
+     "en": "You can build a slot from two end circles and two tangent lines by trimming the inner halves, and you know the trimmed circles become arcs."
+    },
+    {
+     "ko": "MIRROR로 세로 중심선 60을 기준 삼아 오른쪽 장공을 대칭 복사할 수 있습니다.",
+     "en": "You can mirror the right-hand slot across the vertical centerline at x = 60."
+    },
+    {
+     "ko": "FILLET의 반지름을 R 옵션으로 먼저 설정한 뒤 두 선을 골라 R10 라운드를 넣을 수 있습니다.",
+     "en": "You can set the FILLET radius with the R option first, then pick two lines to insert an R10 fillet."
+    },
+    {
+     "ko": "TRIM의 절단 모서리를 필요한 선만 골라 지정하고, 남기고 싶은 쪽이 아니라 없앨 쪽을 클릭한다는 규칙을 적용할 수 있습니다.",
+     "en": "You can select only the cutting edges you need in TRIM, and apply the rule that you click the part to remove, not the part to keep."
+    },
+    {
+     "ko": "DI와 LI로 그린 것이 실제로 그 값인지 숫자로 검산할 수 있습니다.",
+     "en": "You can cross-check what you drew as numbers with DIST and LIST."
+    },
+    {
+     "ko": "SAVEAS로 앞 차시 파일을 덮어쓰지 않고 새 이름으로 차시 종료 상태를 남길 수 있습니다.",
+     "en": "You can use SAVEAS to keep the lesson's end state under a new name without overwriting the previous file."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 확인 — EDU-IB-02_L03_PROFILE",
+      "en": "Starting state - EDU-IB-02_L03_PROFILE"
+     },
+     "note": "체크포인트 게이트. 화면에 있어야 하는 것 다섯 — ① 베이스 외곽(모따기 둘 포함) ② 목 선 두 개 ③ 보스 원 ④ 중심선 두 개(빨간 점선) ⑤ 객체 스냅 켜짐. 이 차시는 끝점 스냅과 중심 스냅을 쓰므로 F3을 먼저 확인합니다. 없을 때의 복구는 recoveryNote로 링크합니다. 앞 차시 완료 상태 그림과 이 절의 출발 상태 그림은 같은 그림이어야 합니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "안쪽 형상 넷은 전부 원에서 출발한다",
+      "en": "All four inside features start as circles"
+     },
+     "note": "바깥 윤곽 안에 들어갈 형상 넷 — 축 구멍 Ø25, 피치원 위의 탭 4-M5, 장공 2-R5, 안쪽 필렛 2-R10. 넷이 전부 원에서 출발하므로 이 차시의 명령도 전부 원을 다룹니다 — 그리고(CIRCLE), 밀고(OFFSET), 끼워 넣고(FILLET), 돌려 복사합니다(ARRAYPOLAR). 이 한 줄이 이 차시의 뼈대이므로 첫 절에 둡니다. 그리고 이 차시의 규율 한 줄 — 마우스로 눈대중하지 않습니다. 원의 중심이 1밀리미터만 어긋나도 뒤가 전부 어긋납니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "Ø냐 R이냐 — CIRCLE의 D 옵션",
+      "en": "Diameter or radius - the D option in CIRCLE"
+     },
+     "note": "도면 표기가 명령의 입력을 정합니다. Ø로 적혀 있으면 반지름을 묻는 자리에서 D를 먼저 누릅니다. D를 안 누르면 정확히 두 배가 되는데 화면에서는 그냥 좀 큰 원으로 보여 알아채기 어렵습니다 — 두 원을 겹쳐 그린 그림으로 보여 줍니다. 반대로 R로 적힌 장공 끝원(R5)에서는 D를 누르지 않습니다. 앞 단계의 흐름 그대로 D를 누르면 지름 5가 되어 장공 폭이 절반이 됩니다. CIRCLE에 방법이 다섯 가지 있다는 것은 이름만 두고, 이 과정에서 쓰는 것은 중심과 지름·반지름 방식뿐이라고 범위를 못 박습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "네 명령의 규칙 — OFFSET · FILLET · ARRAYPOLAR · TRIM",
+      "en": "The rules of four commands"
+     },
+     "note": "각 명령의 함정을 규칙으로 먼저 못 박고 조작으로 넘깁니다. OFFSET: 고른 객체를 평행하게 복사하므로 중심을 다시 찍지 않아 중심이 어긋날 수 없다. 다만 도면층 옵션 기본값이 원본이라 그대로 두면 보조 원이 외형선으로 갑니다 — 현재로 바꿉니다. FILLET: 반지름 기본값이 0이라 순서를 바꾸면 호 대신 각진 모서리가 만들어지고 오류도 안 납니다. R 옵션으로 값을 먼저 넣습니다. 한 번 넣은 값은 다음 실행에도 기억됩니다. ARRAYPOLAR: 단축키 없이 이름 전체를 칩니다. 연관은 꺼 둡니다 — 켜 두면 나중에 하나만 따로 고를 수 없습니다. TRIM: 모든 객체를 경계로 잡지 않습니다. 잘라 낼 선 자체가 경계에 섞이면 어디서 끊길지 알 수 없습니다. 버전에 따라 절단 모서리를 먼저 묻기도 하고 바로 자를 부분을 묻기도 하므로 두 경우를 다 적습니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "계산해서 나오는 값들",
+      "en": "The values you calculate"
+     },
+     "note": "이 차시의 값은 전부 확정 치수표에서 가져오거나 그 값에서 계산됩니다. 계산식을 도면 위에 붙여 한 표로 모읍니다 — 오프셋 6 = (56−44)÷2 / 보조선 22 = 44÷2 / 접선 높이 13과 3 = 8±5 / 끝원 중심 41 = 29+12 / 배열 각도 90 = 360÷4 / 필렛 중심 26 = 16+10. 첫 구멍 45도는 계산이 아니라 도면에 적힌 값이라는 것, 그래서 45를 사이의 각도 칸에 넣으면 네 구멍이 반 바퀴 안에 몰린다는 것을 그림 두 장으로 나란히 보여 줍니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "지울 선과 남길 선",
+      "en": "What to erase, what to keep"
+     },
+     "note": "두 판단을 한 절에 둡니다. ① 목 사이를 지나는 베이스 윗면은 지웁니다 — 베이스와 목은 같은 판이고 둘 다 두께 12라 이어진 한 면에는 모서리가 없습니다. 남는 것은 왼쪽 5~20, 오른쪽 100~115 두 토막이고 그 양 끝이 바로 필렛을 걸 자리입니다. ② 보스 원은 온전히 둡니다 — 보스가 앞으로 8 나와 그 자리만 두께 20이고 목과 베이스는 12라, 두께가 바뀌는 원 한 바퀴가 전부 눈에 보이는 실선입니다. 아래쪽 절반을 지우면 5차시에서 사분점 32·88과 34를 잡을 수 없습니다. 도면 위에서 지울 구간과 남길 구간을 색으로 갈라 보여 줍니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 축 구멍·피치원·탭 네 개 (1~7단계)",
+      "en": "Do it 1 - bore, bolt circle, four taps (steps 1-7)"
+     },
+     "note": "OPEN → Z A → F3 → 외형선 레이어 확인 → C 60,62 D 25 → 중심선 레이어로 → O · L 옵션으로 도면층 현재 · 거리 6 · 보스 원 클릭 · 원 안쪽 클릭 → 피치원 골라 Ctrl+1 선종류축척 0.5 → L 60,62 @22<45 → 외형선 레이어로 → C 보조선 끝점(끝점 표식이 뜬 뒤에 클릭 — 미세한 오차가 배열로 네 배가 됩니다) D 5 → ARRAYPOLAR 원 선택 · 중심 60,62 · I 4 · A 90 · AS N · X → E로 45도 보조선 지우기. 보조선을 그때그때 지우는 이유(남겨 두면 자르기나 필렛에서 엉뚱한 선을 뭅니다)를 붙입니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 장공 두 개 (8~11단계)",
+      "en": "Do it 2 - the two slots (steps 8-11)"
+     },
+     "note": "C 29,8 반지름 5(여기서는 D를 누르지 않습니다) → CO 기준점 0,0 두 번째 점 12,0 → L 29,13 · 41,13 → L 29,3 · 41,3(두 원은 반지름이 같고 중심 높이가 같아 접선이 수평선입니다. 중심 8에 반지름 5이니 위 13, 아래 3) → 확대해 접선 양 끝이 원에 정확히 닿는지 확인 → TR로 왼쪽 원의 오른쪽 반, 오른쪽 원의 왼쪽 반 자르기 → MI로 장공 네 조각 선택 · 대칭축 60,0과 60,90 · 원본 삭제 N. 창 선택에 베이스 바깥선이 같이 잡히면 외곽까지 대칭 복사돼 선이 겹친다는 것을 굵게 둡니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — 윗면 정리와 필렛, 검산, 저장 (12~16단계)",
+      "en": "Do it 3 - clean the top face, fillets, cross-check, save (steps 12-16)"
+     },
+     "note": "TR로 목 선 두 개만 경계로 잡고 베이스 윗면 한가운데(60,16 근처)를 클릭 → F · R · 10 · 윗면 오른쪽 토막(모서리보다 오른쪽)과 오른쪽 목 선(모서리보다 위쪽) → F로 왼쪽도 같은 반지름(현재 반지름이 10인지 명령행에서 확인) → DI·LI 검산 → SAVEAS EDU-IB-02_L04_FEATURES. FILLET에서 남기고 싶은 쪽을 클릭 위치로 정한다는 규칙을 그림으로 보여 줍니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "13항목. 값으로 판정되는 것을 위에 둡니다 — DI로 왼쪽 장공 두 끝원 중심 = 12 / DI로 왼쪽 장공 왼쪽 끝원과 오른쪽 장공 왼쪽 끝원 = 50(29→79), 오른쪽 끝원끼리도 50(41→91) / 장공 한가운데 35·85에는 클릭할 객체가 없다는 사실(중심 스냅이 걸리는 곳은 29·41·79·91뿐) / LI로 피치원 도면층 중심선 · 반지름 22 / LI로 축 구멍 반지름 12.5 / 피치원이 빨간 일점쇄선인가 / 접선 양 끝이 원에 정확히 닿는가 / 장공 안쪽에 곡선이 남았는가 / 탭 네 개가 45·135·225·315도인가 / 필렛 중심 높이 26 = 16+10 / 윗면 토막이 5~20과 100~115인가 / 보스 원이 온전한가. 각 항목에 「다르면 몇 단계로」를 답니다."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "4차시에서 확정된 것",
+      "en": "Settled in Lesson 4"
+     },
+     "note": "정면도의 형상은 이걸로 전부 들어갔습니다. 완료 상태 그림 한 장(확정 검정, 이번 추가 마젠타, 아직 없는 것 회색 점선 — 이제 회색은 다른 두 뷰뿐입니다). 마지막에 「오늘 쓴 명령은 시험에서만 쓰는 것이 아닙니다 — 설비 자리를 재고 지그를 그릴 때 쓰고, 스페어 파트 도면을 확인할 때도 그대로 씁니다」를 둡니다. 특히 오프셋은 벽체 두께나 통로 여유를 잡을 때 쓴다는 대응을 명시합니다."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "OPEN · Z · F3 · CLAYER · C · O · Ctrl+1 · L · ARRAYPOLAR · E · CO · TR · MI · F · DI · LI · F2 · SAVEAS. L이 LINE이면서 OFFSET 안에서는 도면층 옵션 키라는 것을 「언제 쓰나」 칸에서 갈라 씁니다."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "네 가지 실수를 증상→원인→복구로 답하게 합니다 — 반지름 자리에 지름 / 배열 각도를 45로 / 필렛 반지름 미설정 / 장공 안쪽 미절단. 네 실수 모두 오류 메시지가 나지 않아 그냥 넘어가게 되는 종류라는 공통점을 마지막에 한 줄로 정리합니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d04-four-features",
+     "what": "정면도 위에 이번 차시가 넣을 형상 넷(축 구멍·탭 네 개·장공 둘·필렛 둘)을 마젠타로, 이미 있는 것을 검정으로 표시한 지도.",
+     "why": "차시 전체가 어디에 무엇을 더하는지 한 장으로 잡아 주면, 조작 절에서 자기가 어디쯤인지 잃지 않습니다."
+    },
+    {
+     "id": "d04-offset-arith",
+     "what": "동심원 세 개 — Ø56 보스, 오프셋 6, 그 결과 PCD Ø44. 오프셋이 반지름을 미는 것이라 6 = (56-44)/2 임을 반지름 눈금으로 표시.",
+     "why": "왜 12가 아니라 6인지가 지름과 반지름의 차이라서, 숫자만 주면 절반이 12를 넣습니다."
+    },
+    {
+     "id": "d04-array-45-vs-90",
+     "what": "같은 피치원 두 개를 나란히 — 왼쪽은 사이의 각도 90(45·135·225·315에 균등), 오른쪽은 사이의 각도 45(네 개가 반 바퀴 안에 몰림).",
+     "why": "'45는 첫 구멍의 자리이고 90이 간격'이라는 문장은 틀린 결과를 함께 보여 줘야 각인됩니다."
+    },
+    {
+     "id": "d04-slot-build",
+     "what": "장공 만드는 네 단계를 가로로 — 끝원 둘(중심 29·41, 반지름 5) → 수평 접선 둘(y = 13과 3) → 안쪽 반원 자르기 → 알약. 잘린 원이 호가 되었음을 표시.",
+     "why": "원 하나로는 안 나오는 형상이라, 만드는 순서 자체가 이 절의 내용입니다. 순서는 텍스트가 아니라 그림으로 옮깁니다."
+    },
+    {
+     "id": "d04-fillet-click-side",
+     "what": "베이스 윗면 토막과 목 선이 만나는 모서리 확대. 남길 쪽을 클릭했을 때와 반대쪽을 클릭했을 때의 결과를 나란히.",
+     "why": "'클릭한 위치가 어느 쪽을 남길지 정한다'는 규칙이 이 차시에서 가장 되돌리기 잦은 실수입니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "보스 Ø56에서 피치원 Ø44를 만들 때 오프셋 거리가 왜 12가 아니라 6입니까?",
+     "en": "Offsetting the 56 boss to the 44 bolt circle - why is the distance 6 and not 12?",
+     "answer": {
+      "ko": "오프셋은 지름이 아니라 반지름을 밉니다. 지름 차이 12의 절반인 6이 반지름 차이입니다. (56−44)÷2 = 6.",
+      "en": "Offset moves the radius, not the diameter. Half of the 12 mm diameter difference is 6, which is the radius difference: (56 - 44) / 2 = 6."
+     }
+    },
+    {
+     "ko": "도면에 45도라고 적혀 있습니다. ARRAYPOLAR의 「사이의 각도」에 45를 넣습니까?",
+     "en": "The drawing says 45 degrees. Do you enter 45 as ARRAYPOLAR's angle between items?",
+     "answer": {
+      "ko": "아닙니다. 45는 첫 구멍이 놓이는 자리이고, 사이의 각도는 360 ÷ 4 = 90입니다. 45를 넣으면 네 구멍이 반 바퀴 안에 몰립니다.",
+      "en": "No. 45 is where the first hole sits; the angle between items is 360 / 4 = 90. Entering 45 bunches all four holes into half a turn."
+     }
+    },
+    {
+     "ko": "DI로 장공 간격 50을 재려는데 장공 한가운데 35와 85가 안 잡힙니다. 어디를 찍습니까?",
+     "en": "You want to measure the 50 mm slot spacing with DIST, but nothing snaps at the slot centers 35 and 85. What do you pick?",
+     "answer": {
+      "ko": "장공은 호 두 개와 직선 두 개로만 되어 있어 중심 스냅이 걸리는 곳은 끝원 중심 29·41·79·91뿐입니다. 같은 자리끼리 재야 50이 나옵니다 — 왼쪽끼리 29→79, 오른쪽끼리 41→91.",
+      "en": "A slot is only two arcs and two lines, so center snap catches only the end-arc centers at 29, 41, 79, and 91. Measure like to like: 29 to 79, or 41 to 91 - both give 50."
+     }
+    },
+    {
+     "ko": "필렛을 걸었는데 호가 아니라 각진 모서리가 만들어졌습니다. 오류 메시지는 없었습니다. 무엇을 빠뜨렸습니까?",
+     "en": "Your fillet produced a sharp corner instead of an arc, with no error message. What did you omit?",
+     "answer": {
+      "ko": "R 옵션으로 반지름을 먼저 넣지 않았습니다. FILLET의 반지름 기본값이 0이라 0으로 실행된 것입니다. F 다음 R 다음 10을 넣고 다시 두 선을 고릅니다.",
+      "en": "You did not set the radius with the R option first. FILLET defaults to 0, so it ran at 0. Type F, then R, then 10, and pick the two lines again."
+     }
+    },
+    {
+     "ko": "보스 원의 아래쪽 절반을 지워도 됩니까?",
+     "en": "May you erase the lower half of the boss circle?",
+     "answer": {
+      "ko": "안 됩니다. 보스가 앞으로 8 나와 그 자리만 두께 20이고 목과 베이스는 12라, 두께가 바뀌는 원 한 바퀴가 전부 눈에 보이는 실선입니다. 지우면 5차시에서 사분점 32와 88, 그리고 34를 잡을 수 없습니다.",
+      "en": "No. The boss projects 8 forward so its area is 20 thick while the web and base are 12; the full circle is the edge where thickness changes, so all of it is a visible line. Erase it and you cannot pick the quadrants at 32 and 88, or 34, in Lesson 5."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "도면틀 밖 빈 자리에 지름 40 원을 하나 그리고, 그 위에 PCD Ø28로 M4 구멍 세 개를 첫 구멍 30도에 놓아 보세요. 오프셋 거리와 사이의 각도를 스스로 계산합니다 — 오프셋은 (40−28)÷2, 사이의 각도는 360÷3입니다. 보조선 길이는 28÷2입니다. 다 하면 연습 도형만 지우고 저장합니다. 이 계산이 손에 붙으면 시험에서 개수와 피치원 지름이 바뀌어도 흔들리지 않습니다.",
+    "en": "In an empty area outside the border, draw a 40 mm circle and place three M4 holes on a 28 mm bolt circle with the first at 30 degrees. Work out the offset distance and the angle between items yourself: the offset is (40 - 28) / 2 and the angle is 360 / 3. The construction line is 28 / 2 long. Erase the practice shapes when you are done, then save. Once this arithmetic is automatic, a different hole count or bolt circle in the exam will not throw you."
+   },
+   "recoveryNote": {
+    "ko": "4차시를 건너뛰면 5차시가 열 파일(EDU-IB-02_L04_FEATURES)이 없고, 있더라도 투상할 형상이 없어 평면도·우측면도의 숨은선을 그릴 수 없습니다. 되돌아오는 길은 EDU-IB-02_L03_PROFILE을 열어 「따라 하기 1~3」(1~16단계)만 하고 L04_FEATURES로 저장하는 것입니다. 읽기 절 중 「지울 선과 남길 선」만은 반드시 읽으세요 — 보스 원을 온전히 남긴다는 판단을 모르면 5차시에서 사분점 32·88·34를 잡을 수 없고, 베이스 윗면을 안 지우면 6차시 정리에서 무엇이 형상선인지 구분이 안 됩니다. 필렛 R10이 안 들어가 있으면 7차시의 목 밑동 80 기입(확장 교차점 스냅)이 성립하지 않습니다.",
+    "en": "Skip Lesson 4 and Lesson 5 has no EDU-IB-02_L04_FEATURES to open - and even with the file, there is nothing to project, so you cannot draw the hidden lines in the top and right views. The way back is to open EDU-IB-02_L03_PROFILE, do only 'Do it 1-3' (steps 1-16), and save as L04_FEATURES. Of the reading sections, read 'What to erase, what to keep' at minimum: without the decision to keep the boss circle whole you cannot pick quadrants 32, 88, and 34 in Lesson 5, and without trimming the base top face you cannot tell shape lines from leftovers when cleaning up in Lesson 6. If the R10 fillets are missing, the 80 mm web-foot dimension in Lesson 7 has no extended intersection to snap to."
+   }
+  },
+  {
+   "no": 5,
+   "slug": "lesson-05-three-views",
+   "title": {
+    "ko": "제3각법 3뷰와 반복",
+    "en": "Third-Angle Views and Repetition"
+   },
+   "videoLength": "44:43",
+   "selfStudyMin": 144,
+   "opens": "EDU-IB-02_L04_FEATURES",
+   "saves": "EDU-IB-02_L05_VIEWS",
+   "objectives": [
+    {
+     "ko": "제3각법이 본 방향에 그 뷰를 놓는 방식임을 설명하고, 정면도 위에 평면도·오른쪽에 우측면도를 배치할 수 있습니다.",
+     "en": "You can explain that third-angle projection puts each view on the side you looked from, and place the top view above and the right side view to the right of the front view."
+    },
+    {
+     "ko": "정면도로 삼을 면을 세 가지 기준으로 고를 수 있습니다 — 형상이 가장 잘 드러나는 면, 실제 놓이거나 조립되는 자세, 숨은선이 가장 적게 나오는 방향.",
+     "en": "You can choose the front view by three criteria: the face that shows the shape best, the orientation it is assembled or set in, and the direction producing the fewest hidden lines."
+    },
+    {
+     "ko": "XLINE 구성선을 치수선 레이어에 긋고, 정면도의 모서리·모따기 끝점·원 사분점에서 폭과 높이를 받아올 수 있습니다.",
+     "en": "You can draw XLINE construction lines on the dimension layer and carry width and height across from corners, chamfer ends, and circle quadrants."
+    },
+    {
+     "ko": "OFFSET으로 평면도의 깊이선(보스 앞면·판 앞면·뒷면)을 8과 12로 만들고 두께 20을 구성할 수 있습니다.",
+     "en": "You can build the top view's depth lines with OFFSET at 8 and 12 to make up the 20 mm thickness."
+    },
+    {
+     "ko": "격자를 그리고 TRIM으로 잘라내는 방법과 교차점을 따라 한 번에 이어 그리는 방법을 구분해 쓸 수 있습니다.",
+     "en": "You can choose between drawing a grid and trimming it, and tracing the outline through intersections in one pass."
+    },
+    {
+     "ko": "45도 선을 두 뷰의 앞면이 만나는 점에 걸고, 평면도의 세로 거리를 우측면도의 가로 거리로 재지 않고 옮길 수 있습니다.",
+     "en": "You can hang the 45-degree line at the point where both views' front faces meet, and transfer depth from the top view to the right view without measuring."
+    },
+    {
+     "ko": "보이면 외형선 · 있는데 안 보이면 숨은선 · 아예 없으면 안 그림 — 세 갈래로 판단해 숨은선을 넣을 수 있습니다.",
+     "en": "You can apply the three-way rule: visible means a visible line, present but obscured means a hidden line, absent means nothing at all."
+    },
+    {
+     "ko": "축 구멍은 두께 20 관통, 탭은 보스 앞면에서 10까지, 장공은 판 두께 12 구간으로 각각 다른 길이의 숨은선을 그을 수 있습니다.",
+     "en": "You can draw three different hidden-line lengths: the bore through all 20, the taps 10 deep from the boss face, and the slots across the 12 mm plate only."
+    },
+    {
+     "ko": "MIRROR로 우측면도 아래쪽 탭과 평면도 오른쪽 장공을 계산 없이 만들 수 있습니다.",
+     "en": "You can mirror the lower taps in the right view and the right-hand slot in the top view without calculating anything."
+    },
+    {
+     "ko": "치수선 레이어를 껐다 켜서 투상선이 다른 레이어에 섞이지 않았는지 검산할 수 있습니다.",
+     "en": "You can toggle the dimension layer off and on to prove no construction line strayed onto another layer."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 확인 — EDU-IB-02_L04_FEATURES",
+      "en": "Starting state - EDU-IB-02_L04_FEATURES"
+     },
+     "note": "체크포인트 게이트에 자리 확인이 하나 더 붙는 차시입니다. 화면에 있어야 하는 것 여섯 — ① 정면도의 형상이 전부(외곽·모따기·필렛 둘·보스 원·축 구멍·탭 넷·장공 둘) ② 보스 원이 온전한 원 ③ 중심선 ④ 정면도가 도면틀 안 왼쪽 아래에 있고 위쪽과 오른쪽에 빈자리가 남아 있음 ⑤ 객체 스냅 켜짐 ⑥ 레이어 넷. ④가 이 차시 고유입니다 — 정면도가 도면틀 가운데나 오른쪽 위에 있으면 평면도와 우측면도가 도면틀 밖으로 나갑니다. 빈자리가 모자라면 3차시의 UCS 배치를 다시 잡는 것이 뒤에 가서 뷰를 옮기는 것보다 빠르다고 판단 근거까지 씁니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "세 뷰와 정면도 선정",
+      "en": "Three views, and choosing the front"
+     },
+     "note": "세 뷰는 시험 형식이 아니라 물건 하나를 남에게 설명하는 최소 단위입니다. 정면도부터 정하고 나면 나머지 두 뷰는 따라옵니다. 선정 기준 셋을 카드로 — 형상이 가장 잘 드러나는 면 / 실제 놓이거나 조립되는 자세 / 숨은선이 가장 적게 나오는 방향. 이 부품에 세 기준을 적용해 왜 지금 이 면이 정면인지 실제로 판정해 보입니다. 8차시 시험 안내의 「어느 면을 정면으로 삼을지 먼저 정하는 것이 순서」와 같은 판단이므로 여기서 근거를 확정합니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "제3각법 — 본 방향에 그 뷰를 놓는다",
+      "en": "Third angle - the view goes where you looked from"
+     },
+     "note": "위에서 봤으니 위에 두고, 오른쪽에서 봤으니 오른쪽에 둡니다. 제1각법과 나란히 놓은 배치도 두 장으로 차이를 보입니다. 기호는 반드시 방향까지 맞게 그립니다 — 판별 기준은 원의 좌우 위치가 아니라 원뿔대의 어느 쪽 끝이 원을 향하는가이고, 제3각법은 작은 끝이 원을 향합니다. 기억으로 그리지 않고 확인합니다. 뒤집어 그리면 투상법을 가르치는 그림이 정반대를 가르치게 됩니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "투상선은 도면에 남지 않는 선",
+      "en": "Construction lines do not stay on the drawing"
+     },
+     "note": "투상선은 같은 값을 두 번 재지 않으려고 긋는 자입니다. 치수선 레이어에 긋는 이유를 셋으로 씁니다 — 외형선에 그으면 지우는 것을 잊었을 때 흰 실선이 진짜 모서리로 읽히고, 중심선·숨은선에 섞이면 나중에 구분이 안 되고, 치수선 레이어는 지금 비어 있어 마지막에 이 레이어만 껐다 켜면 다 지워졌는지 바로 확인됩니다. XLINE이 무한히 뻗는다는 성질이 왜 이득인지도 여기서 — 한 번 그으면 세 뷰를 다 지나가므로 평면도를 만들며 그은 90 선이 우측면도의 맨 위 선으로 그대로 쓰입니다. 이 차시에서는 지우지 않고 남겨 두며 6차시에 QSELECT로 한 번에 걷어낸다는 예고도 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "45도 선이 깊이를 옮긴다",
+      "en": "The 45-degree line transfers depth"
+     },
+     "note": "깊이는 정면도에 없고 평면도에서 처음 정해집니다. 45도이기 때문에 평면도의 세로 거리와 우측면도의 가로 거리가 같아집니다 — 자로 재서 옮기면 틀리고 이 선으로 옮기면 틀릴 수가 없습니다. 통과점을 아무 데나 찍으면 각도만 45도이고 두 뷰가 안 맞습니다. 반드시 우측면도 맨 왼쪽 세로선과 평면도 맨 아래 선의 교차점, 곧 두 뷰의 앞면끼리 만나는 점을 잡습니다. 깊이 방향 규약도 여기서 못 박습니다 — 평면도는 위쪽이 뒷면 아래쪽이 앞면, 우측면도는 왼쪽이 앞면 오른쪽이 뒷면입니다. 8과 12의 순서를 바꾸면 보스가 뒤로 나온 부품이 됩니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "받아오는 값과 새로 정하는 값",
+      "en": "Values carried across, values newly set"
+     },
+     "note": "이 차시에서 새로 재는 값은 사실상 두께 12와 보스 자리 20 둘뿐이고 나머지는 이미 그어 놓은 선에서 받아옵니다. 표 두 개로 갈라 보입니다. 받아오는 값 — 수직 투상선 일곱 자리(0 · 5 · 32 · 60 · 88 · 115 · 120), 수평 투상선 여섯 자리(0 · 8 · 11 · 16 · 34 · 62)와 이미 그은 90. 새로 정하는 값 — 두께 12, 보스 돌출 8, 그 합 20. 32와 88을 계산해 입력하지 않고 원의 사분점에서 직접 받는 이유(입력하는 순간 오타가 들어오고, 원이 조금이라도 옮겨져 있으면 그 오차가 그대로 남습니다)를 씁니다. 뷰 간격 30과 중심선 여유 5는 정해진 값이 아니라 그리는 사람이 정하는 작도 선택이라고 명시하고 규격으로 적지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "숨은선 셋의 서로 다른 길이",
+      "en": "Three hidden lines, three different lengths"
+     },
+     "note": "판단 규칙 한 줄 — 보이면 외형선, 있는데 안 보이면 숨은선, 아예 없으면 안 그립니다. 그리고 이 부품의 세 구멍이 왜 서로 다른 길이인지를 단면 그림 하나로 한꺼번에 보입니다. 축 구멍 Ø25는 관통이고 그 자리가 보스라 두께 20 전체(평면도 47.5·72.5 세로, 우측면도 49.5·74.5 가로). 탭 4-M5는 관통이 아니라 보스 앞면에서 10까지만 들어가 두께 20의 한가운데에서 허공에 끝난 것처럼 보이며 그게 맞습니다(가로 자리 44.4·75.6은 22×cos45 ≈ 15.6을 60에서 빼고 더한 값). 장공은 관통이지만 보스가 없는 자리라 판 두께 12 구간에만 들어가고 축 구멍보다 시작 깊이가 8 늦습니다. 탭 안쪽 줄 46.9와 축 구멍 47.5가 0.6밖에 안 떨어져 축소하면 한 줄로 보인다는 확대 확인 지시도 여기 둡니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 수직 투상선과 평면도 (1~6단계)",
+      "en": "Do it 1 - vertical projectors and the top view (steps 1-6)"
+     },
+     "note": "OPEN → 치수선 레이어로(타이핑할 명령이 없어 건너뛰기 쉬운 단계이므로 「목록의 현재 레이어가 실제로 치수선인지 눈으로 확인하고 넘어가세요」를 굵게) → XL V로 일곱 자리 수직 투상선(32와 88은 보스 원의 좌우 사분점에서 받습니다. 사분점은 위아래 좌우 네 점이므로 위아래가 잡히면 확대해 다시 잡습니다) → 외형선 레이어로 바꾸고 OFFSET으로 깊이선 셋(90 선 위 30이 보스 앞면, 다시 8 위가 판 앞면, 다시 12 위가 뒷면) → 격자 그리기 → TRIM으로 다듬기. OFFSET의 두 번째 클릭이 거리가 아니라 방향만 정한다는 것, 아래쪽을 클릭하면 뷰가 겹친다는 것을 붙입니다. 5단계에서 격자처럼 보이고 필요 없는 구간이 섞여 있는 것이 정상이며 여기서 미리 지우려 하지 않는다고 안심시킵니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 45도 선과 우측면도 (7~10단계)",
+      "en": "Do it 2 - the 45-degree line and the right view (steps 7-10)"
+     },
+     "note": "우측면도 자리에 세로선 셋(보스 앞면 · 8 오른쪽 판 앞면 · 20 뒷면) → XL A 45로 45도 선을 두 뷰 앞면의 교차점에 걺 → XL H로 수평 투상선 여섯(16은 도면에 점이 없어 FROM으로 잡고, 8은 장공 끝원의 중심 스냅으로 잡습니다. 90은 이미 그었으니 다시 긋지 않습니다 — 다시 그으면 같은 자리에 두 겹) → 교차점을 따라 우측면도 윤곽을 한 번에 이어 그림 → 중심선 셋(평면도 축 30 = 20+5+5, 우측면도 축 30, 우측면도 장공 22 = 12+5+5). 여기서 치는 C가 CIRCLE이 아니라 LINE의 닫기 옵션이라는 것을 굵게 둡니다. 5단계의 격자 방식과 9단계의 이어 그리기 방식을 나란히 비교하는 문단을 절 끝에 둡니다 — 잘라낼 구간이 많으면 격자, 윤곽이 한 줄로 이어지면 곧장."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — 숨은선 셋과 대칭 복사, 저장 (11~16단계)",
+      "en": "Do it 3 - three hidden lines, mirrors, save (steps 11-16)"
+     },
+     "note": "숨은선 레이어로 바꾸고 축 구멍(평면도 세로 두 줄 두께 20 전체, 우측면도 가로 두 줄) → 탭(평면도 길이 10 네 줄, 우측면도 위 두 줄 뒤 MIRROR로 중심 62 기준 아래 두 줄. 원본 삭제 프롬프트에서 기본값을 그냥 누르면 위쪽이 사라지므로 반드시 N) → 장공(평면도 길이 12 네 줄, 우측면도 가로 12 두 줄 — 장공 둘은 높이가 같아 한 쌍으로 겹치므로 두 줄이면 충분합니다) → 치수선 레이어 껐다 켜기로 투상선 확인(끈 채로 저장하면 다음 차시에 투상선이 안 보입니다) → SAVEAS EDU-IB-02_L05_VIEWS. 매 단계 「노란 점선인가 흰 실선인가」를 확인 항목으로 답니다 — 실선은 보이는 모서리라는 뜻이라 안에 뚫린 구멍이 겉면에 파인 홈처럼 읽힙니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "15항목. 레이어 껐다 켜기를 맨 위에 둡니다 — 치수선 레이어를 끄면 투상선이 하나도 남지 않아야 하고 남은 선은 다른 레이어에 그린 것입니다(확인 뒤 반드시 다시 켭니다). 이어 정렬 검산 — 평면도가 정면도 위인가, 우측면도가 오른쪽인가, 평면도 좌우 끝이 정면도와 세로로 맞는가, 우측면도 위아래 끝이 정면도와 가로로 맞는가. 형상 검산 — 평면도가 가로 120 세로 12이고 가운데 폭 56이 아래로 8 더 나왔는가, 우측면도가 아래 폭 12이고 34부터 위는 20인가. 숨은선 검산 — 축 구멍이 두 뷰 모두 20 전체인가, 탭 네 줄이 모두 10이고 두께 한가운데에서 끝나는가, 확대했을 때 탭 안쪽 줄 46.9와 축 구멍 47.5가 붙지 않았는가, 장공이 판 앞면에서 시작해 12이고 보스 앞면까지 내려가지 않았는가, 우측면도 장공이 두 줄인가. 색 검산 — 숨은선 노란 점선, 중심선 빨간 일점쇄선. 점선이 실선처럼 보이면 LTSCALE을 키우고 값을 바꿔도 화면이 그대로면 RE로 재생성합니다."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "5차시에서 확정된 것",
+      "en": "Settled in Lesson 5"
+     },
+     "note": "정면도 하나에서 뷰 두 개를 만들었고 새로 정한 값은 두께 12와 보스 자리 20뿐이었다는 것이 이 차시의 결론입니다. 두 작도 방법(격자 후 잘라내기 / 교차점 따라 이어 그리기)을 언제 쓰는지, 45도 선이 왜 재지 않고 옮기는 장치인지, 숨은선 셋을 왜 다르게 넣었는지를 각각 한 줄로. 완료 상태 그림은 세 뷰 전부와 남아 있는 투상선을 함께 보여야 합니다 — 6차시 출발 상태가 「도면이라기보다 작업 흔적」인 것이 정상이기 때문입니다."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "OPEN · Z · A · XL · V · H · 45 · O · L · C(LINE 닫기) · TR · FROM · MI · N · LAYER · QSELECT(이름만 예고, 실제로는 6차시) · LTSCALE · RE · SAVEAS · F3. 이 차시의 C는 CIRCLE이 아니라는 것을 「언제 쓰나」 칸에 명시합니다."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "판정이 값으로 되는 문항을 우선합니다 — 숨은선 세 길이의 근거, 45도 선의 통과점, 사분점을 쓰는 이유, 치수선 레이어 검산의 뜻. 마지막 문항은 배치 판정(제3각법인지 제1각법인지)으로 둡니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d05-third-vs-first",
+     "what": "같은 부품을 제3각법과 제1각법으로 배치한 두 그림과, 각 배치에 붙는 기호. 제3각법 기호는 원뿔대의 작은 끝이 원을 향합니다.",
+     "why": "배치 규칙은 말로 외우면 반대로 기억합니다. 두 배치를 나란히 놓고 기호까지 함께 보여야 판별이 손에 남습니다."
+    },
+    {
+     "id": "d05-projector-map",
+     "what": "세 뷰 위에 수직 투상선 일곱과 수평 투상선 일곱을 보라색으로 겹쳐 그리고, 각 선이 정면도의 어느 점에서 나왔는지(모서리·모따기 끝·사분점) 표시.",
+     "why": "'같은 값을 두 번 재지 않는다'는 원리가 어느 선에서 어느 값이 건너가는지 보일 때만 이해됩니다."
+    },
+    {
+     "id": "d05-45-transfer",
+     "what": "평면도의 세로 거리 8과 20이 45도 선을 거쳐 우측면도의 가로 8과 20이 되는 경로. 통과점(두 뷰 앞면의 교차점)을 강조.",
+     "why": "이 차시의 핵심 장치이고, 통과점을 잘못 잡는 것이 가장 흔한 실패입니다. 경로를 그림으로 보여 주면 통과점의 필연성이 따라옵니다."
+    },
+    {
+     "id": "d05-hidden-depths",
+     "what": "부품의 깊이 방향 단면 하나 — 뒷면에서 앞면까지 20을 눈금으로 놓고 축 구멍(0~20), 탭(0~10), 장공(8~20) 세 구간을 서로 다른 길이의 파선으로 표시.",
+     "why": "세 구멍이 왜 서로 다른 길이의 숨은선이 되는지는 정면에서는 보이지 않는 방향의 이야기라, 단면 하나가 문단 다섯 개를 대신합니다."
+    },
+    {
+     "id": "d05-tap-vs-bore-gap",
+     "what": "평면도 확대 — 탭 숨은선 안쪽 줄 46.9와 축 구멍 숨은선 47.5 사이 0.6 간격.",
+     "why": "축소하면 한 줄로 보이는 자리라, 확대 확인을 지시하려면 무엇을 봐야 하는지 그림이 필요합니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "축 구멍·탭·장공의 숨은선이 서로 다른 길이인 이유를 각각 한 줄로 쓰세요.",
+     "en": "In one line each, why do the bore, the taps, and the slots produce hidden lines of different lengths?",
+     "answer": {
+      "ko": "축 구멍은 앞뒤로 관통하고 그 자리가 보스라 두께 20 전체입니다. 탭은 관통이 아니라 보스 앞면에서 10까지만 들어가고 멈춥니다. 장공은 관통이지만 보스가 없는 자리라 판 두께 12 구간에만 들어갑니다.",
+      "en": "The bore goes right through and sits where the boss is, so it spans all 20. The taps do not go through - they stop 10 deep from the boss face. The slots go through but sit where there is no boss, so they span only the 12 mm plate."
+     }
+    },
+    {
+     "ko": "45도 선의 통과점은 어디에 잡습니까? 아무 데나 찍으면 무엇이 잘못됩니까?",
+     "en": "Where do you place the 45-degree line's through point, and what breaks if you put it anywhere?",
+     "answer": {
+      "ko": "우측면도 맨 왼쪽 세로선과 평면도 맨 아래 선의 교차점, 곧 두 뷰의 앞면끼리 만나는 점입니다. 아무 데나 찍으면 각도만 45도이고 두 뷰가 서로 안 맞아 깊이가 어긋난 채로 옮겨집니다.",
+      "en": "At the intersection of the right view's leftmost vertical line and the top view's lowest line - the point where both views' front faces meet. Put it anywhere else and only the angle is 45; the two views no longer line up and the depth transfers wrong."
+     }
+    },
+    {
+     "ko": "평면도의 가로 자리 32와 88을 계산해서 입력하지 않고 원의 사분점에서 받는 이유는 무엇입니까?",
+     "en": "Why take 32 and 88 from the circle's quadrants instead of typing them?",
+     "answer": {
+      "ko": "입력하는 순간 오타가 들어올 수 있고, 원이 조금이라도 옮겨져 있으면 그 오차가 그대로 남기 때문입니다. 원에서 직접 받으면 원이 어디 있든 투상선이 원을 따라갑니다.",
+      "en": "Typing invites a typo, and if the circle has shifted at all, that error stays in the number. Taking it from the circle means the projector follows the circle wherever it is."
+     }
+    },
+    {
+     "ko": "치수선 레이어를 껐는데 사라지지 않은 선이 있습니다. 무엇을 뜻합니까?",
+     "en": "You turned the dimension layer off and some lines stayed. What does that mean?",
+     "answer": {
+      "ko": "그 선은 치수선이 아닌 다른 레이어에 그려진 투상선입니다. 2단계에서 레이어를 바꾸지 않고 XL을 시작한 것입니다. 확인이 끝나면 전구를 반드시 다시 켭니다 — 꺼진 채로 저장하면 다음 차시에 투상선이 안 보입니다.",
+      "en": "Those are construction lines drawn on some other layer - you started XLINE before switching layers in step 2. Turn the layer back on when you are done: saving with it off means the construction lines are invisible next lesson."
+     }
+    },
+    {
+     "ko": "평면도가 정면도 아래에, 우측면도가 왼쪽에 있습니다. 무엇으로 배치한 것입니까?",
+     "en": "Your top view is below the front view and the right view is on the left. Which projection is that?",
+     "answer": {
+      "ko": "제1각법입니다. 제3각법은 본 방향에 그 뷰를 놓으므로 위에서 본 것은 위에, 오른쪽에서 본 것은 오른쪽에 둡니다.",
+      "en": "First-angle. Third-angle puts each view on the side you looked from: what you saw from above goes above, what you saw from the right goes to the right."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "도면틀 밖 빈 자리에 가로 40 세로 25 직사각형을 정면도로 그리고, 두께를 10으로 정해 평면도와 우측면도를 만들어 보세요. 45도 선을 걸어 깊이를 옮기는 것까지 합니다. 그다음 가운데에 Ø10 관통 구멍을 하나 넣고 두 뷰에 숨은선을 그으세요. 관통이므로 두께 10 전체입니다. 다 하면 연습 도형만 지우고 저장합니다 — 실제 부품의 세 뷰는 건드리지 않습니다.",
+    "en": "In an empty area outside the border, draw a 40 x 25 rectangle as a front view, set its thickness to 10, and build the top and right side views, including hanging a 45-degree line to transfer depth. Then put one 10 mm through hole in the middle and draw its hidden lines in both views - it goes right through, so they span the full 10. Erase only the practice shapes when you are done, then save; leave the real part's three views alone."
+   },
+   "recoveryNote": {
+    "ko": "5차시를 건너뛰면 6차시가 정리할 대상이 없습니다 — 6차시의 첫 작업이 5차시에 그은 구성선을 QSELECT로 걷어내는 것이라, 구성선이 없으면 그 절이 통째로 성립하지 않습니다. 되돌아오는 길은 EDU-IB-02_L04_FEATURES를 열어 「따라 하기 1~3」(1~16단계)만 하고 L05_VIEWS로 저장하는 것입니다. 읽기 절 중 「투상선은 도면에 남지 않는 선」과 「숨은선 셋의 서로 다른 길이」 둘은 반드시 읽으세요 — 앞의 것을 모르면 투상선을 외형선 레이어에 그어 6차시에서 QSELECT가 형상선까지 잡고, 뒤의 것을 모르면 세 구멍의 숨은선을 전부 같은 길이로 그어 도면이 4-M5 깊이 10과 다른 말을 하게 됩니다. 투상선은 이 차시에서 지우지 않고 남겨 두는 것이 정상입니다.",
+    "en": "Skip Lesson 5 and Lesson 6 has nothing to clean up - its first job is clearing Lesson 5's construction lines with QSELECT, and without them that section has no subject. The way back is to open EDU-IB-02_L04_FEATURES, do only 'Do it 1-3' (steps 1-16), and save as L05_VIEWS. Read two of the reading sections at minimum: 'Construction lines do not stay on the drawing' - skip it and you will draw projectors on the visible-line layer, so Lesson 6's QSELECT sweeps up real geometry too - and 'Three hidden lines, three different lengths' - skip it and you will draw all three holes the same length, making the drawing contradict the 4-M5 depth 10 callout. Leaving the construction lines in place at the end of this lesson is correct, not an oversight."
+   }
+  },
+  {
+   "no": 6,
+   "slug": "lesson-06-editing-symbols",
+   "title": {
+    "ko": "편집과 표현",
+    "en": "Cleaning Up and Reading the Symbols"
+   },
+   "videoLength": "42:30",
+   "selfStudyMin": 93,
+   "opens": "EDU-IB-02_L05_VIEWS",
+   "saves": "EDU-IB-02_L06_REPRESENTED",
+   "objectives": [
+    {
+     "ko": "투상선·보조선이 형상선이 아니라 위치를 맞추려고 쓴 자임을 설명하고, 남겨 두면 도면이 지시가 아니라 그림이 되는 이유를 말할 수 있습니다.",
+     "en": "You can explain that construction and guide lines are rulers, not geometry, and why leaving them turns a drawing from an instruction into a picture."
+    },
+    {
+     "ko": "QSELECT에서 객체 유형으로 구성선만 걸어 투상선 전부를 한 번에 선택해 지울 수 있습니다.",
+     "en": "You can filter object type to construction line in QSELECT and delete every projector in one pass."
+    },
+    {
+     "ko": "TRIM과 EXTEND가 둘 다 기준선을 먼저 요구하는 같은 구조임을 설명하고, 지우기와 자르기의 차이를 말할 수 있습니다.",
+     "en": "You can explain that TRIM and EXTEND share one structure - both ask for a reference edge first - and say how erasing differs from trimming."
+    },
+    {
+     "ko": "TRIM에서는 없앨 쪽을, EXTEND에서는 늘리고 싶은 쪽 끝 근처를 클릭해야 한다는 것을 알고 그대로 조작할 수 있습니다.",
+     "en": "You can apply the click rules: in TRIM click the part to remove, in EXTEND click near the end you want lengthened."
+    },
+    {
+     "ko": "한 명령 안에서 Shift를 눌러 자르기와 늘리기를 오갈 수 있고, 왜 그것이 편한지 말할 수 있습니다.",
+     "en": "You can switch between trimming and extending with Shift inside one command, and say why that helps."
+    },
+    {
+     "ko": "창 선택과 걸침 선택의 차이를 알고, 정리할 때 왼쪽에서 오른쪽이 안전한 이유를 말할 수 있습니다.",
+     "en": "You know window selection from crossing selection, and why left-to-right is the safe direction when cleaning up."
+    },
+    {
+     "ko": "정면도 장공 두 개가 x=60을 기준으로 대칭임을 확정 치수 29·12·50·120으로 계산해 보이고 DI로 실제로 재서 확인할 수 있습니다.",
+     "en": "You can show from the fixed dimensions 29, 12, 50, and 120 that the two slots are symmetric about x = 60, and confirm it by measuring with DIST."
+    },
+    {
+     "ko": "MATCHPROP으로 레이어가 틀린 선을 다시 그리지 않고 옮길 수 있고, 도면층 체크를 확인해야 하는 이유를 말할 수 있습니다.",
+     "en": "You can move a wrongly-layered line with MATCHPROP instead of redrawing it, and say why the Layer tick must be verified."
+    },
+    {
+     "ko": "레이어 관리자의 전구와 QSELECT 두 가지로 레이어 소속을 점검할 수 있고, 끄기와 동결의 차이를 말할 수 있습니다.",
+     "en": "You can audit layer membership two ways - the layer manager's light bulb and QSELECT - and explain off versus frozen."
+    },
+    {
+     "ko": "색상·선종류·선가중치를 ByLayer로 통일하고, 전체 선택 상태에서 도면층 칸은 건드리지 않아야 하는 이유를 말할 수 있습니다.",
+     "en": "You can set color, linetype, and lineweight to ByLayer, and say why the Layer field must be left alone while everything is selected."
+    },
+    {
+     "ko": "화면 간격이 도면 전체 값과 개체 값의 곱이라는 것을 알고, 값을 바꿨는데 화면이 그대로면 RE로 재생성해야 한다는 것을 압니다.",
+     "en": "You know the on-screen dash spacing is the product of the global and the per-object scale, and that RE regenerates when a change does not show."
+    },
+    {
+     "ko": "표면 거칠기 기호·기하 공차·재질 표기·열처리 지시가 각각 무엇을 지시하는 표기인지 읽을 수 있습니다.",
+     "en": "You can read what surface-roughness symbols, geometric tolerances, material notes, and heat-treatment instructions each specify."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 확인 — EDU-IB-02_L05_VIEWS",
+      "en": "Starting state - EDU-IB-02_L05_VIEWS"
+     },
+     "note": "이 차시의 게이트는 특이합니다. 화면이 지저분한 것이 정상이라고 먼저 말해 줘야 합니다 — 「지금 열어 보면 도면이라기보다 작업 흔적에 가깝습니다. 그게 맞습니다.」 확인 항목 다섯 — ① 세 뷰가 다 있음 ② 뷰 밖으로 튀어나온 보라색 투상선이 보임(안 보이면 5차시에서 이미 지웠거나 치수선 레이어가 꺼진 채로 저장된 것) ③ 레이어 넷의 전구가 다 켜짐 ④ 숨은선이 노란 점선 ⑤ 객체 스냅 켜짐. 그리고 「바로 자르지 않습니다. 무엇이 남아 있는지 먼저 봅니다」 — 선을 하나 클릭해 화면 위 레이어 표시가 무엇으로 바뀌는지 확인하고 Esc로 선택을 푸는 절차를 첫 조작으로 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "그려 놓은 것과 제대로 보이는 것은 다르다",
+      "en": "Drawn is not the same as readable"
+     },
+     "note": "이 차시가 존재하는 이유 한 문장과, 오늘 손보는 것 셋 — ① 투상선·보조선 정리 ② 레이어 점검 ③ 선 종류 축척 맞추기. 여기서 잡지 않은 레이어·색·선종류 오류는 마지막 7차시에 한꺼번에 터진다는 것을 근거로 씁니다. 투상선이 외형선 레이어에 있으면 인쇄할 때 형상선과 똑같은 굵기로 나오고 보는 사람은 이게 부품의 어디인지 찾다가 못 찾습니다 — 도면이 지시가 아니라 그림이 되는 자리입니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "지울까 자를까 늘릴까",
+      "en": "Erase, trim, or extend"
+     },
+     "note": "세 명령을 가르는 판단 기준을 먼저 표로 둡니다 — 남길 것이 아니면 지웁니다(ERASE), 남길 선인데 일부가 남으면 자릅니다(TRIM), 남길 선인데 모자라면 늘립니다(EXTEND). 정리는 지우는 것부터 하는 이유 — 구성선을 먼저 지우면 TRIM에서 절단 모서리를 고르지 않고 엔터로 전부를 경계 삼아도 안전합니다. 지우기 전에 그렇게 했다면 무한선이 전부 경계가 됐을 것입니다. TRIM과 EXTEND가 둘 다 기준선을 먼저 요구하는 같은 구조라는 것, 그래서 한 명령 안에서 Shift로 오가면 경계를 한 번만 잡고 끝까지 간다는 것까지. 클릭 위치 규칙 두 개를 굵게 — TRIM은 없앨 쪽, EXTEND는 늘리고 싶은 쪽 끝 근처. 잘못 잘랐을 때 Esc로 명령을 나가면 U 한 번으로 못 되돌리니 명령 안에서 U를 칩니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "선택 방식과 QSELECT",
+      "en": "Selection modes and QSELECT"
+     },
+     "note": "창 선택(왼→오, 창에 완전히 들어온 것만)과 걸침 선택(오→왼, 조금이라도 걸친 것 전부)을 그림 두 장으로. 정리할 때 왼→오가 안전한 이유는 지나가는 형상선이 딸려 들어오지 않기 때문입니다. QSELECT는 조건에 맞는 객체를 한 번에 고르는 방식이고 이 차시에서 세 번 씁니다 — 구성선만 걸어 지울 때, 레이어별로 걸어 점검할 때, 레이어 전체에 선종류축척을 넣을 때. 객체 유형 목록에서 「구성선」 대신 「선」을 고르면 형상선까지 잡히므로 지우기 전에 화면에서 무엇이 선택됐는지 한 번 봅니다. 조건(연산자·값)은 건드리지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "레이어 점검 세 가지 방법",
+      "en": "Three ways to audit layers"
+     },
+     "note": "① 클릭 — 선 하나를 골라 화면 위 레이어 표시를 봅니다. ② 전구 끄기 — 그 레이어의 선이 전부 사라져야 정상이고, 남은 빨간 선이 있으면 다른 레이어에 색만 빨갛게 준 선입니다. 반대로 중심선이 있어야 할 자리인데 아무것도 안 사라졌다면 그 선은 다른 레이어에 있습니다. ③ QSELECT — 도면층 조건을 걸면 개수가 숫자로 나오므로 판정이 눈이 아니라 값이 됩니다. 끄기와 동결의 차이도 여기서 — 끄기는 화면에서 안 보이게만 하고 동결은 도면 재생성 대상에서도 뺍니다. 둘 다 지우는 것이 아닙니다. 꺼 놓은 채로 저장하면 레이어 상태가 파일에 함께 저장되어, 다음에 열었을 때 선이 없어진 줄 알고 다시 그리게 되고 같은 자리에 선이 두 겹으로 깔립니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "ByLayer와 선 종류 축척",
+      "en": "ByLayer and linetype scale"
+     },
+     "note": "레이어는 맞는데 개체에 색을 직접 준 경우가 있습니다. 그러면 레이어 색을 바꿔도 그 선만 안 바뀌고, 지금은 색이 같아 화면에서 구별되지 않습니다 — 레이어로 관리하는 의미가 사라지는 자리입니다. 전체 선택 후 색상·선종류·선가중치를 ByLayer로 통일하되 도면층 칸은 건드리지 않습니다(지금 전부 선택된 상태라 여기서 레이어를 고르면 도면 전체가 한 레이어로 몰립니다). 선 종류 축척은 두 값의 곱이라는 것을 그림으로 — 개체 0.5 × 전체 1 = 실제 0.5이고, 전체를 2로 올리면 개체 값은 그대로인데 화면 간격은 두 배가 됩니다. 0.5는 2차시 레이어 표에서 정해 둔 값이고 지금 새로 지어낸 값이 아니라는 것을 명시합니다. LTSCALE의 최종값은 대본에 없으므로 자습본도 정답 숫자를 주지 않고 「실선처럼 보이면 키우고 듬성듬성하면 줄인다」는 좁혀 가는 절차로만 씁니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 투상선 지우고 형상선 다듬기 (1~8단계)",
+      "en": "Do it 1 - clear the projectors, tidy the geometry (steps 1-8)"
+     },
+     "note": "OPEN → Z A → 선 하나 클릭해 레이어 확인 후 Esc → 상태 막대 F3·F8 확인(토글이라 누르면 켜는 게 아니라 뒤집힙니다 — 아이콘 색으로 판단합니다) → QSELECT 객체 유형 구성선 → 선택 결과를 화면에서 한 번 보고 Delete → TR로 남은 토막 자르기(경계는 엔터로 전부) → EX로 모자란 선 늘리기 → 한 명령 안에서 Shift로 오가기 → E와 창 선택으로 자를 경계가 없는 보조선 지우기. 이 차시의 조작은 학습자 파일 상태에 따라 달라지므로 「어느 선을 자를지는 대본에 지정되어 있지 않습니다 — 뷰 밖으로 나간 토막과 교차점에 못 미친 선을 스스로 찾습니다」를 명시하고, 무엇을 찾는지 그림으로 예시합니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 대칭 검산과 레이어 정리 (9~12단계)",
+      "en": "Do it 2 - symmetry cross-check and layer cleanup (steps 9-12)"
+     },
+     "note": "DI로 왼쪽 장공 왼쪽 끝원 중심 → 오른쪽 장공 왼쪽 끝원 중심 = 50, DI로 오른쪽 장공 오른쪽 끝원 중심 → 도면 오른쪽 끝 = 29. MIRRTEXT 값이 0인지 확인(1이면 글자까지 거울처럼 뒤집혀 읽을 수 없습니다). 이 대칭은 4차시 11단계에서 이미 만들었으므로 오늘은 다시 만드는 것이 아니라 맞는지 재는 것이라는 판단을 굵게 둡니다 — 이미 맞는 것을 지우고 되만드는 일은 도면에 아무것도 더하지 않습니다. 이어 MATCHPROP으로 레이어가 틀린 선 고치기(특성 설정에서 도면층 체크가 빠져 있으면 색만 옮겨지고 레이어는 그대로 남습니다. 원본으로 찍는 선이 제대로 된 선인지 먼저 확인합니다) → LA로 전구를 하나씩 껐다 켜기 → QSELECT로 도면층별 개수 세기. 장공은 호 둘과 직선 둘이라 한 번 클릭하면 하나만 잡히고 베이스 외곽은 폴리선이라 여섯 변이 다 잡힌다는 차이를 여기서 다시 짚습니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — ByLayer 통일과 축척 맞추기, 저장 (13~16단계)",
+      "en": "Do it 3 - ByLayer, dash spacing, save (steps 13-16)"
+     },
+     "note": "Ctrl+A 또는 SELECT ALL → 특성 창에서 색상·선종류·선가중치를 ByLayer(도면층 칸은 건드리지 않습니다) → QSELECT로 도면층 = 중심선을 걸어 선종류축척 0.5, 숨은선도 같은 방법(중심선 하나만 클릭해 값을 넣으면 나머지는 그대로여서 인쇄하면 간격이 제각각이 됩니다) → LTSCALE로 도면 전체를 눈으로 맞춤(한 번에 정답을 맞히려 하지 않고 값을 넣고 화면을 보고 다시 넣는 식으로 좁혀 갑니다. 값을 바꿨는데 화면이 그대로면 RE) → 저장 직전에 전구 넷이 다 켜져 있고 동결된 레이어가 없는지 확인 → SAVEAS EDU-IB-02_L06_REPRESENTED."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "그리지 않지만 읽어야 하는 표기 넷",
+      "en": "Four notations you read but do not draw"
+     },
+     "note": "이 과정에서 그리지 않는 표기를 「무엇을 지시하는가」까지만 읽습니다. 표면 거칠기 기호 — 뿌리가 갈라진 체크 표시에 Ra 값을 붙여 면마다 다르게 지시합니다. 이 부품에서 곱게 지시하는 면(축 구멍)과 거칠어도 되는 면(장공)을 도면 위에서 짚습니다. 기하 공차 — 네모 칸을 좌우로 나눠 왼쪽에 기호, 오른쪽에 허용값을 적으며, 크기가 아니라 형상·자세·위치가 얼마나 벗어나도 되는지를 정합니다. 대본이 든 「지름 25가 25.02까지는 괜찮다」는 치수 공차를 설명하려는 예시이지 이 부품의 지정 공차가 아니라고 명시합니다. 재질 표기 — 표제란의 재질 칸이나 부품란에 적으며 임의로 정하지 않고 문제지의 재료 기호를 그대로 옮깁니다. 이 과정의 표제란에는 재질 칸이 없습니다. 열처리 지시 — 굳히거나 푸는 두 목적으로 열을 주며 주기란에 문장으로 적거나 지시선을 긋습니다. 네 항목 모두 실제 기호 모양과 값은 확정되지 않았으므로 그려 넣지 않고 자리만 설명합니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "13항목. 값과 개수로 판정되는 것을 위에 둡니다 — Z A로 도면틀 전체를 놓고 봤을 때 부품 형상·도면틀·표제란 말고 보이는 것이 있는가 / QSELECT로 구성선을 다시 걸었을 때 아무것도 잡히지 않는가 / DI 50(29→79)과 DI 29(91→120) / 계산 검산(왼쪽 장공 29·41 중심 35, 오른쪽 79·91 중심 85, 대칭축은 120의 절반 60이며 보스 중심 가로 위치와 같다) / QSELECT 도면층=중심선으로 걸었을 때 보스 중심·축 구멍 중심·장공 중심·대칭축이 전부 잡히고 개수가 뜨는가 / 숨은선도 같은 방법 / 레이어를 하나씩 껐을 때 그 레이어 선이 전부 사라지는가 / 축척 0.5를 넣은 뒤 긴 획과 짧은 획이 번갈아 보이는가 / 값을 바꿔도 화면이 그대로면 RE 후 다시 / MATCHPROP으로 고친 선이 레이어까지 옮겨졌는가 / 저장 직전 전구 넷이 다 켜졌는가 / 전체 선택 시 색상·선종류·선가중치가 전부 ByLayer이고 도면층이 한 레이어로 몰리지 않았는가."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "6차시에서 확정된 것",
+      "en": "Settled in Lesson 6"
+     },
+     "note": "새 형상을 하나도 더하지 않은 차시라는 것이 결론입니다. 지운 것 · 다듬은 것 · 옮긴 것 · 통일한 것 네 묶음으로 정리하고, 대칭은 만든 것이 아니라 잰 것이라는 판단을 다시 씁니다. 완료 상태 그림은 5차시 완료 상태와 나란히 놓아 투상선이 사라진 차이가 보이게 합니다. 마지막에 「도면을 그리는 시간보다 정리하는 시간이 길게 느껴졌을 것입니다. 실제 현장도 그렇습니다」를 둡니다."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "OPEN · Z · A · QSELECT · TR · U · EX · E · DI · MIRRTEXT · MA · S · LA · SELECT · ALL · LTSCALE · RE · SAVEAS · F3 · F8 · Ctrl+1 · Ctrl+A · Shift+클릭 · Delete · Esc. XL은 5차시에 이렇게 그었다는 근거로만 나오고 이 차시에서 새로 긋지 않는다는 것을 「언제 쓰나」 칸에 씁니다."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "네 가지 함정을 증상으로 제시하고 답하게 합니다 — 보조선을 남긴 채 넘어감 / 지운 줄 알았는데 레이어만 끔 / 축척을 개체 하나에만 적용 / 레이어는 맞는데 색을 개체에 직접 줌. 넷 다 화면에서 정상으로 보이는데 인쇄나 다음 차시에서 터지는 종류라는 공통점을 마지막에 정리합니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d06-before-after",
+     "what": "같은 세 뷰를 두 장 나란히 — 왼쪽은 투상선이 뷰 밖으로 튀어나온 5차시 종료 상태, 오른쪽은 정리를 마친 6차시 종료 상태.",
+     "why": "이 차시는 더한 것이 없어 결과를 글로 설명하기 어렵습니다. 두 장을 나란히 놓는 것이 절 하나만큼의 설명입니다."
+    },
+    {
+     "id": "d06-erase-trim-extend",
+     "what": "같은 선 세 벌 — 경계가 없어 통째로 지우는 경우, 경계와 경계 사이 한 구간만 자르는 경우, 경계까지 못 미쳐 늘리는 경우. 각각 클릭해야 하는 위치를 점으로 표시.",
+     "why": "세 명령의 차이는 결과가 아니라 클릭 위치에서 갈립니다. 클릭 위치는 좌표가 아니라 그림으로만 지시할 수 있습니다."
+    },
+    {
+     "id": "d06-window-vs-crossing",
+     "what": "왼→오 창 선택과 오→왼 걸침 선택을 같은 화면에 적용했을 때 잡히는 객체의 차이.",
+     "why": "정리 단계에서 형상선을 함께 지우는 사고가 여기서 납니다. 두 방식의 결과를 보여 주면 방향이 습관이 됩니다."
+    },
+    {
+     "id": "d06-ltscale-product",
+     "what": "같은 중심선 세 벌 — 개체 0.5 × 전체 1, 개체 0.5 × 전체 2, 개체 1 × 전체 1. 화면 간격이 곱이라는 것을 눈금으로 표시.",
+     "why": "'화면 간격 = 전체 값 × 개체 값'은 한 줄이지만, 어느 쪽을 고쳐야 하는지는 세 벌을 나란히 봐야 판단됩니다."
+    },
+    {
+     "id": "d06-symbol-anatomy",
+     "what": "네 표기의 자리와 구조만 그린 골격도 — 표면 거칠기 기호의 뿌리와 Ra 값이 붙는 자리, 기하 공차 칸의 좌우 분할, 표제란의 재질 칸 위치, 주기란의 열처리 문장 자리. 값은 비워 둡니다.",
+     "why": "그리지 않는 표기라 형태를 지어내면 안 되지만, 도면 어디에 나타나는지는 알아야 받아 든 도면에서 찾습니다. 값 자리는 점선으로 비웁니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "QSELECT에서 객체 유형을 「선」으로 고르면 무엇이 잘못됩니까?",
+     "en": "What goes wrong if you filter QSELECT by object type Line?",
+     "answer": {
+      "ko": "형상선까지 함께 잡힙니다. 5차시의 투상선은 전부 XL로 그은 무한선이라 객체 유형이 「구성선」입니다. 지우기 전에 화면에서 무엇이 선택됐는지 한 번 보고 누릅니다.",
+      "en": "It grabs real geometry too. Every projector from Lesson 5 was drawn with XLINE, so its object type is Construction Line. Look at what is highlighted before you press Delete."
+     }
+    },
+    {
+     "ko": "레이어를 껐는데 그 레이어 색깔의 선이 남아 있습니다. 무엇을 뜻합니까?",
+     "en": "You turned a layer off but lines in that layer's color are still showing. What does that mean?",
+     "answer": {
+      "ko": "그 선은 다른 레이어에 있으면서 색만 그 색으로 직접 준 것입니다. 색상 특성이 ByLayer가 아니라는 뜻이고, 레이어 색을 바꿔도 그 선만 안 바뀝니다. 전체를 선택해 색상을 ByLayer로 되돌립니다.",
+      "en": "Those lines sit on a different layer with that color applied directly to the object. Their color property is not ByLayer, so changing the layer color will not change them. Select everything and set color back to ByLayer."
+     }
+    },
+    {
+     "ko": "MATCHPROP으로 선을 고쳤는데 색만 바뀌고 레이어는 그대로입니다. 어디를 봅니까?",
+     "en": "MATCHPROP changed the color but not the layer. Where do you look?",
+     "answer": {
+      "ko": "특성 설정 대화상자입니다. 도면층 체크가 빠져 있으면 색만 옮겨지고 레이어는 남습니다. 겉보기는 고쳐졌는데 실제로는 안 고쳐진 상태가 됩니다.",
+      "en": "The Property Settings dialog. If the Layer tick is cleared, only the color transfers and the layer stays. It looks fixed but is not."
+     }
+    },
+    {
+     "ko": "중심선 하나를 클릭해 선종류축척 0.5를 넣었습니다. 이걸로 충분합니까?",
+     "en": "You clicked one centerline and set its linetype scale to 0.5. Is that enough?",
+     "answer": {
+      "ko": "아닙니다. 나머지 중심선은 그대로여서 인쇄하면 같은 종류의 선인데 간격이 제각각이 됩니다. QSELECT로 도면층 = 중심선을 걸어 레이어 전체를 한 번에 잡아 넣습니다. 숨은선도 같습니다.",
+      "en": "No. The other centerlines are untouched, so the same kind of line prints with different spacing. Use QSELECT with layer = center to grab the whole layer at once. Same for hidden lines."
+     }
+    },
+    {
+     "ko": "장공이 대칭인지 DI로 재려면 어느 두 점을 찍고 무엇이 나와야 합니까?",
+     "en": "To check slot symmetry with DIST, which two points do you pick and what should come out?",
+     "answer": {
+      "ko": "왼쪽 장공의 왼쪽 끝원 중심(29)과 오른쪽 장공의 왼쪽 끝원 중심(79)을 찍으면 50이 나와야 합니다. 오른쪽 장공의 오른쪽 끝원 중심(91)과 도면 오른쪽 끝(120)을 재면 29가 나와야 합니다. 왼쪽 끝에서 29, 오른쪽 끝에서 29면 좌우가 맞습니다.",
+      "en": "Pick the left slot's left end-arc center (29) and the right slot's left end-arc center (79): it must read 50. Then the right slot's right end-arc center (91) to the right edge (120): it must read 29. Twenty-nine from each end means the pair is symmetric."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "정리가 끝난 파일에서 일부러 하나를 틀려 보고 스스로 찾아 고치세요. ① 중심선 하나를 골라 레이어를 외형선으로 바꿉니다(흰 실선이 됩니다). ② Esc로 선택을 풀고 화면을 훑어 그 선을 눈으로 찾아봅니다. ③ 못 찾으면 QSELECT로 도면층 = 중심선을 걸어 개수를 세고, 있어야 할 자리에 선택 표시가 없는 곳을 찾습니다. ④ MATCHPROP으로 제자리로 보냅니다. 이 왕복이 실제 도면에서 레이어 오류를 찾는 방식 그대로입니다. 끝나면 저장합니다.",
+    "en": "Break something on purpose in your cleaned-up file and find it yourself. (1) Pick one centerline and change its layer to the visible-line layer - it turns into a white continuous line. (2) Press Esc and scan the screen; try to spot it by eye. (3) If you cannot, run QSELECT with layer = center, read the count, and look for a place where a centerline should be highlighted but is not. (4) Send it back with MATCHPROP. That round trip is exactly how layer errors get found on real drawings. Save when you are done."
+   },
+   "recoveryNote": {
+    "ko": "6차시를 건너뛰면 7차시에서 치수를 넣을 수는 있지만, 남아 있는 투상선 위에 치수가 얹혀 무엇이 형상이고 무엇이 자인지 구분되지 않고, 레이어가 틀린 선이 그대로 남아 출력 미리보기에서 한꺼번에 드러납니다. 되돌아오는 길은 EDU-IB-02_L05_VIEWS를 열어 「따라 하기 1~3」(1~16단계)만 하고 L06_REPRESENTED로 저장하는 것입니다. 최소한 「따라 하기 1」의 QSELECT 구성선 지우기와 「따라 하기 3」의 ByLayer 통일 두 가지는 반드시 하세요 — 앞의 것을 빠뜨리면 7차시 플롯 미리보기에 보라색 무한선이 그대로 나오고, 뒤의 것을 빠뜨리면 치수선 레이어를 껐다 켜는 7차시 검산이 아무것도 판정하지 못합니다. 읽기 절 「그리지 않지만 읽어야 하는 표기 넷」은 작도를 막지 않으므로 나중에 읽어도 됩니다.",
+    "en": "Skip Lesson 6 and you can still dimension in Lesson 7, but the dimensions land on top of leftover projectors so nothing distinguishes geometry from rulers, and every wrongly-layered line surfaces at once in the plot preview. The way back is to open EDU-IB-02_L05_VIEWS, do only 'Do it 1-3' (steps 1-16), and save as L06_REPRESENTED. At minimum do two things: the QSELECT construction-line delete in 'Do it 1' and the ByLayer pass in 'Do it 3'. Without the first, purple infinite lines appear in Lesson 7's plot preview; without the second, Lesson 7's layer-toggle cross-check proves nothing. The reading section 'Four notations you read but do not draw' blocks no drawing and can wait."
+   }
+  },
+  {
+   "no": 7,
+   "slug": "lesson-07-dimensioning-release",
+   "title": {
+    "ko": "치수와 출도",
+    "en": "Dimensioning and Release"
+   },
+   "videoLength": "49:03",
+   "selfStudyMin": 137,
+   "opens": "EDU-IB-02_L06_REPRESENTED",
+   "saves": "EDU-IB-02_L07_RELEASE",
+   "objectives": [
+    {
+     "ko": "치수를 넣기 전에 치수선 레이어를 현재 레이어로 바꿀 수 있고, 왜 나중이 아니라 먼저인지 설명할 수 있습니다.",
+     "en": "You can make the dimension layer current before dimensioning, and explain why it has to happen first rather than after."
+    },
+    {
+     "ko": "DIMSTYLE로 새 치수 스타일 EDU-A3을 만들고 문자 높이 5 · 화살표 크기 5 · 소수 정밀도 0자리 · 전체 축척 1 · 측정 축척 비율 1을 지정한 뒤 현재로 설정할 수 있습니다.",
+     "en": "You can create the EDU-A3 dimension style with text height 5, arrow size 5, precision 0, overall scale 1, and measurement scale 1, then set it current."
+    },
+    {
+     "ko": "재는 대상을 보고 선형·정렬·지름·반지름·각도 중 어느 명령인지 고를 수 있습니다.",
+     "en": "You can pick among linear, aligned, diameter, radius, and angular dimensions based on what you are measuring."
+    },
+    {
+     "ko": "완전한 원에는 지름을, 원의 일부인 호에는 반지름을 쓰는 이유를 말할 수 있습니다.",
+     "en": "You can say why a full circle takes a diameter and an arc takes a radius."
+    },
+    {
+     "ko": "같은 두 점이라도 치수선을 어디로 빼느냐가 가로를 재느냐 세로를 재느냐를 정한다는 것을 실제로 보여 줄 수 있습니다.",
+     "en": "You can demonstrate that for the same two points, where you pull the dimension line decides whether you measure horizontally or vertically."
+    },
+    {
+     "ko": "기준면을 왼쪽 변과 아래 변 한 곳으로 모아 재고, 왜 기준을 옮겨 잡으면 안 되는지 설명할 수 있습니다.",
+     "en": "You can measure from a single pair of datum faces - the left edge and the bottom edge - and explain why the datum must not move."
+    },
+    {
+     "ko": "필렛이 지운 이론상의 모서리를 확장 교차점 스냅으로 잡아 목 밑동 80을 기입할 수 있습니다.",
+     "en": "You can dimension the 80 mm web foot by snapping to the theoretical corner the fillet erased, using extended intersection."
+    },
+    {
+     "ko": "DIMEDIT로 측정값 뒤에 H7을 붙이고, M 옵션으로 측정값 앞에 2- · 2-장공 · PCD 접두어를 붙일 수 있습니다.",
+     "en": "You can append H7 to a measured value with DIMEDIT, and prefix values with 2-, 2-slot, or PCD using the M option."
+    },
+    {
+     "ko": "MLEADER로 2-C5와 4-M5 깊이 10을 뽑고, 왜 이 둘은 치수선으로는 안 되는지 설명할 수 있습니다.",
+     "en": "You can pull 2-C5 and 4-M5 depth 10 out with MLEADER, and explain why neither works as a dimension line."
+    },
+    {
+     "ko": "참고 치수 괄호가 검사하지 말라는 지시임을 알고, 참고 치수에만 예외적으로 측정값을 지우고 손으로 쓸 수 있습니다.",
+     "en": "You know parentheses mark a reference dimension - do not inspect it - and that only there may you overwrite the measured value by hand."
+    },
+    {
+     "ko": "같은 값을 두 번 적지 않는다는 규칙을 장공 폭 10 · 좌우 필렛 R10 · 정면도와 평면도의 120 세 경우로 판별할 수 있습니다.",
+     "en": "You can apply the no-duplicate rule to three cases: the 10 mm slot width, the pair of R10 fillets, and the 120 that appears in both the front and top views."
+    },
+    {
+     "ko": "PLOT에서 A3 · 윈도우 · 플롯의 중심 · 용지에 맞춤 해제 · 1대1 · 가로를 지정하고 미리보기로 최종 판정할 수 있습니다.",
+     "en": "You can set A3, window, plot centered, fit-to-paper off, 1:1, landscape in PLOT, and make the final judgement from the preview."
+    },
+    {
+     "ko": "EXPORTPDF로 PDF를 내보내고 SAVEAS로 EDU-IB-02_L07_RELEASE를 남길 수 있습니다.",
+     "en": "You can export a PDF with EXPORTPDF and save EDU-IB-02_L07_RELEASE with SAVEAS."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "출발 상태 확인 — EDU-IB-02_L06_REPRESENTED",
+      "en": "Starting state - EDU-IB-02_L06_REPRESENTED"
+     },
+     "note": "마지막 실습 차시의 게이트입니다. 확인 항목 여섯 — ① 세 뷰가 다 있고 투상선이 하나도 남아 있지 않음 ② 숨은선 노란 점선, 중심선 빨간 일점쇄선 ③ 레이어 넷 전구가 다 켜짐 ④ 전체 선택 시 색상·선종류·선가중치가 ByLayer ⑤ 객체 스냅 켜짐 ⑥ 도면틀과 표제란이 화면에 들어옴. 오늘은 좌표를 외워 치지 않고 형상 위의 점을 직접 집는다는 원칙을 여기서 못 박습니다 — 형상이 조금이라도 틀려 있으면 값이 그 자리에서 다르게 나오고, 좌표를 외워 치면 그 신호를 놓칩니다. 이 차시는 자기 도면이 맞는지를 치수가 대신 알려 주는 차시입니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "치수 없는 도면은 그림이다",
+      "en": "A drawing without dimensions is a picture"
+     },
+     "note": "형상은 6차시까지 다 그려졌고 선은 제자리에 있지만 얼마나 큰지가 적혀 있지 않아 그대로 넘기면 현장에서 아무것도 못 만듭니다. 그리고 치수선 레이어를 왜 먼저 바꾸는지 — 다 넣고 옮기려면 넣은 치수를 전부 골라내야 하는데 치수가 외형선과 겹쳐 있어 하나씩 집다 보면 형상선이 같이 잡힙니다. 그리기 전에 한 번 바꾸는 것이 훨씬 낫습니다. 이미 잘못 넣었을 때의 복구도 여기 둡니다 — 치수 하나 클릭 → 마우스 오른쪽 → 유사 선택 → 레이어 목록에서 치수선."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "치수 스타일 EDU-A3",
+      "en": "The EDU-A3 dimension style"
+     },
+     "note": "숫자를 올리기 전에 그 숫자가 어떤 모양으로 나올지부터 한곳에 정합니다. ISO-25를 직접 고치지 않고 새로 만드는 이유 — 원본을 남겨 두면 설정이 틀어졌을 때 비교할 데가 있습니다. 값 다섯과 그 근거 — 문자 높이 5 / 화살표 크기 5(둘이 크게 어긋나면 치수 하나가 따로 놉니다) / 소수 정밀도 0자리(이 부품 치수가 참고 치수 하나만 빼면 전부 정수이고, 자릿수를 두면 120이 120.00으로 나옵니다) / 전체 축척 1(이 값이 문자 높이에 곱해집니다 — 문자 높이를 아무리 고쳐도 크기가 안 맞으면 대개 여기가 범인입니다) / 측정 축척 비율 1(모형에서 1대1로 그렸으니 잰 값이 그대로 나와야 합니다). 만드는 것과 쓰는 것이 다르다는 것 — 현재로 설정을 빠뜨리면 스타일은 만들어 놓고 치수는 ISO-25로 들어갑니다. 손대지 않은 세 탭(선·대체 단위·공차)은 ISO-25 상속분이므로 값을 지정하지 않습니다. 문자 높이 5는 연습용 기본값이며 과제 지시가 다른 값을 정하면 그 지시가 우선합니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "다섯 종류를 대상으로 고른다",
+      "en": "Choose the command by what you measure"
+     },
+     "note": "표 하나에 다섯 행 — 선형 DLI(가로 세로로 잰 값) / 정렬 DAL(경사면의 실제 길이) / 지름 DDI(완전한 원) / 반지름 DRA(원의 일부인 호) / 각도 DAN(두 선 사이의 각). 지름이냐 반지름이냐의 판정 기준 하나 — 한 바퀴 다 도는 완전한 원은 지름, 원의 일부인 호는 반지름입니다. 이 부품에서 Ø25 H7과 Ø56은 지름, R5와 R10은 반지름입니다. 원 안쪽은 좁아 치수선과 문자를 넣을 자리가 없으므로 밖으로 끌어냅니다. 그리고 원칙 하나 — 측정값 자리를 지우고 숫자를 직접 치지 않습니다. 그렇게 하면 나중에 형상을 고쳤을 때 치수가 안 따라오고 옛날 숫자를 그대로 붙들고 있습니다. 예외는 참고 치수 하나뿐이며 그 이유는 뒤 절에서 다룹니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "치수선을 어디로 빼느냐 · 기준면을 어디로 모으느냐",
+      "en": "Where the dimension line goes, where the datum sits"
+     },
+     "note": "두 판단을 한 절에 둡니다. ① 선형 치수는 두 점 사이 직선거리를 재지 않고 치수선을 놓은 방향의 성분만 잽니다. 그래서 모따기로 왼쪽 세로 변이 11까지만 올라가는데도 옆으로 빼면 세로 성분 16이 나옵니다. 같은 두 점인데 위로 빼면 가로 5가 나옵니다. 비스듬한 실제 거리를 재려면 선형이 아니라 정렬입니다. ② 기준면은 왼쪽 변과 아래 변 한 곳으로 모읍니다 — 어느 값이냐보다 어디서부터 어디까지 재느냐가 중요합니다. 120은 윗변이 아니라 바닥 변에서 잽니다(윗변은 모따기로 끝점이 원래 자리에 없습니다). 90의 두 번째 점은 모서리가 아니라 보스 원의 위쪽 사분점입니다. 두께 12와 20은 둘 다 같은 뒷면에서 출발합니다 — 뒷면은 통째로 하나의 평면이라 기준면이 하나로 모입니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "이 도면에 들어가는 치수 전부",
+      "en": "Every dimension this sheet carries"
+     },
+     "note": "여섯 묶음으로 갈라 표로 싣고, 행마다 도면 위 해당 치수를 강조합니다. ① 전체 120·90 ② 보스 중심 60·62와 베이스 높이 16 ③ 장공 29·50·12·8 ④ 지름과 반지름 Ø25 H7 · Ø56 · 2-R10 · 2-장공 R5 ⑤ PCD Ø44와 45도 ⑥ 두께 12·20, 참고 치수 (95.7)과 26, 목 밑동 80. 그리고 지시선으로 가는 둘 — 2-C5와 4-M5 깊이 10. 판정 기준을 함께 씁니다: 재서 나오지 않는 값(M5는 나사 규격이라 재면 드릴 구멍 지름이 나옵니다. 깊이 10은 정면에서 안 보입니다)과 한 줄에 여러 정보를 담아야 하는 것이 지시선으로 갑니다. 중복 치수 세 경우도 여기서 판별합니다 — 장공 폭 10은 R5가 이미 정하고 있어 안 적고, 좌우 필렛은 앞의 2가 두 개라는 뜻이라 왼쪽에 다시 안 넣고, 정면도와 평면도의 120은 한 번만 적습니다. 참고 치수 괄호의 뜻(만들 때 참고하고 검사할 때는 재지 말라)과, 괄호를 빼먹으면 반올림 때문에 멀쩡한 부품이 불합격된다는 결과까지. (95.7)의 두 점은 대본과 프레임 도면이 어긋나므로 자습본은 값만 싣고 두 점을 단정하지 않으며 확인 표시를 답니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 1 — 스타일을 세우고 전체·베이스·보스 중심 (1~6단계)",
+      "en": "Do it 1 - style, overall, base, boss center (steps 1-6)"
+     },
+     "note": "OPEN → Z A → F3 → 치수선 레이어를 현재로(색은 보라 6번) → D로 DIMSTYLE, 새로 만들기, 시작 스타일 ISO-25, 이름 EDU-A3 → 문자 탭 높이 5 / 기호와 화살표 탭 크기 5 / 1차 단위 탭 정밀도 0자리와 측정 축척 비율 1 / 맞춤 탭 전체 축척 1 → 현재로 설정 → DLI로 120(바닥 변에서)과 90(두 번째 점은 보스 원 위쪽 사분점) → DLI로 16(왼쪽으로 빼서 세로 성분) → DLI로 60(아래)과 62(왼쪽). 5단계 뒤에 검산 하나를 바로 붙입니다 — 90이 62+28과 맞는지. 다른 값이 나오면 치수가 아니라 형상이 틀린 것입니다. 치수선을 형상에서 넉넉히 떨어뜨리는 이유도 여기."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 2 — 장공·목 밑동·지름·반지름·PCD·각도 (7~11단계)",
+      "en": "Do it 2 - slots, web foot, diameters, radii, PCD, angle (steps 7-11)"
+     },
+     "note": "DLI로 29·12·50을 같은 높이에 층으로 놓고 8은 옆에(겹쳐 보이면 치수를 클릭해 가운데 그립을 잡고 위아래로 끕니다) → 확장 교차점 스냅으로 목 밑동 80(필렛이 지운 이론상의 모서리를 다시 잡습니다. 80이 아닌 값이 나오면 경사선을 잘못 짚은 것이고, 두 점은 가운데 60에서 좌우로 40씩 떨어진 가로 20과 가로 100에 있어야 합니다) → DDI로 Ø25에 DIMEDIT N으로 H7 붙이기, Ø56 → DRA에 M 옵션으로 2-R10과 2-장공 R5 접두어(접두어를 붙이려면 치수선 위치를 찍기 전에 M으로 편집기를 먼저 엽니다) → DDI에 M으로 PCD Ø44 → 45도 중심선이 없으면 중심선 레이어로 바꿔 L 60,62 @22<45로 긋고 다시 치수선 레이어로 돌아온 뒤 DAN으로 45도. 레이어를 되돌리는 것을 빠뜨리면 뒤 치수가 중심선 레이어로 들어간다는 것을 굵게 둡니다. 이번에는 45도 중심선을 지우지 않고 도면에 남깁니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 3 — 모따기·탭 지시선·두께·참고 치수 (12~14단계)",
+      "en": "Do it 3 - chamfer, tap leader, thickness, reference (steps 12-14)"
+     },
+     "note": "DAL로 모따기 경사면을 재 7이 나오는 것을 확인하고(가로 5 세로 5 직각삼각형의 빗변) → 그 정렬 치수를 지웁니다. 도면에 필요한 값은 7이 아니라 5이기 때문입니다 — 모따기는 잘라내는 변의 길이로 지시합니다. 남기면 빗변 7로 잘라내라는 뜻이 되어 형상이 달라집니다 → MLEADER로 오른쪽 모따기를 가리켜 2-C5 → MLEADER로 탭 구멍 하나를 가리켜 4-M5 깊이 10(네 개 다 뽑지 않습니다. 앞의 4가 개수입니다) → 평면도에서 DLI로 12와 20(둘 다 같은 뒷면에서 출발) → DLI로 (95.7)과 26. 참고 치수에만 예외적으로 측정값을 지우고 괄호를 쳐 손으로 씁니다 — 형상이 바뀌어 이 숫자가 안 따라와도 부품이 잘못 만들어지지 않기 때문입니다. 26은 높이를 그대로 지시하므로 괄호를 치지 않습니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "따라 하기 4 — 축척 확인과 출도, 저장 (15~16단계)",
+      "en": "Do it 4 - scale check, plot, save (steps 15-16)"
+     },
+     "note": "PLOT → 출력 장치 선택(파일로만 낼 때의 예로 DWG To PDF. 실제 장치 목록은 PC마다 다르므로 이름을 단정하지 않습니다) → 용지 ISO A3 → 플롯 영역 윈도우로 2차시에 그린 용지선의 왼쪽 아래와 오른쪽 위 모서리를 차례로 클릭 → 플롯의 중심 체크 → 용지에 맞춤 해제 → 축척 1대1 → 도면 방향 가로 → 미리보기 → Esc로 대화상자 복귀 → 확인 → EXPORTPDF → SAVEAS EDU-IB-02_L07_RELEASE. 용지에 맞춤을 켜 두면 AutoCAD가 알아서 축척을 정해 도면의 120이 종이에서 118이 되기도 하고 126이 되기도 한다는 것을 숫자로 씁니다. 현장에서는 뽑은 도면에 자를 대고 설비 자리와 통로 여유, 옆 장비와의 간섭을 확인하므로 1대1이어야 합니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "검산",
+      "en": "Cross-check"
+     },
+     "note": "13항목. 산술 검산을 위에 둡니다 — 90 = 62+28(다르면 치수가 아니라 형상이 틀린 것) / 목 밑동 80의 두 점이 60에서 좌우 40씩(가로 20과 100) / 왼쪽 세로 변이 11까지만 올라가는데도 16이 나오는가 / 두께 20 = 판 12 + 보스 8이고 두 치수가 같은 뒷면에서 출발하는가. 이어 소속 검산 — 치수 하나를 클릭해 레이어 표시가 치수선(보라 6번)인가, 레이어를 하나씩 껐다 켜서 치수가 치수선 레이어에 들어갔는지 드러나는가, 45도 중심선을 그은 뒤 레이어를 치수선으로 되돌렸는가. 표기 검산 — 중복 치수가 없는가(장공 폭 10과 R5를 같이, 좌우 필렛에 R10을 각각, 정면도와 평면도에 같은 120) / 참고 치수 95.7에 괄호가 있고 검사해야 할 값에 괄호가 없는가 / 확인용으로만 넣은 정렬 치수 7이 남아 있지 않은가. 마지막은 종이 기준 — 플롯 미리보기가 최종 판정입니다. 도면틀이 잘리지 않았는가, 치수 문자가 형상이나 다른 치수와 겹치지 않는가, 표제란이 들어왔는가, 문자가 깨알같이 작으면 문자 높이 또는 맞춤 탭의 전체 축척. 그리고 출력한 PDF를 열어 도면의 120이 종이에서 자로 재도 120밀리미터인지."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "7차시에서 확정된 것 — 도면 한 장의 완성",
+      "en": "Settled in Lesson 7 - the sheet is finished"
+     },
+     "note": "이걸로 도면 한 장이 완성되고 그리는 일은 여기서 끝납니다. 스타일 → 다섯 종류 골라 쓰기 → 여섯 묶음 기입 → 지시선 둘 → 축척 확인 → 내보내기 순으로 정리합니다. 완료 상태 그림은 치수까지 들어간 A3 한 장 전체 — 2차시 첫 절의 빈 A3 규격도와 나란히 놓아 일곱 차시가 무엇을 쌓았는지 한눈에 보이게 합니다. 마지막에 「여기까지 오면 현장에서 도면을 씁니다. 도면은 그림이 아니라 지시 문서입니다」와 함께 가공집에 넘어가는 것도 이 PDF라는 사실을 둡니다."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "오늘 친 것",
+      "en": "What you typed today"
+     },
+     "note": "OPEN · Ctrl+O · Z · A · F3 · LAYER · D(DIMSTYLE) · DLI · DDI · DIMEDIT · N · DRA · M · L · DAN · DAL · Delete · MLEADER · PLOT · Esc · EXPORTPDF · SAVEAS. D가 3·4차시에서는 CIRCLE의 지름 옵션이었고 여기서는 DIMSTYLE이라는 것, M이 여러 줄 문자 옵션이라는 것을 「언제 쓰나」 칸에서 갈라 씁니다."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "네 가지 실수를 증상으로 제시하고 답하게 합니다 — 레이어를 안 바꾸고 기입 / 문자 높이가 도면과 안 맞음 / 같은 치수를 두 번 / 참고 치수에 괄호 누락. 마지막 문항은 판정 도구를 묻습니다 — 화면과 종이 중 무엇이 최종 판정인가."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d07-five-dim-types",
+     "what": "같은 부품 위에 다섯 종류의 치수를 하나씩 걸어 보인 그림 — 선형·정렬·지름·반지름·각도. 각각 무엇을 재고 있는지 화살표로 표시.",
+     "why": "명령 이름이 아니라 '무엇을 재느냐'가 선택 기준이므로, 대상과 치수 모양을 짝지어 보여야 고르는 법이 남습니다."
+    },
+    {
+     "id": "d07-linear-direction",
+     "what": "모따기 자리의 같은 두 점에 치수선을 옆으로 뺐을 때(세로 16)와 위로 뺐을 때(가로 5), 그리고 정렬로 쟀을 때(빗변 7)를 한 그림에 병기.",
+     "why": "'선형 치수는 직선거리를 재지 않는다'는 문장은 세 결과를 나란히 봐야 납득됩니다. 12단계의 정렬 치수 7을 왜 지우는지도 여기서 이어집니다."
+    },
+    {
+     "id": "d07-datum-faces",
+     "what": "정면도에 왼쪽 변과 아래 변을 데이텀으로 표시하고, 60·62·120·90·29·50이 전부 그 두 변에서 출발하는 것을 화살표로 보인 그림.",
+     "why": "기준면을 옮겨 잡으면 안 되는 이유는 개별 치수를 볼 때가 아니라 전체를 한 그림으로 볼 때 보입니다."
+    },
+    {
+     "id": "d07-neck-80-corner",
+     "what": "목 경사선과 베이스 윗면이 만나는 자리 확대 — R10 필렛이 실제 모서리를 지운 모습과, 확장 교차점으로 되살린 이론상의 모서리를 점으로 표시.",
+     "why": "잴 점이 도면에 없는 유일한 치수라, 무엇을 잡는지 그림 없이는 지시할 수 없습니다."
+    },
+    {
+     "id": "d07-duplicate-cases",
+     "what": "중복 치수 세 경우를 각각 옳은 쪽과 틀린 쪽 두 장으로 — 장공 폭 10과 R5, 좌우 필렛 R10 두 개, 정면도와 평면도의 120.",
+     "why": "중복 치수는 각각으로 보면 다 맞아 보입니다. 옳은 쪽과 틀린 쪽을 나란히 놓아야 판별 기준이 손에 남습니다."
+    },
+    {
+     "id": "d07-plot-scale",
+     "what": "같은 도면을 1대1로 뽑았을 때와 용지에 맞춤으로 뽑았을 때 — 종이 위 120이 각각 120, 118, 126이 되는 것을 자 눈금과 함께.",
+     "why": "축척 설정이 종이에서 무엇을 바꾸는지는 숫자만으로는 실감이 없습니다. 자를 대는 그림이 현장 검증 방식 그대로입니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "베이스 왼쪽 세로 변은 11까지만 올라가는데 치수는 16이 나옵니다. 왜 그렇습니까?",
+     "en": "The left vertical edge of the base only rises to 11, yet the dimension reads 16. Why?",
+     "answer": {
+      "ko": "선형 치수는 두 점 사이 직선거리를 재지 않고 치수선을 놓은 방향의 성분만 재기 때문입니다. 치수선을 옆으로 빼면 세로 성분을 재므로 바닥에서 윗면까지의 16이 나옵니다. 모따기가 45도로 5를 잘라내 세로 변만 11인 것입니다.",
+      "en": "Because a linear dimension does not measure the straight-line distance between two points; it measures only the component along the direction you pulled the dimension line. Pulled to the side it measures vertically, giving 16 from the bottom to the top face. The chamfer cuts 5 at 45 degrees, so only the vertical edge is 11."
+     }
+    },
+    {
+     "ko": "모따기를 정렬 치수로 재면 7이 나옵니다. 도면에는 무엇을 적습니까?",
+     "en": "An aligned dimension across the chamfer reads 7. What goes on the drawing?",
+     "answer": {
+      "ko": "2-C5입니다. 모따기는 잘라내는 변의 길이로 지시하므로 경사면의 실제 길이 7이 아니라 5로 적습니다. C가 45도를 함께 지시하고 앞의 2는 좌우 두 개입니다. 확인용으로 넣은 정렬 치수 7은 반드시 지웁니다 — 남기면 빗변 7로 잘라내라는 뜻이 됩니다.",
+      "en": "2-C5. A chamfer is specified by the length of the cut edge, so you write 5, not the 7 of the sloped face itself. The C also implies 45 degrees, and the leading 2 means there are two of them. Delete the aligned 7 you used to check - leaving it says to cut a 7 mm hypotenuse instead."
+     }
+    },
+    {
+     "ko": "탭 구멍에 지름 치수를 넣으면 무엇이 잘못됩니까?",
+     "en": "What is wrong with putting a diameter dimension on a tapped hole?",
+     "answer": {
+      "ko": "재서 나오는 것은 드릴이 지나간 구멍 지름이지 나사 규격이 아닙니다. M5는 어떤 나사를 내라는 지시이고 깊이 10은 정면에서 안 보이는 값이라, 둘 다 재서 나오지 않습니다. 그래서 지시선으로 4-M5 깊이 10을 뽑습니다. 네 개 다 뽑지 않습니다 — 앞의 4가 개수입니다.",
+      "en": "Measuring gives the drilled hole diameter, not the thread specification. M5 is an instruction about which thread to cut, and depth 10 is invisible from the front - neither is something you can measure. Pull 4-M5 depth 10 out on a leader instead, on one hole only: the leading 4 states the quantity."
+     }
+    },
+    {
+     "ko": "(95.7)의 괄호를 빼먹으면 어떤 일이 생깁니까?",
+     "en": "What happens if you omit the parentheses around 95.7?",
+     "answer": {
+      "ko": "검사 대상이 되어 버립니다. 참고 치수는 다른 값에서 계산돼 나오는 값이라 소수로 떨어지고, 검사하면 반올림 때문에 멀쩡한 부품이 불합격됩니다. 괄호 하나가 재라는 말과 재지 말라는 말을 가릅니다.",
+      "en": "It becomes something to inspect. A reference dimension is derived from other values and lands on a decimal, so inspecting it fails a perfectly good part on rounding alone. One pair of parentheses is the difference between 'measure this' and 'do not'."
+     }
+    },
+    {
+     "ko": "화면에서는 치수 문자가 멀쩡한데 미리보기에서는 깨알같이 작습니다. 어디를 봅니까?",
+     "en": "The dimension text looks fine on screen but is tiny in the preview. Where do you look?",
+     "answer": {
+      "ko": "치수 스타일의 문자 탭 문자 높이와, 맞춤 탭의 전체 축척입니다. 전체 축척이 문자 높이에 곱해지므로 문자 높이를 아무리 고쳐도 안 맞으면 대개 이쪽이 범인입니다. 그리고 최종 판정은 화면이 아니라 종이입니다 — 플롯 미리보기가 판정 기준입니다.",
+      "en": "Text height on the Text tab of the dimension style, and Overall Scale on the Fit tab. Overall scale multiplies the text height, so if changing text height never helps, that is usually the culprit. And the final judgement is the paper, not the screen - the plot preview decides."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "완성한 PDF를 인쇄하거나 화면 100퍼센트로 열고 자를 대 보세요. ① 전체 120 치수의 실제 길이를 재서 120밀리미터인지 확인합니다. ② 90도 재 봅니다. ③ 두 값 중 하나라도 다르면 PLOT으로 돌아가 용지에 맞춤이 해제돼 있는지, 축척이 1대1인지 확인하고 다시 뽑습니다. ④ 마지막으로 치수 문자를 하나씩 짚으며 그 값이 어느 기준면에서 출발하는지 소리 내어 말해 보세요. 말이 막히는 치수가 있으면 그 치수의 기준이 다른 곳에 있는 것입니다.",
+    "en": "Print the finished PDF, or open it at 100 percent, and put a ruler on it. (1) Measure the overall 120 - it must be 120 mm. (2) Measure the 90 as well. (3) If either is off, go back to PLOT, confirm fit-to-paper is cleared and the scale is 1:1, and plot again. (4) Finally, point at each dimension in turn and say out loud which datum face it starts from. Any dimension you stumble over is one whose datum sits somewhere else than the rest."
+   },
+   "recoveryNote": {
+    "ko": "7차시를 건너뛰면 도면이 완성되지 않고, 8차시의 40분 모의 작도에서 치수 기입 단계를 처음 해 보게 됩니다 — 시험 범위가 「템플릿부터 치수까지」라 이 차시를 빼면 범위의 마지막 토막이 비어 있는 채로 시험을 봅니다. 되돌아오는 길은 EDU-IB-02_L06_REPRESENTED를 열어 「따라 하기 1~4」(1~16단계)를 하고 L07_RELEASE로 저장하는 것입니다. 다른 차시와 달리 읽기 절을 건너뛰기 어렵습니다 — 「치수 스타일 EDU-A3」을 안 읽으면 문자 높이와 전체 축척의 관계를 몰라 미리보기에서 글자가 깨알이 된 원인을 못 찾고, 「치수선을 어디로 빼느냐 · 기준면을 어디로 모으느냐」를 안 읽으면 16과 5를 뒤집어 기입합니다. 최소한 이 두 절과 「이 도면에 들어가는 치수 전부」는 읽고 조작에 들어가세요.",
+    "en": "Skip Lesson 7 and the drawing is never finished, and Lesson 8's 40-minute mock run becomes the first time you ever dimension anything - the exam scope is 'template through dimensions', so skipping this lesson leaves the last segment of that scope blank. The way back is to open EDU-IB-02_L06_REPRESENTED, work through 'Do it 1-4' (steps 1-16), and save as L07_RELEASE. Unlike other lessons the reading here is hard to skip: without 'The EDU-A3 dimension style' you will not know how text height and overall scale interact, so you cannot find why the preview text is tiny; without 'Where the dimension line goes, where the datum sits' you will enter 16 and 5 the wrong way round. Read at least those two sections and 'Every dimension this sheet carries' before starting the hands-on part."
+   }
+  },
+  {
+   "no": 8,
+   "slug": "lesson-08-exam-and-qa",
+   "title": {
+    "ko": "시험 안내와 Q&A",
+    "en": "Exam Briefing and Q&A"
+   },
+   "videoLength": "09:41",
+   "selfStudyMin": 97,
+   "opens": null,
+   "saves": null,
+   "objectives": [
+    {
+     "ko": "시험 방식·출제 형태·시간·작업 범위·제출 방법·장소 여섯 항목을 보지 않고 말할 수 있습니다.",
+     "en": "You can state all six items from memory: format, source material, time, scope, submission, and venue."
+    },
+    {
+     "ko": "시험이 대면이고 문제지는 현장에서 출력해 나눠 준다는 것을 알고, 집에서 받는 시험이 아님을 압니다.",
+     "en": "You know the exam is in person and the question sheet is printed and handed out on site - it is not a take-home."
+    },
+    {
+     "ko": "종이에 인쇄된 3D 형상 그림과 거기 적힌 치수를 보고 제3각법으로 작도하는 것이 출제 형태임을 압니다.",
+     "en": "You know the task is to draw in third-angle projection from a printed 3D view and the dimensions written on it."
+    },
+    {
+     "ko": "40분 안에 템플릿부터 치수까지 끝내는 순서를 손에 붙여 두고, 화면 앞에서 무엇을 먼저 할지 고민하지 않습니다.",
+     "en": "You have the template-to-dimensions sequence in your hands well enough that you do not stop to think about order at the screen."
+    },
+    {
+     "ko": "다 그린 파일을 사번_이름 형식으로 저장하고 현장에서 안내받은 주소로 제출할 수 있습니다.",
+     "en": "You can save the finished file as employeeNumber_name and submit it to the address given on site."
+    },
+    {
+     "ko": "숨은선과 실선이 겹치면 실선 기준으로 표현한다는 규칙을 적용할 수 있습니다.",
+     "en": "You can apply the rule that where a hidden line and a visible line coincide, the visible line wins."
+    },
+    {
+     "ko": "치수를 정면도 외형선 기준으로 최대한 뽑고, 정면도에서 표현이 어려운 것만 나머지 두 뷰에서 뽑을 수 있습니다.",
+     "en": "You can take most dimensions from the front view's visible outline, leaving only what the front view cannot express to the other two views."
+    },
+    {
+     "ko": "투상이 약할 때 3D 모델링을 직접 해 보는 것이 가장 좋은 연습이고, 여건이 안 되면 2D 도면을 많이 그리는 것이 차선임을 압니다.",
+     "en": "You know that modeling in 3D yourself is the best practice for weak projection skills, and drawing many 2D sheets is the fallback."
+    },
+    {
+     "ko": "PL · O · DI · LI · MA · PLOT 여섯 명령을 이름이 아니라 쓰이는 상황으로 기억합니다.",
+     "en": "You remember the six commands PL, O, DI, LI, MA, and PLOT by the situation they are used in rather than by name."
+    },
+    {
+     "ko": "배운 도면 능력이 지그 제안 · 레이아웃 확인 · 스페어 파트 긴급 공수 세 가지 업무에 어떻게 쓰이는지 설명할 수 있습니다.",
+     "en": "You can explain how this drawing skill applies to proposing a jig, checking a layout, and sourcing a spare part urgently."
+    },
+    {
+     "ko": "채점 기준 표·시험 일시·시험 장소·제출 주소·연습 도면은 아직 확정되지 않았고 별도 공지로 받는다는 것을 압니다.",
+     "en": "You know the marking scheme, date, venue, submission address, and practice drawings are not settled yet and will come by separate notice."
+    }
+   ],
+   "sectionPlan": [
+    {
+     "kind": "orient",
+     "label": {
+      "ko": "이 차시에는 파일이 없습니다",
+      "en": "This lesson has no file"
+     },
+     "note": "체크포인트 배지는 「여는 파일: 없음 → 저장할 파일: 없음」입니다. 대신 확인할 것은 앞 차시의 결과물 — EDU-IB-02_L07_RELEASE.dwg와 그 PDF가 손에 있는가, 도면의 120이 종이에서 120밀리미터로 나오는가. 이 두 개가 있으면 시험 범위를 한 번은 통째로 지나온 것입니다. 없으면 7차시 recoveryNote로 보냅니다. 그리고 이 차시의 주된 작업이 읽기가 아니라 40분 모의 작도 한 번이라는 것을 여기서 예고합니다 — 자습본에서 시간이 가장 많이 드는 절이 마지막에 있습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "시험 여섯 항목",
+      "en": "The exam in six items"
+     },
+     "note": "표 하나에 여섯 행 — 시험 방식(대면. 문제지는 현장에서 출력해 나눠 줍니다. 집에서 받는 시험이 아닙니다) / 출제 형태(종이에 인쇄된 3D 형상 그림과 거기 적힌 치수를 보고 제3각법으로 작도) / 시간(40분. 지나면 즉시 제출) / 작업 범위(도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 — 2차시부터 7차시까지 전부) / 제출(저장 후 현장에서 알려 주는 주소로 이메일. 파일 이름은 사번_이름) / 장소와 일시(별도 공지, 아직 확정 아님). 확정되지 않은 칸은 점선 테두리에 「공유 예정」으로 둡니다. 장소를 「평택 교육센터나 구미가 될 예정」이라고 둘 중 하나로 단정하지 않습니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "채점 기준 — 공유 예정",
+      "en": "Marking scheme - to be shared"
+     },
+     "note": "이 절은 내용이 비어 있는 것이 내용입니다. 점선 테두리 안에 「공유 예정」만 두고 배점·감점 항목·합격선을 지어내지 않습니다. 대신 왜 비워 두는지를 한 줄로 씁니다 — 지어낸 기준은 틀렸을 때 학습자가 그것을 믿고 준비하므로 빈 자리보다 나쁩니다. 그리고 이 자습본의 검산 목록이 채점 기준이 아니라는 것을 명시합니다. 자습본의 검산은 대본이 말한 준비 항목을 자기 검산용으로 옮긴 것입니다. 기준 표가 공유되면 이 자리를 채운다는 갱신 예고까지 둡니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "반복해 나온 질문 다섯",
+      "en": "Five questions that kept coming up"
+     },
+     "note": "질문과 답을 짝으로. ① 평가 기준은 무엇인가 → 아직 받지 못했습니다(앞 절로 링크). ② 막히면 누구에게 물어보나 → 김정웅 기장, 김양환 선임. 연락 경로는 대본에 없으므로 이름만 적고 경로는 비워 둡니다. ③ 투상이 약한데 어떻게 연습하나 → 3D 모델링을 직접 해 보는 것이 가장 좋고, 여건이 안 되면 2D 도면을 많이 그립니다. ④ 숨은선과 실선이 겹치면 → 실선 기준입니다. 두 선을 겹쳐 그리면 읽는 사람이 그 자리가 보이는 모양인지 가려진 모양인지 판단하지 못합니다. 화면에서는 실선에 가려 보이지 않다가 출력하면 파선이 비쳐 나옵니다. ⑤ 치수선 간격은 얼마인가 → 명확한 기준이 없습니다. 숫자를 지어내지 않고, 잘 만들어진 도면을 옆에 놓고 정리된 느낌이 날 때까지 맞춥니다. 치수는 정면도 외형선 기준으로 최대한 뽑습니다."
+    },
+    {
+     "kind": "practice",
+     "label": {
+      "ko": "40분 모의 작도 — 일곱 단계",
+      "en": "The 40-minute mock run - seven steps"
+     },
+     "note": "이 자습본에서 유일하게 시간을 재는 절입니다. 조작 절이지만 새 명령이 없습니다 — 2~7차시의 순서를 시간 안에 다시 밟는 것이 내용입니다. ① 템플릿(A3 도면틀, 사방 10, 중심 마크, 표제란 200×30 두 칸, 왼쪽 이름 오른쪽 사번, 문자 높이 10) ② 레이어 넷(외형선만 굵기 0.5, 나머지 0.25. 선 종류 축척은 중심선과 숨은선에만 0.5) ③ 3D 형상 그림을 읽고 정면 정하기(형상을 그리기 시작한 뒤에 정면을 바꾸면 세 뷰를 전부 다시 배치해야 하고 40분에 그 여유가 없습니다) ④ 제3각법으로 세 뷰 작도 ⑤ 겹치는 선 정리 — 실선 우선 ⑥ 치수 기입 — 정면도 외형선 기준 ⑦ 저장하고 제출(40분에 저장과 전송 시간을 빼 둡니다). 단계마다 목표 경과 시간을 두지 않습니다 — 대본에 근거가 없으므로 지어내지 않고, 대신 「어느 단계에서 시간이 샜는지 적으세요」라는 기록란을 둡니다. 이 기록이 두 번째 모의 작도의 계획이 됩니다."
+    },
+    {
+     "kind": "verify",
+     "label": {
+      "ko": "모의 작도 자가 점검",
+      "en": "Checking your mock run"
+     },
+     "note": "13항목. 맨 위에 시간 판정 — 40분 안에 끝났는가, 아니면 어느 단계에서 몇 분을 썼는가. 이어 값과 개수로 판정되는 것 — 도면선이 용지선에서 사방 10 안쪽인가 / 표제란이 200×30이고 100씩 두 칸이며 왼쪽 이름 오른쪽 사번이고 문자 높이 10인가 / 레이어가 정확히 넷이고 외형선만 0.5인가 / 선 종류 축척이 중심선과 숨은선에만 0.5인가 / 평면도가 위에 우측면도가 오른쪽에 있는가(반대면 제1각법입니다) / 숨은선과 실선이 겹친 자리에 실선만 남았는가 / 치수 대부분이 정면도에 붙어 있는가 / 같은 치수가 두 뷰에 중복되지 않았는가 / 치수선 간격이 견본 도면과 비교해 정리된 느낌인가(숫자 기준이 없으므로 비교로 판정합니다) / 출력 전 축척이 1대1인가 / 파일 이름이 사번_이름 형식인가. 마지막 항목은 고지입니다 — 이 목록은 채점 기준이 아닙니다."
+    },
+    {
+     "kind": "onDrawing",
+     "label": {
+      "ko": "시험에서 자주 어긋나는 세 자리",
+      "en": "Three places the exam goes wrong"
+     },
+     "note": "도면 위에서 옳은 쪽과 틀린 쪽을 나란히 보입니다. ① 배치 — 제3각법과 제1각법. 판별 기준은 원의 좌우 위치가 아니라 제3각법 기호에서 원뿔대의 작은 끝이 원을 향한다는 것입니다. ② 겹친 선 — 실선 밑에 숨은선을 남겨 둔 경우. 화면에서는 안 보이다가 출력하면 파선이 비쳐 나옵니다. ③ 치수 — 정면도에서도 뽑을 수 있는 치수를 측면도로 보낸 경우와, 같은 치수를 두 뷰에 중복으로 넣은 경우. 세 자리 모두 형상은 맞는데 읽는 사람이 다시 물어보게 되는 종류라는 공통점을 정리합니다."
+    },
+    {
+     "kind": "concept",
+     "label": {
+      "ko": "시험 뒤에 남는 것",
+      "en": "What is left after the exam"
+     },
+     "note": "테크니션 업무 셋을 마지막으로 다시 놓습니다 — 지그 제안(작업을 편하게 만들 치구를 직접 그려 제안), 레이아웃 확인(설비가 들어올 자리를 도면에서 먼저 보고 통로·문·간섭을 미리 잡음), 스페어 파트 긴급 공수(설비가 섰을 때 조립도에서 부품을 찾고 스페어 파트 도면을 확인해 가공집과 이야기). 1차시의 같은 카드와 짝을 이루게 하되, 이번에는 각 카드에 「이 과정에서 배운 것 중 무엇을 쓰는가」를 한 줄씩 붙입니다 — 지그 제안에는 2차시 템플릿과 3차시 좌표 입력, 레이아웃 확인에는 4차시 오프셋과 7차시 1대1 출력, 스페어 파트에는 2차시 기호 읽기와 7차시 PDF."
+    },
+    {
+     "kind": "shortcuts",
+     "label": {
+      "ko": "작도에는 잘 안 쓰지만 현장에서 자주 쓰는 여섯",
+      "en": "Six commands you rarely draw with but often use on the job"
+     },
+     "note": "표의 마지막 열이 「언제 쓰나」인 것이 이 절에서 특히 중요합니다. PL(레이아웃 도면에서 설비 자리를 한 바퀴 둘러 하나로 묶을 때. 넓이가 한 번에 나오고 통째로 옮겨집니다) / O(벽체 두께를 잡거나 통로 여유를 띄울 때) / DI(설비가 들어갈 폭이 나오는지 그 자리에서 잴 때. 도면에 아무것도 남기지 않습니다) / LI(받은 도면에서 이 선의 길이가 정말 그 값인지 확인할 때) / MA(레이어가 섞인 남의 도면을 다시 그리지 않고 제자리로 보낼 때) / PLOT(가공집과 이야기하려고 종이나 PDF로 내보낼 때. 축척을 확인하고 나갑니다). 여섯을 외울 필요는 없고 상황을 기억하면 그 자리에서 명령이 떠오른다는 것을 절 머리에 둡니다."
+    },
+    {
+     "kind": "recap",
+     "label": {
+      "ko": "여덟 차시 되짚기",
+      "en": "The eight lessons, end to end"
+     },
+     "note": "1차시 도면의 필요 → 2차시 부품 읽기와 A3 템플릿 → 3차시 좌표와 외곽 → 4차시 원과 호 → 5차시 제3각법 3뷰와 배열 → 6차시 보조선 정리와 레이어 → 7차시 치수와 출도. 각 차시에 그 차시가 남긴 파일 이름을 붙여 체크포인트 사슬을 완성된 형태로 다시 보입니다(1차시의 같은 그림과 짝). 그리고 부품 하나가 도면 한 장이 되기까지의 상태 그림 일곱 장을 작은 크기로 한 줄에 늘어놓습니다 — 빈 A3에서 치수까지 들어간 완성본까지."
+    },
+    {
+     "kind": "checks",
+     "label": {
+      "ko": "스스로 확인",
+      "en": "Check yourself"
+     },
+     "note": "시험 여섯 항목과 판단 규칙 둘(실선 우선, 정면도 기준 치수)을 묻습니다. 답을 먼저 쓰고 접힌 정답을 펼칩니다. 답이 「아직 정해지지 않았습니다」인 문항을 일부러 하나 넣어, 모르는 것을 모른다고 답하는 것이 정답인 경우를 연습시킵니다."
+    },
+    {
+     "kind": "exercise",
+     "label": {
+      "ko": "시험까지 할 일 네 가지",
+      "en": "Four things to do before the exam"
+     },
+     "note": "계획표 한 장. ① 템플릿 다시 만들기(빈 도면에서 도면틀·표제란·레이어 넷까지, 몇 분 걸리는지 재기) ② 세 뷰 배치와 치수 연습 ③ 40분 통째 작도 ④ 오늘 답한 판단 규칙 기억하기. 각 항목에 몇 번 했는지 적는 칸과 걸린 시간을 적는 칸을 둡니다. 자습본이 메모를 저장할 수 있으면 이 표에 앵커를 답니다. 마지막 줄은 「막히면 김정웅 기장이나 김양환 선임에게 물어보세요 — 혼자 붙잡고 있지 않습니다」이고, 연락 경로 칸은 「공유 예정」으로 비워 둡니다."
+    }
+   ],
+   "diagrams": [
+    {
+     "id": "d08-exam-six",
+     "what": "시험 여섯 항목 카드. 확정된 넷(대면 / 3D 형상 그림 / 40분 / 템플릿부터 치수까지)은 실선 테두리, 미정인 둘(장소와 일시 / 제출 주소)은 점선 테두리에 「공유 예정」.",
+     "why": "확정과 미정을 같은 모양으로 그리면 학습자가 미정을 확정으로 읽습니다. 테두리 하나로 갈리는 것을 그림 규칙으로 못 박습니다."
+    },
+    {
+     "id": "d08-40min-sequence",
+     "what": "40분 모의 작도의 일곱 단계를 가로 띠로 놓고, 각 단계가 어느 차시에서 배운 것인지 아래에 차시 번호를 붙인 그림. 목표 경과 시간은 비워 둡니다.",
+     "why": "시험 범위가 '2차시부터 7차시까지 전부'라는 말은 이 대응이 보일 때만 실감이 납니다. 시간 배분은 근거가 없으므로 칸만 두고 값을 넣지 않습니다."
+    },
+    {
+     "id": "d08-third-angle-check",
+     "what": "제3각법 기호와 제1각법 기호를 나란히 놓고, 원뿔대의 작은 끝이 어느 쪽을 향하는지에 화살표를 단 판별도.",
+     "why": "배치를 틀리는 사고가 이 판별 하나로 막힙니다. 원의 좌우 위치로 외우면 반대로 기억하므로 판별 기준 자체를 그림에 넣습니다."
+    },
+    {
+     "id": "d08-hidden-under-visible",
+     "what": "실선과 숨은선이 겹친 자리 확대 — 화면에서 보이는 모습과 출력했을 때 파선이 비쳐 나온 모습.",
+     "why": "'화면에서는 멀쩡한데 출력하면 드러난다'는 종류의 실수라, 두 상태를 같이 보여 주지 않으면 왜 문제인지 전달되지 않습니다."
+    },
+    {
+     "id": "d08-course-chain-done",
+     "what": "일곱 차시의 도면 상태를 작은 크기로 한 줄에 — 빈 A3, 외곽, 구멍과 라운드, 세 뷰, 정리된 세 뷰, 치수까지 들어간 완성본. 각 칸 아래에 그 차시가 남긴 파일 이름.",
+     "why": "1차시의 체크포인트 사슬 그림과 짝을 이루어, 계획이 결과로 닫히는 것을 한 줄로 보여 줍니다."
+    }
+   ],
+   "checks": [
+    {
+     "ko": "시험 시간과 작업 범위는 무엇입니까?",
+     "en": "What are the exam time and the scope of work?",
+     "answer": {
+      "ko": "40분이고, 40분이 지나면 즉시 제출입니다. 범위는 템플릿부터 치수까지 — 도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 넣습니다. 2차시부터 7차시까지 전부입니다.",
+      "en": "Forty minutes, and you submit the moment it is up. The scope is template through dimensions: build the border, title block, and four layers, draw the geometry, then dimension it - everything from Lesson 2 through Lesson 7."
+     }
+    },
+    {
+     "ko": "채점 기준의 배점은 어떻게 됩니까?",
+     "en": "How is the marking scheme weighted?",
+     "answer": {
+      "ko": "아직 공유받지 못했습니다. 배점·감점 항목·합격선 전부 미정이고 별도 공지로 받습니다. 이 자습본의 검산 목록은 채점 기준이 아니라 대본이 말한 준비 항목을 자기 검산용으로 옮긴 것입니다. 「모르겠습니다, 아직 안 정해졌습니다」가 이 문항의 정답입니다.",
+      "en": "It has not been shared yet. Weighting, deductions, and the pass mark are all undecided and will come by separate notice. The check lists in this workbook are not a marking scheme - they are the script's preparation items turned into self-checks. 'I do not know, it is not decided yet' is the correct answer here."
+     }
+    },
+    {
+     "ko": "숨은선과 실선이 겹쳤습니다. 무엇을 남깁니까?",
+     "en": "A hidden line and a visible line coincide. Which one stays?",
+     "answer": {
+      "ko": "실선입니다. 보이는 선이 우선입니다. 두 선을 겹쳐 그리면 읽는 사람이 그 자리가 보이는 모양인지 가려진 모양인지 판단하지 못하고, 화면에서는 실선에 가려 있다가 출력하면 파선이 비쳐 나옵니다.",
+      "en": "The visible line. Visible wins. Leaving both stacked means the reader cannot tell whether that edge is seen or obscured, and although the visible line hides it on screen, the dashes show through when you plot."
+     }
+    },
+    {
+     "ko": "치수는 어느 뷰에서 뽑습니까? 치수선 간격 기준은 몇 밀리미터입니까?",
+     "en": "Which view do you take dimensions from, and what is the spacing standard in millimeters?",
+     "answer": {
+      "ko": "정면도 외형선을 기준으로 최대한 많이 뽑고, 정면도에서 표현이 어려운 것만 측면도·평면도에서 뽑습니다. 한 뷰에 모아야 읽는 사람이 시선을 옮기지 않습니다. 간격에는 명확한 기준이 없습니다 — 숫자를 지어내 맞추려 하지 말고, 잘 만들어진 도면을 옆에 놓고 정리된 느낌이 날 때까지 맞춥니다.",
+      "en": "Take as many as possible from the front view's visible outline, and only what the front view cannot express from the side and top views - keeping them in one view saves the reader from moving their eyes. There is no defined spacing standard; do not invent a number, compare against a well-made drawing until it looks tidy."
+     }
+    },
+    {
+     "ko": "다 그렸습니다. 파일 이름은 어떻게 짓고 40분 중 마지막 몇 분은 무엇에 씁니까?",
+     "en": "You have finished drawing. How do you name the file, and what are the last few minutes of the 40 for?",
+     "answer": {
+      "ko": "사번_이름 형식입니다. 여러 명이 같은 주소로 보내므로 파일 이름 자체가 신원입니다. 마지막 몇 분은 저장과 전송에 씁니다 — 40분이 지나면 즉시 제출이므로 그 시간을 미리 빼 둡니다. 제출 주소와 파일 형식은 현장 안내를 따릅니다.",
+      "en": "employeeNumber_name. Everyone submits to the same address, so the file name is your identity. Leave the last few minutes for saving and sending - submission is immediate once the 40 minutes are up, so budget that time in advance. Follow the on-site instructions for the address and file format."
+     }
+    }
+   ],
+   "exercise": {
+    "ko": "40분 모의 작도를 두 번 하세요. 첫 번째는 EDU-IB-02 아이들러 풀리 브래킷을 아무것도 안 보고 처음부터 다시 그립니다 — 새 도면에서 시작해 템플릿부터 치수까지입니다. 끝나면 어느 단계에서 시간이 샜는지 적습니다. 두 번째는 그 단계만 따로 두 번 연습한 뒤 다시 40분을 잽니다. 두 번의 시간과 걸린 단계를 나란히 적어 두면 시험 전에 무엇을 더 연습해야 하는지가 값으로 나옵니다. 시험에 나올 부품은 미정이므로 이 브래킷이 시험 문제라고 생각하지 않습니다 — 연습하는 것은 형상이 아니라 순서입니다.",
+    "en": "Do the 40-minute mock run twice. The first time, redraw the EDU-IB-02 idler pulley bracket from scratch with nothing in front of you - new drawing, template through dimensions. When the clock stops, write down which step ate the time. The second time, drill that step twice on its own, then run the 40 minutes again. Writing both times and both bottleneck steps side by side turns 'what should I practice' into a number. The exam part is not decided, so do not treat this bracket as the exam question - what you are drilling is the sequence, not the shape."
+   },
+   "recoveryNote": {
+    "ko": "8차시는 열 파일도 저장할 파일도 없어 언제 읽어도 됩니다. 다만 40분 모의 작도는 7차시를 마친 뒤에 하세요 — 치수 기입을 한 번도 안 해 본 상태로 시간을 재면 어느 단계에서 시간이 샜는지가 아니라 「치수를 못 넣는다」만 나옵니다. 앞 차시를 건너뛴 채 시험이 급하다면 순서는 이렇습니다. ① 2차시 「따라 하기 1~3」으로 템플릿을 손에 붙입니다(시험 범위의 시작이고 시험장에서 여기에 시간을 쓰면 안 됩니다). ② 5차시 「제3각법 — 본 방향에 그 뷰를 놓는다」를 읽습니다(배치를 틀리면 세 뷰를 다시 배치해야 하고 40분에 그 여유가 없습니다). ③ 7차시 「따라 하기 1」로 치수 스타일을 세워 봅니다. ④ 그다음 이 차시의 40분 모의 작도를 합니다. 채점 기준·일시·장소·제출 주소는 이 자습본에 없습니다. 별도 공지로 받습니다.",
+    "en": "Lesson 8 opens and saves no file, so you can read it at any time. Do the 40-minute mock run after Lesson 7 though: timing yourself before you have ever dimensioned anything tells you only 'I cannot dimension', not which step ate the clock. If you skipped earlier lessons and the exam is close, go in this order. (1) Lesson 2's 'Do it 1-3' until the template is automatic - it is the start of the exam scope and not somewhere to spend time on the day. (2) Read Lesson 5's 'Third angle - the view goes where you looked from'; getting the layout wrong means replacing all three views, and 40 minutes has no room for that. (3) Lesson 7's 'Do it 1' to set up a dimension style once. (4) Then the 40-minute mock run here. The marking scheme, date, venue, and submission address are not in this workbook. They come by separate notice."
+   }
+  }
+ ],
+ "glossary": [
+  {
+   "ko": "외형선",
+   "en": "visible line",
+   "def": {
+    "ko": "눈에 보이는 모양을 그리는 굵은 실선입니다. 이 과정에서는 흰색 7번, 굵기 0.5로 넷 중 이것만 굵습니다.",
+    "en": "The thick continuous line that draws what you can see. In this course it is white (7) at 0.5 mm - the only one of the four that is thick."
+   },
+   "lessons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "중심선",
+   "en": "centerline",
+   "def": {
+    "ko": "원의 중심과 대칭축을 나타내는 가는 일점쇄선입니다. 빨강 1번, 굵기 0.25, 선 종류 축척 0.5입니다.",
+    "en": "The thin chain line marking circle centers and axes of symmetry. Red (1), 0.25 mm, linetype scale 0.5."
+   },
+   "lessons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "숨은선",
+   "en": "hidden line",
+   "def": {
+    "ko": "재료에 가려져 보이지 않는 모양을 나타내는 가는 파선입니다. 노랑 2번, 굵기 0.25, 선 종류 축척 0.5입니다. 실선과 겹치면 실선을 남깁니다.",
+    "en": "The thin dashed line for edges hidden behind material. Yellow (2), 0.25 mm, linetype scale 0.5. Where it coincides with a visible line, the visible line stays."
+   },
+   "lessons": [
+    1,
+    2,
+    5,
+    6,
+    8
+   ]
+  },
+  {
+   "ko": "치수선",
+   "en": "dimension line",
+   "def": {
+    "ko": "치수와 보조선을 그리는 가는 실선입니다. 보라 6번, 굵기 0.25. 이 과정에서는 뷰를 맞추는 투상선도 이 레이어에 긋습니다.",
+    "en": "The thin continuous line for dimensions and extension lines. Magenta (6), 0.25 mm. In this course the construction lines that align the views also go on this layer."
+   },
+   "lessons": [
+    1,
+    2,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "레이어 · 도면층",
+   "en": "layer",
+   "def": {
+    "ko": "선의 색상·선 종류·굵기를 개체마다가 아니라 묶음으로 정하는 장치입니다. 이 과정은 넷만 씁니다 — 외형선·중심선·숨은선·치수선.",
+    "en": "The mechanism that sets color, linetype, and lineweight per group rather than per object. This course uses exactly four: visible, center, hidden, dimension."
+   },
+   "lessons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "선가중치",
+   "en": "lineweight",
+   "def": {
+    "ko": "인쇄될 선의 두께입니다. 밀리미터로 지정합니다. 굵기 차이가 인쇄물에서 형상을 먼저 읽히게 합니다.",
+    "en": "The printed thickness of a line, set in millimeters. The difference in weight is what makes geometry read first on paper."
+   },
+   "lessons": [
+    2,
+    8
+   ]
+  },
+  {
+   "ko": "선 종류 축척",
+   "en": "linetype scale",
+   "def": {
+    "ko": "파선의 획과 틈 길이를 정하는 값입니다. 굵기가 아닙니다. 화면 간격은 도면 전체 값과 개체 값의 곱입니다.",
+    "en": "The value that sets the dash and gap lengths of a broken line. It is not thickness. On-screen spacing is the global value multiplied by the per-object value."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "ko": "정투상",
+   "en": "orthographic projection",
+   "def": {
+    "ko": "물체를 서로 직각인 방향에서 본 모습을 평면에 그리는 방법입니다. 실습 과제의 두 형태 중 하나가 이것입니다.",
+    "en": "Drawing an object as seen from directions at right angles to each other. One of the two task formats is exactly this."
+   },
+   "lessons": [
+    1,
+    5,
+    8
+   ]
+  },
+  {
+   "ko": "제3각법",
+   "en": "third-angle projection",
+   "def": {
+    "ko": "본 방향에 그 뷰를 놓는 배치입니다. 정면도 위에 평면도, 오른쪽에 우측면도가 옵니다. 기호는 원뿔대의 작은 끝이 원을 향합니다.",
+    "en": "The arrangement that places each view on the side you looked from: top view above the front view, right side view to its right. In the symbol, the small end of the truncated cone faces the circles."
+   },
+   "lessons": [
+    1,
+    2,
+    5,
+    8
+   ]
+  },
+  {
+   "ko": "정면도",
+   "en": "front view",
+   "def": {
+    "ko": "기준이 되는 뷰입니다. 형상이 가장 잘 드러나고, 실제 놓이는 자세이고, 숨은선이 가장 적게 나오는 방향으로 고릅니다.",
+    "en": "The reference view. Choose the direction that shows the shape best, matches how the part actually sits, and produces the fewest hidden lines."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "평면도",
+   "en": "top view",
+   "def": {
+    "ko": "위에서 내려다본 뷰입니다. 이 도면에서는 판 두께 12와 보스 자리 두께 20을 여기서 읽습니다. 위쪽이 뒷면, 아래쪽이 앞면입니다.",
+    "en": "The view looking down from above. On this drawing the 12 mm plate and 20 mm boss thicknesses are read here. Its upper edge is the back face, its lower edge the front."
+   },
+   "lessons": [
+    2,
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "우측면도",
+   "en": "right side view",
+   "def": {
+    "ko": "오른쪽에서 본 뷰입니다. 왼쪽이 앞면, 오른쪽이 뒷면입니다. 축 구멍의 관통을 여기서 숨은선으로 읽습니다.",
+    "en": "The view from the right. Its left edge is the front face, its right edge the back. The through bore reads here as hidden lines."
+   },
+   "lessons": [
+    2,
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "투상선 · 구성선",
+   "en": "construction line (projector)",
+   "def": {
+    "ko": "뷰끼리 값을 맞추려고 긋는 무한선입니다. 형상이 아니라 자이므로 도면에 남기지 않습니다. XLINE으로 긋고 치수선 레이어에 둡니다.",
+    "en": "The infinite line drawn to carry values between views. It is a ruler, not geometry, so it does not stay on the drawing. Drawn with XLINE and kept on the dimension layer."
+   },
+   "lessons": [
+    5,
+    6
+   ]
+  },
+  {
+   "ko": "도면틀",
+   "en": "drawing border",
+   "def": {
+    "ko": "용지선 안쪽에 사방 10밀리미터를 띄워 그린 사각형입니다. 실제 그림은 이 안쪽에만 들어갑니다. 인쇄 때 가장자리가 잘려도 내용이 살아 있게 합니다.",
+    "en": "The rectangle drawn 10 mm inside the sheet outline on all four sides. All content sits inside it, so the drawing survives edge cropping when printed."
+   },
+   "lessons": [
+    2,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "표제란",
+   "en": "title block",
+   "def": {
+    "ko": "오른쪽 아래 구석의 가로 200 세로 30 칸입니다. 100씩 둘로 나눠 왼쪽에 이름, 오른쪽에 사번을 문자 높이 10으로 넣습니다.",
+    "en": "The 200 x 30 block in the lower right corner, split into two 100-wide cells: name on the left, employee number on the right, text height 10."
+   },
+   "lessons": [
+    2,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "중심 마크",
+   "en": "centering mark",
+   "def": {
+    "ko": "네 변의 한가운데에 용지선과 도면선 사이를 잇는 짧은 선입니다. 도면을 접거나 복사할 때 기준이 됩니다.",
+    "en": "A short line at the midpoint of each edge, spanning between the sheet outline and the border. It gives a reference when the drawing is folded or copied."
+   },
+   "lessons": [
+    2,
+    8
+   ]
+  },
+  {
+   "ko": "도면 한계",
+   "en": "drawing limits",
+   "def": {
+    "ko": "도면 영역의 좌하단과 우상단 좌표입니다. A3 가로는 0,0과 420,297입니다. 값만 정하고 화면을 바꾸지 않으므로 줌 전체로 맞춥니다.",
+    "en": "The lower-left and upper-right coordinates of the drawing area. A3 landscape is 0,0 and 420,297. Setting limits does not change the view, so follow it with a zoom all."
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "ko": "모따기",
+   "en": "chamfer",
+   "def": {
+    "ko": "모서리를 비스듬히 잘라낸 형상입니다. C 표기가 45도를 함께 지시하고 뒤의 숫자는 잘라내는 변의 길이입니다. 이 부품은 2-C5입니다.",
+    "en": "An edge cut off at an angle. The C callout also implies 45 degrees, and the number is the length of the cut edge. This part carries 2-C5."
+   },
+   "lessons": [
+    2,
+    3,
+    7
+   ]
+  },
+  {
+   "ko": "필렛",
+   "en": "fillet",
+   "def": {
+    "ko": "안쪽 모서리를 둥글린 형상입니다. 각지게 만나면 한 점에 힘이 몰려 거기서부터 금이 가므로 둥글립니다. 이 부품은 2-R10입니다.",
+    "en": "A rounded internal corner. A sharp corner concentrates load at one point and cracks start there, so it is radiused. This part carries 2-R10."
+   },
+   "lessons": [
+    2,
+    4,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "장공",
+   "en": "slot",
+   "def": {
+    "ko": "끝이 반원인 긴 구멍입니다. 조립 후 위치를 조정하기 위한 것으로, 끝단 반지름과 두 끝원 중심거리로 형상이 확정됩니다. 이 부품은 2-R5, 중심거리 12입니다.",
+    "en": "An elongated hole with semicircular ends, used to adjust position after assembly. End radius plus the distance between end-arc centers fully defines it. Here: 2-R5 with 12 between centers."
+   },
+   "lessons": [
+    2,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "보스",
+   "en": "boss",
+   "def": {
+    "ko": "축 둘레에 살을 확보하려고 판에서 돌출시킨 원통 부분입니다. 이 부품은 Ø56이 앞으로 8만큼 나오고 뒷면은 평면으로 둡니다.",
+    "en": "A cylindrical projection from the plate that adds material around the shaft. Here the 56 mm boss projects 8 forward while the back face stays flat."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "ko": "목",
+   "en": "web",
+   "def": {
+    "ko": "보스에서 베이스로 하중을 흘려보내는 부분입니다. 굽힘 모멘트가 가장 큰 밑동이 가장 넓고 위로 갈수록 좁아집니다. 밑동 80입니다.",
+    "en": "The section carrying load from the boss down to the base. It is widest at the foot where the bending moment peaks, and tapers upward. The foot spans 80."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    7
+   ]
+  },
+  {
+   "ko": "베이스",
+   "en": "base",
+   "def": {
+    "ko": "프레임에 밀착해 볼트로 고정되는 아래 판입니다. 폭 120, 정면에서 본 높이 16입니다.",
+    "en": "The lower plate that seats against the frame and is bolted to it. Width 120, height 16 as seen in the front view."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    7
+   ]
+  },
+  {
+   "ko": "축 구멍",
+   "en": "bore",
+   "def": {
+    "ko": "회전하는 축이 끼워지는 관통 구멍입니다. Ø25 H7이고 드릴로 못 내어 리머 공정이 한 번 더 들어갑니다.",
+    "en": "The through hole the rotating shaft fits into. 25 mm H7, which cannot be drilled to size and needs an extra reaming operation."
+   },
+   "lessons": [
+    2,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "ko": "탭 · 나사 구멍",
+   "en": "tapped hole",
+   "def": {
+    "ko": "나사산을 낸 구멍입니다. 드릴로 뚫은 뒤 탭으로 산을 냅니다. 개수·규격·깊이 순으로 한 줄에 적습니다 — 4-M5 깊이 10.",
+    "en": "A hole with a thread cut into it: drilled first, then tapped. Written on one line as quantity, designation, depth - 4-M5 depth 10."
+   },
+   "lessons": [
+    2,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "ko": "피치원",
+   "en": "bolt circle (PCD)",
+   "def": {
+    "ko": "구멍 여러 개의 중심이 놓이는 가상의 원입니다. 구멍 자체의 지름이 아닙니다. 실제로 깎이지 않으므로 중심선으로 그립니다 — PCD Ø44.",
+    "en": "The imaginary circle the hole centers sit on - not the diameter of the holes. Nothing is machined along it, so it is drawn as a centerline: PCD 44."
+   },
+   "lessons": [
+    2,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "ko": "끼워맞춤 · H7",
+   "en": "fit (H7)",
+   "def": {
+    "ko": "구멍과 축이 얼마나 헐겁거나 빡빡하게 맞는지를 정하는 등급입니다. H7은 헐겁지도 억지로 박지도 않는 등급이고, 등급 자체가 리머 공정을 지시합니다.",
+    "en": "The class that sets how loose or tight a hole and shaft go together. H7 is neither slack nor press-fit, and the class itself dictates a reaming operation."
+   },
+   "lessons": [
+    2,
+    7
+   ]
+  },
+  {
+   "ko": "참고 치수",
+   "en": "reference dimension",
+   "def": {
+    "ko": "괄호를 친 치수입니다. 다른 값에서 계산돼 나오므로 만들 때 참고만 하고 검사할 때는 재지 않습니다. 괄호를 빼먹으면 반올림 때문에 멀쩡한 부품이 불합격됩니다.",
+    "en": "A dimension in parentheses. It is derived from other values, so it informs manufacture but is not inspected. Omit the parentheses and a good part fails on rounding alone."
+   },
+   "lessons": [
+    2,
+    7
+   ]
+  },
+  {
+   "ko": "이론상의 모서리",
+   "en": "theoretical corner",
+   "def": {
+    "ko": "필렛이나 모따기가 지워 버렸지만 치수의 기준으로는 살아 있는 모서리입니다. 목 밑동 80이 이 모서리까지 잰 값입니다.",
+    "en": "A corner a fillet or chamfer has removed, which nonetheless remains the reference the dimension is taken to. The 80 mm web foot is measured to these corners."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    7
+   ]
+  },
+  {
+   "ko": "기준면 · 데이텀",
+   "en": "datum face",
+   "def": {
+    "ko": "치수를 재기 시작하는 면입니다. 이 도면은 왼쪽 변과 아래 변 한 곳으로 모읍니다. 기준을 옮겨 잡으면 오차가 누적됩니다.",
+    "en": "The face a dimension is measured from. This drawing gathers them to one pair - the left edge and the bottom edge. Moving the datum accumulates error."
+   },
+   "lessons": [
+    3,
+    7
+   ]
+  },
+  {
+   "ko": "검산",
+   "en": "cross-check",
+   "def": {
+    "ko": "그린 것이 맞는지를 눈이 아니라 값으로 판정하는 일입니다. DIST·LIST·QSELECT·레이어 껐다 켜기와 산술 검산(62+28=90 등)이 여기 듭니다.",
+    "en": "Judging what you drew by numbers instead of by eye: DIST, LIST, QSELECT, toggling layers, and arithmetic such as 62 + 28 = 90."
+   },
+   "lessons": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "절대좌표",
+   "en": "absolute coordinates",
+   "def": {
+    "ko": "원점에서 재는 자리를 x,y로 쓰는 입력입니다. 시작점과 원의 중심에 씁니다 — 60,62.",
+    "en": "Entry written as x,y measured from the origin. Used for start points and circle centers - 60,62."
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "ko": "상대좌표",
+   "en": "relative coordinates",
+   "def": {
+    "ko": "앞에 찍은 점에서 얼마나 갔는지를 @dx,dy로 쓰는 입력입니다. 골뱅이를 빼먹으면 절대좌표로 읽혀 선이 엉뚱한 데로 튑니다.",
+    "en": "Entry written as @dx,dy from the previous point. Omit the @ and it is read as absolute, sending the line somewhere else entirely."
+   },
+   "lessons": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "ko": "상대극좌표",
+   "en": "relative polar coordinates",
+   "def": {
+    "ko": "앞에 찍은 점에서 어느 방향으로 얼마나 갔는지를 @거리<각도로 쓰는 입력입니다. 각도와 거리가 도면에 그대로 적혀 있을 때 씁니다 — @22<45.",
+    "en": "Entry written as @distance<angle from the previous point. Use it when the drawing states the angle and distance directly - @22<45."
+   },
+   "lessons": [
+    3,
+    4,
+    7
+   ]
+  },
+  {
+   "ko": "폴리선",
+   "en": "polyline",
+   "def": {
+    "ko": "여러 변이 하나의 객체로 이어진 선입니다. 클릭 한 번에 전체가 잡히고 넓이 계산과 간격띄우기가 윤곽 전체에 한 번에 걸립니다.",
+    "en": "A run of segments joined into one object. A single click selects all of it, and area and offset apply to the whole outline at once."
+   },
+   "lessons": [
+    2,
+    3,
+    6,
+    8
+   ]
+  },
+  {
+   "ko": "객체 스냅",
+   "en": "object snap",
+   "def": {
+    "ko": "커서를 형상 위의 정확한 점에 붙이는 기능입니다. 이 과정은 여섯 개를 켭니다 — 끝점·중간점·중심·사분점·교차점·접점.",
+    "en": "The feature that locks the cursor to exact points on geometry. This course turns on six: endpoint, midpoint, center, quadrant, intersection, tangent."
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "접점",
+   "en": "tangent point",
+   "def": {
+    "ko": "직선이 원에 닿는 한 점입니다. 좌표를 계산하지 않고 접점 스냅으로 잡습니다. 한 점에서 원에 접하는 선은 둘이고 커서 위치가 어느 쪽인지 정합니다.",
+    "en": "The single point where a line touches a circle. Take it with the tangent snap rather than calculating coordinates. Two tangents exist from any outside point, and the cursor position decides which one you get."
+   },
+   "lessons": [
+    2,
+    3
+   ]
+  },
+  {
+   "ko": "사분점",
+   "en": "quadrant point",
+   "def": {
+    "ko": "원의 위아래 좌우 네 점입니다. 32와 88 같은 값은 계산해 입력하지 않고 여기서 직접 받습니다.",
+    "en": "The four points at the top, bottom, left, and right of a circle. Values like 32 and 88 are taken from here rather than typed."
+   },
+   "lessons": [
+    2,
+    4,
+    5
+   ]
+  },
+  {
+   "ko": "대칭 복사",
+   "en": "mirror",
+   "def": {
+    "ko": "대칭축 건너편으로 형상을 뒤집어 복사하는 것입니다. 이 부품의 대칭축은 x=60인 세로선입니다. 원본 삭제는 아니오로 둡니다.",
+    "en": "Copying geometry flipped across an axis. On this part the axis is the vertical line at x = 60. Answer no when asked whether to delete the source."
+   },
+   "lessons": [
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "ko": "원형 배열",
+   "en": "polar array",
+   "def": {
+    "ko": "한 점을 중심으로 항목을 균등하게 돌려 복사하는 것입니다. 사이의 각도는 360을 개수로 나눈 값이고, 도면에 적힌 첫 구멍 각도와 다릅니다.",
+    "en": "Copying items evenly around a center. The angle between items is 360 divided by the count - not the same as the first-hole angle written on the drawing."
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "ko": "간격띄우기",
+   "en": "offset",
+   "def": {
+    "ko": "고른 객체에서 일정 거리 떨어진 같은 모양을 만드는 것입니다. 중심을 다시 찍지 않으므로 동심원의 중심이 어긋날 수 없습니다. 오프셋 거리는 반지름 차이입니다.",
+    "en": "Creating a copy a set distance from an object. Because the center is never re-picked, concentric circles cannot drift apart. The offset distance is the radius difference."
+   },
+   "lessons": [
+    4,
+    5,
+    8
+   ]
+  },
+  {
+   "ko": "지시선",
+   "en": "leader",
+   "def": {
+    "ko": "형상을 화살표로 가리키고 설명을 밖으로 뽑아 적는 선입니다. 재서 나오지 않는 값과 한 줄에 여러 정보를 담아야 하는 표기가 여기로 갑니다 — 2-C5, 4-M5 깊이 10.",
+    "en": "A line that points at a feature with an arrow and carries its note outside the geometry. Anything that cannot be measured, or that packs several facts into one line, goes here - 2-C5, 4-M5 depth 10."
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "ko": "중복 치수",
+   "en": "duplicate dimension",
+   "def": {
+    "ko": "같은 값을 두 번 적은 것입니다. 도면을 고칠 때 두 곳이 서로 다른 말을 하게 되므로 한 값은 한 번만 적습니다.",
+    "en": "The same value stated twice. When the drawing is revised the two can disagree, so each value appears once only."
+   },
+   "lessons": [
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "축척",
+   "en": "scale",
+   "def": {
+    "ko": "도면의 크기와 실물 크기의 비입니다. 이 도면은 1대1이라 종이의 120이 자로도 120밀리미터입니다. 용지에 맞춤을 켜면 이 값이 흐트러집니다.",
+    "en": "The ratio between the drawing and the real object. This sheet is 1:1, so 120 on paper measures 120 mm. Turning on fit-to-paper breaks that."
+   },
+   "lessons": [
+    7,
+    8
+   ]
+  },
+  {
+   "ko": "표면 거칠기",
+   "en": "surface roughness",
+   "def": {
+    "ko": "면을 얼마나 곱게 다듬을지를 면마다 지시하는 값입니다. 이 과정에서는 기호를 그리지 않고 무엇을 지시하는지만 읽습니다.",
+    "en": "How finely each face is to be finished, specified face by face. This course reads what the notation specifies but does not draw the symbol."
+   },
+   "lessons": [
+    2,
+    6
+   ]
+  },
+  {
+   "ko": "기하 공차",
+   "en": "geometric tolerance",
+   "def": {
+    "ko": "크기가 아니라 형상·자세·위치가 얼마나 벗어나도 되는지를 정하는 표기입니다. 네모 칸을 좌우로 나눠 왼쪽에 기호, 오른쪽에 허용값을 적습니다.",
+    "en": "A notation that limits deviation of form, orientation, and location rather than size. The frame is split left and right: symbol on the left, permitted value on the right."
+   },
+   "lessons": [
+    2,
+    6
+   ]
+  },
+  {
+   "ko": "체크포인트 파일",
+   "en": "checkpoint file",
+   "def": {
+    "ko": "차시가 끝날 때 새 이름으로 남기는 저장 상태입니다. EDU-IB-02_L02_TEMPLATE부터 L07_RELEASE까지 여섯 개가 쌓입니다. 덮어쓰지 않아야 앞 상태로 돌아갈 수 있습니다.",
+    "en": "The state saved under a new name at the end of each lesson. Six accumulate, from EDU-IB-02_L02_TEMPLATE to L07_RELEASE. Never overwrite them, or there is no earlier state to return to."
+   },
+   "lessons": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "ko": "아이들러 풀리",
+   "en": "idler pulley",
+   "def": {
+    "ko": "동력을 전달하지 않고 벨트를 옆에서 눌러 장력을 잡아 주는 바퀴입니다. 이 부품이 그 바퀴의 축을 붙듭니다.",
+    "en": "A wheel that transmits no power but presses on the belt from the side to hold tension. This part carries its shaft."
+   },
+   "lessons": [
+    1,
+    2
+   ]
+  },
+  {
+   "ko": "응력 집중",
+   "en": "stress concentration",
+   "def": {
+    "ko": "각진 안쪽 모서리처럼 한 점에 힘이 몰리는 현상입니다. 거기서부터 금이 가므로 라운드를 주어 힘을 넓게 퍼뜨립니다.",
+    "en": "Load piling up at a single point, as at a sharp internal corner. Cracks start there, so a radius spreads the load out."
+   },
+   "lessons": [
+    2,
+    4
+   ]
+  },
+  {
+   "ko": "굽힘 모멘트",
+   "en": "bending moment",
+   "def": {
+    "ko": "힘점에서 멀어질수록 커지는 휘는 힘입니다. 목의 밑동이 가장 크므로 거기가 가장 넓습니다.",
+    "en": "The bending action that grows with distance from the point of load. It peaks at the foot of the web, which is therefore the widest section."
+   },
+   "lessons": [
+    2
+   ]
+  }
+ ],
+ "shortcutIndex": [
+  {
+   "key": "OPEN",
+   "name": {
+    "ko": "파일 열기",
+    "en": "Open a file"
+   },
+   "when": {
+    "ko": "매 차시 지난 상태에서 이어 그릴 때. Ctrl+O와 같습니다",
+    "en": "Every lesson, to continue from the previous state. Same as Ctrl+O"
+   },
+   "lessons": [
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save under a new name"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 남길 때. 덮어쓰면 앞 차시로 돌아갈 수 없습니다",
+    "en": "To keep a lesson's end state. Overwrite and there is no earlier state to return to"
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "QSAVE",
+   "name": {
+    "ko": "덮어써 저장",
+    "en": "Save in place"
+   },
+   "when": {
+    "ko": "같은 파일 안에서 작업을 이어 갈 때. Ctrl+S와 같습니다",
+    "en": "While continuing work in the same file. Same as Ctrl+S"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "UNITS",
+   "name": {
+    "ko": "단위와 정밀도 설정",
+    "en": "Units and precision"
+   },
+   "when": {
+    "ko": "밀리미터인지 인치인지 확인할 때",
+    "en": "To confirm whether the drawing is in millimeters or inches"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "LIMITS",
+   "name": {
+    "ko": "도면 한계 설정",
+    "en": "Drawing limits"
+   },
+   "when": {
+    "ko": "용지 크기를 좌표로 잡을 때",
+    "en": "To fix the sheet size as coordinates"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "Z",
+   "name": {
+    "ko": "ZOOM · 화면 배율 변경",
+    "en": "ZOOM - change view scale"
+   },
+   "when": {
+    "ko": "스냅이 어디 붙었는지 봐야 할 때. 전체는 A, 범위 지정은 W",
+    "en": "When you need to see where a snap landed. A for all, W for a window"
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "A",
+   "name": {
+    "ko": "ZOOM 전체 옵션",
+    "en": "ZOOM All option"
+   },
+   "when": {
+    "ko": "도면틀 전체를 한 화면에 넣을 때",
+    "en": "To bring the whole border onto one screen"
+   },
+   "lessons": [
+    3,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "W",
+   "name": {
+    "ko": "ZOOM 윈도우 옵션 · UCS 표준 좌표계 옵션",
+    "en": "ZOOM Window option / UCS World option"
+   },
+   "when": {
+    "ko": "줌에서는 두 구석으로 범위를 지정할 때, UCS에서는 표준 좌표계로 돌아갈 때",
+    "en": "In ZOOM, to set a range by two corners; in UCS, to return to world coordinates"
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "LINETYPE",
+   "name": {
+    "ko": "선 종류 불러오기",
+    "en": "Load linetypes"
+   },
+   "when": {
+    "ko": "CENTER · HIDDEN을 레이어에 지정하기 전",
+    "en": "Before assigning CENTER and HIDDEN to layers"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "LAYER / LA",
+   "name": {
+    "ko": "레이어 생성과 관리",
+    "en": "Create and manage layers"
+   },
+   "when": {
+    "ko": "선 종류·색상을 개체가 아니라 레이어로 정할 때, 전구를 껐다 켜며 점검할 때",
+    "en": "To set linetype and color by layer rather than by object, and to audit by toggling the light bulbs"
+   },
+   "lessons": [
+    2,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "CLAYER",
+   "name": {
+    "ko": "현재 레이어",
+    "en": "Current layer"
+   },
+   "when": {
+    "ko": "명령행으로 레이어를 바꿀 때. 드롭다운과 같은 일입니다",
+    "en": "To change layer from the command line - the same as the drop-down"
+   },
+   "lessons": [
+    3,
+    4
+   ]
+  },
+  {
+   "key": "LTSCALE",
+   "name": {
+    "ko": "도면 전체의 선 종류 축척",
+    "en": "Global linetype scale"
+   },
+   "when": {
+    "ko": "점선이 실선처럼 보일 때. 화면 간격은 이 값과 개체 값의 곱입니다",
+    "en": "When dashed lines read as continuous. On-screen spacing is this value times the per-object value"
+   },
+   "lessons": [
+    2,
+    5,
+    6
+   ]
+  },
+  {
+   "key": "RE",
+   "name": {
+    "ko": "REGEN · 도면 재생성",
+    "en": "REGEN - regenerate the drawing"
+   },
+   "when": {
+    "ko": "축척 값을 바꿨는데 화면이 그대로일 때",
+    "en": "When a scale change does not show on screen"
+   },
+   "lessons": [
+    5,
+    6
+   ]
+  },
+  {
+   "key": "REC",
+   "name": {
+    "ko": "RECTANG · 직사각형을 폴리선으로",
+    "en": "RECTANG - rectangle as a polyline"
+   },
+   "when": {
+    "ko": "도면틀, 표제란, 판재 외곽처럼 네 변을 한 덩어리로 다룰 때",
+    "en": "For the border, title block, and plate outlines - anywhere four edges act as one object"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "L",
+   "name": {
+    "ko": "LINE · 선 긋기",
+    "en": "LINE - draw a line"
+   },
+   "when": {
+    "ko": "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선. OFFSET 안에서는 도면층 옵션 키이기도 합니다",
+    "en": "For pieces you must handle individually and will later trim or fillet. Inside OFFSET it is also the Layer option key"
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    7
+   ]
+  },
+  {
+   "key": "PL",
+   "name": {
+    "ko": "PLINE · 폴리선",
+    "en": "PLINE - polyline"
+   },
+   "when": {
+    "ko": "한 바퀴 도는 윤곽. 영역 넓이를 재거나 통째로 옮길 때. 레이아웃에서 설비 자리를 둘러 묶을 때",
+    "en": "For a closed outline, to measure area or move it as a unit. On layouts, to enclose an equipment footprint"
+   },
+   "lessons": [
+    3,
+    8
+   ]
+  },
+  {
+   "key": "C",
+   "name": {
+    "ko": "CIRCLE · 원 / PLINE·LINE의 닫기 옵션",
+    "en": "CIRCLE / the Close option in PLINE and LINE"
+   },
+   "when": {
+    "ko": "아무 명령도 실행 중이 아닐 때는 원, 폴리선이나 선 명령이 진행 중이면 닫기입니다. 5차시의 C는 원이 아닙니다",
+    "en": "With no command running it draws a circle; inside PLINE or LINE it closes the outline. In Lesson 5 the C is not a circle"
+   },
+   "lessons": [
+    3,
+    4,
+    5
+   ]
+  },
+  {
+   "key": "D",
+   "name": {
+    "ko": "CIRCLE 지름 옵션 (3·4차시) / DIMSTYLE (7차시)",
+    "en": "CIRCLE Diameter option (Lessons 3-4) / DIMSTYLE (Lesson 7)"
+   },
+   "when": {
+    "ko": "도면에 Ø로 적혀 있을 때 반지름을 묻는 자리에서 먼저 누릅니다. 7차시의 D는 치수 스타일 명령입니다",
+    "en": "Press it at the radius prompt when the drawing states a diameter. In Lesson 7, D is the dimension-style command"
+   },
+   "lessons": [
+    3,
+    4,
+    7
+   ]
+  },
+  {
+   "key": "O",
+   "name": {
+    "ko": "OFFSET · 간격띄우기",
+    "en": "OFFSET"
+   },
+   "when": {
+    "ko": "중심을 다시 찍지 않고 동심원·평행선을 만들 때. 벽체 두께, 통로 여유",
+    "en": "To build concentric or parallel geometry without re-picking a center. Wall thicknesses, aisle clearances"
+   },
+   "lessons": [
+    4,
+    5,
+    8
+   ]
+  },
+  {
+   "key": "F",
+   "name": {
+    "ko": "FILLET · 모깎기",
+    "en": "FILLET"
+   },
+   "when": {
+    "ko": "응력이 몰리는 안쪽 모서리에. 반지름 기본값이 0이라 R 옵션으로 값을 먼저 넣습니다",
+    "en": "At internal corners where stress concentrates. The default radius is 0, so set it with the R option first"
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "ARRAYPOLAR",
+   "name": {
+    "ko": "원형 배열",
+    "en": "Polar array"
+   },
+   "when": {
+    "ko": "볼트 구멍처럼 각도로 균등 배치된 것. 단축키가 없어 이름 전체를 칩니다",
+    "en": "For items spaced evenly by angle, such as bolt holes. No alias - type the full name"
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "MI",
+   "name": {
+    "ko": "MIRROR · 대칭 복사",
+    "en": "MIRROR"
+   },
+   "when": {
+    "ko": "좌우·상하 대칭 형상. 한 번만 그리고 뒤집습니다. 원본 삭제는 N",
+    "en": "For symmetric geometry - draw once and flip. Answer N when asked to delete the source"
+   },
+   "lessons": [
+    4,
+    5
+   ]
+  },
+  {
+   "key": "CO",
+   "name": {
+    "ko": "COPY · 복사",
+    "en": "COPY"
+   },
+   "when": {
+    "ko": "같은 구멍을 다른 자리에 둘 때. 기준점과 두 번째 점을 좌표로 주면 정확히 그만큼 옮깁니다",
+    "en": "To place the same feature elsewhere. Give the base point and second point as coordinates for an exact displacement"
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "TR",
+   "name": {
+    "ko": "TRIM · 자르기",
+    "en": "TRIM"
+   },
+   "when": {
+    "ko": "겹친 선, 튀어나온 토막을 경계까지 잘라낼 때. 남길 쪽이 아니라 없앨 쪽을 클릭합니다",
+    "en": "To cut overlapping or overshooting segments back to a boundary. Click the part to remove, not the part to keep"
+   },
+   "lessons": [
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "key": "EX",
+   "name": {
+    "ko": "EXTEND · 늘리기",
+    "en": "EXTEND"
+   },
+   "when": {
+    "ko": "경계에 못 미친 선을 늘릴 때. 늘리고 싶은 쪽 끝 근처를 클릭합니다",
+    "en": "To lengthen a line up to a boundary. Click near the end you want extended"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "E",
+   "name": {
+    "ko": "ERASE · 지우기",
+    "en": "ERASE"
+   },
+   "when": {
+    "ko": "자를 경계가 없어 통째로 필요 없는 보조선을 정리할 때",
+    "en": "To clear guide lines that have no boundary to trim to and are simply not wanted"
+   },
+   "lessons": [
+    4,
+    6
+   ]
+  },
+  {
+   "key": "XL",
+   "name": {
+    "ko": "XLINE · 구성선",
+    "en": "XLINE - construction line"
+   },
+   "when": {
+    "ko": "뷰끼리 값을 맞추는 투상선을 그을 때. 무한히 뻗어 세 뷰를 한 번에 지나갑니다",
+    "en": "To draw projectors that align the views. Being infinite, one line crosses all three views"
+   },
+   "lessons": [
+    5,
+    6
+   ]
+  },
+  {
+   "key": "V",
+   "name": {
+    "ko": "XLINE 수직 옵션",
+    "en": "XLINE Vertical option"
+   },
+   "when": {
+    "ko": "수직 투상선만 그을 때. 안 넣으면 방향을 묻는 자유 구성선이 됩니다",
+    "en": "To draw vertical projectors only. Without it you get a free-angle construction line"
+   },
+   "lessons": [
+    5
+   ]
+  },
+  {
+   "key": "H",
+   "name": {
+    "ko": "XLINE 수평 옵션",
+    "en": "XLINE Horizontal option"
+   },
+   "when": {
+    "ko": "수평 투상선만 그을 때",
+    "en": "To draw horizontal projectors only"
+   },
+   "lessons": [
+    5
+   ]
+  },
+  {
+   "key": "FROM",
+   "name": {
+    "ko": "FROM · 객체 스냅 재지정",
+    "en": "FROM - snap override"
+   },
+   "when": {
+    "ko": "잡은 점에서 상대좌표만큼 떨어진, 도면에 점이 없는 자리를 찍을 때",
+    "en": "To pick a location that has no geometry, offset by a relative distance from a point that does"
+   },
+   "lessons": [
+    5
+   ]
+  },
+  {
+   "key": "TAN",
+   "name": {
+    "ko": "접점 스냅",
+    "en": "Tangent snap"
+   },
+   "when": {
+    "ko": "원에 접하는 선을 그을 때. 이번 한 번만 쓰는 1회용 스냅입니다",
+    "en": "To draw a line tangent to a circle. A one-shot override for this pick only"
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "OS",
+   "name": {
+    "ko": "OSNAP · 객체 스냅 항목 설정",
+    "en": "OSNAP settings"
+   },
+   "when": {
+    "ko": "끝점·중심·접점 등 어떤 스냅이 켜져 있는지 확인하고 바꿀 때",
+    "en": "To see and change which snaps are active - endpoint, center, tangent and the rest"
+   },
+   "lessons": [
+    2,
+    3
+   ]
+  },
+  {
+   "key": "UCS",
+   "name": {
+    "ko": "사용자 좌표계",
+    "en": "User coordinate system"
+   },
+   "when": {
+    "ko": "도면 안 특정 자리를 0,0으로 삼을 때. W로 표준 좌표계로 돌아갑니다",
+    "en": "To make a chosen spot inside the sheet the 0,0 point. Return to world with W"
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "UCSICON",
+   "name": {
+    "ko": "좌표계 아이콘 표시",
+    "en": "UCS icon display"
+   },
+   "when": {
+    "ko": "옮긴 원점이 어디인지 눈으로 확인할 때. 원점 옵션은 OR",
+    "en": "To see where the moved origin actually sits. The origin option is OR"
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "OR",
+   "name": {
+    "ko": "UCSICON 원점 옵션",
+    "en": "UCSICON Origin option"
+   },
+   "when": {
+    "ko": "좌표계 아이콘을 새 원점 자리에 붙여 놓을 때",
+    "en": "To park the UCS icon at the new origin"
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "QSELECT",
+   "name": {
+    "ko": "신속 선택",
+    "en": "Quick select"
+   },
+   "when": {
+    "ko": "조건에 맞는 객체를 한 번에 고를 때. 구성선만 골라 지울 때, 레이어별로 걸어 개수를 셀 때, 레이어 전체에 축척을 넣을 때",
+    "en": "To grab everything matching a condition: deleting only construction lines, counting a layer's objects, or applying a scale across a whole layer"
+   },
+   "lessons": [
+    5,
+    6
+   ]
+  },
+  {
+   "key": "MA",
+   "name": {
+    "ko": "MATCHPROP · 특성 일치",
+    "en": "MATCHPROP"
+   },
+   "when": {
+    "ko": "레이어가 틀린 선을 다시 그리지 않고 옮길 때. 설정에서 도면층 체크를 확인합니다",
+    "en": "To move a wrongly-layered line without redrawing it. Check the Layer tick in the settings dialog"
+   },
+   "lessons": [
+    6,
+    8
+   ]
+  },
+  {
+   "key": "S",
+   "name": {
+    "ko": "MATCHPROP 설정 옵션",
+    "en": "MATCHPROP Settings option"
+   },
+   "when": {
+    "ko": "원본을 찍은 뒤 특성 설정 대화상자를 열어 도면층 체크를 확인할 때",
+    "en": "After picking the source, to open Property Settings and confirm the Layer tick"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "SELECT / ALL",
+   "name": {
+    "ko": "명령행으로 전체 선택",
+    "en": "Select everything from the command line"
+   },
+   "when": {
+    "ko": "Ctrl+A 대신 명령행으로 전부 잡을 때. 색상·선종류·선가중치를 ByLayer로 통일하기 전",
+    "en": "As an alternative to Ctrl+A, before setting color, linetype, and lineweight to ByLayer"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "MIRRTEXT",
+   "name": {
+    "ko": "대칭 시 문자 뒤집기 설정",
+    "en": "Mirror-text setting"
+   },
+   "when": {
+    "ko": "문자가 포함된 것을 대칭 복사하기 전. 0이면 글자가 뒤집히지 않습니다 (기본값 0)",
+    "en": "Before mirroring anything containing text. At 0 the text is not reversed - 0 is the default"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "DI",
+   "name": {
+    "ko": "DIST · 거리 재기",
+    "en": "DIST - measure a distance"
+   },
+   "when": {
+    "ko": "치수를 넣기 전 두 점 사이 거리를 잴 때, 대칭이 맞는지 검산할 때. 도면에 아무것도 남기지 않습니다",
+    "en": "To measure between two points before dimensioning, and to cross-check symmetry. It leaves nothing on the drawing"
+   },
+   "lessons": [
+    4,
+    6,
+    8
+   ]
+  },
+  {
+   "key": "LI / LIST",
+   "name": {
+    "ko": "객체 정보 조회",
+    "en": "LIST - object information"
+   },
+   "when": {
+    "ko": "그린 것이 정말 그 값인지 검산할 때. 객체 종류·도면층·반지름·정점 수·닫힘 여부가 나옵니다",
+    "en": "To cross-check that what you drew really is what you meant: object type, layer, radius, vertex count, open or closed"
+   },
+   "lessons": [
+    3,
+    4,
+    8
+   ]
+  },
+  {
+   "key": "F2",
+   "name": {
+    "ko": "문자 창",
+    "en": "Text window"
+   },
+   "when": {
+    "ko": "LIST 결과를 보고 닫을 때",
+    "en": "To read a LIST result and close it again"
+   },
+   "lessons": [
+    3,
+    4
+   ]
+  },
+  {
+   "key": "U",
+   "name": {
+    "ko": "명령 안에서 한 단계 되돌리기",
+    "en": "Undo one step inside a command"
+   },
+   "when": {
+    "ko": "폴리선이나 자르기가 진행 중인 상태에서 방금 한 것 하나만 되돌릴 때",
+    "en": "While a polyline or trim is still running, to take back just the last action"
+   },
+   "lessons": [
+    3,
+    6
+   ]
+  },
+  {
+   "key": "ST",
+   "name": {
+    "ko": "STYLE · 문자 스타일과 글꼴",
+    "en": "STYLE - text style and font"
+   },
+   "when": {
+    "ko": "한글이 물음표로 나올 때. 글자를 쓰기 전에 잡습니다",
+    "en": "When Korean renders as question marks. Set it before typing any text"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "DTEXT",
+   "name": {
+    "ko": "문자 쓰기",
+    "en": "Single-line text"
+   },
+   "when": {
+    "ko": "표제란, 주석. 시작점을 좌표로 주면 두 칸의 글자가 어긋나지 않습니다",
+    "en": "For the title block and notes. Giving the start point as a coordinate keeps text in two cells aligned"
+   },
+   "lessons": [
+    2
+   ]
+  },
+  {
+   "key": "DLI",
+   "name": {
+    "ko": "DIMLINEAR · 선형 치수",
+    "en": "DIMLINEAR"
+   },
+   "when": {
+    "ko": "가로 세로로 잰 값에. 치수선을 어디로 빼느냐가 가로를 재느냐 세로를 재느냐를 정합니다",
+    "en": "For horizontal and vertical values. Where you pull the dimension line decides which component it measures"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "DAL",
+   "name": {
+    "ko": "DIMALIGNED · 정렬 치수",
+    "en": "DIMALIGNED"
+   },
+   "when": {
+    "ko": "경사면의 실제 길이에. 모따기 확인용으로만 쓰고 도면에는 남기지 않습니다",
+    "en": "For the true length of a sloped face. Used only to check the chamfer - it does not stay on the drawing"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "DDI",
+   "name": {
+    "ko": "DIMDIAMETER · 지름 치수",
+    "en": "DIMDIAMETER"
+   },
+   "when": {
+    "ko": "한 바퀴 다 도는 완전한 원에",
+    "en": "For a full circle"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "DRA",
+   "name": {
+    "ko": "DIMRADIUS · 반지름 치수",
+    "en": "DIMRADIUS"
+   },
+   "when": {
+    "ko": "원의 일부인 호에 — 라운드와 장공 끝원",
+    "en": "For arcs - fillets and slot end radii"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "DAN",
+   "name": {
+    "ko": "DIMANGULAR · 각도 치수",
+    "en": "DIMANGULAR"
+   },
+   "when": {
+    "ko": "두 선 사이의 각에. 균등 배열이면 첫 구멍의 각도 하나만 넣습니다",
+    "en": "For the angle between two lines. With an even array, dimension only the first hole's angle"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "M",
+   "name": {
+    "ko": "여러 줄 문자 옵션",
+    "en": "Multiline text option"
+   },
+   "when": {
+    "ko": "치수선 위치를 찍기 전에 측정값 앞에 2- · 2-장공 · PCD 접두어를 붙일 때",
+    "en": "Before picking the dimension-line position, to prefix the measured value with 2-, 2-slot, or PCD"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "DIMEDIT",
+   "name": {
+    "ko": "치수 문자 편집",
+    "en": "Edit dimension text"
+   },
+   "when": {
+    "ko": "측정값 뒤에 H7을 붙이거나 참고 치수에 괄호를 칠 때. 새로 만들기 옵션은 N",
+    "en": "To append H7 to a measured value, or to put a reference dimension in parentheses. The New option is N"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "MLEADER",
+   "name": {
+    "ko": "지시선과 문자",
+    "en": "Multileader"
+   },
+   "when": {
+    "ko": "재서 나오지 않는 값과 한 줄에 여러 정보를 담아야 하는 표기에 — 2-C5, 4-M5 깊이 10",
+    "en": "For values you cannot measure and notes that pack several facts into one line - 2-C5, 4-M5 depth 10"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "PLOT",
+   "name": {
+    "ko": "출력",
+    "en": "Plot"
+   },
+   "when": {
+    "ko": "종이나 PDF로 내보낼 때. 나가기 전에 축척이 1대1인지 미리보기로 확인합니다",
+    "en": "To send the sheet to paper or PDF. Confirm 1:1 in the preview before it goes out"
+   },
+   "lessons": [
+    7,
+    8
+   ]
+  },
+  {
+   "key": "EXPORTPDF",
+   "name": {
+    "ko": "PDF로 내보내기",
+    "en": "Export to PDF"
+   },
+   "when": {
+    "ko": "제출용 파일에. 가공집에 넘어가는 것도 이 PDF입니다",
+    "en": "For the file you submit - and the same PDF is what reaches the machine shop"
+   },
+   "lessons": [
+    7
+   ]
+  },
+  {
+   "key": "F3",
+   "name": {
+    "ko": "객체 스냅 켜기·끄기",
+    "en": "Object snap on/off"
+   },
+   "when": {
+    "ko": "스냅이 안 잡힐 때 가장 먼저 확인하는 곳. 토글이라 누르면 상태가 뒤집힙니다",
+    "en": "The first thing to check when a snap will not catch. It toggles, so pressing it may turn it off"
+   },
+   "lessons": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "F8",
+   "name": {
+    "ko": "직교 모드",
+    "en": "Ortho mode"
+   },
+   "when": {
+    "ko": "수평 수직선을 그을 때는 켜고, 접점을 잡을 때는 끕니다",
+    "en": "On for horizontal and vertical lines, off when picking a tangent"
+   },
+   "lessons": [
+    2,
+    3,
+    5,
+    6
+   ]
+  },
+  {
+   "key": "Ctrl+1",
+   "name": {
+    "ko": "특성 창",
+    "en": "Properties palette"
+   },
+   "when": {
+    "ko": "선종류축척처럼 객체의 값을 직접 고칠 때",
+    "en": "To edit an object's values directly, such as its linetype scale"
+   },
+   "lessons": [
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  {
+   "key": "Ctrl+A",
+   "name": {
+    "ko": "전부 선택",
+    "en": "Select all"
+   },
+   "when": {
+    "ko": "색상·선종류·선가중치를 ByLayer로 통일하기 전. 도면층 칸은 건드리지 않습니다",
+    "en": "Before setting color, linetype, and lineweight to ByLayer. Leave the Layer field alone"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "Shift + 클릭",
+   "name": {
+    "ko": "TRIM과 EXTEND 전환",
+    "en": "Switch between TRIM and EXTEND"
+   },
+   "when": {
+    "ko": "한 명령 안에서 자를 것과 늘릴 것이 번갈아 나올 때. 경계를 한 번만 잡고 끝까지 갑니다",
+    "en": "When trimming and extending alternate. Pick the boundary once and stay in one command"
+   },
+   "lessons": [
+    6
+   ]
+  },
+  {
+   "key": "Ctrl+Z",
+   "name": {
+    "ko": "실행 취소",
+    "en": "Undo"
+   },
+   "when": {
+    "ko": "명령을 빠져나온 뒤 되돌릴 때. 명령이 진행 중이면 U가 낫습니다",
+    "en": "To undo after leaving a command. While one is still running, U is the better tool"
+   },
+   "lessons": [
+    3,
+    5
+   ]
+  },
+  {
+   "key": "Delete",
+   "name": {
+    "ko": "선택한 객체 지우기",
+    "en": "Delete selected objects"
+   },
+   "when": {
+    "ko": "QSELECT로 잡은 구성선을 지울 때, 확인용 정렬 치수를 지울 때",
+    "en": "To delete construction lines caught by QSELECT, or the aligned dimension used only to check"
+   },
+   "lessons": [
+    6,
+    7
+   ]
+  },
+  {
+   "key": "Esc",
+   "name": {
+    "ko": "선택 해제 · 대화상자 복귀",
+    "en": "Deselect / return from preview"
+   },
+   "when": {
+    "ko": "확인이 끝난 뒤 선택을 풀 때, 플롯 미리보기에서 대화상자로 돌아갈 때",
+    "en": "To clear a selection after checking, and to come back from the plot preview to the dialog"
+   },
+   "lessons": [
+    3,
+    6,
+    7
+   ]
+  },
+  {
+   "key": "LWDISPLAY",
+   "name": {
+    "ko": "선가중치 화면 표시",
+    "en": "Lineweight display"
+   },
+   "when": {
+    "ko": "굵기 차이를 화면에서 확인할 때. ON으로 켭니다",
+    "en": "To see weight differences on screen. Turn it ON"
+   },
+   "lessons": [
+    2
+   ]
+  }
+ ],
+ "toneGuide": {
+  "ko": [
+   "종결은 합쇼체가 기본입니다 — ~합니다 · ~했습니다 · ~입니다. 전체의 70~80퍼센트를 여기에 둡니다. 문어체 ~한다로 쓰지 않습니다.",
+   "해요체는 세 자리에만 씁니다(20~30퍼센트). ① 어려운 대목의 확인 — 「여기가 좀 어려우신가요?」 「한 번 더 보겠습니다」. ② 멈춤점 — 「여기서 한 번 쉬어 가세요」 「화면이 이렇게 되어 있으면 다음으로 넘어가세요」. ③ 막힘 복구 블록의 첫 줄 — 「안 되면 여기를 보세요」. 사실·규격·조작 지시·검산 판정에는 쓰지 않습니다.",
+   "한 문장은 40자 안쪽으로 끊습니다. 접속사로 이어 붙인 긴 문장은 자습에서 두 번 읽게 만듭니다.",
+   "번역투를 쓰지 않습니다 — ~에 대해 · ~을 통해 · ~에 있어서 · 가지고 있다 · ~되어집니다. 우리말 어순으로 고쳐 씁니다.",
+   "레이블은 대상의 이름입니다. 「무엇인가」 「오늘」 「미리」 같은 질문형·메타 레이블을 절 제목과 카드 첫 줄에 쓰지 않습니다. 「아이들러 풀리 브래킷 / 용도 / 설명」 순서입니다.",
+   "사실만 나열하고 끝내지 않습니다. 형상·표기·설정마다 왜 그런가와 그래서 어떤 효과가 있는가를 붙입니다. 영상에서 내레이터가 채우던 인과를 본문이 직접 씁니다.",
+   "조작은 명령어·입력값·엔터·클릭 위치·대화상자가 묻는 항목과 고를 값·기능키까지 빠짐없이 적습니다. 옆에서 물어볼 사람이 없으므로 영상보다 촘촘합니다.",
+   "조작마다 실무에서 왜 필요한지 한 줄을 붙입니다. 근거로 삼는 업무는 셋뿐입니다 — 지그 제안 · 레이아웃 확인 · 스페어 파트 긴급 공수.",
+   "감점 위험을 공포 문구로 쓰지 않습니다. 「지시 확인 → 오류 발견 → 수정 → 재검수」의 작업 게이트로 표현합니다.",
+   "그림이 보여 줄 수 있는 것을 글로 다시 묘사하지 않습니다. 설명이 길어지면 그래픽이 실패한 것입니다.",
+   "확정되지 않은 것은 「공유 예정」이라고 쓰고 비워 둡니다. 지어낸 기준은 학습자가 그것을 믿고 준비하므로 빈 자리보다 나쁩니다.",
+   "학습자를 「여러분」이나 「학습자」로 부르지 않습니다. 주어를 생략하거나 「직접 해 보세요」처럼 바로 지시합니다."
+  ],
+  "en": [
+   "Use plain present tense for facts and the bare imperative for operations: 'Type SAVEAS and press Enter.' Do not soften instructions into 'you should' or 'you may want to'.",
+   "Address the reader as 'you'. Never 'the student', 'the learner', or 'we'.",
+   "Keep sentences to about 20 words. Split at the point where a Korean sentence splits, so the two languages stay paragraph-for-paragraph alignable.",
+   "State cause and effect for every shape, notation, and setting, the same as the Korean. A face is finished fine because a rotating shaft touches it, and the effect is that the fit does not loosen.",
+   "Name the thing in headings and card labels. No 'What is this?', 'Today', or 'Coming up' as a label.",
+   "Contractions are allowed in the softer registers - the stop points, the 'if it did not work' blocks, the encouragement. Keep specifications and command sequences contraction-free.",
+   "Avoid 'in order to', 'utilize', 'perform a check', 'it is important to note'. Write 'to', 'use', 'check', and delete the last one entirely.",
+   "Write numbers as digits and always with mm implied - never convert to inches, never add an imperial equivalent in parentheses.",
+   "Where something is undecided, write 'To be shared' in the same slot the Korean leaves blank. Do not fill it with a plausible value.",
+   "Do not describe in prose what the diagram already shows. If a paragraph is growing, the diagram has failed and should be fixed instead.",
+   "Match the Korean's hedging exactly. Where the Korean says a value is a practice default rather than a standard, the English says so too - do not upgrade it to a specification."
+  ]
+ },
+ "terminologyRules": [
+  "선 네 종류는 국문·영문 대응을 고정합니다 — 외형선 visible line(최초 1회만 object line 병기), 중심선 centerline(한 단어), 숨은선 hidden line, 치수선 dimension line. 영문에서 outline이나 solid line으로 흔들지 않습니다.",
+  "레이어는 국문 본문에서 「레이어」로 통일합니다. AutoCAD 대화상자 문구를 인용할 때만 「도면층」을 쓰고 괄호로 「레이어」를 병기합니다. 영문은 layer로 고정합니다.",
+  "선가중치 = lineweight(한 단어). 선 종류 = linetype. 선 종류 축척 = linetype scale. 명령·시스템 변수 이름 LTSCALE은 두 언어 모두 대문자 그대로 두고 번역하지 않습니다.",
+  "제3각법 = third-angle projection(하이픈 필수). 정투상 = orthographic projection. 뷰 이름은 front view / top view / right side view로 고정하며 elevation·plan 같은 건축 용어를 쓰지 않습니다.",
+  "피치원 = bolt circle. 최초 등장 시 'pitch circle diameter (PCD), commonly called the bolt circle'로 한 번 병기하고 이후 PCD로 고정합니다. 도면 표기 PCD Ø44는 두 언어에서 같은 문자열입니다.",
+  "장공 = slot(필요하면 slotted hole 병기). oblong hole·elongated hole로 흔들지 않습니다. 모따기 = chamfer, 필렛 = fillet. 이 부품의 R10은 안쪽 모서리이므로 round로 쓰지 않습니다.",
+  "보스 = boss, 목 = web, 베이스 = base, 축 구멍 = bore, 탭 = tapped hole, 표제란 = title block, 도면틀 = drawing border(frame 병기 가능), 검산 = cross-check.",
+  "Ø는 두 언어 모두 기호 그대로 씁니다 — Ø25, Ø56. 영문에서 'dia. 25'나 'D25'로 풀지 않습니다. H7은 ISO 끼워맞춤 등급이므로 번역하지 않고 그대로 둡니다.",
+  "명령어·옵션 키·기능키는 국영 공통으로 대문자 그대로 씁니다 — LINE, PLINE, TRIM, ARRAYPOLAR, MIRRTEXT, F3, Ctrl+1. 국문 본문에서 「선 명령」처럼 풀어 쓰지 않고 「LINE 명령」으로 씁니다.",
+  "좌표 표기는 국영 공통입니다 — 60,62 / @120,0 / @22<45 / 0,0. 쉼표 뒤에 공백을 넣지 않고 대소문자를 바꾸지 않습니다.",
+  "체크포인트 파일명 EDU-IB-02_L02_TEMPLATE 등은 두 언어에서 같은 문자열이며 번역·대소문자 변경·하이픈과 밑줄 교체를 하지 않습니다. 부품 번호 EDU-IB-02도 같습니다.",
+  "단위는 밀리미터만 씁니다. 영문에서도 mm 기준이며 인치 환산을 병기하지 않습니다. 각도는 도(degree)로 씁니다.",
+  "이 과정의 용지·레이어·색상·문자 높이·축척 값은 두 언어 모두 「연습용 기본값 / practice default」로 부르고 「규격 / standard」로 부르지 않습니다.",
+  "확정되지 않은 항목의 자리 표시는 국문 「공유 예정」, 영문 'To be shared'로 고정하고 두 언어가 같은 자리에 같은 모양(점선 테두리)으로 나타납니다.",
+  "1차시 다섯 요건의 이름은 두 언어에서 고정 번역을 씁니다 — 도형·크기·모양 = shape and size / 자세·위치 = orientation and position / 표면·재료·가공 = surface, material and machining / 모호하지 않게 = free of ambiguity / 보존·검색·이용 = storable and retrievable.",
+  "테크니션 업무 셋의 이름도 고정합니다 — 지그 제안 = proposing a jig / 레이아웃 확인 = checking a layout / 스페어 파트 긴급 공수 = urgent spare-part sourcing. 이 세 문구가 여덟 차시에서 계속 되돌아오므로 흔들리면 대응이 끊깁니다."
+ ],
+ "navigationDesign": {
+  "ko": "자체완결 HTML 열 장입니다 — 인덱스 1장 + 차시 8장 + 공통 뼈대 1벌(색·글꼴·표·도해 스타일·스크립트). 뼈대는 한 곳에만 두고 각 차시가 불러 씁니다. 복사하지 않습니다. 한 장의 구조는 위에서부터 이렇습니다. ① 머리 — 제목, 작성·갱신 시각, 체크포인트 배지(여는 파일 → 저장할 파일). 배지는 스크롤해도 상단에 남습니다. ② 좌측 절 목차 — 절 이름과 예상 소요 분. 지금 읽는 절이 강조되고 지나간 절은 감광됩니다(영상의 읽기 상태 셋을 애니메이션이 아니라 정적 위계로 옮긴 것입니다. 대비는 약하게 잡습니다). 절 옆의 체크박스는 학습자가 직접 눌러 진행을 남기고 localStorage에 파일명 키로 저장하며, 실패하면 메모리로 폴백합니다. ③ 본문 — 절 하나가 한 화면 분량을 넘지 않게 자릅니다. 조작 절의 각 단계는 「무엇을 친다 / 무엇을 묻는가 / 무엇을 입력한다 / 이렇게 되면 맞습니다」 네 칸이고, 그 아래에 접힌 「안 되면 여기를 보세요」가 붙습니다(증상 → 원인 → 그 자리에서 고치는 법 → 그래도 안 되면 몇 단계로). 접혀 있으므로 잘 되는 사람의 흐름을 끊지 않습니다. ④ 절 끝의 멈춤점 — 한 줄 판정과 「여기서 쉬어도 됩니다」. 다음 절로 가는 버튼은 판정 아래에 둡니다. ⑤ 꼬리 — 이전 차시 / 다음 차시, 그리고 이 차시의 recoveryNote로 가는 링크. 우측에는 메모 사이드바가 고정으로 접혀 있습니다 — 드래그 선택 후 플로팅 [메모]로 인용을 고정하고, 주요 블록에 data-memo 앵커를 답니다. [메모 → 프롬프트 복사]는 인용·위치·메모를 조립합니다. 국문/영문 토글은 머리 오른쪽에 있고 문서 전체를 한 번에 바꿉니다 — 두 언어를 같은 DOM에 넣고 data-lang으로 전환하며 선택을 localStorage에 남깁니다. 반쪽만 번역된 절이 없도록 빌드 시 두 언어의 노드 수가 같은지 검사합니다. 도해의 레이블도 두 벌을 넣습니다. 인쇄하면 토글·목차·메모 사이드바·상단 배너가 숨고 접힌 복구 블록은 펼쳐진 채로 나옵니다 — 종이로 들고 화면 앞에 앉는 사람이 있기 때문입니다. 외부 라이브러리·빌드·네트워크는 0이고 CSS·JS·SVG는 전부 인라인입니다. 색은 셋을 넘지 않습니다 — 본문 #111111, 보조 #666666과 #A4A3A4, 강조 #C7004C, 바탕 #FFFFFF, 면 #F5F5F3, 구분선 #A4A3A4. 모서리 반경 0, 테두리 2px, 그림자 없음. 라이트·다크 자동 전환과 aria·대비·포커스를 갖춥니다.",
+  "en": "Ten self-contained HTML files: one index, eight lessons, and one shared shell (color, type, tables, diagram styles, script). The shell lives in one place and each lesson pulls it in - never copied. A page reads top to bottom like this. (1) Header - title, written and updated timestamps, and a checkpoint badge showing the file you open and the file you save. The badge stays pinned while you scroll. (2) Left-hand section list - section name plus estimated minutes. The current section is highlighted and finished ones dim slightly: the video's three reading states rendered as static hierarchy rather than animation, with the contrast kept low. A checkbox beside each section is the reader's own progress mark, stored in localStorage under a filename key with a memory fallback. (3) Body - no section longer than about one screen. Each operation step is a four-column row: what you type, what it asks, what you enter, what correct looks like. Below it sits a collapsed 'if it did not work, look here' block: symptom, cause, fix on the spot, and which step to return to if that fails. Collapsed, it does not interrupt a reader for whom everything is working. (4) A stop point ends every section - one line of judgement plus 'this is a good place to stop'. The button to the next section sits under that judgement, never above it. (5) Footer - previous and next lesson, and a link to this lesson's recovery note. A memo sidebar is pinned on the right, collapsed by default and overlaid rather than pushing the text: drag-select, click the floating Memo button, and the quotation is pinned; major blocks carry data-memo anchors. 'Copy memo as prompt' assembles quotation, location, and note. The Korean/English toggle sits at the top right and switches the whole document at once - both languages live in the same DOM, switched by data-lang, with the choice remembered in localStorage. A build check compares node counts between the two languages so no section ships half-translated; diagram labels carry both languages too. Printing hides the toggle, the section list, the memo sidebar, and the top banner, and expands every collapsed recovery block - some people will carry paper to the machine. No external libraries, no build step, no network: CSS, JS, and SVG are all inline. No more than three colors: text #111111, secondary #666666 and #A4A3A4, accent #C7004C, page #FFFFFF, surface #F5F5F3, rules #A4A3A4. Zero corner radius, 2 px borders, no shadows. Light and dark switch automatically, with aria roles, contrast, and visible focus throughout."
+ },
+ "openQuestions": [
+  {
+   "item": {
+    "ko": "채점 기준 · 배점 · 감점 항목 · 합격선",
+    "en": "Marking scheme, weightings, deductions, pass mark"
+   },
+   "blocks": {
+    "ko": "여덟 차시 어디에도 없습니다. 어디에 시간을 더 써야 할지 정할 수 없어요. 8차시와 각 차시 검산 절 머리를 「공유 예정」 자리로 두었고, 검산 목록이 채점 기준으로 읽히지 않게 고지 문구를 붙였습니다.",
+    "en": "Nothing in the eight lessons carries them, so a learner cannot decide where the extra hour should go. The exam lesson and the head of every cross-check section hold a dotted “to be shared” slot, and a notice keeps the cross-check lists from being read as a marking scheme."
+   }
+  },
+  {
+   "item": {
+    "ko": "AutoCAD 버전 · 언어 · 리본 구성",
+    "en": "AutoCAD version, language and ribbon"
+   },
+   "blocks": {
+    "ko": "두 곳에 직접 걸립니다. ① `TRIM`이 절단 모서리를 먼저 묻는 버전인지 곧바로 자를 부분을 묻는 버전인지 ② 대화상자 항목 이름(도면층 / 레이어, 선가중치 / 선 굵기). 화면 캡쳐를 쓸 수 없어 프롬프트를 글로 적어야 하는데, 버전이 정해지면 「무엇을 묻는가」 칸을 실제 문구로 확정할 수 있습니다.",
+    "en": "It bites in two places: whether `TRIM` asks for cutting edges first or goes straight to what you want removed, and what the dialogs actually call things. With no screenshots to lean on, the prompts are described in words. Fix the version and the “what it asks” column can carry the real wording."
+   }
+  },
+  {
+   "item": {
+    "ko": "스타터 DWG 파일을 배포합니까",
+    "en": "Are starter DWG files handed out?"
+   },
+   "blocks": {
+    "ko": "배포하지 않으면 한 차시를 건너뛴 사람의 복구 경로가 「앞 차시의 따라 하기를 다 하기」밖에 없습니다. 5차시를 건너뛴 사람은 최소 한 시간을 되돌아가야 합니다. 배포한다면 자습본에 내려받는 자리가 필요합니다. 지금은 배포하지 않는 것으로 보고 썼습니다.",
+    "en": "If not, the only way back for someone who skipped a lesson is to work through the previous lesson's steps. Skipping lesson 5 costs at least an hour to recover. If they are handed out, this material needs a download slot. It is written assuming they are not."
+   }
+  },
+  {
+   "item": {
+    "ko": "시험 운영 — 일시 · 장소 · 제출 · 시험장 PC",
+    "en": "Exam logistics — date, venue, submission, exam-room PCs"
+   },
+   "blocks": {
+    "ko": "일시, 장소(평택 교육센터 또는 구미, 확정 아님), 제출용 주소, 제출 파일 형식(DWG인지 PDF인지), 시험장 PC 환경(AutoCAD 버전, 템플릿 제공 여부, 개인 파일 반입), 시험에 나올 부품, 문제지의 뷰 개수와 제3각법 기호 표시 여부, 연습 도면 제공 시기가 모두 미정입니다. 8차시에 전부 「공유 예정」 자리로 두었습니다.",
+    "en": "The date, the venue (Pyeongtaek training center or Gumi, not settled), where to submit, the file format (DWG or PDF), the exam-room PCs (AutoCAD version, whether a template is provided, whether personal files may be brought in), which part will be set, how many views the sheet shows and whether it carries the third-angle symbol, and when practice drawings arrive — all of it is open. Lesson 8 holds a “to be shared” slot for each."
+   }
+  },
+  {
+   "item": {
+    "ko": "막혔을 때 물어보는 경로",
+    "en": "How to reach someone when you are stuck"
+   },
+   "blocks": {
+    "ko": "8차시가 담당자 두 사람을 이름으로 안내하지만 연락 경로(사내 메신저·메일·내선)가 없습니다. 「막히면 물어보세요」 카드를 완성하려면 경로가 필요합니다. 이름만 적고 경로 칸은 비워 두었습니다.",
+    "en": "Lesson 8 names two people to ask, but no route to them — messenger, mail or extension — is on record. The “ask someone” card needs one. The names are printed and the route is left blank."
+   }
+  }
+ ],
+ "sourceNote": {
+  "ko": "이 자습본은 사내 영상 과정(8차시·19편·264분)의 공개 대본에서 파생했습니다. 치수와 좌표는 `master-part-geometry.json`, 용지·레이어는 `MASTER_DRAWING_SPEC.md`, 차시 연결은 `course-continuity.json`을 근거로 합니다. 실제 과제에 다른 지시가 적혀 있으면 언제나 그 지시가 우선입니다.",
+  "en": "This self-study material is derived from the public scripts of the in-house video course (8 lessons, 19 episodes, 264 minutes). Dimensions and coordinates come from `master-part-geometry.json`, the sheet and layers from `MASTER_DRAWING_SPEC.md`, and the lesson chain from `course-continuity.json`. Where an actual assignment says something different, that instruction always wins."
+ },
+ "settledNote": {
+  "ko": "2026-09-08 에 여섯 건이 닫혔습니다. **참고 치수 (95.7)** 은 좌우 필렛 중심 사이 거리입니다 — 107.86 − 12.14 = 95.72. **목 상단 폭 54** 는 보스 원과 만나는 두 접점 사이입니다 — 87.207 − 32.793 = 54.414. 둘 다 `master-part-geometry.json` 에서 바로 계산됩니다. **레이어 값**은 `MASTER_DRAWING_SPEC.md` 를 정본으로 씁니다(정본 기하에서 생성되는 문서입니다). 2차시 화면 표는 굵기 열이 없고 축척이 달라 아직 어긋나 있어요. **표면 거칠기**는 2차시 대본이 말한 Ra 1.6 · 6.3 · 12.5 를 씁니다. **4차시 제목**은 `COURSE_PLAN.md` 와 `course-continuity.json` 을 따라 「원·호·오프셋」입니다. **영문 글꼴**은 설치된 LG EI 를 먼저 부르고 없으면 운영체제 UI 글꼴로 물러섭니다. 배포 라이선스가 필요 없습니다. **LTSCALE** 은 `1` 입니다 — 6차시 대본이 「그대로 두려면 1」이라고 이미 정해 둔 값이에요. 개체 축척 0.5 와 곱해 화면 간격이 0.5 가 됩니다. 6차시 검산이 눈 판정에서 두 숫자를 읽는 판정으로 바뀌었습니다.",
+  "en": "Six items closed on 2026-09-08. The **reference dimension (95.7)** spans the two fillet centers — 107.86 − 12.14 = 95.72. The **54 across the top of the web** spans the two points where the web meets the boss circle — 87.207 − 32.793 = 54.414. Both fall straight out of `master-part-geometry.json`. **Layer values** follow `MASTER_DRAWING_SPEC.md`, which is generated from that same geometry; the on-screen table in lesson 2 still disagrees on lineweights and scales. **Surface roughness** uses the Ra 1.6 / 6.3 / 12.5 the lesson 2 script states. **Lesson 4 is titled** “Circles, arcs and offset”, following `COURSE_PLAN.md` and `course-continuity.json`. **English type** asks for an installed LG EI face first and falls back to the operating system UI font, so no font is redistributed. **LTSCALE** is `1` — the lesson 6 script already fixed it with “leave it at 1”. Times the object scale of 0.5, the spacing on screen is 0.5. The lesson 6 cross-check now reads two numbers instead of judging dashes by eye."
+ }
+}

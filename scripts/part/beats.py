@@ -19,14 +19,28 @@ import json
 import math
 import os
 import re
+import sys
 import unicodedata
 
-# A calm teaching pace. Korean narration for instruction sits well below the
-# ~7/s of read-aloud news; 5.0 matches the recorded pace of this course.
-SYL_PER_SEC = 5.0
-GAP_SEC = 0.55          # breath between paragraphs
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import speech  # noqa: E402
+
+# How long the words take is measured, not assumed — see speech.py. What is
+# left here is what happens around them on screen.
+#
+# There is no gap between paragraphs any more. There used to be, because the
+# old estimate ended on the last syllable and something had to stand in for the
+# breath. The measured model already includes a paragraph's own edges, so a gap
+# on top would be the same silence counted twice.
+GAP_SEC = 0.0
 LEAD_SEC = 1.6          # header lands before the first beat
 TAIL_SEC = 1.2          # the frame does not cut on the last syllable
+MIN_BEAT_SEC = 1.2      # a card has to be readable, however briefly it is named
+
+# The recording runs longer than its narration: typing, dialog boxes and mouse
+# work are not spoken. This is the one timing number still not measured — the
+# first real recording replaces it, since ingest reads the file's own length.
+DEMO_FACTOR = 1.3
 
 # Read-along states. The contrast is deliberately mild — the ask was for
 # emphasis that reads as natural, not a spotlight.
@@ -60,7 +74,8 @@ def syllables(text):
 
 
 def read_seconds(text):
-    return syllables(text) / SYL_PER_SEC
+    """Seconds to say this paragraph, from the measured model in speech.py."""
+    return speech.read_seconds(text)
 
 
 # --------------------------------------------------------------- parsing
@@ -141,7 +156,7 @@ def plan(segments, duration=None, lead=LEAD_SEC, tail=TAIL_SEC):
     duration given, the segments are scaled to fill it so a fixed-length frame
     (a screen recording) still tracks the script's proportions.
     """
-    raw = [max(read_seconds(t), 1.2) + GAP_SEC for _, t in segments]
+    raw = [max(read_seconds(t), MIN_BEAT_SEC) + GAP_SEC for _, t in segments]
     need = sum(raw)
     if duration is None:
         duration = math.ceil(need + lead + tail)
@@ -519,9 +534,15 @@ def stamp_times(path, ranges, total):
     def clock(t):
         return "%d:%02d" % (int(t) // 60, int(t) % 60)
 
+    want = sum(1 for raw in lines if raw.startswith("**Time:**"))
+    if want != len(ranges):
+        raise SystemExit(
+            "%s: Time 줄 %d개인데 프레임 구간은 %d개다. 하나가 조용히 버려진다."
+            % (path, want, len(ranges)))
+
     out, i, no = [], 0, 0
     for raw in lines:
-        if raw.startswith("**Time:**") and no < len(ranges):
+        if raw.startswith("**Time:**"):
             a, b = ranges[no]
             note = raw.split("(", 1)[1].rsplit(")", 1)[0] if "(" in raw else None
             out.append("**Time:** %s–%s%s" % (clock(a), clock(b),
@@ -539,6 +560,44 @@ def stamp_times(path, ranges, total):
         fh.write("\n".join(out) + "\n")
     return no
 
+
+
+def split_steps(steps, cuts):
+    """Slice the recording's steps at `cuts`, renumbering each slice from 1.
+
+    `cuts` are step numbers to cut *after*, so [6, 14] gives 1–6, 7–14, 15–end.
+    Each slice is renumbered because read_along, assertions and audit all index
+    beats by position within their frame. The absolute number stays available
+    as the returned offset, which is what the strip on screen shows — a learner
+    watching part two should see 07 / 16, not 01 / 10.
+    """
+    bounds = list(cuts) + [len(steps)]
+    out, prev = [], 0
+    for c in bounds:
+        piece = steps[prev:c]
+        if not piece:
+            raise ValueError("빈 조각이 생기는 컷: %r" % (cuts,))
+        out.append((prev, [(i, t) for i, (_n, t) in enumerate(piece, 1)]))
+        prev = c
+    if prev != len(steps):
+        raise ValueError("컷이 단계 수를 넘는다: %r" % (cuts,))
+    return out
+
+
+def split_lengths(total, weights):
+    """Divide `total` by weight so the pieces sum to exactly `total`.
+
+    Cumulative rounding, not per-piece: rounding each share on its own leaves a
+    remainder, and verify_course recomputes this same division and compares.
+    """
+    s = float(sum(weights)) or 1.0
+    out, acc, run = [], 0.0, 0
+    for w in weights:
+        acc += w
+        cut = int(round(total * acc / s))
+        out.append(cut - run)
+        run = cut
+    return out
 
 def report(name, spans, duration):
     n = len(beat_spans(spans))

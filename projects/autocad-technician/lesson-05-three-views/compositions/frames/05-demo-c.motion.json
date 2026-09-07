@@ -1,0 +1,1 @@
+{"duration": 549, "assertions": [{"kind": "appearsBy", "selector": "#l5f5c .strip", "bySec": 3}, {"kind": "staysInFrame", "selector": "#l5f5c .strip"}]}

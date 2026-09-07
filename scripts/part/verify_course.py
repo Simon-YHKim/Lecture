@@ -23,6 +23,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 
 ROOT = "projects/autocad-technician"
 
@@ -67,6 +68,9 @@ FORBIDDEN = re.compile("(?i)(" + "|".join([
 
 _SLOT = re.compile(r'data-composition-src="compositions/frames/([^"]+)\.html"'
                    r'[^>]*data-start="([\d.]+)"\s+data-duration="([\d.]+)"')
+_SLOT_EP = re.compile(
+    r'data-composition-src="compositions/frames/([^"]+)\.html"'
+    r'[^>]*data-start="([\d.]+)"\s+data-duration="([\d.]+)"')
 _CUE = re.compile(r",\s*(-?\d+(?:\.\d+)?)\s*\)\s*;")
 
 fails, notes = [], []
@@ -75,6 +79,76 @@ fails, notes = [], []
 def fail(where, msg):
     fails.append("%s :: %s" % (where, msg))
 
+
+
+def check_episodes(slug):
+    """Every frame in exactly one episode, in order, and none over the cap.
+
+    An episode is a playlist over the lesson's own frames, so there is nothing
+    to fall out of date — but there is plenty to get wrong: a frame in two
+    episodes, a frame in none, an episode that quietly runs past twenty
+    minutes because a paragraph grew.
+    """
+    d = os.path.join(ROOT, slug)
+    index = io.open(os.path.join(d, "index.html"), encoding="utf-8").read()
+    master = {stem: float(dur) for stem, _s, dur in _SLOT.findall(index)}
+    order = [stem for stem, _s, _d in _SLOT.findall(index)]
+
+    claimed = episodes.frames_for(slug)
+    if claimed != order:
+        missing = [s for s in order if s not in claimed]
+        extra = [s for s in claimed if s not in master]
+        dup = sorted({s for s in claimed if claimed.count(s) > 1})
+        return fail(slug, "episodes.json 의 프레임 목록이 index 와 다르다"
+                          "%s%s%s"
+                          % (" · 빠짐 %s" % ", ".join(missing) if missing else "",
+                             " · 없는 것 %s" % ", ".join(extra) if extra else "",
+                             " · 중복 %s" % ", ".join(dup) if dup else ""))
+
+    eps = episodes.episodes_for(slug)
+    ed = os.path.join(d, "compositions", "episodes")
+    have = sorted(n for n in os.listdir(ed)) if os.path.isdir(ed) else []
+    if have != ["ep%d.html" % i for i in range(1, len(eps) + 1)]:
+        return fail(slug, "편 파일이 %d개여야 하는데 %s" % (len(eps), have or "없다"))
+
+    for i, ep in enumerate(eps, 1):
+        want = sum(master[s] for s in ep["frames"])
+        if want > episodes.CAP_SEC:
+            fail(slug, "%d편 「%s」 가 %d:%02d 로 상한 %d분을 넘는다"
+                 % (i, ep["title"], int(want) // 60, int(want) % 60,
+                    episodes.CAP_SEC // 60))
+        html = io.open(os.path.join(ed, "ep%d.html" % i), encoding="utf-8").read()
+        got = _SLOT_EP.findall(html)
+        if [g[0] for g in got] != ep["frames"]:
+            fail(slug, "%d편 파일의 프레임이 선언과 다르다" % i)
+            continue
+        run = 0.0
+        for stem, start, dur in got:
+            if abs(float(start) - run) > 0.01:
+                fail(slug, "%d편 %s 시작이 %s 인데 앞 합은 %.0f" % (i, stem, start, run))
+            if abs(float(dur) - master[stem]) > 0.01:
+                fail(slug, "%d편 %s 길이가 마스터와 다르다" % (i, stem))
+            run += float(dur)
+        m = re.search(r'id="root"[^>]*data-duration="([\d.]+)"', html)
+        if not m or abs(float(m.group(1)) - want) > 0.01:
+            fail(slug, "%d편 전체 길이가 슬롯 합과 다르다" % i)
+
+
+def check_frame_headings(slug):
+    """The `(Frame N)` in a script heading is what narration-timing keys on.
+
+    If it drifts from the frame it names, measured narration lands on a
+    different frame and nothing complains — the motion still plays, it just
+    stops matching the words.
+    """
+    d = os.path.join(ROOT, slug)
+    text = io.open(os.path.join(d, "SCRIPT.md"), encoding="utf-8").read()
+    heads = [(int(a), int(b)) for a, b in
+             re.findall(r"^## Line (\d+)[^\n]*\(Frame (\d+)\)\s*$", text, re.M)]
+    for line_no, frame_no in heads:
+        if line_no != frame_no:
+            fail(slug, "Line %d 의 제목이 (Frame %d) 다 — 실측 나레이션이 "
+                       "엉뚱한 프레임에 붙는다" % (line_no, frame_no))
 
 def check_lesson(slug, cp_in, cp_out):
     d = os.path.join(ROOT, slug)
@@ -99,21 +173,52 @@ def check_lesson(slug, cp_in, cp_out):
         script[demo_line] = list(steps)
 
     lines = sorted(script)
-    if len(lines) != len(slots):
-        return fail(slug, "대본 Line %d개 vs 프레임 %d개" % (len(lines), len(slots)))
+    cuts = episodes.cuts_for(slug)
+
+    # Once a recording exists its own length is the answer, and the builder uses
+    # it. The guard has to use the same number or a correct build fails here.
+    demo_total, demo_parts = None, None
+    if steps:
+        rec = os.path.join(d, "recording.json")
+        if os.path.isfile(rec):
+            doc = json.load(io.open(rec, encoding="utf-8"))
+            demo_total = int(round(doc["durationSec"]))
+            if doc.get("parts"):
+                demo_parts = [int(round(p["durationSec"])) for p in doc["parts"]]
+        else:
+            demo_total = int(round(sum(beats.read_seconds(t) for _, t in steps)
+                                   * beats.DEMO_FACTOR / 10.0)) * 10
+
+    # One Line can stand behind several frames now: the recording, cut at the
+    # step boundaries the lesson declares.
+    expect = []
+    for line_no in lines:
+        if steps and line_no == demo_line and cuts:
+            sl = beats.split_steps(steps, cuts)
+            lens = demo_parts or beats.split_lengths(
+                demo_total, [sum(beats.read_seconds(t) for _, t in x[1])
+                             for x in sl])
+            for segs, dur in zip([x[1] for x in sl], lens):
+                expect.append((line_no, segs, dur))
+        else:
+            expect.append((line_no, script[line_no], None))
+    if len(expect) != len(slots):
+        return fail(slug, "대본이 내놓는 프레임 %d개 vs index %d개"
+                    % (len(expect), len(slots)))
 
     total = 0
-    for (stem, start, dur), line_no in zip(slots, lines):
+    for (stem, start, dur), (line_no, segs, part_sec) in zip(slots, expect):
         start, dur = float(start), float(dur)
         if abs(start - total) > 0.01:
             fail(slug, "%s 시작이 %.1f 인데 앞 프레임 합은 %.1f" % (stem, start, total))
         total += dur
 
-        fixed = 12 if line_no == 1 else None
-        if steps and line_no == demo_line:
-            fixed = int(round(sum(beats.read_seconds(t) for _, t in steps)
-                              * 1.3 / 10.0)) * 10
-        spans, want = beats.plan(script[line_no], duration=fixed)
+        fixed = part_sec
+        if fixed is None:
+            fixed = 12 if line_no == 1 else None
+            if steps and line_no == demo_line:
+                fixed = demo_total
+        spans, want = beats.plan(segs, duration=fixed)
         if abs(dur - want) > 0.01:
             fail(slug, "%s 길이 %.0f 인데 SCRIPT.md 기준은 %.0f "
                        "— 대본을 고치고 스캐폴드를 다시 돌리지 않았다" % (stem, dur, want))
@@ -182,6 +287,10 @@ def main():
              if n.startswith("lesson-") and n not in {s for s, _, _ in LESSONS}]
     if stale:
         fail("course", "옛 차시 디렉터리가 남아 있다: %s" % ", ".join(sorted(stale)))
+
+    for slug, _a, _b in LESSONS:
+        check_episodes(slug)
+        check_frame_headings(slug)
 
     geo = subprocess.run([sys.executable, "scripts/part/edu_ib_02.py",
                           os.devnull], capture_output=True, text=True,

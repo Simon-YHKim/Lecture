@@ -1,0 +1,109 @@
+{
+  "note": "차시를 20분 이하의 편으로 나눈다. demoCuts 는 실습 프레임을 나눌 단계 번호이고, 그 번호 뒤에서 자른다. episodes 의 frames 는 그 편이 재생하는 프레임 스템이며, 차시의 모든 프레임이 정확히 한 편에만 순서대로 나타나야 한다 (verify_course.py 가 검사한다).",
+  "capSec": 1200,
+  "lessons": {
+    "lesson-01-orientation": {
+      "demoCuts": [],
+      "episodes": [
+        {
+          "title": "오리엔테이션",
+          "frames": ["01-title", "02-why-drawings", "03-how-assessed", "04-roadmap", "05-recap", "06-closing"]
+        }
+      ]
+    },
+    "lesson-02-part-and-template": {
+      "demoCuts": [],
+      "episodes": [
+        {
+          "title": "부품과 도면 규칙",
+          "frames": ["01-title", "02-what-is-this-part", "03-surfaces", "04-why-this-shape", "05-reading-dimensions", "06-reading-symbols", "07-sheet-and-layers"]
+        },
+        {
+          "title": "A3 템플릿 만들기",
+          "frames": ["08-build-template", "09-recap", "10-keys", "11-closing"]
+        }
+      ]
+    },
+    "lesson-03-baseline-profile": {
+      "demoCuts": [6],
+      "why": "6단계에서 중심선 두 개와 선 종류 축척까지 끝나 기준이 완성된다. 8~10단계는 폴리선 한 명령이 이어지므로 그 사이를 자를 수 없다.",
+      "episodes": [
+        {
+          "title": "원점과 중심선",
+          "frames": ["01-title", "02-today", "03-concept", "04-on-the-drawing", "05-demo-a"]
+        },
+        { "title": "베이스 외곽과 목", "frames": ["05-demo-b"] },
+        { "title": "검산과 정리", "frames": ["06-check", "07-recap", "08-keys", "09-closing"] }
+      ]
+    },
+    "lesson-04-circles-arcs": {
+      "demoCuts": [6, 14],
+      "why": "6단계 끝에서 탭 네 개가 피치원에 놓여 한 덩어리가 닫힌다. 14단계는 마지막 필렛이고 15~16단계는 검산과 저장이다.",
+      "episodes": [
+        {
+          "title": "축 구멍과 탭 네 개",
+          "frames": ["01-title", "02-today", "03-concept", "04-on-the-drawing", "05-demo-a"]
+        },
+        { "title": "장공과 필렛", "frames": ["05-demo-b"] },
+        {
+          "title": "검산과 정리",
+          "frames": ["05-demo-c", "06-check", "07-recap", "08-keys", "09-closing"]
+        }
+      ]
+    },
+    "lesson-05-three-views": {
+      "demoCuts": [6, 12],
+      "why": "6단계에서 평면도가 완성되고 7단계부터 우측면도로 넘어간다. 12단계까지 축 구멍이 두 뷰에 다 들어간다. 13~14단계는 같은 탭 구멍이라 그 사이는 자를 수 없다.",
+      "episodes": [
+        {
+          "title": "평면도",
+          "frames": ["01-title", "02-today", "03-concept", "04-on-the-drawing", "05-demo-a"]
+        },
+        { "title": "우측면도와 축 구멍", "frames": ["05-demo-b"] },
+        {
+          "title": "숨은선과 정리",
+          "frames": ["05-demo-c", "06-check", "07-recap", "08-keys", "09-closing"]
+        }
+      ]
+    },
+    "lesson-06-editing-symbols": {
+      "demoCuts": [7, 13],
+      "why": "7단계에서 선 정리가 끝난다. 13단계까지 레이어 점검이 끝나고 14단계부터 선 종류 축척이다.",
+      "episodes": [
+        {
+          "title": "투상선 정리",
+          "frames": ["01-title", "02-today", "03-concept", "04-on-the-drawing", "05-demo-a"]
+        },
+        { "title": "대칭 검산과 레이어", "frames": ["05-demo-b"] },
+        {
+          "title": "선 종류 축척과 정리",
+          "frames": ["05-demo-c", "06-check", "07-recap", "08-keys", "09-closing"]
+        }
+      ]
+    },
+    "lesson-07-dimensioning-release": {
+      "demoCuts": [5, 14],
+      "why": "5단계까지 치수 스타일을 만들고 전체 크기를 넣는 것이 한 덩어리다. 14단계가 마지막 치수이고 15단계부터 출도다.",
+      "episodes": [
+        {
+          "title": "치수 스타일과 전체 크기",
+          "frames": ["01-title", "02-today", "03-concept", "04-on-the-drawing", "05-demo-a"]
+        },
+        { "title": "치수 기입", "frames": ["05-demo-b"] },
+        {
+          "title": "축척 확인과 출도",
+          "frames": ["05-demo-c", "06-check", "07-recap", "08-keys", "09-closing"]
+        }
+      ]
+    },
+    "lesson-08-exam-and-qa": {
+      "demoCuts": [],
+      "episodes": [
+        {
+          "title": "시험 안내와 Q&A",
+          "frames": ["01-title", "02-exam", "03-qa", "04-technician-work", "05-field-commands", "06-recap", "07-closing"]
+        }
+      ]
+    }
+  }
+}

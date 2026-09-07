@@ -13,9 +13,17 @@ Only the following belong here:
 - synthetic training diagrams authored as inline SVG inside reviewed HTML;
 - validation scripts and CI configuration.
 - reviewed HyperFrames QA snapshots rendered from the public synthetic course scenes;
-- explicitly reviewed public references listed in `docs/autocad-technician/README.md`.
+- explicitly reviewed public references listed in `docs/autocad-technician/README.md`;
+- the `EDU-IB-02` bracket model under `model/`, which the course author built and cleared for publication.
 
-Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
+Do not commit a file merely because it was derived from a private source. Slide renders, copied text, transcripts, PDFs, screenshots, and video frames require the same confidentiality review as the source. Raster/vector image files, 3D CAD sources, and embedded image data are blocked by default; an exception requires a deliberate guard change and confidentiality review.
+
+The bracket model is such an exception, and it is the only one. Its four files
+ride the same path-and-hash allowlist as the other public artifacts, so renaming
+or editing one blocks the commit until
+`scripts/update-public-artifact-manifest.ps1` is run again and the change is
+reviewed. Any other Inventor, SolidWorks or neutral-exchange file is blocked on
+sight.
 
 Narration recordings and the Whisper transcripts produced from them stay private.
 Transcript and caption paths are blocked unconditionally and cannot be bypassed by
@@ -88,7 +96,7 @@ Then transcribe the recording and derive its timing:
 
 ```powershell
 ./scripts/transcribe-narration.ps1 -AudioPath <recording> -TranscriptPath <private-output>
-./scripts/build-narration-timing.ps1 -LessonPath projects/autocad-technician/lesson-01-drawing-language -TranscriptPath <private-output>
+./scripts/build-narration-timing.ps1 -LessonPath projects/autocad-technician/lesson-03-baseline-profile -TranscriptPath <private-output>
 ```
 
 The transcript is private and the first script refuses to write one inside this
@@ -98,7 +106,7 @@ confidence, and recording-cue times, with no spoken text. The second script
 verifies that before it returns.
 
 Speech recognition supplies only the clock. Canonical identifiers such as
-`EDU-SB-01`, `REFERENCE_READONLY`, and `L01_FEATURE_MAP` cannot be recovered from
+`EDU-IB-02`, `L02_TEMPLATE`, and `L07_RELEASE` cannot be recovered from
 audio, because an underscore has no sound, so the words come from `SCRIPT.md` and
 the two are aligned character by character. A frame dense in Layer names aligns
 less tightly; its `matchedRatio` records that rather than hiding it.
@@ -110,11 +118,16 @@ regenerate only when the recording itself changes. Do not rebuild it in CI.
 
 ## AutoCAD Technician course
 
-The course is organized as ten connected HyperFrames projects under
-`projects/autocad-technician/`. Every lesson advances the same synthetic
-`EDU-SB-01` sensor-mounting bracket from exam-brief analysis to an A3 third-angle
-release drawing. Each lesson owns its brief, narration script, storyboard, six scene
-compositions, motion assertions, and final assembly.
+The course is organized as eight connected HyperFrames projects under
+`projects/autocad-technician/`. Seven of them advance the same synthetic
+`EDU-IB-02` idler pulley bracket from orientation to an A3 third-angle release
+drawing; the eighth covers the exam briefing and its questions. Each lesson owns
+its brief, narration script, storyboard, six to eleven scene compositions, motion
+assertions, and final assembly, and the eight lessons are cut into 19 episodes of
+at most twenty minutes each.
+
+The earlier ten-lesson arrangement is kept under
+`projects/autocad-technician/_archive/`. It is not built and not checked.
 
 The sanitized curriculum and production contract are documented in
 `projects/autocad-technician/COURSE_PLAN.md`. The canonical part, paper, template,
@@ -122,12 +135,16 @@ layer, projection, checkpoint, and exam-disclosure rules live in
 `projects/autocad-technician/MASTER_DRAWING_SPEC.md` and
 `projects/autocad-technician/course-continuity.json`; the reproducible coordinates and
 feature-clearance contract live in `projects/autocad-technician/master-part-geometry.json`.
-The 29 screen-recording slots and their exact frame sources are locked in
-`projects/autocad-technician/recording-map.json`.
-All lessons inherit the LG technical-training visual system. Selected QA snapshots
-rendered solely from the public synthetic scenes are tracked as review evidence.
+The screen-recording sections and their exact frame sources are locked in
+`projects/autocad-technician/recording-map.json`: one section in each of lessons 2
+through 7, cut into 15 pieces so that no episode runs past twenty minutes.
+All lessons inherit the LG technical-training visual system.
 Drawings, recordings, narration, transcripts, presentation sources and direct slide
 derivatives remain private.
+
+A self-study edition of the same eight lessons, in Korean and English on one page
+each, is published under `docs/autocad-technician/self-study/` and generated by
+`scripts/selfstudy/`.
 
 Public HTML resolves installed LG EI families with CSS `local()` and falls back to
 `Malgun Gothic`; it contains no private font URL or filesystem path. Font binaries

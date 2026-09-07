@@ -8,11 +8,41 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = (& git rev-parse --show-toplevel).Trim()
 $manifestRelativePath = 'docs/autocad-technician/public-artifact-manifest.json'
 
+function Get-GitOutputBytes([string]$Arguments) {
+    # `& git ...` decodes stdout with the console code page, which mangles every
+    # non-ASCII byte, so staged reads come back as raw bytes and are decoded as
+    # UTF-8 here. ArgumentList is .NET Core only; Windows PowerShell 5.1 needs
+    # the single quoted Arguments string, the same way Get-GitNulPaths does it.
+    $startInfo = [Diagnostics.ProcessStartInfo]::new()
+    $startInfo.FileName = 'git'
+    $startInfo.Arguments = $Arguments
+    $startInfo.WorkingDirectory = $repoRoot
+    $startInfo.UseShellExecute = $false
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $startInfo.CreateNoWindow = $true
+
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $startInfo
+    $stream = [IO.MemoryStream]::new()
+    try {
+        if (-not $process.Start()) { return $null }
+        $process.StandardOutput.BaseStream.CopyTo($stream)
+        [void]$process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) { return $null }
+        return $stream.ToArray()
+    } finally {
+        $stream.Dispose()
+        $process.Dispose()
+    }
+}
+
 function Get-RepositoryText([string]$Path) {
     if ($Mode -eq 'staged') {
-        $stagedText = @(& git show ":$Path" 2>$null) -join "`n"
-        if ($LASTEXITCODE -eq 0) { return $stagedText }
-        return $null
+        $bytes = Get-GitOutputBytes ('show "' + (":$Path" -replace '"', '\"') + '"')
+        if ($null -eq $bytes) { return $null }
+        return [Text.UTF8Encoding]::new($false).GetString($bytes)
     }
 
     $fullPath = Join-Path $repoRoot $Path
@@ -130,6 +160,9 @@ $blockedExtensions = @(
     '.ppt', '.pptx', '.pptm', '.pps', '.ppsx', '.ppsm',
     '.pot', '.potx', '.potm', '.odp',
     '.dwg', '.dxf', '.dwt', '.dws', '.sv$', '.ac$', '.dwl', '.dwl2',
+    '.ipt', '.iam', '.idw', '.ipn', '.ipj',
+    '.sldprt', '.sldasm', '.slddrw',
+    '.step', '.stp', '.igs', '.iges', '.sat', '.x_t', '.x_b', '.stl',
     '.pdf', '.mp4', '.mov', '.mkv', '.avi',
     '.wav', '.m4a', '.mp3', '.srt', '.vtt',
     '.ttf', '.ttc', '.otf', '.woff', '.woff2',
@@ -147,6 +180,10 @@ $privateTranscriptFilePattern = '(^|/)(?:[^/]+\.)?(?:transcript|caption|captions
 $reviewedPublicMasterPlan = 'docs/autocad-technician/master-plan/autocad_technician_video_course_masterplan_260811.html'
 $reviewedPublicReference = 'docs/autocad-technician/reference/a3-landscape-template-reference.png'
 $reviewedSnapshotPattern = '^projects/autocad-technician/(?:lesson-01-drawing-language|lesson-02-work-environment|lesson-03-lines-polylines|lesson-04-curves-offset|lesson-05-orthographic-reading|lesson-06-placement-repetition|lesson-07-object-editing|lesson-08-representation-reuse|lesson-09-dimensioning|lesson-10-final-bracket)/snapshots/.+\.(?:png|jpe?g)$'
+# The EDU-IB-02 bracket model. The course author built it and cleared it for
+# publication, so these paths may appear in the manifest; the hash check below
+# still applies, and no other CAD file anywhere gets this treatment.
+$reviewedModelPattern = '^model/(?:[^/]+/)*[^/]+\.(?:ipt|iam|idw|ipn|ipj|png|jpe?g)$'
 $violations = @()
 $approvedAssets = @{}
 $approvedSha256 = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -170,7 +207,8 @@ if ([string]::IsNullOrWhiteSpace($manifestText)) {
             $hasValidByteCount = [long]::TryParse(([string]$asset.bytes), [ref]$assetBytes) -and $assetBytes -ge 0
             $isAllowedManifestPath = $assetPath -eq $reviewedPublicMasterPlan -or
                 $assetPath -eq $reviewedPublicReference -or
-                $assetPath -match $reviewedSnapshotPattern
+                $assetPath -match $reviewedSnapshotPattern -or
+                $assetPath -match $reviewedModelPattern
             if ([string]::IsNullOrWhiteSpace($assetPath) -or
                 -not $isAllowedManifestPath -or
                 -not $hasValidByteCount -or
