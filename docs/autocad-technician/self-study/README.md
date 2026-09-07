@@ -59,6 +59,19 @@ python scripts/selfstudy/build_selfstudy.py docs/autocad-technician/self-study
 `master-part-geometry.json` 과 같은 정의에서 다시 그린다. 그래서 도면과 본문이
 서로 다른 말을 할 수 없다. 저장소 가드가 이미지 파일을 확장자로 막는 것과도 맞는다.
 
+## 한 장으로 묶어 건네려면
+
+```powershell
+python scripts/selfstudy/build_single.py
+```
+
+여덟 차시를 파일 하나로 다시 엮는다. 차시 사이 이동이 링크가 아니라 탭이고,
+진도 막대가 과정 전체로 하나이며, 용어·명령·미결이 같은 파일에 들어온다.
+본문은 쪽 판과 같은 원본에서 나오므로 둘이 어긋날 수 없다.
+
+약 1.1 MB 라 커밋하지 않는다(`.gitignore`). 사람에게 주소 하나로 건네야 할 때만 뽑는다.
+`SELFSTUDY_ARTIFACT=1` 을 주면 문서 껍데기를 뺀 형태로 나온다.
+
 ## 영문 감수
 
 ```powershell
