@@ -140,3 +140,8 @@ media.local.json
 # and entirely derivable from scripts/selfstudy/source/, so it is regenerated on
 # demand rather than tracked: python scripts/selfstudy/bilingual_review.py
 docs/autocad-technician/self-study/bilingual-review.csv
+
+# The whole course rebuilt as one shareable page. About 1.1 MB and entirely
+# derivable, so it is generated when someone needs a single link rather than
+# tracked: python scripts/selfstudy/build_single.py
+docs/autocad-technician/self-study/autocad-self-study-all-in-one.html
