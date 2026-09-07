@@ -21,6 +21,25 @@
 *.dwl
 *.dwl2
 
+# 3D CAD sources and neutral exchange files. The bracket is modelled before it is
+# drawn, and those model files are as private as the drawings they produce.
+*.ipt
+*.iam
+*.idw
+*.ipn
+*.ipj
+*.sldprt
+*.sldasm
+*.slddrw
+*.step
+*.stp
+*.igs
+*.iges
+*.sat
+*.x_t
+*.x_b
+*.stl
+
 # Derived course media that belongs in the private delivery system
 *.pdf
 *.mp4
@@ -111,3 +130,8 @@ __pycache__/
 
 # Absolute paths to private recordings, written by scripts/part/ingest_recording.py
 media.local.json
+
+# Full Korean/English comparison export for the English reviewer. Roughly 900 KB
+# and entirely derivable from scripts/selfstudy/source/, so it is regenerated on
+# demand rather than tracked: python scripts/selfstudy/bilingual_review.py
+docs/autocad-technician/self-study/bilingual-review.csv

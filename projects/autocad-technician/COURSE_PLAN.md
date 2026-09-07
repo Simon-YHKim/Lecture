@@ -70,6 +70,12 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
     python scripts/part/scaffold_lessons_3_7.py
     python scripts/part/lesson_eight.py
 
+문서도 손으로 쓰지 않는다. 정본 기하와 차시 연결에서 생성된다.
+
+    python scripts/part/edu_ib_02.py projects/autocad-technician/master-part-geometry.json --json
+    python scripts/part/write_master_spec.py     # MASTER_DRAWING_SPEC.md
+    python scripts/part/write_course_docs.py     # course-continuity.json · recording-map.json
+
 스캐폴드는 한 번만 돌린다. 그 뒤 프레임은 HyperFrames Studio 에서 직접 편집하는
 저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.
 

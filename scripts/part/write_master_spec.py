@@ -66,6 +66,15 @@ def main():
         "| `%s` | %s |" % (k, ("%.2e" % val) if isinstance(val, float) else val)
         for k, val in v.items())
 
+    # 깊이 규약은 표로 낸다. 파이썬 dict 를 그대로 찍으면 문서가 아니라 덤프가 된다.
+    dc = g["depthConvention"]
+    depth_rows = [("bossFront", "보스 앞면 — 보는 사람에게 가장 가깝다"),
+                  ("bossPlateBoundary", "보스와 판이 만나는 면"),
+                  ("plateBack", "판 뒷면 — 프레임에 밀착한다")]
+    depth = ("| z | 위치 |\n| --- | --- |\n"
+             + "\n".join("| %g | %s |" % (dc[k], label) for k, label in depth_rows)
+             + "\n\n" + dc["note"])
+
     io.open(os.path.join(ROOT, "MASTER_DRAWING_SPEC.md"), "w",
             encoding="utf-8", newline="\n").write(
         "# %s 정본 도면\n\n" % g["partId"]
@@ -78,7 +87,7 @@ def main():
           "## 1. 치수\n\n단위 %s.\n\n| 항목 | 값 | 비고 |\n| --- | --- | --- |\n"
           % g["units"]
         + "\n".join(dims)
-        + "\n\n## 2. 깊이 규약\n\n%s\n\n" % g["depthConvention"]
+        + "\n\n## 2. 깊이 규약\n\n%s\n\n" % depth
         + "보스는 **앞으로** 나온다. 뒷면 전체가 프레임에 밀착해야 하기 때문이다.\n"
           "뒤로 튀어나오면 그 부분이 먼저 닿아 나머지 면이 뜬다.\n\n"
           "## 3. 용지와 도면틀\n\n"
