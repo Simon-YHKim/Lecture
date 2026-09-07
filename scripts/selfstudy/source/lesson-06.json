@@ -1,0 +1,2521 @@
+{
+ "no": 6,
+ "slug": "lesson-06-editing-symbols",
+ "title": {
+  "ko": "편집과 표현",
+  "en": "Cleaning Up and Reading the Symbols"
+ },
+ "videoLength": "42:30",
+ "selfStudyMin": 93,
+ "opens": "EDU-IB-02_L05_VIEWS",
+ "saves": "EDU-IB-02_L06_REPRESENTED",
+ "summary": {
+  "what": {
+   "ko": "5차시에 저장한 파일을 열어 새 형상은 하나도 더하지 않습니다. 이미 그려 둔 것을 정리하고 제대로 보이게 만듭니다. 투상선을 지우고, 남은 선을 다듬고, 레이어와 파선 간격을 맞춰요.",
+   "en": "You open the file saved in Lesson 5 and add no new geometry. You clean up what is drawn and make it read correctly: delete the projectors, tidy what is left, fix the layers and the dash spacing."
+  },
+  "why": {
+   "ko": "그려 놓은 것과 제대로 보이는 것은 다릅니다. 투상선이 남으면 읽는 사람이 형상선과 구별하지 못해 도면이 그림이 됩니다. 여기서 잡지 않은 레이어·색·선종류 오류는 7차시에 한꺼번에 터집니다.",
+   "en": "Drawn is not the same as readable. Leave the projectors in and the reader cannot tell them from real geometry, so the drawing becomes a picture. Layer, color, and linetype errors skipped here all surface at once in Lesson 7."
+  },
+  "where": {
+   "ko": "부품은 정면도·평면도·우측면도 세 뷰가 다 나온 상태입니다. 형상은 더 그릴 것이 없습니다. 다만 뷰를 맞추려고 그은 보라색 투상선이 뷰 밖으로 튀어나와 있어요.",
+   "en": "The part now has all three views: front, top, and right side. There is no more geometry to draw. What is left are the magenta projectors, still running out past the views."
+  }
+ },
+ "objectives": [
+  {
+   "ko": "투상선이 형상이 아니라 자임을 알고, `QSELECT` 로 `구성선` 만 걸어 한 번에 지울 수 있습니다.",
+   "en": "You can explain that projectors are rulers, not geometry, and delete them in one pass with QSELECT filtered to construction line."
+  },
+  {
+   "ko": "`TR` 과 `EX` 의 클릭 규칙대로 다듬고 `Shift` 로 둘을 오갈 수 있습니다. 창 선택과 걸침 선택도 구별합니다.",
+   "en": "You can apply the click rules for TRIM and EXTEND, flip between them with Shift, and tell window from crossing selection."
+  },
+  {
+   "ko": "장공 두 개가 x=60 대칭임을 29·12·50·120으로 계산하고 `DI` 로 재서 확인할 수 있습니다.",
+   "en": "You can prove the two slots are symmetric about x = 60 from 29, 12, 50, and 120, then confirm it with DIST."
+  },
+  {
+   "ko": "MATCHPROP과 전구와 `QSELECT` 로 레이어 소속을 점검합니다. 색과 선 종류는 ByLayer로 되돌릴 수 있습니다.",
+   "en": "You can audit layer membership with MATCHPROP, the light bulb, and QSELECT, and hand color and linetype back to the layer."
+  },
+  {
+   "ko": "파선 간격이 전체 값과 개체 값의 곱임을 알고, 표면 거칠기·기하 공차·재질·열처리 표기를 읽을 수 있습니다.",
+   "en": "You know the dash spacing is the global scale times the per-object scale, and you can read the four notations on a drawing."
+  }
+ ],
+ "before": {
+  "checklist": [
+   {
+    "ko": "정면도·평면도·우측면도 세 뷰가 다 있습니다.",
+    "en": "All three views are present: front, top, and right side."
+   },
+   {
+    "ko": "뷰 밖으로 튀어나온 보라색 투상선이 보입니다. 안 보이면 5차시에서 이미 지웠거나 치수선 레이어가 꺼진 채로 저장된 것입니다.",
+    "en": "Magenta projectors run out past the views. If none show, they were deleted in Lesson 5 or the dimension layer was saved switched off."
+   },
+   {
+    "ko": "레이어 목록을 펼쳐 전구 네 개가 다 켜져 있는지 보세요.",
+    "en": "Open the layer list and confirm all four bulbs are on."
+   },
+   {
+    "ko": "숨은선이 노란 점선으로 보입니다. 아직 간격이 촘촘해 실선처럼 보일 수 있어요.",
+    "en": "Hidden lines show in yellow. Their spacing is still tight, so they may look continuous."
+   },
+   {
+    "ko": "객체 스냅이 켜져 있습니다. `F3` 으로 상태 막대 아이콘을 확인하세요.",
+    "en": "Object snap is on. Check the status bar icon with F3."
+   }
+  ],
+  "recovery": {
+   "ko": "5차시를 건너뛰었으면 열 파일이 없습니다. 스타터 파일은 배포하지 않아요. 되돌아오는 길은 이렇습니다. `EDU-IB-02_L04_FEATURES` 를 열어 5차시의 「따라 하기 1~3」만 합니다. 그리고 `EDU-IB-02_L05_VIEWS` 로 저장합니다. 투상선이 남아 있는 것이 정상이니 그대로 넘어오세요.",
+   "en": "Skip Lesson 5 and there is no file to open. No starter file is distributed. The way back: open EDU-IB-02_L04_FEATURES, do only 'Do it 1-3' of Lesson 5, save as EDU-IB-02_L05_VIEWS. Leftover projectors are correct there, so bring the clutter in."
+  }
+ },
+ "sections": [
+  {
+   "id": "start-state",
+   "kind": "concept",
+   "label": {
+    "ko": "출발 상태 확인 — EDU-IB-02_L05_VIEWS",
+    "en": "Starting state - EDU-IB-02_L05_VIEWS"
+   },
+   "lede": {
+    "ko": "지금 파일을 열면 도면이라기보다 작업 흔적에 가깝습니다. 그게 맞는 상태예요.",
+    "en": "Open the file now and it looks more like working traces than a drawing. That is the correct state."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "이 차시는 새 파일을 만들지 않습니다. 5차시에 저장한 `EDU-IB-02_L05_VIEWS` 를 열어 그 위에서 이어 갑니다. 오늘 마지막에 `EDU-IB-02_L06_REPRESENTED` 라는 새 이름으로 남겨요.",
+     "en": "You do not create a new file. Open EDU-IB-02_L05_VIEWS, saved at the end of Lesson 5, and keep working on it. At the end of today you save it under the new name EDU-IB-02_L06_REPRESENTED."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "화면이 어수선해 보여도 잘못한 것이 아니에요. 5차시는 뷰를 맞추는 것까지가 일이었어요. 뷰를 맞추려고 그은 선은 지우지 않고 남겨 두는 것이 정상입니다.",
+     "en": "A cluttered screen does not mean you did something wrong. Lesson 5's job ended at aligning the views. Leaving the alignment lines in place was the correct thing to do."
+    },
+    {
+     "type": "figure",
+     "ref": "front",
+     "caption": {
+      "ko": "정면도. 오늘은 여기에 형상을 더하지 않습니다. 이미 있는 선을 정리해요.",
+      "en": "Front view. You add no geometry to it today. You clean up the lines that are already there."
+     },
+     "alt": {
+      "ko": "아이들러 풀리 브래킷 정면도. 아래에 폭 120 높이 16의 베이스가 있습니다. 그 위로 좁아지는 목, 맨 위에 지름 56 보스와 지름 25 축 구멍입니다. 중심선은 보스 중심과 대칭축에 있습니다.",
+      "en": "Front view of the idler pulley bracket: a 120 by 16 base, a web tapering upward from it, and at the top a 56 mm boss with a 25 mm bore. Centerlines mark the boss center and the axis of symmetry."
+     }
+    },
+    {
+     "type": "p",
+     "ko": "바로 자르지 마세요. 무엇이 남아 있는지 먼저 봅니다. 정면도에서 평면도까지 세로선이, 우측면도까지 가로선이 이어집니다. 둘 다 뷰 바깥으로 튀어나와 있어요.",
+     "en": "Do not start cutting yet. Look at what is left first. Verticals run up from the front view to the top view and horizontals run right to the side view, both sticking out beyond them."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "보라색 투상선이 하나도 안 보이면 둘 중 하나예요. 5차시에서 이미 지웠거나, 치수선 레이어가 꺼진 채로 저장된 것입니다. 레이어 목록을 펼쳐 전구부터 확인하세요.",
+     "en": "If you see no magenta projectors at all, one of two things happened. Either they were already deleted in Lesson 5, or the dimension layer was saved switched off. Open the layer list and check the bulbs first."
+    }
+   ]
+  },
+  {
+   "id": "drawn-vs-readable",
+   "kind": "concept",
+   "label": {
+    "ko": "그려 놓은 것과 제대로 보이는 것의 차이",
+    "en": "Drawn is not the same as readable"
+   },
+   "lede": {
+    "ko": "형상은 다 나왔습니다. 남은 일은 읽히게 만드는 것입니다.",
+    "en": "The geometry is complete. What is left is making it readable."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "도면은 그림이 아니라 지시입니다. 읽는 사람이 부품과 자를 구별하지 못하면 그 도면은 지시에 실패합니다. 오늘 하는 일이 전부 그 구별을 세우는 일이에요.",
+     "en": "A drawing is an instruction, not a picture. If the reader cannot tell which lines are the part and which are rulers, the drawing has failed to instruct. Everything you do today builds that distinction."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "투상선과 보조선 정리",
+        "en": "Clearing projectors and guides"
+       },
+       "body": {
+        "ko": "뷰를 맞추려고 그은 선은 부품의 형상이 아닙니다. 우리가 위치를 맞추려고 쓴 자예요. `QSELECT` 로 객체 유형만 걸어 한 번에 지웁니다.",
+        "en": "The lines drawn to align the views are not part geometry. They are rulers you used to place things. Filter by object type in QSELECT and delete them in one pass."
+       }
+      },
+      {
+       "label": {
+        "ko": "레이어 점검",
+        "en": "Auditing the layers"
+       },
+       "body": {
+        "ko": "다섯 차시 동안 그린 선이 전부 제 레이어에 있는지 봅니다. 급할 때 레이어를 안 바꾸고 그린 선이 꼭 나와요.",
+        "en": "Check that every line drawn over five lessons sits on its proper layer. There is always one drawn in a hurry without switching layers."
+       }
+      },
+      {
+       "label": {
+        "ko": "선 종류 축척 맞추기",
+        "en": "Fixing the dash spacing"
+       },
+       "body": {
+        "ko": "중심선과 숨은선은 파선입니다. 그런데 지금 화면에서는 실선처럼 보일 겁니다. 획과 틈이 도면 크기에 비해 너무 촘촘해서예요.",
+        "en": "Centerlines and hidden lines are broken lines. Right now they read as continuous. The dashes and gaps are simply too fine for the size of the drawing."
+       }
+      },
+      {
+       "label": {
+        "ko": "도면 기호 읽기",
+        "en": "Reading the drawing symbols"
+       },
+       "body": {
+        "ko": "현장 도면에는 표면 거칠기, 기하 공차, 재질, 열처리 지시가 더 들어갑니다. 이 과정에서는 그리지 않습니다. 다만 받아 든 도면에 있으면 읽을 줄 알아야 해요.",
+        "en": "Real drawings carry more: surface roughness, geometric tolerance, material, heat treatment. You do not draw them in this course. You do have to read them when a drawing arrives with them on it."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "투상선을 남기면 무엇이 문제일까요. 외형선 레이어에 있으면 인쇄할 때 형상선과 똑같은 굵기로 나옵니다. 보는 사람은 부품의 어디인지 찾다가 못 찾아요. 도면이 그림이 되는 자리입니다.",
+     "en": "What goes wrong if you leave the projectors? On the visible-line layer they print at the weight of real geometry. The reader hunts for the feature they belong to and finds none. This is where a drawing turns into a picture."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "오늘 잡지 않은 레이어·색·선종류 오류는 사라지지 않아요. 마지막 7차시에 레이어별로 굵기를 줄 때 한꺼번에 드러납니다. 그때는 치수까지 얹혀 있어 고치기가 훨씬 어려워요.",
+     "en": "Layer, color, and linetype errors you skip today do not go away. They all surface in Lesson 7 when lineweights are assigned per layer. By then the dimensions sit on top and the fix is much harder."
+    }
+   ]
+  },
+  {
+   "id": "erase-trim-extend",
+   "kind": "concept",
+   "label": {
+    "ko": "지울까 자를까 늘릴까",
+    "en": "Erase, trim, or extend"
+   },
+   "lede": {
+    "ko": "세 명령의 차이는 결과가 아니라 판단에서 갈려요.",
+    "en": "What separates these three commands is the judgement, not the result."
+   },
+   "blocks": [
+    {
+     "type": "table",
+     "caption": {
+      "ko": "무엇을 쓸지 정하는 기준",
+      "en": "How to choose between the three"
+     },
+     "head": [
+      {
+       "ko": "이 선의 상태",
+       "en": "State of the line"
+      },
+      {
+       "ko": "어떻게 하나",
+       "en": "What to do"
+      },
+      {
+       "ko": "클릭하는 자리",
+       "en": "Where you click"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "남길 선이 아닙니다",
+        "en": "not one you keep"
+       },
+       {
+        "ko": "지웁니다 `E`",
+        "en": "Erase it - E"
+       },
+       {
+        "ko": "그 선 위 아무 데나",
+        "en": "anywhere on the line"
+       }
+      ],
+      [
+       {
+        "ko": "남길 선인데 일부가 남았습니다",
+        "en": "one you keep, with an extra piece"
+       },
+       {
+        "ko": "자릅니다 `TR`",
+        "en": "Trim it - TR"
+       },
+       {
+        "ko": "남길 쪽이 아니라 없앨 쪽",
+        "en": "the part to remove, not the part to keep"
+       }
+      ],
+      [
+       {
+        "ko": "남길 선인데 모자랍니다",
+        "en": "one you keep, but too short"
+       },
+       {
+        "ko": "늘립니다 `EX`",
+        "en": "Extend it - EX"
+       },
+       {
+        "ko": "늘리고 싶은 쪽 끝 근처",
+        "en": "near the end you want lengthened"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "figure",
+     "id": "fig-erase-trim-extend",
+     "caption": {
+      "ko": "세 명령이 각각 어디를 클릭하는가.",
+      "en": "Where each of the three commands wants you to click."
+     },
+     "alt": {
+      "ko": "도해 세 칸. 첫 칸은 형상과 떨어진 보조선에 클릭 표시가 있습니다. 둘째 칸은 세로 기준선 둘을 가로지른 선입니다. 오른쪽 기준선 밖으로 나온 토막에 클릭 표시가 있습니다. 셋째 칸은 기준선에 못 미친 짧은 선과 파선으로 그린 모자란 구간, 오른쪽 끝의 클릭 표시입니다.",
+      "en": "Three panels. One: a rectangle and a stray guide line, click dot on the guide. Two: a line crossing two vertical references and overshooting the right one, click dot on the overshoot. Three: a short line stopping before a reference, missing span dashed, click dot near its right end."
+     },
+     "svg": "<svg viewBox=\"0 0 600 216\" width=\"600\" height=\"216\"><text class=\"slh\" x=\"12\" y=\"16\">1 · 지우기 ERASE</text><rect class=\"si\" x=\"24\" y=\"40\" width=\"120\" height=\"62\" fill=\"none\"/><line class=\"sd\" x1=\"18\" y1=\"126\" x2=\"176\" y2=\"126\"/><circle class=\"sh\" cx=\"97\" cy=\"126\" r=\"5\"/><text class=\"sl\" x=\"12\" y=\"158\">경계가 없는 선</text><text class=\"sl\" x=\"12\" y=\"176\">클릭해서 통째로</text><text class=\"sl\" x=\"12\" y=\"194\">없앱니다</text><text class=\"slh\" x=\"212\" y=\"16\">2 · 자르기 TRIM</text><line class=\"si\" x1=\"248\" y1=\"40\" x2=\"248\" y2=\"112\"/><line class=\"si\" x1=\"340\" y1=\"40\" x2=\"340\" y2=\"112\"/><line class=\"si\" x1=\"222\" y1=\"80\" x2=\"386\" y2=\"80\"/><circle class=\"sh\" cx=\"364\" cy=\"80\" r=\"5\"/><text class=\"sl\" x=\"212\" y=\"158\">기준선 둘을 세우고</text><text class=\"sl\" x=\"212\" y=\"176\">없앨 쪽을 클릭합니다</text><text class=\"sl\" x=\"212\" y=\"194\">경계까지만 사라집니다</text><text class=\"slh\" x=\"412\" y=\"16\">3 · 늘리기 EXTEND</text><line class=\"si\" x1=\"566\" y1=\"40\" x2=\"566\" y2=\"112\"/><line class=\"si\" x1=\"424\" y1=\"80\" x2=\"500\" y2=\"80\"/><line class=\"sn\" x1=\"504\" y1=\"80\" x2=\"564\" y2=\"80\"/><circle class=\"sh\" cx=\"489\" cy=\"80\" r=\"5\"/><text class=\"sl\" x=\"412\" y=\"158\">늘리고 싶은 쪽</text><text class=\"sl\" x=\"412\" y=\"176\">끝 근처를 클릭합니다</text><text class=\"sl\" x=\"412\" y=\"194\">경계에 닿고 멈춥니다</text></svg>"
+    },
+    {
+     "type": "p",
+     "ko": "정리는 지우는 것부터 합니다. 자르는 것이 아닙니다. 5차시에 투상선을 전부 `XL` 로 그었으니 그것들은 무한히 긴 구성선입니다. 도면에 남길 선이 아니면 다듬을 이유가 없어요.",
+     "en": "Cleaning up starts with erasing, not trimming. Every projector in Lesson 5 was drawn with XLINE, so they are infinite construction lines. There is no reason to tidy a line you are not keeping."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "순서를 왜 이렇게 잡을까요. 구성선을 먼저 지우면 `TR` 에서 절단 모서리를 고르지 않고 엔터로 넘겨도 안전하거든요. 지우기 전에 그렇게 했다면 무한선이 전부 경계가 됐을 거예요.",
+     "en": "Why this order? Once the construction lines are gone, you can press Enter past the cutting-edge prompt in TR and use everything as a boundary. Do that before the delete and every infinite line becomes a boundary."
+    },
+    {
+     "type": "p",
+     "ko": "`TR` 과 `EX` 는 반대처럼 보이지만 구조가 같습니다. 둘 다 기준선이 먼저 있어야 해요. `TR` 은 그 기준을 절단 모서리, `EX` 는 경계 모서리라고 부릅니다. 자르는 쪽은 기준까지 없애고, 늘리는 쪽은 채웁니다.",
+     "en": "TR and EX look opposite but share one structure. Both need a reference line first. TR calls it the cutting edge, EX the boundary edge. Trimming removes up to the reference; extending fills up to it."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "한 명령 안에서 `Shift` 를 누른 채 클릭하면 반대 동작이 나옵니다. 자르기에서는 늘어나고, 늘리기에서는 잘려요. 명령을 나갔다 들어오면 경계를 새로 잡아야 하니, 이렇게 오가면 한 번만 잡습니다.",
+     "en": "Hold Shift and click inside either command for the opposite action. Inside trim the line extends; inside extend it trims. Leaving and re-entering means picking boundaries again; switching this way picks them once."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "왜 지우지 않고 자를까요. 지우면 교차점까지 사라지지만, 자르면 그대로 남습니다. 형상선은 교차점 자체가 도면의 정보예요.",
+     "en": "Why trim instead of erase? Erasing takes the intersection with it; trimming leaves it in place, and on geometry the intersection is itself information."
+    }
+   ]
+  },
+  {
+   "id": "selection-qselect",
+   "kind": "concept",
+   "label": {
+    "ko": "선택 방식과 QSELECT",
+    "en": "Selection modes and QSELECT"
+   },
+   "lede": {
+    "ko": "정리 단계에서 형상선을 함께 지우는 사고는 대개 드래그 방향에서 납니다.",
+    "en": "Most accidental deletions of real geometry trace back to the drag direction."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "빈 곳에서 드래그해 여러 개를 잡을 때, 방향이 결과를 바꿔요. 왼쪽에서 오른쪽은 창 선택이고, 완전히 들어온 객체만 잡힙니다. 오른쪽에서 왼쪽은 걸침 선택이고, 조금이라도 걸친 객체가 전부 잡힙니다.",
+     "en": "When you drag from empty space, the direction changes the result. Left to right is a window: only objects fully inside are picked. Right to left is a crossing: everything the box touches is picked."
+    },
+    {
+     "type": "figure",
+     "id": "fig-window-vs-crossing",
+     "caption": {
+      "ko": "같은 자리에 같은 크기로 끌어도 방향에 따라 잡히는 것이 다릅니다.",
+      "en": "Same box, same place - the direction alone changes what gets picked."
+     },
+     "alt": {
+      "ko": "도해 두 칸. 왼쪽은 실선 선택 상자입니다. 짧은 선 둘이 완전히 들어와 강조되고, 상자를 가로지르는 긴 선은 강조되지 않았습니다. 오른쪽은 같은 배치에 파선 상자를 썼고, 셋이 모두 강조돼 있습니다.",
+      "en": "Two panels. Left: a solid selection box with two short lines fully inside, both highlighted, while a long line crossing the box is not. Right: the same with a dashed box, where all three are highlighted."
+     },
+     "svg": "<svg viewBox=\"0 0 600 206\" width=\"600\" height=\"206\"><text class=\"slh\" x=\"12\" y=\"16\">창 선택 · 왼쪽에서 오른쪽</text><line class=\"sd\" x1=\"30\" y1=\"40\" x2=\"230\" y2=\"40\"/><line class=\"sd\" x1=\"30\" y1=\"40\" x2=\"30\" y2=\"140\"/><line class=\"sd\" x1=\"230\" y1=\"40\" x2=\"230\" y2=\"140\"/><line class=\"sd\" x1=\"30\" y1=\"140\" x2=\"230\" y2=\"140\"/><line class=\"sh\" x1=\"66\" y1=\"66\" x2=\"194\" y2=\"66\"/><line class=\"sh\" x1=\"66\" y1=\"96\" x2=\"194\" y2=\"96\"/><line class=\"si\" x1=\"8\" y1=\"124\" x2=\"278\" y2=\"124\"/><text class=\"sl\" x=\"12\" y=\"168\">창 안에 완전히 들어온</text><text class=\"sl\" x=\"12\" y=\"186\">둘만 잡힙니다</text><text class=\"slh\" x=\"312\" y=\"16\">걸침 선택 · 오른쪽에서 왼쪽</text><line class=\"sn\" x1=\"330\" y1=\"40\" x2=\"530\" y2=\"40\"/><line class=\"sn\" x1=\"330\" y1=\"40\" x2=\"330\" y2=\"140\"/><line class=\"sn\" x1=\"530\" y1=\"40\" x2=\"530\" y2=\"140\"/><line class=\"sn\" x1=\"330\" y1=\"140\" x2=\"530\" y2=\"140\"/><line class=\"sh\" x1=\"366\" y1=\"66\" x2=\"494\" y2=\"66\"/><line class=\"sh\" x1=\"366\" y1=\"96\" x2=\"494\" y2=\"96\"/><line class=\"sh\" x1=\"308\" y1=\"124\" x2=\"578\" y2=\"124\"/><text class=\"sl\" x=\"312\" y=\"168\">스치기만 한 긴 선까지</text><text class=\"sl\" x=\"312\" y=\"186\">셋이 다 잡힙니다</text></svg>"
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "정리할 때는 왼쪽에서 오른쪽이 안전해요. 걸침으로 잡으면 지나가는 형상선까지 딸려 들어오거든요.",
+     "en": "Left to right is the safe direction when cleaning up: a crossing box drags in the geometry that passes through it."
+    },
+    {
+     "type": "p",
+     "ko": "`QSELECT` 는 드래그가 아니라 조건으로 고릅니다. 객체 유형이나 도면층을 조건으로 걸면 도면 전체에서 해당하는 것만 한 번에 잡힙니다. 몇 개가 잡혔는지 숫자로도 나와요.",
+     "en": "QSELECT picks by condition, not by drag. Set object type or layer as the condition and everything matching is selected across the drawing at once. It reports the count as a number."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "이 차시에서 `QSELECT` 를 쓰는 세 자리",
+      "en": "The three places QSELECT is used in this lesson"
+     },
+     "head": [
+      {
+       "ko": "언제",
+       "en": "When"
+      },
+      {
+       "ko": "무엇을 조건으로",
+       "en": "Condition"
+      },
+      {
+       "ko": "무엇에 쓰나",
+       "en": "What it is for"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "투상선을 걷어낼 때",
+        "en": "clearing the projectors"
+       },
+       {
+        "ko": "객체 유형 = `구성선`",
+        "en": "object type = construction line"
+       },
+       {
+        "ko": "한 번에 선택해 지웁니다",
+        "en": "select them all and delete"
+       }
+      ],
+      [
+       {
+        "ko": "레이어를 점검할 때",
+        "en": "auditing layers"
+       },
+       {
+        "ko": "도면층 = 중심선 · 숨은선",
+        "en": "layer = center, then hidden"
+       },
+       {
+        "ko": "개수와 위치를 확인합니다",
+        "en": "read the count and see where they are"
+       }
+      ],
+      [
+       {
+        "ko": "축척 값을 넣을 때",
+        "en": "setting the linetype scale"
+       },
+       {
+        "ko": "도면층 = 중심선 · 숨은선",
+        "en": "layer = center, then hidden"
+       },
+       {
+        "ko": "레이어 전체에 한 번에 넣습니다",
+        "en": "apply one value to the whole layer"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "객체 유형에서 `구성선` 대신 「선」을 고르면 형상선까지 잡혀요. 조건 칸의 연산자와 값은 건드리지 마세요.",
+     "en": "Filter by Line instead of Construction Line and real geometry comes with it. Leave the operator and value alone."
+    }
+   ]
+  },
+  {
+   "id": "layer-audit",
+   "kind": "concept",
+   "label": {
+    "ko": "레이어 점검 세 가지 방법",
+    "en": "Three ways to audit layers"
+   },
+   "lede": {
+    "ko": "레이어가 틀려도 화면은 아무 경고를 주지 않습니다. 그래서 직접 물어봐야 해요.",
+    "en": "A wrong layer raises no warning on screen. You have to go and ask."
+   },
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "클릭해서 보기",
+        "en": "Click and read"
+       },
+       "body": {
+        "ko": "선을 하나 클릭하면 화면 위 레이어 표시가 그 선의 레이어로 바뀝니다. 하나씩 볼 때 써요.",
+        "en": "Click a line and the layer indicator at the top switches to that line's layer. Use it to check one line at a time."
+       }
+      },
+      {
+       "label": {
+        "ko": "전구를 꺼 보기",
+        "en": "Switch the bulb off"
+       },
+       "body": {
+        "ko": "레이어 관리자에서 레이어를 하나 끕니다. 그 레이어의 선이 전부 사라져야 정상입니다. 확인했으면 반드시 다시 켜세요.",
+        "en": "Turn one layer off in the layer manager. Every line on it must disappear. Turn the bulb back on as soon as you have looked."
+       }
+      },
+      {
+       "label": {
+        "ko": "`QSELECT` 로 세어 보기",
+        "en": "Count with QSELECT"
+       },
+       "body": {
+        "ko": "도면층을 조건으로 걸면 몇 개가 잡혔는지 숫자로 나옵니다. 판정이 눈이 아니라 값이 돼요.",
+        "en": "Filter by layer and the count comes back as a number. The verdict becomes a value instead of an impression."
+       }
+      }
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "전구를 껐을 때 화면을 읽는 법이 둘 있습니다. 그 색 선이 남아 있으면 다른 레이어에서 색만 직접 받은 것이에요. 중심선 자리인데 아무것도 안 사라졌으면 그 선이 다른 레이어에 있는 것입니다.",
+     "en": "Two ways to read the screen after a bulb goes off. Lines still in that color sit on another layer with the color applied directly. And if nothing disappears where a centerline should be, that line is elsewhere."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "끄기와 동결",
+      "en": "Off versus frozen"
+     },
+     "head": [
+      {
+       "ko": "무엇",
+       "en": "What"
+      },
+      {
+       "ko": "화면",
+       "en": "On screen"
+      },
+      {
+       "ko": "도면 재생성",
+       "en": "On regeneration"
+      },
+      {
+       "ko": "객체",
+       "en": "The objects"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "끄기",
+        "en": "Off"
+       },
+       {
+        "ko": "안 보입니다",
+        "en": "hidden"
+       },
+       {
+        "ko": "대상에 남습니다",
+        "en": "still processed"
+       },
+       {
+        "ko": "그대로 있습니다",
+        "en": "still there"
+       }
+      ],
+      [
+       {
+        "ko": "동결",
+        "en": "Frozen"
+       },
+       {
+        "ko": "안 보입니다",
+        "en": "hidden"
+       },
+       {
+        "ko": "대상에서 빠집니다",
+        "en": "skipped"
+       },
+       {
+        "ko": "그대로 있습니다",
+        "en": "still there"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "끄기도 동결도 지우는 것이 아닙니다. 그런데 꺼 놓고 저장하면 그 상태까지 파일에 저장돼요. 다음 차시에 다시 그리면 선이 두 겹으로 깔립니다.",
+     "en": "Neither off nor frozen deletes anything. But save with a layer off and that state is stored too; redraw next lesson and you get two lines in one place."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "레이아웃 확인에서 같은 방법을 씁니다. 설비 레이어만 꺼 보면 통로와 동선이 드러나거든요. 켰다 껐다 하면서 간섭을 미리 찾아요.",
+     "en": "Checking a layout uses the same trick. Switch off the equipment layer and the aisles and traffic paths appear. Toggling it finds clashes before they are built."
+    }
+   ]
+  },
+  {
+   "id": "bylayer-ltscale",
+   "kind": "concept",
+   "label": {
+    "ko": "ByLayer와 선 종류 축척",
+    "en": "ByLayer and linetype scale"
+   },
+   "lede": {
+    "ko": "레이어로 관리하는 의미가 사라지는 자리가 하나 있습니다.",
+    "en": "There is one place where managing by layer quietly stops working."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "레이어는 맞는데 개체에 색을 직접 준 경우가 있습니다. 중심선 레이어에 제대로 있는데, 색상 특성이 ByLayer가 아니라 빨강으로 지정된 것입니다. 지금은 레이어 색도 빨강이라 화면에서 구별이 안 돼요.",
+     "en": "Sometimes the layer is right but the color was applied to the object. The line sits on the center layer, yet its color property reads Red, not ByLayer. The layer is red too, so nothing looks different."
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "문제는 나중에 생깁니다. 중심선을 다른 색으로 바꾸라고 하면 레이어 색을 바꿔도 그 선만 빨강으로 남거든요. 찾기도 어려워요. 그래서 정리 단계에서 전체를 ByLayer로 통일합니다.",
+     "en": "The trouble comes later. Asked to recolor the centerlines, you change the layer color and that one stays red. It is hard to find, too. So at cleanup you set everything to ByLayer."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "전체를 선택한 상태에서 도면층 칸은 건드리지 않습니다. 여기서 레이어를 고르면 도면 전체가 한 레이어로 몰려요. 되돌릴 일은 만들지 마세요.",
+     "en": "With everything selected, do not touch the Layer field. Pick a layer there and the whole drawing collapses onto it. Undo recovers it, but do not create the situation."
+    },
+    {
+     "type": "p",
+     "ko": "선 종류 축척은 파선의 획과 틈 길이를 정하는 값입니다. 굵기가 아니에요. 값은 두 군데 있습니다. 개체 값은 특성 창에서, 도면 전체 값은 `LTSCALE` 로 넣습니다. 화면 간격은 두 값의 곱입니다.",
+     "en": "Linetype scale sets the dash and gap lengths of a broken line. It is not thickness. The value lives in two places: per-object in the Properties window, global in LTSCALE. On-screen spacing is the product of the two."
+    },
+    {
+     "type": "figure",
+     "id": "fig-ltscale-product",
+     "caption": {
+      "ko": "같은 중심선 세 벌. 곱이 같으면 화면도 같아요.",
+      "en": "The same centerline three times. Equal products look identical."
+     },
+     "alt": {
+      "ko": "같은 중심선 세 줄이 위아래로 놓여 있습니다. 첫 줄은 개체 0.5에 전체 1이라 가장 촘촘합니다. 둘째 줄은 개체 0.5에 전체 2입니다. 셋째 줄은 개체 1에 전체 1인데, 곱이 같아 둘째 줄과 구별되지 않습니다.",
+      "en": "Three copies of the same centerline stacked. The first, per-object 0.5 with global 1, has the tightest dashes. The second is 0.5 with global 2, the third is 1 with global 1; both make a product of 1 and look identical."
+     },
+     "svg": "<svg viewBox=\"0 0 600 176\" width=\"600\" height=\"176\"><text class=\"slh\" x=\"12\" y=\"18\">화면 간격 = 도면 전체 값 x 개체 값</text><text class=\"sl\" x=\"12\" y=\"60\">개체 0.5 x 전체 1</text><line class=\"sc\" x1=\"196\" y1=\"55\" x2=\"516\" y2=\"55\" style=\"stroke-dasharray:14 4 4 4\"/><text class=\"sl\" x=\"528\" y=\"60\">= 0.5</text><text class=\"sl\" x=\"12\" y=\"104\">개체 0.5 x 전체 2</text><line class=\"sc\" x1=\"196\" y1=\"99\" x2=\"516\" y2=\"99\" style=\"stroke-dasharray:28 8 8 8\"/><text class=\"sl\" x=\"528\" y=\"104\">= 1</text><text class=\"sl\" x=\"12\" y=\"148\">개체 1 x 전체 1</text><line class=\"sc\" x1=\"196\" y1=\"143\" x2=\"516\" y2=\"143\" style=\"stroke-dasharray:28 8 8 8\"/><text class=\"sl\" x=\"528\" y=\"148\">= 1</text></svg>"
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "이 과정의 레이어 넷 · 정본 값",
+      "en": "The four layers of this course - the settled values"
+     },
+     "head": [
+      {
+       "ko": "레이어",
+       "en": "Layer"
+      },
+      {
+       "ko": "색",
+       "en": "Color"
+      },
+      {
+       "ko": "선 종류",
+       "en": "Linetype"
+      },
+      {
+       "ko": "선가중치",
+       "en": "Lineweight"
+      },
+      {
+       "ko": "선 종류 축척",
+       "en": "Linetype scale"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "외형선",
+        "en": "visible line"
+       },
+       {
+        "ko": "흰색 7",
+        "en": "White (7)"
+       },
+       {
+        "ko": "Continuous",
+        "en": "Continuous"
+       },
+       {
+        "ko": "0.5",
+        "en": "0.5"
+       },
+       {
+        "ko": "따로 주지 않습니다",
+        "en": "not set"
+       }
+      ],
+      [
+       {
+        "ko": "중심선",
+        "en": "centerline"
+       },
+       {
+        "ko": "빨강 1",
+        "en": "Red (1)"
+       },
+       {
+        "ko": "Center",
+        "en": "Center"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "`0.5`",
+        "en": "0.5"
+       }
+      ],
+      [
+       {
+        "ko": "숨은선",
+        "en": "hidden line"
+       },
+       {
+        "ko": "노랑 2",
+        "en": "Yellow (2)"
+       },
+       {
+        "ko": "Hidden",
+        "en": "Hidden"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "`0.5`",
+        "en": "0.5"
+       }
+      ],
+      [
+       {
+        "ko": "치수선",
+        "en": "dimension line"
+       },
+       {
+        "ko": "보라 6",
+        "en": "Magenta (6)"
+       },
+       {
+        "ko": "Continuous",
+        "en": "Continuous"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "따로 주지 않습니다",
+        "en": "not set"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "이 표의 값이 정본입니다. `0.5` 는 2차시 레이어 표에서 이미 정해 둔 값이에요. 오늘 새로 지어낸 값이 아닙니다. 굵기와 축척은 다른 값입니다. 굵기는 선의 두께이고, 축척은 파선의 간격입니다.",
+     "en": "These are the settled values. The 0.5 was already fixed in the Lesson 2 layer table, not invented today. Lineweight and linetype scale are different numbers: weight is thickness, scale is the gap in a broken line."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "`LTSCALE` 의 정답 숫자는 정해져 있지 않아요. 값을 넣고 화면을 보고 다시 넣는 식으로 좁혀 가세요. 설비 레이아웃에서는 이게 특히 중요합니다. 벽이나 판 뒤에 가린 것은 숨은선으로 그리거든요. 그게 실선으로 보이면 가려진 것을 못 알아봅니다.",
+     "en": "There is no single correct LTSCALE number. Enter a value, look, enter another, and close in on it. This matters most on a plant layout: whatever sits behind a wall or a plate is drawn hidden, and if it reads continuous you cannot tell what is behind what."
+    }
+   ]
+  },
+  {
+   "id": "do-1",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 1 — 투상선 지우고 형상선 다듬기 (1~8단계)",
+    "en": "Do it 1 - clear the projectors, tidy the geometry (steps 1-8)"
+   },
+   "lede": {
+    "ko": "여기서 파일을 열고, 지울 것을 지우고, 남은 형상선을 다듬습니다.",
+    "en": "Here you open the file, delete what goes, and tidy the geometry that stays."
+   },
+   "blocks": [
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "이 절의 조작은 파일 상태에 따라 달라집니다. 어느 선을 자를지는 정해져 있지 않아요. 뷰 밖으로 나간 토막과 교차점에 못 미친 선을 스스로 찾으세요. 앞 절의 도해가 그 예시예요.",
+     "en": "What you do here depends on the state of your file. Which lines to cut is not fixed. Look for pieces running outside the views and lines stopping short of an intersection. The previous section's diagram shows what to look for."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "오늘 쓰는 기능키와 조합키",
+      "en": "Function and modifier keys used today"
+     },
+     "head": [
+      {
+       "ko": "키",
+       "en": "Key"
+      },
+      {
+       "ko": "무엇을 하나",
+       "en": "What it does"
+      },
+      {
+       "ko": "언제 쓰나",
+       "en": "When you use it"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "`F3`",
+        "en": "F3"
+       },
+       {
+        "ko": "객체 스냅 켜기/끄기",
+        "en": "toggles object snap"
+       },
+       {
+        "ko": "정확한 점을 잡아야 할 때. 조작 전에 켜져 있는지 봅니다",
+        "en": "before picking exact points - check it is on first"
+       }
+      ],
+      [
+       {
+        "ko": "`F8`",
+        "en": "F8"
+       },
+       {
+        "ko": "직교 켜기/끄기",
+        "en": "toggles ortho"
+       },
+       {
+        "ko": "수평·수직으로만 움직여야 할 때",
+        "en": "when movement must stay horizontal or vertical"
+       }
+      ],
+      [
+       {
+        "ko": "`Esc`",
+        "en": "Esc"
+       },
+       {
+        "ko": "선택 풀기",
+        "en": "clears the selection"
+       },
+       {
+        "ko": "확인이 끝나고 다음 명령으로 넘어가기 전",
+        "en": "after a check, before the next command"
+       }
+      ],
+      [
+       {
+        "ko": "`Delete`",
+        "en": "Delete"
+       },
+       {
+        "ko": "선택한 객체 지우기",
+        "en": "deletes what is selected"
+       },
+       {
+        "ko": "`QSELECT` 로 잡은 구성선을 지울 때",
+        "en": "to delete the construction lines QSELECT picked"
+       }
+      ],
+      [
+       {
+        "ko": "`Shift` + 클릭",
+        "en": "Shift + click"
+       },
+       {
+        "ko": "자르기와 늘리기를 뒤집기",
+        "en": "flips trim and extend"
+       },
+       {
+        "ko": "한 명령 안에서 자를 것과 늘릴 것이 번갈아 나올 때",
+        "en": "when cuts and extensions alternate inside one command"
+       }
+      ],
+      [
+       {
+        "ko": "`Ctrl+A`",
+        "en": "Ctrl+A"
+       },
+       {
+        "ko": "전부 선택",
+        "en": "selects everything"
+       },
+       {
+        "ko": "ByLayer로 통일하기 전 전체를 잡을 때",
+        "en": "to grab everything before the ByLayer pass"
+       }
+      ],
+      [
+       {
+        "ko": "`Ctrl+1`",
+        "en": "Ctrl+1"
+       },
+       {
+        "ko": "특성 창 열기",
+        "en": "opens the Properties window"
+       },
+       {
+        "ko": "색상·도면층·선종류축척을 보고 넣을 때",
+        "en": "to read and set color, layer, and linetype scale"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 1,
+       "title": {
+        "ko": "지난 파일 열기",
+        "en": "Open last lesson's file"
+       },
+       "actions": [
+        {
+         "type": "OPEN",
+         "do": {
+          "ko": "입력하고 엔터를 누릅니다. 파일 선택 대화상자가 뜹니다.",
+          "en": "Type it and press Enter. The file selection dialog opens."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L05_VIEWS",
+         "do": {
+          "ko": "지난 시간에 저장한 이 파일을 고르고 열기를 누릅니다.",
+          "en": "Select the file you saved last time and click Open."
+         }
+        },
+        {
+         "type": "Z",
+         "do": {
+          "ko": "입력하고 엔터. 줌 명령입니다.",
+          "en": "Type it and press Enter. This is the zoom command."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "입력하고 엔터. 줌 전체입니다.",
+          "en": "Type it and press Enter. This is zoom all."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "A3 도면틀 전체가 한 화면에 들어옵니다. 세 뷰와, 뷰 밖으로 튀어나온 투상선이 함께 보입니다.",
+        "en": "The whole A3 border fits on one screen. You see all three views plus projectors running outside them."
+       },
+       "why": {
+        "ko": "새 도면을 만들지 않습니다. 이 과정은 한 파일을 일곱 차시에 걸쳐 이어 그립니다. 줌 전체를 먼저 하는 것은 정리할 범위를 도면틀 단위로 잡기 위해서예요.",
+        "en": "You never start a new drawing. This course carries one file through seven lessons. Zoom all comes first so the cleanup scope is the whole border, not one view."
+       },
+       "pitfall": {
+        "ko": "파일 이름부터 확인하세요. 새 도면으로 시작하면 정리할 대상 자체가 없습니다. 이름이 `EDU-IB-02_L05_VIEWS` 인지 보고 여세요.",
+        "en": "Check the file name first. Start from a new drawing and there is nothing to clean up. Confirm the name reads EDU-IB-02_L05_VIEWS before opening."
+       }
+      },
+      {
+       "n": 2,
+       "title": {
+        "ko": "정리 전 상태 확인하기",
+        "en": "Look before you cut"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "투상선 하나를 클릭합니다. 화면 위 레이어 표시가 그 선의 레이어로 바뀝니다.",
+          "en": "Click one projector. The layer indicator at the top switches to that line's layer."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Esc` 를 눌러 선택을 풉니다.",
+          "en": "Press Esc to clear the selection."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "레이어 표시가 클릭한 선의 이름으로 바뀝니다. 세로선과 가로선이 뷰 바깥까지 이어진 것도 보입니다.",
+        "en": "The layer indicator switches to that line's layer. You can see the vertical and horizontal lines running past the views."
+       },
+       "why": {
+        "ko": "이 선이 외형선 레이어에 있으면 인쇄할 때 형상선과 똑같은 굵기로 나옵니다. 그래서 자르기 전에 무엇부터 볼지가 정해져 있어요.",
+        "en": "If that line sits on the visible-line layer it prints at the same weight as real geometry. That is why you look before you cut."
+       },
+       "pitfall": {
+        "ko": "여기서 `Esc` 를 빠뜨리기 쉬워요. 선택을 풀지 않으면 그 선이 선택된 채로 다음 명령에 들어갑니다. 확인 없이 지우기에 들어가면 무엇을 지웠는지 모른 채 형상선까지 날려요.",
+        "en": "Esc is easy to skip here. Without clearing, that line goes into the next command already selected. Jump straight to deleting and you lose real geometry without knowing."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
+        "ko": "편집 명령이 레이어를 어떻게 다루는지 확인",
+        "en": "Check how the edit commands treat layers"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "`F3` 을 눌러 객체 스냅이 켜져 있는지 봅니다.",
+          "en": "Press F3 and check that object snap is on."
+         }
+        },
+        {
+         "do": {
+          "ko": "`F8` 을 눌러 직교가 켜져 있는지 봅니다.",
+          "en": "Press F8 and check that ortho is on."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "상태 막대의 객체 스냅과 직교 아이콘 색으로 켜짐 여부가 보입니다.",
+        "en": "The object snap and ortho icons in the status bar show, by their color, whether each is on."
+       },
+       "why": {
+        "ko": "`TR` 과 `EX` 는 새 객체를 만들지 않고 길이만 바꾸므로 레이어가 그대로입니다. 대칭 복사는 새 객체를 만들지만 원본의 레이어를 따라갑니다. 그래서 오늘은 현재 레이어를 무엇으로 두든 결과가 같아요.",
+        "en": "TR and EX create nothing new; they change length only, so the layer stays. Mirroring creates objects, but they inherit the source line's layer. So today the current layer makes no difference."
+       },
+       "pitfall": {
+        "ko": "`F3` 과 `F8` 은 토글이라 누르면 켜는 게 아니라 상태가 뒤집힙니다. 이미 켜져 있는데 누르면 꺼져요. 누르기 전에 상태 막대 아이콘 색부터 보세요.",
+        "en": "F3 and F8 are toggles: pressing them flips the state rather than turning it on. Press one that is already on and you switch it off. Read the status bar icon color before you press."
+       }
+      },
+      {
+       "n": 4,
+       "title": {
+        "ko": "QSELECT 로 투상선 한 번에 지우기",
+        "en": "Delete every projector in one pass with QSELECT"
+       },
+       "actions": [
+        {
+         "type": "QSELECT",
+         "do": {
+          "ko": "입력하고 엔터. 신속 선택 대화상자가 열립니다.",
+          "en": "Type it and press Enter. The Quick Select dialog opens."
+         }
+        },
+        {
+         "do": {
+          "ko": "적용 위치는 전체 도면으로 둡니다.",
+          "en": "Leave Apply to set to Entire drawing."
+         }
+        },
+        {
+         "type": "구성선",
+         "do": {
+          "ko": "객체 유형 목록에서 이것을 고릅니다.",
+          "en": "Choose this in the object type list."
+         }
+        },
+        {
+         "do": {
+          "ko": "조건 칸은 그대로 두고, 적용 방법이 새 선택 세트에 포함인지 확인하고 확인을 누릅니다.",
+          "en": "Leave the condition fields alone, confirm the result is set to Include in new selection set, and click OK."
+         }
+        },
+        {
+         "do": {
+          "ko": "화면에서 무엇이 선택됐는지 한 번 본 다음 `Delete` 를 누릅니다.",
+          "en": "Look at what is highlighted, then press Delete."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "투상선이 한 번에 사라지고 뷰 세 개의 형상선만 남습니다. 화면이 눈에 띄게 비워집니다.",
+        "en": "Every projector disappears at once and only the geometry of the three views remains. The screen visibly clears."
+       },
+       "why": {
+        "ko": "정리는 지우는 것부터 합니다. 구성선은 도면에 남길 선이 아니니 다듬을 이유가 없어요. 하나씩 클릭해 지웠다면 몇 분이 걸렸을 자리입니다.",
+        "en": "Cleanup starts with deleting. A construction line is not staying in the drawing, so there is nothing to tidy about it. Clicking them one by one would have cost minutes."
+       },
+       "pitfall": {
+        "ko": "객체 유형에서 `구성선` 대신 「선」을 고르면 형상선까지 잡힙니다. 지우기 전에 화면을 한 번 보세요. 조건의 연산자나 값을 건드리면 원하는 것이 안 잡혀요.",
+        "en": "Pick Line instead of Construction Line and real geometry comes with it. Look at the screen before you delete. Touching the operator or value fields breaks the filter."
+       }
+      },
+      {
+       "n": 5,
+       "title": {
+        "ko": "TRIM 으로 남은 형상선 다듬기",
+        "en": "Trim the geometry that stays"
+       },
+       "actions": [
+        {
+         "type": "TR",
+         "do": {
+          "ko": "입력하고 엔터. 자르기 명령입니다.",
+          "en": "Type it and press Enter. This is the trim command."
+         }
+        },
+        {
+         "do": {
+          "ko": "절단 모서리를 물으면 아무것도 고르지 말고 엔터를 한 번 더 누릅니다. 도면 안의 모든 객체가 절단 모서리가 됩니다. 버전에 따라 이 물음이 없기도 한데, 곧바로 자를 선을 물어보면 그대로 갑니다.",
+          "en": "When it asks for cutting edges, select nothing and press Enter again: every object becomes one. Some versions skip the prompt and ask straight away which line to cut - if so, carry on."
+         }
+        },
+        {
+         "do": {
+          "ko": "잘라 낼 부분을 클릭합니다. 남길 쪽이 아니라 없앨 쪽이에요. 형상 밖으로 튀어나온 토막을 하나씩 클릭합니다.",
+          "en": "Click the part to cut away - the part you remove, not the part you keep. Work through the pieces sticking out one at a time."
+         }
+        },
+        {
+         "type": "U",
+         "do": {
+          "ko": "잘못 잘랐으면 명령을 끝내지 말고 입력하고 엔터. 방금 자른 것 하나만 되살아납니다.",
+          "en": "Cut the wrong thing? Do not leave the command - type it and press Enter. Only the last cut comes back."
+         }
+        },
+        {
+         "do": {
+          "ko": "다 잘랐으면 엔터를 눌러 명령을 끝냅니다.",
+          "en": "Press Enter to end the command when you are done."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "클릭할 때마다 그 토막만 사라집니다. 선 전체가 아니라 경계와 경계 사이의 한 구간만 없어집니다.",
+        "en": "Each click removes only that piece. Not the whole line - just the span between one boundary and the next."
+       },
+       "why": {
+        "ko": "구성선을 이미 지웠으니 절단 모서리를 고르지 않고 엔터로 넘겨도 안전합니다. 5차시 평면도는 격자로 그려 놓고 잘라내기로 했고, 그 구간이 아직 남아 있어요.",
+        "en": "With the construction lines already gone, pressing Enter past the cutting-edge prompt is safe. The Lesson 5 top view was laid out as a grid to be trimmed later, and those spans are still there."
+       },
+       "pitfall": {
+        "ko": "남길 쪽을 클릭하면 남겨야 할 것이 사라져요. 잘못 잘랐을 때 `Esc` 로 명령을 나가 버리면 `U` 한 번으로 되돌릴 수 없습니다. 명령 안에서 `U` 를 치세요.",
+        "en": "Click the part you meant to keep and it is the part that goes. And if you leave the command with Esc after a bad cut, a single U will not bring it back. Type U while still inside."
+       }
+      },
+      {
+       "n": 6,
+       "title": {
+        "ko": "EXTEND 로 모자란 선 늘리기",
+        "en": "Extend the lines that fall short"
+       },
+       "actions": [
+        {
+         "type": "EX",
+         "do": {
+          "ko": "입력하고 엔터. 늘리기 명령입니다.",
+          "en": "Type it and press Enter. This is the extend command."
+         }
+        },
+        {
+         "do": {
+          "ko": "경계 모서리를 물어봅니다. 늘어난 선이 가서 닿을 선을 클릭하고, 다 골랐으면 엔터.",
+          "en": "It asks for boundary edges. Click the line the extension should reach, then press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "늘릴 선을 클릭합니다. 선의 가운데가 아니라 늘리고 싶은 쪽 끝 근처입니다.",
+          "en": "Click the line to extend - near the end you want lengthened, not in the middle."
+         }
+        },
+        {
+         "do": {
+          "ko": "끝나면 엔터를 눌러 명령을 나옵니다.",
+          "en": "Press Enter to leave the command when you are done."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "선이 경계까지 닿으면 멈춥니다. 지나치지 않습니다.",
+        "en": "The line stops the moment it reaches the boundary. It does not overshoot."
+       },
+       "why": {
+        "ko": "AutoCAD는 클릭한 지점에 가까운 끝을 늘립니다. 경계까지만 늘어나므로 손으로 끌어 맞추는 것보다 정확해요.",
+        "en": "AutoCAD lengthens whichever end is nearer your click. It stops at the boundary, which makes it more accurate than dragging by hand."
+       },
+       "pitfall": {
+        "ko": "선의 반대쪽을 클릭하면 엉뚱한 방향으로 늘어나요. 클릭 위치는 늘리고 싶은 쪽 끝 근처입니다. 경계 모서리를 안 고르고 넘어가면 늘릴 곳이 정해지지 않아요.",
+        "en": "Click the far end and it grows the wrong way. Click near the end you want. Skip the boundary edge and there is nothing for the line to reach."
+       }
+      },
+      {
+       "n": 7,
+       "title": {
+        "ko": "한 명령 안에서 자르기와 늘리기 바꾸기",
+        "en": "Switch between trim and extend inside one command"
+       },
+       "actions": [
+        {
+         "type": "TR",
+         "do": {
+          "ko": "입력하고 엔터. 자르기에 들어간 상태입니다.",
+          "en": "Type it and press Enter. You are now inside trim."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Shift` 키를 누른 채 선을 클릭해 보세요. 그 선은 잘리지 않고 늘어납니다.",
+          "en": "Hold Shift and click a line. It extends instead of being trimmed."
+         }
+        },
+        {
+         "type": "EX",
+         "do": {
+          "ko": "반대로 이 명령 안에서 `Shift` 를 누르고 클릭하면 잘립니다.",
+          "en": "The other way round: inside this command, Shift and click trims instead."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "클릭한 선이 반대 동작으로 처리됩니다. 명령을 나가지 않고도 둘을 오갑니다.",
+        "en": "The clicked line gets the opposite action, without leaving the command."
+       },
+       "why": {
+        "ko": "뷰를 정리하다 보면 자를 것과 늘릴 것이 번갈아 나옵니다. 명령을 나갔다 들어오면 경계를 새로 잡아야 합니다. `Shift` 하나로 오가면 한 번만 잡고 끝까지 가요.",
+        "en": "Cleaning up views alternates between cuts and extensions. Leaving and re-entering means re-picking boundaries; switching with Shift lets one set of boundaries serve the whole job."
+       },
+       "pitfall": {
+        "ko": "`Shift` 를 놓은 상태로 클릭하면 원래 동작이 그대로 실행됩니다. 늘릴 때도 클릭 위치는 늘리고 싶은 쪽 끝 근처여야 해요.",
+        "en": "Let go of Shift and the command's own action runs. And when extending, the click still has to be near the end you want lengthened."
+       }
+      },
+      {
+       "n": 8,
+       "title": {
+        "ko": "남은 보조선 지우기",
+        "en": "Delete the guides that cannot be trimmed"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "지울 선을 클릭해서 선택하고 `Delete` 를 누릅니다.",
+          "en": "Click the line to remove, then press Delete."
+         }
+        },
+        {
+         "type": "E",
+         "do": {
+          "ko": "또는 선택한 다음 입력하고 엔터. 지우기 명령입니다.",
+          "en": "Or select it, then type this and press Enter. This is the erase command."
+         }
+        },
+        {
+         "do": {
+          "ko": "여러 개를 한 번에 지울 때는 빈 곳에서 왼쪽에서 오른쪽으로 드래그합니다. 창 안에 완전히 들어온 객체만 선택됩니다.",
+          "en": "To remove several at once, drag from empty space left to right. Only objects fully inside the box are picked."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "선택된 객체만 사라집니다. 창 선택이면 창 안에 완전히 들어온 것만 잡혀요.",
+        "en": "Only the selected objects go. With a window, only what sits fully inside is caught."
+       },
+       "why": {
+        "ko": "자를 수 없는 선도 있습니다. 경계가 없어서 통째로 필요 없는 선입니다. 이건 자르지 않고 지워요.",
+        "en": "Some lines cannot be trimmed at all: there is no boundary and the whole line is unwanted. Those get erased, not trimmed."
+       },
+       "pitfall": {
+        "ko": "걸침 선택으로 잡으면 지나가는 형상선까지 딸려 들어와 함께 지워져요. 지우기 전에 선택된 것이 무엇인지 화면에서 한 번 보고 누르세요.",
+        "en": "A crossing pick drags in real geometry that merely passes through, and it goes too. Look at what is highlighted before you press Delete."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "do-2",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 2 — 대칭 검산과 레이어 정리 (9~12단계)",
+    "en": "Do it 2 - symmetry cross-check and layer cleanup (steps 9-12)"
+   },
+   "lede": {
+    "ko": "여기서 대칭은 만드는 것이 아니라 재는 것입니다.",
+    "en": "Here symmetry is something you measure, not something you build."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "정면도의 장공 두 개는 4차시 11단계에서 이미 대칭으로 만들었습니다. 왼쪽 장공을 골라 `60,0` 과 `60,90` 을 축으로 넘긴 결과입니다. 오늘 할 일은 다시 만드는 것이 아니라 맞는지 재는 것이에요.",
+     "en": "The two slots were already made symmetric in step 11 of Lesson 4: the left slot mirrored across an axis defined by 60,0 and 60,90. So today's job is to measure them, not make them again."
+    },
+    {
+     "type": "figure",
+     "ref": "frontdim",
+     "caption": {
+      "ko": "정면도와 치수. 대칭 검산에 쓰는 값 29 · 12 · 50 · 120 을 여기서 읽어요.",
+      "en": "Front view with dimensions. Read the symmetry check values 29, 12, 50, and 120 from here."
+     },
+     "alt": {
+      "ko": "치수가 다 들어간 정면도입니다. 전체 가로 120, 높이 90, 베이스 높이 16이고 아래에 장공 두 개가 있습니다. 왼쪽 끝에서 첫 끝원 중심까지 29, 한 장공의 두 끝원 사이 12, 두 장공의 첫 끝원 사이 50입니다. 위에는 보스 지름 56과 축 구멍 지름 25, 보스 중심의 가로 위치 60입니다.",
+      "en": "The front view with every dimension: 120 wide, 90 tall, a 16 mm base, two slots low down. Left edge to the first end-arc center is 29, one slot's end-arc centers 12 apart, the two slots' first end-arc centers 50 apart. Above, the 56 mm boss and 25 mm bore, boss center 60 from the left."
+     }
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "장공 두 개가 대칭이라는 계산",
+      "en": "The arithmetic that shows the slots are symmetric"
+     },
+     "head": [
+      {
+       "ko": "무엇",
+       "en": "What"
+      },
+      {
+       "ko": "값",
+       "en": "Value"
+      },
+      {
+       "ko": "어떻게 나오나",
+       "en": "How it comes out"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "왼쪽 장공 끝원 중심",
+        "en": "left slot end-arc centers"
+       },
+       {
+        "ko": "29 · 41",
+        "en": "29 and 41"
+       },
+       {
+        "ko": "왼쪽 끝에서 29, 거기에 12를 더합니다",
+        "en": "29 from the left edge, then add 12"
+       }
+      ],
+      [
+       {
+        "ko": "왼쪽 장공 중심",
+        "en": "left slot center"
+       },
+       {
+        "ko": "35",
+        "en": "35"
+       },
+       {
+        "ko": "29와 41의 가운데입니다",
+        "en": "midway between 29 and 41"
+       }
+      ],
+      [
+       {
+        "ko": "오른쪽 장공 끝원 중심",
+        "en": "right slot end-arc centers"
+       },
+       {
+        "ko": "79 · 91",
+        "en": "79 and 91"
+       },
+       {
+        "ko": "29에 50을 더하고, 거기에 12를 더합니다",
+        "en": "29 plus 50, then add 12"
+       }
+      ],
+      [
+       {
+        "ko": "오른쪽 장공 중심",
+        "en": "right slot center"
+       },
+       {
+        "ko": "85",
+        "en": "85"
+       },
+       {
+        "ko": "79와 91의 가운데입니다",
+        "en": "midway between 79 and 91"
+       }
+      ],
+      [
+       {
+        "ko": "오른쪽 끝에서 91까지",
+        "en": "right edge back to 91"
+       },
+       {
+        "ko": "29",
+        "en": "29"
+       },
+       {
+        "ko": "전체 가로 120에서 91을 뺍니다",
+        "en": "120 overall minus 91"
+       }
+      ],
+      [
+       {
+        "ko": "대칭축",
+        "en": "axis of symmetry"
+       },
+       {
+        "ko": "x = 60",
+        "en": "x = 60"
+       },
+       {
+        "ko": "120의 절반이고 보스 중심의 가로 위치와 같습니다",
+        "en": "half of 120, and the same as the boss center"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "대칭 형상을 좌우 각각 손으로 그리면 반드시 어긋납니다. 소수점 한 자리에서 틀어지고 눈으로는 안 보이거든요. 그래서 4차시에는 한쪽만 정확히 만들고 축을 좌표로 넣어 넘겼습니다. 축을 클릭으로 잡으면 그 순간 대칭이 깨져요. 이미 맞는 것을 지우고 되만들면 도면에 아무것도 더해지지 않습니다. 오히려 새 오차가 들어갈 자리만 생겨요. 검산은 그래서 값으로 합니다. 눈으로 훑는 것은 판정이 아니에요.",
+     "en": "Draw the two halves of a symmetric shape by hand and they will not match. They drift in the first decimal place, where the eye cannot catch it. So Lesson 4 built one half accurately and mirrored it about a typed axis; pick that axis by clicking and the symmetry breaks right there. Rebuilding what is already correct adds nothing and only opens a door for new error, so the check is done with numbers."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 9,
+       "title": {
+        "ko": "장공이 정말 대칭인지 재기",
+        "en": "Measure whether the slots really are symmetric"
+       },
+       "actions": [
+        {
+         "type": "DI",
+         "do": {
+          "ko": "입력하고 엔터. 거리 재기 명령입니다.",
+          "en": "Type it and press Enter. This measures a distance."
+         }
+        },
+        {
+         "do": {
+          "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나옵니다. 29에서 79까지입니다.",
+          "en": "Click the left slot's left end-arc center, then the right slot's left end-arc center. It reads 50 - from 29 to 79."
+         }
+        },
+        {
+         "type": "DI",
+         "do": {
+          "ko": "다시 입력하고 엔터. 이번에는 오른쪽 장공의 오른쪽 끝원 중심과 도면 오른쪽 끝입니다.",
+          "en": "Type it again. This time take the right slot's right end-arc center and the right edge of the part."
+         }
+        },
+        {
+         "do": {
+          "ko": "29가 나옵니다. 91에서 120까지입니다. 왼쪽 끝에서 29, 오른쪽 끝에서 29면 좌우가 맞습니다.",
+          "en": "It reads 29 - from 91 to 120. Twenty-nine in from each end means the pair is symmetric."
+         }
+        },
+        {
+         "type": "MIRRTEXT",
+         "do": {
+          "ko": "입력하고 엔터. 지금 값을 보여 줍니다. 0이면 그대로 엔터를 눌러 빠져나옵니다.",
+          "en": "Type it and press Enter. It reports the current value. If it is 0, press Enter to leave it as it is."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "첫 거리는 50, 두 번째 거리는 29가 나옵니다. `MIRRTEXT` 의 현재 값은 0으로 표시됩니다.",
+        "en": "The first distance reads 50 and the second reads 29. MIRRTEXT reports its current value as 0."
+       },
+       "why": {
+        "ko": "대칭 복사의 나머지 규칙입니다. 원본을 지울지 묻는데 기본값은 아니오예요. 뜬 객체는 원본의 레이어·색·선 종류를 물려받습니다. `MIRRTEXT` 가 0이면 글자는 자리만 옮깁니다.",
+        "en": "The rest of the mirror rules: it asks whether to delete the source and defaults to No, the new object inherits the source layer, color, and linetype, and with MIRRTEXT at 0 text only moves."
+       },
+       "pitfall": {
+        "ko": "객체 스냅이 꺼져 있으면 엉뚱한 점이 찍혀 값이 틀려요. `F3` 부터 확인하세요. `MIRRTEXT` 가 1이면 글자까지 뒤집혀 읽을 수 없습니다. 표제란 근처에서 대칭을 쓸 때 확인하세요.",
+        "en": "With object snap off the pick lands elsewhere and the number is wrong. Check F3 first. At MIRRTEXT 1 text mirrors too and becomes unreadable - check before mirroring near the title block."
+       }
+      },
+      {
+       "n": 10,
+       "title": {
+        "ko": "MATCHPROP 으로 레이어 고치기",
+        "en": "Move a wrongly-layered line with MATCHPROP"
+       },
+       "actions": [
+        {
+         "type": "MA",
+         "do": {
+          "ko": "입력하고 엔터. 특성 일치 명령입니다.",
+          "en": "Type it and press Enter. This is the match properties command."
+         }
+        },
+        {
+         "do": {
+          "ko": "먼저 원본 객체를 하나 클릭합니다. 제대로 된 중심선, 곧 빨간 파선으로 보이는 선입니다. 커서가 붓 모양으로 바뀝니다.",
+          "en": "First click a source object - a correct centerline, one showing as a red broken line. The cursor turns into a brush."
+         }
+        },
+        {
+         "type": "S",
+         "do": {
+          "ko": "입력하고 엔터를 누릅니다. 특성 설정 대화상자가 열립니다.",
+          "en": "Type it and press Enter. The Property Settings dialog opens."
+         }
+        },
+        {
+         "do": {
+          "ko": "색상, 도면층, 선종류, 선종류축척, 선가중치 항목이 있습니다. 도면층에 체크가 되어 있는지 보고 확인을 누릅니다.",
+          "en": "It lists Color, Layer, Linetype, Linetype scale, and Lineweight. Confirm Layer is ticked and click OK."
+         }
+        },
+        {
+         "do": {
+          "ko": "고칠 객체를 클릭합니다. 더 있으면 계속 클릭하고, 다 됐으면 엔터.",
+          "en": "Click the object to fix. Keep clicking if there are more, then press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "클릭한 선이 원본과 같은 레이어로 옮겨지고 색과 선 종류도 따라 바뀝니다. 축 구멍 중심선이 흰 실선이었다면 빨간 파선이 됩니다.",
+        "en": "The clicked line moves to the source's layer, color and linetype following. A white continuous bore centerline becomes a red broken one."
+       },
+       "why": {
+        "ko": "정리하다 보면 레이어가 틀린 선이 나옵니다. 축 구멍의 중심선이 빨간 파선이 아니라 흰 실선이면 외형선 레이어에 그려진 것입니다. 지우고 다시 그리면 위치를 또 맞춰야 하고 새 오차가 들어가요.",
+        "en": "Cleanup always turns up a line on the wrong layer. A bore centerline showing white and continuous was drawn on the visible-line layer. Delete and redraw it and you re-place it, which lets new error in."
+       },
+       "pitfall": {
+        "ko": "색만 바뀌고 레이어가 그대로면 특성 설정을 다시 보세요. 도면층 체크가 빠지면 겉보기만 고쳐집니다. 원본으로 찍는 선이 제대로 된 선인지도 확인하세요. 틀린 선을 찍으면 틀린 특성이 퍼져요.",
+        "en": "If the color changed but the layer did not, check Property Settings. With Layer unticked it only looks fixed. Check the source line is correct too - pick a bad one and you spread the fault."
+       }
+      },
+      {
+       "n": 11,
+       "title": {
+        "ko": "LAYER 로 레이어 점검하기",
+        "en": "Audit the layers with LAYER"
+       },
+       "actions": [
+        {
+         "type": "LA",
+         "do": {
+          "ko": "입력하고 엔터. 레이어 특성 관리자가 열립니다. 외형선, 중심선, 숨은선, 치수선 네 개가 있습니다.",
+          "en": "Type it and press Enter. The Layer Properties Manager opens with four layers: visible, center, hidden, and dimension."
+         }
+        },
+        {
+         "do": {
+          "ko": "중심선 행의 전구 아이콘을 눌러 끕니다. 화면에서 빨간 중심선이 전부 사라져야 정상입니다.",
+          "en": "Click the bulb on the center row to switch it off. Every red centerline must disappear."
+         }
+        },
+        {
+         "do": {
+          "ko": "확인했으면 전구를 다시 켭니다. 반드시 다시 켜세요.",
+          "en": "Once you have looked, switch the bulb back on. This is not optional."
+         }
+        },
+        {
+         "do": {
+          "ko": "같은 방법으로 숨은선과 치수선도 한 번씩 껐다 켭니다.",
+          "en": "Do the same for the hidden and dimension layers, one at a time."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "끈 레이어의 선이 화면에서 전부 사라집니다. 남은 선이 있으면 다른 레이어에 색만 그 색으로 준 선입니다.",
+        "en": "Every line on the layer you switched off disappears. Anything still in that color sits on another layer with the color applied directly."
+       },
+       "why": {
+        "ko": "반대로 중심선 자리인데 아무것도 안 사라졌다면 그 선은 다른 레이어에 있습니다. 끄기는 화면에서 안 보이게만 하고, 동결은 도면 재생성 대상에서도 뺍니다. 둘 다 지우는 것이 아니에요.",
+        "en": "The reverse tells you something too: if nothing disappears where a centerline should be, that line is elsewhere. Off only hides; frozen also drops the layer from regeneration. Neither deletes."
+       },
+       "pitfall": {
+        "ko": "확인했으면 반드시 다시 켜세요. 꺼 놓은 채로 저장하면 그 상태까지 파일에 함께 저장됩니다.",
+        "en": "Switch the bulb back on. Save with it off and the off state is stored in the file too."
+       }
+      },
+      {
+       "n": 12,
+       "title": {
+        "ko": "QSELECT 로 레이어별로 골라 보기",
+        "en": "Filter by layer with QSELECT"
+       },
+       "actions": [
+        {
+         "type": "QSELECT",
+         "do": {
+          "ko": "입력하고 엔터. 신속 선택 대화상자가 열립니다.",
+          "en": "Type it and press Enter. The Quick Select dialog opens."
+         }
+        },
+        {
+         "do": {
+          "ko": "적용 위치는 전체 도면, 객체 유형은 다중으로 둡니다. 다중은 모든 종류라는 뜻입니다.",
+          "en": "Leave Apply to as Entire drawing and object type as Multiple, which means every type."
+         }
+        },
+        {
+         "do": {
+          "ko": "특성 목록에서 도면층을 고릅니다. 연산자는 같음, 값은 중심선입니다.",
+          "en": "Choose Layer in the properties list. Set the operator to Equals and the value to the center layer."
+         }
+        },
+        {
+         "do": {
+          "ko": "적용 방법은 새 선택 세트에 포함입니다. 확인을 누릅니다.",
+          "en": "Set the result to Include in new selection set and click OK."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Esc` 로 선택을 풉니다. 같은 방법으로 숨은선도 한 번 걸어 봅니다.",
+          "en": "Press Esc to clear. Then run the same filter for the hidden layer."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "중심선 레이어의 객체가 전부 선택되고 명령행에 개수가 뜹니다. 보스 중심, 축 구멍 중심, 장공 중심, 대칭축이 선택 표시됩니다.",
+        "en": "Every object on the center layer is selected and the count is reported. The boss center, bore center, slot centers, and the axis all highlight."
+       },
+       "why": {
+        "ko": "개수가 숫자로 나오므로 판정이 눈이 아니라 값이 됩니다.",
+        "en": "The count comes back as a number, so the verdict rests on a value rather than on your eye."
+       },
+       "pitfall": {
+        "ko": "중심선 자리에 선택 표시가 없으면 그 선은 다른 레이어에 있어요. 객체 유형을 다중이 아니라 특정 유형으로 두면 개수가 실제보다 적게 나와요.",
+        "en": "If a place that should hold a centerline does not highlight, that line is elsewhere. And with a specific object type instead of Multiple, the count comes out low."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "장공은 호 둘과 직선 둘이라 한 번 클릭하면 그중 하나만 잡힙니다. 4차시에 원 두 개를 그려 안쪽을 잘라낸 결과예요. 반면 베이스 외곽은 폴리선이라 클릭 한 번에 여섯 변이 전부 잡혀요. 폴리선은 작도할 때보다 레이아웃을 볼 때 더 씁니다. 둘러싼 영역의 넓이가 바로 나오고, 설비 자리를 통째로 잡아 옮길 때도 한 번에 잡혀요.",
+     "en": "A slot is two arcs and two straight lines, so one click picks only one of them - that is what drawing two circles and trimming between them in Lesson 4 produced. The base outline is a polyline: one click takes all six sides. Polylines pay off more in reading a layout than in drawing: the enclosed area reads out at once, and a machine footprint moves as one object."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "지그를 그려 제안할 때도 좌우 같은 받침을 두 번 그리지 않습니다. 한쪽을 만들고 좌표축으로 넘겨요. 남의 도면을 받아 쓸 때는 MATCHPROP을 자주 씁니다. 스페어 파트 도면을 열어 보면 레이어가 제각각이거든요. 한 줄씩 다시 그리지 않고 이 명령으로 맞춥니다.",
+     "en": "Drawing a jig to propose, you never draw the two matching feet twice - you build one and mirror it about a typed axis. Taking over someone else's drawing, MATCHPROP earns its keep: a spare-part drawing usually has layers all over the place, and this command brings them into line without redrawing."
+    }
+   ]
+  },
+  {
+   "id": "do-3",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 3 — ByLayer 통일과 축척 맞추기, 저장 (13~16단계)",
+    "en": "Do it 3 - ByLayer, dash spacing, save (steps 13-16)"
+   },
+   "lede": {
+    "ko": "여기까지 오면 도면이 지시로 읽히기 시작해요.",
+    "en": "By the end of this the drawing starts reading as an instruction."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "선을 제자리에 놓았으니 이제 값으로 못 박습니다. 색과 선 종류의 주인을 레이어로 돌려주고, 파선 간격을 맞춘 뒤 새 이름으로 남겨요.",
+     "en": "The lines are in place; now the values get nailed down. Hand color and linetype back to the layer, set the dash spacing, and save under a new name."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 13,
+       "title": {
+        "ko": "색상과 선 종류를 ByLayer 로 통일하기",
+        "en": "Set color and linetype to ByLayer"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "`Ctrl+A` 를 눌러 전부 선택합니다.",
+          "en": "Press Ctrl+A to select everything."
+         }
+        },
+        {
+         "type": "SELECT",
+         "do": {
+          "ko": "또는 입력하고 엔터,",
+          "en": "Or type this and press Enter,"
+         }
+        },
+        {
+         "type": "ALL",
+         "do": {
+          "ko": "입력하고 엔터, 한 번 더 엔터를 누릅니다.",
+          "en": "then type this, press Enter, and press Enter once more."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Ctrl+1` 을 눌러 특성 창을 엽니다. 일반 항목에 색상, 도면층, 선종류, 선종류축척, 선가중치가 보입니다.",
+          "en": "Press Ctrl+1 to open the Properties window. Under General you see Color, Layer, Linetype, Linetype scale, and Lineweight."
+         }
+        },
+        {
+         "do": {
+          "ko": "색상 칸을 눌러 ByLayer를 고릅니다. 선종류 칸과 선가중치 칸도 ByLayer로 고칩니다.",
+          "en": "Set the Color field to ByLayer. Do the same for Linetype and Lineweight."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Esc` 로 선택을 풉니다. 이제 색은 레이어가 정합니다.",
+          "en": "Press Esc to clear the selection. From now on the layer decides the color."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "색상·선종류·선가중치가 전부 ByLayer가 됩니다. 화면 색은 그대로여도 주인이 레이어로 넘어간 상태입니다.",
+        "en": "Color, linetype, and lineweight all read ByLayer. The colors may look unchanged, but ownership has moved to the layers."
+       },
+       "why": {
+        "ko": "여기서 통일해 두면 이후 레이어의 색·선종류·굵기를 바꿀 때 전부 따라옵니다.",
+        "en": "Unify here and every later change to a layer color, linetype, or weight carries through."
+       },
+       "pitfall": {
+        "ko": "도면층 칸은 건드리지 마세요. 지금 전부 선택된 상태라 여기서 레이어를 고르면 도면 전체가 한 레이어로 몰립니다. 되돌리기로 풀 수는 있지만 되돌릴 일은 만들지 마세요.",
+        "en": "Do not touch the Layer field. Everything is selected, so picking a layer here collapses the whole drawing onto it. Undo recovers it, but do not create the situation."
+       }
+      },
+      {
+       "n": 14,
+       "title": {
+        "ko": "중심선과 숨은선의 선 종류 축척 주기",
+        "en": "Give the center and hidden layers their linetype scale"
+       },
+       "actions": [
+        {
+         "type": "QSELECT",
+         "do": {
+          "ko": "입력하고 엔터. 특성은 도면층, 값은 중심선으로 걸고 확인을 누릅니다.",
+          "en": "Type it and press Enter. Set the property to Layer, the value to the center layer, and click OK."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Ctrl+1` 로 특성 창을 봅니다.",
+          "en": "Press Ctrl+1 to bring up the Properties window."
+         }
+        },
+        {
+         "type": "0.5",
+         "do": {
+          "ko": "선종류축척 칸에 입력하고 엔터를 누릅니다.",
+          "en": "Type this into the Linetype scale field and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "`Esc` 로 선택을 풀고 화면을 봅니다. 긴 획과 짧은 획이 번갈아 보이면 맞은 겁니다.",
+          "en": "Press Esc and look at the screen. Long dash, short dash, alternating - that is correct."
+         }
+        },
+        {
+         "type": "QSELECT",
+         "do": {
+          "ko": "같은 방법으로 숨은선입니다. 입력하고 엔터, 도면층은 숨은선, 확인.",
+          "en": "Now the hidden layer. Type it, press Enter, set the layer to hidden, and click OK."
+         }
+        },
+        {
+         "type": "0.5",
+         "do": {
+          "ko": "선종류축척에 입력하고 엔터. `Esc` 로 선택을 풉니다.",
+          "en": "Type this into Linetype scale and press Enter, then Esc to clear."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "중심선에서 긴 획과 짧은 획이 번갈아 보입니다. 숨은선도 같은 방식으로 파선이 벌어집니다.",
+        "en": "The centerlines show long dash and short dash alternating. The hidden lines open up the same way."
+       },
+       "why": {
+        "ko": "`0.5` 는 2차시 레이어 표에서 정해 둔 값이고 지금 지어낸 값이 아니에요. `QSELECT` 로 레이어 전체를 잡아 넣어야 같은 종류의 선이 같은 간격으로 나옵니다.",
+        "en": "The 0.5 was fixed in the Lesson 2 layer table, not invented now. Grabbing the whole layer with QSELECT makes lines of one kind print with one spacing."
+       },
+       "pitfall": {
+        "ko": "중심선 하나만 클릭해 값을 넣으면 나머지 중심선은 그대로예요. 인쇄하면 같은 종류의 선인데 간격이 제각각이 됩니다. 반드시 `QSELECT` 로 레이어 전체를 잡으세요.",
+        "en": "Set the value on one clicked centerline and the rest keep theirs. In print the same kind of line comes out with different spacing. Always grab the whole layer with QSELECT."
+       }
+      },
+      {
+       "n": 15,
+       "title": {
+        "ko": "LTSCALE 로 도면 전체 맞추기",
+        "en": "Tune the whole drawing with LTSCALE"
+       },
+       "actions": [
+        {
+         "type": "LTSCALE",
+         "do": {
+          "ko": "입력하고 엔터. 새 선 종류 축척 비율을 물어봅니다. 현재 값이 꺾쇠 안에 나오고, 처음 값은 1입니다.",
+          "en": "Type it and press Enter. It asks for a new linetype scale factor, showing the current value in angle brackets. It starts at 1."
+         }
+        },
+        {
+         "type": "1",
+         "do": {
+          "ko": "그대로 두려면 입력하고 엔터를 누릅니다.",
+          "en": "To leave it alone, type this and press Enter."
+         }
+        },
+        {
+         "type": "RE",
+         "do": {
+          "ko": "값을 바꿨는데 화면이 그대로면 입력하고 엔터. 도면 재생성입니다.",
+          "en": "Changed the value and nothing moved? Type this and press Enter to regenerate the drawing."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "파선 간격이 눈에 보이게 벌어지거나 좁아집니다. 화면이 그대로면 재생성 뒤에 반영됩니다.",
+        "en": "The dash spacing visibly opens or tightens. If a change does not show, it appears after regeneration."
+       },
+       "why": {
+        "ko": "화면에 보이는 간격은 두 값의 곱입니다. 개체가 0.5이고 전체가 1이면 0.5로 그려집니다. 전체를 2로 올리면 개체 값은 그대로인데 간격은 두 배가 돼요. 이 값은 길이도 위치도 치수도 바꾸지 않습니다.",
+        "en": "On-screen spacing is the product of two values. Object 0.5 with global 1 draws at 0.5. Raise the global to 2 and the object value is unchanged while the spacing doubles. It changes no length, position, or dimension."
+       },
+       "pitfall": {
+        "ko": "한 번에 정답을 맞히려 하지 마세요. 실선처럼 보이면 값을 키우고, 점이 듬성듬성하면 줄입니다. 화면이 안 바뀌면 값이 안 들어간 게 아니라 재생성이 안 된 거예요.",
+        "en": "Do not try to hit the right number in one go. Still continuous? Raise it. Dashes scattered? Lower it. If nothing changes, the value did go in - the drawing has not regenerated."
+       }
+      },
+      {
+       "n": 16,
+       "title": {
+        "ko": "새 이름으로 저장",
+        "en": "Save under a new name"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "저장 전에 화면 위 레이어 목록을 펼칩니다. 전구가 네 개 다 켜져 있는지, 동결된 레이어가 없는지 봅니다.",
+          "en": "Before saving, open the layer list at the top of the screen. Check all four bulbs are on and no layer is frozen."
+         }
+        },
+        {
+         "type": "SAVEAS",
+         "do": {
+          "ko": "입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L06_REPRESENTED",
+         "do": {
+          "ko": "파일 이름 칸에 이 이름을 넣습니다.",
+          "en": "Enter this in the file name field."
+         }
+        },
+        {
+         "do": {
+          "ko": "파일 형식은 AutoCAD 도면 dwg 그대로 둡니다. 저장을 누릅니다.",
+          "en": "Leave the file type as AutoCAD Drawing (dwg) and click Save."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "`EDU-IB-02_L06_REPRESENTED` 가 새로 만들어집니다. `EDU-IB-02_L05_VIEWS` 는 그대로 남아요.",
+        "en": "EDU-IB-02_L06_REPRESENTED is created and EDU-IB-02_L05_VIEWS stays where it was."
+       },
+       "why": {
+        "ko": "오늘은 지우고 자르는 작업을 했습니다. 지우면 안 될 선을 지웠을 수 있고, 그건 나중에 발견됩니다. 차시마다 이름을 남겨 두면 앞 상태로 돌아가 다시 시작할 수 있어요.",
+        "en": "Today was deleting and cutting. You may have removed a line that should have stayed, and that surfaces later. Keeping one saved name per lesson means you can go back and start again."
+       },
+       "pitfall": {
+        "ko": "덮어쓰기로 끝내면 5차시 상태로 돌아갈 길이 없어져요. 전구를 켜지 않은 채 저장하면 꺼진 상태가 파일에 함께 저장됩니다. 다음 시간에는 이 파일을 열어서 시작해요.",
+        "en": "Overwrite instead and there is no way back to the Lesson 5 state. Save with a bulb off and that state is stored too. Next lesson starts by opening this file."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "현장에서 도면을 고칠 때도 같은 습관을 씁니다. 고친 판을 따로 남겨야 무엇이 언제 바뀌었는지 알아요. 스페어 파트를 급히 맞출 때 이 이력이 판단 근거가 됩니다.",
+     "en": "The same habit applies to revising real drawings. Keeping the revised version separate is what tells you what changed and when. Sourcing an urgent spare part, that history is the evidence you decide on."
+    }
+   ]
+  },
+  {
+   "id": "read-only-notations",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "그리지 않지만 읽어야 하는 표기 넷",
+    "en": "Four notations you read but do not draw"
+   },
+   "lede": {
+    "ko": "이 넷은 이 과정 실습에서 그리지 않습니다. 받아 든 도면에 있으면 읽을 줄만 알면 돼요.",
+    "en": "You draw none of these four in this course. You only have to read them when a drawing arrives with them on."
+   },
+   "blocks": [
+    {
+     "type": "table",
+     "caption": {
+      "ko": "네 표기가 무엇을 지시하는가",
+      "en": "What each of the four notations specifies"
+     },
+     "head": [
+      {
+       "ko": "표기",
+       "en": "Notation"
+      },
+      {
+       "ko": "생김새",
+       "en": "What it looks like"
+      },
+      {
+       "ko": "무엇을 지시하나",
+       "en": "What it specifies"
+      },
+      {
+       "ko": "어디에 나타나나",
+       "en": "Where it appears"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "표면 거칠기",
+        "en": "surface roughness"
+       },
+       {
+        "ko": "뿌리가 갈라진 체크 표시",
+        "en": "a check mark with a split root"
+       },
+       {
+        "ko": "그 면을 얼마나 곱게 다듬을지",
+        "en": "how finely that face is to be finished"
+       },
+       {
+        "ko": "해당 면에 붙습니다. 옆에 Ra 값이 옵니다",
+        "en": "attached to the face, with an Ra value beside it"
+       }
+      ],
+      [
+       {
+        "ko": "기하 공차",
+        "en": "geometric tolerance"
+       },
+       {
+        "ko": "좌우로 나눈 네모 칸",
+        "en": "a rectangular frame split left and right"
+       },
+       {
+        "ko": "형상·자세·위치가 얼마나 벗어나도 되는지",
+        "en": "how far form, orientation, and location may deviate"
+       },
+       {
+        "ko": "왼쪽에 기호, 오른쪽에 허용값을 적습니다",
+        "en": "symbol on the left, permitted value on the right"
+       }
+      ],
+      [
+       {
+        "ko": "재질",
+        "en": "material"
+       },
+       {
+        "ko": "글자로 적은 재료 기호",
+        "en": "a material designation written as text"
+       },
+       {
+        "ko": "무엇으로 만드는지",
+        "en": "what the part is made of"
+       },
+       {
+        "ko": "표제란의 재질 칸, 또는 부품란의 한 열",
+        "en": "the material cell of the title block, or a column in the parts list"
+       }
+      ],
+      [
+       {
+        "ko": "열처리 지시",
+        "en": "heat treatment"
+       },
+       {
+        "ko": "문장으로 적은 지시",
+        "en": "an instruction written as a sentence"
+       },
+       {
+        "ko": "굳힐지 풀지, 그리고 어디에 적용할지",
+        "en": "whether to harden or relieve, and where it applies"
+       },
+       {
+        "ko": "주기란에 적거나 해당 부위에 지시선을 긋습니다",
+        "en": "in the notes block, or on a leader to the feature"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "표면 거칠기 기호",
+        "en": "The surface roughness symbol"
+       },
+       "body": {
+        "ko": "옆에 붙는 Ra 값이 다듬는 정도입니다. 이 부품도 면마다 값이 다릅니다. 축이 도는 축 구멍은 곱게 지시합니다. 볼트가 통과만 하는 장공은 거칠어도 됩니다. 다만 이 도면의 등급은 아직 확정되지 않았어요.",
+        "en": "The Ra value beside the symbol is how fine the finish must be, and it varies face by face on this part too. The bore the shaft turns in is called out fine. The slots a bolt only passes through may stay coarse. The grades for this drawing are not settled yet."
+       }
+      },
+      {
+       "label": {
+        "ko": "기하 공차",
+        "en": "Geometric tolerance"
+       },
+       "body": {
+        "ko": "치수 공차는 크기가 얼마까지 벗어나도 되는지를 정합니다. 기하 공차는 크기가 아니라 형상과 자세와 위치를 봅니다. 축 구멍 지름이 25여도 뒷면과 직각으로 뚫리지 않았으면 축이 안 들어가요.",
+        "en": "A size tolerance limits how far a dimension may stray. A geometric tolerance ignores size and looks at form, orientation, and location. The bore can be exactly 25 and still refuse the shaft if drilled at an angle to the back face."
+       }
+      },
+      {
+       "label": {
+        "ko": "재질 표기",
+        "en": "The material note"
+       },
+       "body": {
+        "ko": "같은 형상이라도 재질이 바뀌면 견디는 힘이 달라집니다. 가공 속도와 공구도 달라집니다. 지시를 받을 때는 문제지의 재료 기호를 그대로 옮깁니다. 임의로 정하지 마세요.",
+        "en": "The same shape in a different material carries a different load. Cutting speeds and tooling change too. Copy the material designation from the paper exactly. Never choose one yourself."
+       }
+      },
+      {
+       "label": {
+        "ko": "열처리 지시",
+        "en": "The heat treatment note"
+       },
+       "body": {
+        "ko": "열을 주는 목적은 둘입니다. 하나는 표면을 굳혀 닳는 속도를 늦추는 것이고, 다른 하나는 반대로 푸는 것입니다. 깎는 과정에서 재료 안에 남은 힘을 풀지 않으면 부품이 스스로 휘어요.",
+        "en": "Heat is applied for two opposite reasons: to harden a surface so it wears more slowly, or to relieve. Cutting leaves stress in the material, and unrelieved it bows the part over time."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "왜 면마다 다르게 지시할까요. 전부 곱게 하면 공정이 늘어 가공비가 올라가거든요. 전부 거칠게 하면 축이 닿는 자리가 닳아요. 필요한 자리에만 필요한 만큼 지시합니다.",
+     "en": "Why vary the finish face by face? Finish everything finely and you add operations and cost. Leave everything coarse and the faces the shaft touches wear away. You specify only what each face needs."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "「지름 25가 25.02까지는 괜찮다」는 치수 공차를 설명하려고 든 예시 숫자입니다. 이 부품의 지정 공차가 아니에요. 도면에 그 값이 적혀 있는 것처럼 옮기지 않습니다.",
+     "en": "The line about 25 being acceptable up to 25.02 is an example used to explain size tolerance. It is not a tolerance specified for this part. Do not carry it across as if the drawing stated it."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "우리가 2차시에 만든 표제란은 가로 200 세로 30입니다. 이름과 사번 두 칸뿐이라 재질 칸이 없습니다. 그래서 이 과정에서는 재질을 적지 않아요.",
+     "en": "The title block you built in Lesson 2 is 200 by 30. It holds only a name and an employee number, with no material cell. So no material is written in this course."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "설비가 서면 스페어 파트를 급히 구해야 합니다. 조립도에서 부품을 찾고, 부품 도면을 확인해 가공집에 넘깁니다. 기호를 못 읽으면 지시가 빠진 채 넘어가요. 그러면 겉모양만 같은 물건이 와요.",
+     "en": "When a machine stops, a spare must be sourced fast. You find the part on the assembly drawing, check its detail drawing, and hand it to a machine shop. Miss a symbol and the instruction goes across missing - what comes back only looks the same."
+    },
+    {
+     "type": "note",
+     "tone": "pend",
+     "label": {
+      "ko": "공유 예정",
+      "en": "To be shared"
+     },
+     "ko": "이 부품의 표면 거칠기 등급과 기하 공차는 아직 공유받지 못했습니다. 재료 기호와 열처리 조건도 마찬가지예요. 확정되면 이 자리에 채웁니다. 그때까지는 값을 지어내지 않습니다.",
+     "en": "The roughness grades, the geometric tolerance symbols and values, the material designation, and the heat treatment conditions have not been shared yet. They fill this slot once settled; until then no value is invented."
+    }
+   ]
+  }
+ ],
+ "verify": [
+  {
+   "what": {
+    "ko": "뷰 밖에 남은 보조선 없음",
+    "en": "No guide lines left outside the views"
+   },
+   "how": {
+    "ko": "`Z` 엔터, `A` 엔터로 도면틀 전체를 놓고 봅니다. 부품 형상과 도면틀과 표제란 말고 보이는 것이 남은 보조선이에요. 뷰와 뷰 사이, 도면틀 가장자리에 토막이 잘 남습니다. 계속 보던 화면이라 눈에 안 들어와요.",
+    "en": "Press Z, Enter, A, Enter to fit the whole border. Anything visible besides the part, the border, and the title block is a leftover guide. Stubs hide between the views and along the border; you stop seeing them after staring at that screen all along."
+   }
+  },
+  {
+   "what": {
+    "ko": "구성선 0개",
+    "en": "Zero construction lines"
+   },
+   "how": {
+    "ko": "`QSELECT` 로 객체 유형 `구성선` 을 다시 겁니다. 아무것도 안 잡혀야 전부 지워진 것입니다.",
+    "en": "Run QSELECT again for object type Construction Line. Nothing picked proves the projectors are gone."
+   }
+  },
+  {
+   "what": {
+    "ko": "장공 두 개 사이 거리 50",
+    "en": "50 between the two slots"
+   },
+   "how": {
+    "ko": "`DI` 로 왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 잽니다. 29에서 79까지, 50이 나와야 합니다.",
+    "en": "DI from the left slot's left end-arc center to the right slot's left end-arc center must read 50 - 29 to 79."
+   }
+  },
+  {
+   "what": {
+    "ko": "오른쪽 끝에서 29",
+    "en": "29 in from the right edge"
+   },
+   "how": {
+    "ko": "`DI` 로 오른쪽 장공의 오른쪽 끝원 중심과 도면 오른쪽 끝을 잽니다. 91에서 120까지, 29가 나와야 합니다. 양쪽 끝에서 29면 좌우가 맞아요.",
+    "en": "DI from the right slot's right end-arc center to the right edge must read 29. Twenty-nine from each end means symmetric."
+   }
+  },
+  {
+   "what": {
+    "ko": "계산 검산 — 29 · 41 · 79 · 91",
+    "en": "Arithmetic check - 29, 41, 79, 91"
+   },
+   "how": {
+    "ko": "왼쪽 장공 끝원 중심은 29와 41, 중심은 35입니다. 오른쪽은 79와 91, 중심은 85입니다. 대칭축은 120의 절반인 x=60이고 보스 중심과 같습니다.",
+    "en": "The left slot's end-arc centers are 29 and 41, center 35. The right slot's are 79 and 91, center 85. The axis is x = 60, half of 120 and the boss center."
+   }
+  },
+  {
+   "what": {
+    "ko": "중심선의 레이어 소속",
+    "en": "Centerline layer membership"
+   },
+   "how": {
+    "ko": "`QSELECT` 로 도면층 = 중심선을 겁니다. 보스 중심, 축 구멍 중심, 장공 중심, 대칭축이 다 선택되고 개수가 떠야 합니다.",
+    "en": "Filter with QSELECT for layer = center. The boss center, bore center, slot centers, and axis must all highlight, with a count on the command line."
+   }
+  },
+  {
+   "what": {
+    "ko": "숨은선의 레이어 소속",
+    "en": "Hidden line layer membership"
+   },
+   "how": {
+    "ko": "같은 방법으로 도면층 = 숨은선도 걸어 봅니다. 우측면도의 축 구멍 관통선이 잡히는지 봅니다.",
+    "en": "Run the same filter for layer = hidden. Check the through-bore lines in the right side view are picked up."
+   }
+  },
+  {
+   "what": {
+    "ko": "전구를 끄면 그 레이어 선이 전부 사라짐",
+    "en": "Bulb off clears every line on that layer"
+   },
+   "how": {
+    "ko": "`LA` 에서 레이어를 하나씩 꺼 봅니다. 그 레이어 선이 전부 사라져야 정상이고, 남은 선은 다른 레이어에 색만 준 선입니다.",
+    "en": "In LA, switch each layer off in turn. Every line on it must go. Anything left is on another layer with the color applied directly."
+   }
+  },
+  {
+   "what": {
+    "ko": "파선이 파선으로 보임",
+    "en": "Broken lines reading as broken"
+   },
+   "how": {
+    "ko": "선종류축척을 `0.5` 로 넣고 화면을 봅니다. 긴 획과 짧은 획이 번갈아 보여야 해요. 실선처럼 보이면 `LTSCALE` 을 키우고, 듬성듬성하면 줄이세요.",
+    "en": "After setting the linetype scale to 0.5, look. Long dash and short dash must alternate. Still continuous? Raise LTSCALE. Scattered? Lower it."
+   }
+  },
+  {
+   "what": {
+    "ko": "값 변경이 화면에 반영됨",
+    "en": "A value change showing on screen"
+   },
+   "how": {
+    "ko": "화면이 그대로면 `RE` 로 재생성하고 다시 봅니다. 그래도 안 바뀌면 개체 쪽인지 전체 쪽인지 확인하세요. 간격은 전체 값 곱하기 개체 값입니다.",
+    "en": "If nothing moves, regenerate with RE and look again. Still nothing? Check which value you edited - spacing is global times per-object."
+   }
+  },
+  {
+   "what": {
+    "ko": "MATCHPROP 이 레이어까지 옮김",
+    "en": "MATCHPROP having moved the layer too"
+   },
+   "how": {
+    "ko": "고친 선을 클릭해 레이어 표시로 확인합니다. 색만 바뀌었으면 특성 설정에서 도면층 체크가 빠진 것입니다.",
+    "en": "Click the fixed line and read the layer indicator. If only the color changed, the Layer tick was cleared in Property Settings."
+   }
+  },
+  {
+   "what": {
+    "ko": "전구 네 개 모두 켜짐",
+    "en": "All four bulbs on"
+   },
+   "how": {
+    "ko": "저장 직전에 레이어 목록을 펼칩니다. 외형선·중심선·숨은선·치수선 넷이 다 켜졌고 동결된 것이 없는지 봅니다.",
+    "en": "Just before saving, open the layer list. Confirm visible, center, hidden, and dimension are all on and none frozen."
+   }
+  },
+  {
+   "what": {
+    "ko": "전부 ByLayer · 도면층 안 몰림",
+    "en": "Everything ByLayer, no layer collapse"
+   },
+   "how": {
+    "ko": "전체를 선택해 특성 창을 봅니다. 색상·선종류·선가중치가 전부 ByLayer여야 하고, 도면층 칸이 한 이름으로 몰리면 안 됩니다.",
+    "en": "Select everything and read the Properties window. Color, linetype, and lineweight must say ByLayer, and the Layer field must not show one name."
+   }
+  }
+ ],
+ "checks": [
+  {
+   "q": {
+    "ko": "`QSELECT` 에서 객체 유형을 「선」으로 고르면 무엇이 잘못됩니까?",
+    "en": "What goes wrong if you filter QSELECT by object type Line?"
+   },
+   "a": {
+    "ko": "형상선까지 함께 잡힙니다. 5차시 투상선은 전부 `XL` 로 그은 무한선이라 객체 유형이 `구성선` 이에요. 지우기 전에 화면을 한 번 보고 누르세요.",
+    "en": "It grabs real geometry too. Every Lesson 5 projector was drawn with XLINE, so its type is Construction Line. Look at what is highlighted before pressing Delete."
+   }
+  },
+  {
+   "q": {
+    "ko": "레이어를 껐는데 그 레이어 색깔의 선이 남아 있습니다. 무엇을 뜻합니까?",
+    "en": "You turned a layer off but lines in that layer's color are still showing. What does that mean?"
+   },
+   "a": {
+    "ko": "그 선은 다른 레이어에 있으면서 색만 직접 받은 것입니다. 색상 특성이 ByLayer가 아니라는 뜻이고, 레이어 색을 바꿔도 그 선만 안 바뀝니다. 전체를 선택해 색상을 ByLayer로 되돌리세요.",
+    "en": "Those lines sit on another layer with that color applied directly. Their color property is not ByLayer, so changing the layer color will not touch them. Select everything and set color back to ByLayer."
+   }
+  },
+  {
+   "q": {
+    "ko": "레이어를 껐다가 다시 안 켜고 저장하면 다음 차시에 무엇이 보입니까?",
+    "en": "You save with a layer still switched off. What do you see when you open it next lesson?"
+   },
+   "a": {
+    "ko": "그 레이어의 선이 하나도 없는 것처럼 보입니다. 레이어가 꺼졌다는 것까지 파일에 저장되거든요. 없는 줄 알고 다시 그리면 같은 자리에 선이 두 겹으로 깔립니다. 저장 전에 전구 넷을 확인하세요.",
+    "en": "Nothing from that layer shows, because the off state is saved with the file. You redraw what looks missing and end up with two lines in the same place. Check all four bulbs before you save."
+   }
+  },
+  {
+   "q": {
+    "ko": "MATCHPROP으로 선을 고쳤는데 색만 바뀌고 레이어는 그대로입니다. 어디를 봅니까?",
+    "en": "MATCHPROP changed the color but not the layer. Where do you look?"
+   },
+   "a": {
+    "ko": "특성 설정 대화상자입니다. 도면층 체크가 빠져 있으면 색만 옮겨지고 레이어는 남아요. 겉보기만 고쳐진 상태가 됩니다.",
+    "en": "The Property Settings dialog. With the Layer tick cleared, only the color transfers. It looks fixed but is not."
+   }
+  },
+  {
+   "q": {
+    "ko": "중심선 하나를 클릭해 선종류축척 `0.5` 를 넣었습니다. 이걸로 충분합니까?",
+    "en": "You clicked one centerline and set its linetype scale to 0.5. Is that enough?"
+   },
+   "a": {
+    "ko": "아닙니다. 나머지 중심선은 그대로여서 인쇄하면 간격이 제각각이 됩니다. `QSELECT` 로 도면층 = 중심선을 걸어 레이어 전체에 한 번에 넣습니다. 숨은선도 같아요.",
+    "en": "No. The others are untouched, so the same kind of line prints with different spacing. Use QSELECT with layer = center to take the whole layer at once. Same for hidden lines."
+   }
+  },
+  {
+   "q": {
+    "ko": "장공이 대칭인지 `DI` 로 재려면 어느 두 점을 찍고 무엇이 나와야 합니까?",
+    "en": "To check slot symmetry with DIST, which two points do you pick and what should come out?"
+   },
+   "a": {
+    "ko": "왼쪽 장공의 왼쪽 끝원 중심 29와 오른쪽 장공의 왼쪽 끝원 중심 79를 찍으면 50이어야 합니다. 오른쪽 끝원 중심 91과 도면 오른쪽 끝 120은 29여야 합니다. 양쪽 끝에서 29면 좌우가 맞습니다.",
+    "en": "Pick the left slot's left end-arc center at 29 and the right slot's at 79: it must read 50. Then 91 to the right edge at 120: it must read 29. Twenty-nine from each end means symmetric."
+   }
+  }
+ ],
+ "exercise": {
+  "title": {
+   "ko": "일부러 하나 틀리고 스스로 찾기",
+   "en": "Break one thing on purpose and find it"
+  },
+  "body": {
+   "ko": "정리가 끝난 파일에서 일부러 하나를 틀려 봅니다. 중심선 하나를 골라 레이어를 외형선으로 바꾸면 흰 실선이 됩니다. `Esc` 로 선택을 풀고 눈으로 찾아보세요. 못 찾으면 `QSELECT` 로 도면층 = 중심선을 걸어, 선택 표시가 없는 자리를 찾습니다. MATCHPROP으로 제자리로 보냅니다. 이 왕복이 실제 도면에서 레이어 오류를 찾는 방식 그대로예요. 끝나면 저장하세요.",
+   "en": "Break something on purpose in your cleaned-up file. Set one centerline's layer to visible-line; it turns white and continuous. Press Esc and try to spot it by eye. If you cannot, run QSELECT with layer = center and find where a centerline should be highlighted but is not. Send it back with MATCHPROP. That round trip is how layer errors get found on real drawings. Save when you are done."
+  },
+  "criteria": [
+   {
+    "ko": "바꾼 선을 눈으로 못 찾았더라도 `QSELECT` 의 개수로는 찾아냈습니다.",
+    "en": "Even if you could not spot the line by eye, the QSELECT count found it."
+   },
+   {
+    "ko": "MATCHPROP으로 되돌린 뒤 그 선을 클릭하면 화면 위 레이어 표시가 중심선으로 나옵니다.",
+    "en": "After MATCHPROP, clicking that line shows the center layer in the indicator at the top."
+   },
+   {
+    "ko": "되돌린 선이 다시 빨간 파선으로 보이고 간격도 다른 중심선과 같습니다.",
+    "en": "The restored line shows as a red broken line again, with the same spacing as the other centerlines."
+   }
+  ]
+ },
+ "shortcuts": [
+  {
+   "key": "OPEN",
+   "name": {
+    "ko": "열기",
+    "en": "Open"
+   },
+   "when": {
+    "ko": "지난 차시 상태에서 이어 그릴 때. 매 차시 첫 조작",
+    "en": "to carry on from the previous lesson's state - the first action every time"
+   }
+  },
+  {
+   "key": "Z",
+   "name": {
+    "ko": "ZOOM (줌)",
+    "en": "ZOOM"
+   },
+   "when": {
+    "ko": "화면 배율을 바꿀 때. 이 차시에서는 `A` 를 이어 붙여 줌 전체로 씁니다",
+    "en": "to change the zoom level - here followed by A for zoom all"
+   }
+  },
+  {
+   "key": "A",
+   "name": {
+    "ko": "ZOOM 의 전체 옵션",
+    "en": "the All option of ZOOM"
+   },
+   "when": {
+    "ko": "`Z` 뒤에 이어 입력해 도면틀 전체를 한 화면에 놓을 때",
+    "en": "typed after Z to fit the whole border on screen"
+   }
+  },
+  {
+   "key": "XL",
+   "name": {
+    "ko": "XLINE (구성선)",
+    "en": "XLINE"
+   },
+   "when": {
+    "ko": "무한히 뻗는 구성선을 긋습니다. 5차시에 투상선을 이렇게 그었고, 이 차시에서는 긋지 않습니다",
+    "en": "draws an infinite construction line; Lesson 5 drew the projectors this way, this lesson draws none"
+   }
+  },
+  {
+   "key": "QSELECT",
+   "name": {
+    "ko": "신속 선택",
+    "en": "Quick Select"
+   },
+   "when": {
+    "ko": "조건에 맞는 객체를 한 번에 고를 때. 구성선만 지울 때, 레이어별 점검, 레이어 전체 축척",
+    "en": "to select by condition: deleting construction lines, auditing by layer, setting one scale per layer"
+   }
+  },
+  {
+   "key": "TR",
+   "name": {
+    "ko": "TRIM (자르기)",
+    "en": "TRIM"
+   },
+   "when": {
+    "ko": "경계까지 잘라낼 때. 겹친 선과 튀어나온 토막에 씁니다",
+    "en": "to cut back to a boundary - overlaps and pieces sticking out"
+   }
+  },
+  {
+   "key": "U",
+   "name": {
+    "ko": "명령 안에서 한 단계 되돌리기",
+    "en": "one-step undo inside a command"
+   },
+   "when": {
+    "ko": "`TR` 안에서 잘못 잘랐을 때. 명령을 끝내지 않고 방금 자른 것 하나만 되살립니다",
+    "en": "after a bad cut inside TR - restores the last cut without leaving the command"
+   }
+  },
+  {
+   "key": "EX",
+   "name": {
+    "ko": "EXTEND (늘리기)",
+    "en": "EXTEND"
+   },
+   "when": {
+    "ko": "경계까지 늘릴 때. 교차점에 못 미친 선에 씁니다",
+    "en": "to lengthen a line to a boundary - lines stopping short of an intersection"
+   }
+  },
+  {
+   "key": "E",
+   "name": {
+    "ko": "ERASE (지우기)",
+    "en": "ERASE"
+   },
+   "when": {
+    "ko": "자를 경계가 없어 통째로 필요 없는 보조선을 없앨 때",
+    "en": "to remove a guide line with no boundary, unwanted entirely"
+   }
+  },
+  {
+   "key": "DI",
+   "name": {
+    "ko": "DIST (거리 재기)",
+    "en": "DIST"
+   },
+   "when": {
+    "ko": "두 점 사이 거리를 잴 때. 치수 전에 대칭을 검산할 때",
+    "en": "to measure between two points - checking symmetry before dimensioning"
+   }
+  },
+  {
+   "key": "MIRRTEXT",
+   "name": {
+    "ko": "대칭 시 문자 뒤집기 설정",
+    "en": "the mirror-text setting"
+   },
+   "when": {
+    "ko": "문자가 포함된 것을 대칭 복사하기 전. 0이면 글자가 뒤집히지 않습니다",
+    "en": "before mirroring anything with text - at 0 the text is not flipped"
+   }
+  },
+  {
+   "key": "MA",
+   "name": {
+    "ko": "MATCHPROP (특성 일치)",
+    "en": "MATCHPROP"
+   },
+   "when": {
+    "ko": "레이어가 틀린 선을 다시 그리지 않고 옮길 때",
+    "en": "to move a wrongly-layered line without redrawing it"
+   }
+  },
+  {
+   "key": "S",
+   "name": {
+    "ko": "MATCHPROP 안의 설정 옵션",
+    "en": "the Settings option inside MATCHPROP"
+   },
+   "when": {
+    "ko": "원본을 찍은 뒤 특성 설정 대화상자를 열어 도면층 체크를 확인할 때",
+    "en": "after picking the source, to open Property Settings and check the Layer tick"
+   }
+  },
+  {
+   "key": "LA",
+   "name": {
+    "ko": "LAYER (레이어 특성 관리자)",
+    "en": "LAYER"
+   },
+   "when": {
+    "ko": "레이어를 관리할 때. 전구를 껐다 켜며 소속을 점검할 때 씁니다",
+    "en": "to manage layers, and to audit membership by toggling the bulbs"
+   }
+  },
+  {
+   "key": "SELECT",
+   "name": {
+    "ko": "선택",
+    "en": "SELECT"
+   },
+   "when": {
+    "ko": "`Ctrl+A` 대신 명령행으로 전부 선택할 때",
+    "en": "to select everything from the command line instead of Ctrl+A"
+   }
+  },
+  {
+   "key": "ALL",
+   "name": {
+    "ko": "SELECT 의 전체 옵션",
+    "en": "the All option of SELECT"
+   },
+   "when": {
+    "ko": "`SELECT` 뒤에 이어 입력해 도면의 모든 객체를 잡을 때",
+    "en": "typed after SELECT to take every object in the drawing"
+   }
+  },
+  {
+   "key": "LTSCALE",
+   "name": {
+    "ko": "도면 전체 선 종류 축척",
+    "en": "the global linetype scale"
+   },
+   "when": {
+    "ko": "파선이 실선처럼 보일 때. 도면 전체의 간격을 한꺼번에 움직입니다",
+    "en": "when broken lines read as continuous - moves spacing across the whole drawing"
+   }
+  },
+  {
+   "key": "RE",
+   "name": {
+    "ko": "REGEN (도면 재생성)",
+    "en": "REGEN"
+   },
+   "when": {
+    "ko": "축척 값을 바꿨는데 화면이 그대로일 때",
+    "en": "when a scale change does not show on screen"
+   }
+  },
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save As"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 새 이름으로 남길 때. 덮어쓰지 않습니다",
+    "en": "to keep the end-of-lesson state under a new name; never overwrite"
+   }
+  }
+ ],
+ "recap": {
+  "did": [
+   {
+    "ko": "뷰를 맞추려고 그었던 투상선을 `QSELECT` 로 구성선만 걸어 한 번에 지웠습니다.",
+    "en": "You cleared every projector in one pass, filtering QSELECT by construction line."
+   },
+   {
+    "ko": "남은 형상선은 `TR` 로 토막을 잘라 내고, `EX` 로 모자란 선을 경계까지 늘렸습니다.",
+    "en": "You trimmed the pieces sticking out with TR and extended the short lines with EX."
+   },
+   {
+    "ko": "두 명령 안에서 `Shift` 로 바꿔 쓰는 방법도 익혔습니다.",
+    "en": "You also learned to flip between the two with Shift inside one command."
+   },
+   {
+    "ko": "정면도의 장공 두 개가 x=60 세로선을 기준으로 대칭인지 `DI` 로 재 봤습니다. 4차시에 만든 것이라 값이 그대로 맞았습니다.",
+    "en": "You measured with DI whether the two slots are symmetric about x = 60. Made in Lesson 4, they came out right."
+   },
+   {
+    "ko": "이미 맞는 것을 지우고 되만들지 않았습니다. 그런 일은 도면에 아무것도 더하지 않거든요.",
+    "en": "You did not delete and rebuild something that was already correct. Doing that adds nothing to a drawing."
+   },
+   {
+    "ko": "MATCHPROP으로 레이어가 틀린 선을 다시 그리지 않고 제자리로 옮겼습니다.",
+    "en": "You moved a wrongly-layered line back with MATCHPROP instead of redrawing it."
+   },
+   {
+    "ko": "레이어 관리자에서 전구를 껐다 켜 보고, `QSELECT` 로 레이어별로 걸어 소속을 점검했습니다.",
+    "en": "You toggled each bulb in the layer manager and filtered by layer with QSELECT."
+   },
+   {
+    "ko": "색상과 선종류와 선가중치를 ByLayer로 통일했습니다. 이제 색의 주인은 레이어예요.",
+    "en": "You set color, linetype, and lineweight to ByLayer. The layer now owns the color."
+   },
+   {
+    "ko": "중심선과 숨은선의 선 종류 축척을 `0.5` 로 넣었습니다. `LTSCALE` 로 전체 파선 간격을 눈으로 맞췄어요.",
+    "en": "You set the center and hidden layers to linetype scale 0.5 and tuned the drawing's spacing by eye with LTSCALE."
+   },
+   {
+    "ko": "표면 거칠기 기호와 기하 공차, 재질과 열처리 표기가 무엇을 지시하는지 읽었습니다. 그리지는 않지만 읽을 수는 있어야 하는 것들입니다.",
+    "en": "You read what the surface roughness symbol, geometric tolerance, material note, and heat treatment instruction specify. You do not draw them, but you must read them."
+   },
+   {
+    "ko": "`SAVEAS` 로 `EDU-IB-02_L06_REPRESENTED` 를 남겼습니다. 새 형상은 하나도 더하지 않은 차시였습니다.",
+    "en": "You saved EDU-IB-02_L06_REPRESENTED with SAVEAS. This lesson added not one new piece of geometry."
+   },
+   {
+    "ko": "도면을 그리는 시간보다 정리하는 시간이 길게 느껴졌을 겁니다. 실제 현장도 그래요.",
+    "en": "Cleaning up probably felt longer than drawing did. That is how it goes on real jobs too."
+   }
+  ],
+  "next": {
+   "ko": "다음은 7차시 「치수 기입과 도면 완성」이고 마지막입니다. 치수 스타일을 만들고, 현재 레이어를 치수선으로 바꿔 기입에 들어갑니다. 축척 표기와 표제란까지 마치면 일곱 차시 동안 쌓아 온 파일이 완성됩니다.",
+   "en": "Next is Lesson 7, dimensioning and finishing the drawing - the last one. You build a dimension style, switch the current layer to dimension, and place the dimensions. With the scale note and title block done, the file is complete."
+  }
+ }
+}

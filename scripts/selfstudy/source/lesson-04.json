@@ -1,0 +1,2267 @@
+{
+ "no": 4,
+ "slug": "lesson-04-circles-arcs",
+ "title": {
+  "ko": "원·호·오프셋",
+  "en": "Circles, Arcs, Offset"
+ },
+ "videoLength": "39:11",
+ "selfStudyMin": 100,
+ "opens": "EDU-IB-02_L03_PROFILE",
+ "saves": "EDU-IB-02_L04_FEATURES",
+ "summary": {
+  "what": {
+   "ko": "3차시에서 저장한 파일을 열어 정면도 안쪽을 채웁니다. 축 구멍 하나, 탭 네 개, 장공 두 개, 필렛 두 개입니다. 넷 다 원에서 출발해요.",
+   "en": "You open the file you saved in Lesson 3 and fill in the inside of the front view: one bore, four tapped holes, two slots, two fillets. All four start as circles."
+  },
+  "why": {
+   "ko": "바깥 윤곽만으로는 부품이 되지 않습니다. 축이 들어갈 자리와 볼트가 물릴 자리가 있어야 합니다. 오늘 그 자리를 전부 넣어요.",
+   "en": "An outline alone is not a part. It needs a seat for the shaft and seats for the bolts. Today you put all of them in."
+  },
+  "where": {
+   "ko": "지금은 베이스 외곽과 목 선 두 개, 보스 원까지 그려져 있습니다. 오늘이 끝나면 정면도 하나가 완성됩니다. 남는 것은 다른 두 뷰예요.",
+   "en": "Right now you have the base outline, the two web edges, and the boss circle. When today ends the front view is complete. Only the other two views are left."
+  }
+ },
+ "objectives": [
+  {
+   "ko": "도면의 Ø 표기와 R 표기를 구분할 수 있습니다. CIRCLE에서 지름 입력과 반지름 입력을 골라 쓸 수 있습니다.",
+   "en": "You can tell a Ø callout from an R callout. You can then pick diameter or radius entry in CIRCLE to match."
+  },
+  {
+   "ko": "축 구멍 Ø25를 보스와 같은 중심 60,62에 좌표로 그릴 수 있습니다.",
+   "en": "You can draw the Ø25 bore at 60,62 by coordinate, concentric with the boss."
+  },
+  {
+   "ko": "보스 Ø56을 안쪽으로 6 오프셋해 피치원 PCD Ø44를 만들 수 있습니다. 그 6이 (56−44)÷2에서 나온 값임을 설명할 수 있습니다.",
+   "en": "You can offset the Ø56 boss inward by 6 to make the PCD Ø44 bolt circle. You can explain that the 6 comes from (56 - 44) / 2."
+  },
+  {
+   "ko": "OFFSET의 도면층 옵션을 현재로 바꿔 보조 원을 중심선 레이어에 넣을 수 있습니다.",
+   "en": "You can switch the OFFSET layer option to Current so the construction circle lands on the centerline layer."
+  },
+  {
+   "ko": "선 종류 축척을 0.5로 고쳐 중심선이 일점쇄선으로 보이게 만들 수 있습니다.",
+   "en": "You can set the linetype scale to 0.5 so a centerline reads as a chain line."
+  },
+  {
+   "ko": "@22<45로 45도 보조선을 그어 탭 첫 구멍 자리를 정확히 잡을 수 있습니다.",
+   "en": "You can draw a 45-degree construction line with @22<45 to locate the first tapped hole exactly."
+  },
+  {
+   "ko": "ARRAYPOLAR에서 항목 수 4, 사이의 각도 90, 연관 끄기를 지정할 수 있습니다. 그러면 탭 네 개를 45·135·225·315도에 놓을 수 있습니다.",
+   "en": "You can set ARRAYPOLAR to 4 items, 90 degrees between them, and association off. That places the four taps at 45, 135, 225, and 315 degrees."
+  },
+  {
+   "ko": "끝원 두 개와 접선 두 개를 그려 장공을 만들 수 있습니다. 안쪽 반원을 자르면 원이 호로 바뀐다는 것도 압니다.",
+   "en": "You can build a slot from two end circles and two tangent lines. You know that trimming the inner halves turns the circles into arcs."
+  },
+  {
+   "ko": "MIRROR로 세로 중심선 60을 기준 삼아 오른쪽 장공을 대칭 복사할 수 있습니다.",
+   "en": "You can mirror the right-hand slot across the vertical centerline at x = 60."
+  },
+  {
+   "ko": "FILLET의 반지름을 R 옵션으로 먼저 설정할 수 있습니다. 그다음 두 선을 골라 R10 라운드를 넣을 수 있습니다.",
+   "en": "You can set the FILLET radius with the R option first. You can then pick two lines to drop in an R10 round."
+  },
+  {
+   "ko": "TRIM의 절단 모서리를 필요한 선만 골라 지정할 수 있습니다. 필렛에서 남기고 싶은 쪽을 클릭한다는 규칙도 쓸 수 있습니다.",
+   "en": "You can select only the cutting edges you need in TRIM. You can also apply the rule that in FILLET you click the side you want to keep."
+  },
+  {
+   "ko": "DI와 LI로 그린 것이 실제로 그 값인지 숫자로 검산할 수 있습니다.",
+   "en": "You can cross-check what you drew as numbers with DIST and LIST."
+  },
+  {
+   "ko": "SAVEAS로 앞 차시 파일을 덮어쓰지 않고 새 이름으로 차시 종료 상태를 남길 수 있습니다.",
+   "en": "You can use SAVEAS to keep the lesson's end state under a new name without overwriting the previous file."
+  }
+ ],
+ "before": {
+  "checklist": [
+   {
+    "ko": "`EDU-IB-02_L03_PROFILE.dwg` 를 찾을 수 있는지 봅니다.",
+    "en": "Check that you can find EDU-IB-02_L03_PROFILE.dwg."
+   },
+   {
+    "ko": "화면에 베이스 외곽과 모따기 둘, 목 선 두 개, 보스 원이 있는지 보세요.",
+    "en": "Check the screen for the base outline with its two chamfers, the two web edges, and the boss circle."
+   },
+   {
+    "ko": "중심선 두 개가 빨간 일점쇄선으로 보이는지 보세요.",
+    "en": "Check that the two centerlines read as red chain lines."
+   },
+   {
+    "ko": "레이어 목록에 외형선·중심선·숨은선·치수선 넷이 다 있는지 보세요.",
+    "en": "Check that all four layers are in the list: visible, centerline, hidden, dimension."
+   },
+   {
+    "ko": "상태 막대에서 객체 스냅이 켜져 있는지 봅니다. 꺼져 있으면 `F3` 을 눌러 켜세요.",
+    "en": "Check that object snap is on in the status bar. If it is off, press F3 to turn it on."
+   }
+  ],
+  "recovery": {
+   "ko": "3차시를 건너뛰었으면 열 파일이 없습니다. 시작용 도면 파일은 따로 나눠 주지 않아요. `EDU-IB-02_L02_TEMPLATE` 을 엽니다. 3차시의 따라 하기만 해서 같은 상태를 만듭니다. 읽기 절은 나중에 읽어도 되지만 베이스 외곽·목 선 두 개·보스 원 셋은 반드시 있어야 합니다. 셋이 없으면 오늘 그리는 형상이 붙을 자리가 없어요.",
+   "en": "If you skipped Lesson 3 you have no file to open. No starter drawing is handed out. Open EDU-IB-02_L02_TEMPLATE and work through the Lesson 3 do-it steps only, until you reach the same state. You can read its reading sections later, but three things must exist: the base outline, the two web edges, and the boss circle. Without them today's features have nothing to attach to."
+  }
+ },
+ "sections": [
+  {
+   "id": "start-state",
+   "kind": "orient",
+   "label": {
+    "ko": "출발 상태 — EDU-IB-02_L03_PROFILE",
+    "en": "Starting state - EDU-IB-02_L03_PROFILE"
+   },
+   "lede": {
+    "ko": "새 파일을 만들지 않습니다. 지난 차시의 저장 상태를 열어 그 위에 이어 그려요.",
+    "en": "You do not start a new file. You open last lesson's saved state and keep drawing on it."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "이 차시는 `EDU-IB-02_L03_PROFILE` 을 열어 시작합니다. 저장은 `EDU-IB-02_L04_FEATURES` 로 합니다. 여는 이름과 저장할 이름이 다릅니다. 덮어쓰지 않아야 한 차시 전으로 돌아갈 수 있어요.",
+     "en": "This lesson opens EDU-IB-02_L03_PROFILE and ends at EDU-IB-02_L04_FEATURES. The name you open and the name you save are different. Only by not overwriting can you step back one lesson."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "ko": "베이스 외곽. 폭 120, 정면에서 본 높이 16입니다.",
+       "en": "The base outline: 120 wide, 16 high as seen in the front view."
+      },
+      {
+       "ko": "베이스 위쪽 바깥 모서리 두 곳의 모따기 2-C5.",
+       "en": "The 2-C5 chamfers on the two outer top corners of the base."
+      },
+      {
+       "ko": "보스 원에 접하는 목 선 두 개.",
+       "en": "The two web edges running tangent to the boss circle."
+      },
+      {
+       "ko": "보스 원 Ø56. 중심은 60, 62입니다.",
+       "en": "The Ø56 boss circle, centered at 60, 62."
+      },
+      {
+       "ko": "가로세로 중심선 두 개. 빨간 일점쇄선으로 보여야 합니다.",
+       "en": "The horizontal and vertical centerlines, which should read as red chain lines."
+      }
+     ]
+    },
+    {
+     "type": "figure",
+     "ref": "front",
+     "caption": {
+      "ko": "3차시가 끝난 상태입니다. 오늘은 이 바깥 윤곽 안쪽을 채웁니다.",
+      "en": "The state at the end of Lesson 3. Today you fill in the inside of this outline."
+     },
+     "alt": {
+      "ko": "아이들러 풀리 브래킷 정면도입니다. 아래에 폭 120, 높이 16인 베이스가 있고 위쪽 양 모서리가 5씩 잘려 있습니다. 가운데에서 목 선 두 줄이 올라가 지름 56인 보스 원에 접합니다. 치수 문자는 없고 중심선만 그려져 있습니다.",
+      "en": "Front view of the idler pulley bracket. A 120 by 16 base sits at the bottom with 5 mm chamfers on its two outer top corners. Two web edges rise from the middle and run tangent to the Ø56 boss circle. Centerlines only, no dimension text."
+     }
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "객체 스냅부터 확인합니다",
+      "en": "Check object snap first"
+     },
+     "ko": "오늘은 끝점 스냅과 중심 스냅을 씁니다. 2차시에서 여섯 가지를 켜 뒀습니다 — 끝점·중간점·중심·사분점·교차점·접점입니다. 상태 막대에서 꺼져 있으면 `F3` 을 누릅니다. 이걸 안 켜면 5단계와 15단계에서 막혀요.",
+     "en": "Today you use the endpoint snap and the center snap. Six were turned on back in Lesson 2: endpoint, midpoint, center, quadrant, intersection, tangent. If the status bar shows it off, press F3. Without it you will get stuck at step 5 and step 15."
+    }
+   ]
+  },
+  {
+   "id": "four-features",
+   "kind": "concept",
+   "label": {
+    "ko": "안쪽 형상 넷 — 축 구멍·탭·장공·필렛",
+    "en": "The four inside features - bore, taps, slots, fillets"
+   },
+   "lede": {
+    "ko": "네 가지가 전부 원에서 출발합니다. 그래서 오늘 명령도 전부 원을 다룹니다.",
+    "en": "All four start as circles. That is why every command today works on circles."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "원을 그리고, 밀고, 끼워 넣고, 돌려 복사합니다. 명령 이름은 CIRCLE·OFFSET·FILLET·ARRAYPOLAR 예요. 이 네 개를 알면 남는 것은 순서 문제뿐이에요.",
+     "en": "You draw a circle, push one outward or inward, drop one between two lines, and spin copies around a center. By name: CIRCLE, OFFSET, FILLET, ARRAYPOLAR. Know these four and only the order is left to learn."
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "축 구멍 Ø25 H7",
+        "en": "Bore, Ø25 H7"
+       },
+       "body": {
+        "ko": "지름 25로 앞뒤를 관통합니다. 중심은 보스와 같은 60, 62입니다. 왼쪽 끝에서 60, 바닥에서 62예요. 축이 여기 들어가서 돕니다. 이 구멍이 어긋나면 나머지가 다 맞아도 부품을 못 씁니다. 그래서 오늘 가장 먼저 그려요.",
+        "en": "A 25 mm hole straight through, front to back. Its center is 60, 62 - the same as the boss. That is 60 from the left edge and 62 up from the bottom. The shaft sits here and turns. If this hole is off, the part is unusable even when everything else is right. So you draw it first."
+       }
+      },
+      {
+       "label": {
+        "ko": "탭 4-M5 깊이 10",
+        "en": "Tapped holes, 4-M5 depth 10"
+       },
+       "body": {
+        "ko": "나사 자리 네 개입니다. 축 구멍 둘레에 놓입니다. 네 개의 중심은 지름 44짜리 원 위에 있습니다. 첫 구멍이 45도 자리이고 나머지는 90도씩 돌아갑니다. 하나만 그리고 원형 배열로 돌립니다.",
+        "en": "Four screw seats around the bore. Their centers sit on a 44 mm circle. The first is at 45 degrees and the rest follow every 90 degrees. You draw one and let a polar array make the other three."
+       }
+      },
+      {
+       "label": {
+        "ko": "장착 장공 2-R5",
+        "en": "Mounting slots, 2-R5"
+       },
+       "body": {
+        "ko": "아래쪽 긴 구멍 두 개입니다. 폭은 10이고 양 끝은 반지름 5짜리 반원입니다. 원 명령 하나로는 안 나옵니다. 끝원 두 개를 접선으로 잇고 안쪽을 잘라내야 알약 모양이 돼요.",
+        "en": "Two elongated holes low on the base. Width 10, with semicircular ends of radius 5. One CIRCLE will not produce this. You join two end circles with tangents and trim the inner halves to get the pill shape."
+       }
+      },
+      {
+       "label": {
+        "ko": "안쪽 필렛 2-R10",
+        "en": "Internal fillets, 2-R10"
+       },
+       "body": {
+        "ko": "목이 베이스로 꺾이는 안쪽 모서리입니다. 반지름 10으로 둥글립니다. 여기는 원을 따로 그리지 않습니다. 두 선만 고르면 명령이 그 사이에 호를 끼우고 남는 부분도 잘라 줘요.",
+        "en": "The internal corner where the web turns into the base. It is rounded at radius 10. You draw no circle here. Pick two lines and the command drops an arc between them and trims what sticks out."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "R을 10으로 크게 잡은 이유",
+      "en": "Why the radius is as large as 10"
+     },
+     "ko": "목과 베이스가 만나는 안쪽 모서리는 힘이 가장 몰리는 자리입니다. 각지게 두면 그 한 점에서 금이 갑니다. 반지름을 키울수록 힘이 넓게 퍼집니다. 2차시에서 본 이야기예요.",
+     "en": "The internal corner where the web meets the base carries the most load. Left sharp, a crack starts at that one point. The larger the radius, the wider the load spreads. You saw this in Lesson 2."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "이 차시의 규율",
+      "en": "The rule for this lesson"
+     },
+     "ko": "마우스로 위치를 눈대중하지 않습니다. 좌표를 입력합니다. 원의 중심이 1밀리미터만 어긋나도 뒤가 전부 어긋나요.",
+     "en": "Do not eyeball a position with the mouse. Type the coordinate. A circle center off by one millimeter throws off everything that follows."
+    }
+   ]
+  },
+  {
+   "id": "diameter-or-radius",
+   "kind": "concept",
+   "label": {
+    "ko": "Ø와 R — CIRCLE의 D 옵션",
+    "en": "Ø and R - the D option in CIRCLE"
+   },
+   "lede": {
+    "ko": "도면 표기가 명령의 입력을 정해요.",
+    "en": "The notation on the drawing decides what you type."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "CIRCLE 의 단축키는 `C` 입니다. 기본으로 묻는 값은 반지름입니다. 그런데 도면은 구멍을 지름으로 적어요. 이 어긋남이 이 차시에서 가장 흔한 실수예요.",
+     "en": "The shortcut for CIRCLE is C. By default it asks for a radius. But drawings state holes as diameters. That mismatch is the most common mistake in this lesson."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "표기를 보고 무엇을 누를지 정합니다",
+      "en": "Let the notation decide what you press"
+     },
+     "head": [
+      {
+       "ko": "표기",
+       "en": "Notation"
+      },
+      {
+       "ko": "무엇인가",
+       "en": "What it is"
+      },
+      {
+       "ko": "어떻게 넣는가",
+       "en": "How you enter it"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "Ø25 H7",
+        "en": "Ø25 H7"
+       },
+       {
+        "ko": "축 구멍의 지름",
+        "en": "Diameter of the bore"
+       },
+       {
+        "ko": "`C` → 중심 `60,62` → `D` → `25`",
+        "en": "C, then center 60,62, then D, then 25"
+       }
+      ],
+      [
+       {
+        "ko": "Ø56",
+        "en": "Ø56"
+       },
+       {
+        "ko": "보스 원의 지름",
+        "en": "Diameter of the boss circle"
+       },
+       {
+        "ko": "오늘은 그리지 않습니다. 피치원을 밀어낼 기준으로만 씁니다.",
+        "en": "You do not draw it today. It only serves as the base for offsetting the bolt circle."
+       }
+      ],
+      [
+       {
+        "ko": "PCD Ø44",
+        "en": "PCD Ø44"
+       },
+       {
+        "ko": "탭 중심이 놓이는 피치원. 구멍이 아니라 자리를 잡아 주는 보조 원입니다.",
+        "en": "The bolt circle the tap centers sit on. Not a hole - the construction circle that locates them."
+       },
+       {
+        "ko": "`O` 로 보스에서 `6` 만큼 안쪽으로 밉니다.",
+        "en": "Use O to push the boss inward by 6."
+       }
+      ],
+      [
+       {
+        "ko": "4-M5 깊이 10",
+        "en": "4-M5 depth 10"
+       },
+       {
+        "ko": "나사 자리 네 개",
+        "en": "Four screw seats"
+       },
+       {
+        "ko": "`C` → 보조선 끝점 → `D` → `5`, 그다음 `ARRAYPOLAR`",
+        "en": "C, snap the construction line endpoint, D, 5, then ARRAYPOLAR"
+       }
+      ],
+      [
+       {
+        "ko": "장공 2-R5",
+        "en": "Slots 2-R5"
+       },
+       {
+        "ko": "장공 끝원의 반지름",
+        "en": "Radius of the slot end circles"
+       },
+       {
+        "ko": "`C` → 중심 `29,8` → `5`. 여기서는 `D` 를 누르지 않습니다.",
+        "en": "C, center 29,8, then 5. Here you do not press D."
+       }
+      ],
+      [
+       {
+        "ko": "2-R10",
+        "en": "2-R10"
+       },
+       {
+        "ko": "안쪽 필렛의 반지름",
+        "en": "Radius of the internal fillets"
+       },
+       {
+        "ko": "`F` → `R` → `10` → 두 선을 고릅니다.",
+        "en": "F, then R, then 10, then pick the two lines."
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "D 를 안 누르면 정확히 두 배",
+      "en": "Skip D and you get exactly double"
+     },
+     "ko": "Ø25 에서 그대로 25를 넣으면 지름 50짜리 구멍이 생깁니다. 정확히 두 배입니다. 그런데 화면에서는 그냥 좀 큰 원으로 보여요. 알아채기 어렵습니다. 습관을 하나 만드세요. Ø가 붙어 있으면 `D` 를 먼저 누르고, R이 붙어 있으면 그냥 넣습니다.",
+     "en": "Type 25 straight into Ø25 and you get a 50 mm hole. Exactly double. On screen it just looks like a slightly bigger circle, which is hard to catch. Build one habit: if it says Ø, press D first; if it says R, enter the number as it stands."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "Ø25 뒤의 H7",
+      "en": "The H7 after Ø25"
+     },
+     "ko": "Ø25 뒤에 붙은 H7은 끼워맞춤 등급입니다. 구멍과 축이 얼마나 헐겁거나 빡빡하게 맞는지를 정해요. 형상에는 영향이 없으니 그리기는 25로 합니다. 등급은 치수를 기입할 때 글자로 붙입니다. 설비가 서면 스페어 파트를 급히 구해야 해요. 조립도에서 부품을 찾아 그 도면을 가공집에 넘깁니다. 등급 한 줄이 빠지면 축이 안 들어갑니다.",
+     "en": "The H7 after Ø25 is a fit grade. It sets how loose or tight the shaft sits in the hole. It does not change the shape, so you draw at 25. The grade is added as text later, when you dimension. When a machine goes down you chase a spare part in a hurry. You find the part on the assembly drawing and hand that drawing to the machine shop. Leave the grade line off and the shaft will not go in."
+    },
+    {
+     "type": "p",
+     "ko": "원을 그리는 방법은 다섯 가지입니다. 중심과 반지름, 중심과 지름, 2점, 3점, 접선-접선-반지름이에요. 2점은 두 점이 지름의 양 끝이 되고, 3점은 원 위를 지나는 점 셋으로 원을 정합니다. 접선-접선-반지름은 선이나 원 두 개에 접하는 원을 만듭니다. 이 과정에서 쓰는 것은 앞의 둘뿐이고, 나머지 셋은 이름만 알아 두면 돼요.",
+     "en": "CIRCLE offers five ways. Center and radius, center and diameter, 2-point, 3-point, and tangent-tangent-radius. With 2-point the two picks become the ends of a diameter; with 3-point three points on the circle define it; tangent-tangent-radius builds a circle touching two lines or circles. This course uses only the first two, so just know the names of the other three."
+    }
+   ]
+  },
+  {
+   "id": "four-commands",
+   "kind": "concept",
+   "label": {
+    "ko": "OFFSET · FILLET · ARRAYPOLAR · TRIM",
+    "en": "OFFSET, FILLET, ARRAYPOLAR, TRIM"
+   },
+   "lede": {
+    "ko": "네 명령 모두 기본값이 발목을 잡습니다. 선을 고르기 전에 옵션부터 손봐요.",
+    "en": "All four have a default that trips you up. Fix the option before you pick a line."
+   },
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "OFFSET — 간격띄우기 `O`",
+        "en": "OFFSET - offset, shortcut O"
+       },
+       "body": {
+        "ko": "고른 객체를 평행하게 복사합니다. 직선은 평행선이 되고 원은 동심원이 됩니다. 중심을 다시 찍지 않으니 중심이 어긋날 일이 없습니다. 옵션은 셋입니다 — 통과점, 지우기, 도면층(레이어)입니다. 통과점은 거리 대신 지나갈 점을 찍습니다. 지우기는 원본을 지우면서 옮겨요. 도면층 기본값이 원본이라 그냥 두면 복사본이 원본 레이어를 따라가요.",
+        "en": "It copies the object you pick, parallel to it. A line becomes a parallel line; a circle becomes a concentric circle. The center is never re-picked, so it cannot drift. Three options: Through, Erase, and Layer. Through picks a point to pass through instead of a distance. Erase deletes the original as it moves. Layer defaults to Source, so left alone the copy follows the original's layer."
+       }
+      },
+      {
+       "label": {
+        "ko": "FILLET — 모깎기 `F`",
+        "en": "FILLET - fillet, shortcut F"
+       },
+       "body": {
+        "ko": "두 선을 고르면 그 사이에 호를 끼우고 모서리 밖으로 남는 부분을 잘라 줍니다. 순서가 중요합니다. 반지름 기본값이 0이라 먼저 `R` 옵션으로 값을 넣습니다. 한 번 넣은 값은 다음 실행에도 기억됩니다. 폴리선 옵션을 쓰면 폴리선의 모든 모서리를 한 번에 둥글려요.",
+        "en": "Pick two lines and it drops an arc between them, trimming whatever runs past the corner. Order matters. The radius defaults to 0, so set it with the R option first. Once set, it is remembered on the next run. A Polyline option rounds every corner of a polyline at once."
+       }
+      },
+      {
+       "label": {
+        "ko": "ARRAYPOLAR — 원형 배열",
+        "en": "ARRAYPOLAR - polar array"
+       },
+       "body": {
+        "ko": "단축키가 없어 이름 전체를 칩니다. 객체를 고르고 중심점을 찍고 몇 개를 몇 도 간격으로 놓을지 정합니다. 옵션은 넷입니다 — 항목 수, 사이의 각도, 채울 각도, 연관 여부입니다. 사이의 각도는 이웃한 항목이 벌어진 각이고 채울 각도는 전체가 도는 각이에요.",
+        "en": "It has no shortcut, so you type the whole name. Pick the object, pick the center, then say how many and how far apart. Four options: item count, angle between items, angle to fill, and association. The angle between items is the gap between neighbours; the angle to fill is how far the whole set sweeps."
+       }
+      },
+      {
+       "label": {
+        "ko": "TRIM — 자르기 `TR`",
+        "en": "TRIM - trim, shortcut TR"
+       },
+       "body": {
+        "ko": "경계까지 잘라냅니다. 여기서는 모든 객체를 경계로 잡지 않습니다. 잘라 낼 선 자체가 경계에 섞이면 어디서 끊길지 알 수 없습니다. 필요한 선만 골라 경계로 지정하고, 없앨 쪽을 클릭해요.",
+        "en": "It cuts back to a boundary. Do not take every object as a boundary here. If the line you are cutting is itself among the boundaries, you cannot tell where it will break. Select only the edges you need, then click the part you want gone."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "연관을 켜 두면",
+      "en": "If you leave association on"
+     },
+     "ko": "네 개가 한 덩어리로 묶입니다. 하나만 따로 고를 수 없습니다. 뒤 차시에서 구멍 하나만 옮기거나 지울 일이 생겨요. 그래서 `AS` 옵션에서 `N` 을 넣어요.",
+     "en": "The four become one object. You cannot select just one of them. In later lessons you will want to move or delete a single hole. So answer N at the AS option."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "버전에 따라 TRIM이 묻는 것이 다릅니다",
+      "en": "TRIM asks different things in different versions"
+     },
+     "ko": "절단 모서리를 먼저 고르라고 하는 버전이 있습니다. 그때는 경계로 쓸 선을 클릭하고 엔터로 선택을 끝냅니다. 바로 자를 부분을 고르라고 하는 버전도 있습니다. 그때는 그대로 진행합니다. 어느 쪽인지는 명령행 문구를 보고 판단하세요.",
+     "en": "Some versions ask you to select cutting edges first. Then you click the lines that act as boundaries and press Enter to finish the selection. Other versions go straight to asking what to cut. Then you just carry on. Read the command line to see which one you have."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "오프셋은 현장에서 손이 많이 갑니다",
+      "en": "Offset earns its keep on the floor"
+     },
+     "ko": "설비 레이아웃을 볼 때 씁니다. 벽체 두께를 잡고 통로 여유를 잡습니다. 기준선 하나에서 밀어내면 돼요.",
+     "en": "You use it when checking a layout. Set a wall thickness, set the clearance of a walkway. Push it all out from one reference line."
+    }
+   ]
+  },
+  {
+   "id": "numbers",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "계산해서 나오는 값들",
+    "en": "The values you calculate"
+   },
+   "lede": {
+    "ko": "오늘 치는 숫자는 전부 도면에 적힌 값이거나 그 값에서 계산한 값이에요.",
+    "en": "Every number you type today is either written on the drawing or worked out from one that is."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "ref": "frontdim",
+     "caption": {
+      "ko": "치수를 다 기입한 정면도입니다. 오늘 쓰는 값은 여기서 읽습니다.",
+      "en": "The front view with all dimensions. Every value you use today is read from here."
+     },
+     "alt": {
+      "ko": "치수를 모두 기입한 정면도입니다. 길이 값은 120, 90, 80, 62, 60입니다. 이어서 50, 29, 26, 16, 12, 8이 있습니다. 괄호를 친 참고 치수 (95.7)도 하나 있어요. 기호는 Ø25 H7, Ø56, PCD Ø44입니다. 이어서 4-M5 깊이 10, 2-R10, 장공 2-R5가 있습니다. 45도와 2-C5도 있어요.",
+      "en": "The front view fully dimensioned. Linear values are 120, 90, 80, 62, and 60. Then 50, 29, 26, 16, 12, and 8. One reference dimension, (95.7), sits in parentheses. Callouts are Ø25 H7, Ø56, and PCD Ø44. Then 4-M5 depth 10, 2-R10, and slots 2-R5. Also 45 degrees and 2-C5."
+     }
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "값과 그 값이 나온 자리",
+      "en": "Each value and where it comes from"
+     },
+     "head": [
+      {
+       "ko": "값",
+       "en": "Value"
+      },
+      {
+       "ko": "어디서 나왔나",
+       "en": "Where it comes from"
+      },
+      {
+       "ko": "어디에 쓰나",
+       "en": "Where you use it"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "6",
+        "en": "6"
+       },
+       {
+        "ko": "(56−44)÷2",
+        "en": "(56 - 44) / 2"
+       },
+       {
+        "ko": "피치원을 만드는 오프셋 거리",
+        "en": "The offset distance that makes the bolt circle"
+       }
+      ],
+      [
+       {
+        "ko": "22",
+        "en": "22"
+       },
+       {
+        "ko": "44÷2",
+        "en": "44 / 2"
+       },
+       {
+        "ko": "45도 보조선의 길이",
+        "en": "The length of the 45-degree construction line"
+       }
+      ],
+      [
+       {
+        "ko": "13과 3",
+        "en": "13 and 3"
+       },
+       {
+        "ko": "8+5 와 8−5",
+        "en": "8 + 5 and 8 - 5"
+       },
+       {
+        "ko": "장공 위아래 접선의 높이",
+        "en": "The heights of the upper and lower slot tangents"
+       }
+      ],
+      [
+       {
+        "ko": "41",
+        "en": "41"
+       },
+       {
+        "ko": "29+12",
+        "en": "29 + 12"
+       },
+       {
+        "ko": "장공 오른쪽 끝원의 중심",
+        "en": "The center of the slot's right end circle"
+       }
+      ],
+      [
+       {
+        "ko": "90",
+        "en": "90"
+       },
+       {
+        "ko": "360÷4",
+        "en": "360 / 4"
+       },
+       {
+        "ko": "ARRAYPOLAR 사이의 각도",
+        "en": "The angle between items in ARRAYPOLAR"
+       }
+      ],
+      [
+       {
+        "ko": "26",
+        "en": "26"
+       },
+       {
+        "ko": "16+10",
+        "en": "16 + 10"
+       },
+       {
+        "ko": "필렛 중심의 높이 — 검산용입니다.",
+        "en": "The height of the fillet center - used only for cross-checking."
+       }
+      ],
+      [
+       {
+        "ko": "45",
+        "en": "45"
+       },
+       {
+        "ko": "계산이 아닙니다. 도면에 적힌 값입니다.",
+        "en": "Not a calculation. It is written on the drawing."
+       },
+       {
+        "ko": "첫 탭 구멍이 놓이는 자리",
+        "en": "Where the first tapped hole sits"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "괄호를 친 치수",
+      "en": "A dimension in parentheses"
+     },
+     "ko": "괄호를 친 치수는 참고 치수입니다. 정면도의 (95.7)이 그렇습니다. 다른 값에서 계산돼 나오는 값이라 입력하지 않습니다. 오늘 치는 값에는 들어가지 않아요.",
+     "en": "A dimension in parentheses is a reference dimension. The (95.7) on the front view is one. It is worked out from other values, so you never type it in. It is not among the numbers you enter today."
+    },
+    {
+     "type": "figure",
+     "id": "fig-offset-6",
+     "caption": {
+      "ko": "오프셋 거리가 12가 아니라 6인 이유입니다.",
+      "en": "Why the offset distance is 6 and not 12."
+     },
+     "alt": {
+      "ko": "동심원 두 개입니다. 바깥이 보스 Ø56, 안쪽이 피치원 PCD Ø44입니다. 오른쪽에는 반지름 막대 두 개가 나란히 있습니다. 위가 반지름 28, 아래가 반지름 22이고, 두 막대의 끝 차이가 6입니다. 지름은 12 줄지만 반지름은 6 줍니다.",
+      "en": "Two concentric circles: the outer is the Ø56 boss, the inner is the PCD Ø44 bolt circle. To the right, two radius bars sit one above the other - 28 on top, 22 below - and the difference between their ends is 6. The diameter drops by 12 but the radius drops by 6."
+     },
+     "svg": "<svg viewBox='0 0 380 232' width='380' height='232'><circle class='si' cx='95' cy='95' r='67.2' fill='none'/><circle class='sc' cx='95' cy='95' r='52.8' fill='none' stroke-linecap='butt'/><line class='sc' x1='16' y1='95' x2='174' y2='95' stroke-linecap='butt'/><line class='sc' x1='95' y1='16' x2='95' y2='174' stroke-linecap='butt'/><text class='sl' x='95' y='24' text-anchor='middle'>Ø56</text><text class='sl' x='95' y='84' text-anchor='middle'>PCD Ø44</text><line class='sd' x1='200' y1='60' x2='267.2' y2='60'/><text class='sl' x='200' y='51'>반지름 28 · Ø56</text><line class='sh' x1='200' y1='95' x2='252.8' y2='95'/><text class='sl' x='200' y='86'>반지름 22 · PCD Ø44</text><line class='sd' x1='252.8' y1='95' x2='252.8' y2='128' stroke-linecap='butt'/><line class='sd' x1='267.2' y1='60' x2='267.2' y2='128' stroke-linecap='butt'/><line class='sh' x1='252.8' y1='122' x2='267.2' y2='122'/><text class='slh' x='276' y='126'>6</text><text class='slh' x='14' y='196'>오프셋 6 = (56−44)÷2</text><text class='sl' x='14' y='214'>지름은 12 줄지만 반지름은 6 줍니다.</text><text class='sl' x='14' y='228'>오프셋은 반지름을 밀기 때문입니다.</text></svg>"
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "왜 12가 아니라 6인가",
+      "en": "Why 6, not 12"
+     },
+     "ko": "오프셋은 지름이 아니라 반지름을 밉니다. 지름은 56에서 44로 12만큼 줄지만 반지름은 28에서 22로 6만큼 줍니다. 그래서 거리 칸에 6을 넣어요. 그리고 중심 좌표를 다시 치지 않으니 보스와 피치원의 중심이 어긋날 수가 없어요.",
+     "en": "Offset moves the radius, not the diameter. The diameter drops 12, from 56 to 44, but the radius drops 6, from 28 to 22. So 6 goes in the distance prompt. And because you never retype the center, the boss and the bolt circle cannot end up off-center from each other."
+    },
+    {
+     "type": "figure",
+     "id": "fig-array-90-45",
+     "caption": {
+      "ko": "왼쪽이 사이의 각도 90, 오른쪽이 45입니다.",
+      "en": "Left: 90 degrees between items. Right: 45."
+     },
+     "alt": {
+      "ko": "피치원 두 개를 나란히 그린 그림입니다. 왼쪽은 구멍 네 개가 45도, 135도, 225도, 315도에 고르게 놓여 있습니다. 오른쪽은 사이의 각도에 45를 넣은 경우입니다. 구멍 네 개가 반 바퀴 안에 몰려 한쪽에만 붙어 있습니다. 45도부터 180도까지예요.",
+      "en": "Two bolt circles side by side. On the left, four holes sit evenly at 45, 135, 225, and 315 degrees. On the right, with 45 entered as the angle between items, all four crowd into half a turn between 45 and 180 degrees, bunched on one side."
+     },
+     "svg": "<svg viewBox='0 0 380 206' width='380' height='206'><circle class='sc' cx='95' cy='88' r='55' fill='none' stroke-linecap='butt'/><circle class='sh' cx='133.9' cy='49.1' r='6' fill='none'/><circle class='sh' cx='56.1' cy='49.1' r='6' fill='none'/><circle class='sh' cx='56.1' cy='126.9' r='6' fill='none'/><circle class='sh' cx='133.9' cy='126.9' r='6' fill='none'/><line class='sc' x1='95' y1='24' x2='95' y2='152' stroke-linecap='butt'/><line class='sc' x1='31' y1='88' x2='159' y2='88' stroke-linecap='butt'/><text class='slh' x='95' y='176' text-anchor='middle'>사이의 각도 90</text><text class='sl' x='95' y='194' text-anchor='middle'>45·135·225·315도에 고릅니다.</text><circle class='sc' cx='275' cy='88' r='55' fill='none' stroke-linecap='butt'/><circle class='sh' cx='313.9' cy='49.1' r='6' fill='none'/><circle class='sh' cx='275' cy='33' r='6' fill='none'/><circle class='sh' cx='236.1' cy='49.1' r='6' fill='none'/><circle class='sh' cx='220' cy='88' r='6' fill='none'/><line class='sc' x1='275' y1='24' x2='275' y2='152' stroke-linecap='butt'/><line class='sc' x1='211' y1='88' x2='339' y2='88' stroke-linecap='butt'/><text class='slh' x='275' y='176' text-anchor='middle'>사이의 각도 45</text><text class='sl' x='275' y='194' text-anchor='middle'>반 바퀴 안에 몰립니다.</text></svg>"
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "45와 90을 바꿔 넣으면",
+      "en": "Swap 45 and 90 and this happens"
+     },
+     "ko": "네 구멍이 반 바퀴 안에 몰립니다. 한쪽에만 붙어요. 그러면 커버가 한쪽으로 기웁니다. 네 개를 균등하게 배치한 이유가 통째로 없어집니다. 45도는 첫 구멍이 놓이는 자리이고 90도는 구멍 사이의 간격이에요.",
+     "en": "All four holes crowd into half a turn, bunched on one side. The cover then tilts. The whole reason for spacing four holes evenly disappears. 45 degrees is where the first hole sits; 90 degrees is the gap between holes."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "중심선 레이어의 값",
+      "en": "Values on the centerline layer"
+     },
+     "ko": "이 과정의 중심선은 빨강 1번, 굵기 0.25, 선 종류 축척 0.5입니다. 연습용 기본값이에요. 2차시 화면의 표와 값이 다르게 보이면 이 값이 정본이에요.",
+     "en": "In this course the centerline layer is red (1), 0.25 mm, linetype scale 0.5. These are practice defaults. Where the table on the Lesson 2 screen shows something different, these values are the authoritative ones."
+    }
+   ]
+  },
+  {
+   "id": "erase-or-keep",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "지울 선과 남길 선",
+    "en": "What to erase, what to keep"
+   },
+   "lede": {
+    "ko": "모서리는 면이 꺾이거나 두께가 바뀌는 자리에만 생깁니다. 이 한 줄이 두 판단을 다 정해요.",
+    "en": "An edge exists only where a face turns or a thickness changes. That one line settles both decisions."
+   },
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "목 사이의 베이스 윗면 — 지웁니다",
+        "en": "The base top face between the web edges - erase it"
+       },
+       "body": {
+        "ko": "베이스 윗면은 5,16에서 115,16까지 한 줄로 이어져 있습니다. 3차시에 폴리선으로 한 번에 그린 여섯 변 중 하나입니다. 그 위로 목이 올라갑니다. 베이스와 목은 같은 판이고 둘 다 두께 12입니다. 이어진 한 면에는 모서리가 없습니다. 그래서 목 사이를 지나던 구간은 지워요.",
+        "en": "The base top face runs as one line from 5,16 to 115,16. It is one of the six edges you drew as a single polyline in Lesson 3. The web rises out of it. Base and web are the same plate, both 12 thick. A continuous face has no edge across it. So the stretch that passes between the web edges comes out."
+       }
+      },
+      {
+       "label": {
+        "ko": "보스 원 — 온전히 둡니다",
+        "en": "The boss circle - keep all of it"
+       },
+       "body": {
+        "ko": "보스는 앞으로 8 나와 있습니다. 그 자리만 두께가 20이고 목과 베이스는 12입니다. 두께가 바뀌면 거기에 모서리가 생깁니다. 위쪽 절반은 바깥 윤곽이고 아래쪽 절반은 목 위에 얹힌 단차입니다. 자리는 다르지만 둘 다 눈에 보이는 선이라 실선이에요.",
+        "en": "The boss projects 8 forward. There the plate is 20 thick, while the web and base are 12. Where thickness changes, an edge appears. The upper half is the outer silhouette; the lower half is the step sitting on top of the web. Different roles, but both are visible edges, so both are solid lines."
+       }
+      }
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "윗면을 자르면 두 토막이 남습니다. 왼쪽은 5에서 20까지, 오른쪽은 100에서 115까지입니다. 20과 100은 3차시에서 말한 이론상의 모서리입니다. 닫혀 있던 폴리선이 열린 폴리선 하나가 됩니다. 양 끝이 바로 필렛을 걸 자리예요.",
+     "en": "Trimming the top face leaves two stubs: 5 to 20 on the left, 100 to 115 on the right. 20 and 100 are the theoretical corners named in Lesson 3. The closed polyline becomes one open polyline. Those two ends are exactly where the fillets go."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "보스 원의 아래쪽 절반을 지우면",
+      "en": "Erase the lower half of the boss circle and"
+     },
+     "ko": "5차시에서 투상선을 뽑을 때 사분점 32와 88, 그리고 34를 잡아야 합니다. 그 셋이 전부 아래쪽 절반에 있습니다. 지우면 잡을 데가 없어져요.",
+     "en": "In Lesson 5 you must snap to the quadrants at 32 and 88, and to 34, when pulling projectors up. All three lie on the lower half. Erase it and there is nothing left to snap to."
+    }
+   ]
+  },
+  {
+   "id": "do-1",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 1 — 축 구멍·피치원·탭 네 개",
+    "en": "Do it 1 - bore, bolt circle, four taps"
+   },
+   "lede": {
+    "ko": "여기부터는 화면을 보면서 그대로 따라 합니다. 한 단계씩 확인하고 넘어가세요.",
+    "en": "From here you follow along on screen. Confirm each step before moving to the next."
+   },
+   "blocks": [
+    {
+     "type": "note",
+     "tone": "tip",
+     "label": {
+      "ko": "오늘 쓰는 기능키",
+      "en": "Function keys you use today"
+     },
+     "ko": "`F3` 은 객체 스냅을 켜고 끕니다. `Ctrl+1` 은 특성 창을 엽니다. `F2` 는 `LI` 결과가 뜬 문자 창을 닫습니다. 단축키 표에는 명령만 모았으니 이 셋은 여기서 챙겨 두세요.",
+     "en": "F3 toggles object snap. Ctrl+1 opens the Properties window. F2 closes the text window that LIST writes into. The shortcut table lists commands only, so keep these three in mind from here."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "label": {
+      "ko": "레이어를 두 번 바꿉니다",
+      "en": "You change layers twice"
+     },
+     "ko": "3단계에서 중심선으로 갔다가 5단계에서 외형선으로 돌아옵니다. 피치원 하나만 중심선 레이어에 놓기 때문입니다. 돌아오는 것을 잊으면 탭 구멍이 빨간 일점쇄선으로 그려져요.",
+     "en": "You move to the centerline layer at step 3 and back to the visible-line layer at step 5, because only the bolt circle belongs on the centerline layer. Forget to switch back and the tapped holes come out as red chain lines."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 1,
+       "title": {
+        "ko": "지난 파일 열기",
+        "en": "Open last lesson's file"
+       },
+       "actions": [
+        {
+         "type": "OPEN",
+         "do": {
+          "ko": "입력하고 엔터를 누릅니다. 새로 만들지 않습니다.",
+          "en": "Type it and press Enter. Do not start a new file."
+         }
+        },
+        {
+         "do": {
+          "ko": "지난 시간에 저장한 `EDU-IB-02_L03_PROFILE.dwg` 를 고릅니다. 열기를 누릅니다.",
+          "en": "Pick EDU-IB-02_L03_PROFILE.dwg, the file you saved last lesson, and click Open."
+         }
+        },
+        {
+         "type": "Z",
+         "do": {
+          "ko": "입력하고 엔터. 화면 배율을 맞추는 명령입니다.",
+          "en": "Type it and press Enter. This is the zoom command."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "입력하고 엔터. 전체 옵션입니다. 도면 전체가 화면에 들어옵니다.",
+          "en": "Type it and press Enter. That is the All option, which fits the whole drawing on screen."
+         }
+        },
+        {
+         "do": {
+          "ko": "상태 막대에서 객체 스냅을 봅니다. 꺼져 있으면 `F3` 을 누릅니다.",
+          "en": "Look at object snap in the status bar. If it is off, press F3."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "화면에 베이스와 모따기, 목 선 두 개, 보스 원이 보입니다. 이게 오늘의 출발 상태예요.",
+        "en": "You see the base with its chamfers, the two web edges, and the boss circle. That is today's starting state."
+       },
+       "why": {
+        "ko": "차시마다 새 파일을 만들지 않습니다. 앞 차시의 종료 상태를 열어 이어 그립니다. 뒤 단계가 전부 스냅에 기대므로 객체 스냅을 먼저 확인해요.",
+        "en": "You never start a fresh file for a lesson. You open the previous end state and keep drawing. Every later step leans on snaps, so check object snap first."
+       },
+       "pitfall": {
+        "ko": "객체 스냅이 꺼져 있으면 5단계의 끝점 스냅과 15단계의 중심 스냅이 안 잡힙니다. 2차시에서 켜 둔 여섯 가지는 끝점·중간점·중심·사분점·교차점·접점입니다. 오늘은 끝점과 중심을 써요.",
+        "en": "With object snap off, the endpoint snap in step 5 and the center snap in step 15 will not catch. The six turned on in Lesson 2 are endpoint, midpoint, center, quadrant, intersection, tangent. Today you use endpoint and center."
+       }
+      },
+      {
+       "n": 2,
+       "title": {
+        "ko": "축 구멍 Ø25",
+        "en": "The Ø25 bore"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "화면 위 도면층(레이어) 목록을 봅니다. 외형선인지 확인하고, 아니면 눌러서 외형선으로 바꿉니다.",
+          "en": "Look at the layer list at the top of the screen. Confirm it says the visible-line layer; if not, click and change it."
+         }
+        },
+        {
+         "type": "CLAYER",
+         "do": {
+          "ko": "명령행으로 해도 됩니다. 입력하고 엔터.",
+          "en": "You can do it from the command line instead. Type it and press Enter."
+         }
+        },
+        {
+         "type": "외형선",
+         "do": {
+          "ko": "입력하고 엔터. 레이어 이름입니다.",
+          "en": "Type it and press Enter. That is the layer name."
+         }
+        },
+        {
+         "type": "C",
+         "do": {
+          "ko": "입력하고 엔터. 원 명령입니다.",
+          "en": "Type it and press Enter. That starts CIRCLE."
+         }
+        },
+        {
+         "type": "60,62",
+         "do": {
+          "ko": "중심점을 물어봅니다. 입력하고 엔터.",
+          "en": "It asks for the center. Type it and press Enter."
+         }
+        },
+        {
+         "type": "D",
+         "do": {
+          "ko": "반지름을 물어봅니다. 여기서 숫자를 바로 넣지 않습니다. 입력하고 엔터.",
+          "en": "It asks for a radius. Do not type the number here. Type D and press Enter."
+         }
+        },
+        {
+         "type": "25",
+         "do": {
+          "ko": "이제 지름을 물어봅니다. 입력하고 엔터.",
+          "en": "Now it asks for a diameter. Type it and press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "보스 원 안쪽에 작은 원이 하나 생깁니다. 이게 축 구멍이에요.",
+        "en": "A small circle appears inside the boss circle. That is the bore."
+       },
+       "why": {
+        "ko": "축 구멍이 부품의 기준이라 가장 먼저 그립니다. 도면 표기가 Ø25라 반지름이 아니라 지름 입력으로 바꿔요.",
+        "en": "The bore is the reference for the whole part, so it goes in first. The drawing says Ø25, so you switch from radius entry to diameter entry."
+       },
+       "pitfall": {
+        "ko": "`D` 를 누르지 않고 25를 넣으면 지름 50이 됩니다. 정확히 두 배인데 화면에서는 좀 큰 원으로만 보입니다. 15단계에서 `LI` 로 반지름이 12.5인지 확인하면 바로 드러나요.",
+        "en": "Skip D and type 25 and you get a 50 mm circle. Exactly double, but on screen it only looks a bit large. Checking with LI in step 15 for a radius of 12.5 exposes it at once."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
+        "ko": "피치원 Ø44를 오프셋으로",
+        "en": "Make the Ø44 bolt circle by offset"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "먼저 레이어를 바꿉니다. 도면층(레이어) 목록에서 중심선을 고릅니다.",
+          "en": "Change the layer first. Pick the centerline layer from the layer list."
+         }
+        },
+        {
+         "type": "O",
+         "do": {
+          "ko": "입력하고 엔터. 간격띄우기입니다.",
+          "en": "Type it and press Enter. That starts OFFSET."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "거리를 물어봅니다. 그 전에 옵션을 하나 손봅니다. 입력하고 엔터. 도면층 옵션입니다.",
+          "en": "It asks for a distance, but first fix one option. Type L and press Enter. That is the Layer option."
+         }
+        },
+        {
+         "type": "C",
+         "do": {
+          "ko": "원본으로 할지 현재로 할지 물어봅니다. 입력하고 엔터. 현재 레이어, 즉 중심선에 넣겠다는 뜻입니다.",
+          "en": "It asks Source or Current. Type C and press Enter. That means put the copy on the current layer, the centerline layer."
+         }
+        },
+        {
+         "type": "6",
+         "do": {
+          "ko": "다시 거리를 물어봅니다. 입력하고 엔터. 56 빼기 44를 2로 나눈 값입니다.",
+          "en": "It asks for the distance again. Type it and press Enter. That is 56 minus 44, divided by 2."
+         }
+        },
+        {
+         "do": {
+          "ko": "간격띄우기할 객체를 물어봅니다. 보스 Ø56 원의 선을 클릭합니다.",
+          "en": "It asks which object to offset. Click the line of the Ø56 boss circle."
+         }
+        },
+        {
+         "do": {
+          "ko": "어느 쪽으로 띄울지 물어봅니다. 원 안쪽 아무 곳이나 클릭하고 엔터로 명령을 끝냅니다.",
+          "en": "It asks which side. Click anywhere inside the circle, then press Enter to end the command."
+         }
+        },
+        {
+         "do": {
+          "ko": "피치원이 실선처럼 보이나요. 그 원을 클릭하고 `Ctrl+1` 을 눌러 특성 창을 엽니다.",
+          "en": "Does the bolt circle look like a solid line? Click it and press Ctrl+1 to open the Properties window."
+         }
+        },
+        {
+         "type": "0.5",
+         "do": {
+          "ko": "선 종류 축척 칸에 입력하고 엔터.",
+          "en": "Type it into the linetype scale field and press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "피치원 Ø44가 중심선 레이어에 생깁니다. 점선 간격이 벌어지면서 빨간 일점쇄선으로 보여요.",
+        "en": "The Ø44 bolt circle appears on the centerline layer. The dashes open up and it reads as a red chain line."
+       },
+       "why": {
+        "ko": "오프셋은 반지름을 밀기 때문에 거리는 지름 차이의 절반인 6입니다. 중심 좌표를 다시 치지 않으니 보스와 피치원의 중심이 어긋날 수 없어요.",
+        "en": "Offset moves the radius, so the distance is half the diameter difference: 6. You never retype the center, so the boss and the bolt circle cannot drift apart."
+       },
+       "pitfall": {
+        "ko": "도면층 옵션을 현재로 바꾸지 않으면 복사본이 원본을 따라 외형선 레이어로 갑니다. 그러면 보조 원이 형상선으로 남아요. 선 종류 축척이 맞지 않으면 중심선 레이어인데도 실선처럼 보여요.",
+        "en": "Leave the Layer option on Source and the copy follows the original onto the visible-line layer, leaving a construction circle posing as geometry. And if the linetype scale is wrong, it looks solid even though it is on the centerline layer."
+       }
+      },
+      {
+       "n": 4,
+       "title": {
+        "ko": "45도 보조선",
+        "en": "The 45-degree construction line"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터. 선 명령입니다.",
+          "en": "Type it and press Enter. That starts LINE."
+         }
+        },
+        {
+         "type": "60,62",
+         "do": {
+          "ko": "첫 점을 물어봅니다. 입력하고 엔터. 보스 중심입니다.",
+          "en": "It asks for the first point. Type it and press Enter. That is the boss center."
+         }
+        },
+        {
+         "type": "@22<45",
+         "do": {
+          "ko": "다음 점을 물어봅니다. 입력하고 엔터. 골뱅이는 지금 점에서부터라는 뜻입니다. 22는 거리이고 꺾쇠 뒤의 45는 각도입니다.",
+          "en": "It asks for the next point. Type it and press Enter. The @ means from the current point, 22 is the distance, and the 45 after the angle bracket is the angle."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터를 한 번 더 눌러 명령을 끝냅니다.",
+          "en": "Press Enter once more to end the command."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "보스 중심에서 45도 방향으로 길이 22짜리 선이 그어집니다. 끝점이 피치원 위에 정확히 얹혀요.",
+        "en": "A 22-long line runs from the boss center at 45 degrees. Its far end lands exactly on the bolt circle."
+       },
+       "why": {
+        "ko": "22는 피치원 지름 44의 절반, 즉 반지름입니다. 그래서 이 선의 끝점이 피치원 위에 떨어져요.",
+        "en": "22 is half of the Ø44 bolt circle - its radius. That is why the endpoint falls on the bolt circle."
+       },
+       "pitfall": {
+        "ko": "각도를 마우스로 맞추면 44.9도나 45.2도가 됩니다. 상대극좌표로 넣어야 정확히 45도예요.",
+        "en": "Set the angle with the mouse and you get 44.9 or 45.2 degrees. Only relative polar entry gives exactly 45."
+       }
+      },
+      {
+       "n": 5,
+       "title": {
+        "ko": "탭 첫 구멍",
+        "en": "The first tapped hole"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "도면층(레이어) 목록에서 외형선으로 되돌립니다.",
+          "en": "Switch the layer list back to the visible-line layer."
+         }
+        },
+        {
+         "type": "C",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "중심점을 물어봅니다. 여기서는 좌표를 치지 않습니다. 방금 그은 보조선의 바깥쪽 끝에 마우스를 가져갑니다. 네모난 끝점 표식이 뜨면 그때 클릭합니다.",
+          "en": "It asks for the center. Do not type a coordinate here. Hover over the outer end of the construction line you just drew. When the square endpoint marker appears, click."
+         }
+        },
+        {
+         "type": "D",
+         "do": {
+          "ko": "반지름을 물어봅니다. 입력하고 엔터.",
+          "en": "It asks for a radius. Type D and press Enter."
+         }
+        },
+        {
+         "type": "5",
+         "do": {
+          "ko": "입력하고 엔터. M5의 5가 나사의 호칭 지름입니다.",
+          "en": "Type it and press Enter. The 5 in M5 is the nominal thread diameter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "피치원 위 45도 자리에 지름 5짜리 원이 하나 생겨요.",
+        "en": "A Ø5 circle appears on the bolt circle at the 45-degree position."
+       },
+       "why": {
+        "ko": "보조선 끝점이 이미 피치원 위 45도 자리입니다. 그러니 좌표를 계산할 필요가 없어요. 끝점 스냅으로 잡으면 그만이에요.",
+        "en": "The end of the construction line already sits at 45 degrees on the bolt circle. So there is no coordinate to work out - the endpoint snap does it for you."
+       },
+       "pitfall": {
+        "ko": "끝점 표식이 뜨기 전에 클릭하면 중심이 미세하게 어긋납니다. 그 오차가 원형 배열로 네 배가 됩니다. 실제 도면은 탭 구멍을 골지름과 바깥지름 두 원으로 그리지만 이 실습에서는 원 하나로 그려요.",
+        "en": "Click before the marker shows and the center is slightly off, and the polar array multiplies that error by four. Note that a real drawing shows a tapped hole as two circles, root and major diameter; in this exercise one circle is enough."
+       }
+      },
+      {
+       "n": 6,
+       "title": {
+        "ko": "원형 배열로 네 개",
+        "en": "Four holes by polar array"
+       },
+       "actions": [
+        {
+         "type": "ARRAYPOLAR",
+         "do": {
+          "ko": "입력하고 엔터. 단축키가 없어 이름 전체를 칩니다.",
+          "en": "Type it and press Enter. It has no shortcut, so type the whole name."
+         }
+        },
+        {
+         "do": {
+          "ko": "객체를 물어봅니다. 방금 그린 작은 원을 클릭하고 엔터.",
+          "en": "It asks for objects. Click the small circle you just drew and press Enter."
+         }
+        },
+        {
+         "type": "60,62",
+         "do": {
+          "ko": "배열의 중심점을 물어봅니다. 입력하고 엔터. 보스 중심입니다.",
+          "en": "It asks for the array center. Type it and press Enter. That is the boss center."
+         }
+        },
+        {
+         "type": "I",
+         "do": {
+          "ko": "화면에 미리보기가 뜨고 명령행에 옵션이 줄줄이 나옵니다. 세 개만 건드립니다. 입력하고 엔터. 항목 수입니다.",
+          "en": "A preview appears and the command line fills with options. You touch only three. Type I and press Enter for the item count."
+         }
+        },
+        {
+         "type": "4",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "입력하고 엔터. 사이의 각도입니다.",
+          "en": "Type it and press Enter. That is the angle between items."
+         }
+        },
+        {
+         "type": "90",
+         "do": {
+          "ko": "입력하고 엔터. 360을 4로 나눈 값입니다.",
+          "en": "Type it and press Enter. That is 360 divided by 4."
+         }
+        },
+        {
+         "type": "AS",
+         "do": {
+          "ko": "입력하고 엔터. 연관 배열로 만들지 물어봅니다.",
+          "en": "Type it and press Enter. It asks whether to make the array associative."
+         }
+        },
+        {
+         "type": "N",
+         "do": {
+          "ko": "입력하고 엔터. 네 개를 한 덩어리로 묶지 않겠다는 뜻입니다.",
+          "en": "Type it and press Enter. That means do not bind the four into one object."
+         }
+        },
+        {
+         "type": "X",
+         "do": {
+          "ko": "입력하고 엔터. 배열이 확정됩니다.",
+          "en": "Type it and press Enter. The array is committed."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "구멍 네 개가 피치원 위에 놓입니다. 45도, 135도, 225도, 315도예요.",
+        "en": "Four holes sit on the bolt circle, at 45, 135, 225, and 315 degrees."
+       },
+       "why": {
+        "ko": "간격은 360을 개수 4로 나눈 90도입니다. 연관을 끄면 네 개가 독립 객체로 남아 나중에 개별로 고칠 수 있어요.",
+        "en": "The gap is 360 divided by 4, which is 90 degrees. With association off the four stay independent, so you can edit one later."
+       },
+       "pitfall": {
+        "ko": "도면에 적힌 45를 사이의 각도에 넣으면 네 구멍이 반 바퀴 안에 몰립니다. 45는 첫 구멍의 자리이고 90이 간격이에요. 연관을 켜 두면 나중에 하나만 따로 고를 수 없어요.",
+        "en": "Put the drawing's 45 into the angle between items and all four crowd into half a turn. 45 is where the first hole sits; 90 is the gap. And with association on you cannot select just one of them later."
+       }
+      },
+      {
+       "n": 7,
+       "title": {
+        "ko": "보조선 지우기",
+        "en": "Erase the construction line"
+       },
+       "actions": [
+        {
+         "type": "E",
+         "do": {
+          "ko": "입력하고 엔터. 지우기입니다.",
+          "en": "Type it and press Enter. That starts ERASE."
+         }
+        },
+        {
+         "do": {
+          "ko": "45도 보조선을 클릭하고 엔터.",
+          "en": "Click the 45-degree construction line and press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "보조선이 사라지고 탭 네 개와 피치원만 남아요.",
+        "en": "The construction line is gone, leaving the four taps and the bolt circle."
+       },
+       "why": {
+        "ko": "할 일을 끝낸 보조선은 그때그때 지웁니다. 남겨 두면 형상선인지 보조선인지 구별이 안 돼요.",
+        "en": "A construction line that has done its job goes right away. Leave it and you can no longer tell geometry from scaffolding."
+       },
+       "pitfall": {
+        "ko": "보조선을 남겨 두면 자르기나 필렛에서 엉뚱한 선을 물게 됩니다. 지운 뒤 45도 자리에 남은 선이 없는지 확인하세요.",
+        "en": "Left in place, it gets grabbed by TRIM or FILLET instead of the line you meant. After erasing, check that nothing is left along the 45-degree direction."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "do-2",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 2 — 장공 두 개",
+    "en": "Do it 2 - the two slots"
+   },
+   "lede": {
+    "ko": "오늘 제목의 「호」가 나오는 자리입니다. 원을 잘라야 호가 돼요.",
+    "en": "This is where the arcs in today's title come from. A circle becomes an arc when you cut it."
+   },
+   "blocks": [
+    {
+     "type": "figure",
+     "id": "fig-slot-build",
+     "caption": {
+      "ko": "장공을 만드는 네 단계입니다.",
+      "en": "The four stages of building a slot."
+     },
+     "alt": {
+      "ko": "장공을 만드는 과정을 네 칸으로 나눈 그림입니다. 첫 칸은 반지름 5짜리 끝원 두 개이고 중심거리는 12입니다. 둘째 칸은 그 위아래에 수평 접선 두 개를 그은 모습입니다. 셋째 칸은 두 원의 안쪽 반원을 파선으로 표시해 잘라낼 자리를 가리킵니다. 넷째 칸은 잘라낸 뒤의 알약 모양으로, 호 두 개와 직선 두 개만 남습니다.",
+      "en": "A four-panel sequence for building a slot. Panel one: two end circles of radius 5, centers 12 apart. Panel two: two horizontal tangents added above and below. Panel three: the inner half of each circle marked with a dashed line to show what gets cut. Panel four: the finished pill shape, only two arcs and two straight lines."
+     },
+     "svg": "<svg viewBox='0 0 600 128' width='600' height='128'><circle class='si' cx='57' cy='55' r='15' fill='none'/><circle class='si' cx='93' cy='55' r='15' fill='none'/><line class='sc' x1='45' y1='55' x2='105' y2='55' stroke-linecap='butt'/><text class='sl' x='75' y='96' text-anchor='middle'>1 끝원 둘 R5</text><text class='sl' x='75' y='112' text-anchor='middle'>중심 29와 41 · 거리 12</text><circle class='si' cx='207' cy='55' r='15' fill='none'/><circle class='si' cx='243' cy='55' r='15' fill='none'/><line class='sh' x1='207' y1='40' x2='243' y2='40'/><line class='sh' x1='207' y1='70' x2='243' y2='70'/><text class='sl' x='225' y='96' text-anchor='middle'>2 접선 둘</text><text class='sl' x='225' y='112' text-anchor='middle'>y = 13 과 3</text><circle class='si' cx='357' cy='55' r='15' fill='none'/><circle class='si' cx='393' cy='55' r='15' fill='none'/><line class='si' x1='357' y1='40' x2='393' y2='40'/><line class='si' x1='357' y1='70' x2='393' y2='70'/><path class='sn' d='M357,40 A15,15 0 0,1 357,70' fill='none' stroke-linecap='butt'/><path class='sn' d='M393,40 A15,15 0 0,0 393,70' fill='none' stroke-linecap='butt'/><text class='sl' x='375' y='96' text-anchor='middle'>3 안쪽 반원 자르기</text><text class='sl' x='375' y='112' text-anchor='middle'>파선이 없앨 부분입니다.</text><path class='sh' d='M507,40 L543,40 A15,15 0 0,1 543,70 L507,70 A15,15 0 0,1 507,40 Z' fill='none'/><text class='sl' x='525' y='96' text-anchor='middle'>4 알약 모양</text><text class='sl' x='525' y='112' text-anchor='middle'>호 둘 + 직선 둘</text></svg>"
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 8,
+       "title": {
+        "ko": "장공 끝원 두 개",
+        "en": "The two slot end circles"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "도면층(레이어)이 외형선인지 확인합니다.",
+          "en": "Confirm the layer is the visible-line layer."
+         }
+        },
+        {
+         "type": "C",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "29,8",
+         "do": {
+          "ko": "중심점에 입력하고 엔터.",
+          "en": "Type it for the center and press Enter."
+         }
+        },
+        {
+         "type": "5",
+         "do": {
+          "ko": "반지름을 물어봅니다. 이번에는 도면에 R5로 적혀 있습니다. 그러니 `D` 를 누르지 않습니다. 그대로 입력하고 엔터.",
+          "en": "It asks for a radius. This time the drawing says R5, so do not press D. Type the number as it stands and press Enter."
+         }
+        },
+        {
+         "type": "CO",
+         "do": {
+          "ko": "입력하고 엔터. 복사 명령입니다.",
+          "en": "Type it and press Enter. That starts COPY."
+         }
+        },
+        {
+         "do": {
+          "ko": "객체를 물어봅니다. 방금 그린 원을 클릭하고 엔터.",
+          "en": "It asks for objects. Click the circle you just drew and press Enter."
+         }
+        },
+        {
+         "type": "0,0",
+         "do": {
+          "ko": "기준점을 물어봅니다. 입력하고 엔터.",
+          "en": "It asks for a base point. Type it and press Enter."
+         }
+        },
+        {
+         "type": "12,0",
+         "do": {
+          "ko": "두 번째 점을 물어봅니다. 입력하고 엔터. 오른쪽으로 12만큼 간다는 뜻입니다.",
+          "en": "It asks for the second point. Type it and press Enter. That means 12 to the right."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터를 눌러 명령을 끝냅니다.",
+          "en": "Press Enter to end the command."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "원 두 개가 생깁니다. 중심은 29와 41입니다. 41은 29 더하기 12입니다.",
+        "en": "You now have two circles, centered at 29 and 41. 41 is 29 plus 12."
+       },
+       "why": {
+        "ko": "Ø는 지름이고 R은 반지름입니다. 표기를 따라가므로 여기서는 `D` 를 누르지 않습니다. 기준점과 두 번째 점을 `0,0` 과 `12,0` 으로 주면 정확히 오른쪽으로 12만큼 옮겨 가요. 29는 도면에도 그대로 적혀 있어요. 왼쪽 끝에서 첫 끝원까지 29입니다.",
+        "en": "Ø means diameter, R means radius, and you follow the notation, so no D here. Giving 0,0 and 12,0 as the base and second points moves the copy exactly 12 to the right. 29 is written on the drawing itself - from the left edge to the first end circle."
+       },
+       "pitfall": {
+        "ko": "앞 단계의 흐름 그대로 `D` 를 누르면 지름 5, 즉 반지름 2.5짜리 원이 됩니다. 장공 폭이 절반이 돼요. 왼쪽 장공의 중심 35에서 6씩 벌린 자리가 29와 41입니다.",
+        "en": "Carry the habit from the previous steps and press D and you get a Ø5 circle, radius 2.5, halving the slot width. 29 and 41 are 6 either side of the slot center at 35."
+       }
+      },
+      {
+       "n": 9,
+       "title": {
+        "ko": "접선 두 개",
+        "en": "The two tangents"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "29,13",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "41,13",
+         "do": {
+          "ko": "입력하고 엔터. 엔터를 한 번 더 눌러 끝냅니다. 위쪽 접선입니다.",
+          "en": "Type it and press Enter, then Enter again to finish. That is the upper tangent."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "29,3",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "41,3",
+         "do": {
+          "ko": "입력하고 엔터. 엔터를 한 번 더 눌러 끝냅니다. 아래쪽 접선입니다.",
+          "en": "Type it and press Enter, then Enter again to finish. That is the lower tangent."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "장공 위아래로 수평선 두 개가 그어집니다. 두 선의 양 끝이 각각 원에 정확히 닿아야 합니다.",
+        "en": "Two horizontal lines run across the top and bottom of the slot. Each end must touch its circle exactly."
+       },
+       "why": {
+        "ko": "두 원은 반지름이 같고 중심도 같은 높이에 있습니다. 그러니 접선은 수평선입니다. 중심 높이가 8이고 반지름이 5이니 위는 13, 아래는 3이에요.",
+        "en": "The two circles share a radius and sit at the same height, so the tangents are horizontal. With the centers at 8 and a radius of 5, the upper line is at 13 and the lower at 3."
+       },
+       "pitfall": {
+        "ko": "화면을 확대해서 접점을 확인합니다. 접선이 떠 있거나 원을 파고들었으면 다음 단계에서 자르기가 안 먹습니다. 13과 3을 다시 확인하세요.",
+        "en": "Zoom in and inspect where they meet. If a tangent floats clear of the circle or cuts into it, the trim in the next step will not work. Re-check 13 and 3."
+       }
+      },
+      {
+       "n": 10,
+       "title": {
+        "ko": "안쪽 반원 자르기",
+        "en": "Trim the inner halves"
+       },
+       "actions": [
+        {
+         "type": "TR",
+         "do": {
+          "ko": "입력하고 엔터. 자르기입니다.",
+          "en": "Type it and press Enter. That starts TRIM."
+         }
+        },
+        {
+         "do": {
+          "ko": "버전에 따라 묻는 것이 다릅니다. 절단 모서리를 먼저 고르라고 하면 방금 그은 두 직선을 클릭하고 엔터로 선택을 끝냅니다. 바로 자를 부분을 고르라고 하면 그대로 진행합니다.",
+          "en": "What it asks depends on the version. If it asks for cutting edges first, click the two lines you just drew and press Enter to finish the selection. If it goes straight to asking what to cut, just carry on."
+         }
+        },
+        {
+         "do": {
+          "ko": "왼쪽 원의 오른쪽 반을 클릭합니다. 장공 안쪽으로 들어간 부분입니다. 사라집니다.",
+          "en": "Click the right half of the left circle - the part that reaches into the slot. It disappears."
+         }
+        },
+        {
+         "do": {
+          "ko": "오른쪽 원의 왼쪽 반을 클릭합니다. 사라집니다.",
+          "en": "Click the left half of the right circle. It disappears."
+         }
+        },
+        {
+         "do": {
+          "ko": "엔터를 눌러 명령을 끝냅니다.",
+          "en": "Press Enter to end the command."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "남은 것은 반원 두 개와 직선 두 개입니다. 알약 모양이에요. 원이 호로 바뀌었습니다.",
+        "en": "What remains is two half circles and two straight lines - a pill shape. The circles have become arcs."
+       },
+       "why": {
+        "ko": "장공은 원 하나로 안 나오는 형상입니다. 원 두 개를 그린 뒤 안쪽으로 들어간 반원을 잘라내야 실제 형상이 돼요.",
+        "en": "A slot is not a shape one CIRCLE can make. You draw two circles, then cut away the halves that reach inside, and only then does it match the real feature."
+       },
+       "pitfall": {
+        "ko": "클릭했는데 아무것도 안 잘리면 접점이 안 맞은 것입니다. 9단계의 13과 3을 다시 확인합니다. 자르기를 빼먹으면 알약 안에 곡선 두 개가 남아요. 그 선이 남으면 나중에 해칭 경계가 갈라지고 치수를 잴 때 엉뚱한 점에 스냅이 붙습니다.",
+        "en": "If clicking cuts nothing, the tangency is off - re-check 13 and 3 from step 9. Skip the trim and two curves stay inside the pill. Those leftovers split a hatch boundary later and pull dimension snaps onto the wrong points."
+       }
+      },
+      {
+       "n": 11,
+       "title": {
+        "ko": "오른쪽 장공은 대칭으로",
+        "en": "The right slot comes from a mirror"
+       },
+       "actions": [
+        {
+         "type": "MI",
+         "do": {
+          "ko": "입력하고 엔터. 대칭 복사입니다.",
+          "en": "Type it and press Enter. That starts MIRROR."
+         }
+        },
+        {
+         "do": {
+          "ko": "객체를 물어봅니다. 장공을 이루는 네 개를 전부 고릅니다. 반원 둘과 직선 둘입니다. 고르고 엔터.",
+          "en": "It asks for objects. Select all four pieces of the slot - two arcs and two lines - then press Enter."
+         }
+        },
+        {
+         "type": "60,0",
+         "do": {
+          "ko": "대칭선의 첫 점을 물어봅니다. 입력하고 엔터.",
+          "en": "It asks for the first point of the mirror line. Type it and press Enter."
+         }
+        },
+        {
+         "type": "60,90",
+         "do": {
+          "ko": "두 번째 점을 물어봅니다. 입력하고 엔터. 세로 중심선입니다.",
+          "en": "It asks for the second point. Type it and press Enter. That is the vertical centerline."
+         }
+        },
+        {
+         "type": "N",
+         "do": {
+          "ko": "원본을 지울지 물어봅니다. 입력하고 엔터.",
+          "en": "It asks whether to erase the source objects. Type it and press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "오른쪽 장공의 중심이 85에 생깁니다. 60에서 왼쪽으로 25 간 곳이 35이고 오른쪽으로 25 간 곳이 85입니다.",
+        "en": "The right slot appears with its center at 85. From 60, going 25 left gives 35 and 25 right gives 85."
+       },
+       "why": {
+        "ko": "부품이 세로 중심선 60을 기준으로 좌우 대칭입니다. 그래서 오른쪽 장공을 다시 그리지 않습니다. 두 장공의 중심 35와 85의 한가운데가 60이고, 60은 보스 중심의 가로 위치이기도 해요.",
+        "en": "The part is symmetric about the vertical centerline at 60, so there is no need to draw the right slot again. Midway between the slot centers 35 and 85 is 60, which is also the horizontal position of the boss center."
+       },
+       "pitfall": {
+        "ko": "창으로 감싸서 고르면 편하지만 베이스 바깥선이 같이 잡히지 않게 주의합니다. 같이 잡히면 외곽까지 대칭 복사돼 선이 겹칩니다. 원본을 지울지 묻는 자리에서 예를 고르면 왼쪽 장공이 없어져요.",
+        "en": "A window selection is easier, but keep the base outline out of it. If it is caught, the outline gets mirrored too and lines pile on top of each other. And answering yes at the erase prompt removes the left slot."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "label": {
+      "ko": "장공은 현장에서도 자주 그립니다",
+      "en": "You draw slots on the floor too"
+     },
+     "ko": "작업을 편하게 만들 지그를 제안할 때 씁니다. 볼트 자리를 장공으로 두면 조립한 뒤에도 위치를 조금씩 옮길 수 있어요. 구멍으로 두면 한 자리에 못 박힙니다.",
+     "en": "They come up when you propose a jig to make a job easier. Put the bolt seats on slots and you can still nudge the position after assembly. Round holes lock it to one spot."
+    }
+   ]
+  },
+  {
+   "id": "do-3",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 3 — 윗면 정리·필렛·검산·저장",
+    "en": "Do it 3 - clean the top face, fillets, cross-check, save"
+   },
+   "lede": {
+    "ko": "필렛을 걸기 전에 할 일이 하나 있습니다. 목 사이의 윗면을 먼저 지워요.",
+    "en": "One thing comes before the fillets: erase the top face between the web edges."
+   },
+   "blocks": [
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 12,
+       "title": {
+        "ko": "목 사이 윗면 잘라내기",
+        "en": "Trim the top face between the web edges"
+       },
+       "actions": [
+        {
+         "type": "TR",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "절단 모서리를 물어봅니다. 목 선 두 개를 클릭하고 엔터.",
+          "en": "It asks for cutting edges. Click the two web edges and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "베이스 윗면의 한가운데를 클릭합니다. `60,16` 근처입니다.",
+          "en": "Click the middle of the base top face, near 60,16."
+         }
+        },
+        {
+         "do": {
+          "ko": "목 사이를 지나던 구간이 사라집니다. 엔터로 끝냅니다.",
+          "en": "The stretch running between the web edges disappears. Press Enter to finish."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "윗면이 두 토막으로 나뉩니다. 왼쪽은 5에서 20까지, 오른쪽은 100에서 115까지입니다. 양 끝이 바로 필렛을 걸 자리예요.",
+        "en": "The top face splits into two stubs: 5 to 20 on the left, 100 to 115 on the right. Those two ends are where the fillets go."
+       },
+       "why": {
+        "ko": "베이스와 목은 같은 판이고 둘 다 두께 12입니다. 이어진 한 면에는 모서리가 없습니다. 20과 100은 3차시에서 말한 이론상의 모서리예요.",
+        "en": "Base and web are the same plate, both 12 thick, and a continuous face has no edge across it. 20 and 100 are the theoretical corners named in Lesson 3."
+       },
+       "pitfall": {
+        "ko": "여기서는 모든 객체를 경계로 잡지 않습니다. 잘라 낼 선 자체가 경계에 섞이면 어디서 끊길지 알 수 없습니다. 자른 뒤 닫혀 있던 폴리선이 열린 폴리선 하나가 되는지 확인하세요.",
+        "en": "Do not take every object as a boundary here. If the line you are cutting is itself in the boundary set, you cannot predict where it breaks. Afterwards, check that the closed polyline has become one open polyline."
+       }
+      },
+      {
+       "n": 13,
+       "title": {
+        "ko": "오른쪽 필렛 R10",
+        "en": "The right fillet, R10"
+       },
+       "actions": [
+        {
+         "type": "F",
+         "do": {
+          "ko": "입력하고 엔터. 모깎기입니다.",
+          "en": "Type it and press Enter. That starts FILLET."
+         }
+        },
+        {
+         "do": {
+          "ko": "명령행에 현재 설정이 뜹니다. 반지름이 0으로 되어 있을 겁니다. 이대로 선을 고르면 안 됩니다.",
+          "en": "The command line reports the current settings. The radius will read 0. Do not pick lines in this state."
+         }
+        },
+        {
+         "type": "R",
+         "do": {
+          "ko": "입력하고 엔터. 반지름 옵션입니다.",
+          "en": "Type it and press Enter. That is the radius option."
+         }
+        },
+        {
+         "type": "10",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "첫 번째 객체는 방금 남긴 윗면 오른쪽 토막입니다. 100에서 115까지 남은 높이 16짜리 수평선을 클릭합니다. 이때 남기고 싶은 쪽을 클릭합니다. 오른쪽 필렛이니 모서리보다 오른쪽입니다.",
+          "en": "The first object is the right-hand stub of the top face you just left - the horizontal line at height 16 running from 100 to 115. Click on the side you want to keep. This is the right fillet, so click to the right of the corner."
+         }
+        },
+        {
+         "do": {
+          "ko": "두 번째 객체는 오른쪽 목 선입니다. 역시 남기고 싶은 쪽, 모서리보다 위쪽을 클릭합니다.",
+          "en": "The second object is the right web edge. Again click the side you want to keep, above the corner."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "호가 끼워집니다. 모서리 밖으로 나간 부분이 잘립니다.",
+        "en": "An arc drops in and whatever ran past the corner is trimmed away."
+       },
+       "why": {
+        "ko": "FILLET 은 반지름 기본값이 0입니다. 선을 고르기 전에 `R` 옵션으로 값을 넣습니다. 두 선 중 어느 쪽을 남길지는 클릭한 위치가 정해요.",
+        "en": "FILLET starts with a radius of 0, so you set it with the R option before picking anything. Which side of each line survives is decided by where you click."
+       },
+       "pitfall": {
+        "ko": "반지름을 설정하지 않고 두 선을 고르면 호 대신 각진 모서리가 만들어집니다. 오류가 나지 않아 그냥 넘어가기 쉬워요. 남기고 싶은 쪽이 아닌 반대쪽을 클릭하면 살려야 할 구간이 잘려 나가요.",
+        "en": "Pick two lines without setting the radius and you get a sharp corner instead of an arc, with no error to warn you. Click the wrong side and the stretch you needed is the one that goes."
+       }
+      },
+      {
+       "n": 14,
+       "title": {
+        "ko": "왼쪽 필렛 R10",
+        "en": "The left fillet, R10"
+       },
+       "actions": [
+        {
+         "type": "F",
+         "do": {
+          "ko": "입력하고 엔터. 반지름은 10으로 기억되어 있습니다. 다시 넣지 않습니다.",
+          "en": "Type it and press Enter. The radius is remembered as 10, so do not set it again."
+         }
+        },
+        {
+         "do": {
+          "ko": "명령행에 반지름 10이라고 떠 있는지 확인만 합니다.",
+          "en": "Just confirm the command line reports a radius of 10."
+         }
+        },
+        {
+         "do": {
+          "ko": "베이스 윗면을 모서리보다 왼쪽에서 클릭합니다.",
+          "en": "Click the base top face to the left of the corner."
+         }
+        },
+        {
+         "do": {
+          "ko": "왼쪽 목 선을 모서리보다 위쪽에서 클릭합니다.",
+          "en": "Click the left web edge above the corner."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "좌우 두 개가 같은 반지름으로 들어갑니다. 도면의 2-R10이 이 두 개를 뜻합니다. 외곽이 한 줄로 이어져요.",
+        "en": "Both fillets now share one radius. The 2-R10 on the drawing means these two. The outline now runs as one continuous line."
+       },
+       "why": {
+        "ko": "한 번 설정한 반지름은 다음 실행에도 기억됩니다. 그래서 좌우가 같은 값으로 들어갑니다. 이제 베이스 윗면에서 라운드를 타고 목 선으로 올라갑니다. 목 선은 보스 원에 접하는 자리에서 끝나요.",
+        "en": "A radius set once carries into the next run, so both sides come out identical. The outline now climbs from the base top face, around the round, and up the web edge, which ends where it meets the boss circle."
+       },
+       "pitfall": {
+        "ko": "반지름이 기억되어 있다고 믿고 확인하지 않으면 좌우가 다른 값이 될 수 있습니다. 그리고 보스 원은 손대지 않습니다. 아래쪽 절반을 지우면 5차시에서 사분점 32와 88, 그리고 34를 잡을 수 없어요.",
+        "en": "Trust the remembered radius without looking and the two sides can end up different. Also leave the boss circle alone: erase its lower half and you cannot snap to the quadrants at 32 and 88, or to 34, in Lesson 5."
+       }
+      },
+      {
+       "n": 15,
+       "title": {
+        "ko": "검산",
+        "en": "Cross-check"
+       },
+       "actions": [
+        {
+         "type": "DI",
+         "do": {
+          "ko": "입력하고 엔터. 거리 재기입니다.",
+          "en": "Type it and press Enter. That starts DIST."
+         }
+        },
+        {
+         "do": {
+          "ko": "왼쪽 장공의 두 끝원 중심을 차례로 클릭합니다. 중심 스냅이 잡히면 클릭합니다. 명령행에 12가 나와야 합니다.",
+          "en": "Click the two end-arc centers of the left slot in turn, waiting for the center snap each time. The command line should read 12."
+         }
+        },
+        {
+         "type": "DI",
+         "do": {
+          "ko": "다시 입력하고 엔터. 이번에는 두 장공 사이입니다.",
+          "en": "Type it again and press Enter. This time you measure between the two slots."
+         }
+        },
+        {
+         "do": {
+          "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나와야 합니다. 29에서 79까지입니다.",
+          "en": "Click the left end-arc center of the left slot and the left end-arc center of the right slot. It should read 50 - from 29 to 79."
+         }
+        },
+        {
+         "type": "LI",
+         "do": {
+          "ko": "입력하고 엔터. 특성 나열입니다.",
+          "en": "Type it and press Enter. That starts LIST."
+         }
+        },
+        {
+         "do": {
+          "ko": "피치원을 클릭하고 엔터. 도면층이 중심선인지, 반지름이 22인지 봅니다. 반지름 22면 지름 44입니다. 문자 창은 `F2` 로 닫습니다.",
+          "en": "Click the bolt circle and press Enter. Check the layer is the centerline layer and the radius is 22 - radius 22 means Ø44. Close the text window with F2."
+         }
+        },
+        {
+         "do": {
+          "ko": "축 구멍도 같은 방법으로 확인합니다. 반지름 12.5여야 합니다. 즉 지름 25입니다.",
+          "en": "Check the bore the same way. The radius must be 12.5, which is Ø25."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "끝원 중심거리 12와 장공 사이 50이 확인됩니다. 피치원은 반지름 22에 중심선 레이어입니다. 축 구멍은 반지름 12.5입니다.",
+        "en": "You confirm 12 between the end-arc centers, 50 between the slots, a bolt circle of radius 22 on the centerline layer, and a bore of radius 12.5."
+       },
+       "why": {
+        "ko": "눈으로 맞아 보이는 것과 실제로 맞는 것은 다릅니다. 숫자로 확인합니다.",
+        "en": "Looking right and being right are different things. Confirm it as a number."
+       },
+       "pitfall": {
+        "ko": "장공의 한가운데인 35와 85를 찍으려 하지 마세요. 거기에는 클릭할 객체가 없습니다. 장공은 호 두 개와 직선 두 개로만 되어 있어요. 중심 스냅이 걸리는 곳은 29와 41, 79와 91뿐입니다. 같은 자리끼리 재야 간격이 나옵니다. 오른쪽 끝원끼리, 41에서 91까지 재도 50입니다.",
+        "en": "Do not try to pick the slot centers at 35 and 85; there is no object there. A slot is only two arcs and two lines, so center snap catches at 29, 41, 79, and 91 only. Measure like to like: the right-hand arcs, 41 to 91, also give 50."
+       }
+      },
+      {
+       "n": 16,
+       "title": {
+        "ko": "새 이름으로 저장",
+        "en": "Save under a new name"
+       },
+       "actions": [
+        {
+         "type": "SAVEAS",
+         "do": {
+          "ko": "입력하고 엔터.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L04_FEATURES",
+         "do": {
+          "ko": "파일 이름 칸에 넣습니다.",
+          "en": "Put this in the file name field."
+         }
+        },
+        {
+         "do": {
+          "ko": "파일 형식은 dwg 그대로 둡니다. 저장을 누릅니다.",
+          "en": "Leave the file type as dwg and click Save."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "`EDU-IB-02_L04_FEATURES.dwg` 가 새로 만들어집니다. 지난 파일은 그대로 남아요.",
+        "en": "EDU-IB-02_L04_FEATURES.dwg is created and the previous file stays untouched."
+       },
+       "why": {
+        "ko": "지난 파일을 덮어쓰지 않습니다. 어딘가 잘못됐을 때 한 차시 전으로 돌아갈 수 있기 때문입니다. 다음 시간에는 이 파일을 열어서 시작해요.",
+        "en": "You never overwrite the previous file, so that when something turns out wrong you can step back one lesson. Next time you open this file to begin."
+       },
+       "pitfall": {
+        "ko": "그냥 저장을 누르면 `EDU-IB-02_L03_PROFILE` 을 덮어쓰게 됩니다. 그러면 되돌아갈 자리가 없어져요. 반드시 새 이름으로 남깁니다.",
+        "en": "A plain save overwrites EDU-IB-02_L03_PROFILE and there is nowhere left to step back to. Always leave it under a new name."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "이 차시를 건너뛰면",
+      "en": "If you skip this lesson"
+     },
+     "ko": "5차시가 열 파일이 없습니다. 파일이 있어도 투상할 형상이 없어 평면도와 우측면도의 숨은선을 그릴 수 없습니다. 되돌아오는 길은 이렇습니다. `EDU-IB-02_L03_PROFILE` 을 열어 따라 하기 1~3만 합니다. 그리고 새 이름으로 저장하세요. 읽기 절 중 「지울 선과 남길 선」만은 꼭 읽으세요. 보스 원을 온전히 남긴다는 판단을 모르면 어떻게 될까요. 5차시에서 사분점 32·88과 34를 잡을 수 없습니다. 필렛 R10이 빠지면 7차시의 목 밑동 80 기입이 성립하지 않아요.",
+     "en": "Lesson 5 will have no file to open. Even with the file, there is nothing to project, so you cannot draw the hidden lines in the top and right views. The way back is to open EDU-IB-02_L03_PROFILE, work through Do it 1 to 3 only, and save under the new name. Of the reading sections, read 'What to erase, what to keep' at minimum. Without the decision to keep the boss circle whole you cannot pick quadrants 32, 88, and 34 in Lesson 5, and without the R10 fillets the 80 mm web-foot dimension in Lesson 7 has nothing to measure to."
+    },
+    {
+     "type": "note",
+     "tone": "pend",
+     "label": {
+      "ko": "채점 기준은 공유 예정",
+      "en": "Grading criteria: to be provided"
+     },
+     "ko": "배점, 제한시간, 합격선, 시험 일시와 장소, 제출 형식은 아직 확인되지 않았습니다. 확인되면 이 자리에 채웁니다. 지금은 「지시 확인 → 오류 발견 → 수정 → 재검수」 순서로만 연습하세요.",
+     "en": "Marks, time limit, pass mark, exam date and place, and submission format have not been confirmed. They go in this slot once they are. For now, practice the working gate only: read the instruction, find the error, fix it, check it again."
+    }
+   ]
+  }
+ ],
+ "verify": [
+  {
+   "what": {
+    "ko": "왼쪽 장공의 두 끝원 중심거리",
+    "en": "Distance between the left slot's end-arc centers"
+   },
+   "how": {
+    "ko": "`DI` 로 두 중심을 차례로 클릭합니다. 12가 나와야 합니다. 다르면 8단계로 돌아가요.",
+    "en": "Use DI and click the two centers in turn. It must read 12. If not, go back to step 8."
+   }
+  },
+  {
+   "what": {
+    "ko": "두 장공의 간격",
+    "en": "Spacing between the two slots"
+   },
+   "how": {
+    "ko": "`DI` 로 왼쪽 장공의 왼쪽 끝원과 오른쪽 장공의 왼쪽 끝원을 잽니다. 29에서 79까지 50입니다. 오른쪽 끝원끼리, 41에서 91까지 재도 50이에요.",
+    "en": "Use DI from the left slot's left arc to the right slot's left arc: 29 to 79 is 50. The right-hand arcs, 41 to 91, also give 50."
+   }
+  },
+  {
+   "what": {
+    "ko": "장공에서 스냅이 걸리는 자리",
+    "en": "Where snaps catch on a slot"
+   },
+   "how": {
+    "ko": "한가운데 35와 85에는 클릭할 객체가 없습니다. 중심 스냅이 걸리는 곳은 29·41·79·91뿐이에요.",
+    "en": "There is no object at the slot centers 35 and 85. Center snap catches only at 29, 41, 79, and 91."
+   }
+  },
+  {
+   "what": {
+    "ko": "피치원의 레이어와 크기",
+    "en": "Layer and size of the bolt circle"
+   },
+   "how": {
+    "ko": "`LI` 로 확인합니다. 도면층이 중심선이고 반지름이 22면 맞습니다. 다르면 3단계로 돌아가요.",
+    "en": "Check with LI. The layer must be the centerline layer and the radius 22. If not, go back to step 3."
+   }
+  },
+  {
+   "what": {
+    "ko": "축 구멍의 크기",
+    "en": "Size of the bore"
+   },
+   "how": {
+    "ko": "`LI` 로 반지름이 12.5인지 봅니다. 25가 나오면 `D` 를 안 누른 것이니 2단계로 돌아가요.",
+    "en": "Check with LI for a radius of 12.5. A radius of 25 means you skipped D, so go back to step 2."
+   }
+  },
+  {
+   "what": {
+    "ko": "피치원의 선 모양",
+    "en": "How the bolt circle looks"
+   },
+   "how": {
+    "ko": "빨간 일점쇄선으로 보여야 합니다. 실선처럼 보이면 선 종류 축척을 0.5로 고쳐요.",
+    "en": "It must read as a red chain line. If it looks solid, set the linetype scale to 0.5."
+   }
+  },
+  {
+   "what": {
+    "ko": "장공 접선의 양 끝",
+    "en": "The ends of the slot tangents"
+   },
+   "how": {
+    "ko": "화면을 확대해 원에 정확히 닿는지 봅니다. 떠 있거나 파고들었으면 9단계의 13과 3을 다시 확인해요.",
+    "en": "Zoom in and see whether each end touches its circle exactly. If it floats or cuts in, re-check 13 and 3 in step 9."
+   }
+  },
+  {
+   "what": {
+    "ko": "장공 안쪽에 남은 곡선",
+    "en": "Curves left inside a slot"
+   },
+   "how": {
+    "ko": "확대해서 알약 안에 곡선이 남았는지 봅니다. 남았으면 10단계의 자르기를 다시 해요.",
+    "en": "Zoom in and look for curves inside the pill. If any remain, redo the trim in step 10."
+   }
+  },
+  {
+   "what": {
+    "ko": "탭 네 개의 각도",
+    "en": "The angles of the four taps"
+   },
+   "how": {
+    "ko": "45도, 135도, 225도, 315도에 놓였는지 봅니다. 한쪽에 몰려 있으면 사이의 각도에 45를 넣은 것이니 6단계로 돌아가요.",
+    "en": "Check they sit at 45, 135, 225, and 315 degrees. If they bunch on one side you entered 45 as the angle between items, so go back to step 6."
+   }
+  },
+  {
+   "what": {
+    "ko": "필렛 중심의 높이",
+    "en": "Height of the fillet center"
+   },
+   "how": {
+    "ko": "베이스 윗면 16에 반지름 10을 더하면 26입니다. 도면에 적힌 26과 맞으면 돼요.",
+    "en": "The base top face at 16 plus the radius 10 gives 26. It should match the 26 written on the drawing."
+   }
+  },
+  {
+   "what": {
+    "ko": "베이스 윗면 두 토막",
+    "en": "The two stubs of the base top face"
+   },
+   "how": {
+    "ko": "왼쪽이 5에서 20까지, 오른쪽이 100에서 115까지인지 봅니다. 아니면 12단계로 돌아가요.",
+    "en": "Check the left runs 5 to 20 and the right runs 100 to 115. If not, go back to step 12."
+   }
+  },
+  {
+   "what": {
+    "ko": "보스 원",
+    "en": "The boss circle"
+   },
+   "how": {
+    "ko": "온전한 원 그대로 남아 있는지 봅니다. 아래쪽 절반을 지우면 5차시에서 사분점 32·88과 34를 못 잡아요.",
+    "en": "Check the full circle is still there. Erase its lower half and you cannot pick quadrants 32, 88, or 34 in Lesson 5."
+   }
+  },
+  {
+   "what": {
+    "ko": "저장한 파일 이름",
+    "en": "The saved file name"
+   },
+   "how": {
+    "ko": "`EDU-IB-02_L04_FEATURES.dwg` 가 새로 생겼는지 봅니다. `EDU-IB-02_L03_PROFILE.dwg` 도 그대로 있어야 해요.",
+    "en": "Check that EDU-IB-02_L04_FEATURES.dwg now exists and EDU-IB-02_L03_PROFILE.dwg is still there."
+   }
+  }
+ ],
+ "checks": [
+  {
+   "q": {
+    "ko": "보스 Ø56에서 피치원 Ø44를 만들 때 오프셋 거리가 왜 12가 아니라 6입니까?",
+    "en": "Offsetting the Ø56 boss to the Ø44 bolt circle - why is the distance 6 and not 12?"
+   },
+   "a": {
+    "ko": "오프셋은 지름이 아니라 반지름을 밉니다. 지름 차이 12의 절반인 6이 반지름 차이입니다. (56−44)÷2 = 6입니다.",
+    "en": "Offset moves the radius, not the diameter. Half of the 12 mm diameter difference is 6, which is the radius difference: (56 - 44) / 2 = 6."
+   }
+  },
+  {
+   "q": {
+    "ko": "도면에 45도라고 적혀 있습니다. ARRAYPOLAR의 「사이의 각도」에 45를 넣습니까?",
+    "en": "The drawing says 45 degrees. Do you enter 45 as ARRAYPOLAR's angle between items?"
+   },
+   "a": {
+    "ko": "아닙니다. 45는 첫 구멍이 놓이는 자리이고, 사이의 각도는 360 ÷ 4 = 90입니다. 45를 넣으면 네 구멍이 반 바퀴 안에 몰려요.",
+    "en": "No. 45 is where the first hole sits; the angle between items is 360 / 4 = 90. Entering 45 bunches all four holes into half a turn."
+   }
+  },
+  {
+   "q": {
+    "ko": "DI로 장공 간격 50을 재려는데 장공 한가운데 35와 85가 안 잡힙니다. 어디를 찍습니까?",
+    "en": "You want to measure the 50 mm slot spacing with DIST, but nothing snaps at the slot centers 35 and 85. What do you pick?"
+   },
+   "a": {
+    "ko": "장공은 호 두 개와 직선 두 개로만 되어 있어요. 중심 스냅이 걸리는 곳은 끝원 중심 29·41·79·91뿐입니다. 같은 자리끼리 재야 50이 나옵니다. 왼쪽끼리 29에서 79, 오른쪽끼리 41에서 91입니다.",
+    "en": "A slot is only two arcs and two lines, so center snap catches only the end-arc centers at 29, 41, 79, and 91. Measure like to like: 29 to 79, or 41 to 91 - both give 50."
+   }
+  },
+  {
+   "q": {
+    "ko": "필렛을 걸었는데 호가 아니라 각진 모서리가 만들어졌습니다. 오류 메시지는 없었습니다. 무엇을 빠뜨렸습니까?",
+    "en": "Your fillet produced a sharp corner instead of an arc, with no error message. What did you omit?"
+   },
+   "a": {
+    "ko": "R 옵션으로 반지름을 먼저 넣지 않았습니다. FILLET의 반지름 기본값이 0이라 0으로 실행된 것입니다. `F` 다음 `R` 다음 `10` 을 넣고 다시 두 선을 골라요.",
+    "en": "You did not set the radius with the R option first. FILLET defaults to 0, so it ran at 0. Type F, then R, then 10, and pick the two lines again."
+   }
+  },
+  {
+   "q": {
+    "ko": "보스 원의 아래쪽 절반을 지워도 됩니까?",
+    "en": "May you erase the lower half of the boss circle?"
+   },
+   "a": {
+    "ko": "안 됩니다. 보스가 앞으로 8 나와 그 자리만 두께 20입니다. 목과 베이스는 12예요. 두께가 바뀌는 원 한 바퀴가 전부 눈에 보이는 실선입니다. 지우면 5차시에서 사분점 32와 88, 그리고 34를 잡을 수 없어요.",
+    "en": "No. The boss projects 8 forward so its area is 20 thick while the web and base are 12; the full circle is the edge where thickness changes, so all of it is a visible line. Erase it and you cannot pick the quadrants at 32 and 88, or 34, in Lesson 5."
+   }
+  },
+  {
+   "q": {
+    "ko": "네 가지 실수의 공통점은 무엇입니까?",
+    "en": "What do the four common mistakes have in common?"
+   },
+   "a": {
+    "ko": "넷 다 오류 메시지가 나지 않습니다. 반지름 자리에 지름을 넣어도 명령은 정상으로 끝납니다. 배열 각도를 45로 줘도, 필렛 반지름이 0이어도 마찬가지예요. 장공 안쪽을 안 잘라도 오류가 없습니다. 화면에서는 멀쩡해 보이고 치수를 재 봐야 드러나요. 그래서 15단계의 검산이 있어요.",
+    "en": "None of them raises an error. Diameter typed into a radius prompt, 45 as the array angle, a fillet radius of 0, an untrimmed slot - the command finishes normally every time. It looks fine on screen and only shows up when you measure. That is what the cross-check in step 15 is for."
+   }
+  }
+ ],
+ "exercise": {
+  "title": {
+   "ko": "연습 — 피치원과 구멍 세 개",
+   "en": "Practice - a bolt circle with three holes"
+  },
+  "body": {
+   "ko": "도면틀 밖 빈 자리에 지름 40 원을 하나 그립니다. 그 위에 PCD Ø28로 M4 구멍 세 개를 놓아 보세요. 첫 구멍은 30도 자리입니다. 오프셋 거리와 사이의 각도는 스스로 계산합니다. 오프셋은 (40−28)÷2입니다. 사이의 각도는 360÷3이에요. 보조선 길이는 28÷2입니다. 다 하면 연습 도형만 지우고 저장합니다. 이 계산이 손에 붙으면 시험에서 개수와 피치원 지름이 바뀌어도 흔들리지 않아요.",
+   "en": "In an empty area outside the border, draw a 40 mm circle and place three M4 holes on a Ø28 bolt circle with the first at 30 degrees. Work out the offset distance and the angle between items yourself: the offset is (40 - 28) / 2 and the angle is 360 / 3. The construction line is 28 / 2 long. Erase the practice shapes when you are done, then save. Once this arithmetic is automatic, a different hole count or bolt circle in the exam will not throw you."
+  },
+  "criteria": [
+   {
+    "ko": "오프셋 거리로 6을 넣었는지 봅니다. (40−28)÷2입니다.",
+    "en": "Check you entered 6 as the offset distance: (40 - 28) / 2."
+   },
+   {
+    "ko": "`LI` 로 바깥 원의 반지름이 20, 피치원의 반지름이 14인지 확인합니다.",
+    "en": "Use LI to confirm the outer circle has radius 20 and the bolt circle radius 14."
+   },
+   {
+    "ko": "사이의 각도로 120을 넣었는지 봅니다. 360÷3입니다.",
+    "en": "Check you entered 120 as the angle between items: 360 / 3."
+   },
+   {
+    "ko": "구멍 세 개가 30도, 150도, 270도에 놓였는지 봅니다.",
+    "en": "Check the three holes sit at 30, 150, and 270 degrees."
+   },
+   {
+    "ko": "연습 도형만 지웠는지 봅니다. 본 도면의 형상은 하나도 건드리지 않습니다.",
+    "en": "Check you erased only the practice shapes and touched nothing on the real drawing."
+   }
+  ]
+ },
+ "shortcuts": [
+  {
+   "key": "OPEN",
+   "name": {
+    "ko": "열기",
+    "en": "Open"
+   },
+   "when": {
+    "ko": "매 차시 지난 상태에서 이어 그릴 때",
+    "en": "Every lesson, to carry on from the previous state"
+   }
+  },
+  {
+   "key": "Z",
+   "name": {
+    "ko": "ZOOM",
+    "en": "ZOOM"
+   },
+   "when": {
+    "ko": "화면 배율을 바꿔 스냅이 어디 붙었는지 봐야 할 때. 오늘은 뒤에 A를 붙여 전체를 맞춥니다",
+    "en": "To change the view and see where a snap landed. Today you follow it with A to fit everything"
+   }
+  },
+  {
+   "key": "CLAYER",
+   "name": {
+    "ko": "현재 레이어",
+    "en": "Current layer"
+   },
+   "when": {
+    "ko": "명령행으로 레이어를 바꿀 때. 도면층 목록 드롭다운과 같은 일입니다",
+    "en": "To change layers from the command line - the same job as the layer dropdown"
+   }
+  },
+  {
+   "key": "C",
+   "name": {
+    "ko": "CIRCLE",
+    "en": "CIRCLE"
+   },
+   "when": {
+    "ko": "구멍, 축, 피치원. Ø 표기면 D 옵션을 먼저 누릅니다",
+    "en": "Holes, shafts, bolt circles. Press the D option first when the drawing says Ø"
+   }
+  },
+  {
+   "key": "O",
+   "name": {
+    "ko": "OFFSET",
+    "en": "OFFSET"
+   },
+   "when": {
+    "ko": "중심을 다시 찍지 않고 동심원·평행선을 만들 때. 벽체 두께, 통로 여유",
+    "en": "Concentric circles and parallel lines without re-picking a center. Wall thickness, walkway clearance"
+   }
+  },
+  {
+   "key": "L",
+   "name": {
+    "ko": "LINE",
+    "en": "LINE"
+   },
+   "when": {
+    "ko": "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선. OFFSET 안에서는 도면층 옵션의 키이기도 합니다",
+    "en": "Pieces you need to handle one by one, and lines you will trim or round later. Inside OFFSET it is also the Layer option key"
+   }
+  },
+  {
+   "key": "ARRAYPOLAR",
+   "name": {
+    "ko": "원형 배열",
+    "en": "Polar array"
+   },
+   "when": {
+    "ko": "볼트 구멍처럼 각도로 균등 배치된 것. 단축키가 없어 이름 전체를 칩니다",
+    "en": "Anything spaced evenly by angle, like bolt holes. No shortcut, so type the whole name"
+   }
+  },
+  {
+   "key": "E",
+   "name": {
+    "ko": "ERASE",
+    "en": "ERASE"
+   },
+   "when": {
+    "ko": "보조선 정리",
+    "en": "Clearing away construction lines"
+   }
+  },
+  {
+   "key": "CO",
+   "name": {
+    "ko": "COPY",
+    "en": "COPY"
+   },
+   "when": {
+    "ko": "반복되는 부품, 같은 구멍을 다른 자리에 둘 때",
+    "en": "Repeated features, or the same hole in another position"
+   }
+  },
+  {
+   "key": "TR",
+   "name": {
+    "ko": "TRIM",
+    "en": "TRIM"
+   },
+   "when": {
+    "ko": "겹친 선, 튀어나온 토막을 경계까지 잘라낼 때",
+    "en": "Cutting overlapping lines and overshoots back to a boundary"
+   }
+  },
+  {
+   "key": "MI",
+   "name": {
+    "ko": "MIRROR",
+    "en": "MIRROR"
+   },
+   "when": {
+    "ko": "좌우 대칭 형상. 한 번만 그리고 뒤집습니다",
+    "en": "Symmetric features. Draw once, then flip"
+   }
+  },
+  {
+   "key": "F",
+   "name": {
+    "ko": "FILLET",
+    "en": "FILLET"
+   },
+   "when": {
+    "ko": "응력이 몰리는 안쪽 모서리. 반지름이 0이면 각지게 잇습니다",
+    "en": "Internal corners where load concentrates. At radius 0 it just joins them sharp"
+   }
+  },
+  {
+   "key": "DI",
+   "name": {
+    "ko": "DIST",
+    "en": "DIST"
+   },
+   "when": {
+    "ko": "치수를 넣기 전 두 점 사이 거리를 잴 때",
+    "en": "Measuring between two points before you dimension"
+   }
+  },
+  {
+   "key": "LI",
+   "name": {
+    "ko": "LIST",
+    "en": "LIST"
+   },
+   "when": {
+    "ko": "그린 것이 정말 그 값인지 검산할 때",
+    "en": "Cross-checking that what you drew really is that value"
+   }
+  },
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save as"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 남길 때",
+    "en": "Leaving the lesson's end state behind"
+   }
+  }
+ ],
+ "recap": {
+  "did": [
+   {
+    "ko": "축 구멍 Ø25를 그렸습니다. 보스와 같은 중심 60, 62입니다.",
+    "en": "You drew the Ø25 bore at 60, 62 - the same center as the boss."
+   },
+   {
+    "ko": "지름으로 적힌 값은 `D` 옵션으로 넣는다는 걸 여기서 익혔습니다.",
+    "en": "That is where you learned to enter a diameter value with the D option."
+   },
+   {
+    "ko": "보스 Ø56을 안쪽으로 6만큼 오프셋해 피치원 Ø44를 만들고 중심선 레이어에 넣었습니다.",
+    "en": "You offset the Ø56 boss inward by 6 to make the Ø44 bolt circle, and put it on the centerline layer."
+   },
+   {
+    "ko": "중심을 다시 입력하지 않았으니 두 원의 중심이 어긋날 수 없어요.",
+    "en": "You never retyped the center, so the two circles cannot be off-center from each other."
+   },
+   {
+    "ko": "탭 구멍은 45도 보조선으로 첫 자리를 잡고 원형 배열로 90도씩 네 개를 만들었습니다.",
+    "en": "You located the first tapped hole with a 45-degree construction line and arrayed four of them at 90 degrees."
+   },
+   {
+    "ko": "장공은 끝원 두 개를 중심거리 12로 놓고 접선을 그었습니다. 안쪽 반원을 잘라 알약 모양을 만들었습니다.",
+    "en": "For the slot you set two end circles 12 apart, drew the tangents, and trimmed the inner halves into a pill."
+   },
+   {
+    "ko": "세로 중심선 60을 기준으로 오른쪽 장공을 대칭 복사했습니다.",
+    "en": "You mirrored the right slot across the vertical centerline at 60."
+   },
+   {
+    "ko": "목과 베이스 사이를 반지름 10으로 둥글렸습니다. 중심 높이 26이 16 더하기 10이라는 것도 검산했어요.",
+    "en": "You rounded the web-to-base corner at radius 10, and checked that the center height 26 is 16 plus 10."
+   },
+   {
+    "ko": "이걸로 정면도의 형상은 전부 들어갔습니다.",
+    "en": "With that, every feature of the front view is in."
+   },
+   {
+    "ko": "오늘 쓴 명령은 시험에서만 쓰는 것이 아닙니다. 설비 자리를 재고 지그를 그릴 때 씁니다. 스페어 파트 도면을 확인할 때도 그대로 써요.",
+    "en": "These commands are not just for the exam. You use them measuring out equipment positions and drawing a jig, and again when checking a spare-part drawing."
+   }
+  ],
+  "next": {
+   "ko": "5차시는 제3각법 투상입니다. 정면도 하나로 도면 전체를 만듭니다. 평면도를 위쪽에, 우측면도를 오른쪽에 놓습니다. 핵심은 둘이에요. 정면도의 어느 점이 평면도의 어느 점이 되는지입니다. 그리고 보조선을 어떻게 끌어 쓰는지입니다. 오늘 그린 축 구멍과 탭 구멍은 옆에서 보면 가려져 숨은선으로 나옵니다. 2차시에 만들어 둔 숨은선 레이어를 여기서 처음 써요.",
+   "en": "Lesson 5 is third-angle projection. One front view generates the whole drawing: the top view above it, the right side view to its right. Two things matter - which point of the front view becomes which point of the top view, and how you pull construction lines across. The bore and tapped holes you drew today are hidden when seen from the side, so they come out as hidden lines. That is where the hidden layer built in Lesson 2 finally gets used."
+  }
+ }
+}

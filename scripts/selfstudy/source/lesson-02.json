@@ -1,0 +1,2640 @@
+{
+ "no": 2,
+ "slug": "lesson-02-part-and-template",
+ "title": {
+  "ko": "부품 이해와 도면 환경",
+  "en": "Reading the Part, Building the Sheet"
+ },
+ "videoLength": "33:41",
+ "selfStudyMin": 130,
+ "opens": null,
+ "saves": "EDU-IB-02_L02_TEMPLATE",
+ "summary": {
+  "what": {
+   "ko": "아이들러 풀리 브래킷을 읽고 A3 도면 환경을 만듭니다. 오늘은 선을 한 줄도 긋지 않습니다. 부품이 무엇이고 왜 그 형상인지부터 읽어요.",
+   "en": "You read the idler pulley bracket, then build an A3 drawing environment. You do not draw a single object line today. You start by reading what the part is and why it has that shape."
+  },
+  "why": {
+   "ko": "모르는 물건은 그려도 틀립니다. 형상의 이유를 알면 치수를 하나 놓쳐도 알아차려요. 도면틀과 레이어를 먼저 잡아야 3차시에서 바로 선을 그을 수 있어요.",
+   "en": "Draw a part you do not understand and you draw it wrong. Once you know why a shape is there, a missing dimension stands out. The border and the layers have to exist before Lesson 3 can draw anything."
+  },
+  "where": {
+   "ko": "부품은 아직 한 선도 그려지지 않았습니다. 오늘 만드는 것은 빈 A3 용지와 도면틀과 표제란입니다. 부품 형상은 3차시 베이스부터 시작해요.",
+   "en": "None of the part is drawn yet. What you build today is an empty A3 sheet with a border and a title block. The part itself starts in Lesson 3 with the base."
+  }
+ },
+ "objectives": [
+  {
+   "ko": "브래킷이 무엇을 붙들고 왜 벨트 장력이 필요한지 설명할 수 있습니다.",
+   "en": "You can explain what the bracket holds and why belt tension is needed."
+  },
+  {
+   "ko": "가공과 거칠기의 차이를 「무엇이 닿느냐」로 판단할 수 있습니다.",
+   "en": "You can decide why each face is machined and finished differently by asking what touches it."
+  },
+  {
+   "ko": "형상 다섯 가지의 근거를 대고 치수 여덟과 기호 여덟을 읽을 수 있습니다.",
+   "en": "You can give the reason behind five shape decisions and read all eight dimensions and all eight symbols."
+  },
+  {
+   "ko": "acadiso.dwt 로 도면을 열고 레이어 네 개를 설정할 수 있습니다.",
+   "en": "You can start a new drawing from acadiso.dwt and build four layers down to their values."
+  },
+  {
+   "ko": "좌표만으로 도면틀과 표제란을 작도해 템플릿 파일로 저장할 수 있습니다.",
+   "en": "You can draw the border and the title block from coordinates alone and save the template file."
+  }
+ ],
+ "before": {
+  "checklist": [
+   {
+    "ko": "AutoCAD 가 실행되는지 확인합니다.",
+    "en": "Check that AutoCAD starts."
+   },
+   {
+    "ko": "템플릿 목록에 acadiso.dwt 가 있는지 봅니다.",
+    "en": "Check that acadiso.dwt is in the template list."
+   },
+   {
+    "ko": "파일을 저장할 폴더를 미리 정해 둡니다.",
+    "en": "Decide the folder you will save into."
+   },
+   {
+    "ko": "표제란에 넣을 이름과 사번을 준비합니다.",
+    "en": "Have your name and employee number ready for the title block."
+   },
+   {
+    "ko": "오늘은 여는 파일이 없습니다. 이 과정에서 새 파일로 시작하는 유일한 차시예요.",
+    "en": "There is no file to open today. This is the only lesson in the course that starts from a new file."
+   }
+  ],
+  "recovery": {
+   "ko": "1차시를 건너뛰어도 오늘은 막히지 않아요. 여는 파일이 없거든요. 다만 외형선·중심선·숨은선·치수선이라는 네 이름은 1차시에서 나옵니다. 이름이 낯설면 「레이어 네 개」 절을 먼저 읽으세요. 그다음 따라 하기로 넘어가면 돼요.",
+   "en": "Skipping Lesson 1 does not block you today, because there is no file to open. The four names - visible line, centerline, hidden line, dimension line - do come from Lesson 1. If they are new to you, read the four-layer section here first. Then go on to the practice."
+  }
+ },
+ "sections": [
+  {
+   "id": "bracket",
+   "kind": "concept",
+   "label": {
+    "ko": "아이들러 풀리 브래킷",
+    "en": "The idler pulley bracket"
+   },
+   "lede": {
+    "ko": "도면 번호는 EDU-IB-02 입니다. 일곱 차시에 걸쳐 이 부품 하나를 그립니다.",
+    "en": "The drawing number is EDU-IB-02. You draw this one part across seven lessons."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "오늘은 선을 한 줄도 긋지 않습니다. 이게 무엇인지부터 읽습니다. 바로 그리고 싶으시죠? 그런데 모르는 물건은 그려도 틀려요.",
+     "en": "You do not draw a single line today. You read what this thing is first. You want to start drawing right away, of course. But a part you do not understand comes out wrong."
+    },
+    {
+     "type": "figure",
+     "id": "fig-belt-drive",
+     "caption": {
+      "ko": "V-벨트 구동계. 아이들러 풀리가 벨트를 눌러 장력을 잡고, 브래킷이 그 축을 붙듭니다.",
+      "en": "A V-belt drive. The idler pulley presses the belt to hold tension, and the bracket holds its shaft."
+     },
+     "alt": {
+      "ko": "모터 풀리와 종동 풀리를 벨트가 감고 있습니다. 아래쪽 벨트를 아이들러 풀리가 안쪽으로 밀어 꺾어 놓았습니다. 아이들러 풀리의 축 구멍에서 목이 내려와 넓은 베이스가 되고, 그 베이스가 볼트 두 개로 기계 프레임에 붙어 있습니다. 위쪽 벨트에 겹쳐 그린 파선은 장력이 빠져 늘어난 벨트이고, 이때 벨트가 풀리 위에서 미끄러집니다.",
+      "en": "A belt wraps a motor pulley and a driven pulley. On the lower run an idler pulley pushes the belt inward and deflects it. A web runs down from the idler's bore into a wide base, and that base is bolted to the machine frame with two bolts. The dashed line over the upper run is the belt after it has stretched and lost tension; that is when it slips on the pulleys."
+     },
+     "svg": "<svg viewBox=\"0 0 560 250\" width=\"560\" height=\"250\"><circle class=\"si\" cx=\"80\" cy=\"110\" r=\"40\"/><circle class=\"sd\" cx=\"80\" cy=\"110\" r=\"9\"/><circle class=\"si\" cx=\"430\" cy=\"110\" r=\"40\"/><circle class=\"sd\" cx=\"430\" cy=\"110\" r=\"9\"/><path class=\"si\" d=\"M80 70 L430 70\"/><path class=\"si\" d=\"M80 150 L250 132 L430 150\"/><path class=\"si\" d=\"M80 70 A40 40 0 0 0 80 150\"/><path class=\"si\" d=\"M430 70 A40 40 0 0 1 430 150\"/><path class=\"sn\" d=\"M84 74 C180 100 330 100 426 74\"/><circle class=\"si\" cx=\"250\" cy=\"159\" r=\"26\"/><circle class=\"sh\" cx=\"250\" cy=\"159\" r=\"8\"/><path class=\"sh\" d=\"M236 205 L244 170 M256 170 L264 205\"/><rect class=\"sh\" x=\"210\" y=\"205\" width=\"80\" height=\"14\"/><path class=\"sd\" d=\"M224 212 L234 212 M266 212 L276 212\"/><path class=\"si\" d=\"M170 221 L330 221\"/><path class=\"sd\" d=\"M176 221 L168 231 M196 221 L188 231 M216 221 L208 231 M236 221 L228 231 M256 221 L248 231 M276 221 L268 231 M296 221 L288 231 M316 221 L308 231\"/><text class=\"sl\" x=\"80\" y=\"114\" text-anchor=\"middle\">모터 풀리</text><text class=\"sl\" x=\"430\" y=\"114\" text-anchor=\"middle\">종동 풀리</text><text class=\"sl\" x=\"255\" y=\"112\" text-anchor=\"middle\">늘어난 벨트 · 미끄러짐</text><text class=\"slh\" x=\"286\" y=\"156\">아이들러 풀리</text><text class=\"slh\" x=\"298\" y=\"216\">브래킷</text><text class=\"sl\" x=\"340\" y=\"234\">기계 프레임</text></svg>"
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "용도",
+        "en": "What it is for"
+       },
+       "body": {
+        "ko": "V-벨트로 동력을 전달하는 장치를 떠올려 보세요. 벨트를 옆에서 눌러 주는 바퀴가 있습니다. 그 바퀴가 아이들러 풀리입니다. 이 브래킷은 그 바퀴의 축을 붙듭니다. 기계 프레임 수직면에 볼트 두 개로 고정됩니다.",
+        "en": "Picture a V-belt drive. It has a wheel that presses on the belt from the side. That wheel is the idler pulley. This bracket holds its shaft. It bolts to the vertical face of the machine frame with two bolts."
+       }
+      },
+      {
+       "label": {
+        "ko": "실제 역할",
+        "en": "What it actually does"
+       },
+       "body": {
+        "ko": "벨트는 쓰다 보면 늘어납니다. 늘어난 채로 두면 풀리 위에서 미끄러집니다. 모터는 도는데 반대쪽이 안 따라옵니다. 그동안 마찰로 열이 나고 벨트와 풀리가 같이 닳아요.",
+        "en": "A belt stretches with use. Left slack, it slips on the pulley. The motor turns but the other side does not follow. Meanwhile friction makes heat, and belt and pulley wear together."
+       }
+      },
+      {
+       "label": {
+        "ko": "적용 예시",
+        "en": "Where you meet one"
+       },
+       "body": {
+        "ko": "물류 창고의 벨트 컨베이어를 떠올리시면 돼요. 모터에서 롤러로 동력을 넘기는 구간이 있어요. 거기에 이런 브래킷이 들어갑니다. 정비할 때는 브래킷을 옆으로 조금 밀어 장력을 맞추고 볼트를 조입니다.",
+        "en": "Think of a belt conveyor in a warehouse. There is a section that passes power from the motor to a roller. A bracket like this sits there. During maintenance you slide the bracket sideways a little, set the tension, and tighten the bolts."
+       }
+      },
+      {
+       "label": {
+        "ko": "그 효과",
+        "en": "The effect"
+       },
+       "body": {
+        "ko": "장력이 맞으면 미끄러짐이 없습니다. 동력이 그대로 전달됩니다. 벨트와 풀리가 덜 닳아 교체 주기가 길어져요. 반대로 너무 조이면 어떻게 될까요? 베어링에 무리가 갑니다. 적당한 장력을 잡아 주는 것이 이 부품의 일이에요.",
+        "en": "With the right tension there is no slip. Power goes straight through. Belt and pulley wear less, so they last longer. And if you over-tighten it? The bearing takes the strain. Holding the right tension is this part's job."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "이런 부품이 부러지면 설비가 섭니다. 그때 스페어를 급히 구해야 합니다. 조립도에서 부품을 찾고, 부품 도면을 확인하고, 가공집에 넘깁니다. 오늘 배우는 읽는 법이 그 자리에서 쓰여요.",
+     "en": "When a part like this breaks, the line stops. Then you have to source a spare fast. You find the part on the assembly drawing, check its part drawing, and hand it to the machine shop. The reading you learn today is what you use at that moment.",
+     "label": {
+      "ko": "스페어 파트 긴급 공수",
+      "en": "Urgent spare-part sourcing"
+     }
+    }
+   ]
+  },
+  {
+   "id": "machining",
+   "kind": "concept",
+   "label": {
+    "ko": "부위별 가공과 표면 거칠기",
+    "en": "Machining and surface finish, face by face"
+   },
+   "lede": {
+    "ko": "무엇이 닿느냐가 그 면의 가공을 정합니다.",
+    "en": "What touches a face decides how that face is machined."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "여기에 원칙이 하나 있습니다. **모든 면을 똑같이 깎지 않습니다.** 닿는 상대와 받는 힘이 면마다 다르기 때문입니다.",
+     "en": "There is one principle here. **You do not machine every face the same way.** What each face touches, and what force it carries, is different."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "부위 여섯 곳의 가공과 표면 거칠기",
+      "en": "Machining and surface roughness at six places"
+     },
+     "head": [
+      {
+       "ko": "부위",
+       "en": "Place"
+      },
+      {
+       "ko": "가공",
+       "en": "Machining"
+      },
+      {
+       "ko": "표면 거칠기",
+       "en": "Surface roughness"
+      },
+      {
+       "ko": "왜 그런가",
+       "en": "Why"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "축 구멍 Ø25 H7",
+        "en": "Bore Ø25 H7"
+       },
+       {
+        "ko": "드릴 Ø24 → 리머",
+        "en": "Drill Ø24, then ream"
+       },
+       {
+        "ko": "Ra 1.6",
+        "en": "Ra 1.6"
+       },
+       {
+        "ko": "회전하는 축이 닿는 면 · 미끄럼 마찰이 계속되는 자리",
+        "en": "A rotating shaft runs here; sliding friction never stops"
+       }
+      ],
+      [
+       {
+        "ko": "탭 4-M5 깊이 10",
+        "en": "Tapped holes 4-M5, 10 deep"
+       },
+       {
+        "ko": "드릴 Ø4.2 → 탭",
+        "en": "Drill Ø4.2, then tap"
+       },
+       {
+        "ko": "지정 없음",
+        "en": "Not specified"
+       },
+       {
+        "ko": "힘을 받는 것은 면이 아니라 나사산",
+        "en": "The thread carries the load, not the surface"
+       }
+      ],
+      [
+       {
+        "ko": "장착 장공 2-R5",
+        "en": "Mounting slots 2-R5"
+       },
+       {
+        "ko": "드릴 Ø10 두 번 → 엔드밀",
+        "en": "Drill Ø10 twice, then end-mill"
+       },
+       {
+        "ko": "Ra 12.5",
+        "en": "Ra 12.5"
+       },
+       {
+        "ko": "볼트가 통과만 하는 구멍 · 머리와 프레임 사이에서 눌러 잡음",
+        "en": "The bolt only passes through; it clamps between its head and the frame"
+       }
+      ],
+      [
+       {
+        "ko": "보스 앞면 Ø56",
+        "en": "Boss face Ø56"
+       },
+       {
+        "ko": "단차 밀링",
+        "en": "Step milling"
+       },
+       {
+        "ko": "Ra 6.3",
+        "en": "Ra 6.3"
+       },
+       {
+        "ko": "커버가 덮이기만 하는 면 · 평평하면 충분",
+        "en": "A cover simply sits on it; flat is enough"
+       }
+      ],
+      [
+       {
+        "ko": "목과 외곽",
+        "en": "Web and outline"
+       },
+       {
+        "ko": "윤곽 밀링",
+        "en": "Contour milling"
+       },
+       {
+        "ko": "Ra 12.5",
+        "en": "Ra 12.5"
+       },
+       {
+        "ko": "닿는 상대가 없고 힘만 전달하는 면",
+        "en": "Nothing touches it; it only carries force"
+       }
+      ],
+      [
+       {
+        "ko": "필렛 R10",
+        "en": "Fillet R10"
+       },
+       {
+        "ko": "엔드밀 코너 R",
+        "en": "End-mill corner radius"
+       },
+       {
+        "ko": "지정 없음",
+        "en": "Not specified"
+       },
+       {
+        "ko": "안쪽 모서리의 응력 집중 완화",
+        "en": "Relieves stress concentration at the inside corner"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "축 구멍만 곱게 하는 이유를 한 줄 더 붙일게요. 표면이 거칠면 축과 구멍이 서로 긁습니다. 마찰이 커지고 열이 나고, 그러면 둘 다 닳아요. 닳으면 처음에 맞춰 놓은 끼워맞춤이 헐거워져요. H7 등급은 드릴만으로 낼 수 없어서 리머 공정이 한 번 더 들어갑니다.",
+     "en": "One more line on why only the bore is finished fine. A rough surface lets shaft and bore scrape each other. Friction rises, heat builds, and both wear. Once they wear, the fit you set at the start goes loose. An H7 grade cannot be drilled to size, so a reaming pass is added."
+    },
+    {
+     "type": "p",
+     "ko": "탭은 거칠기 대신 드릴 지름이 중요합니다. 구멍이 크면 산이 얕게 남아 나사가 힘을 못 받습니다. 네 개를 균등하게 둔 것은 커버가 한쪽으로 기울지 않게 하려는 거예요.",
+     "en": "For the tapped holes, drill diameter matters more than finish. If the hole is too big the thread is shallow and cannot carry load. The four are evenly spaced so the cover does not tilt to one side."
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "장공을 곱게 하려면 공정이 하나 더 붙습니다. 필요 없는 곳을 곱게 하면 가공비만 올라요. 이 판단이 가공집 견적에 그대로 나타나요.",
+     "en": "Finishing the slots finely adds one more process. Finishing a face that does not need it only raises the cost. That judgement shows up directly in the machine shop's quote.",
+     "label": {
+      "ko": "가공집 견적",
+      "en": "The machine shop quote"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "실제 도면에는 표기가 더 들어갑니다. 표면 거칠기 기호, 기하 공차, 열처리 지시입니다. 이 과정 실습에서는 그리지 않아요. 무엇을 지시하는 기호인지만 알고 넘어가요.",
+     "en": "A real drawing carries more notation: surface roughness symbols, geometric tolerances, heat-treatment notes. This course does not draw them. Just know what each one specifies and move on.",
+     "label": {
+      "ko": "이 과정에서 그리지 않는 표기",
+      "en": "Notations this course does not draw"
+     }
+    }
+   ]
+  },
+  {
+   "id": "shape",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "형상이 그 모양인 이유",
+    "en": "Why the shape is what it is"
+   },
+   "lede": {
+    "ko": "도면을 볼 때 가장 위험한 습관은 형상을 그냥 외우는 것입니다.",
+    "en": "The most dangerous habit in reading a drawing is memorising the shape."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "왜 그 자리에 그게 있는지를 알아야 합니다. 그러면 치수를 하나 놓쳐도 알아차려요. 아래 정면도를 옆에 두고 다섯 곳을 하나씩 짚어 보세요.",
+     "en": "You need to know why each feature sits where it does. Then a missing dimension stands out. Keep the front view beside you and go through the five places one at a time."
+    },
+    {
+     "type": "figure",
+     "ref": "front",
+     "caption": {
+      "ko": "정면도. 아래 넓은 베이스, 가운데 목, 위쪽 보스와 축 구멍이 보입니다.",
+      "en": "Front view. You can see the wide base at the bottom, the web in the middle, and the boss and bore above."
+     },
+     "alt": {
+      "ko": "정면도입니다. 아래에 가로로 긴 베이스가 있고 그 안에 좌우로 장공 두 개가 있습니다. 베이스 바깥 위 모서리 두 곳은 비스듬히 잘려 있습니다. 가운데에서 목이 올라가는데 밑이 넓고 위로 갈수록 좁아지며, 목과 베이스가 만나는 안쪽 모서리는 크게 둥글려져 있습니다. 목 위쪽에는 큰 원인 보스가 있고 그 안에 작은 축 구멍이 같은 중심으로 뚫려 있습니다. 축 구멍 둘레에는 작은 탭 구멍 네 개가 원을 따라 놓여 있고, 가로 세로 중심선이 그려져 있습니다.",
+      "en": "The front view. A long horizontal base sits at the bottom with two slots side by side inside it. The two outer top corners of the base are cut off at an angle. A web rises from the middle, wide at the foot and narrowing upward, and the inside corners where the web meets the base are generously rounded. Above the web is a large circle, the boss, with a smaller bore through it on the same center. Four small tapped holes sit on a circle around the bore, and horizontal and vertical centerlines are drawn."
+     }
+    },
+    {
+     "type": "cards",
+     "items": [
+      {
+       "label": {
+        "ko": "베이스 120 × 16",
+        "en": "Base 120 x 16"
+       },
+       "body": {
+        "ko": "폭이 120 으로 넓습니다. 위쪽 축이 만드는 힘이 이 판을 비틉니다. 볼트 두 개가 멀리 벌어져야 그 힘을 받아냅니다. 가까이 모아 놓으면 같은 힘에 더 크게 흔들려요.",
+        "en": "The base is a wide 120. The shaft above twists this plate. The two bolts have to sit far apart to take that twist. Move them close together and the same force shakes the bracket much more."
+       }
+      },
+      {
+       "label": {
+        "ko": "장공 중심거리 12",
+        "en": "Slot center distance 12"
+       },
+       "body": {
+        "ko": "볼트 구멍이 동그랗지 않아요. 벨트를 끼운 뒤 장력을 보며 좌우로 밀어야 하거든요. 조정할 수 있는 폭이 곧 이 중심거리 12 밀리미터입니다.",
+        "en": "The bolt holes are not round. After the belt goes on you slide the bracket sideways while watching the tension. The 12 mm between the end-arc centers is exactly how much adjustment you get."
+       }
+      },
+      {
+       "label": {
+        "ko": "목 밑동 80",
+        "en": "Web foot 80"
+       },
+       "body": {
+        "ko": "밑동 폭은 80 이고 위로 가면서 54 까지 좁아집니다. 굽힘 모멘트가 가장 큰 곳이 밑동이기 때문입니다. 위쪽은 힘이 작으니 살을 뺍니다. 필요한 곳에만 재료를 두는 거예요.",
+        "en": "The foot spans 80 and narrows to 54 higher up, because the bending moment is largest at the foot. Higher up the force is smaller, so material comes off. Material stays only where it is needed."
+       }
+      },
+      {
+       "label": {
+        "ko": "보스 Ø56 · 앞으로 8",
+        "en": "Boss Ø56, 8 forward"
+       },
+       "body": {
+        "ko": "판 전체를 두껍게 할 수도 있었어요. 대신 살이 필요한 축 둘레만 앞으로 8 키웠습니다. 뒤는 평평합니다. 뒷면 전체가 프레임에 밀착해야 하기 때문입니다. 뒤로 튀어나오면 그 부분만 닿고 나머지 면이 떠요.",
+        "en": "The whole plate could have been made thicker. Instead only the ring around the shaft grows 8 forward, where the material is needed. The back stays flat, because the whole back face has to sit against the frame. A bump on the back would touch at that point alone and lift the rest of the face."
+       }
+      },
+      {
+       "label": {
+        "ko": "축 구멍 Ø25 · 동심",
+        "en": "Bore Ø25, concentric"
+       },
+       "body": {
+        "ko": "축 구멍의 중심은 보스의 중심과 같습니다. 어긋나면 어떻게 될까요? 축이 도는 힘이 한쪽으로 쏠립니다. 얇은 쪽 살부터 가요.",
+        "en": "The bore sits on the same center as the boss. What happens if it drifts off? The force from the turning shaft leans to one side. The thin wall goes first."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "보스가 뒤로 나오면 밀착면이 뜹니다. 이 판단은 설비 레이아웃에서 간섭을 찾는 눈과 같아요. 닿아야 할 면과 닿으면 안 되는 면을 먼저 갈라 보세요.",
+     "en": "A boss on the back would lift the mating face. Seeing that is the same eye you use to spot interference in an equipment layout. Sort the faces that must touch from the faces that must not.",
+     "label": {
+      "ko": "레이아웃 확인",
+      "en": "Checking a layout"
+     }
+    }
+   ]
+  },
+  {
+   "id": "dimensions",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "치수 여덟 항목",
+    "en": "The eight dimensions"
+   },
+   "lede": {
+    "ko": "도면 위 치수는 이 여덟 개가 전부입니다.",
+    "en": "These eight entries are all the dimensions on the drawing."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "치수를 왜 이렇게 꼼꼼히 읽을까요? 스페어 파트를 급히 만들어야 할 때가 있어요. 이 숫자를 그대로 가공집에 넘깁니다. 하나가 틀리면 물건이 안 맞아요.",
+     "en": "Why read the dimensions this carefully? Because a spare sometimes has to be made in a hurry. These numbers go straight to the machine shop. One wrong number and the part does not fit."
+    },
+    {
+     "type": "figure",
+     "ref": "frontdim",
+     "caption": {
+      "ko": "치수와 기호가 모두 기입된 정면도입니다.",
+      "en": "The front view with every dimension and symbol shown."
+     },
+     "alt": {
+      "ko": "앞 절의 정면도에 치수가 모두 붙은 그림입니다. 가로 120 과 세로 90 이 바깥 치수로 잡혀 있고, 보스 중심까지 가로 60 세로 62 가 표시됩니다. 베이스 높이 16, 목 밑동 폭 80, 장공의 29 와 50 과 12, 장공 중심 높이 8, 필렛 중심 높이 26 이 각각 인출되어 있습니다. 기호로는 Ø25 H7, Ø56, PCD Ø44, 45도, 4-M5 깊이 10, 2-장공 R5, 2-R10, 2-C5 가 붙어 있습니다.",
+      "en": "The same front view with all dimensions added. The outside sizes are 120 across and 90 high, and the boss center is located 60 across and 62 up. The base height 16, the web foot 80, the slot values 29, 50 and 12, the slot centerline height 8, and the fillet center height 26 are each called out. The symbols shown are Ø25 H7, Ø56, PCD Ø44, 45 degrees, 4-M5 10 deep, 2-slot R5, 2-R10 and 2-C5."
+     }
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "치수 여덟 항목",
+      "en": "The eight dimension entries"
+     },
+     "head": [
+      {
+       "ko": "치수",
+       "en": "Dimension"
+      },
+      {
+       "ko": "무엇을 재는가",
+       "en": "What it measures"
+      },
+      {
+       "ko": "어디서 읽는가",
+       "en": "Where you read it"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "120 · 90",
+        "en": "120 · 90"
+       },
+       {
+        "ko": "가로 세로 바깥 치수",
+        "en": "Overall width and height"
+       },
+       {
+        "ko": "정면도 · 재료를 자르는 크기",
+        "en": "Front view; the stock cut size"
+       }
+      ],
+      [
+       {
+        "ko": "60 · 62",
+        "en": "60 · 62"
+       },
+       {
+        "ko": "보스 중심 위치",
+        "en": "Position of the boss center"
+       },
+       {
+        "ko": "왼쪽 끝에서 60, 바닥에서 62",
+        "en": "60 from the left edge, 62 up from the bottom"
+       }
+      ],
+      [
+       {
+        "ko": "16",
+        "en": "16"
+       },
+       {
+        "ko": "베이스 높이",
+        "en": "Height of the base"
+       },
+       {
+        "ko": "정면도 · 판 두께가 아님",
+        "en": "Front view; not the plate thickness"
+       }
+      ],
+      [
+       {
+        "ko": "80",
+        "en": "80"
+       },
+       {
+        "ko": "목 밑동 폭",
+        "en": "Width across the web foot"
+       },
+       {
+        "ko": "라운드가 지운 이론상의 모서리까지",
+        "en": "Measured to the theoretical corners the fillets erase"
+       }
+      ],
+      [
+       {
+        "ko": "29 · 50 · 12",
+        "en": "29 · 50 · 12"
+       },
+       {
+        "ko": "장공의 위치와 조정 폭",
+        "en": "Slot position and adjustment range"
+       },
+       {
+        "ko": "왼쪽 끝에서 첫 끝원 중심 29 · 두 장공의 끝원 중심 사이 50 · 한 장공 안 12",
+        "en": "29 to the first end-arc center, 50 between the two slots, 12 within one slot"
+       }
+      ],
+      [
+       {
+        "ko": "8",
+        "en": "8"
+       },
+       {
+        "ko": "장공 중심 높이",
+        "en": "Height of the slot centerline"
+       },
+       {
+        "ko": "바닥에서 8 · 볼트 머리가 판 안에 드는지를 정함",
+        "en": "8 up from the bottom; it decides whether the bolt head stays on the plate"
+       }
+      ],
+      [
+       {
+        "ko": "26 · (95.7)",
+        "en": "26 · (95.7)"
+       },
+       {
+        "ko": "필렛 R10 중심 위치",
+        "en": "Position of the R10 fillet center"
+       },
+       {
+        "ko": "높이 26 · 가로는 참고 치수라 괄호",
+        "en": "Height 26; the horizontal value is bracketed as a reference dimension"
+       }
+      ],
+      [
+       {
+        "ko": "12 · 20",
+        "en": "12 · 20"
+       },
+       {
+        "ko": "두께",
+        "en": "Thickness"
+       },
+       {
+        "ko": "평면도 · 판 12, 보스 자리 20",
+        "en": "Top view; 12 for the plate, 20 where the boss is"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "16 은 두께가 아닙니다. 정면에서 본 베이스의 높이예요. 두께는 평면도에서 읽습니다. 80 도 마찬가지예요. 그 자리에는 라운드가 있어 모서리가 실제로는 없습니다. 라운드가 지운 이론상의 모서리까지 잰 값이에요. 목 선은 이 점에서 시작합니다.",
+     "en": "16 is not a thickness. It is the height of the base seen in the front view; thickness is read in the top view. The 80 is the same kind of trap. A fillet sits there, so the corner does not physically exist. The 80 runs to the theoretical corner the fillet erased. The web line starts from that point.",
+     "label": {
+      "ko": "여기서 헷갈립니다",
+      "en": "This is where people slip"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "필렛 중심의 가로 위치는 (95.7) 로 적혀 있습니다. 괄호는 참고 치수라는 뜻이에요. 다른 값에서 계산되어 나오는 값입니다. 그래서 그 자체를 검사 대상으로 삼지 않아요. 이 값이 어느 두 점 사이인지는 도면마다 다르게 잡습니다. 지금은 괄호의 뜻만 기억해 두세요.",
+     "en": "The horizontal position of the fillet center is written as (95.7). Parentheses mark a reference dimension. It is derived from other values. So it is not inspected on its own. Which two points it spans is drawn differently from drawing to drawing. For now just remember what the parentheses mean.",
+     "label": {
+      "ko": "괄호 친 치수",
+      "en": "A dimension in parentheses"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "설비가 서면 이 여덟 항목을 그대로 옮겨 적어 가공집에 넘겨요. 어느 뷰에서 읽은 값인지까지 함께 적어 두세요.",
+     "en": "When the line stops you copy these eight entries and hand them to the machine shop. Write down which view each value was read from as well.",
+     "label": {
+      "ko": "스페어 파트 긴급 공수",
+      "en": "Urgent spare-part sourcing"
+     }
+    }
+   ]
+  },
+  {
+   "id": "symbols",
+   "kind": "onDrawing",
+   "label": {
+    "ko": "기호 여덟 개",
+    "en": "The eight symbols"
+   },
+   "lede": {
+    "ko": "숫자 앞뒤에 붙는 글자가 가공을 지시합니다.",
+    "en": "The letters around the numbers are what specify the machining."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "치수를 읽었으니 이제 기호를 읽습니다. 이것도 여덟 개 전부 봐요. 하나씩 소리 내어 읽어 보세요.",
+     "en": "You have read the dimensions, so now read the symbols. All eight of them again. Read each one aloud once."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "기호 여덟 개",
+      "en": "The eight symbols"
+     },
+     "head": [
+      {
+       "ko": "표기",
+       "en": "Notation"
+      },
+      {
+       "ko": "무엇인가",
+       "en": "What it is"
+      },
+      {
+       "ko": "무엇을 지시하는가",
+       "en": "What it specifies"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "Ø25 H7",
+        "en": "Ø25 H7"
+       },
+       {
+        "ko": "지름 25 · 끼워맞춤 등급 H7",
+        "en": "Diameter 25 with fit grade H7"
+       },
+       {
+        "ko": "헐겁지도 억지로 박지도 않는 등급 · 드릴로 못 내고 리머가 필요",
+        "en": "Neither loose nor forced; it cannot be drilled to size and needs reaming"
+       }
+      ],
+      [
+       {
+        "ko": "Ø56",
+        "en": "Ø56"
+       },
+       {
+        "ko": "보스 바깥 지름",
+        "en": "Outside diameter of the boss"
+       },
+       {
+        "ko": "축 둘레에 남길 살의 크기",
+        "en": "How much material stays around the shaft"
+       }
+      ],
+      [
+       {
+        "ko": "PCD Ø44",
+        "en": "PCD Ø44"
+       },
+       {
+        "ko": "피치원 지름",
+        "en": "Pitch circle diameter, the bolt circle"
+       },
+       {
+        "ko": "탭 구멍 네 개의 중심이 놓이는 원 · 구멍 지름이 아님",
+        "en": "The circle the four tapped-hole centers sit on, not the hole diameter"
+       }
+      ],
+      [
+       {
+        "ko": "45도",
+        "en": "45 degrees"
+       },
+       {
+        "ko": "첫 탭 구멍의 각도",
+        "en": "Angle of the first tapped hole"
+       },
+       {
+        "ko": "나머지 셋은 여기서 90도씩",
+        "en": "The other three follow at 90 degrees each"
+       }
+      ],
+      [
+       {
+        "ko": "4-M5 깊이 10",
+        "en": "4-M5, 10 deep"
+       },
+       {
+        "ko": "개수 · 규격 · 깊이",
+        "en": "Count, thread size, depth"
+       },
+       {
+        "ko": "이 순서로 한 줄에 씀",
+        "en": "Written in that order on one line"
+       }
+      ],
+      [
+       {
+        "ko": "2-장공 R5",
+        "en": "2-slot R5"
+       },
+       {
+        "ko": "개수와 끝단 반원 반지름",
+        "en": "Count and the end-arc radius"
+       },
+       {
+        "ko": "중심거리 12 와 함께 장공 형상을 확정",
+        "en": "With the 12 between centers it fixes the slot shape"
+       }
+      ],
+      [
+       {
+        "ko": "2-R10",
+        "en": "2-R10"
+       },
+       {
+        "ko": "좌우 둥글리기 반지름",
+        "en": "Radius of the two fillets"
+       },
+       {
+        "ko": "목과 베이스가 만나는 안쪽 모서리 두 곳",
+        "en": "The two inside corners where web meets base"
+       }
+      ],
+      [
+       {
+        "ko": "2-C5",
+        "en": "2-C5"
+       },
+       {
+        "ko": "모따기",
+        "en": "Chamfer"
+       },
+       {
+        "ko": "베이스 위쪽 바깥 모서리 두 곳 · 45도로 잘라내고 변의 길이는 5",
+        "en": "The two outer top corners of the base; cut at 45 degrees, 5 along the cut edge"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "PCD Ø44 는 구멍 자체의 지름이 아닙니다. 여기서 가장 많이 헷갈리세요. 구멍 중심이 놓이는 원의 지름입니다. 헷갈리면 구멍이 엉뚱하게 커져요.",
+     "en": "PCD Ø44 is not the diameter of the holes. This is where people slip most often. It is the diameter of the circle the hole centers sit on. Confuse the two and the holes come out far too big.",
+     "label": {
+      "ko": "PCD 를 구멍 지름으로 읽는 실수",
+      "en": "Reading PCD as a hole diameter"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "가공집과는 이 기호로 이야기합니다. 말로 풀어 쓰면 서로 다르게 알아들어요. 기호가 정확한 소통 수단이에요.",
+     "en": "You talk to the machine shop in these symbols. Spell them out in words and the two of you hear different things. The symbols are the precise channel.",
+     "label": {
+      "ko": "가공집과의 소통",
+      "en": "Talking to the machine shop"
+     }
+    }
+   ]
+  },
+  {
+   "id": "sheet",
+   "kind": "concept",
+   "label": {
+    "ko": "A3 용지와 도면틀",
+    "en": "The A3 sheet and its border"
+   },
+   "lede": {
+    "ko": "종이는 A3 가로, 420 × 297 밀리미터입니다.",
+    "en": "The sheet is A3 landscape, 420 x 297 mm."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "부품은 다 읽었어요. 이제 그릴 준비를 합니다. 오늘 만드는 환경은 이 부품에만 쓰는 게 아니에요. 종이와 선 규칙이 잡혀 있으면 무엇이든 바로 그리기 시작할 수 있어요.",
+     "en": "You have finished reading the part. Now you set up to draw. The environment you build today is not only for this part. Once the sheet and the line rules are settled, you can start drawing anything straight away."
+    },
+    {
+     "type": "figure",
+     "id": "fig-a3-layout",
+     "caption": {
+      "ko": "A3 규격도. 따라 하기에서 칠 좌표를 그림 위에 함께 적었어요.",
+      "en": "The A3 layout, with the coordinates you will type in the practice marked on it."
+     },
+     "alt": {
+      "ko": "가로로 긴 바깥 사각형이 용지선이고 왼쪽 아래 구석이 0,0, 오른쪽 위 구석이 420,297 입니다. 그 안쪽으로 사방 10 을 띄운 사각형이 도면선이며 왼쪽 아래가 10,10, 오른쪽 위가 410,287 입니다. 네 변의 한가운데에 용지선과 도면선을 잇는 짧은 중심 마크가 하나씩 있고, 좌우 마크의 높이는 148.5 입니다. 오른쪽 아래 구석에 가로 200 세로 30 의 표제란이 도면선 모서리에 붙어 있습니다. 왼쪽 아래가 210,10, 오른쪽 위가 410,40 이고 가운데 310 자리의 세로선이 100 짜리 칸 둘로 나눕니다. 왼쪽 칸에는 225,20 에서 시작하는 이름, 오른쪽 칸에는 325,20 에서 시작하는 사번이 들어가고 문자 높이는 10 입니다.",
+      "en": "The outer landscape rectangle is the sheet outline, with 0,0 at the lower left and 420,297 at the upper right. Inside it, 10 in on every side, is the border: 10,10 at the lower left and 410,287 at the upper right. At the middle of each edge a short centering mark bridges the two rectangles; the left and right marks sit at height 148.5. In the lower right corner a 200 by 30 title block meets the border corner. Its lower left is 210,10 and its upper right is 410,40, and a vertical line at 310 splits it into two cells of 100. The left cell holds the name starting at 225,20, the right cell the employee number starting at 325,20, both at text height 10."
+     },
+     "svg": "<svg viewBox=\"0 0 560 400\" width=\"560\" height=\"400\"><rect class=\"si\" x=\"30\" y=\"30\" width=\"462\" height=\"327\"/><rect class=\"si\" x=\"41\" y=\"41\" width=\"440\" height=\"305\"/><path class=\"si\" d=\"M261 357 L261 346 M261 41 L261 30 M30 194 L41 194 M481 194 L492 194\"/><rect class=\"sh\" x=\"261\" y=\"313\" width=\"220\" height=\"33\"/><path class=\"sh\" d=\"M371 313 L371 346\"/><path class=\"sd\" d=\"M30 62 L41 62\"/><text class=\"sl\" x=\"47\" y=\"66\">10</text><text class=\"sl\" x=\"30\" y=\"372\" text-anchor=\"middle\">0,0</text><text class=\"sl\" x=\"486\" y=\"24\" text-anchor=\"middle\">420,297</text><text class=\"slh\" x=\"48\" y=\"336\">10,10</text><text class=\"slh\" x=\"474\" y=\"36\" text-anchor=\"end\">410,287</text><text class=\"slh\" x=\"256\" y=\"370\" text-anchor=\"end\">210,10</text><text class=\"slh\" x=\"476\" y=\"308\" text-anchor=\"end\">410,40</text><text class=\"slh\" x=\"371\" y=\"308\" text-anchor=\"middle\">310</text><text class=\"sl\" x=\"316\" y=\"308\" text-anchor=\"middle\">200 × 30</text><text class=\"sl\" x=\"46\" y=\"190\">148.5</text><text class=\"sl\" x=\"46\" y=\"208\">중심 마크</text><text class=\"slh\" x=\"277\" y=\"329\">225,20</text><text class=\"sl\" x=\"277\" y=\"343\">이름</text><text class=\"slh\" x=\"387\" y=\"329\">325,20</text><text class=\"sl\" x=\"387\" y=\"343\">사번</text><text class=\"sl\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · 문자 높이 10</text></svg>"
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "A3 도면 환경의 연습용 기본값",
+      "en": "Practice defaults for the A3 environment"
+     },
+     "head": [
+      {
+       "ko": "요소",
+       "en": "Element"
+      },
+      {
+       "ko": "값",
+       "en": "Value"
+      },
+      {
+       "ko": "왜 그런가",
+       "en": "Why"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "용지선",
+        "en": "Sheet outline"
+       },
+       {
+        "ko": "420 × 297",
+        "en": "420 x 297"
+       },
+       {
+        "ko": "A3 가로 · 좌표의 바깥 경계",
+        "en": "A3 landscape; the outer limit of every coordinate"
+       }
+      ],
+      [
+       {
+        "ko": "도면선",
+        "en": "Border"
+       },
+       {
+        "ko": "사방 10 안쪽",
+        "en": "10 in on all four sides"
+       },
+       {
+        "ko": "인쇄 때 가장자리가 잘려도 내용이 남음",
+        "en": "The content survives when the edges are cropped in printing"
+       }
+      ],
+      [
+       {
+        "ko": "중심 마크",
+        "en": "Centering marks"
+       },
+       {
+        "ko": "네 변 한가운데",
+        "en": "Middle of each edge"
+       },
+       {
+        "ko": "접거나 복사할 때의 기준",
+        "en": "A reference when the drawing is folded or copied"
+       }
+      ],
+      [
+       {
+        "ko": "표제란",
+        "en": "Title block"
+       },
+       {
+        "ko": "200 × 30",
+        "en": "200 x 30"
+       },
+       {
+        "ko": "오른쪽 아래 · 도면선 모서리에 붙음",
+        "en": "Lower right, meeting the border corner"
+       }
+      ],
+      [
+       {
+        "ko": "표제란 칸",
+        "en": "Title block cells"
+       },
+       {
+        "ko": "100 + 100",
+        "en": "100 + 100"
+       },
+       {
+        "ko": "왼쪽 이름 · 오른쪽 사번",
+        "en": "Name on the left, employee number on the right"
+       }
+      ],
+      [
+       {
+        "ko": "문자 높이",
+        "en": "Text height"
+       },
+       {
+        "ko": "10",
+        "en": "10"
+       },
+       {
+        "ko": "칸 높이 30 안에서 위아래 여백 10씩",
+        "en": "Leaves 10 above and 10 below inside the 30 high cell"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "field",
+     "ko": "현장에서 치구를 하나 그려 제안할 때도 이 환경을 그대로 씁니다. 종이와 선 규칙이 잡혀 있으면 형상만 그리면 되거든요.",
+     "en": "You use this same environment when you sketch a jig proposal on the job. With the sheet and the line rules already settled, all that is left is the shape.",
+     "label": {
+      "ko": "지그 제안",
+      "en": "Proposing a jig"
+     }
+    }
+   ]
+  },
+  {
+   "id": "layers",
+   "kind": "concept",
+   "label": {
+    "ko": "레이어 네 개",
+    "en": "The four layers"
+   },
+   "lede": {
+    "ko": "외형선 · 중심선 · 숨은선 · 치수선, 넷뿐입니다.",
+    "en": "Visible line, centerline, hidden line, dimension line - just four."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "레이어는 선의 색상·선 종류·굵기를 묶음으로 정하는 장치입니다. 개체마다 하나씩 줄 필요가 없어요. 여기서 한 번 정해 두면 그 레이어에 그린 선이 값을 물려받습니다.",
+     "en": "A layer sets color, linetype, and lineweight for a whole group. You never have to set them object by object. Settle them once here and every line drawn on that layer inherits them."
+    },
+    {
+     "type": "table",
+     "caption": {
+      "ko": "레이어 네 개의 연습용 기본값",
+      "en": "Practice defaults for the four layers"
+     },
+     "head": [
+      {
+       "ko": "레이어",
+       "en": "Layer"
+      },
+      {
+       "ko": "선 종류",
+       "en": "Linetype"
+      },
+      {
+       "ko": "색상",
+       "en": "Color"
+      },
+      {
+       "ko": "선가중치",
+       "en": "Lineweight"
+      },
+      {
+       "ko": "선 종류 축척",
+       "en": "Linetype scale"
+      },
+      {
+       "ko": "용도",
+       "en": "Used for"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "외형선",
+        "en": "Visible line"
+       },
+       {
+        "ko": "Continuous",
+        "en": "Continuous"
+       },
+       {
+        "ko": "흰색 7",
+        "en": "White (7)"
+       },
+       {
+        "ko": "0.5",
+        "en": "0.5"
+       },
+       {
+        "ko": "—",
+        "en": "-"
+       },
+       {
+        "ko": "눈에 보이는 모양",
+        "en": "Edges you can see"
+       }
+      ],
+      [
+       {
+        "ko": "중심선",
+        "en": "Centerline"
+       },
+       {
+        "ko": "CENTER",
+        "en": "CENTER"
+       },
+       {
+        "ko": "빨강 1",
+        "en": "Red (1)"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "0.5",
+        "en": "0.5"
+       },
+       {
+        "ko": "중심과 대칭축",
+        "en": "Centers and axes of symmetry"
+       }
+      ],
+      [
+       {
+        "ko": "숨은선",
+        "en": "Hidden line"
+       },
+       {
+        "ko": "HIDDEN",
+        "en": "HIDDEN"
+       },
+       {
+        "ko": "노랑 2",
+        "en": "Yellow (2)"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "0.5",
+        "en": "0.5"
+       },
+       {
+        "ko": "가려진 모양",
+        "en": "Edges hidden behind material"
+       }
+      ],
+      [
+       {
+        "ko": "치수선",
+        "en": "Dimension line"
+       },
+       {
+        "ko": "Continuous",
+        "en": "Continuous"
+       },
+       {
+        "ko": "보라 6",
+        "en": "Magenta (6)"
+       },
+       {
+        "ko": "0.25",
+        "en": "0.25"
+       },
+       {
+        "ko": "—",
+        "en": "-"
+       },
+       {
+        "ko": "치수 · 보조선",
+        "en": "Dimensions and extension lines"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "표에 숫자가 두 종류입니다. 헷갈리기 쉬운 자리라 짚고 갈게요. 선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.5, 나머지는 0.25 로 정확히 두 배예요. 인쇄된 도면에서 형상이 먼저 눈에 들어와야 하기 때문입니다.",
+     "en": "There are two kinds of number in that table. It is an easy place to slip, so look at it closely. Lineweight is the thickness of the line, in millimeters. Only the visible line is 0.5 and the rest are 0.25, exactly double. The shape has to reach your eye first on a printed drawing."
+    },
+    {
+     "type": "figure",
+     "id": "fig-lineweight-ltscale",
+     "caption": {
+      "ko": "왼쪽은 굵기만 다른 두 선입니다. 오른쪽은 굵기가 같고 점선 간격만 다릅니다.",
+      "en": "On the left, two lines that differ only in thickness. On the right, two lines of equal thickness whose dash spacing differs."
+     },
+     "alt": {
+      "ko": "왼쪽 칸에는 같은 길이의 가로선 두 개가 있습니다. 위 선은 0.5 로 눈에 띄게 굵고 아래 선은 0.25 로 그 절반입니다. 오른쪽 칸에도 가로선 두 개가 있는데 굵기는 서로 같습니다. 위 선은 선 종류 축척 0.5 이라 점과 선의 간격이 촘촘하고, 아래 선은 축척 2 라 같은 무늬가 네 배로 늘어나 간격이 넓습니다.",
+      "en": "The left panel shows two horizontal lines of the same length. The upper one is a clearly thick 0.5, the lower one is 0.25, half as thick. The right panel also shows two horizontal lines, but these are equally thick. The upper one is at linetype scale 0.5, so the dashes and gaps are tight; the lower one is at scale 2, so the same pattern is stretched four times and the gaps are wide."
+     },
+     "svg": "<svg viewBox=\"0 0 560 170\" width=\"560\" height=\"170\"><text class=\"sl\" x=\"30\" y=\"26\">선가중치 — 선의 두께</text><text class=\"slh\" x=\"40\" y=\"56\">0.5 · 외형선</text><path class=\"si\" d=\"M40 66 L240 66\" stroke-width=\"5\"/><text class=\"slh\" x=\"40\" y=\"106\">0.25 · 나머지 셋</text><path class=\"si\" d=\"M40 116 L240 116\" stroke-width=\"2.5\"/><text class=\"sl\" x=\"40\" y=\"146\">두께가 정확히 두 배</text><path class=\"sd\" d=\"M280 20 L280 158\"/><text class=\"sl\" x=\"310\" y=\"26\">선 종류 축척 — 점선의 간격</text><text class=\"slh\" x=\"320\" y=\"56\">0.5 · 중심선 · 숨은선</text><path class=\"sc\" d=\"M320 66 L520 66\" stroke-dasharray=\"6 1.5 1.5 1.5\"/><text class=\"slh\" x=\"320\" y=\"106\">2 · 간격이 벌어짐</text><path class=\"sc\" d=\"M320 116 L520 116\" stroke-dasharray=\"24 6 6 6\"/><text class=\"sl\" x=\"310\" y=\"146\">굵기는 같고 간격만 다름</text></svg>"
+    },
+    {
+     "type": "p",
+     "ko": "선 종류 축척은 두께가 아닙니다. 점선의 간격이에요. 그래서 값이 있는 줄이 중심선과 숨은선뿐입니다. Continuous 에는 조정할 간격이 없습니다. 화면에서 점선이 실선처럼 보이면 축척이 안 맞는 거예요. 도면 전체를 한꺼번에 맞추는 명령은 `LTSCALE` 입니다. 조정하는 방법은 뒤 차시에서 다룹니다. 지금은 값만 기억해 두세요.",
+     "en": "Linetype scale is not thickness. It is the spacing of the dashes. That is why only the centerline and the hidden line carry a value; Continuous has no spacing to adjust. If a dashed line looks solid on screen, the scale is off. The command that adjusts the whole drawing at once is `LTSCALE`. How to use it comes in a later lesson. For now just remember the value."
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "2차시 영상 화면의 레이어 표에는 선가중치 열이 없습니다. 선 종류 축척도 다르게 적혀 있습니다. 이 교재는 정본 도면 규격의 값을 씁니다. 위 표가 기준이에요.",
+     "en": "The layer table on the Lesson 2 video screen has no lineweight column. Its linetype scales differ as well. This book uses the values from the master drawing specification. The table above is the reference.",
+     "label": {
+      "ko": "영상 화면의 표와 다른 값",
+      "en": "Where the video screen differs"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "warn",
+     "ko": "과제 지시가 다른 이름이나 색상, 축척을 지정할 수 있습니다. 그럴 때는 그 지시가 우선합니다. 여기 값은 연습용 기본값이에요. 지시를 먼저 확인하고, 어긋난 곳을 찾고, 고치고, 다시 검수합니다.",
+     "en": "An assignment may specify different names, colors, or scales. When it does, the assignment wins. The values here are practice defaults. Check the instruction first, find what differs, fix it, and check again.",
+     "label": {
+      "ko": "과제 지시 우선",
+      "en": "The assignment instruction wins"
+     }
+    }
+   ]
+  },
+  {
+   "id": "setup",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 1 — 그리기 전 환경 설정",
+    "en": "Do it 1 - set up before drawing"
+   },
+   "lede": {
+    "ko": "1단계부터 9단계까지, 선을 긋기 전에 정하는 것들입니다.",
+    "en": "Steps 1 to 9: everything you settle before drawing a line."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "마우스로 하지 말고 명령행으로 하시길 권해요. 좌표를 입력해야 정확하게 들어가거든요. 대문자로 쓴 것이 명령어입니다. 회색 칸에 든 것이 실제로 타이핑하는 값입니다.",
+     "en": "Do this from the command line rather than the mouse. Typed coordinates land exactly where you mean. The capitals are command names. The values in the gray boxes are what you actually type."
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "AutoCAD 버전에 따라 대화상자의 문구와 배치가 조금씩 다릅니다. 그래서 화면 문구를 그대로 옮기지 않았어요. 무엇을 묻고 무엇을 고르는지만 적었습니다. 이름이 조금 달라도 묻는 내용이 같으면 같은 항목이에요.",
+     "en": "Dialog wording and layout differ a little between AutoCAD versions. So this book does not copy screen strings. It tells you what the dialog asks and what to choose. If the wording differs but the question is the same, it is the same setting.",
+     "label": {
+      "ko": "대화상자 문구",
+      "en": "Dialog wording"
+     }
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 1,
+       "title": {
+        "ko": "새 도면 열기",
+        "en": "Open a new drawing"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "AutoCAD 를 켜고 시작 화면에서 새로 만들기 옆 화살표를 누릅니다. 템플릿 목록이 열립니다.",
+          "en": "Start AutoCAD. On the start screen, click the arrow next to New. The template list opens."
+         }
+        },
+        {
+         "type": "acadiso.dwt",
+         "do": {
+          "ko": "를 고릅니다. iso 세 글자가 붙은 것이 밀리미터 단위 템플릿입니다.",
+          "en": "Pick this one. The three letters iso mark the millimeter template."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "빈 새 도면이 열립니다.",
+        "en": "An empty new drawing opens."
+       },
+       "why": {
+        "ko": "iso 가 붙은 것이 밀리미터 단위 템플릿이기 때문입니다.",
+        "en": "Because the one with iso in the name is the millimeter template."
+       },
+       "pitfall": {
+        "ko": "`acad.dwt` 는 인치 단위입니다. 그걸 고르면 처음부터 값이 다 어긋나요. 목록에서 iso 세 글자를 확인하고 고르세요.",
+        "en": "acad.dwt is in inches. Pick that and every value is wrong from the start. Check for the three letters iso before you click."
+       }
+      },
+      {
+       "n": 2,
+       "title": {
+        "ko": "먼저 저장하기",
+        "en": "Save before you draw"
+       },
+       "actions": [
+        {
+         "type": "SAVEAS",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "EDU-IB-02_L02_TEMPLATE",
+         "do": {
+          "ko": "을 파일 이름에 넣습니다. 파일 형식은 dwg 그대로 둡니다.",
+          "en": "Enter it as the file name. Leave the file type as dwg."
+         }
+        },
+        {
+         "do": {
+          "ko": "미리 정해 둔 폴더를 고르고 저장을 누릅니다.",
+          "en": "Choose the folder you decided on and click Save."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "제목 표시줄이 EDU-IB-02_L02_TEMPLATE 으로 바뀝니다.",
+        "en": "The title bar changes to EDU-IB-02_L02_TEMPLATE."
+       },
+       "why": {
+        "ko": "매 차시 이 파일을 열어 이어 그려요. 그리기 전에 이름부터 확정합니다.",
+        "en": "Every lesson opens this file and draws on top of it. Settle the name before you draw."
+       },
+       "pitfall": {
+        "ko": "이름을 다르게 적으면 3차시에서 파일을 못 찾아요. 하이픈과 밑줄 위치를 그대로 옮기세요.",
+        "en": "Type the name differently and Lesson 3 will not find the file. Copy the hyphens and the underscore exactly."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
+        "ko": "단위 확인",
+        "en": "Check the units"
+       },
+       "actions": [
+        {
+         "type": "UNITS",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다. 대화상자가 열립니다.",
+          "en": "Type it and press Enter. A dialog opens."
+         }
+        },
+        {
+         "do": {
+          "ko": "길이 유형은 십진, 길이 정밀도는 소수점 두 자리로 둡니다.",
+          "en": "Set length type to decimal and length precision to two decimal places."
+         }
+        },
+        {
+         "do": {
+          "ko": "각도 유형은 십진 도수, 각도 정밀도는 0 으로 둡니다.",
+          "en": "Set angle type to decimal degrees and angle precision to 0."
+         }
+        },
+        {
+         "do": {
+          "ko": "삽입 축척 단위가 밀리미터인지 봅니다. 인치면 밀리미터로 바꿉니다.",
+          "en": "Check that the insertion scale unit is millimeters. If it says inches, change it."
+         }
+        },
+        {
+         "do": {
+          "ko": "확인을 눌러 닫습니다.",
+          "en": "Click OK to close."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "대화상자가 닫힙니다. 화면에는 눈에 띄는 변화가 없습니다.",
+        "en": "The dialog closes. Nothing visible changes on screen."
+       },
+       "why": {
+        "ko": "acadiso.dwt 를 골랐더라도 삽입 축척 단위는 눈으로 확인해 둬요.",
+        "en": "Even after choosing acadiso.dwt, confirm the insertion scale unit with your own eyes."
+       },
+       "pitfall": {
+        "ko": "인치인 채로 넘어가면 나중에 크기가 어긋납니다. 블록이나 다른 도면을 넣을 때 드러납니다. 대화상자 문구는 버전마다 조금씩 달라요. 항목 이름이 아니라 무엇을 묻는지를 보세요.",
+        "en": "Leave it in inches and later inserts come in at the wrong size. It shows up when you bring in a block or another drawing. The dialog wording differs between versions, so read what it asks rather than matching the label."
+       }
+      },
+      {
+       "n": 4,
+       "title": {
+        "ko": "도면 한계 잡기",
+        "en": "Set the drawing limits"
+       },
+       "actions": [
+        {
+         "type": "LIMITS",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "0,0",
+         "do": {
+          "ko": "왼쪽 아래 구석을 묻습니다. 입력하고 엔터를 누릅니다.",
+          "en": "It asks for the lower left corner. Type this and press Enter."
+         }
+        },
+        {
+         "type": "420,297",
+         "do": {
+          "ko": "오른쪽 위 구석을 묻습니다. 입력하고 엔터를 누릅니다.",
+          "en": "It asks for the upper right corner. Type this and press Enter."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "명령이 끝나지만 화면은 그대로입니다. 한계만 A3 가로 크기로 잡힙니다.",
+        "en": "The command ends but the screen does not change. Only the limits are now A3 landscape."
+       },
+       "why": {
+        "ko": "A3 가로가 420 × 297 이기 때문입니다.",
+        "en": "Because A3 landscape is 420 x 297."
+       },
+       "pitfall": {
+        "ko": "화면이 그대로라 아무 일도 안 일어난 것처럼 보여요. 5단계의 줌 전체를 해야 화면에 반영돼요.",
+        "en": "Nothing seems to happen because the screen does not move. The zoom in step 5 is what brings the limits onto the screen."
+       }
+      },
+      {
+       "n": 5,
+       "title": {
+        "ko": "화면 맞추기",
+        "en": "Fit the screen"
+       },
+       "actions": [
+        {
+         "type": "Z",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "옵션이 뜨면 입력하고 엔터를 누릅니다. 줌 전체입니다.",
+          "en": "When the options appear, type this and press Enter. That is zoom all."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "화면이 방금 잡은 한계에 맞춰집니다. 아직 아무것도 없으니 빈 화면입니다.",
+        "en": "The view fits the limits you just set. Nothing is drawn yet, so the screen is empty."
+       },
+       "why": {
+        "ko": "LIMITS 는 값만 정하고 화면을 바꾸지 않기 때문입니다.",
+        "en": "Because LIMITS only sets values; it does not move the view."
+       },
+       "pitfall": {
+        "ko": "지금은 확인할 것이 없어요. 10단계에서 용지선을 그린 뒤에 확인해요.",
+        "en": "There is nothing to check yet. You check it in step 10, once the sheet outline is drawn."
+       }
+      },
+      {
+       "n": 6,
+       "title": {
+        "ko": "선 종류 불러오기",
+        "en": "Load the linetypes"
+       },
+       "actions": [
+        {
+         "type": "LINETYPE",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "do": {
+          "ko": "로드 버튼을 누릅니다.",
+          "en": "Click Load."
+         }
+        },
+        {
+         "type": "CENTER",
+         "do": {
+          "ko": "를 목록에서 찾아 선택합니다.",
+          "en": "Find it in the list and select it."
+         }
+        },
+        {
+         "type": "HIDDEN",
+         "do": {
+          "ko": "Ctrl 을 누른 채 이것도 함께 선택하고 확인을 누릅니다.",
+          "en": "Hold Ctrl, select this one as well, and click OK."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "선 종류 목록에 CENTER 와 HIDDEN 이 들어옵니다.",
+        "en": "CENTER and HIDDEN appear in the linetype list."
+       },
+       "why": {
+        "ko": "레이어에 지정하려면 그 선 종류가 도면 안에 먼저 들어와 있어야 합니다.",
+        "en": "A linetype has to be in the drawing before a layer can use it."
+       },
+       "pitfall": {
+        "ko": "건너뛰면 8단계에서 지정할 선 종류가 목록에 없어요. Ctrl 을 놓고 두 번째를 클릭하면 첫 선택이 풀려요.",
+        "en": "Skip this and step 8 has nothing to choose from. Let go of Ctrl before the second click and the first selection is lost."
+       }
+      },
+      {
+       "n": 7,
+       "title": {
+        "ko": "레이어 네 개 만들기",
+        "en": "Create the four layers"
+       },
+       "actions": [
+        {
+         "type": "LAYER",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다. 레이어 특성 관리자가 열립니다.",
+          "en": "Type it and press Enter. The layer properties manager opens."
+         }
+        },
+        {
+         "do": {
+          "ko": "새 레이어 아이콘을 누릅니다.",
+          "en": "Click the new layer icon."
+         }
+        },
+        {
+         "type": "외형선",
+         "do": {
+          "ko": "을 이름에 입력하고 엔터를 누릅니다.",
+          "en": "Type it as the name and press Enter."
+         }
+        },
+        {
+         "type": "중심선",
+         "do": {
+          "ko": "을 같은 방법으로 만듭니다.",
+          "en": "Create this one the same way."
+         }
+        },
+        {
+         "type": "숨은선",
+         "do": {
+          "ko": "을 같은 방법으로 만듭니다.",
+          "en": "Create this one the same way."
+         }
+        },
+        {
+         "type": "치수선",
+         "do": {
+          "ko": "을 같은 방법으로 만듭니다. 모두 네 개입니다.",
+          "en": "Create this one the same way. Four in all."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "관리자에 외형선 · 중심선 · 숨은선 · 치수선 네 행이 생깁니다.",
+        "en": "Four rows appear in the manager: visible, center, hidden, dimension."
+       },
+       "why": {
+        "ko": "선의 성격이 네 가지라 넷이면 충분해요.",
+        "en": "There are four kinds of line here, so four layers are enough."
+       },
+       "pitfall": {
+        "ko": "이름을 한 글자라도 다르게 적으면 뒤 차시에서 레이어를 못 찾아요. 여기서는 이름만 만들고 색상과 선 종류는 다음 단계예요.",
+        "en": "One wrong character in a name and later lessons cannot find the layer. This step makes names only; color and linetype come next."
+       }
+      },
+      {
+       "n": 8,
+       "title": {
+        "ko": "레이어마다 색상 · 선 종류 · 선가중치 지정",
+        "en": "Set color, linetype, and lineweight on each layer"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "외형선 행의 색상 칸을 클릭해 7번 흰색을 고르고 확인을 누릅니다. 선 종류 칸은 Continuous 그대로 둡니다.",
+          "en": "Click the color cell on the visible line row, choose white (7), and click OK. Leave the linetype as Continuous."
+         }
+        },
+        {
+         "type": "0.50",
+         "do": {
+          "ko": "외형선의 선가중치 칸에서 이 값을 고릅니다. 넷 중 이 줄만 굵습니다.",
+          "en": "Choose this in the lineweight cell for the visible line. It is the only thick one of the four."
+         }
+        },
+        {
+         "type": "CENTER",
+         "do": {
+          "ko": "중심선 행의 선 종류 칸에서 고릅니다. 색상은 1번 빨강입니다.",
+          "en": "Choose it in the linetype cell on the centerline row. The color is red (1)."
+         }
+        },
+        {
+         "type": "0.25",
+         "do": {
+          "ko": "중심선의 선가중치입니다.",
+          "en": "This is the centerline lineweight."
+         }
+        },
+        {
+         "type": "HIDDEN",
+         "do": {
+          "ko": "숨은선 행의 선 종류 칸에서 고릅니다. 색상은 2번 노랑입니다.",
+          "en": "Choose it in the linetype cell on the hidden line row. The color is yellow (2)."
+         }
+        },
+        {
+         "type": "0.25",
+         "do": {
+          "ko": "숨은선의 선가중치입니다.",
+          "en": "This is the hidden line lineweight."
+         }
+        },
+        {
+         "do": {
+          "ko": "치수선 행은 색상 6번 보라를 고릅니다. 선 종류는 Continuous 그대로 둡니다.",
+          "en": "On the dimension line row choose magenta (6). Leave the linetype as Continuous."
+         }
+        },
+        {
+         "type": "0.25",
+         "do": {
+          "ko": "치수선의 선가중치입니다.",
+          "en": "This is the dimension line lineweight."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "네 행이 표대로 채워집니다. 외형선 행만 선가중치가 0.50 입니다.",
+        "en": "The four rows match the table. Only the visible line row is 0.50."
+       },
+       "why": {
+        "ko": "굵기를 레이어에서 정해 두면 개체마다 따로 줄 일이 없어요.",
+        "en": "Set the thickness on the layer and you never set it on an object."
+       },
+       "pitfall": {
+        "ko": "나중에 선 하나가 굵기만 다르면 레이어가 틀린 거예요. 선 종류 축척은 여기서 지정하지 않습니다. 개체를 그린 뒤 특성 창의 선 종류 축척 칸에 넣습니다.",
+        "en": "If one line later differs only in thickness, it is on the wrong layer. Linetype scale is not set here. You enter it in the Properties palette after the object is drawn."
+       }
+      },
+      {
+       "n": 9,
+       "title": {
+        "ko": "외형선을 현재 레이어로",
+        "en": "Make the visible line layer current"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "레이어 관리자에서 외형선 행을 선택합니다.",
+          "en": "Select the visible line row in the layer manager."
+         }
+        },
+        {
+         "do": {
+          "ko": "현재로 설정 버튼을 누르고 대화상자를 닫습니다.",
+          "en": "Click Set Current and close the dialog."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "화면 위 레이어 표시가 외형선으로 바뀝니다.",
+        "en": "The layer indicator at the top of the screen changes to the visible line layer."
+       },
+       "why": {
+        "ko": "앞으로 그리는 선이 이 레이어에 들어가기 때문입니다.",
+        "en": "Because every line you draw from now on lands on this layer."
+       },
+       "pitfall": {
+        "ko": "누르지 않으면 다른 레이어에 그려져요. 그 선은 굵기를 못 받아 15단계에서 차이가 안 보여요.",
+        "en": "Skip the button and the lines go on another layer. They never get the thickness, so no difference shows up in step 15."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "border",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 2 — 도면틀 · 중심 마크 · 표제란",
+    "en": "Do it 2 - border, centering marks, title block"
+   },
+   "lede": {
+    "ko": "10단계부터 12단계까지, 좌표 입력만으로 도면틀을 그립니다.",
+    "en": "Steps 10 to 12: the whole border drawn from typed coordinates."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "이제부터 선이 화면에 나타납니다. 앞 절의 A3 규격도를 옆에 두고 좌표를 대조하며 치세요. 숫자가 그림 어디에 해당하는지 보이면 오타를 스스로 잡아요.",
+     "en": "From here lines start appearing on screen. Keep the A3 layout from the previous section beside you and check each coordinate against it. Once you can see where a number lands, you catch your own typos."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 10,
+       "title": {
+        "ko": "용지선과 도면선",
+        "en": "Sheet outline and border"
+       },
+       "actions": [
+        {
+         "type": "REC",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다. 직사각형 명령입니다.",
+          "en": "Type it and press Enter. That is the rectangle command."
+         }
+        },
+        {
+         "type": "0,0",
+         "do": {
+          "ko": "첫 번째 구석점을 묻습니다. 입력하고 엔터를 누릅니다.",
+          "en": "It asks for the first corner. Type this and press Enter."
+         }
+        },
+        {
+         "type": "420,297",
+         "do": {
+          "ko": "반대 구석점을 묻습니다. 입력하고 엔터를 누릅니다. 용지선이 그려집니다.",
+          "en": "It asks for the opposite corner. Type this and press Enter. That is the sheet outline."
+         }
+        },
+        {
+         "type": "REC",
+         "do": {
+          "ko": "를 다시 입력하고 엔터를 누릅니다.",
+          "en": "Type it again and press Enter."
+         }
+        },
+        {
+         "type": "10,10",
+         "do": {
+          "ko": "첫 번째 구석점입니다.",
+          "en": "The first corner."
+         }
+        },
+        {
+         "type": "410,287",
+         "do": {
+          "ko": "반대 구석점입니다. 도면선이 그려집니다.",
+          "en": "The opposite corner. That is the border."
+         }
+        },
+        {
+         "type": "Z",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "A",
+         "do": {
+          "ko": "를 입력하고 엔터를 눌러 화면을 다시 맞춥니다.",
+          "en": "Type it and press Enter to fit the view again."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "사각형 두 개가 보이고 안쪽 사각형이 사방 10씩 들어가 있습니다.",
+        "en": "Two rectangles appear, the inner one set 10 in on every side."
+       },
+       "why": {
+        "ko": "인쇄할 때 가장자리가 잘려도 도면 내용이 살아 있어야 하기 때문입니다.",
+        "en": "Because the content has to survive when the printer crops the edges."
+       },
+       "pitfall": {
+        "ko": "REC 로 그린 사각형은 네 변이 한 덩어리인 폴리선입니다. 한 번 클릭에 네 변이 같이 잡히면 제대로 된 거예요. 한 변만 다뤄야 하는 선은 REC 로 그리지 마세요.",
+        "en": "A rectangle drawn with REC is a polyline: four edges in one object. If one click grabs all four edges, it is right. Do not use REC for a line you need to handle on its own."
+       }
+      },
+      {
+       "n": 11,
+       "title": {
+        "ko": "중심 마크 네 개",
+        "en": "The four centering marks"
+       },
+       "actions": [
+        {
+         "type": "L",
+         "do": {
+          "ko": "을 입력하고 엔터를 누릅니다. 선 명령입니다.",
+          "en": "Type it and press Enter. That is the line command."
+         }
+        },
+        {
+         "type": "210,0",
+         "do": {
+          "ko": "아래쪽 마크의 첫 점입니다.",
+          "en": "First point of the bottom mark."
+         }
+        },
+        {
+         "type": "210,10",
+         "do": {
+          "ko": "둘째 점입니다. 그리고 엔터를 한 번 더 눌러 명령을 끝냅니다.",
+          "en": "Second point. Then press Enter once more to end the command."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "을 다시 입력하고 엔터를 누릅니다.",
+          "en": "Type it again and press Enter."
+         }
+        },
+        {
+         "type": "210,287",
+         "do": {
+          "ko": "위쪽 마크의 첫 점입니다.",
+          "en": "First point of the top mark."
+         }
+        },
+        {
+         "type": "210,297",
+         "do": {
+          "ko": "둘째 점입니다. 엔터로 끝냅니다.",
+          "en": "Second point. Press Enter to end."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "을 다시 입력하고 엔터를 누릅니다.",
+          "en": "Type it again and press Enter."
+         }
+        },
+        {
+         "type": "0,148.5",
+         "do": {
+          "ko": "왼쪽 마크의 첫 점입니다.",
+          "en": "First point of the left mark."
+         }
+        },
+        {
+         "type": "10,148.5",
+         "do": {
+          "ko": "둘째 점입니다. 엔터로 끝냅니다.",
+          "en": "Second point. Press Enter to end."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "을 다시 입력하고 엔터를 누릅니다.",
+          "en": "Type it again and press Enter."
+         }
+        },
+        {
+         "type": "410,148.5",
+         "do": {
+          "ko": "오른쪽 마크의 첫 점입니다.",
+          "en": "First point of the right mark."
+         }
+        },
+        {
+         "type": "420,148.5",
+         "do": {
+          "ko": "둘째 점입니다. 엔터로 끝냅니다.",
+          "en": "Second point. Press Enter to end."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "네 변 한가운데에 용지선과 도면선을 잇는 짧은 선이 하나씩 생깁니다.",
+        "en": "A short line bridging outline and border appears at the middle of each edge."
+       },
+       "why": {
+        "ko": "148.5 는 297 의 절반입니다. 네 변의 한가운데를 좌표로 찍어요.",
+        "en": "148.5 is half of 297. You place each mark by coordinate, not by eye."
+       },
+       "pitfall": {
+        "ko": "엔터를 두 번 연달아 치는 게 아니에요. 두 점을 찍고 마지막에 한 번 더 눌러 빠져나옵니다. 148.5 의 소수점을 빠뜨리면 마크가 한가운데에 오지 않아요.",
+        "en": "You are not pressing Enter twice in a row. You place two points, then press once more to exit. Drop the decimal point in 148.5 and the mark is nowhere near the middle."
+       }
+      },
+      {
+       "n": 12,
+       "title": {
+        "ko": "표제란",
+        "en": "The title block"
+       },
+       "actions": [
+        {
+         "type": "REC",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "210,10",
+         "do": {
+          "ko": "첫 번째 구석점입니다.",
+          "en": "The first corner."
+         }
+        },
+        {
+         "type": "410,40",
+         "do": {
+          "ko": "반대 구석점입니다. 가로 200, 세로 30 사각형이 생깁니다.",
+          "en": "The opposite corner. A 200 by 30 rectangle appears."
+         }
+        },
+        {
+         "type": "L",
+         "do": {
+          "ko": "을 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "310,10",
+         "do": {
+          "ko": "세로선의 첫 점입니다.",
+          "en": "First point of the dividing line."
+         }
+        },
+        {
+         "type": "310,40",
+         "do": {
+          "ko": "둘째 점입니다. 엔터로 끝냅니다. 이제 100 짜리 칸이 두 개입니다.",
+          "en": "Second point. Press Enter to end. Now there are two cells of 100."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "도면선 오른쪽 아래 모서리에 200 × 30 사각형이 붙습니다. 칸은 두 개입니다.",
+        "en": "A 200 by 30 rectangle meets the lower right border corner, split into two cells."
+       },
+       "why": {
+        "ko": "도면선의 오른쪽 아래 모서리가 410, 10 입니다. 표제란이 그 모서리에 딱 붙습니다.",
+        "en": "The lower right border corner is at 410, 10, so the title block meets it exactly."
+       },
+       "pitfall": {
+        "ko": "가운데 세로선은 사각형이 아니라 선입니다. REC 가 아니라 L 로 그려요. REC 로 그리면 폴리선이 하나 더 생겨 나중에 손댈 때 걸려요.",
+        "en": "The dividing line is a line, not a rectangle. Draw it with L, not REC. Drawn with REC it becomes another polyline that gets in your way later."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "ko": "REC 로 그린 사각형은 네 변이 한 덩어리입니다. 한 번 클릭하면 네 변이 같이 잡혀요. 설비 레이아웃에서 영역을 재거나 통째로 옮길 때 이 성질을 써요.",
+     "en": "A rectangle from REC is one object with four edges; one click grabs all four. You use that when you measure or move a whole area on an equipment layout.",
+     "label": {
+      "ko": "폴리선으로 그린다는 것",
+      "en": "What it means to draw a polyline"
+     }
+    }
+   ]
+  },
+  {
+   "id": "text-snap-save",
+   "kind": "practice",
+   "label": {
+    "ko": "따라 하기 3 — 한글 문자 · 스냅 · 저장",
+    "en": "Do it 3 - Korean text, snaps, save"
+   },
+   "lede": {
+    "ko": "13단계부터 16단계까지, 글자를 넣고 스냅을 잡고 저장합니다.",
+    "en": "Steps 13 to 16: put in the text, set the snaps, and save."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "글자를 쓰기 전에 할 일이 하나 있습니다. 문자 스타일의 글꼴부터 바꿔요. 이걸 건너뛰면 이름이 물음표로 나와요.",
+     "en": "There is one thing to do before writing text: change the font on the text style. Skip it and your name comes out as question marks."
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "n": 13,
+       "title": {
+        "ko": "한글이 나오게 문자 스타일 잡기",
+        "en": "Set the text style so Korean appears"
+       },
+       "actions": [
+        {
+         "type": "ST",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다. 문자 스타일 대화상자가 열리고 Standard 스타일이 선택돼 있습니다.",
+          "en": "Type it and press Enter. The text style dialog opens with the Standard style selected."
+         }
+        },
+        {
+         "type": "txt.shx",
+         "do": {
+          "ko": "글꼴 이름 칸이 이 값이면 한글 자형이 없습니다.",
+          "en": "If the font name cell says this, it has no Korean glyphs."
+         }
+        },
+        {
+         "type": "굴림",
+         "do": {
+          "ko": "으로 글꼴 이름을 바꿉니다. 목록에서 한글 이름으로 보이는 글꼴이면 무엇이든 됩니다.",
+          "en": "Change the font name to this. Any font that shows a Korean name in the list will do."
+         }
+        },
+        {
+         "type": "whgtxt.shx",
+         "do": {
+          "ko": "SHX 글꼴을 쓰려면 이것을 고릅니다. 큰 글꼴 사용을 체크하고 큰 글꼴에도 같은 값을 지정합니다.",
+          "en": "To use an SHX font, choose this instead. Tick Use Big Font and set the big font to the same file."
+         }
+        },
+        {
+         "type": "0",
+         "do": {
+          "ko": "높이 칸은 이 값 그대로 둡니다.",
+          "en": "Leave the height cell at this value."
+         }
+        },
+        {
+         "do": {
+          "ko": "적용을 누르고 닫습니다.",
+          "en": "Click Apply and close."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "Standard 스타일이 한글 자형이 있는 글꼴로 바뀝니다. 높이는 0 으로 남습니다.",
+        "en": "The Standard style now uses a font with Korean glyphs, and the height stays 0."
+       },
+       "why": {
+        "ko": "높이가 0 이어야 글자를 쓸 때마다 높이를 물어봅니다.",
+        "en": "A height of 0 makes the command ask for a height every time you write text."
+       },
+       "pitfall": {
+        "ko": "굴림 계열과 whgtxt.shx 는 둘 중 하나만 고르세요. 높이에 0 이 아닌 값을 넣으면 그 높이로 고정돼요. 표제란과 주석의 높이가 다를 때 곤란해요.",
+        "en": "Pick either a Gulim-family font or whgtxt.shx, not both. Put anything other than 0 in the height and every text is locked to it, which hurts when the title block and a note need different heights."
+       }
+      },
+      {
+       "n": 14,
+       "title": {
+        "ko": "이름과 사번 넣기",
+        "en": "Enter the name and employee number"
+       },
+       "actions": [
+        {
+         "type": "DTEXT",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "225,20",
+         "do": {
+          "ko": "문자 시작점을 묻습니다. 왼쪽 칸 왼쪽 끝에서 15 들어간 자리입니다.",
+          "en": "It asks for the start point. That is 15 in from the left edge of the left cell."
+         }
+        },
+        {
+         "type": "10",
+         "do": {
+          "ko": "높이를 묻습니다.",
+          "en": "It asks for the height."
+         }
+        },
+        {
+         "type": "0",
+         "do": {
+          "ko": "회전 각도를 묻습니다.",
+          "en": "It asks for the rotation angle."
+         }
+        },
+        {
+         "do": {
+          "ko": "본인 이름을 입력하고 엔터를 누릅니다. 엔터를 한 번 더 눌러 문자 입력을 끝냅니다.",
+          "en": "Type your name and press Enter. Press Enter once more to finish the text."
+         }
+        },
+        {
+         "type": "DTEXT",
+         "do": {
+          "ko": "를 다시 입력하고 엔터를 누릅니다.",
+          "en": "Type it again and press Enter."
+         }
+        },
+        {
+         "type": "325,20",
+         "do": {
+          "ko": "오른쪽 칸의 문자 시작점입니다. 여기도 왼쪽 끝에서 15 입니다.",
+          "en": "The start point in the right cell, also 15 in from its left edge."
+         }
+        },
+        {
+         "type": "10",
+         "do": {
+          "ko": "높이입니다.",
+          "en": "The height."
+         }
+        },
+        {
+         "type": "0",
+         "do": {
+          "ko": "회전 각도입니다.",
+          "en": "The rotation angle."
+         }
+        },
+        {
+         "do": {
+          "ko": "본인 사번을 입력하고 엔터를 누릅니다. 엔터를 한 번 더 눌러 끝냅니다.",
+          "en": "Type your employee number and press Enter. Press Enter once more to finish."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "왼쪽에 이름, 오른쪽에 사번이 들어갑니다. 글자 밑선이 둘 다 20 이고 높이가 10 이니 글자 위가 30 입니다.",
+        "en": "The name sits left and the number right. Both baselines are at 20 and the height is 10, so the tops are at 30."
+       },
+       "why": {
+        "ko": "좌표를 아는 자리는 좌표로 넣습니다. 눈대중으로 클릭하면 두 칸의 글자가 서로 어긋나요.",
+        "en": "Where you know the coordinate, type it. Click by eye and the two cells never line up."
+       },
+       "pitfall": {
+        "ko": "왼쪽이 이름, 오른쪽이 사번입니다. 순서를 바꾸지 않습니다. 글자가 물음표로 나오면 13단계로 돌아가세요.",
+        "en": "Name on the left, number on the right. Do not swap them. If the text comes out as question marks, go back to step 13."
+       }
+      },
+      {
+       "n": 15,
+       "title": {
+        "ko": "스냅과 보조 기능 설정",
+        "en": "Object snaps and the helper toggles"
+       },
+       "actions": [
+        {
+         "type": "OS",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다. 제도 설정의 객체 스냅 탭이 열립니다.",
+          "en": "Type it and press Enter. The drafting settings dialog opens on the object snap tab."
+         }
+        },
+        {
+         "do": {
+          "ko": "여섯 개를 체크합니다. 끝점 · 중간점 · 중심 · 사분점 · 교차점 · 접점이에요. 나머지는 꺼 둡니다.",
+          "en": "Tick six: endpoint, midpoint, center, quadrant, intersection, tangent. Leave the rest off."
+         }
+        },
+        {
+         "do": {
+          "ko": "확인을 누릅니다. 화면 아래 상태 막대에서 객체 스냅이 켜져 있는지 봅니다. 기능키는 `F3` 입니다.",
+          "en": "Click OK. Check the status bar at the bottom to see that object snap is on. The function key is `F3`."
+         }
+        },
+        {
+         "do": {
+          "ko": "직교 모드도 켭니다. 기능키는 `F8` 이고 수평 수직선을 그을 때 편합니다.",
+          "en": "Turn on ortho mode too. The function key is `F8`, and it helps when you draw horizontals and verticals."
+         }
+        },
+        {
+         "type": "LWDISPLAY",
+         "do": {
+          "ko": "를 입력하고 엔터를 누릅니다.",
+          "en": "Type it and press Enter."
+         }
+        },
+        {
+         "type": "ON",
+         "do": {
+          "ko": "을 입력하고 엔터를 누릅니다. 상태 막대에서 켜도 같습니다.",
+          "en": "Type it and press Enter. Toggling it on the status bar does the same."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "객체 스냅과 직교가 켜지고 외형선이 나머지보다 굵게 보입니다.",
+        "en": "Object snap and ortho are on, and the visible lines look thicker than the rest."
+       },
+       "why": {
+        "ko": "접점은 3차시에서 보스 원에 접하는 목 선을 그릴 때 써요. 꼭 체크하세요.",
+        "en": "You need the tangent snap in Lesson 3 to draw the web lines tangent to the boss circle. Be sure to tick it."
+       },
+       "pitfall": {
+        "ko": "선이 다 같아 보이면 굵기를 지정하지 않은 거예요. 8단계로 돌아가 선가중치를 확인하세요. 스냅을 다 켜면 원하지 않는 점에 자꾸 붙어요.",
+        "en": "If every line looks the same, no lineweight was set; go back to step 8 and check. Tick every snap and the cursor keeps grabbing points you did not want."
+       }
+      },
+      {
+       "n": 16,
+       "title": {
+        "ko": "저장",
+        "en": "Save"
+       },
+       "actions": [
+        {
+         "do": {
+          "ko": "`Ctrl+S` 를 누릅니다.",
+          "en": "Press `Ctrl+S`."
+         }
+        },
+        {
+         "type": "QSAVE",
+         "do": {
+          "ko": "를 입력하고 엔터를 눌러도 같습니다.",
+          "en": "Typing it and pressing Enter does the same thing."
+         }
+        }
+       ],
+       "expect": {
+        "ko": "덮어써 저장되고 EDU-IB-02_L02_TEMPLATE 상태가 됩니다.",
+        "en": "The file is overwritten and you are at the EDU-IB-02_L02_TEMPLATE state."
+       },
+       "why": {
+        "ko": "3차시가 이 파일을 열어서 시작하기 때문입니다.",
+        "en": "Because Lesson 3 opens this very file to start."
+       },
+       "pitfall": {
+        "ko": "다음 차시에 새로 만들지 마세요. 이 파일을 열어서 이어 그려요. 저장한 폴더 위치를 지금 적어 두세요.",
+        "en": "Do not start a new drawing next lesson. Open this file and keep drawing on it. Write down where you saved it while you still remember."
+       }
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "tip",
+     "ko": "2차시를 건너뛰면 3차시가 열 파일이 없어요. 아예 시작되지 않습니다. 3차시로 바로 가고 싶으면 따라 하기 세 절만 하세요. 1단계부터 16단계까지 하고 저장하면 됩니다. 앞의 읽기 절은 나중에 읽어도 작도가 막히지 않아요. 다만 「기호 여덟 개」는 4차시 전에 반드시 읽으세요. Ø 와 R 의 구분, PCD 가 구멍 지름이 아니라는 것을 알아야 합니다. C 가 45도를 함께 지시한다는 것도 알아야 해요. 모르면 4차시에서 원이 두 배로 커집니다. 탭도 반 바퀴 안에 몰려요.",
+     "en": "Skip Lesson 2 and Lesson 3 has no file to open, so it cannot start at all. If you want to jump ahead, do only the three practice sections, steps 1 to 16, and save. The reading sections can wait without blocking any drawing. But read 'The eight symbols' before Lesson 4. You need to know that a diameter differs from a radius and that PCD is not a hole diameter. You also need to know that C implies 45 degrees. Without that, your circles come out twice too big in Lesson 4 and the tapped holes bunch into half a turn.",
+     "label": {
+      "ko": "시간이 모자라면",
+      "en": "If you are short on time"
+     }
+    },
+    {
+     "type": "note",
+     "tone": "pend",
+     "ko": "이 차시 과제의 배점과 제한 시간, 합격선은 아직 공유받지 못했습니다. 시험 일시와 장소, 제출 형식도 마찬가지예요. 확정되면 이 자리에 채울게요.",
+     "en": "The marks, the time limit, and the pass mark for this lesson's assignment have not been shared yet. Neither have the exam date, the place, or the submission format. They go in this slot once settled.",
+     "label": {
+      "ko": "공유 예정",
+      "en": "To be shared"
+     }
+    }
+   ]
+  }
+ ],
+ "verify": [
+  {
+   "what": {
+    "ko": "선가중치 표시를 켰을 때 외형선만 굵은가",
+    "en": "Only the visible lines look thick with lineweight display on"
+   },
+   "how": {
+    "ko": "외형선이 나머지 세 레이어보다 눈에 띄게 굵으면 맞습니다. 다 같아 보이면 8단계로 갑니다.",
+    "en": "The visible lines should stand out against the other three layers. If all look alike, go to step 8."
+   }
+  },
+  {
+   "what": {
+    "ko": "안쪽 사각형이 사방 10씩 들어갔는가",
+    "en": "The inner rectangle is 10 in on all four sides"
+   },
+   "how": {
+    "ko": "바깥은 0,0 과 420,297 입니다. 안쪽은 10,10 과 410,287 입니다. 네 변의 간격이 모두 같아야 합니다.",
+    "en": "Outer 0,0 to 420,297 and inner 10,10 to 410,287. The gap must be equal on all four edges."
+   }
+  },
+  {
+   "what": {
+    "ko": "사각형 한 번 클릭에 네 변이 같이 잡히는가",
+    "en": "One click on a rectangle grabs all four edges"
+   },
+   "how": {
+    "ko": "네 변이 함께 선택되면 폴리선으로 그려진 것입니다. 한 변만 잡히면 REC 가 아니라 L 로 그린 거예요.",
+    "en": "If all four highlight together it is a polyline. If only one edge does, it was drawn with L, not REC."
+   }
+  },
+  {
+   "what": {
+    "ko": "표제란 오른쪽 아래 모서리가 도면선 모서리에 붙었는가",
+    "en": "The title block corner meets the border corner"
+   },
+   "how": {
+    "ko": "410, 10 지점에서 두 모서리가 만나야 합니다. 틈이 보이면 12단계의 좌표를 다시 봅니다.",
+    "en": "The two corners must meet at 410, 10. If you see a gap, recheck the coordinates in step 12."
+   }
+  },
+  {
+   "what": {
+    "ko": "세로선이 310 에 있어 100 짜리 칸이 둘인가",
+    "en": "The dividing line is at 310, giving two cells of 100"
+   },
+   "how": {
+    "ko": "왼쪽 칸이 210 에서 310, 오른쪽 칸이 310 에서 410 입니다. 두 칸의 폭이 같아야 합니다.",
+    "en": "The left cell runs 210 to 310 and the right 310 to 410. The two widths must match."
+   }
+  },
+  {
+   "what": {
+    "ko": "이름과 사번의 글자 밑선이 둘 다 20 인가",
+    "en": "Both texts sit on a baseline of 20"
+   },
+   "how": {
+    "ko": "높이가 10 이니 글자 위가 30 입니다. 칸이 10 에서 40 이라 위아래 여백이 10씩 남습니다.",
+    "en": "With height 10 the tops are at 30. The cell runs 10 to 40, so 10 is left above and below."
+   }
+  },
+  {
+   "what": {
+    "ko": "왼쪽이 이름, 오른쪽이 사번인가",
+    "en": "Name on the left, employee number on the right"
+   },
+   "how": {
+    "ko": "순서를 바꾸지 않습니다. 바뀌었으면 두 글자를 지우고 14단계를 다시 합니다.",
+    "en": "The order does not change. If they are swapped, erase both and redo step 14."
+   }
+  },
+  {
+   "what": {
+    "ko": "한글이 물음표가 아니라 글자로 보이는가",
+    "en": "Korean shows as letters, not question marks"
+   },
+   "how": {
+    "ko": "물음표면 13단계의 글꼴이 아직 txt.shx 입니다. 글꼴을 바꾸면 이미 쓴 글자도 함께 바뀝니다.",
+    "en": "Question marks mean the font in step 13 is still txt.shx. Changing it fixes the text already written."
+   }
+  },
+  {
+   "what": {
+    "ko": "좌우 중심 마크가 148.5, 위아래가 210 인가",
+    "en": "The side marks are at 148.5 and the top and bottom marks at 210"
+   },
+   "how": {
+    "ko": "148.5 는 297 의 절반, 210 은 420 의 절반입니다. 눈으로 봐도 한가운데여야 합니다.",
+    "en": "148.5 is half of 297 and 210 is half of 420. They should look centered to the eye as well."
+   }
+  },
+  {
+   "what": {
+    "ko": "레이어가 정확히 넷이고 이름이 맞는가",
+    "en": "There are exactly four layers with the right names"
+   },
+   "how": {
+    "ko": "외형선 · 중심선 · 숨은선 · 치수선입니다. 다섯 개면 잘못 만든 하나를 지웁니다.",
+    "en": "Visible, center, hidden, dimension. If there are five, delete the extra one."
+   }
+  },
+  {
+   "what": {
+    "ko": "중심선에 CENTER, 숨은선에 HIDDEN 이 지정됐는가",
+    "en": "CENTER is on the centerline layer and HIDDEN on the hidden line layer"
+   },
+   "how": {
+    "ko": "두 칸이 Continuous 로 남아 있으면 6단계를 건너뛴 것입니다. 목록에 없으면 먼저 불러옵니다.",
+    "en": "If either still says Continuous, step 6 was skipped. Load the linetype first if it is missing."
+   }
+  },
+  {
+   "what": {
+    "ko": "현재 레이어가 외형선인가",
+    "en": "The current layer is the visible line layer"
+   },
+   "how": {
+    "ko": "화면 위 레이어 표시를 봅니다. 다른 이름이면 9단계로 돌아갑니다.",
+    "en": "Look at the layer indicator at the top. If it shows another name, go back to step 9."
+   }
+  },
+  {
+   "what": {
+    "ko": "파일 이름이 EDU-IB-02_L02_TEMPLATE 인가",
+    "en": "The file is named EDU-IB-02_L02_TEMPLATE"
+   },
+   "how": {
+    "ko": "하이픈과 밑줄 위치까지 같아야 합니다. 3차시는 이 파일을 열어 시작해요.",
+    "en": "Hyphens and underscore must match exactly. Lesson 3 opens this file to start."
+   }
+  }
+ ],
+ "checks": [
+  {
+   "q": {
+    "ko": "축 구멍은 곱게 다듬고 장공은 거칠어도 됩니다. 판단 기준은 무엇입니까?",
+    "en": "The bore is finished fine, the slots may stay rough. What is the criterion?"
+   },
+   "a": {
+    "ko": "무엇이 닿느냐입니다. 축 구멍은 회전하는 축이 닿아 미끄럼 마찰이 계속됩니다. 장공은 볼트가 통과만 합니다. 볼트는 머리와 프레임 사이에서 눌러 잡습니다. 구멍 벽은 힘을 받지 않습니다. 필요 없는 곳을 곱게 하면 가공비만 오릅니다. 틀렸으면 「부위별 가공과 표면 거칠기」로 돌아가세요.",
+    "en": "What touches it. A rotating shaft runs in the bore, so sliding friction is continuous. A bolt only passes through the slot. It clamps between its head and the frame. The slot wall carries no load. Finishing a face that does not need it only raises the cost. If you missed this, go back to the machining section."
+   }
+  },
+  {
+   "q": {
+    "ko": "PCD Ø44 는 무엇의 지름입니까?",
+    "en": "Diameter of what is PCD Ø44?"
+   },
+   "a": {
+    "ko": "탭 구멍 네 개의 중심이 놓이는 원의 지름입니다. 구멍 자체의 지름이 아닙니다. 여기서 헷갈리면 구멍이 엉뚱하게 커져요. 틀렸으면 「기호 여덟 개」로 돌아가세요.",
+    "en": "The circle the four tapped-hole centers sit on. It is not the diameter of the holes themselves. Confusing the two makes the holes far too large. If you missed this, go back to the symbols section."
+   }
+  },
+  {
+   "q": {
+    "ko": "16 은 판의 두께입니까?",
+    "en": "Is 16 the plate thickness?"
+   },
+   "a": {
+    "ko": "아닙니다. 정면에서 본 베이스의 높이입니다. 두께는 평면도에서 읽고 판이 12, 보스가 있는 자리가 20 입니다. 틀렸으면 「치수 여덟 항목」으로 돌아가세요.",
+    "en": "No. It is the height of the base seen in the front view. Thickness is read in the top view: 12 for the plate and 20 where the boss is. If you missed this, go back to the dimensions section."
+   }
+  },
+  {
+   "q": {
+    "ko": "도면선을 용지선에서 사방 10 띄우는 이유는 무엇입니까?",
+    "en": "Why is the border set 10 mm inside the sheet outline on all four sides?"
+   },
+   "a": {
+    "ko": "인쇄할 때 가장자리가 잘릴 수 있기 때문입니다. 잘려도 도면 내용은 살아 있어야 합니다. 틀렸으면 「A3 용지와 도면틀」로 돌아가세요.",
+    "en": "Because the edges can be cropped when printing. The content of the drawing has to survive that. If you missed this, go back to the A3 sheet section."
+   }
+  },
+  {
+   "q": {
+    "ko": "표제란에 이름을 넣었더니 물음표가 나왔습니다. 어느 단계로 돌아갑니까?",
+    "en": "Your name came out as question marks in the title block. Which step do you go back to?"
+   },
+   "a": {
+    "ko": "13단계입니다. 문자 스타일의 글꼴이 아직 txt.shx 이기 때문이에요. 한글 자형이 없어 물음표가 나와요. 굴림 계열이나 whgtxt.shx 중 하나로 바꿉니다.",
+    "en": "Step 13. The text style font is still txt.shx. It has no Korean glyphs, so you get question marks. Change it to a Gulim-family font or to whgtxt.shx."
+   }
+  },
+  {
+   "q": {
+    "ko": "선가중치와 선 종류 축척은 무엇이 다릅니까?",
+    "en": "What is the difference between lineweight and linetype scale?"
+   },
+   "a": {
+    "ko": "선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.5, 나머지는 0.25 입니다. 선 종류 축척은 점선의 간격이라 중심선과 숨은선에만 값이 있습니다. Continuous 에는 조정할 간격이 없어요. 틀렸으면 「레이어 네 개」로 돌아가세요.",
+    "en": "Lineweight is the thickness of the line in millimeters: 0.5 for the visible line and 0.25 for the rest. Linetype scale is the spacing of the dashes, so only the centerline and the hidden line carry a value. Continuous has no spacing to adjust. If you missed this, go back to the four-layer section."
+   }
+  }
+ ],
+ "exercise": {
+  "title": {
+   "ko": "내 이름표를 뗀 빈 템플릿 한 벌",
+   "en": "A blank copy of the template with your name off"
+  },
+  "body": {
+   "ko": "지금 만든 파일을 다른 이름으로 한 벌 더 저장하세요. 예를 들면 MY_A3_TEMPLATE 이에요. 그런 다음 표제란 오른쪽 칸의 사번을 지우고 빈 칸으로 둡니다. 현장에서 치구를 하나 그려 제안할 때 이 파일을 엽니다. 바로 시작할 수 있는 상태가 됩니다. 실습용 파일 EDU-IB-02_L02_TEMPLATE 은 손대지 않습니다. 3차시가 그 파일을 엽니다.",
+   "en": "Save a second copy of the file you just made under another name, for example MY_A3_TEMPLATE. Then clear the employee-number cell in the title block and leave it blank. That copy is ready to open whenever you want to sketch a jig proposal on the job. Do not touch EDU-IB-02_L02_TEMPLATE itself - Lesson 3 opens that one."
+  },
+  "criteria": [
+   {
+    "ko": "사본의 이름이 EDU-IB-02_L02_TEMPLATE 과 다릅니다.",
+    "en": "The copy has a name different from EDU-IB-02_L02_TEMPLATE."
+   },
+   {
+    "ko": "사본의 표제란 오른쪽 칸이 비어 있고 왼쪽 칸의 이름은 남아 있습니다.",
+    "en": "The right cell of the copy's title block is empty and the name in the left cell remains."
+   },
+   {
+    "ko": "사본에도 레이어 네 개와 선가중치가 그대로 있습니다.",
+    "en": "The copy still carries all four layers with their lineweights."
+   },
+   {
+    "ko": "원본 EDU-IB-02_L02_TEMPLATE 이 그대로 남아 있습니다.",
+    "en": "The original EDU-IB-02_L02_TEMPLATE is unchanged in name and content."
+   }
+  ]
+ },
+ "shortcuts": [
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save under a new name"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 남길 때",
+    "en": "When you leave a checkpoint file at the end of a lesson"
+   }
+  },
+  {
+   "key": "UNITS",
+   "name": {
+    "ko": "단위와 정밀도 설정",
+    "en": "Set units and precision"
+   },
+   "when": {
+    "ko": "밀리미터인지 인치인지 확인할 때",
+    "en": "When you check whether you are in millimeters or inches"
+   }
+  },
+  {
+   "key": "LIMITS",
+   "name": {
+    "ko": "도면 한계 설정",
+    "en": "Set the drawing limits"
+   },
+   "when": {
+    "ko": "용지 크기를 좌표로 잡을 때",
+    "en": "When you fix the sheet size by coordinates"
+   }
+  },
+  {
+   "key": "Z",
+   "name": {
+    "ko": "ZOOM · 화면 배율 변경",
+    "en": "ZOOM - change the view"
+   },
+   "when": {
+    "ko": "스냅이 어디 붙었는지 봐야 할 때. 옵션 A 는 줌 전체",
+    "en": "When you need to see where a snap landed; option A is zoom all"
+   }
+  },
+  {
+   "key": "LINETYPE",
+   "name": {
+    "ko": "선 종류 불러오기",
+    "en": "Load a linetype"
+   },
+   "when": {
+    "ko": "CENTER · HIDDEN 을 레이어에 지정하기 전",
+    "en": "Before assigning CENTER or HIDDEN to a layer"
+   }
+  },
+  {
+   "key": "LAYER",
+   "name": {
+    "ko": "레이어 생성과 관리",
+    "en": "Create and manage layers"
+   },
+   "when": {
+    "ko": "선 종류와 색상을 개체가 아니라 레이어로 정할 때",
+    "en": "When you set linetype and color by layer instead of by object"
+   }
+  },
+  {
+   "key": "LTSCALE",
+   "name": {
+    "ko": "도면 전체의 선 종류 축척 변경",
+    "en": "Change linetype scale for the whole drawing"
+   },
+   "when": {
+    "ko": "점선이 실선처럼 보일 때",
+    "en": "When a dashed line looks solid on screen"
+   }
+  },
+  {
+   "key": "REC",
+   "name": {
+    "ko": "RECTANG · 직사각형을 폴리선으로 그리기",
+    "en": "RECTANG - draw a rectangle as a polyline"
+   },
+   "when": {
+    "ko": "도면틀, 표제란, 판재 외곽",
+    "en": "The border, the title block, a plate outline"
+   }
+  },
+  {
+   "key": "L",
+   "name": {
+    "ko": "LINE · 선 긋기",
+    "en": "LINE - draw a line"
+   },
+   "when": {
+    "ko": "낱개로 다뤄야 하는 조각",
+    "en": "A segment you need to handle on its own"
+   }
+  },
+  {
+   "key": "ST",
+   "name": {
+    "ko": "STYLE · 문자 스타일과 글꼴 설정",
+    "en": "STYLE - set the text style and font"
+   },
+   "when": {
+    "ko": "한글이 물음표로 나올 때. 글자를 쓰기 전",
+    "en": "When Korean comes out as question marks; before you write any text"
+   }
+  },
+  {
+   "key": "DTEXT",
+   "name": {
+    "ko": "문자 쓰기",
+    "en": "Write text"
+   },
+   "when": {
+    "ko": "표제란, 주석",
+    "en": "The title block, a note"
+   }
+  },
+  {
+   "key": "OS",
+   "name": {
+    "ko": "OSNAP · 객체 스냅 항목 설정",
+    "en": "OSNAP - choose which object snaps run"
+   },
+   "when": {
+    "ko": "끝점 · 중심 · 접점을 정확히 잡아야 할 때",
+    "en": "When you must land exactly on an endpoint, a center, or a tangent point"
+   }
+  },
+  {
+   "key": "LWDISPLAY",
+   "name": {
+    "ko": "선가중치 화면 표시 여부",
+    "en": "Show or hide lineweight on screen"
+   },
+   "when": {
+    "ko": "굵기 차이를 화면에서 확인할 때. ON 으로 켭니다",
+    "en": "When you check the thickness difference on screen; ON turns it on"
+   }
+  },
+  {
+   "key": "QSAVE",
+   "name": {
+    "ko": "덮어써 저장",
+    "en": "Save over the same file"
+   },
+   "when": {
+    "ko": "Ctrl+S 와 같습니다",
+    "en": "Same as Ctrl+S"
+   }
+  },
+  {
+   "key": "F3",
+   "name": {
+    "ko": "객체 스냅 켜기 · 끄기",
+    "en": "Toggle object snap"
+   },
+   "when": {
+    "ko": "상태 막대에서 객체 스냅이 켜져 있는지 확인할 때",
+    "en": "When you check on the status bar that object snap is on"
+   }
+  },
+  {
+   "key": "F8",
+   "name": {
+    "ko": "직교 모드",
+    "en": "Ortho mode"
+   },
+   "when": {
+    "ko": "수평 수직선을 그을 때",
+    "en": "When you draw horizontal and vertical lines"
+   }
+  },
+  {
+   "key": "Ctrl+S",
+   "name": {
+    "ko": "저장",
+    "en": "Save"
+   },
+   "when": {
+    "ko": "16단계 저장. QSAVE 와 같습니다",
+    "en": "The save in step 16; same as QSAVE"
+   }
+  }
+ ],
+ "recap": {
+  "did": [
+   {
+    "ko": "아이들러 풀리 브래킷을 읽었습니다. 벨트 장력을 잡는 바퀴의 축을 붙드는 부품이에요.",
+    "en": "You read the idler pulley bracket - the part that holds the shaft of the wheel that keeps belt tension."
+   },
+   {
+    "ko": "면마다 가공과 표면 거칠기가 다른 이유를 봤습니다. 무엇이 닿느냐가 판단 기준입니다.",
+    "en": "You saw why each face is machined and finished differently. What touches it is the criterion."
+   },
+   {
+    "ko": "형상마다의 근거를 봤습니다. 넓은 베이스는 비트는 힘 때문이에요. 장공은 조정 여유, 굵은 밑동은 굽힘 때문입니다. 필렛은 힘이 한 점에 몰리는 것을 막습니다.",
+    "en": "You saw the reason behind each shape. The wide base takes the twist. The slots leave room to adjust and the thick foot takes the bending. The fillets keep force off a single point."
+   },
+   {
+    "ko": "도면 위 표기는 치수 여덟 항목과 기호 여덟 개를 전부 읽었습니다.",
+    "en": "You read every notation on the drawing: eight dimensions and eight symbols."
+   },
+   {
+    "ko": "A3 용지에 도면틀을 잡고 사방 10 을 띄웠습니다. 중심 마크도 네 개 그렸습니다.",
+    "en": "You set a border on an A3 sheet, kept 10 clear on all sides, and drew four centering marks."
+   },
+   {
+    "ko": "200 × 30 표제란을 만들고 왼쪽에 이름, 오른쪽에 사번을 넣었습니다.",
+    "en": "You made a 200 by 30 title block with your name on the left and your number on the right."
+   },
+   {
+    "ko": "레이어 네 개를 설정했습니다. EDU-IB-02_L02_TEMPLATE 으로 저장했습니다.",
+    "en": "You set up four layers and saved the file as EDU-IB-02_L02_TEMPLATE."
+   },
+   {
+    "ko": "이 환경은 이 부품에만 쓰는 것이 아닙니다. 현장에서 치구를 하나 그려 제안할 때도 그대로 써요.",
+    "en": "This environment is not only for this part. You use it as it is when you sketch a jig proposal on the job."
+   }
+  ],
+  "next": {
+   "ko": "3차시는 기준선과 외곽입니다. 드디어 선을 그어요. 절대좌표와 상대좌표와 극좌표로 점을 찍습니다. 셋을 각각 언제 쓰는지 봐요. LINE 과 PLINE 의 차이도 봅니다. 원점과 기준면을 정하고 120 × 16 베이스를 작도해요. 오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그립니다. 시작할 때 EDU-IB-02_L02_TEMPLATE 을 엽니다. 새로 만들지 마세요.",
+   "en": "Lesson 3 is the baseline and the outline, and you finally draw. You place points with absolute, relative, and polar coordinates and see when each one fits. You also see how LINE differs from PLINE. You fix the origin and the datum face, then draw the 120 by 16 base from typed coordinates. With the tangent snap you turned on today you draw the web lines tangent to the boss circle. Open EDU-IB-02_L02_TEMPLATE to start. Do not create a new file."
+  }
+ }
+}
