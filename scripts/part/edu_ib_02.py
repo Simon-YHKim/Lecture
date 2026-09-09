@@ -293,6 +293,41 @@ _hl([FT_WEB, TR])
 _hl([TL, FT_WEB_L])
 feature("boss")
 _hl(arc_pts(BOSS_C, BOSS_R, 0.0, 360.0))
+# 축 구멍·탭·장공에도 겹선을 준다. 없으면 그 형상을 가리키는 강조가 대상을
+# 못 찾아 조용히 아무 일도 하지 않는다.
+feature("bore")
+_hl(arc_pts(BOSS_C, SHAFT_D / 2, 0.0, 360.0))
+feature("tap")
+for _tx, _ty in tap_xy:
+    _hl(arc_pts((_tx, _ty), TAP_D / 2, 0.0, 360.0))
+feature("slot")
+for _cx, _cy in SLOT_C:
+    _r, _half = SLOT_W / 2, SLOT_L / 2 - SLOT_W / 2
+    path("M%.3f %.3f L%.3f %.3f A%.3f %.3f 0 0 1 %.3f %.3f L%.3f %.3f A%.3f %.3f 0 0 1 %.3f %.3f Z"
+         % (*F(_cx - _half, _cy + _r), *F(_cx + _half, _cy + _r), _r, _r,
+            *F(_cx + _half, _cy - _r), *F(_cx - _half, _cy - _r), _r, _r,
+            *F(_cx - _half, _cy + _r)), "hl")
+# 같은 형상 안에서도 재는 곳이 다르면 켜는 것도 달라야 한다. 치수 하나에
+# 겹선 하나가 맞도록 더 잘게 나눠 둔다.
+feature("basehl")                      # 베이스 윤곽만 — 높이 16, 모따기 C5
+_hl([(c5, BASE_H), (0, BASE_H - c5), (0, 0), (BASE_W, 0),
+     (BASE_W, BASE_H - c5), (BASE_W - c5, BASE_H)])
+feature("neck")                        # 목 두 선과 그 밑 라운드 — 밑동 폭 80
+_hl([FT_WEB, TR])
+_hl([TL, FT_WEB_L])
+_hl(fillet_pts(FC, FT_BASE, FT_WEB))
+_hl(fillet_pts(FC_L, FT_WEB_L, FT_BASE_L))
+feature("bossc")                       # 보스 중심의 십자 — 위치 60, 62
+_hl([(BOSS_C[0] - BOSS_R * 0.54, BOSS_C[1]), (BOSS_C[0] + BOSS_R * 0.54, BOSS_C[1])])
+_hl([(BOSS_C[0], BOSS_C[1] - BOSS_R * 0.54), (BOSS_C[0], BOSS_C[1] + BOSS_R * 0.54)])
+feature("filletc")                     # 필렛 중심의 십자 — 높이 26
+for _fx, _fy in (FC, FC_L):
+    _hl([(_fx - 8.0, _fy), (_fx + 8.0, _fy)])
+    _hl([(_fx, _fy - 8.0), (_fx, _fy + 8.0)])
+feature("slotc")                        # 장공 중심선 — 중심 높이 8
+for _cx, _cy in SLOT_C:
+    _half = SLOT_L / 2 - SLOT_W / 2
+    _hl([(_cx - _half - 6.0, _cy), (_cx + _half + 6.0, _cy)])
 feature(None)
 
 feature("boss")
