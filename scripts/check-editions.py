@@ -125,7 +125,25 @@ def main():
             if want not in L[no]["body"] and tail not in L[no]["body"]:
                 fail.append("%d차시 %s 「%s」 를 대본이 말하지 않는다" % (no, label, want))
 
-    # 3) 단계 쪼개기 — 다르다고 틀린 것은 아니다. 크게 벌어지면 알려만 준다.
+    # 3) 코치 마크 — 사용자 정책 2번. 「도면 위에서 자리를 잡는 단계」에는 도면과
+    #    코치 마크가 있어야 한다. 그 단계를 무엇으로 아는가: 조작에 `snap` 이 있는
+    #    단계다. 스냅은 형상 위의 점을 잡는다는 뜻이고, 그 점을 글로만 부르면
+    #    학습자가 화면에서 찾아내야 한다 — 정책이 없애라고 한 그 탐색이다.
+    for no in sorted(SLUG):
+        holes = []
+        for sec in S[no]["doc"].get("sections", []):
+            for blk in sec.get("blocks", []):
+                if blk.get("type") != "steps":
+                    continue
+                for st in blk.get("items", []):
+                    kinds = {a.get("kind") for a in st.get("actions", [])}
+                    if "snap" in kinds and not st.get("spots"):
+                        holes.append(st.get("n"))
+        if holes:
+            fail.append("%d차시 — 스냅으로 점을 잡는데 코치 마크가 없는 단계: %s"
+                        % (no, ", ".join(str(h) for h in holes)))
+
+    # 4) 단계 쪼개기 — 다르다고 틀린 것은 아니다. 크게 벌어지면 알려만 준다.
     for no in sorted(SLUG):
         a, b = L[no]["steps"], S[no]["steps"]
         if a and b and abs(a - b) > 3:

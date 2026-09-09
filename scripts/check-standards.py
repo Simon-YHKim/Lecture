@@ -44,6 +44,12 @@ def texts():
     p = os.path.join(ROOT, SPEC.replace("/", os.sep))
     if os.path.exists(p):
         out.append((SPEC, open(p, encoding="utf-8").read()))
+    # 기획 문서도 함께 본다. 여기 옛 값이 남으면 다시 쓰는 사람이 되살린다 —
+    # 이번에 갈라진 값들이 실제로 그렇게 생겼다.
+    p = os.path.join(ROOT, "scripts", "selfstudy", "source", "curriculum.json")
+    if os.path.exists(p):
+        out.append(("scripts/selfstudy/source/curriculum.json",
+                    open(p, encoding="utf-8").read()))
     return out
 
 
@@ -56,7 +62,8 @@ def check_layers(std, docs, fail):
 
     # 1) 폐기된 값이 남아 있는가. 하나라도 남으면 그 화면은 옛 규격을 가르친다.
     dead = [
-        (r"보라\s*\(?6\)?|보라\s*6\s*번|보라색\s*6", "치수선 색 — 폐기된 '보라 6'"),
+        # 사용자 확인 (2026-09-10) — 보라색 선은 쓰지 않는다. 색 이름 자체를 막는다.
+        (r"보라", "보라색은 이 과정에서 쓰지 않는다"),
         (r"색상\s*12\s*번|12\s*번\s*빨강|빨강\s*계열\s*12", "치수선 색 — 폐기된 '12번 빨강 계열'"),
         (r"굵기\s*0\.5\b|선가중치\s*[`\"]?0\.5\b", "선가중치 — 폐기된 0.5 (정본 0.30)"),
         (r"나머지는?\s*0\.25|나머지\s*셋(은|이)?\s*0\.25", "선가중치 — 폐기된 0.25 (정본 0.15)"),

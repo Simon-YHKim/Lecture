@@ -10,8 +10,10 @@ import { pathToFileURL } from 'url';
 
 const b = await chromium.launch();
 const pg = await b.newPage({ viewport: { width: 1600, height: 900 } });
-await pg.goto(pathToFileURL(process.argv[2]).href);
-await pg.waitForFunction(() => window.__deckGo && window.__timelines);
+// 검수용 묶음은 슬라이드 220장에 코치 마크 82개가 한 문서에 들어 있어 첫 화면까지
+// 40초쯤 걸린다. 기본 30초로는 검사가 못 연다.
+await pg.goto(pathToFileURL(process.argv[2]).href, { timeout: 180000 });
+await pg.waitForFunction(() => window.__deckGo && window.__timelines, null, { timeout: 180000 });
 
 const meta = await pg.evaluate(() => {
   const out = [];

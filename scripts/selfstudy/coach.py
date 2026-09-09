@@ -37,14 +37,22 @@ SHEET_KY = 327.0 / 297.0
 
 
 def place(spot, surface):
-    """한 자리를 그 바탕의 SVG 좌표로 옮긴다."""
+    """한 자리를 그 바탕의 SVG 좌표로 옮긴다.
+
+    `view` 가 `raw` 면 x·y 를 SVG 좌표 그대로 쓴다. 투상선끼리 만나는 자리처럼
+    **부품 위에 없는 점**을 찍을 때 쓴다 — 45도 선의 원점이 그렇다. 부품 좌표로
+    억지로 환산해 적으면 그 숫자가 무엇인지 아무도 못 읽는다.
+    """
     x = float(spot.get('x', 0))
     y = float(spot.get('y', 0))
+    view = spot.get('view', 'front')
+    if view == 'raw':
+        return x, y
     if surface == 'sheet':
         return SHEET_X0 + x * SHEET_KX, SHEET_Y0 + (297.0 - y) * SHEET_KY
-    view = spot.get('view', 'front')
     if surface == 'three' and view == 'top':
-        # 평면도는 가로가 부품 x, 세로가 깊이 z 다.
+        # 평면도는 가로가 부품 x, 세로가 깊이 z 다. z=0(앞면)이 아래쪽이고
+        # 정면도에 가까운 변이 앞면이라는 제3각법의 규칙이 이 부호에 들어 있다.
         return FRONT_X0 + x, TOP_Y0 - float(spot.get('z', y))
     if surface == 'three' and view == 'side':
         # 우측면도는 가로가 깊이 z, 세로가 부품 y 다.
@@ -64,7 +72,7 @@ SNAP_NAME = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사�
 
 def snap_glyph(kind, x, y, r=4.2):
     """표식 하나를 도면 좌표 위에 그린다. 획 굵기는 배율과 무관하게 둔다."""
-    a = 'class="mk" vector-effect="non-scaling-stroke"'
+    a = 'class="mk"'
     if kind == 'end':
         return '<rect %s x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>' % (
             a, x - r, y - r, r * 2, r * 2)
@@ -100,19 +108,32 @@ FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 �
 
 
 def marks(spots, surface):
-    """자리 표시 무리와 그 설명 목록을 만든다. (svg 조각, [(번호, 설명, 표식이름)])"""
+    """자리 표시 무리와 그 설명 목록을 만든다. (svg 조각, [(번호, 설명, 표식이름)])
+
+    표시 크기는 **자리끼리 얼마나 붙어 있는지**로 정한다. 평면도는 깊이가 20 밖에
+    안 돼서, 앞면·판앞면·뒷면 세 자리를 같은 크기로 찍으면 고리 셋이 겹쳐 어느
+    것이 어느 것인지 안 보인다. 붙어 있으면 작게 찍는다.
+    """
+    pts = [place(sp, surface) for sp in spots]
+    r = 8.6
+    if len(pts) > 1:
+        near = min(((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** .5
+                   for i, a in enumerate(pts) for b in pts[i + 1:]) or r * 2
+        r = max(3.4, min(8.6, near * 0.46))
+    k = r / 8.6
     out, caps = [], []
-    for i, sp in enumerate(spots, 1):
-        x, y = place(sp, surface)
+    for i, (sp, (x, y)) in enumerate(zip(spots, pts), 1):
         kind = sp.get('snap')
         out.append('<g class="cm">'
-                   '<circle class="ring" cx="%.2f" cy="%.2f" r="8.6"/>'
+                   '<circle class="ring" cx="%.2f" cy="%.2f" r="%.2f"/>'
                    '%s'
-                   '<circle class="bg" cx="%.2f" cy="%.2f" r="5.4"/>'
-                   '<text class="bn" x="%.2f" y="%.2f">%d</text>'
+                   '<circle class="bg" cx="%.2f" cy="%.2f" r="%.2f"/>'
+                   '<text class="bn" x="%.2f" y="%.2f" font-size="%.2f">%d</text>'
                    '</g>'
-                   % (x, y, snap_glyph(kind, x, y) if kind else '',
-                      x + 10.2, y - 10.2, x + 10.2, y - 8.5, i))
+                   % (x, y, r,
+                      snap_glyph(kind, x, y, 4.2 * k) if kind else '',
+                      x + 10.2 * k, y - 10.2 * k, 5.4 * k,
+                      x + 10.2 * k, y - 8.5 * k, 7 * k, i))
         caps.append((i, sp.get('hover'), SNAP_NAME.get(kind)))
     return ''.join(out), caps
 
@@ -130,11 +151,11 @@ def viewbox(svg):
 # 색은 `currentColor` 라 바탕 테마(밝은/어두운)를 그대로 따라간다.
 PRESENT = {
     'outline': 'fill="none" stroke="currentColor" stroke-width=".55" '
-               'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"',
+               'stroke-linejoin="round" stroke-linecap="round"',
     'hidden': 'fill="none" stroke="currentColor" stroke-width=".3" opacity=".6" '
-              'stroke-dasharray="2.4 1.2" stroke-linecap="butt" vector-effect="non-scaling-stroke"',
+              'stroke-dasharray="2.4 1.2" stroke-linecap="butt"',
     'center': 'fill="none" stroke="currentColor" stroke-width=".28" opacity=".72" '
-              'stroke-dasharray="6 1.2 1 1.2" stroke-linecap="butt" vector-effect="non-scaling-stroke"',
+              'stroke-dasharray="6 1.2 1 1.2" stroke-linecap="butt"',
     'dim': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
     'ext': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
     'tangent': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
@@ -142,9 +163,9 @@ PRESENT = {
     'chk': 'fill="none" stroke="currentColor" stroke-width=".18" opacity=".4"',
     'hl': 'fill="none" stroke="none"',
     'hl hot': 'fill="none" stroke="#C7004C" stroke-width="1.9" stroke-linejoin="round" '
-              'stroke-linecap="round" vector-effect="non-scaling-stroke"',
+              'stroke-linecap="round"',
     # A3 도면틀 도해 쪽 이름
-    'si': 'fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"',
+    'si': 'fill="none" stroke="currentColor" stroke-width="1.4"',
     'sh': 'fill="none" stroke="currentColor" stroke-width="1.4" opacity=".8" '
           'vector-effect="non-scaling-stroke"',
     'sd': 'fill="none" stroke="currentColor" stroke-width="1" opacity=".5" stroke-dasharray="4 3"',
@@ -169,15 +190,46 @@ def stylize(svg):
     return _CLS.sub(one, svg)
 
 
-def to_symbol(svg, sid):
-    """도해 하나를 `<symbol>` 로 바꾼다. 쪽마다 한 벌만 두고 `<use>` 로 부른다.
+# `<symbol>` 안에 넣는 스타일. 그림자 트리에는 바깥 CSS 가 닿지 않지만 **안에 든
+# `<style>` 은 함께 복제되어 적용된다.** 요소마다 속성을 박으면 정면도가 14KB 에서
+# 19KB 로, 세 뷰가 26KB 에서 42KB 로 불어난다 — 한 쪽 100KB 한도에서 그 차이가 쪽
+# 하나를 통째로 먹는다. 규칙 한 벌이면 600바이트다.
+SYMBOL_CSS = (
+    '<style>'
+    '.outline{fill:none;stroke:currentColor;stroke-width:.55;stroke-linejoin:round;'
+    'stroke-linecap:round}'
+    '.hidden{fill:none;stroke:currentColor;stroke-width:.3;opacity:.6;'
+    'stroke-dasharray:2.4 1.2;stroke-linecap:butt}'
+    '.center{fill:none;stroke:currentColor;stroke-width:.28;opacity:.72;'
+    'stroke-dasharray:6 1.2 1 1.2;stroke-linecap:butt}'
+    '.dim,.ext,.tangent{fill:none;stroke:currentColor;stroke-width:.26;opacity:.55}'
+    '.arrow{fill:currentColor;stroke:none;opacity:.55}'
+    '.chk{fill:none;stroke:currentColor;stroke-width:.18;opacity:.4}'
+    '.hl{fill:none;stroke:none}'
+    'text{fill:currentColor;opacity:.6}'
+    '.si{fill:none;stroke:currentColor;stroke-width:1.4}'
+    '.sh{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.8;'
+    'vector-effect:non-scaling-stroke}'
+    '.sd{fill:none;stroke:currentColor;stroke-width:1;opacity:.5;stroke-dasharray:4 3}'
+    '.sl,.slh{fill:currentColor;font-size:11px}.slh{opacity:.85}'
+    '</style>')
+
+
+def to_symbol(svg, sid, css=True):
+    """도해 하나를 `<symbol>` 로 바꾼다. 한 벌만 두고 `<use>` 로 부른다.
 
     자습 교재는 한 쪽이 100KB 를 넘으면 안 된다(지침 §2). 정면도가 14KB 라
     단계마다 복사해 넣으면 열네 단계에서 이미 한도를 넘는다.
+
+    `css` 를 끄면 표현을 속성으로 박는다. `<use>` 는 심볼 안을 **통째로 복제**하는데,
+    안에 `<style>` 이 있으면 그 스타일시트까지 인스턴스 수만큼 복제돼 파싱된다.
+    여덟 차시 묶음(`<use>` 82개)에서 그것 때문에 첫 화면이 40초 걸렸다. 인스턴스가
+    몇 개뿐인 자습 교재는 켜 두고(파일이 작아진다), 묶음 데크는 끈다.
     """
     body = svg[svg.index('>', svg.index('<svg')) + 1:]
     body = body[:body.rindex('</svg>')]
-    return '<symbol id="%s" viewBox="%s">%s</symbol>' % (sid, viewbox(svg), stylize(body))
+    inner = (SYMBOL_CSS + body) if css else stylize(body)
+    return '<symbol id="%s" viewBox="%s">%s</symbol>' % (sid, viewbox(svg), inner)
 
 
 def hl_for(svg, feature):

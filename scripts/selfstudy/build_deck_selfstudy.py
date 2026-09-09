@@ -75,6 +75,9 @@ ACT_LAB = {'ask': '묻는 것', 'move': '마우스', 'snap': '스냅', 'click': 
 # 두 산출물이 갈라지지 않는다 (LESSON_STYLE 12번).
 import coach as _coach
 
+# 이 실행에서 실제로 쓴 바탕. 문서 끝에 `<symbol>` 로 한 벌씩 심는다.
+USED_SURFACES = set()
+
 
 def to_svg(x, y):
     return _coach.place({'x': x, 'y': y}, 'front')
@@ -83,6 +86,29 @@ def to_svg(x, y):
 SNAP_NAME = _coach.SNAP_NAME
 snap_glyph = _coach.snap_glyph
 FEATURE_KO = _coach.FEATURE_KO
+
+
+_SURFACES = None
+
+
+def surfaces():
+    """바탕 묶음. 도면 생성기를 한 번만 돌린다."""
+    global _SURFACES
+    if _SURFACES is None:
+        fm = _figures.build_map(keep_hl=True)
+        _SURFACES = {'front': fm['front'], 'frontdim': fm['frontdim'],
+                     'three': fm['three'], 'sheet': _sheet.SVG_A3}
+    return _SURFACES
+
+
+def surface_defs():
+    """이 실행에서 쓴 바탕을 `<symbol>` 로 낸다. 문서에 한 번만 넣는다."""
+    if not USED_SURFACES:
+        return ''
+    syms = ''.join(_coach.to_symbol(surfaces()[n], 'dsfc-' + n, css=False)
+                   for n in sorted(USED_SURFACES) if surfaces().get(n))
+    return ('<svg aria-hidden="true" focusable="false" '
+            'style="position:absolute;width:0;height:0;overflow:hidden">%s</svg>' % syms)
 
 
 def fig_block(spots, figs, feature=None, surface='front'):
@@ -101,16 +127,17 @@ def fig_block(spots, figs, feature=None, surface='front'):
         caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
                     % (i, rich(ko(hover)),
                        ('<em> — %s 표식</em>' % esc(snapname)) if snapname else ''))
-    # 강조를 먼저 켜고 나서 표현을 박는다. 순서가 바뀌면 stylize 가 class 뒤에
-    # 속성을 끼워 넣어 `class="hl" data-feature=` 짝이 깨지고 강조가 안 켜진다.
-    if feature:
-        base = base.replace('class="hl" data-feature="%s"' % feature,
-                            'class="hl hot" data-feature="%s"' % feature)
-    # 선 표현을 속성으로 박아 둔다. 데크 CSS 는 정면도만 알고 A3 도면틀의
-    # 클래스(si·sh·sd·sl)는 모르기 때문에, 안 박으면 까만 상자가 나온다.
-    body = _coach.stylize(base).replace('</svg>', '<g class="coach">%s</g></svg>' % marks_svg)
-    body = body.replace('<svg class="dwg"', '<svg class="dwg cdwg"', 1)
-    body = body.replace('<svg viewBox', '<svg class="dwg cdwg" viewBox', 1)
+    # 도해는 문서에 한 벌만 두고 슬라이드는 `<use>` 로 부른다. 단계마다 통째로
+    # 복사하면 여덟 차시 묶음이 4MB 를 넘어 브라우저가 30초 안에 못 연다 —
+    # 실제로 그렇게 됐다. 강조 겹선만 인스턴스에 직접 그린다(`<use>` 안쪽은
+    # 바깥에서 켤 수 없다).
+    USED_SURFACES.add(surface)
+    vb = _coach.viewbox(base).split()
+    body = ('<svg class="dwg cdwg" viewBox="%s" width="%s" height="%s" '
+            'preserveAspectRatio="xMidYMid meet"><use href="#dsfc-%s"/>%s'
+            '<g class="coach">%s</g></svg>'
+            % (_coach.viewbox(base), vb[2], vb[3], surface,
+               _coach.hl_for(base, feature), marks_svg))
     # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
     head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
     return ('<figure class="fig" data-memo="도면 코치 마크">'
@@ -642,9 +669,7 @@ def main(lesson_dir, lesson_json, outpath):
     by_label = {ko(s.get('label')): s for s in L['sections']}
     # 코치 마크가 앉을 정면도. 도면을 그리는 코드가 하나뿐이라 자습본 쪽
     # 그림과 어긋날 수 없다.
-    _fm = _figures.build_map(keep_hl=True)
-    front = {'front': _fm['front'], 'frontdim': _fm['frontdim'], 'three': _fm['three'],
-             'sheet': _sheet.SVG_A3}
+    front = surfaces()
 
     bodies, tls, slides, clock = [], [], [], 0.0
     dropped = 0

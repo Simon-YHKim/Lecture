@@ -39,7 +39,7 @@
    "en": "You can build an A3 landscape border, a title block, and four layers from scratch, and save them as a template."
   },
   {
-   "ko": "절대좌표·상대좌표·상대극좌표를 구분해 쓰고, 눈대중 없이 값으로 형상을 그릴 수 있습니다.",
+   "ko": "객체 스냅·직교와 수치 입력·스냅 추적을 구분해 쓰고, 눈대중 없이 형상 위에서 점을 잡아 그릴 수 있습니다.",
    "en": "You can tell absolute, relative, and relative polar coordinates apart, and draw to values instead of by eye."
   },
   {
@@ -414,7 +414,7 @@
       "ko": "A3 도면 환경과 레이어 네 개",
       "en": "The A3 sheet and its four layers"
      },
-     "note": "먼저 규격도 한 장 — 용지선 420×297, 도면선은 사방 10 안쪽(인쇄 때 가장자리가 잘려도 내용이 살아 있어야 함), 네 변 한가운데 중심 마크(접거나 복사할 때의 기준), 오른쪽 아래 표제란 200×30을 100씩 둘로 나눠 왼쪽 이름 오른쪽 사번, 문자 높이 10. 이어서 레이어 표 — 이름 / 선 종류 / 색상 / 선가중치 / 선 종류 축척 / 용도 다섯 열. 외형선 Continuous 흰색7 0.5, 중심선 CENTER 빨강1 0.25 축척 0.5, 숨은선 HIDDEN 노랑2 0.25 축척 0.5, 치수선 Continuous 보라6 0.25. 굵기와 선 종류 축척이 다른 값이라는 것을 표 밑에 한 줄로 못 박습니다 — 굵기는 선의 두께(밀리미터)이고 외형선만 나머지의 두 배, 선 종류 축척은 점선의 간격이라 Continuous에는 조정할 값이 없습니다. 영상 프레임 7 화면 표와 정본 값이 어긋나므로 정본을 확정하기 전에는 이 표를 확정 인쇄하지 않습니다(openQuestions). 절 끝에 「과제 지시 우선」을 한 줄로 다시 붙이고 1차시 절로 링크합니다."
+     "note": "먼저 규격도 한 장 — 용지선 420×297, 도면선은 사방 10 안쪽(인쇄 때 가장자리가 잘려도 내용이 살아 있어야 함), 네 변 한가운데 중심 마크(접거나 복사할 때의 기준), 오른쪽 아래 표제란 200×30을 100씩 둘로 나눠 왼쪽 이름 오른쪽 사번, 문자 높이 10. 이어서 레이어 표 — 이름 / 선 종류 / 색상 / 선가중치 / 선 종류 축척 / 용도 다섯 열. 외형선 Continuous 초록3 0.30, 중심선 CENTER 빨강1 0.15 축척 0.5, 숨은선 HIDDEN 노랑2 0.15 축척 0.5, 치수선 Continuous 흰색7 0.15. 굵기와 선 종류 축척이 다른 값이라는 것을 표 밑에 한 줄로 못 박습니다 — 굵기는 선의 두께(밀리미터)이고 외형선만 나머지의 두 배, 선 종류 축척은 점선의 간격이라 Continuous에는 조정할 값이 없습니다. 정본은 course-standards.json 이고 근거는 사내 정본 교안 26쪽입니다. 값을 여기 다시 적지 않습니다. 절 끝에 「과제 지시 우선」을 한 줄로 다시 붙이고 1차시 절로 링크합니다."
     },
     {
      "kind": "practice",
@@ -576,7 +576,7 @@
      "en": "You can say why datum lines come before shape, and draw vertical and horizontal centerlines on the center layer with the right overrun."
     },
     {
-     "ko": "절대좌표 x,y · 상대좌표 @dx,dy · 상대극좌표 @거리<각도를 구분해 쓰고 각각을 언제 쓰는지 근거를 들어 고를 수 있습니다.",
+     "ko": "객체 스냅(F3) · 직교와 수치 입력(F8·F12) · 스냅 추적과 FROM(F11) · 자유 클릭 넷을 구분해 쓰고, 그 점이 도면 치수에 걸려 있는지로 넷 중 하나를 고를 수 있습니다.",
      "en": "You can tell absolute, relative, and relative polar entry apart and justify which one to use where."
     },
     {
@@ -600,7 +600,7 @@
      "en": "You can confirm with a click and with LIST that the polyline really is one closed object."
     },
     {
-     "ko": "좌표 오독 · 골뱅이 누락 · 레이어 미변경 · 접점 스냅 꺼짐 네 가지 실수를 화면에서 알아차리고 그 자리에서 고칠 수 있습니다.",
+     "ko": "치수 오독 · 직교 꺼짐 · 레이어 미변경 · 접점 스냅 꺼짐 네 가지 실수를 화면에서 알아차리고 그 자리에서 고칠 수 있습니다.",
      "en": "You can spot four mistakes on screen - misread coordinate, missing @, wrong current layer, tangent snap off - and fix each on the spot."
     }
    ],
@@ -635,7 +635,7 @@
       "ko": "좌표 입력 세 가지",
       "en": "Three ways to enter a point"
      },
-     "note": "표 하나에 세 행 — 절대좌표 x,y(원점에서 재는 자리. 시작점과 원 중심), 상대좌표 @dx,dy(앞에 찍은 점에서 얼마나 갔는지. 이어지는 변), 상대극좌표 @거리<각도(방향과 거리가 도면에 그대로 적혀 있을 때). 각 행에 이 차시에서 실제로 치는 값을 예로 답니다. 각도 기준(0도 오른쪽, 90도 위, 135도 왼쪽 위, 180도 왼쪽)을 시계 그림으로 붙입니다. 모따기를 @7.07<135로도 그릴 수 있지만 7.07은 반올림값이고 도면에 적힌 값은 5와 5라는 판단까지 씁니다."
+     "note": "표 하나에 네 행 — 객체 스냅 F3(형상의 특징점에 붙여 찍는다. 밑변 중간점·중심선 교차점·보스 원 접점), 직교와 수치 F8·F12(방향은 마우스, 길이는 숫자. 중심선 두 개), 스냅 추적과 FROM F11(특징점에서 뻗은 안내선의 교차로 형상에 없는 점을 만든다), 자유 클릭(도면 치수에 걸리지 않은 점. 외곽의 첫 구석). 각 행에 이 차시에서 실제로 하는 손동작을 예로 답니다. 고르는 기준은 하나 — 그 점이 도면 치수에 걸려 있는가입니다. 모따기는 사각형을 먼저 세우고 CHAMFER 로 자르므로 11·115 같은 계산값이 나올 자리가 없다는 판단까지 씁니다."
     },
     {
      "kind": "concept",
@@ -691,7 +691,7 @@
       "ko": "검산",
       "en": "Cross-check"
      },
-     "note": "11항목을 세 칸 표로. 값으로 판정되는 것을 위에 둡니다 — LIST 결과가 LWPOLYLINE · 정점 6 · 닫힘 예인가 / 원 꼭대기 y가 90인가(62+28) / 윗면 110이 아래변 120보다 짧은가 / 모따기 둘이 같은 크기인가 / 클릭 한 번에 여섯 변이 잡히는가 / 두 목 선이 세로 중심선 기준으로 대칭인가 / 확대했을 때 목 선과 보스 원이 파고들거나 못 미치지 않고 한 점에서 닿는가 / 중심선이 빨간 CENTER 점선, 외곽과 목 선이 흰 실선인가 / 세로 중심선이 위아래로 5씩 나와 있고 가로가 27~93인가 / 선종류축척 0.5를 넣은 뒤 실선이 아니라 점선으로 보이는가 / 그리는 중에 선이 엉뚱한 데로 튀지 않았는가(튀었으면 골뱅이 누락)."
+     "note": "11항목을 세 칸 표로. 값으로 판정되는 것을 위에 둡니다 — LIST 결과가 LWPOLYLINE · 정점 6 · 닫힘 예인가 / 원 꼭대기 y가 90인가(62+28) / 윗면 110이 아래변 120보다 짧은가 / 모따기 둘이 같은 크기인가 / 클릭 한 번에 여섯 변이 잡히는가 / 두 목 선이 세로 중심선 기준으로 대칭인가 / 확대했을 때 목 선과 보스 원이 파고들거나 못 미치지 않고 한 점에서 닿는가 / 중심선이 빨간 CENTER 점선, 외곽과 목 선이 흰 실선인가 / 세로 중심선이 위아래로 5씩 나와 있고 가로가 27~93인가 / 선종류축척 0.5를 넣은 뒤 실선이 아니라 점선으로 보이는가 / 그리는 중에 선이 엉뚱한 데로 튀지 않았는가(튀었으면 직교 꺼짐)."
     },
     {
      "kind": "recap",
@@ -715,7 +715,7 @@
       "ko": "스스로 확인",
       "en": "Check yourself"
      },
-     "note": "네 가지 흔한 실수를 증상으로 제시하고 원인과 복구를 답하게 하는 형식으로 씁니다. 실수 목록은 좌표 오독 · 골뱅이 누락 · 레이어 미변경 · 접점 스냅 꺼짐입니다."
+     "note": "네 가지 흔한 실수를 증상으로 제시하고 원인과 복구를 답하게 하는 형식으로 씁니다. 실수 목록은 치수 오독 · 직교 꺼짐 · 레이어 미변경 · 접점 스냅 꺼짐입니다."
     }
    ],
    "diagrams": [
@@ -758,7 +758,7 @@
      "ko": "선을 그었더니 방금 그리던 자리에서 뚝 떨어진 곳으로 튀었습니다. 무엇을 빠뜨렸고 어떻게 되돌립니까?",
      "en": "Your line jumped far away from where you were drawing. What did you omit and how do you undo it?",
      "answer": {
-      "ko": "골뱅이(@)를 빠뜨려 상대좌표가 절대좌표로 읽혔습니다. 폴리선 명령이 진행 중이면 U 엔터로 마지막 한 점만 취소하고, 명령을 이미 빠져나왔으면 Ctrl+Z입니다.",
+      "ko": "직교가 꺼진 채로 길이만 쳐서 선이 반 도쯤 기울었습니다. 명령이 진행 중이면 U 엔터로 마지막 한 점만 취소하고, 명령을 이미 빠져나왔으면 Ctrl+Z입니다.",
       "en": "You left out the @, so a relative entry was read as absolute. If the polyline command is still running, type U and Enter to undo just the last point; if you already exited the command, use Ctrl+Z."
      }
     },
@@ -1216,7 +1216,7 @@
     },
     {
      "id": "d05-projector-map",
-     "what": "세 뷰 위에 수직 투상선 일곱과 수평 투상선 일곱을 보라색으로 겹쳐 그리고, 각 선이 정면도의 어느 점에서 나왔는지(모서리·모따기 끝·사분점) 표시.",
+     "what": "세 뷰 위에 수직 투상선 일곱과 수평 투상선 일곱을 가는 선으로 겹쳐 그리고, 각 선이 정면도의 어느 점에서 나왔는지(모서리·모따기 끝·사분점) 표시.",
      "why": "'같은 값을 두 번 재지 않는다'는 원리가 어느 선에서 어느 값이 건너가는지 보일 때만 이해됩니다."
     },
     {
@@ -1354,7 +1354,7 @@
       "ko": "출발 상태 확인 — EDU-IB-02_L05_VIEWS",
       "en": "Starting state - EDU-IB-02_L05_VIEWS"
      },
-     "note": "이 차시의 게이트는 특이합니다. 화면이 지저분한 것이 정상이라고 먼저 말해 줘야 합니다 — 「지금 열어 보면 도면이라기보다 작업 흔적에 가깝습니다. 그게 맞습니다.」 확인 항목 다섯 — ① 세 뷰가 다 있음 ② 뷰 밖으로 튀어나온 보라색 투상선이 보임(안 보이면 5차시에서 이미 지웠거나 치수선 레이어가 꺼진 채로 저장된 것) ③ 레이어 넷의 전구가 다 켜짐 ④ 숨은선이 노란 점선 ⑤ 객체 스냅 켜짐. 그리고 「바로 자르지 않습니다. 무엇이 남아 있는지 먼저 봅니다」 — 선을 하나 클릭해 화면 위 레이어 표시가 무엇으로 바뀌는지 확인하고 Esc로 선택을 푸는 절차를 첫 조작으로 둡니다."
+     "note": "이 차시의 게이트는 특이합니다. 화면이 지저분한 것이 정상이라고 먼저 말해 줘야 합니다 — 「지금 열어 보면 도면이라기보다 작업 흔적에 가깝습니다. 그게 맞습니다.」 확인 항목 다섯 — ① 세 뷰가 다 있음 ② 뷰 밖으로 튀어나온 투상선이 보임 — 형상은 초록이고 투상선은 흰색이라 색으로 갈립니다(안 보이면 5차시에서 이미 지웠거나 치수선 레이어가 꺼진 채로 저장된 것) ③ 레이어 넷의 전구가 다 켜짐 ④ 숨은선이 노란 점선 ⑤ 객체 스냅 켜짐. 그리고 「바로 자르지 않습니다. 무엇이 남아 있는지 먼저 봅니다」 — 선을 하나 클릭해 화면 위 레이어 표시가 무엇으로 바뀌는지 확인하고 Esc로 선택을 푸는 절차를 첫 조작으로 둡니다."
     },
     {
      "kind": "concept",
@@ -1535,7 +1535,7 @@
     "en": "Break something on purpose in your cleaned-up file and find it yourself. (1) Pick one centerline and change its layer to the visible-line layer - it turns into a white continuous line. (2) Press Esc and scan the screen; try to spot it by eye. (3) If you cannot, run QSELECT with layer = center, read the count, and look for a place where a centerline should be highlighted but is not. (4) Send it back with MATCHPROP. That round trip is exactly how layer errors get found on real drawings. Save when you are done."
    },
    "recoveryNote": {
-    "ko": "6차시를 건너뛰면 7차시에서 치수를 넣을 수는 있지만, 남아 있는 투상선 위에 치수가 얹혀 무엇이 형상이고 무엇이 자인지 구분되지 않고, 레이어가 틀린 선이 그대로 남아 출력 미리보기에서 한꺼번에 드러납니다. 되돌아오는 길은 EDU-IB-02_L05_VIEWS를 열어 「따라 하기 1~3」(1~16단계)만 하고 L06_REPRESENTED로 저장하는 것입니다. 최소한 「따라 하기 1」의 QSELECT 구성선 지우기와 「따라 하기 3」의 ByLayer 통일 두 가지는 반드시 하세요 — 앞의 것을 빠뜨리면 7차시 플롯 미리보기에 보라색 무한선이 그대로 나오고, 뒤의 것을 빠뜨리면 치수선 레이어를 껐다 켜는 7차시 검산이 아무것도 판정하지 못합니다. 읽기 절 「그리지 않지만 읽어야 하는 표기 넷」은 작도를 막지 않으므로 나중에 읽어도 됩니다.",
+    "ko": "6차시를 건너뛰면 7차시에서 치수를 넣을 수는 있지만, 남아 있는 투상선 위에 치수가 얹혀 무엇이 형상이고 무엇이 자인지 구분되지 않고, 레이어가 틀린 선이 그대로 남아 출력 미리보기에서 한꺼번에 드러납니다. 되돌아오는 길은 EDU-IB-02_L05_VIEWS를 열어 「따라 하기 1~3」(1~16단계)만 하고 L06_REPRESENTED로 저장하는 것입니다. 최소한 「따라 하기 1」의 QSELECT 구성선 지우기와 「따라 하기 3」의 ByLayer 통일 두 가지는 반드시 하세요 — 앞의 것을 빠뜨리면 7차시 플롯 미리보기에 무한선이 그대로 나오고, 뒤의 것을 빠뜨리면 치수선 레이어를 껐다 켜는 7차시 검산이 아무것도 판정하지 못합니다. 읽기 절 「그리지 않지만 읽어야 하는 표기 넷」은 작도를 막지 않으므로 나중에 읽어도 됩니다.",
     "en": "Skip Lesson 6 and you can still dimension in Lesson 7, but the dimensions land on top of leftover projectors so nothing distinguishes geometry from rulers, and every wrongly-layered line surfaces at once in the plot preview. The way back is to open EDU-IB-02_L05_VIEWS, do only 'Do it 1-3' (steps 1-16), and save as L06_REPRESENTED. At minimum do two things: the QSELECT construction-line delete in 'Do it 1' and the ByLayer pass in 'Do it 3'. Without the first, purple infinite lines appear in Lesson 7's plot preview; without the second, Lesson 7's layer-toggle cross-check proves nothing. The reading section 'Four notations you read but do not draw' blocks no drawing and can wait."
    }
   },
@@ -1659,7 +1659,7 @@
       "ko": "따라 하기 1 — 스타일을 세우고 전체·베이스·보스 중심 (1~6단계)",
       "en": "Do it 1 - style, overall, base, boss center (steps 1-6)"
      },
-     "note": "OPEN → Z A → F3 → 치수선 레이어를 현재로(색은 보라 6번) → D로 DIMSTYLE, 새로 만들기, 시작 스타일 ISO-25, 이름 EDU-A3 → 문자 탭 높이 5 / 기호와 화살표 탭 크기 5 / 1차 단위 탭 정밀도 0자리와 측정 축척 비율 1 / 맞춤 탭 전체 축척 1 → 현재로 설정 → DLI로 120(바닥 변에서)과 90(두 번째 점은 보스 원 위쪽 사분점) → DLI로 16(왼쪽으로 빼서 세로 성분) → DLI로 60(아래)과 62(왼쪽). 5단계 뒤에 검산 하나를 바로 붙입니다 — 90이 62+28과 맞는지. 다른 값이 나오면 치수가 아니라 형상이 틀린 것입니다. 치수선을 형상에서 넉넉히 떨어뜨리는 이유도 여기."
+     "note": "OPEN → Z A → F3 → 치수선 레이어를 현재로(색은 흰색 7번) → D로 DIMSTYLE, 새로 만들기, 시작 스타일 ISO-25, 이름 EDU-A3 → 문자 탭 높이 5 / 기호와 화살표 탭 크기 5 / 1차 단위 탭 정밀도 0자리와 측정 축척 비율 1 / 맞춤 탭 전체 축척 1 → 현재로 설정 → DLI로 120(바닥 변에서)과 90(두 번째 점은 보스 원 위쪽 사분점) → DLI로 16(왼쪽으로 빼서 세로 성분) → DLI로 60(아래)과 62(왼쪽). 5단계 뒤에 검산 하나를 바로 붙입니다 — 90이 62+28과 맞는지. 다른 값이 나오면 치수가 아니라 형상이 틀린 것입니다. 치수선을 형상에서 넉넉히 떨어뜨리는 이유도 여기."
     },
     {
      "kind": "practice",
@@ -1691,7 +1691,7 @@
       "ko": "검산",
       "en": "Cross-check"
      },
-     "note": "13항목. 산술 검산을 위에 둡니다 — 90 = 62+28(다르면 치수가 아니라 형상이 틀린 것) / 목 밑동 80의 두 점이 60에서 좌우 40씩(가로 20과 100) / 왼쪽 세로 변이 11까지만 올라가는데도 16이 나오는가 / 두께 20 = 판 12 + 보스 8이고 두 치수가 같은 뒷면에서 출발하는가. 이어 소속 검산 — 치수 하나를 클릭해 레이어 표시가 치수선(보라 6번)인가, 레이어를 하나씩 껐다 켜서 치수가 치수선 레이어에 들어갔는지 드러나는가, 45도 중심선을 그은 뒤 레이어를 치수선으로 되돌렸는가. 표기 검산 — 중복 치수가 없는가(장공 폭 10과 R5를 같이, 좌우 필렛에 R10을 각각, 정면도와 평면도에 같은 120) / 참고 치수 95.7에 괄호가 있고 검사해야 할 값에 괄호가 없는가 / 확인용으로만 넣은 정렬 치수 7이 남아 있지 않은가. 마지막은 종이 기준 — 플롯 미리보기가 최종 판정입니다. 도면틀이 잘리지 않았는가, 치수 문자가 형상이나 다른 치수와 겹치지 않는가, 표제란이 들어왔는가, 문자가 깨알같이 작으면 문자 높이 또는 맞춤 탭의 전체 축척. 그리고 출력한 PDF를 열어 도면의 120이 종이에서 자로 재도 120밀리미터인지."
+     "note": "13항목. 산술 검산을 위에 둡니다 — 90 = 62+28(다르면 치수가 아니라 형상이 틀린 것) / 목 밑동 80의 두 점이 60에서 좌우 40씩(가로 20과 100) / 왼쪽 세로 변이 11까지만 올라가는데도 16이 나오는가 / 두께 20 = 판 12 + 보스 8이고 두 치수가 같은 뒷면에서 출발하는가. 이어 소속 검산 — 치수 하나를 클릭해 레이어 표시가 치수선(흰색 7번)인가, 레이어를 하나씩 껐다 켜서 치수가 치수선 레이어에 들어갔는지 드러나는가, 45도 중심선을 그은 뒤 레이어를 치수선으로 되돌렸는가. 표기 검산 — 중복 치수가 없는가(장공 폭 10과 R5를 같이, 좌우 필렛에 R10을 각각, 정면도와 평면도에 같은 120) / 참고 치수 95.7에 괄호가 있고 검사해야 할 값에 괄호가 없는가 / 확인용으로만 넣은 정렬 치수 7이 남아 있지 않은가. 마지막은 종이 기준 — 플롯 미리보기가 최종 판정입니다. 도면틀이 잘리지 않았는가, 치수 문자가 형상이나 다른 치수와 겹치지 않는가, 표제란이 들어왔는가, 문자가 깨알같이 작으면 문자 높이 또는 맞춤 탭의 전체 축척. 그리고 출력한 PDF를 열어 도면의 120이 종이에서 자로 재도 120밀리미터인지."
     },
     {
      "kind": "recap",
@@ -1897,7 +1897,7 @@
       "ko": "40분 모의 작도 — 일곱 단계",
       "en": "The 40-minute mock run - seven steps"
      },
-     "note": "이 자습본에서 유일하게 시간을 재는 절입니다. 조작 절이지만 새 명령이 없습니다 — 2~7차시의 순서를 시간 안에 다시 밟는 것이 내용입니다. ① 템플릿(A3 도면틀, 사방 10, 중심 마크, 표제란 200×30 두 칸, 왼쪽 이름 오른쪽 사번, 문자 높이 10) ② 레이어 넷(외형선만 굵기 0.5, 나머지 0.25. 선 종류 축척은 중심선과 숨은선에만 0.5) ③ 3D 형상 그림을 읽고 정면 정하기(형상을 그리기 시작한 뒤에 정면을 바꾸면 세 뷰를 전부 다시 배치해야 하고 40분에 그 여유가 없습니다) ④ 제3각법으로 세 뷰 작도 ⑤ 겹치는 선 정리 — 실선 우선 ⑥ 치수 기입 — 정면도 외형선 기준 ⑦ 저장하고 제출(40분에 저장과 전송 시간을 빼 둡니다). 단계마다 목표 경과 시간을 두지 않습니다 — 대본에 근거가 없으므로 지어내지 않고, 대신 「어느 단계에서 시간이 샜는지 적으세요」라는 기록란을 둡니다. 이 기록이 두 번째 모의 작도의 계획이 됩니다."
+     "note": "이 자습본에서 유일하게 시간을 재는 절입니다. 조작 절이지만 새 명령이 없습니다 — 2~7차시의 순서를 시간 안에 다시 밟는 것이 내용입니다. ① 템플릿(A3 도면틀, 사방 10, 중심 마크, 표제란 200×30 두 칸, 왼쪽 이름 오른쪽 사번, 문자 높이 10) ② 레이어 넷(외형선만 선가중치 0.30, 나머지 0.15. 선 종류 축척은 중심선과 숨은선에만 0.5) ③ 3D 형상 그림을 읽고 정면 정하기(형상을 그리기 시작한 뒤에 정면을 바꾸면 세 뷰를 전부 다시 배치해야 하고 40분에 그 여유가 없습니다) ④ 제3각법으로 세 뷰 작도 ⑤ 겹치는 선 정리 — 실선 우선 ⑥ 치수 기입 — 정면도 외형선 기준 ⑦ 저장하고 제출(40분에 저장과 전송 시간을 빼 둡니다). 단계마다 목표 경과 시간을 두지 않습니다 — 대본에 근거가 없으므로 지어내지 않고, 대신 「어느 단계에서 시간이 샜는지 적으세요」라는 기록란을 둡니다. 이 기록이 두 번째 모의 작도의 계획이 됩니다."
     },
     {
      "kind": "verify",
@@ -2040,7 +2040,7 @@
    "ko": "외형선",
    "en": "visible line",
    "def": {
-    "ko": "눈에 보이는 모양을 그리는 굵은 실선입니다. 이 과정에서는 흰색 7번, 굵기 0.5로 넷 중 이것만 굵습니다.",
+    "ko": "눈에 보이는 모양을 그리는 굵은 실선입니다. 이 과정에서는 초록 3번, 선가중치 0.30 으로 넷 중 이것만 굵습니다.",
     "en": "The thick continuous line that draws what you can see. In this course it is white (7) at 0.5 mm - the only one of the four that is thick."
    },
    "lessons": [
@@ -2089,7 +2089,7 @@
    "ko": "치수선",
    "en": "dimension line",
    "def": {
-    "ko": "치수와 보조선을 그리는 가는 실선입니다. 보라 6번, 굵기 0.25. 이 과정에서는 뷰를 맞추는 투상선도 이 레이어에 긋습니다.",
+    "ko": "치수와 보조선을 그리는 가는 실선입니다. 흰색 7번, 선가중치 0.15. 이 과정에서는 뷰를 맞추는 투상선도 이 레이어에 긋습니다.",
     "en": "The thin continuous line for dimensions and extension lines. Magenta (6), 0.25 mm. In this course the construction lines that align the views also go on this layer."
    },
    "lessons": [
@@ -2477,8 +2477,8 @@
    "ko": "절대좌표",
    "en": "absolute coordinates",
    "def": {
-    "ko": "원점에서 재는 자리를 x,y로 쓰는 입력입니다. 시작점과 원의 중심에 씁니다 — 60,62.",
-    "en": "Entry written as x,y measured from the origin. Used for start points and circle centers - 60,62."
+    "ko": "원점에서 재는 자리를 x,y로 쓰는 입력입니다. 남의 도면이나 다른 교재에서 만나므로 읽을 줄은 알아 둡니다. 이 과정은 쓰지 않아요 — 용지선 두 구석만 예외입니다.",
+    "en": "Entry written as x,y measured from the origin. Worth being able to read, since other drawings and other books use it. This course does not use it - the two sheet-border corners are the only exception."
    },
    "lessons": [
     3
@@ -2488,8 +2488,8 @@
    "ko": "상대좌표",
    "en": "relative coordinates",
    "def": {
-    "ko": "앞에 찍은 점에서 얼마나 갔는지를 @dx,dy로 쓰는 입력입니다. 골뱅이를 빼먹으면 절대좌표로 읽혀 선이 엉뚱한 데로 튑니다.",
-    "en": "Entry written as @dx,dy from the previous point. Omit the @ and it is read as absolute, sending the line somewhere else entirely."
+    "ko": "앞에 찍은 점에서 얼마나 갔는지를 @dx,dy로 쓰는 입력입니다. 남의 도면이나 다른 교재에서 만나므로 읽을 줄은 알아 둡니다. 이 과정은 쓰지 않아요 — 같은 자리를 객체 스냅과 수치 입력으로 잡습니다.",
+    "en": "Entry written as @dx,dy from the previous point. Worth being able to read, since other drawings and other books use it. This course does not use it - the same point comes off the geometry with a snap and a typed length."
    },
    "lessons": [
     3,
@@ -3168,7 +3168,7 @@
     "en": "FROM - snap override"
    },
    "when": {
-    "ko": "잡은 점에서 상대좌표만큼 떨어진, 도면에 점이 없는 자리를 찍을 때",
+    "ko": "잡은 점에서 방향과 거리를 주어, 도면에 점이 없는 자리를 찍을 때",
     "en": "To pick a location that has no geometry, offset by a relative distance from a point that does"
    },
    "lessons": [

@@ -247,6 +247,44 @@ def render_steps(items, ctx):
     return '<ol class="steps">%s</ol>' % ''.join(lis)
 
 
+# 절 하나가 쪽 예산을 통째로 넘으면 쪽 나누기가 할 수 있는 일이 없다. 따라 하기
+# 절은 단계가 열일곱까지 가고 단계마다 코치 마크가 붙어서 실제로 그렇게 됐다.
+# 단계를 나눠 두 절로 낸다 — 자르는 자리는 단계 경계라 절차가 끊기지 않는다.
+SECTION_CAP = 44 * 1024
+
+
+def render_section_split(sec, n, ctx):
+    """절 하나를 렌더한다. 너무 크면 단계 경계에서 나눠 여럿으로 낸다."""
+    whole = render_section(sec, n, ctx)
+    if len(whole.encode('utf-8')) <= SECTION_CAP:
+        return [whole]
+    blocks = sec.get('blocks', [])
+    idx = next((i for i, b in enumerate(blocks)
+                if b.get('type') == 'steps' and len(b.get('items', [])) > 3), None)
+    if idx is None:
+        return [whole]
+    items = blocks[idx]['items']
+    parts = max(2, -(-len(whole.encode('utf-8')) // SECTION_CAP))
+    parts = min(parts, len(items))
+    size = -(-len(items) // parts)
+    chunks = [items[i:i + size] for i in range(0, len(items), size)]
+    out = []
+    for k, chunk in enumerate(chunks):
+        part = dict(sec)
+        part['blocks'] = (list(blocks[:idx]) if k == 0 else []) \
+            + [dict(blocks[idx], items=chunk)] \
+            + (list(blocks[idx + 1:]) if k == len(chunks) - 1 else [])
+        if k:
+            part = dict(part, id='%s-%d' % (sec.get('id', 'sec'), k + 1), lede=None)
+            lab = dict(sec.get('label') or {})
+            for lang, tail in (('ko', ' (이어서)'), ('en', ' (continued)')):
+                if lab.get(lang):
+                    lab[lang] = lab[lang] + tail
+            part['label'] = lab
+        out.append(render_section(part, n, ctx))
+    return out
+
+
 def render_section(sec, n, ctx):
     ctx = dict(ctx, label=(sec.get('label') or {}).get('ko', ''))
     head = '<h2%s id="%s"><span class="num">%02d</span>%s</h2>' % (
@@ -391,7 +429,8 @@ def build_lesson(L, nav):
     for sec in L.get('sections', []):
         tab = sec.get('tab') or TAB_OF_KIND.get(sec.get('kind'), 'concept')
         counters[tab] += 1
-        buckets[tab].append(render_section(sec, counters[tab], ctx))
+        for h in render_section_split(sec, counters[tab], ctx):
+            buckets[tab].append(h)
 
     # 점검 탭 고정 구성물
     chk = list(buckets['check'])

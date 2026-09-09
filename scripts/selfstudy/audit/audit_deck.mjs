@@ -15,8 +15,11 @@ const pg = await b.newPage({ viewport: { width: 1440, height: 900 } });
 const errs = [];
 pg.on('console', (m) => { if (m.type() === 'error') errs.push(m.text().slice(0, 160)); });
 pg.on('pageerror', (e) => errs.push('PAGEERROR ' + String(e).slice(0, 160)));
-await pg.goto(pathToFileURL(FILE).href);
-await pg.waitForFunction(() => window.__deckGo && window.__timelines);
+// 여덟 차시 묶음은 슬라이드 220장에 코치 마크 82개가 한 문서에 다 들어 있어서
+// 첫 화면까지 40초쯤 걸린다. 기본 30초로는 검사가 못 연다. 학생이 읽는 자습
+// 교재 쪽은 0.1초라 이 비용은 검수용 묶음에만 있다.
+await pg.goto(pathToFileURL(FILE).href, { timeout: 180000 });
+await pg.waitForFunction(() => window.__deckGo && window.__timelines, null, { timeout: 180000 });
 
 const meta = await pg.evaluate(() => {
   const out = [];

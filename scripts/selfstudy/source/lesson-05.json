@@ -1109,7 +1109,8 @@
           "en": "Centre of the boss - 60"
          }
         }
-       ]
+       ],
+       "on": "three"
       },
       {
        "n": 5,
@@ -1222,7 +1223,47 @@
        "pitfall": {
         "ko": "OFFSET의 두 번째 클릭은 거리가 아니라 방향만 정합니다. 아래쪽을 클릭하면 정면도 쪽에 선이 생겨 뷰가 겹쳐요. 8과 12의 순서를 바꾸면 보스가 뒤로 나온 부품이 되니 순서를 다시 보세요.",
         "en": "The second click in OFFSET sets direction only. Click below and the line lands over the front view. Swap 8 and 12 and the boss projects backwards, so check the order."
-       }
+       },
+       "on": "three",
+       "feature": "boss",
+       "spots": [
+        {
+         "x": 60,
+         "y": 90,
+         "hover": {
+          "ko": "보스 원의 위쪽 사분점입니다. 마름모 표식이 뜨면 클릭해요. 여기서 높이 90 을 지나는 수평선이 생깁니다.",
+          "en": "The top quadrant of the boss circle. Click on the diamond marker. The horizontal construction line through height 90 starts here."
+         },
+         "snap": "qua"
+        },
+        {
+         "view": "top",
+         "x": 42,
+         "z": 0,
+         "hover": {
+          "ko": "그 선을 30 띄운 자리입니다. 평면도의 맨 아래 선이고 **보스 앞면**이에요. 정면도에 가까운 변이 앞면입니다.",
+          "en": "Offset that line by 30 and you get the bottom edge of the top view - the **boss front face**. In third angle the edge nearest the front view is the front."
+         }
+        },
+        {
+         "view": "top",
+         "x": 60,
+         "z": 8,
+         "hover": {
+          "ko": "거기서 다시 8 을 띄우면 **판 앞면**입니다. 보스가 앞으로 8 나와 있으니 판은 그만큼 뒤예요.",
+          "en": "Offset 8 more and that is the **plate front face**. The boss stands 8 proud, so the plate sits that far back."
+         }
+        },
+        {
+         "view": "top",
+         "x": 78,
+         "z": 20,
+         "hover": {
+          "ko": "다시 12 를 띄우면 **뒷면**입니다. 판 두께 12 예요. 이 세 줄이 평면도의 깊이를 다 정합니다.",
+          "en": "Another 12 gives the **back face** - the 12 plate thickness. Those three lines fix every depth in the top view."
+         }
+        }
+       ]
       },
       {
        "n": 6,
@@ -1299,7 +1340,50 @@
        "pitfall": {
         "ko": "레이어를 안 바꾸고 그으면 형상이 투상선과 같은 치수선 레이어에 들어갑니다. 그러면 16단계에서 치수선 레이어를 껐을 때 형상까지 사라져요. 여기서 미리 지우려 하지 말고 다음 단계로 가세요.",
         "en": "Draw without switching and the geometry comes out magenta like the projectors. Step 16 then hides the shape along with them. Do not erase anything here - go on."
-       }
+       },
+       "on": "three",
+       "spots": [
+        {
+         "view": "top",
+         "x": 0,
+         "z": 0,
+         "hover": {
+          "ko": "보스 앞면 선과 왼쪽 투상선이 만나는 자리입니다. 가위표 표식, 교차점이 뜨면 클릭해요. 가로선의 시작점입니다.",
+          "en": "Where the boss-front line crosses the leftmost projector. Click on the cross marker - the intersection. This is where the horizontal starts."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 120,
+         "z": 0,
+         "hover": {
+          "ko": "같은 선과 오른쪽 투상선의 교차점입니다. 폭 전체를 가로지르는 선 하나가 생깁니다.",
+          "en": "The same line against the rightmost projector. One line now spans the whole width."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 0,
+         "z": 8,
+         "hover": {
+          "ko": "판 앞면 선 위에도 하나. 가로는 세 줄입니다.",
+          "en": "One more along the plate-front line. Three horizontals in all."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 32,
+         "z": 20,
+         "hover": {
+          "ko": "세로줄은 여섯입니다. 5 · 32 · 88 · 115 · 120 과 왼쪽 끝 0 이에요. 정면도에서 올린 투상선이 그 자리를 이미 잡아 두었습니다.",
+          "en": "Six verticals: 0, 5, 32, 88, 115 and 120. The projectors raised from the front view already mark them."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 7,
@@ -1384,7 +1468,55 @@
        "pitfall": {
         "ko": "TRIM 프롬프트는 버전에 따라 갈립니다. 경계를 먼저 묻기도 하고 곧바로 자를 구간을 묻기도 해요. 경계를 묻는 화면에서 형상을 클릭하면 경계로 선택될 뿐 잘리지 않아요. 잘못 잘랐으면 Ctrl+Z로 되돌리고 다시 하세요.",
         "en": "Depending on the version, TRIM asks for cutting edges first or trims straight away. Clicking geometry at the cutting-edge prompt only selects a boundary. If you cut the wrong piece, press Ctrl+Z and redo it."
-       }
+       },
+       "on": "three",
+       "spots": [
+        {
+         "view": "top",
+         "x": 16,
+         "z": 0,
+         "hover": {
+          "ko": "보스 앞면 선에서 32 **왼쪽** 구간입니다. 클릭하면 사라져요. 보스는 32 에서 88 사이에만 있거든요.",
+          "en": "The stretch of the boss-front line **left of 32**. Click and it goes - the boss only exists between 32 and 88."
+         }
+        },
+        {
+         "view": "top",
+         "x": 104,
+         "z": 0,
+         "hover": {
+          "ko": "같은 선의 88 **오른쪽** 구간. 같은 이유예요.",
+          "en": "The stretch **right of 88** on the same line, for the same reason."
+         }
+        },
+        {
+         "view": "top",
+         "x": 60,
+         "z": 8,
+         "hover": {
+          "ko": "판 앞면 선의 32 와 88 **사이** 구간입니다. 그 구간은 보스가 앞을 덮고 있어요.",
+          "en": "The stretch of the plate-front line **between 32 and 88**. The boss covers it from the front."
+         }
+        },
+        {
+         "view": "top",
+         "x": 0,
+         "z": 4,
+         "hover": {
+          "ko": "왼쪽 세로선의 맨 아래 8 구간. 판의 양 끝에는 보스가 없습니다.",
+          "en": "The lowest 8 of the left vertical. There is no boss at the ends of the plate."
+         }
+        },
+        {
+         "view": "top",
+         "x": 32,
+         "z": 14,
+         "hover": {
+          "ko": "32 세로선에서 판 앞면보다 **위쪽** 구간. 보스 단차는 앞으로 나온 8 안에만 있어요.",
+          "en": "On the 32 vertical, the stretch **above** the plate front. The boss step lives only in the 8 that stands proud."
+         }
+        }
+       ]
       }
      ]
     },
@@ -1526,7 +1658,48 @@
        "pitfall": {
         "ko": "통과점을 아무 데나 찍으면 각도만 45도이고 두 뷰가 안 맞습니다. 각도 옵션 A를 빼면 XLINE이 두 점을 묻는 기본 모드로 들어가요. 우측면도 맨 왼쪽 세로선과 평면도 맨 아래 선의 교차점을 다시 잡으세요.",
         "en": "Put the through point anywhere and only the angle is right; the views stop agreeing. Skip the A option and XLINE falls back to asking for two points. Re-pick the intersection of the right view's leftmost vertical and the top view lowest line."
-       }
+       },
+       "on": "three",
+       "spots": [
+        {
+         "x": 120,
+         "y": 90,
+         "hover": {
+          "ko": "정면도 오른쪽 끝에서 올린 수직 투상선입니다. 이 선을 30 오른쪽으로 띄우면 우측면도의 맨 왼쪽 선이 돼요.",
+          "en": "The projector raised from the right end of the front view. Offset it 30 to the right and it becomes the leftmost line of the side view."
+         }
+        },
+        {
+         "view": "raw",
+         "x": 224,
+         "y": 84,
+         "hover": {
+          "ko": "그 세로선과 평면도 맨 아래 선이 만나는 자리입니다. 두 뷰의 **앞면끼리** 만나는 점이에요. 45도 선이 여기서 출발합니다.",
+          "en": "Where that vertical meets the bottom line of the top view - the point where the two views' **front faces** meet. The 45-degree line starts here."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "raw",
+         "x": 232,
+         "y": 76,
+         "hover": {
+          "ko": "45도 선과 평면도 판 앞면 선의 교차점. 우측면도 왼쪽 선에서 8 떨어진 자리가 됩니다.",
+          "en": "Where the 45-degree line crosses the plate-front line of the top view. That lands 8 from the left edge of the side view."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "raw",
+         "x": 244,
+         "y": 64,
+         "hover": {
+          "ko": "45도 선과 뒷면 선의 교차점. 20 떨어진 자리예요. 깊이가 이렇게 평면도에서 우측면도로 건너갑니다.",
+          "en": "Where it crosses the back line - 20 across. This is how depth travels from the top view to the side view."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 9,
@@ -1652,7 +1825,8 @@
           "en": "Centre of the left slot’s left end circle - 8"
          }
         }
-       ]
+       ],
+       "on": "three"
       },
       {
        "n": 10,
@@ -1761,7 +1935,70 @@
        "pitfall": {
         "ko": "여기서 치는 C는 CIRCLE이 아니라 LINE의 닫기 옵션입니다. 명령을 새로 시작한 뒤 C를 치면 원 그리기가 시작돼요. 여섯 점의 순서를 바꾸면 윤곽이 꼬이니 순서대로 다시 찍으세요.",
         "en": "The C here is LINE's close option, not CIRCLE. Type C after starting a fresh command and you begin a circle. Reorder the six points and the outline crosses itself, so pick them in sequence."
-       }
+       },
+       "on": "three",
+       "spots": [
+        {
+         "view": "side",
+         "z": 8,
+         "y": 0,
+         "hover": {
+          "ko": "판 앞면 세로선과 바닥선의 교차점입니다. 첫 점이에요.",
+          "en": "Where the plate-front vertical meets the base line. That is your first point."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 20,
+         "y": 0,
+         "hover": {
+          "ko": "뒷면 세로선과 바닥선의 교차점.",
+          "en": "Where the back vertical meets the base line."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 20,
+         "y": 90,
+         "hover": {
+          "ko": "뒷면 세로선과 90 선의 교차점. 부품의 맨 위입니다.",
+          "en": "Where the back vertical meets the 90 line - the top of the part."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 90,
+         "hover": {
+          "ko": "보스 앞면 세로선과 90 선의 교차점.",
+          "en": "Where the boss-front vertical meets the 90 line."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 34,
+         "hover": {
+          "ko": "보스 앞면 세로선과 34 선의 교차점. 보스 원의 아래쪽 사분점에서 온 높이예요.",
+          "en": "Where the boss-front vertical meets the 34 line - the height that came from the bottom quadrant of the boss circle."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 8,
+         "y": 34,
+         "hover": {
+          "ko": "판 앞면 세로선과 34 선의 교차점. 여기서 `C` 를 치면 시작점까지 닫히면서 끝납니다.",
+          "en": "Where the plate-front vertical meets the 34 line. Type `C` here and it closes back to the start."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 11,
@@ -1927,7 +2164,50 @@
        "pitfall": {
         "ko": "레이어를 안 바꾸면 흰 실선이 되어 형상 모서리로 읽힙니다. 커서를 반대쪽에 두고 5를 치면 중심선이 형상 안에서 시작해 한쪽만 삐져나와요. 5를 치기 전에 커서가 어느 쪽에 있는지 보세요.",
         "en": "Without the center layer these come out white and solid and read as real edges. With the cursor on the wrong side, the centerline starts inside the shape and overruns one end only. Check which side the cursor is on before you type the 5."
-       }
+       },
+       "on": "three",
+       "feature": "bossc",
+       "spots": [
+        {
+         "view": "top",
+         "x": 60,
+         "z": 0,
+         "hover": {
+          "ko": "60 수직 투상선과 평면도 보스 앞면 선의 교차점입니다. `FROM` 의 기준점이에요.",
+          "en": "Where the 60 projector crosses the boss-front line of the top view. This is the base point for `FROM`."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 60,
+         "z": -5,
+         "hover": {
+          "ko": "커서를 그 점의 **아래**에 두고 5 를 칩니다. 중심선이 형상 밖으로 나오는 몫이에요.",
+          "en": "Put the cursor **below** it and type 5 - the overhang the centerline needs outside the shape."
+         }
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 62,
+         "hover": {
+          "ko": "62 수평 투상선과 우측면도 보스 앞면 세로선의 교차점. 우측면도 축 중심선의 기준점입니다.",
+          "en": "Where the 62 projector crosses the boss-front vertical of the side view. Base point for the side view's axis centerline."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 8,
+         "hover": {
+          "ko": "8 수평 투상선과 우측면도 판 앞면 세로선의 교차점. 장공 중심선의 기준점이에요.",
+          "en": "Where the 8 projector crosses the plate-front vertical. Base point for the slot centerline."
+         },
+         "snap": "int"
+        }
+       ]
       }
      ]
     },
@@ -2068,7 +2348,49 @@
        "pitfall": {
         "ko": "선이 노란 점선인지 확인합니다. 흰 실선이면 레이어를 안 바꾸고 그린 거예요. 실선은 보이는 모서리라는 뜻입니다. 뚫린 구멍이 파인 홈처럼 읽히니 지우고 다시 그으세요.",
         "en": "Check the lines are yellow dashes. White solid means you drew without switching. A solid line means a visible edge, so the hole reads as a groove - erase and redraw."
-       }
+       },
+       "on": "three",
+       "feature": "bore",
+       "spots": [
+        {
+         "x": 47.5,
+         "y": 62,
+         "hover": {
+          "ko": "축 구멍 원의 **왼쪽 사분점**입니다. 47.5 예요. 중심 60 에서 12.5 왼쪽입니다.",
+          "en": "The **left quadrant** of the shaft hole - 47.5, which is 12.5 left of the 60 centre."
+         },
+         "snap": "qua"
+        },
+        {
+         "x": 72.5,
+         "y": 62,
+         "hover": {
+          "ko": "**오른쪽 사분점**. 72.5 입니다.",
+          "en": "The **right quadrant** - 72.5."
+         },
+         "snap": "qua"
+        },
+        {
+         "view": "top",
+         "x": 47.5,
+         "z": 0,
+         "hover": {
+          "ko": "그 투상선과 평면도 보스 앞면 선의 교차점. 숨은선의 시작점이에요.",
+          "en": "Where that projector meets the boss-front line of the top view. The hidden line starts here."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 47.5,
+         "z": 20,
+         "hover": {
+          "ko": "같은 투상선과 뒷면 선의 교차점. 구멍이 뚫려 있으니 앞에서 뒤까지 이어집니다.",
+          "en": "The same projector against the back line. The hole goes through, so the line runs front to back."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 13,
@@ -2154,7 +2476,49 @@
        "pitfall": {
         "ko": "여기서도 옵션은 H입니다. 11단계에 이어 V로 치면 세로선이 나와 우측면도를 세로로 갈라요. 12.5를 좌표로 넣지 말고 원의 사분점에서 받으세요.",
         "en": "The option is H again. Carry V over from step 11 and verticals slice down through the right view. Do not type 12.5 - take it from the quadrants."
-       }
+       },
+       "on": "three",
+       "feature": "bore",
+       "spots": [
+        {
+         "x": 60,
+         "y": 74.5,
+         "hover": {
+          "ko": "축 구멍 원의 **위쪽 사분점**입니다. 74.5 예요.",
+          "en": "The **top quadrant** of the shaft hole - 74.5."
+         },
+         "snap": "qua"
+        },
+        {
+         "x": 60,
+         "y": 49.5,
+         "hover": {
+          "ko": "**아래쪽 사분점**. 49.5 이고 중심 62 에서 12.5 씩입니다.",
+          "en": "The **bottom quadrant** - 49.5. Both are 12.5 from the 62 centre."
+         },
+         "snap": "qua"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 74.5,
+         "hover": {
+          "ko": "보스 앞면 세로선과 위쪽 투상선의 교차점.",
+          "en": "Where the boss-front vertical meets the upper projector."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 20,
+         "y": 74.5,
+         "hover": {
+          "ko": "뒷면 세로선과 같은 투상선의 교차점. 두 줄 다 가로로 20 입니다.",
+          "en": "The back vertical against the same projector. Both lines run 20 across."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 14,
@@ -2255,7 +2619,48 @@
        "pitfall": {
         "ko": "M5는 지름 5이니 반지름 2.5입니다. 44.4에 2.5를 더하면 46.9예요. 축 구멍 숨은선은 47.5라 0.6밖에 안 떨어져 있어요. 축소하면 한 줄로 보이니 확대해서 두 줄인지 확인하세요.",
         "en": "M5 is 5 across, so radius 2.5, and 44.4 plus 2.5 is 46.9. The bore line is 47.5, only 0.6 away. Zoomed out they merge, so zoom in and confirm two lines."
-       }
+       },
+       "on": "three",
+       "feature": "tap",
+       "spots": [
+        {
+         "x": 75.556,
+         "y": 77.556,
+         "hover": {
+          "ko": "오른쪽 위 탭 원입니다. 사분점 둘을 투상선으로 올려요.",
+          "en": "The upper-right tapped hole. Two quadrants go up as projectors."
+         },
+         "snap": "cen"
+        },
+        {
+         "x": 44.444,
+         "y": 77.556,
+         "hover": {
+          "ko": "왼쪽 위 탭 원. 아래쪽 탭 둘은 가로 자리가 같아 같은 선에 겹칩니다.",
+          "en": "The upper-left one. The two lower holes share the same across-positions, so they land on the same projectors."
+         },
+         "snap": "cen"
+        },
+        {
+         "view": "top",
+         "x": 44.444,
+         "z": 0,
+         "hover": {
+          "ko": "투상선과 평면도 보스 앞면 선의 교차점입니다. 여기서 시작해 **위로 10**.",
+          "en": "Where a projector meets the boss-front line. Start here and go **10 up**."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 44.444,
+         "z": 10,
+         "hover": {
+          "ko": "탭 깊이 10 만큼만 들어갑니다. 관통이 아니에요 — 도면 표기가 `4-M5 깊이 10` 입니다.",
+          "en": "It reaches only the 10 of thread depth. Not a through hole - the drawing says `4-M5 깊이 10`."
+         }
+        }
+       ]
       },
       {
        "n": 15,
@@ -2379,7 +2784,50 @@
        "pitfall": {
         "ko": "원본을 지울지 묻는 프롬프트가 나옵니다. 기본값을 그냥 누르면 위쪽 두 줄이 사라져요. 대칭선을 중심선이 아니라 형상 모서리로 잡으면 아래쪽 탭 높이가 어긋나요. 반드시 N을 넣고 대칭선은 중심선의 두 끝점으로 잡으세요.",
         "en": "Accept the default at the erase prompt and the upper pair vanishes. Pick a shape edge instead of the centerline and the lower taps land wrong. Type N, and take the mirror line from the centerline's two ends."
-       }
+       },
+       "on": "three",
+       "feature": "tap",
+       "spots": [
+        {
+         "x": 75.556,
+         "y": 88.556,
+         "hover": {
+          "ko": "위쪽 탭 원의 **위쪽 사분점**입니다. 여기서 수평 투상선을 우측면도로 보냅니다.",
+          "en": "The **top quadrant** of an upper tapped hole. A horizontal projector goes from here to the side view."
+         },
+         "snap": "qua"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 88.556,
+         "hover": {
+          "ko": "보스 앞면 세로선과 그 투상선의 교차점. **오른쪽으로 10** 입니다 — 우측면도는 왼쪽이 앞면이라 재료가 오른쪽에 있어요.",
+          "en": "Where the boss-front vertical meets it. Go **10 to the right**: in the side view the front is on the left, so material lies to the right."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "side",
+         "z": 0,
+         "y": 62,
+         "hover": {
+          "ko": "우측면도 축 중심선의 **왼쪽 끝점**입니다. 대칭선의 첫 점이에요.",
+          "en": "The **left endpoint** of the side view's axis centerline - the first point of the mirror line."
+         },
+         "snap": "end"
+        },
+        {
+         "view": "side",
+         "z": 20,
+         "y": 62,
+         "hover": {
+          "ko": "같은 중심선의 **오른쪽 끝점**. 아래쪽 탭은 다시 그리지 않고 이 축으로 넘깁니다.",
+          "en": "The **right endpoint** of the same centerline. The lower holes get mirrored across it instead of redrawn."
+         },
+         "snap": "end"
+        }
+       ]
       },
       {
        "n": 16,
@@ -2553,7 +3001,59 @@
        "pitfall": {
         "ko": "보스 앞면 선까지 내려가면 판 앞으로 튀어나온 구멍이 됩니다. 우측면도에서 네 줄을 그으면 두 줄이 겹쳐 쌓여요. 두 줄이면 충분하니 겹친 것은 지우세요.",
         "en": "Run them to the boss front line and the hole appears to stick out in front of the plate. Draw four lines in the right view and two stack on the others. Two is enough, so delete the duplicates."
-       }
+       },
+       "on": "three",
+       "feature": "slot",
+       "spots": [
+        {
+         "x": 24,
+         "y": 8,
+         "hover": {
+          "ko": "왼쪽 장공에서 **왼쪽 끝원의 왼쪽 사분점**입니다. 24 예요. 끝원 중심 29 에서 반지름 5 를 뺀 값이에요.",
+          "en": "The **left quadrant of the left end circle** of the left slot - 24, which is the 29 end-circle centre less the 5 radius."
+         },
+         "snap": "qua"
+        },
+        {
+         "x": 46,
+         "y": 8,
+         "hover": {
+          "ko": "**오른쪽 끝원의 오른쪽 사분점**. 46 입니다. 41 에 5 를 더한 값이에요.",
+          "en": "The **right quadrant of the right end circle** - 46, which is 41 plus 5."
+         },
+         "snap": "qua"
+        },
+        {
+         "view": "top",
+         "x": 24,
+         "z": 8,
+         "hover": {
+          "ko": "그 투상선과 평면도 **판 앞면** 선의 교차점입니다. 장공은 판에만 있어 보스 앞면까지 가지 않아요.",
+          "en": "Where that projector meets the **plate-front** line. The slot is only in the plate, so it does not reach the boss front."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 24,
+         "z": 20,
+         "hover": {
+          "ko": "같은 투상선과 뒷면 선의 교차점. 두 줄 모두 길이 12 — 판 두께 그대로입니다.",
+          "en": "The same projector against the back line. Both lines are 12 long - the plate thickness."
+         },
+         "snap": "int"
+        },
+        {
+         "view": "top",
+         "x": 60,
+         "z": 20,
+         "hover": {
+          "ko": "평면도 축 중심선의 끝점입니다. 오른쪽 장공은 이 축으로 대칭 복사해요. 중심 35 와 85 가 둘 다 60 에서 25 씩이라 정확히 맞습니다.",
+          "en": "An endpoint of the top view's axis centerline. The right slot mirrors across it - 35 and 85 are both 25 from 60, so it lands exactly."
+         },
+         "snap": "end"
+        }
+       ]
       },
       {
        "n": 17,
