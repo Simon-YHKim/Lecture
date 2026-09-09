@@ -29,8 +29,8 @@
    "en": "You can tell a Ø callout from an R callout. You can then pick diameter or radius entry in CIRCLE to match."
   },
   {
-   "ko": "축 구멍 Ø25를 보스와 같은 중심 60,62에 좌표로 그릴 수 있습니다.",
-   "en": "You can draw the Ø25 bore at 60,62 by coordinate, concentric with the boss."
+   "ko": "보스 원 둘레에서 중심 스냅을 잡아 축 구멍 Ø25를 보스와 동심으로 그릴 수 있습니다.",
+   "en": "You can catch the boss circle's center with the center snap and draw the Ø25 bore concentric with it."
   },
   {
    "ko": "보스 Ø56을 안쪽으로 6 오프셋해 피치원 PCD Ø44를 만들 수 있습니다. 그 6이 (56−44)÷2에서 나온 값임을 설명할 수 있습니다.",
@@ -45,8 +45,8 @@
    "en": "You can set the linetype scale to 0.5 so a centerline reads as a chain line."
   },
   {
-   "ko": "@22<45로 45도 보조선을 그어 탭 첫 구멍 자리를 정확히 잡을 수 있습니다.",
-   "en": "You can draw a 45-degree construction line with @22<45 to locate the first tapped hole exactly."
+   "ko": "극좌표 추적 45도 안내선 위에서 거리 22만 입력해 45도 보조선을 긋고 탭 첫 구멍 자리를 정확히 잡을 수 있습니다.",
+   "en": "You can draw the 45-degree construction line by typing only the distance 22 on the polar tracking guide, and so locate the first tapped hole exactly."
   },
   {
    "ko": "ARRAYPOLAR에서 항목 수 4, 사이의 각도 90, 연관 끄기를 지정할 수 있습니다. 그러면 탭 네 개를 45·135·225·315도에 놓을 수 있습니다.",
@@ -251,8 +251,8 @@
       "ko": "이 차시의 규율",
       "en": "The rule for this lesson"
      },
-     "ko": "마우스로 위치를 눈대중하지 않습니다. 좌표를 입력합니다. 원의 중심이 1밀리미터만 어긋나도 뒤가 전부 어긋나요.",
-     "en": "Do not eyeball a position with the mouse. Type the coordinate. A circle center off by one millimeter throws off everything that follows."
+     "ko": "눈대중으로 찍지 않습니다. 이미 그려진 것이 있으면 스냅으로 잡고, 방향은 직교나 극좌표로 고정한 다음 거리만 숫자로 칩니다. 원의 중심이 1밀리미터만 어긋나도 뒤가 전부 어긋나요.",
+     "en": "Do not eyeball a position. Snap to what is already drawn, lock the direction with ortho or polar tracking, and type only the distance. A circle center off by one millimeter throws off everything that follows."
     }
    ]
   },
@@ -304,8 +304,8 @@
         "en": "Diameter of the bore"
        },
        {
-        "ko": "`C` → 중심 `60,62` → `D` → `25`",
-        "en": "C, then center 60,62, then D, then 25"
+        "ko": "`C` → 보스 원 둘레에서 중심 스냅 → `D` → `25`",
+        "en": "C, snap the boss circle's center, then D, then 25"
        }
       ],
       [
@@ -360,8 +360,8 @@
         "en": "Radius of the slot end circles"
        },
        {
-        "ko": "`C` → 중심 `29,8` → `5`. 여기서는 `D` 를 누르지 않습니다.",
-        "en": "C, center 29,8, then 5. Here you do not press D."
+        "ko": "`O` → `8` → 밑변을 위로, `O` → `29` → 왼쪽 변을 오른쪽으로. 두 보조선의 교차점을 스냅으로 잡고 `C` → 반지름 `5`. 그리고 보조선을 지웁니다.",
+        "en": "`O`, `8`, offset the bottom edge up; `O`, `29`, offset the left edge right. Snap to where the two guides cross, then `C` and radius `5`. Erase the guides after."
        }
       ],
       [
@@ -810,33 +810,38 @@
          "do": {
           "ko": "입력하고 엔터를 누릅니다. 새로 만들지 않습니다.",
           "en": "Type it and press Enter. Do not start a new file."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "지난 시간에 저장한 `EDU-IB-02_L03_PROFILE.dwg` 를 고릅니다. 열기를 누릅니다.",
           "en": "Pick EDU-IB-02_L03_PROFILE.dwg, the file you saved last lesson, and click Open."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "Z",
          "do": {
           "ko": "입력하고 엔터. 화면 배율을 맞추는 명령입니다.",
           "en": "Type it and press Enter. This is the zoom command."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "A",
          "do": {
           "ko": "입력하고 엔터. 전체 옵션입니다. 도면 전체가 화면에 들어옵니다.",
           "en": "Type it and press Enter. That is the All option, which fits the whole drawing on screen."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
-          "ko": "상태 막대에서 객체 스냅을 봅니다. 꺼져 있으면 `F3` 을 누릅니다.",
-          "en": "Look at object snap in the status bar. If it is off, press F3."
-         }
+          "ko": "상태 막대에서 객체 스냅을 봅니다. 꺼져 있으면 `F3` 을 누릅니다. 도면의 선 위에 커서를 올려 표식이 뜨는지까지 확인하세요. 안 뜨면 `OS` 엔터로 여섯 개가 체크돼 있는지 봅니다.",
+          "en": "Check object snap in the status bar and press `F3` if it is off. Then hover a line and make sure a marker appears; if it does not, type `OS`, Enter and check the six boxes."
+         },
+         "kind": "click"
         }
        ],
        "expect": {
@@ -860,52 +865,64 @@
        },
        "actions": [
         {
+         "kind": "click",
          "do": {
           "ko": "화면 위 도면층(레이어) 목록을 봅니다. 외형선인지 확인하고, 아니면 눌러서 외형선으로 바꿉니다.",
-          "en": "Look at the layer list at the top of the screen. Confirm it says the visible-line layer; if not, click and change it."
+          "en": "Check the layer dropdown reads the outline layer; switch it if not."
          }
         },
         {
-         "type": "CLAYER",
+         "kind": "type",
          "do": {
-          "ko": "명령행으로 해도 됩니다. 입력하고 엔터.",
-          "en": "You can do it from the command line instead. Type it and press Enter."
-         }
+          "ko": "명령행으로 해도 됩니다. 입력하고 엔터, 새 값에 `외형선` 입력하고 엔터.",
+          "en": "The command line does it too: type it, Enter, then the layer name, Enter."
+         },
+         "type": "CLAYER"
         },
         {
-         "type": "외형선",
-         "do": {
-          "ko": "입력하고 엔터. 레이어 이름입니다.",
-          "en": "Type it and press Enter. That is the layer name."
-         }
-        },
-        {
-         "type": "C",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 원 명령입니다.",
-          "en": "Type it and press Enter. That starts CIRCLE."
-         }
+          "en": "then Enter. The circle command."
+         },
+         "type": "C"
         },
         {
-         "type": "60,62",
+         "kind": "ask",
          "do": {
-          "ko": "중심점을 물어봅니다. 입력하고 엔터.",
-          "en": "It asks for the center. Type it and press Enter."
+          "ko": "중심점을 물어봅니다. 여기서 좌표를 치지 않습니다.",
+          "en": "It asks for the centre. No coordinate goes in here."
          }
         },
         {
-         "type": "D",
+         "kind": "move",
+         "do": {
+          "ko": "커서를 보스 원 Ø56 의 둘레로 가져갑니다.",
+          "en": "Move the cursor onto the rim of the Ø56 boss circle."
+         }
+        },
+        {
+         "kind": "snap",
+         "do": {
+          "ko": "커서를 보스 원 둘레에 올리면 중심에 동그라미 표식이 뜹니다. 그 표식을 보고 클릭합니다. 축 구멍은 보스와 중심이 같아요.",
+          "en": "Hover the rim of the boss circle and a circle marker appears at its centre. Click on that marker - the bore shares the boss centre."
+         }
+        },
+        {
+         "kind": "type",
          "do": {
           "ko": "반지름을 물어봅니다. 여기서 숫자를 바로 넣지 않습니다. 입력하고 엔터.",
-          "en": "It asks for a radius. Do not type the number here. Type D and press Enter."
-         }
+          "en": "It asks for a radius - do not type the number yet. Type this, Enter."
+         },
+         "type": "D"
         },
         {
-         "type": "25",
+         "kind": "type",
          "do": {
           "ko": "이제 지름을 물어봅니다. 입력하고 엔터.",
-          "en": "Now it asks for a diameter. Type it and press Enter."
-         }
+          "en": "Now it asks for the diameter. Type it, Enter."
+         },
+         "type": "25"
         }
        ],
        "expect": {
@@ -913,13 +930,25 @@
         "en": "A small circle appears inside the boss circle. That is the bore."
        },
        "why": {
-        "ko": "축 구멍이 부품의 기준이라 가장 먼저 그립니다. 도면 표기가 Ø25라 반지름이 아니라 지름 입력으로 바꿔요.",
-        "en": "The bore is the reference for the whole part, so it goes in first. The drawing says Ø25, so you switch from radius entry to diameter entry."
+        "ko": "축 구멍은 보스와 중심이 같습니다. 같은 점이니 좌표를 다시 칠 이유가 없어요. 중심 스냅으로 잡으면 보스가 정확한 한 두 원이 어긋날 수 없습니다.",
+        "en": "The bore and the boss share a centre, so there is no reason to type the point twice. Catch it with the centre snap and the two circles cannot drift apart."
        },
        "pitfall": {
-        "ko": "`D` 를 누르지 않고 25를 넣으면 지름 50이 됩니다. 정확히 두 배인데 화면에서는 좀 큰 원으로만 보입니다. 15단계에서 `LI` 로 반지름이 12.5인지 확인하면 바로 드러나요.",
-        "en": "Skip D and type 25 and you get a 50 mm circle. Exactly double, but on screen it only looks a bit large. Checking with LI in step 15 for a radius of 12.5 exposes it at once."
-       }
+        "ko": "둘레가 아니라 원 안쪽에 커서를 두면 표식이 안 뜹니다. 선 위에 올려야 해요. 지름 25 대신 반지름 25로 그렸으면 `D` 를 안 누른 겁니다.",
+        "en": "The marker only appears over the rim, not inside the circle. A circle twice the size means you skipped `D`."
+       },
+       "spots": [
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "보스 원 둘레에 커서를 올리면 중심 표식이 뜹니다",
+          "en": "Hover the boss rim and the centre marker appears"
+         },
+         "snap": "cen"
+        }
+       ],
+       "feature": "bore"
       },
       {
        "n": 3,
@@ -932,60 +961,69 @@
          "do": {
           "ko": "먼저 레이어를 바꿉니다. 도면층(레이어) 목록에서 중심선을 고릅니다.",
           "en": "Change the layer first. Pick the centerline layer from the layer list."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "O",
          "do": {
           "ko": "입력하고 엔터. 간격띄우기입니다.",
           "en": "Type it and press Enter. That starts OFFSET."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "L",
          "do": {
           "ko": "거리를 물어봅니다. 그 전에 옵션을 하나 손봅니다. 입력하고 엔터. 도면층 옵션입니다.",
           "en": "It asks for a distance, but first fix one option. Type L and press Enter. That is the Layer option."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "C",
          "do": {
           "ko": "원본으로 할지 현재로 할지 물어봅니다. 입력하고 엔터. 현재 레이어, 즉 중심선에 넣겠다는 뜻입니다.",
           "en": "It asks Source or Current. Type C and press Enter. That means put the copy on the current layer, the centerline layer."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "6",
          "do": {
           "ko": "다시 거리를 물어봅니다. 입력하고 엔터. 56 빼기 44를 2로 나눈 값입니다.",
           "en": "It asks for the distance again. Type it and press Enter. That is 56 minus 44, divided by 2."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "간격띄우기할 객체를 물어봅니다. 보스 Ø56 원의 선을 클릭합니다.",
           "en": "It asks which object to offset. Click the line of the Ø56 boss circle."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "어느 쪽으로 띄울지 물어봅니다. 원 안쪽 아무 곳이나 클릭하고 엔터로 명령을 끝냅니다.",
           "en": "It asks which side. Click anywhere inside the circle, then press Enter to end the command."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
-          "ko": "피치원이 실선처럼 보이나요. 그 원을 클릭하고 `Ctrl+1` 을 눌러 특성 창을 엽니다.",
+          "ko": "피치원이 실선처럼 보이면 그 원을 클릭하고 `Ctrl+1` 을 눌러 특성 창을 엽니다.",
           "en": "Does the bolt circle look like a solid line? Click it and press Ctrl+1 to open the Properties window."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "0.5",
          "do": {
           "ko": "선 종류 축척 칸에 입력하고 엔터.",
           "en": "Type it into the linetype scale field and press Enter."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -1009,31 +1047,64 @@
        },
        "actions": [
         {
-         "type": "L",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 선 명령입니다.",
-          "en": "Type it and press Enter. That starts LINE."
+          "en": "then Enter. The line command."
+         },
+         "type": "L"
+        },
+        {
+         "kind": "ask",
+         "do": {
+          "ko": "첫 점을 물어봅니다.",
+          "en": "It asks for the first point."
          }
         },
         {
-         "type": "60,62",
+         "kind": "move",
          "do": {
-          "ko": "첫 점을 물어봅니다. 입력하고 엔터. 보스 중심입니다.",
-          "en": "It asks for the first point. Type it and press Enter. That is the boss center."
+          "ko": "커서를 보스 원 둘레에 올립니다.",
+          "en": "Hover the rim of the boss circle."
          }
         },
         {
-         "type": "@22<45",
+         "kind": "snap",
          "do": {
-          "ko": "다음 점을 물어봅니다. 입력하고 엔터. 골뱅이는 지금 점에서부터라는 뜻입니다. 22는 거리이고 꺾쇠 뒤의 45는 각도입니다.",
-          "en": "It asks for the next point. Type it and press Enter. The @ means from the current point, 22 is the distance, and the 45 after the angle bracket is the angle."
+          "ko": "중심 표식이 뜨면 클릭합니다. 보스 중심이에요.",
+          "en": "Click on the centre marker - that is the boss centre."
          }
         },
         {
+         "kind": "key",
          "do": {
-          "ko": "엔터를 한 번 더 눌러 명령을 끝냅니다.",
-          "en": "Press Enter once more to end the command."
+          "ko": "상태 막대의 극좌표 추적을 켭니다. 각도 증분이 45도인지 확인해요.",
+          "en": "Turn on polar tracking in the status bar and check the increment is 45 degrees."
+         },
+         "type": "F10"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 오른쪽 위로 끕니다. 45도에 닿으면 점선 안내선과 「극좌표: 45도」 가 뜹니다.",
+          "en": "Drag up and to the right. At 45 degrees a dotted guide appears with \"Polar: 45\"."
          }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "안내선이 뜬 상태에서 입력하고 엔터. 방향은 안내선이 잡고 거리만 숫자로 줍니다. 정확히 45도예요.",
+          "en": "With the guide showing, type this and press Enter. The guide holds the direction; the number gives only the distance. Exactly 45 degrees."
+         },
+         "type": "22"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "한 번 더 눌러 명령을 끝냅니다.",
+          "en": "once more to end the command."
+         },
+         "type": "Enter"
         }
        ],
        "expect": {
@@ -1045,9 +1116,21 @@
         "en": "22 is half of the Ø44 bolt circle - its radius. That is why the endpoint falls on the bolt circle."
        },
        "pitfall": {
-        "ko": "각도를 마우스로 맞추면 44.9도나 45.2도가 됩니다. 상대극좌표로 넣어야 정확히 45도예요.",
-        "en": "Set the angle with the mouse and you get 44.9 or 45.2 degrees. Only relative polar entry gives exactly 45."
-       }
+        "ko": "각도를 손으로 대충 맞추면 44.9도나 45.2도가 됩니다. 안내선이 뜬 것을 보고 눌러야 정확히 45도예요. 안내선이 안 뜨면 극좌표 추적이 꺼져 있거나 각도 증분이 45가 아닙니다.",
+        "en": "Nudge the angle by hand and you get 44.9 or 45.2 degrees. Wait for the guide before you type. No guide means polar tracking is off, or its increment is not 45."
+       },
+       "spots": [
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "보스 중심 — 여기서 45도로 22",
+          "en": "The boss centre - then 22 at 45 degrees"
+         },
+         "snap": "cen"
+        }
+       ],
+       "feature": "tap"
       },
       {
        "n": 5,
@@ -1060,34 +1143,39 @@
          "do": {
           "ko": "도면층(레이어) 목록에서 외형선으로 되돌립니다.",
           "en": "Switch the layer list back to the visible-line layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "C",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "Type it and press Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "중심점을 물어봅니다. 여기서는 좌표를 치지 않습니다. 방금 그은 보조선의 바깥쪽 끝에 마우스를 가져갑니다. 네모난 끝점 표식이 뜨면 그때 클릭합니다.",
           "en": "It asks for the center. Do not type a coordinate here. Hover over the outer end of the construction line you just drew. When the square endpoint marker appears, click."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "D",
          "do": {
           "ko": "반지름을 물어봅니다. 입력하고 엔터.",
           "en": "It asks for a radius. Type D and press Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "5",
          "do": {
           "ko": "입력하고 엔터. M5의 5가 나사의 호칭 지름입니다.",
           "en": "Type it and press Enter. The 5 in M5 is the nominal thread diameter."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -1111,73 +1199,89 @@
        },
        "actions": [
         {
-         "type": "ARRAYPOLAR",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 단축키가 없어 이름 전체를 칩니다.",
-          "en": "Type it and press Enter. It has no shortcut, so type the whole name."
-         }
+          "en": "then Enter. It has no alias, so you type the whole name."
+         },
+         "type": "ARRAYPOLAR"
         },
         {
+         "kind": "click",
          "do": {
           "ko": "객체를 물어봅니다. 방금 그린 작은 원을 클릭하고 엔터.",
-          "en": "It asks for objects. Click the small circle you just drew and press Enter."
+          "en": "It asks for objects. Click the small circle you just drew, then Enter."
          }
         },
         {
-         "type": "60,62",
+         "kind": "ask",
          "do": {
-          "ko": "배열의 중심점을 물어봅니다. 입력하고 엔터. 보스 중심입니다.",
-          "en": "It asks for the array center. Type it and press Enter. That is the boss center."
+          "ko": "배열의 중심점을 물어봅니다.",
+          "en": "It asks for the centre of the array."
          }
         },
         {
-         "type": "I",
+         "kind": "snap",
+         "do": {
+          "ko": "보스 원 둘레에 커서를 올려 중심 표식이 뜨면 클릭합니다. 탭은 보스 중심을 돌아가니까요.",
+          "en": "Hover the boss rim, wait for the centre marker, and click - the taps turn about the boss centre."
+         }
+        },
+        {
+         "kind": "type",
          "do": {
           "ko": "화면에 미리보기가 뜨고 명령행에 옵션이 줄줄이 나옵니다. 세 개만 건드립니다. 입력하고 엔터. 항목 수입니다.",
-          "en": "A preview appears and the command line fills with options. You touch only three. Type I and press Enter for the item count."
-         }
+          "en": "A preview appears and the command line lists options; you touch three. Type this, Enter - the item count."
+         },
+         "type": "I"
         },
         {
-         "type": "4",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
-         }
+          "en": "then Enter."
+         },
+         "type": "4"
         },
         {
-         "type": "A",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 사이의 각도입니다.",
-          "en": "Type it and press Enter. That is the angle between items."
-         }
+          "en": "then Enter. The angle between items."
+         },
+         "type": "A"
         },
         {
-         "type": "90",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 360을 4로 나눈 값입니다.",
-          "en": "Type it and press Enter. That is 360 divided by 4."
-         }
+          "en": "then Enter. 360 divided by 4."
+         },
+         "type": "90"
         },
         {
-         "type": "AS",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 연관 배열로 만들지 물어봅니다.",
-          "en": "Type it and press Enter. It asks whether to make the array associative."
-         }
+          "en": "then Enter. It asks whether to make it associative."
+         },
+         "type": "AS"
         },
         {
-         "type": "N",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 네 개를 한 덩어리로 묶지 않겠다는 뜻입니다.",
-          "en": "Type it and press Enter. That means do not bind the four into one object."
-         }
+          "en": "then Enter - do not bind the four into one object."
+         },
+         "type": "N"
         },
         {
-         "type": "X",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 배열이 확정됩니다.",
-          "en": "Type it and press Enter. The array is committed."
-         }
+          "en": "then Enter. The array is committed."
+         },
+         "type": "X"
         }
        ],
        "expect": {
@@ -1191,7 +1295,19 @@
        "pitfall": {
         "ko": "도면에 적힌 45를 사이의 각도에 넣으면 네 구멍이 반 바퀴 안에 몰립니다. 45는 첫 구멍의 자리이고 90이 간격이에요. 연관을 켜 두면 나중에 하나만 따로 고를 수 없어요.",
         "en": "Put the drawing's 45 into the angle between items and all four crowd into half a turn. 45 is where the first hole sits; 90 is the gap. And with association on you cannot select just one of them later."
-       }
+       },
+       "spots": [
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "배열이 도는 중심 — 보스 중심입니다",
+          "en": "The centre the array turns about - the boss centre"
+         },
+         "snap": "cen"
+        }
+       ],
+       "feature": "tap"
       },
       {
        "n": 7,
@@ -1205,13 +1321,15 @@
          "do": {
           "ko": "입력하고 엔터. 지우기입니다.",
           "en": "Type it and press Enter. That starts ERASE."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "45도 보조선을 클릭하고 엔터.",
           "en": "Click the 45-degree construction line and press Enter."
-         }
+         },
+         "kind": "key"
         }
        ],
        "expect": {
@@ -1267,64 +1385,147 @@
        },
        "actions": [
         {
+         "kind": "see",
          "do": {
           "ko": "도면층(레이어)이 외형선인지 확인합니다.",
-          "en": "Confirm the layer is the visible-line layer."
+          "en": "Check the current layer is the visible-outline layer."
          }
         },
         {
-         "type": "C",
+         "kind": "see",
          "do": {
-          "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
+          "ko": "장공 중심은 베이스 왼쪽 아래 구석에서 오른쪽 29, 위 8입니다. 그 자리에는 잡을 것이 없어요. 그래서 잡을 것을 먼저 만듭니다.",
+          "en": "The slot center is 29 right and 8 up from the base's lower-left corner. There is nothing to snap to there, so make something first."
          }
         },
         {
-         "type": "29,8",
+         "kind": "type",
          "do": {
-          "ko": "중심점에 입력하고 엔터.",
-          "en": "Type it for the center and press Enter."
-         }
+          "ko": "입력하고 엔터. 간격 띄우기 명령이에요.",
+          "en": "then Enter. The offset command."
+         },
+         "type": "O"
         },
         {
-         "type": "5",
+         "kind": "type",
          "do": {
-          "ko": "반지름을 물어봅니다. 이번에는 도면에 R5로 적혀 있습니다. 그러니 `D` 를 누르지 않습니다. 그대로 입력하고 엔터.",
-          "en": "It asks for a radius. This time the drawing says R5, so do not press D. Type the number as it stands and press Enter."
+          "ko": "거리를 묻습니다. 입력하고 엔터.",
+          "en": "It asks for the distance. Type it and press Enter."
+         },
+         "type": "8"
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "베이스 밑변을 클릭하고, 그 위쪽을 한 번 더 클릭합니다. 밑변이 8만큼 위로 복사됩니다.",
+          "en": "Click the base bottom edge, then click above it. The edge is copied 8 up."
          }
         },
         {
-         "type": "CO",
+         "kind": "type",
+         "do": {
+          "ko": "엔터로 명령을 되부르고 거리를 다시 줍니다. 입력하고 엔터.",
+          "en": "Press Enter to repeat the command and give a new distance."
+         },
+         "type": "29"
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "베이스 왼쪽 변을 클릭하고, 그 오른쪽을 한 번 더 클릭합니다.",
+          "en": "Click the base left edge, then click to the right of it."
+         }
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "보조선 두 개가 만나는 자리가 장공 왼쪽 끝원의 중심입니다.",
+          "en": "Where the two guides cross is the center of the slot's left end circle."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 원 명령입니다.",
+          "en": "then Enter. The circle command."
+         },
+         "type": "C"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 두 보조선이 만나는 자리에 올립니다.",
+          "en": "Hover where the two guides cross."
+         }
+        },
+        {
+         "kind": "snap",
+         "do": {
+          "ko": "가위표 표식이 뜨면 클릭합니다. 교차점이에요.",
+          "en": "Click when the cross shows - the intersection."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "반지름을 물어봅니다. 도면에 R5로 적혀 있으니 `D` 를 누르지 않습니다. 그대로 입력하고 엔터.",
+          "en": "It asks for the radius. The drawing says R5, so do not press `D`. Type it and press Enter."
+         },
+         "type": "5"
+        },
+        {
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 복사 명령입니다.",
-          "en": "Type it and press Enter. That starts COPY."
-         }
+          "en": "then Enter. The copy command."
+         },
+         "type": "CO"
         },
         {
+         "kind": "click",
          "do": {
           "ko": "객체를 물어봅니다. 방금 그린 원을 클릭하고 엔터.",
-          "en": "It asks for objects. Click the circle you just drew and press Enter."
+          "en": "It asks for objects. Click the circle you just drew, then Enter."
          }
         },
         {
-         "type": "0,0",
+         "kind": "snap",
          "do": {
-          "ko": "기준점을 물어봅니다. 입력하고 엔터.",
-          "en": "It asks for a base point. Type it and press Enter."
+          "ko": "기준점을 물어봅니다. 방금 그린 원의 둘레에 커서를 올려 중심 표식이 뜨면 클릭합니다.",
+          "en": "It asks for a base point. Hover that circle's rim and click its centre marker."
          }
         },
         {
-         "type": "12,0",
+         "kind": "key",
          "do": {
-          "ko": "두 번째 점을 물어봅니다. 입력하고 엔터. 오른쪽으로 12만큼 간다는 뜻입니다.",
-          "en": "It asks for the second point. Type it and press Enter. That means 12 to the right."
-         }
+          "ko": "두 번째 점을 물어봅니다. 직교가 꺼져 있으면 눌러 켜고, 커서를 그 점보다 오른쪽에 둡니다.",
+          "en": "It asks for the second point. If ortho is off, press this to turn it on, then hold the cursor to the right of that point."
+         },
+         "type": "F8"
         },
         {
+         "kind": "type",
          "do": {
-          "ko": "엔터를 눌러 명령을 끝냅니다.",
-          "en": "Press Enter to end the command."
-         }
+          "ko": "입력하고 엔터. 방향은 직교가 잡아 주고 거리만 숫자로 줍니다. 장공 두 끝원의 중심 거리예요.",
+          "en": "then Enter. Ortho holds the direction and you give only the distance - the gap between the slot's two end centres."
+         },
+         "type": "12"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "눌러 명령을 끝냅니다.",
+          "en": "to end the command."
+         },
+         "type": "Enter"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "보조선 두 개를 지웁니다. 입력하고 엔터, 두 선을 클릭하고 엔터. 자리를 잡으려고 그은 선은 도면에 남기지 않습니다.",
+          "en": "Erase the two guides: type this, Enter, click both lines, Enter. Lines drawn only to find a position do not belong on the drawing."
+         },
+         "type": "E"
         }
        ],
        "expect": {
@@ -1332,13 +1533,34 @@
         "en": "You now have two circles, centered at 29 and 41. 41 is 29 plus 12."
        },
        "why": {
-        "ko": "Ø는 지름이고 R은 반지름입니다. 표기를 따라가므로 여기서는 `D` 를 누르지 않습니다. 기준점과 두 번째 점을 `0,0` 과 `12,0` 으로 주면 정확히 오른쪽으로 12만큼 옮겨 가요. 29는 도면에도 그대로 적혀 있어요. 왼쪽 끝에서 첫 끝원까지 29입니다.",
-        "en": "Ø means diameter, R means radius, and you follow the notation, so no D here. Giving 0,0 and 12,0 as the base and second points moves the copy exactly 12 to the right. 29 is written on the drawing itself - from the left edge to the first end circle."
+        "ko": "29와 8은 도면에 적힌 치수인데, 왼쪽 아래 구석에서 재는 값입니다. 그 구석은 외곽 폴리선의 꼭짓점이라 끝점 스냅으로 잡힙니다. 원점이 어디에 있든 결과가 같아요.",
+        "en": "The 29 and the 8 are printed dimensions, measured from the lower-left corner - a vertex of the outline polyline, so an endpoint snap catches it. The result no longer depends on where the origin sits."
        },
        "pitfall": {
-        "ko": "앞 단계의 흐름 그대로 `D` 를 누르면 지름 5, 즉 반지름 2.5짜리 원이 됩니다. 장공 폭이 절반이 돼요. 왼쪽 장공의 중심 35에서 6씩 벌린 자리가 29와 41입니다.",
-        "en": "Carry the habit from the previous steps and press D and you get a Ø5 circle, radius 2.5, halving the slot width. 29 and 41 are 6 either side of the slot center at 35."
-       }
+        "ko": "원이 엉뚱한 데 생기면 OFFSET 을 어느 쪽으로 했는지 봅니다. 밑변은 위로, 왼쪽 변은 오른쪽으로예요. 보조선을 지우는 것도 잊지 마세요. 남으면 외형선으로 읽힙니다.",
+        "en": "A circle in the wrong place means the offsets went the wrong way: the bottom edge goes up, the left edge goes right. And do erase the guides - left behind, they read as real edges."
+       },
+       "spots": [
+        {
+         "x": 0,
+         "y": 0,
+         "hover": {
+          "ko": "베이스 왼쪽 아래 구석 — 여기서 오른쪽 29, 위로 8",
+          "en": "The lower-left corner of the base - 29 right and 8 up from here"
+         },
+         "snap": "end"
+        },
+        {
+         "x": 29,
+         "y": 8,
+         "hover": {
+          "ko": "첫 끝원의 중심. 여기서 오른쪽으로 12 복사합니다",
+          "en": "The first end circle. Copy it 12 to the right"
+         },
+         "snap": "cen"
+        }
+       ],
+       "feature": "slot"
       },
       {
        "n": 9,
@@ -1348,46 +1570,64 @@
        },
        "actions": [
         {
-         "type": "L",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
+          "en": "then Enter."
+         },
+         "type": "L"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 왼쪽 끝원의 맨 위로 가져갑니다.",
+          "en": "Move the cursor to the top of the left end circle."
          }
         },
         {
-         "type": "29,13",
+         "kind": "snap",
+         "do": {
+          "ko": "마름모 표식이 뜨면 클릭합니다. 사분점이에요. 원의 상하좌우 네 점을 잡아 줍니다.",
+          "en": "Click on the diamond - the quadrant, which catches a circle at its four compass points."
+         }
+        },
+        {
+         "kind": "snap",
+         "do": {
+          "ko": "오른쪽 끝원의 맨 위에서도 마름모 표식을 보고 클릭합니다.",
+          "en": "Do the same on top of the right end circle."
+         }
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "한 번 더 눌러 끝냅니다. 위쪽 접선입니다.",
+          "en": "once more to finish. That is the upper tangent line."
+         },
+         "type": "Enter"
+        },
+        {
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
+          "en": "then Enter."
+         },
+         "type": "L"
+        },
+        {
+         "kind": "snap",
+         "do": {
+          "ko": "이번에는 두 끝원의 맨 아래에서 마름모 표식을 보고 차례로 클릭합니다.",
+          "en": "This time click the diamond at the bottom of each end circle in turn."
          }
         },
         {
-         "type": "41,13",
+         "kind": "key",
          "do": {
-          "ko": "입력하고 엔터. 엔터를 한 번 더 눌러 끝냅니다. 위쪽 접선입니다.",
-          "en": "Type it and press Enter, then Enter again to finish. That is the upper tangent."
-         }
-        },
-        {
-         "type": "L",
-         "do": {
-          "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
-         }
-        },
-        {
-         "type": "29,3",
-         "do": {
-          "ko": "입력하고 엔터.",
-          "en": "Type it and press Enter."
-         }
-        },
-        {
-         "type": "41,3",
-         "do": {
-          "ko": "입력하고 엔터. 엔터를 한 번 더 눌러 끝냅니다. 아래쪽 접선입니다.",
-          "en": "Type it and press Enter, then Enter again to finish. That is the lower tangent."
-         }
+          "ko": "한 번 더 눌러 끝냅니다. 아래쪽 접선입니다.",
+          "en": "once more to finish. That is the lower tangent line."
+         },
+         "type": "Enter"
         }
        ],
        "expect": {
@@ -1395,13 +1635,34 @@
         "en": "Two horizontal lines run across the top and bottom of the slot. Each end must touch its circle exactly."
        },
        "why": {
-        "ko": "두 원은 반지름이 같고 중심도 같은 높이에 있습니다. 그러니 접선은 수평선입니다. 중심 높이가 8이고 반지름이 5이니 위는 13, 아래는 3이에요.",
-        "en": "The two circles share a radius and sit at the same height, so the tangents are horizontal. With the centers at 8 and a radius of 5, the upper line is at 13 and the lower at 3."
+        "ko": "장공의 위아래 변은 두 끝원에 접하는 수평선입니다. 접점이 곧 원의 위 사분점과 아래 사분점이에요. 좌표 13과 3을 계산할 필요 없이 표식으로 잡힙니다.",
+        "en": "The top and bottom edges of a slot are horizontals tangent to the two end circles - and those tangent points are the circles' top and bottom quadrants. No need to work out 13 and 3; the marker has them."
        },
        "pitfall": {
-        "ko": "화면을 확대해서 접점을 확인합니다. 접선이 떠 있거나 원을 파고들었으면 다음 단계에서 자르기가 안 먹습니다. 13과 3을 다시 확인하세요.",
-        "en": "Zoom in and inspect where they meet. If a tangent floats clear of the circle or cuts into it, the trim in the next step will not work. Re-check 13 and 3."
-       }
+        "ko": "마름모가 아니라 근처점이나 접점이 잡히면 선이 미세하게 기웁니다. 표식 모양을 보고 누르세요. 겹쳐 뜨면 `Tab` 으로 넘깁니다.",
+        "en": "Catch a nearest or tangent instead of the quadrant and the line tilts slightly. Read the marker shape; press `Tab` when they compete."
+       },
+       "spots": [
+        {
+         "x": 29,
+         "y": 13,
+         "hover": {
+          "ko": "왼쪽 끝원의 위 사분점",
+          "en": "Top quadrant of the left end circle"
+         },
+         "snap": "qua"
+        },
+        {
+         "x": 41,
+         "y": 13,
+         "hover": {
+          "ko": "오른쪽 끝원의 위 사분점",
+          "en": "Top quadrant of the right end circle"
+         },
+         "snap": "qua"
+        }
+       ],
+       "feature": "slot"
       },
       {
        "n": 10,
@@ -1415,31 +1676,36 @@
          "do": {
           "ko": "입력하고 엔터. 자르기입니다.",
           "en": "Type it and press Enter. That starts TRIM."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "버전에 따라 묻는 것이 다릅니다. 절단 모서리를 먼저 고르라고 하면 방금 그은 두 직선을 클릭하고 엔터로 선택을 끝냅니다. 바로 자를 부분을 고르라고 하면 그대로 진행합니다.",
           "en": "What it asks depends on the version. If it asks for cutting edges first, click the two lines you just drew and press Enter to finish the selection. If it goes straight to asking what to cut, just carry on."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
           "ko": "왼쪽 원의 오른쪽 반을 클릭합니다. 장공 안쪽으로 들어간 부분입니다. 사라집니다.",
           "en": "Click the right half of the left circle - the part that reaches into the slot. It disappears."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "오른쪽 원의 왼쪽 반을 클릭합니다. 사라집니다.",
           "en": "Click the left half of the right circle. It disappears."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "엔터를 눌러 명령을 끝냅니다.",
           "en": "Press Enter to end the command."
-         }
+         },
+         "kind": "key"
         }
        ],
        "expect": {
@@ -1463,38 +1729,55 @@
        },
        "actions": [
         {
-         "type": "MI",
+         "kind": "type",
          "do": {
           "ko": "입력하고 엔터. 대칭 복사입니다.",
-          "en": "Type it and press Enter. That starts MIRROR."
-         }
+          "en": "then Enter. The mirror command."
+         },
+         "type": "MI"
         },
         {
+         "kind": "click",
          "do": {
-          "ko": "객체를 물어봅니다. 장공을 이루는 네 개를 전부 고릅니다. 반원 둘과 직선 둘입니다. 고르고 엔터.",
-          "en": "It asks for objects. Select all four pieces of the slot - two arcs and two lines - then press Enter."
+          "ko": "객체를 물어봅니다. 장공을 이루는 네 개를 전부 고릅니다. 반원 둘과 직선 둘이에요. 상자로 감싸 고를 때는 끄는 방향이 규칙입니다. 왼쪽에서 오른쪽으로 끌면 상자 안에 완전히 들어온 것만 잡히고, 이걸 윈도우라고 부릅니다. 오른쪽에서 왼쪽으로 끌면 상자에 걸치기만 해도 잡히고, 이걸 크로싱이라고 불러요. 여기서는 왼쪽에서 오른쪽으로 끕니다. 고르고 엔터.",
+          "en": "It asks for objects: pick all four pieces of the slot - two arcs and two lines. When you drag a box the direction is the rule: drag left to right and only what falls entirely inside is caught, which is called a window; drag right to left and anything the box merely touches is caught, which is called a crossing. Drag left to right here, then Enter."
          }
         },
         {
-         "type": "60,0",
+         "kind": "ask",
          "do": {
-          "ko": "대칭선의 첫 점을 물어봅니다. 입력하고 엔터.",
-          "en": "It asks for the first point of the mirror line. Type it and press Enter."
+          "ko": "대칭선의 첫 점을 물어봅니다.",
+          "en": "It asks for the first point of the mirror line."
          }
         },
         {
-         "type": "60,90",
+         "kind": "move",
          "do": {
-          "ko": "두 번째 점을 물어봅니다. 입력하고 엔터. 세로 중심선입니다.",
-          "en": "It asks for the second point. Type it and press Enter. That is the vertical centerline."
+          "ko": "커서를 세로 중심선의 아래 끝으로 가져갑니다.",
+          "en": "Move to the lower end of the vertical centerline."
          }
         },
         {
-         "type": "N",
+         "kind": "snap",
+         "do": {
+          "ko": "네모 표식이 뜨면 클릭합니다. 끝점이에요.",
+          "en": "Click on the square - the endpoint."
+         }
+        },
+        {
+         "kind": "snap",
+         "do": {
+          "ko": "두 번째 점은 같은 중심선의 위 끝입니다. 네모 표식을 보고 클릭합니다.",
+          "en": "The second point is the top end of the same line. Click its square."
+         }
+        },
+        {
+         "kind": "type",
          "do": {
           "ko": "원본을 지울지 물어봅니다. 입력하고 엔터.",
-          "en": "It asks whether to erase the source objects. Type it and press Enter."
-         }
+          "en": "It asks whether to erase the source. Type it, Enter."
+         },
+         "type": "N"
         }
        ],
        "expect": {
@@ -1502,13 +1785,34 @@
         "en": "The right slot appears with its center at 85. From 60, going 25 left gives 35 and 25 right gives 85."
        },
        "why": {
-        "ko": "부품이 세로 중심선 60을 기준으로 좌우 대칭입니다. 그래서 오른쪽 장공을 다시 그리지 않습니다. 두 장공의 중심 35와 85의 한가운데가 60이고, 60은 보스 중심의 가로 위치이기도 해요.",
-        "en": "The part is symmetric about the vertical centerline at 60, so there is no need to draw the right slot again. Midway between the slot centers 35 and 85 is 60, which is also the horizontal position of the boss center."
+        "ko": "대칭축은 3차시에 그은 세로 중심선 그 자체입니다. 두 끝점을 잡으면 축이 정확히 그 선이 돼요. 좌표로 찍으면 중심선과 미세하게 어긋날 수 있습니다.",
+        "en": "The mirror axis is the vertical centerline you drew in lesson 3. Snapping its two ends makes the axis exactly that line; typed points can miss it by a hair."
        },
        "pitfall": {
-        "ko": "창으로 감싸서 고르면 편하지만 베이스 바깥선이 같이 잡히지 않게 주의합니다. 같이 잡히면 외곽까지 대칭 복사돼 선이 겹칩니다. 원본을 지울지 묻는 자리에서 예를 고르면 왼쪽 장공이 없어져요.",
-        "en": "A window selection is easier, but keep the base outline out of it. If it is caught, the outline gets mirrored too and lines pile on top of each other. And answering yes at the erase prompt removes the left slot."
-       }
+        "ko": "오른쪽에서 왼쪽으로 끌면 크로싱이라 상자에 걸친 베이스 바깥선까지 잡힙니다. 그러면 외곽이 같이 대칭 복사돼 선이 겹쳐요. 왼쪽에서 오른쪽으로 끌어 장공 네 조각만 상자 안에 완전히 담습니다. 원본을 지울지 묻는 자리에서 예를 고르면 왼쪽 장공이 없어져요.",
+        "en": "Drag right to left and it is a crossing box, so the base outline the box touches comes along; the outline then gets mirrored too and lines pile on top of each other. Drag left to right instead, with only the four slot pieces fully inside. And answering yes at the erase prompt removes the left slot."
+       },
+       "spots": [
+        {
+         "x": 60,
+         "y": -5,
+         "hover": {
+          "ko": "세로 중심선의 아래 끝",
+          "en": "Lower end of the vertical centerline"
+         },
+         "snap": "end"
+        },
+        {
+         "x": 60,
+         "y": 95,
+         "hover": {
+          "ko": "위 끝. 이 둘을 이은 선이 대칭축입니다",
+          "en": "The upper end - the two make the mirror axis"
+         },
+         "snap": "end"
+        }
+       ],
+       "feature": "slot"
       }
      ]
     },
@@ -1551,25 +1855,29 @@
          "do": {
           "ko": "입력하고 엔터.",
           "en": "Type it and press Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "절단 모서리를 물어봅니다. 목 선 두 개를 클릭하고 엔터.",
           "en": "It asks for cutting edges. Click the two web edges and press Enter."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
           "ko": "베이스 윗면의 한가운데를 클릭합니다. `60,16` 근처입니다.",
           "en": "Click the middle of the base top face, near 60,16."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "목 사이를 지나던 구간이 사라집니다. 엔터로 끝냅니다.",
           "en": "The stretch running between the web edges disappears. Press Enter to finish."
-         }
+         },
+         "kind": "key"
         }
        ],
        "expect": {
@@ -1597,39 +1905,45 @@
          "do": {
           "ko": "입력하고 엔터. 모깎기입니다.",
           "en": "Type it and press Enter. That starts FILLET."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "명령행에 현재 설정이 뜹니다. 반지름이 0으로 되어 있을 겁니다. 이대로 선을 고르면 안 됩니다.",
           "en": "The command line reports the current settings. The radius will read 0. Do not pick lines in this state."
-         }
+         },
+         "kind": "see"
         },
         {
          "type": "R",
          "do": {
           "ko": "입력하고 엔터. 반지름 옵션입니다.",
           "en": "Type it and press Enter. That is the radius option."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "10",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "Type it and press Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "첫 번째 객체는 방금 남긴 윗면 오른쪽 토막입니다. 100에서 115까지 남은 높이 16짜리 수평선을 클릭합니다. 이때 남기고 싶은 쪽을 클릭합니다. 오른쪽 필렛이니 모서리보다 오른쪽입니다.",
           "en": "The first object is the right-hand stub of the top face you just left - the horizontal line at height 16 running from 100 to 115. Click on the side you want to keep. This is the right fillet, so click to the right of the corner."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "두 번째 객체는 오른쪽 목 선입니다. 역시 남기고 싶은 쪽, 모서리보다 위쪽을 클릭합니다.",
           "en": "The second object is the right web edge. Again click the side you want to keep, above the corner."
-         }
+         },
+         "kind": "click"
         }
        ],
        "expect": {
@@ -1657,25 +1971,29 @@
          "do": {
           "ko": "입력하고 엔터. 반지름은 10으로 기억되어 있습니다. 다시 넣지 않습니다.",
           "en": "Type it and press Enter. The radius is remembered as 10, so do not set it again."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "명령행에 반지름 10이라고 떠 있는지 확인만 합니다.",
           "en": "Just confirm the command line reports a radius of 10."
-         }
+         },
+         "kind": "see"
         },
         {
          "do": {
           "ko": "베이스 윗면을 모서리보다 왼쪽에서 클릭합니다.",
           "en": "Click the base top face to the left of the corner."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "왼쪽 목 선을 모서리보다 위쪽에서 클릭합니다.",
           "en": "Click the left web edge above the corner."
-         }
+         },
+         "kind": "click"
         }
        ],
        "expect": {
@@ -1703,45 +2021,52 @@
          "do": {
           "ko": "입력하고 엔터. 거리 재기입니다.",
           "en": "Type it and press Enter. That starts DIST."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 장공의 두 끝원 중심을 차례로 클릭합니다. 중심 스냅이 잡히면 클릭합니다. 명령행에 12가 나와야 합니다.",
           "en": "Click the two end-arc centers of the left slot in turn, waiting for the center snap each time. The command line should read 12."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "DI",
          "do": {
           "ko": "다시 입력하고 엔터. 이번에는 두 장공 사이입니다.",
           "en": "Type it again and press Enter. This time you measure between the two slots."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나와야 합니다. 29에서 79까지입니다.",
           "en": "Click the left end-arc center of the left slot and the left end-arc center of the right slot. It should read 50 - from 29 to 79."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "LI",
          "do": {
           "ko": "입력하고 엔터. 특성 나열입니다.",
           "en": "Type it and press Enter. That starts LIST."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "피치원을 클릭하고 엔터. 도면층이 중심선인지, 반지름이 22인지 봅니다. 반지름 22면 지름 44입니다. 문자 창은 `F2` 로 닫습니다.",
           "en": "Click the bolt circle and press Enter. Check the layer is the centerline layer and the radius is 22 - radius 22 means Ø44. Close the text window with F2."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
           "ko": "축 구멍도 같은 방법으로 확인합니다. 반지름 12.5여야 합니다. 즉 지름 25입니다.",
           "en": "Check the bore the same way. The radius must be 12.5, which is Ø25."
-         }
+         },
+         "kind": "see"
         }
        ],
        "expect": {
@@ -1769,20 +2094,23 @@
          "do": {
           "ko": "입력하고 엔터.",
           "en": "Type it and press Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "EDU-IB-02_L04_FEATURES",
          "do": {
           "ko": "파일 이름 칸에 넣습니다.",
           "en": "Put this in the file name field."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "파일 형식은 dwg 그대로 둡니다. 저장을 누릅니다.",
           "en": "Leave the file type as dwg and click Save."
-         }
+         },
+         "kind": "click"
         }
        ],
        "expect": {

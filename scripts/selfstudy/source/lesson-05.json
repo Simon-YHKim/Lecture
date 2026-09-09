@@ -82,7 +82,7 @@
     "en": "Starting state - EDU-IB-02_L04_FEATURES"
    },
    "lede": {
-    "ko": "오늘은 새로 그리는 차시가 아니에요. 있는 정면도 위에 뷰를 두 개 얹습니다.",
+    "ko": "오늘은 새로 그리는 차시가 아니에요. 자동차 엔진에 들어가는 아이들러 풀리 브래킷, 그 정면도 위에 뷰를 두 개 얹습니다.",
     "en": "Today is not a draw-from-scratch lesson. You add two views on top of the front view you already have."
    },
    "blocks": [
@@ -113,7 +113,7 @@
     {
      "type": "note",
      "tone": "tip",
-     "ko": "레이어 값은 `MASTER_DRAWING_SPEC.md` 가 정본입니다. 굵기는 외형선만 0.5, 나머지 셋은 0.25예요. 선 종류 축척은 중심선과 숨은선만 0.5입니다. 2차시 화면 표와 다르면 이 값을 따르세요.",
+     "ko": "레이어 값은 `MASTER_DRAWING_SPEC.md` 가 정본입니다. 굵기는 외형선만 0.5, 나머지 셋은 0.25예요. 2차시 화면 표와 다르면 이 값을 따르세요.",
      "en": "`MASTER_DRAWING_SPEC.md` is the authority for layer settings. Lineweight is 0.5 mm on the visible layer and 0.25 on the other three. Linetype scale is 0.5 on center and hidden only. Where the Lesson 2 table differs, follow these."
     }
    ]
@@ -343,7 +343,7 @@
         "en": "On the dimension layer"
        },
        "body": {
-        "ko": "지금 비어 있고 색이 보라라서 한눈에 구분됩니다. 마지막에 껐다 켜는 것만으로 검산이 돼요.",
+        "ko": "지금은 비어 있습니다. 마지막에 이 레이어만 껐다 켜는 것으로 검산이 돼요.",
         "en": "It is empty right now and magenta, so it stands out. Toggling it at the end is the whole cross-check."
        }
       }
@@ -478,7 +478,7 @@
     "en": "Values carried across, values newly set"
    },
    "lede": {
-    "ko": "오늘 새로 재는 값이 몇 개일까요. 사실상 둘뿐입니다.",
+    "ko": "오늘 새로 재는 값은 사실상 둘뿐입니다.",
     "en": "How many values are new today? In practice, only two."
    },
    "blocks": [
@@ -563,8 +563,8 @@
         "en": "0, 16, 34, 90"
        },
        {
-        "ko": "바닥 모서리 · FROM으로 잡은 16 · 보스 원 아래·위 사분점 (중심 62에 반지름 28이라 34와 90)",
-        "en": "Bottom corner, 16 taken with FROM, lower and upper boss quadrants - center 62 with radius 28 gives 34 and 90"
+        "ko": "바닥 모서리 · 모따기 위쪽 끝점 16 · 보스 원 아래·위 사분점 (중심 62에 반지름 28이라 34와 90)",
+        "en": "Bottom corner, 16 at the chamfer's upper end, lower and upper boss quadrants - center 62 with radius 28 gives 34 and 90"
        }
       ],
       [
@@ -668,8 +668,8 @@
     {
      "type": "note",
      "tone": "tip",
-     "ko": "뷰 간격 30과 중심선 여유 5는 규격이 아닙니다. 그리는 사람이 정하는 연습용 기본값이에요. 치수 자리를 남기고 세 뷰가 도면틀 안에 균형 있게 들어가면 됩니다.",
-     "en": "The 30 between views and the 5 of centerline overrun are practice defaults, not standards. Leave room for dimensions and keep the views balanced inside the border."
+     "ko": "뷰 간격 30과 중심선 여유 5는 규격이 아니라 그리는 사람이 정하는 연습용 기본값이에요.",
+     "en": "The 30 between views and the 5 of centerline overrun are practice defaults, not standards."
     }
    ]
   },
@@ -795,8 +795,8 @@
     "en": "Do it 1 - vertical projectors and the top view"
    },
    "lede": {
-    "ko": "1단계부터 6단계까지예요. 여기까지 하면 평면도가 나와요.",
-    "en": "Steps 1 through 6. At the end of them the top view exists."
+    "ko": "1단계부터 7단계까지예요. 여기까지 하면 평면도가 나와요.",
+    "en": "Steps 1 through 7. At the end of them the top view exists."
    },
    "blocks": [
     {
@@ -819,27 +819,31 @@
          "do": {
           "ko": "AutoCAD를 켜고 입력한 다음 엔터.",
           "en": "Start AutoCAD, type it, then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "`EDU-IB-02_L04_FEATURES` 를 고릅니다. 새로 만들지 않습니다.",
           "en": "Pick `EDU-IB-02_L04_FEATURES`. Do not create a new drawing."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "Z",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "A",
          "do": {
           "ko": "엔터를 눌러 도면 전체를 화면에 맞춥니다.",
           "en": "Enter, to fit the whole drawing on screen."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -858,6 +862,72 @@
       {
        "n": 2,
        "title": {
+        "ko": "기본 설정 확인 — 스냅과 직교",
+        "en": "Check the basics: snap and ortho"
+       },
+       "actions": [
+        {
+         "kind": "see",
+         "do": {
+          "ko": "화면 아래 상태 막대에서 객체 스냅이 켜져 있는지 봅니다.",
+          "en": "Look at the status bar and see whether object snap is on."
+         }
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "꺼져 있으면 눌러 켭니다.",
+          "en": "Press it if it is off."
+         },
+         "type": "F3"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "도면의 선 위에 커서를 잠깐 올려 봅니다.",
+          "en": "Rest the cursor on a line in the drawing for a moment."
+         }
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "표식이 뜨면 스냅이 살아 있는 겁니다. 아무것도 안 뜨면 `OS` 엔터로 끝점·중간점·중심·사분점·교차점·접점 여섯 개가 체크돼 있는지 봅니다.",
+          "en": "A marker means the snaps are alive. If nothing appears, type `OS`, Enter and check the six boxes: endpoint, midpoint, center, quadrant, intersection, tangent."
+         }
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "직교 모드가 지금 켜져 있는지도 상태 막대에서 봐 둡니다. 수평·수직으로 그을 때 씁니다.",
+          "en": "Note whether ortho is on, too. You use it for horizontal and vertical lines."
+         },
+         "type": "F8"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "눌러 명령행을 비웁니다. 모든 명령은 이 상태에서 시작합니다.",
+          "en": "clears the command line. Every command starts from this state."
+         },
+         "type": "Esc"
+        }
+       ],
+       "expect": {
+        "ko": "커서를 선 위에 올리면 표식이 뜨고, 명령행이 비어 있습니다.",
+        "en": "A marker appears when you hover a line, and the command line is empty."
+       },
+       "why": {
+        "ko": "자리를 스냅으로 잡는 차시입니다. 스냅이 꺼져 있으면 클릭이 전부 눈대중이 돼요. 매 차시 작도를 시작하기 전에 같은 자리에서 확인합니다.",
+        "en": "This lesson catches positions with snaps, and with them off every click is a guess. Check the same thing in the same place before drawing, every lesson."
+       },
+       "pitfall": {
+        "ko": "표식은 뜨는데 엉뚱한 점이 잡히면 원하지 않는 스냅까지 켜 둔 겁니다. `OS` 로 돌아가 여섯 개만 남깁니다.",
+        "en": "A marker that catches the wrong point means extra snaps are on. Go back to `OS` and keep just the six."
+       }
+      },
+      {
+       "n": 3,
+       "title": {
         "ko": "투상선을 그을 레이어 정하기",
         "en": "Set the layer for the construction lines"
        },
@@ -866,11 +936,12 @@
          "do": {
           "ko": "화면 위 레이어 목록을 열고 `치수선` 을 고릅니다. 투상선은 여기에 긋습니다.",
           "en": "Open the layer list and pick `치수선`, the dimension layer. Projectors go here."
-         }
+         },
+         "kind": "click"
         }
        ],
        "expect": {
-        "ko": "현재 레이어가 치수선으로 바뀌고 색은 보라입니다. 이 레이어에는 아직 아무것도 없습니다.",
+        "ko": "현재 레이어가 치수선으로 바뀝니다. 이 레이어에는 아직 아무것도 없습니다.",
         "en": "The current layer becomes the dimension layer, in magenta. Nothing has been drawn on it yet."
        },
        "why": {
@@ -883,7 +954,7 @@
        }
       },
       {
-       "n": 3,
+       "n": 4,
        "title": {
         "ko": "정면도에서 수직 투상선 올리기",
         "en": "Send vertical projectors up from the front view"
@@ -894,66 +965,76 @@
          "do": {
           "ko": "입력하고 엔터. 구성선 명령입니다.",
           "en": "Type it, then Enter. This is the construction line command."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "V",
          "do": {
           "ko": "옵션을 물어보면 입력하고 엔터. 수직선만 그립니다.",
           "en": "At the option prompt, type it and Enter. Verticals only now."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "정면도 왼쪽 아래 모서리를 끝점 스냅으로 클릭. 왼쪽 끝 0입니다.",
           "en": "Click the lower left corner with the endpoint snap. That is 0."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 아래 모서리를 클릭. 오른쪽 끝 120입니다.",
           "en": "Click the lower right corner. That is 120."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "왼쪽 모따기의 위쪽 끝점을 클릭. 5입니다.",
           "en": "Click the upper end of the left chamfer. That is 5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 모따기의 위쪽 끝점을 클릭. 115입니다.",
           "en": "Click the upper end of the right chamfer. That is 115."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 원의 왼쪽 사분점을 클릭. 32입니다.",
           "en": "Click the boss left quadrant. That is 32."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 원의 오른쪽 사분점을 클릭. 88입니다.",
           "en": "Click its right quadrant. That is 88."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 원의 중심을 클릭. 60이고 중심선에 씁니다.",
           "en": "Click its center. That is 60, used later for a centerline."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "엔터를 눌러 명령을 끝냅니다.",
           "en": "Enter, to end the command."
-         }
+         },
+         "kind": "key"
         }
        ],
        "expect": {
-        "ko": "보라색 구성선 일곱 개가 세로로 섭니다. 자리는 0, 5, 32, 60, 88, 115, 120이에요. 무한히 길어서 화면 위아래로 뻗어 나가요.",
+        "ko": "구성선 일곱 개가 세로로 섭니다. 자리는 0, 5, 32, 60, 88, 115, 120이에요. 무한히 길어서 화면 위아래로 뻗어 나가요.",
         "en": "Seven magenta construction lines stand vertically at 0, 5, 32, 60, 88, 115, and 120. They are infinite, so they run off the screen."
        },
        "why": {
@@ -963,10 +1044,75 @@
        "pitfall": {
         "ko": "옵션 V를 빼면 방향을 묻는 자유 구성선이 되어 기울어집니다. 사분점은 네 점이라 좌우 대신 위아래가 잡히기도 해요. 스냅이 안 붙으면 F3으로 객체 스냅부터 확인하세요.",
         "en": "Skip the V option and XLINE asks for a direction, giving slanted lines. A circle has four quadrants, so the top or bottom may grab instead. If nothing snaps, press F3 and check object snap."
-       }
+       },
+       "spots": [
+        {
+         "x": 0,
+         "y": 0,
+         "snap": "end",
+         "hover": {
+          "ko": "왼쪽 아래 모서리 — 0",
+          "en": "Lower-left corner - 0"
+         }
+        },
+        {
+         "x": 120,
+         "y": 0,
+         "snap": "end",
+         "hover": {
+          "ko": "오른쪽 아래 모서리 — 120",
+          "en": "Lower-right corner - 120"
+         }
+        },
+        {
+         "x": 5,
+         "y": 16,
+         "snap": "end",
+         "hover": {
+          "ko": "왼쪽 모따기 위쪽 끝점 — 5",
+          "en": "Top end of the left chamfer - 5"
+         }
+        },
+        {
+         "x": 115,
+         "y": 16,
+         "snap": "end",
+         "hover": {
+          "ko": "오른쪽 모따기 위쪽 끝점 — 115",
+          "en": "Top end of the right chamfer - 115"
+         }
+        },
+        {
+         "x": 32,
+         "y": 62,
+         "snap": "qua",
+         "hover": {
+          "ko": "보스 원 왼쪽 사분점 — 32",
+          "en": "Left quadrant of the boss - 32"
+         }
+        },
+        {
+         "x": 88,
+         "y": 62,
+         "snap": "qua",
+         "hover": {
+          "ko": "보스 원 오른쪽 사분점 — 88",
+          "en": "Right quadrant of the boss - 88"
+         }
+        },
+        {
+         "x": 60,
+         "y": 62,
+         "snap": "cen",
+         "hover": {
+          "ko": "보스 원 중심 — 60",
+          "en": "Centre of the boss - 60"
+         }
+        }
+       ]
       },
       {
-       "n": 4,
+       "n": 5,
        "title": {
         "ko": "평면도의 깊이선 세 개",
         "en": "The three depth lines of the top view"
@@ -977,80 +1123,92 @@
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "H",
          "do": {
           "ko": "입력하고 엔터. 이번에는 수평선입니다.",
           "en": "then Enter. Horizontals this time."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "보스 원의 위쪽 사분점을 클릭. 높이 90을 지나는 수평선이 생깁니다. 엔터로 끝냅니다.",
           "en": "Click the boss top quadrant. A horizontal appears at height 90. Enter to finish."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "O",
          "do": {
           "ko": "입력하고 엔터. 간격 띄우기 명령입니다.",
           "en": "Type it, then Enter. This is the offset command."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "30",
          "do": {
           "ko": "간격을 물어보면 입력하고 엔터.",
           "en": "At the distance prompt, type it and Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "방금 그은 수평선을 클릭하고 그 위쪽 아무 데나 클릭. 30 위에 생긴 선이 평면도 맨 아래, 보스 앞면입니다. 엔터로 끝냅니다.",
           "en": "Click the horizontal just drawn, then click anywhere above it. The line 30 above is the top view lowest edge, the boss front face. Enter to finish."
-         }
+         },
+         "kind": "key"
         },
         {
          "type": "O",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "8",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "방금 만든 선을 클릭하고 위쪽 클릭. 판 앞면입니다. 보스가 앞으로 8 나와 있으니 판 앞면은 그보다 8 뒤입니다.",
           "en": "Click the new line, then above it. That is plate front face - 8 behind the boss face."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "O",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "12",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "판 앞면 선을 클릭하고 위쪽 클릭. 뒷면이고 판 두께 12입니다.",
           "en": "Click the plate front line, then above it. That is back face, 12 of plate away."
-         }
+         },
+         "kind": "click"
         }
        ],
        "expect": {
@@ -1067,7 +1225,7 @@
        }
       },
       {
-       "n": 5,
+       "n": 6,
        "title": {
         "ko": "평면도 외형 그리기",
         "en": "Draw the top view outline"
@@ -1077,26 +1235,30 @@
          "do": {
           "ko": "레이어를 `외형선` 으로 바꿉니다. 여기서부터는 도면에 남는 선입니다.",
           "en": "Switch to the `외형선` layer. These lines stay on the drawing."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "보스 앞면 선과 왼쪽 투상선의 교차점을 클릭. 가로선의 시작점입니다.",
           "en": "Click where boss front line crosses the leftmost projector. That starts the horizontal."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "같은 선과 오른쪽 투상선의 교차점을 클릭하고 엔터. 폭 전체를 가로지르는 선 하나가 생깁니다.",
           "en": "Click where it crosses the rightmost projector, then Enter. One line now spans the full width."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -1109,13 +1271,15 @@
          "do": {
           "ko": "입력하고 엔터. 이번에는 세로입니다.",
           "en": "then Enter. Now the verticals."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 투상선과 보스 앞면 선의 교차점을 클릭. 같은 투상선과 뒷면 선의 교차점도 클릭하고 엔터.",
           "en": "Click where leftmost projector crosses the boss front line, then the back line, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -1133,12 +1297,12 @@
         "en": "This is the draw-a-grid-then-trim method. It wins when there is a lot to remove."
        },
        "pitfall": {
-        "ko": "레이어를 안 바꾸고 그으면 형상이 투상선과 같은 보라색이 됩니다. 그러면 16단계에서 치수선 레이어를 껐을 때 형상까지 사라져요. 여기서 미리 지우려 하지 말고 다음 단계로 가세요.",
+        "ko": "레이어를 안 바꾸고 그으면 형상이 투상선과 같은 치수선 레이어에 들어갑니다. 그러면 16단계에서 치수선 레이어를 껐을 때 형상까지 사라져요. 여기서 미리 지우려 하지 말고 다음 단계로 가세요.",
         "en": "Draw without switching and the geometry comes out magenta like the projectors. Step 16 then hides the shape along with them. Do not erase anything here - go on."
        }
       },
       {
-       "n": 6,
+       "n": 7,
        "title": {
         "ko": "평면도 다듬기",
         "en": "Trim the top view"
@@ -1149,55 +1313,64 @@
          "do": {
           "ko": "입력하고 엔터. 잘라내기 명령입니다.",
           "en": "Type it, then Enter. This is the trim command."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "자를 경계를 물어보면 엔터를 한 번 더 누릅니다. 화면의 모든 객체가 경계가 됩니다. 버전에 따라 곧바로 자를 구간을 묻기도 해요.",
           "en": "If it asks for cutting edges, press Enter again to take everything as the boundary. Some versions go straight to trimming."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
           "ko": "보스 앞면 선에서 32 왼쪽 구간을 클릭. 사라집니다.",
           "en": "On the boss front line, click the segment left of 32. It disappears."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "같은 선에서 88 오른쪽 구간을 클릭. 보스 앞면은 32에서 88 사이에만 있습니다.",
           "en": "On the same line, click right of 88. The boss front face exists only between 32 and 88."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "판 앞면 선에서 32와 88 사이 구간을 클릭. 그 구간은 보스가 앞을 덮고 있습니다.",
           "en": "On the plate front line, click between 32 and 88. The boss covers the front there."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "왼쪽 세로선의 맨 아래 8 구간을 클릭. 판의 양 끝에는 보스가 없습니다.",
           "en": "Click the lowest 8 of the left vertical. There is no boss at the plate ends."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "오른쪽 세로선의 맨 아래 8 구간도 클릭.",
           "en": "Click the lowest 8 of the right vertical too."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "32 세로선에서 판 앞면보다 위쪽 구간을 클릭. 보스 단차는 앞으로 나온 8 구간에만 있습니다.",
           "en": "On the 32 vertical, click above the plate front line. The boss step exists only in the 8 it projects."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "88 세로선에서도 같은 구간을 클릭하고 엔터로 끝냅니다.",
           "en": "Do the same on the 88 vertical, then Enter to finish."
-         }
+         },
+         "kind": "key"
         }
        ],
        "expect": {
@@ -1231,8 +1404,8 @@
     "en": "Do it 2 - the 45-degree line and the right view"
    },
    "lede": {
-    "ko": "7단계부터 10단계까지예요. 깊이를 옮기고 우측면도를 세웁니다.",
-    "en": "Steps 7 through 10. You transfer depth and stand the right side view up."
+    "ko": "8단계부터 11단계까지예요. 깊이를 옮기고 우측면도를 세웁니다.",
+    "en": "Steps 8 through 11. You transfer depth and stand the right side view up."
    },
    "blocks": [
     {
@@ -1244,7 +1417,7 @@
      "type": "steps",
      "items": [
       {
-       "n": 7,
+       "n": 8,
        "title": {
         "ko": "우측면도 자리와 45도 선",
         "en": "The right view position and the 45-degree line"
@@ -1254,80 +1427,92 @@
          "do": {
           "ko": "레이어를 다시 `치수선` 으로 바꿉니다. 여기서부터 다시 보조선입니다.",
           "en": "Switch back to the `치수선` layer. Scaffolding again."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "O",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "30",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "정면도 오른쪽 끝에서 올린 수직 투상선을 클릭하고 그 오른쪽을 클릭. 우측면도의 맨 왼쪽 선이고 여기가 보스 앞면입니다. 엔터로 끝냅니다.",
           "en": "Click the projector raised from the right end of the front view, then click to its right. That is right view's leftmost line, the boss front face. Enter to finish."
-         }
+         },
+         "kind": "key"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "A",
          "do": {
           "ko": "입력하고 엔터. 각도 옵션입니다.",
           "en": "then Enter. This is the angle option."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "45",
          "do": {
           "ko": "각도를 물어보면 입력하고 엔터.",
           "en": "At the angle prompt, type it and Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "방금 만든 세로선과 평면도 맨 아래 선의 교차점을 클릭. 두 뷰의 앞면끼리 만나는 점입니다. 엔터로 끝냅니다.",
           "en": "Click where that vertical crosses the top view lowest line - where both front faces meet. Enter to finish."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "V",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "45도 선과 평면도 판 앞면 선의 교차점을 클릭. 우측면도 왼쪽 선에서 8 떨어진 자리가 됩니다.",
           "en": "Click where 45-degree line crosses the plate front line. That lands 8 from the right view's left line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "45도 선과 뒷면 선의 교차점도 클릭하고 엔터. 20 떨어진 자리입니다.",
           "en": "Click where it crosses the back line too, then Enter. That lands at 20."
-         }
+         },
+         "kind": "snap"
         }
        ],
        "expect": {
@@ -1344,7 +1529,7 @@
        }
       },
       {
-       "n": 8,
+       "n": 9,
        "title": {
         "ko": "정면도에서 수평 투상선 긋기",
         "en": "Run horizontal projectors out of the front view"
@@ -1355,81 +1540,122 @@
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "H",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "정면도 왼쪽 아래 모서리를 클릭. 바닥 0입니다.",
           "en": "Click the lower left corner. That is floor, 0."
-         }
-        },
-        {
-         "type": "FROM",
-         "do": {
-          "ko": "다음 통과점에서 입력하고 엔터.",
-          "en": "At the next through point, type it and Enter."
-         }
+         },
+         "kind": "click"
         },
         {
          "do": {
-          "ko": "기준점을 물어보면 같은 왼쪽 아래 모서리를 클릭.",
-          "en": "At the base point prompt, click that same corner."
-         }
-        },
-        {
-         "type": "@0,16",
-         "do": {
-          "ko": "입력하고 엔터. 바닥에서 16 올라간 자리에 수평선이 생깁니다. 베이스 윗면입니다.",
-          "en": "then Enter. A horizontal appears 16 above the floor - the top face of the base."
-         }
+          "ko": "왼쪽 모따기의 위쪽 끝점을 클릭. 바닥에서 16 올라간 베이스 윗면입니다. 4단계에서 수직 투상선을 올릴 때 쓴 그 점이에요.",
+          "en": "Click the upper end of the left chamfer - the base top face, 16 above the floor. It is the point you already used for a vertical projector in step 4."
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 세로변의 위쪽 끝점을 클릭. 11이고 모따기가 시작되는 높이입니다. 16에서 5를 뺀 값입니다.",
           "en": "Click the upper end of the right vertical edge. That is 11, where the chamfer starts - 16 minus 5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 원의 아래쪽 사분점을 클릭. 34입니다.",
           "en": "Click the boss bottom quadrant. That is 34."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 원의 중심을 클릭. 62이고 중심선에 씁니다.",
           "en": "Click its center. That is 62, for a centerline."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "왼쪽 장공의 왼쪽 끝원 중심을 클릭. 8이고 이것도 중심선용입니다. 엔터로 끝냅니다.",
           "en": "Click the left slot's left end-arc center. That is 8, also for a centerline. Enter to finish."
-         }
+         },
+         "kind": "snap"
         }
        ],
        "expect": {
-        "ko": "수평 구성선이 0, 8, 11, 16, 34, 62 자리에 생깁니다. 정면도를 가로질러 오른쪽까지 뻗습니다. 맨 위 90은 4단계에서 이미 그었습니다. 그 선이 오른쪽으로도 뻗어 있어서 다시 그을 필요가 없습니다.",
-        "en": "Horizontal construction lines cross the front view and run out to the right at 0, 8, 11, 16, 34, and 62. The topmost, 90, was drawn back in step 4 and already reaches right."
+        "ko": "수평 구성선이 0, 8, 11, 16, 34, 62 자리에 생깁니다. 정면도를 가로질러 오른쪽까지 뻗어요. 맨 위 90은 5단계에서 이미 그었습니다. 그 선이 오른쪽으로도 뻗어 있어서 다시 그을 필요가 없습니다.",
+        "en": "Horizontal construction lines cross the front view and run out to the right at 0, 8, 11, 16, 34, and 62. The topmost, 90, was drawn back in step 5 and already reaches right."
        },
        "why": {
         "ko": "구성선이 무한히 긴 이유가 여기 있습니다. 한 번 그으면 세 뷰를 다 지나가요.",
         "en": "This is why construction lines are infinite. One line crosses all three views."
        },
        "pitfall": {
-        "ko": "16은 도면에 점이 없는 높이라 FROM으로 잡습니다. 눈대중으로 찍으면 베이스 윗면이 어긋나요. 90을 여기서 또 그으면 같은 자리에 선이 두 겹으로 쌓입니다. 4단계 선을 그대로 쓰세요.",
-        "en": "There is no point at 16, so take it with FROM. Guess at it and the base top face drifts. Drawing 90 again stacks two lines in one place, so reuse the one from step 4."
-       }
+        "ko": "16은 모따기 위쪽 끝점에서 그대로 받습니다. 표식이 뜨기 전에 누르면 베이스 윗면이 어긋나요. 90을 여기서 또 그으면 같은 자리에 선이 두 겹으로 쌓입니다. 5단계 선을 그대로 쓰세요.",
+        "en": "Take 16 straight from the chamfer's upper end. Click before the marker shows and the base top face drifts. Drawing 90 again stacks two lines in one place, so reuse the one from step 5."
+       },
+       "spots": [
+        {
+         "x": 0,
+         "y": 0,
+         "snap": "end",
+         "hover": {
+          "ko": "왼쪽 아래 모서리 — 바닥 0",
+          "en": "Lower-left corner - the floor, 0"
+         }
+        },
+        {
+         "x": 120,
+         "y": 11,
+         "snap": "end",
+         "hover": {
+          "ko": "오른쪽 세로변 위쪽 끝점 — 11",
+          "en": "Top end of the right vertical edge - 11"
+         }
+        },
+        {
+         "x": 60,
+         "y": 34,
+         "snap": "qua",
+         "hover": {
+          "ko": "보스 원 아래 사분점 — 34",
+          "en": "Bottom quadrant of the boss - 34"
+         }
+        },
+        {
+         "x": 60,
+         "y": 62,
+         "snap": "cen",
+         "hover": {
+          "ko": "보스 원 중심 — 62",
+          "en": "Centre of the boss - 62"
+         }
+        },
+        {
+         "x": 29,
+         "y": 8,
+         "snap": "cen",
+         "hover": {
+          "ko": "왼쪽 장공 왼쪽 끝원 중심 — 8",
+          "en": "Centre of the left slot’s left end circle - 8"
+         }
+        }
+       ]
       },
       {
-       "n": 9,
+       "n": 10,
        "title": {
         "ko": "우측면도 외형 그리기",
         "en": "Draw the right side view outline"
@@ -1439,77 +1665,89 @@
          "do": {
           "ko": "레이어를 `외형선` 으로 바꿉니다.",
           "en": "Switch to the `외형선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터. 잘라낼 것 없이 교차점을 따라 그립니다.",
           "en": "then Enter. This time you trace intersections and trim nothing."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "판 앞면 세로선과 바닥선의 교차점을 클릭. 첫 점입니다.",
           "en": "Click where plate front vertical meets the floor line. First point."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "뒷면 세로선과 바닥선의 교차점을 클릭.",
           "en": "Click where back vertical meets the floor line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "뒷면 세로선과 90선의 교차점을 클릭.",
           "en": "Click where back vertical meets the 90 line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 90선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the 90 line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 34선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the 34 line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "판 앞면 세로선과 34선의 교차점을 클릭.",
           "en": "Click where plate front vertical meets the 34 line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "C",
          "do": {
           "ko": "입력하고 엔터. 시작점까지 닫으면서 명령이 끝납니다.",
           "en": "then Enter. The outline closes back to the first point and the command ends."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "16선 위에서 판 앞면 세로선과 뒷면 세로선의 교차점을 차례로 클릭하고 엔터. 베이스 끝면의 윗변입니다.",
           "en": "On the 16 line, click its intersections with the plate front and back verticals, then Enter. That is top edge of the base seen end on."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터. 11선에도 같은 방법으로 하나. 11까지가 옆면이고 그 위 5는 비스듬한 면이에요.",
           "en": "Type it and Enter, then do the same on the 11 line. Up to 11 is the side face; the 5 above it is the angled face."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -1526,7 +1764,7 @@
        }
       },
       {
-       "n": 10,
+       "n": 11,
        "title": {
         "ko": "중심선 세 개",
         "en": "Three centerlines"
@@ -1536,109 +1774,146 @@
          "do": {
           "ko": "레이어를 `중심선` 으로 바꿉니다.",
           "en": "Switch to the `중심선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "FROM",
          "do": {
-          "ko": "첫 번째 점에서 입력하고 엔터.",
-          "en": "At the first point, type it and Enter."
-         }
+          "ko": "첫 번째 점에서 입력하고 엔터. 잡은 점에서 조금 떨어진 자리를 찍는 기능이에요.",
+          "en": "At the first point, type it and Enter. It picks a spot a little away from a point you snap."
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "60 수직 투상선과 평면도 보스 앞면 선의 교차점을 기준점으로 클릭.",
           "en": "Click where 60 projector meets the top view boss front line as the base point."
+         },
+         "kind": "snap"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 그 점의 아래에 둡니다. 직교가 방향을 잡아 줍니다.",
+          "en": "Put the cursor below of that point; ortho holds the direction."
          }
         },
         {
-         "type": "@0,-5",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터.",
-          "en": "then Enter."
-         }
+          "ko": "입력하고 엔터. 중심선이 형상 밖으로 나오는 몫입니다.",
+          "en": "then Enter - how far the centerline runs past the shape."
+         },
+         "type": "5"
         },
         {
-         "type": "@0,30",
+         "type": "30",
          "do": {
-          "ko": "입력하고 엔터, 다시 엔터. 평면도의 축 중심선입니다.",
-          "en": "Enter, then Enter again. That is top view's bore centerline."
-         }
+          "ko": "커서를 위에 두고 입력하고 엔터, 다시 엔터. 방향은 직교가 잡고 숫자는 거리만 칩니다. 평면도의 축 중심선입니다.",
+          "en": "Hold the cursor above, type it and Enter, then Enter again. Ortho holds the direction and the number is just a distance. That is top view's bore centerline."
+         },
+         "kind": "type"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "FROM",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "62 수평 투상선과 우측면도 보스 앞면 세로선의 교차점을 클릭.",
           "en": "Click where 62 projector meets the right view's boss front vertical."
+         },
+         "kind": "snap"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 그 점의 왼쪽에 둡니다. 직교가 방향을 잡아 줍니다.",
+          "en": "Put the cursor to the left of that point; ortho holds the direction."
          }
         },
         {
-         "type": "@-5,0",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터.",
-          "en": "then Enter."
-         }
+          "ko": "입력하고 엔터. 중심선이 형상 밖으로 나오는 몫입니다.",
+          "en": "then Enter - how far the centerline runs past the shape."
+         },
+         "type": "5"
         },
         {
-         "type": "@30,0",
+         "type": "30",
          "do": {
-          "ko": "입력하고 엔터, 다시 엔터. 우측면도의 축 중심선이에요.",
-          "en": "Enter, then Enter again. That is right view's bore centerline."
-         }
+          "ko": "커서를 오른쪽으로 옮기고 입력하고 엔터, 다시 엔터. 우측면도의 축 중심선이에요.",
+          "en": "Move the cursor to the right, type it and Enter, then Enter again. That is right view's bore centerline."
+         },
+         "kind": "type"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "FROM",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "8 수평 투상선과 우측면도 판 앞면 세로선의 교차점을 클릭.",
           "en": "Click where 8 projector meets the right view's plate front vertical."
+         },
+         "kind": "snap"
+        },
+        {
+         "kind": "move",
+         "do": {
+          "ko": "커서를 그 점의 왼쪽에 둡니다. 직교가 방향을 잡아 줍니다.",
+          "en": "Put the cursor to the left of that point; ortho holds the direction."
          }
         },
         {
-         "type": "@-5,0",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터.",
-          "en": "then Enter."
-         }
+          "ko": "입력하고 엔터. 중심선이 형상 밖으로 나오는 몫입니다.",
+          "en": "then Enter - how far the centerline runs past the shape."
+         },
+         "type": "5"
         },
         {
-         "type": "@22,0",
+         "type": "22",
          "do": {
-          "ko": "입력하고 엔터, 다시 엔터. 장공의 중심선입니다.",
-          "en": "Enter, then Enter again. That is slot centerline."
-         }
+          "ko": "커서를 오른쪽으로 옮기고 입력하고 엔터, 다시 엔터. 장공의 중심선입니다.",
+          "en": "Move the cursor to the right, type it and Enter, then Enter again. That is slot centerline."
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -1650,8 +1925,8 @@
         "en": "Centerlines run slightly past the shape. Stop them flush and the eye cannot find the center. Here it is 5 at each end. So 20 plus 5 and 5 makes 30, and 12 plus 5 and 5 makes 22."
        },
        "pitfall": {
-        "ko": "레이어를 안 바꾸면 흰 실선이 되어 형상 모서리로 읽힙니다. `@0,-5` 의 빼기 부호를 빼먹으면 중심선이 형상 안에서 시작합니다. 한쪽만 삐져나와요. 부호까지 그대로 입력하세요.",
-        "en": "Without the center layer these come out white and solid and read as real edges. Drop the minus in `@0,-5` and the centerline starts inside the shape and overruns one side only. Type the sign exactly."
+        "ko": "레이어를 안 바꾸면 흰 실선이 되어 형상 모서리로 읽힙니다. 커서를 반대쪽에 두고 5를 치면 중심선이 형상 안에서 시작해 한쪽만 삐져나와요. 5를 치기 전에 커서가 어느 쪽에 있는지 보세요.",
+        "en": "Without the center layer these come out white and solid and read as real edges. With the cursor on the wrong side, the centerline starts inside the shape and overruns one end only. Check which side the cursor is on before you type the 5."
        }
       }
      ]
@@ -1661,8 +1936,8 @@
      "items": [
       {
        "label": {
-        "ko": "격자를 그리고 잘라내기 — 5단계",
-        "en": "Grid then trim - step 5"
+        "ko": "격자를 그리고 잘라내기 — 6·7단계",
+        "en": "Grid then trim - steps 6 and 7"
        },
        "body": {
         "ko": "잘라낼 구간이 많으면 이쪽이 빠릅니다. 평면도는 지울 구간이 일곱 군데였어요.",
@@ -1671,8 +1946,8 @@
       },
       {
        "label": {
-        "ko": "교차점을 따라 이어 그리기 — 9단계",
-        "en": "Trace the intersections - step 9"
+        "ko": "교차점을 따라 이어 그리기 — 10단계",
+        "en": "Trace the intersections - step 10"
        },
        "body": {
         "ko": "윤곽이 한 줄로 이어지면 이쪽이 빠릅니다. 우측면도는 여섯 점으로 닫히거든요.",
@@ -1684,7 +1959,7 @@
     {
      "type": "note",
      "tone": "warn",
-     "ko": "9단계의 `C` 는 이 차시에서 CIRCLE이 아니에요. LINE 안에서 친 닫기 옵션입니다.",
+     "ko": "10단계의 `C` 는 이 차시에서 CIRCLE이 아니에요. LINE 안에서 친 닫기 옵션입니다.",
      "en": "In this lesson `C` does not mean CIRCLE. It is the close option typed inside LINE."
     }
    ]
@@ -1697,8 +1972,8 @@
     "en": "Do it 3 - three hidden lines, mirrors, save"
    },
    "lede": {
-    "ko": "11단계부터 16단계까지예요. 매 단계 노란 점선인지 흰 실선인지만 보면 돼요.",
-    "en": "Steps 11 through 16. At every step, just check whether the line is a yellow dash or a white solid."
+    "ko": "12단계부터 17단계까지예요. 매 단계 노란 점선인지 흰 실선인지만 보면 돼요.",
+    "en": "Steps 12 through 17. At every step, just check whether the line is a yellow dash or a white solid."
    },
    "blocks": [
     {
@@ -1710,7 +1985,7 @@
      "type": "steps",
      "items": [
       {
-       "n": 11,
+       "n": 12,
        "title": {
         "ko": "축 구멍 숨은선 · 평면도",
         "en": "Bore hidden lines in the top view"
@@ -1720,52 +1995,60 @@
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
           "en": "Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "V",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "축 구멍 원의 왼쪽 사분점을 클릭. 47.5입니다.",
           "en": "Click the bore circle's left quadrant. That is 47.5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 사분점을 클릭하고 엔터. 72.5입니다.",
           "en": "Click its right quadrant, then Enter. That is 72.5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 투상선과 평면도 보스 앞면 선의 교차점을 클릭. 같은 투상선과 뒷면 선의 교차점도 클릭하고 엔터.",
           "en": "Click where left projector meets the boss front line, then the back line, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -1788,7 +2071,7 @@
        }
       },
       {
-       "n": 12,
+       "n": 13,
        "title": {
         "ko": "축 구멍 숨은선 · 우측면도",
         "en": "Bore hidden lines in the right side view"
@@ -1798,52 +2081,60 @@
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
           "en": "Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "H",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "축 구멍 원의 위쪽 사분점을 클릭. 74.5입니다.",
           "en": "Click the bore circle's top quadrant. That is 74.5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "아래쪽 사분점을 클릭하고 엔터. 49.5이고 중심 62에서 12.5씩이에요.",
           "en": "Click its bottom quadrant, then Enter. That is 49.5 - 12.5 each side of center 62."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 위쪽 투상선의 교차점을 클릭. 뒷면 세로선과 같은 투상선의 교차점도 클릭하고 엔터.",
           "en": "Click where boss front vertical meets the upper projector, then the back vertical, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -1866,7 +2157,7 @@
        }
       },
       {
-       "n": 13,
+       "n": 14,
        "title": {
         "ko": "탭 숨은선 · 평면도",
         "en": "Tap hidden lines in the top view"
@@ -1876,59 +2167,68 @@
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
           "en": "Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "V",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 위 탭 원의 왼쪽 사분점과 오른쪽 사분점을 클릭.",
           "en": "Click the left and right quadrants of the upper left tap circle."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 위 탭 원도 같은 두 점을 클릭하고 엔터. 투상선은 네 개예요. 아래쪽 탭 두 개는 가로 자리가 같아서 같은 선에 겹칩니다.",
           "en": "Click the same two points on the upper right tap circle, then Enter. Four projectors. The lower two taps share those same positions."
-         }
+         },
+         "kind": "key"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "첫 번째 투상선과 평면도 보스 앞면 선의 교차점을 클릭.",
           "en": "Click where first projector meets the boss front line."
-         }
+         },
+         "kind": "snap"
         },
         {
-         "type": "@0,10",
+         "type": "10",
          "do": {
-          "ko": "입력하고 엔터, 다시 엔터.",
-          "en": "Enter, then Enter again."
-         }
+          "ko": "커서를 그 점보다 위에 두고 입력하고 엔터, 다시 엔터. 방향은 직교가 잡아 줍니다.",
+          "en": "Hold the cursor above that point, type it and Enter, then Enter again. Ortho holds the direction."
+         },
+         "kind": "type"
         },
         {
          "do": {
@@ -1940,7 +2240,8 @@
          "do": {
           "ko": "화면을 확대해서 탭 숨은선의 안쪽 줄과 축 구멍 숨은선을 봅니다.",
           "en": "Zoom in and look at the inner tap line beside the bore line."
-         }
+         },
+         "kind": "see"
         }
        ],
        "expect": {
@@ -1957,7 +2258,7 @@
        }
       },
       {
-       "n": 14,
+       "n": 15,
        "title": {
         "ko": "탭 숨은선 · 우측면도와 대칭 복사",
         "en": "Tap hidden lines in the right view, then mirror"
@@ -1967,53 +2268,61 @@
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
           "en": "Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "H",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "위쪽 탭 원의 위쪽 사분점과 아래쪽 사분점을 클릭하고 엔터.",
           "en": "Click the top and bottom quadrants of the upper tap circle, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 위쪽 투상선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the upper projector."
-         }
+         },
+         "kind": "snap"
         },
         {
-         "type": "@10,0",
+         "type": "10",
          "do": {
-          "ko": "입력하고 엔터, 다시 엔터.",
-          "en": "Enter, then Enter again."
-         }
+          "ko": "커서를 그 점의 오른쪽에 두고 입력하고 엔터, 다시 엔터. 우측면도는 왼쪽이 앞면이라 재료가 오른쪽에 있어요.",
+          "en": "Hold the cursor to the right of that point, type it and Enter, then Enter again. The right view's front face is on the left, so the material lies to the right."
+         },
+         "kind": "type"
         },
         {
          "do": {
@@ -2026,32 +2335,37 @@
          "do": {
           "ko": "입력하고 엔터. 아래쪽 탭은 다시 그리지 않고 대칭 복사합니다.",
           "en": "then Enter. The lower taps get mirrored, not redrawn."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
-          "ko": "방금 그은 두 줄을 클릭해서 선택하고 엔터.",
-          "en": "Click the two lines to select them, then Enter."
-         }
+          "ko": "방금 그은 두 줄을 하나씩 클릭해서 선택하고 엔터. 상자로 끌지 않습니다. 왼쪽에서 오른쪽으로 끌면 상자에 완전히 들어온 것만 잡히고, 오른쪽에서 왼쪽으로 끌면 걸치기만 해도 잡혀요. 여기는 투상선이 겹쳐 지나가서 걸침으로 잡으면 구성선까지 딸려 옵니다.",
+          "en": "Click the two lines one at a time, then Enter. Do not drag a box. Dragging left to right catches only what falls fully inside; dragging right to left catches whatever the box touches. Projectors cross here, so a right-to-left box drags them in as well."
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "우측면도 축 중심선의 왼쪽 끝점을 클릭. 대칭선의 첫 번째 점입니다.",
           "en": "Click the left end of the right view's bore centerline. First point of the mirror line."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "같은 중심선의 오른쪽 끝점을 클릭.",
           "en": "Click the right end of the same centerline."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "N",
          "do": {
           "ko": "원본을 지울지 물어보면 입력하고 엔터. 지우지 않습니다.",
           "en": "At the erase-source prompt, type it and Enter. You keep the source."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -2068,7 +2382,7 @@
        }
       },
       {
-       "n": 15,
+       "n": 16,
        "title": {
         "ko": "장공 숨은선",
         "en": "Slot hidden lines"
@@ -2078,52 +2392,60 @@
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
           "en": "Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "V",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 장공에서 왼쪽 끝원의 왼쪽 사분점을 클릭. 24입니다.",
           "en": "On the left slot, click its left end arc's left quadrant. That is 24."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "오른쪽 끝원의 오른쪽 사분점을 클릭하고 엔터. 46이에요. 끝원 중심이 29와 41이고 반지름이 5입니다.",
           "en": "Click the right end arc's right quadrant, then Enter. That is 46 - the end arcs sit at 29 and 41 with radius 5."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "왼쪽 투상선과 평면도 판 앞면 선의 교차점을 클릭. 같은 투상선과 뒷면 선의 교차점도 클릭하고 엔터.",
           "en": "Click where left projector meets the plate front line, then the back line, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -2136,71 +2458,82 @@
          "do": {
           "ko": "입력하고 엔터. 오른쪽 장공은 대칭 복사합니다.",
           "en": "then Enter. The right slot gets mirrored."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
-          "ko": "방금 그은 두 줄을 선택하고 엔터.",
-          "en": "Select the two lines and Enter."
-         }
+          "ko": "방금 그은 두 줄을 하나씩 클릭해서 선택하고 엔터. 여기도 상자로 끌지 않아요. 오른쪽에서 왼쪽으로 끌면 걸친 투상선까지 잡힙니다.",
+          "en": "Click the two lines one at a time, then Enter. No box here either - a right-to-left box would catch every projector it touches."
+         },
+         "kind": "click"
         },
         {
          "do": {
           "ko": "평면도 축 중심선의 위쪽 끝점과 아래쪽 끝점을 차례로 클릭.",
           "en": "Click the upper then the lower end of the top view bore centerline."
-         }
+         },
+         "kind": "snap"
         },
         {
          "type": "N",
          "do": {
           "ko": "원본을 지울지 물으면 입력하고 엔터. 장공 중심 35와 85가 둘 다 60에서 25씩이라 대칭이 정확히 맞아요.",
           "en": "At the erase prompt, type it and Enter. The slots sit 25 either side of 60, so the mirror lands exactly."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "우측면도로 갑니다. 레이어를 `치수선` 으로 바꿉니다.",
           "en": "Move to the right side view. Switch to the `치수선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "XL",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "H",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "장공 끝원의 위쪽 사분점과 아래쪽 사분점을 클릭하고 엔터. 13과 3이고, 중심 8에 폭 10의 절반인 5씩입니다.",
           "en": "Click a slot end arc's top and bottom quadrants, then Enter. Those are 13 and 3 - 5 either side of center 8."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
           "en": "Switch to the `숨은선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "L",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
           "ko": "판 앞면 세로선과 위쪽 투상선의 교차점을 클릭. 뒷면 세로선과 같은 투상선의 교차점도 클릭하고 엔터.",
           "en": "Click where plate front vertical meets the upper projector, then the back vertical, then Enter."
-         }
+         },
+         "kind": "snap"
         },
         {
          "do": {
@@ -2223,7 +2556,7 @@
        }
       },
       {
-       "n": 16,
+       "n": 17,
        "title": {
         "ko": "투상선 확인하고 저장",
         "en": "Check the projectors, then save"
@@ -2233,14 +2566,16 @@
          "do": {
           "ko": "레이어를 `외형선` 으로 되돌립니다.",
           "en": "Switch back to the `외형선` layer."
-         }
+         },
+         "kind": "click"
         },
         {
          "type": "LAYER",
          "do": {
           "ko": "입력하고 엔터. 먼저 확인부터 합니다.",
           "en": "Type it, then Enter. Check before you save."
-         }
+         },
+         "kind": "type"
         },
         {
          "do": {
@@ -2253,49 +2588,55 @@
          "do": {
           "ko": "입력하고 엔터를 눌러 전구를 다시 켭니다.",
           "en": "Type it and Enter to turn the bulb back on."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "Z",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "A",
          "do": {
           "ko": "엔터를 눌러 세 뷰를 한 화면에 봅니다.",
           "en": "Enter, to see all three views at once."
-         }
-        },
-        {
-         "type": "LTSCALE",
-         "do": {
-          "ko": "점선이 실선처럼 보이면 입력하고 엔터. 값을 키우면 획과 틈이 벌어지고, 점이 너무 듬성듬성하면 값을 줄입니다.",
-          "en": "If the dashes read as solid, type it and Enter. Raise the value to open the gaps, lower it if they look too sparse."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "RE",
          "do": {
-          "ko": "값을 바꿔도 화면이 그대로면 입력하고 엔터로 재생성합니다.",
-          "en": "If the screen does not change, type it and Enter to regenerate."
-         }
+          "ko": "점선이 실선처럼 보이면 입력하고 엔터. 화면만 덜 그려진 것이면 여기서 점선으로 돌아옵니다.",
+          "en": "If the dashes read as solid, type it and Enter. If the screen was merely under-drawn, they come back as dashes here."
+         },
+         "kind": "type"
+        },
+        {
+         "do": {
+          "ko": "그래도 실선으로 보이면 오늘은 그대로 둡니다. 선 종류 축척은 6차시에 `LTSCALE` 로 도면 전체를 한 번에 맞춰요.",
+          "en": "If they still read as solid, leave them for today. Lesson 6 sets the linetype scale for the whole drawing in one go, with `LTSCALE`."
+         },
+         "kind": "see"
         },
         {
          "type": "SAVEAS",
          "do": {
           "ko": "입력하고 엔터.",
           "en": "then Enter."
-         }
+         },
+         "kind": "type"
         },
         {
          "type": "EDU-IB-02_L05_VIEWS",
          "do": {
           "ko": "파일 이름으로 넣고 저장을 누릅니다. 다음 시간에는 이 파일을 열어서 시작해요.",
           "en": "Enter it as the file name and click Save. Next lesson opens this file."
-         }
+         },
+         "kind": "type"
         }
        ],
        "expect": {
@@ -2316,13 +2657,13 @@
     {
      "type": "note",
      "tone": "pend",
-     "ko": "LTSCALE에 넣을 숫자는 공유 예정입니다. 대본은 「실선처럼 보이면 키우고 너무 듬성듬성하면 줄인다」까지만 말해요. 지어낸 값을 쓰지 말고 화면을 보면서 맞추세요.",
-     "en": "The number for LTSCALE is to be shared. The script says only to raise it when dashes read as solid and lower it when they look sparse. Do not invent a value - match it on screen."
+     "ko": "LTSCALE에 넣을 숫자는 공유 예정입니다. 오늘은 값을 치지 않아요. 6차시에 도면 전체를 한 번에 맞출 때 정해집니다. 지어낸 값을 쓰지 마세요.",
+     "en": "The number for LTSCALE is to be shared. You do not type a value today. It gets settled in Lesson 6, when the whole drawing is matched in one go. Do not invent one."
     },
     {
      "type": "note",
      "tone": "tip",
-     "ko": "다 하고 나면 화면이 도면보다 작업 흔적에 가깝습니다. 투상선이 그대로 남아 있으니까요. 그 상태가 6차시의 출발점입니다.",
+     "ko": "다 하고 나면 화면이 도면보다 작업 흔적에 가깝습니다. 그 상태가 6차시의 출발점입니다.",
      "en": "When you finish, the screen looks more like a worksite than a drawing, because the construction lines remain. That is Lesson 6's starting state."
     }
    ]
@@ -2475,8 +2816,8 @@
     "en": "Dashed lines actually read as dashed"
    },
    "how": {
-    "ko": "실선처럼 보이면 LTSCALE 값을 키우고, 너무 듬성듬성하면 줄입니다. 화면이 그대로면 RE로 재생성하세요.",
-    "en": "If they look solid, raise LTSCALE; if too sparse, lower it. If nothing changes, regenerate with RE."
+    "ko": "실선처럼 보이면 `RE` 로 화면을 다시 그립니다. 그래도 실선이면 오늘은 그대로 두세요. 선 종류 축척은 6차시에 맞춥니다.",
+    "en": "If they look solid, redraw the screen with `RE`. If they still look solid, leave them for today - the linetype scale is set in Lesson 6."
    }
   }
  ],
@@ -2667,8 +3008,8 @@
     "en": "LINE's Close option - not CIRCLE in this lesson"
    },
    "when": {
-    "ko": "9단계에서 우측면도 윤곽을 시작점까지 닫으며 끝낼 때",
-    "en": "In step 9, to close the right view outline and end the command"
+    "ko": "10단계에서 우측면도 윤곽을 시작점까지 닫으며 끝낼 때",
+    "en": "In step 10, to close the right view outline and end the command"
    }
   },
   {
@@ -2689,8 +3030,8 @@
     "en": "FROM - object snap override"
    },
    "when": {
-    "ko": "도면에 점이 없는 자리를 상대좌표로 찍을 때",
-    "en": "To pick a spot with no point on the drawing"
+    "ko": "도면에 점이 없는 자리를 기준점에서 떨어뜨려 찍을 때",
+    "en": "To pick a spot with no point on the drawing, offset from one that has"
    }
   },
   {
@@ -2744,8 +3085,8 @@
     "en": "LTSCALE"
    },
    "when": {
-    "ko": "도면 전체의 선 종류 축척. 점선이 실선처럼 보일 때",
-    "en": "Global linetype scale. When dashes read as solid"
+    "ko": "도면 전체의 선 종류 축척. 이름만 나오고 실제로는 6차시에 칩니다",
+    "en": "Global linetype scale. Named here; typed in Lesson 6"
    }
   },
   {
