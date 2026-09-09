@@ -15,6 +15,11 @@ worse failure than two files.
     python scripts/selfstudy/build_deck.py [출력 디렉터리]
 
 Writes <out>/<lang>/composition/index.html plus a runnable wrapper.
+
+**폐기(2026-09-10).** 1세대 데크 빌더다. 산출물이 `cdn.jsdelivr.net` 의
+hyperframes-player 를 불러 오프라인이 아니었고(사용자 정책 8번 위반), 그
+산출물 `docs/autocad-technician/deck/` 도 함께 지웠다. 현행 정본은
+`build_deck_selfstudy.py` + `build_deck_all.py` 다. 참고용으로만 남긴다.
 """
 import html as _html
 import io
