@@ -24,8 +24,17 @@ $python = Join-Path $repoRoot '.venv\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $python)) { $python = 'python' }
 
 $env:PYTHONIOENCODING = 'utf-8'
+$env:PYTHONUTF8 = '1'
 & $python (Join-Path $repoRoot 'scripts\part\verify_course.py')
 $code = $LASTEXITCODE
+
+# 규격이 한 값인가, 두 판이 같은 것을 가르치는가. 둘 다 사람이 세어서 찾았던
+# 결함이라 세는 일을 검사기로 옮겼다 — TWO_EDITIONS.md 6절.
+foreach ($extra in @('scripts\check-standards.py', 'scripts\check-editions.py')) {
+    Write-Host ''
+    & $python (Join-Path $repoRoot $extra)
+    if ($LASTEXITCODE -ne 0) { $code = $LASTEXITCODE }
+}
 
 if ($RunHyperFramesChecks -and $code -eq 0) {
     $courseRoot = Join-Path $repoRoot 'projects\autocad-technician'

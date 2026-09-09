@@ -1896,6 +1896,13 @@
          "kind": "type"
         },
         {
+         "kind": "see",
+         "do": {
+          "ko": "앞에 붙은 Ø 는 지름 치수 명령이 자동으로 붙인 것이에요. 주기나 지시선 문자에 직접 써야 할 때는 `%%c` 를 칩니다. 화면에서 Ø 로 바뀝니다. 각도 기호는 `%%d`, 플러스마이너스는 `%%p` 예요.",
+          "en": "The Ø came from the diameter command, not from you. When you need to type it yourself - in a note or a leader - type `%%c` and it turns into Ø on screen. Degrees are `%%d`, plus-minus is `%%p`."
+         }
+        },
+        {
          "do": {
           "ko": "엔터. 보스 바깥 원을 클릭하고 치수선을 바깥 빈 자리로 끌어내 클릭하면 Ø56 입니다.",
           "en": "then Enter. Click the outer circle of the boss, drag out to empty space, and click; it reads Ø56."
