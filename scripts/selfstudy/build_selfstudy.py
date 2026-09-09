@@ -22,12 +22,17 @@ PAGE_CAP = 100 * 1024          # 지침 §2 — 단일 파일 100KB. 넘으면 1
 # 정본 도면 — scripts/part/edu_ib_02.py 가 그린 것을 빌드할 때마다 다시 뽑는다.
 # 저장소 가드가 이미지 파일을 확장자로 막으므로 .svg 를 커밋하지 않는다.
 import figures as _figmod
+import coach as _coach
+from sheet_figures import SVG_A3 as _SVG_A3
 _figdir = os.path.join(HERE, 'figures')
+# 강조 겹선(.hl)을 남긴 채로 뽑는다. 코치 마크가 「지금 그리는 것」을 켤 때 쓴다.
+# 겹선은 CSS 에서 기본이 stroke:none 이라 켜지 않으면 보이지 않는다.
 if os.path.isdir(_figdir) and os.environ.get('SELFSTUDY_FIG_CACHE') == '1':
     FIGURES = {f[:-4]: io.open(os.path.join(_figdir, f), encoding='utf-8').read()
                for f in os.listdir(_figdir) if f.endswith('.svg')}
 else:
-    FIGURES = _figmod.build_map()
+    FIGURES = _figmod.build_map(keep_hl=True)
+FIGURES_HL = FIGURES
 
 
 # ── 인라인 마크업 ──────────────────────────────────────────────
@@ -149,6 +154,63 @@ def render_block(b, ctx):
     return ''
 
 
+# ── 코치 마크 ──────────────────────────────────────────────────
+# 도해는 쪽마다 한 벌만 두고 단계는 `<use>` 로 부른다. 정면도가 14KB 라 단계마다
+# 복사해 넣으면 열네 단계에서 이미 100KB 한도를 넘는다(지침 §2).
+_SURFACE_SVG = {'sheet': _SVG_A3}
+
+
+def surface_svg(name):
+    if name in _SURFACE_SVG:
+        return _SURFACE_SVG[name]
+    return FIGURES_HL.get(_coach.FIG_OF.get(name, name), '')
+
+
+def coach_figure(st, ctx):
+    """이 단계가 잡을 자리를 도면 위에 찍는다. `spots` 가 없으면 아무것도 안 낸다."""
+    spots = st.get('spots')
+    if not spots:
+        return ''
+    surface = st.get('on', 'front')
+    svg = surface_svg(surface)
+    if not svg:
+        return ''
+    ctx.setdefault('surfaces', set()).add(surface)
+    feature = st.get('feature')
+    body, caps = _coach.marks(spots, surface)
+    lis = []
+    for i, hover, snapname in caps:
+        tail = ('<em> — %s 표식</em>' % esc(snapname)) if snapname else ''
+        lis.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
+                   % (i, bi_txt(hover) if hover else '', tail))
+    head = ('지금 그리는 것 — <b>%s</b>' % esc(_coach.FEATURE_KO[feature])) \
+        if feature in _coach.FEATURE_KO else '도면 위에서 지금 잡을 자리'
+    return ('<figure class="coachfig" data-memo="도면 코치 마크">'
+            '<div class="fh">%s</div>'
+            '<svg class="dwg cdwg" viewBox="%s" role="img" aria-label="%s">'
+            '<use href="#sfc-%s"/>%s<g class="coach">%s</g></svg>'
+            '<ul class="cap%s">%s</ul></figure>'
+            % (head, _coach.viewbox(svg), attr(head.replace('<b>', '').replace('</b>', '')),
+               esc(surface), _coach.hl_for(svg, feature), body,
+               ' many' if len(spots) > 4 else '', ''.join(lis)))
+
+
+def surface_defs(used):
+    """쪽에서 쓴 바탕을 `<symbol>` 로 한 번 심는다."""
+    if not used:
+        return ''
+    syms = []
+    for name in sorted(used):
+        svg = surface_svg(name)
+        if svg:
+            syms.append(_coach.to_symbol(svg, 'sfc-' + name))
+    if not syms:
+        return ''
+    return ('<svg class="sfcdefs" aria-hidden="true" focusable="false" '
+            'style="position:absolute;width:0;height:0;overflow:hidden">%s</svg>'
+            % ''.join(syms))
+
+
 def render_steps(items, ctx):
     lis = []
     for st in items:
@@ -177,9 +239,11 @@ def render_steps(items, ctx):
                         % bi_txt(st['pitfall']))
         chk = ('<label class="chk"><input type="checkbox" data-step="%s">'
                '<span class="k">완료</span><span class="e">done</span></label>' % esc(sid))
-        lis.append('<li data-memo="%s"><p class="st-h">%s%s</p>%s<div class="st-f">%s</div></li>'
+        fig = coach_figure(st, ctx)
+        lis.append('<li data-memo="%s"%s><p class="st-h">%s%s</p>%s%s<div class="st-f">%s</div></li>'
                    % (attr(ctx['label'] + ' · ' + str(st.get('n')) + '단계'),
-                      bi(st.get('title')), chk, ''.join(acts), ''.join(foot)))
+                      ' class="hasfig"' if fig else '',
+                      bi(st.get('title')), chk, fig, ''.join(acts), ''.join(foot)))
     return '<ol class="steps">%s</ol>' % ''.join(lis)
 
 
@@ -427,6 +491,10 @@ def build_lesson(L, nav):
              + [('practice', h) for h in buckets['practice']]
              + [('check', h) for h in buckets['check']])
     budget = PAGE_CAP - SHELL_BYTES - 3072
+    # 코치 마크의 바탕 도해는 쪽마다 한 벌씩 들어간다. 정면도만 14KB 라 이걸
+    # 빼 두지 않으면 담을 때는 들어갔다가 낼 때 한도를 넘는다.
+    surfaces_used = set(re.findall(r'href="#sfc-([\w-]+)"', ''.join(h for _k, h in units)))
+    budget -= len(surface_defs(surfaces_used).encode('utf-8'))
     head_b = len(''.join(sum_html).encode('utf-8')) + len(prog_html.encode('utf-8')) + 1400
     sizes = [len(h.encode('utf-8')) for _, h in units]
 
@@ -490,6 +558,13 @@ def build_lesson(L, nav):
                 body = prog_html + body
             tabs.append((pid, lab))
             panels.append((pid, body))
+
+        # 코치 마크가 부르는 바탕만 이 쪽에 심는다. 쪽마다 실제로 쓴 것만 찾아
+        # 넣어야 안 쓰는 도해 14KB 가 따라붙지 않는다.
+        used = set(re.findall(r'href="#sfc-([\w-]+)"', ''.join(h for _p, h in panels)))
+        defs = surface_defs(used)
+        if defs and panels:
+            panels[0] = (panels[0][0], defs + panels[0][1])
 
         part_ko = ' · '.join(KIND[k][2] for k in kinds)
         part_en = ' · '.join(KIND[k][3] for k in kinds)

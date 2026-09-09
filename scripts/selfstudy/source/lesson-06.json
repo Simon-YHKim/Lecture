@@ -1616,7 +1616,26 @@
        "pitfall": {
         "ko": "색만 바뀌고 레이어가 그대로면 특성 설정을 다시 보세요. 도면층 체크가 빠지면 겉보기만 고쳐집니다. 원본으로 찍는 선이 제대로 된 선인지도 확인하세요. 틀린 선을 찍으면 틀린 특성이 퍼져요.",
         "en": "If the color changed but the layer did not, check Property Settings. With Layer unticked it only looks fixed. Check the source line is correct too - pick a bad one and you spread the fault."
-       }
+       },
+       "feature": "bossc",
+       "spots": [
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "먼저 원본을 클릭합니다. 제대로 된 중심선, 곧 빨간 파선으로 보이는 선이에요. 커서가 붓 모양으로 바뀝니다.",
+          "en": "Click the source first - a centerline that is already right, the one showing as a red dashed line. The cursor turns into a brush."
+         }
+        },
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "그다음 고칠 선을 클릭합니다. 클릭한 선이 원본과 같은 레이어로 옮겨지고 색과 선 종류도 따라 바뀝니다.",
+          "en": "Then click the line to fix. It moves to the source's layer and takes its color and linetype."
+         }
+        }
+       ]
       },
       {
        "n": 11,

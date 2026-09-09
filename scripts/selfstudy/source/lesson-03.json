@@ -1024,7 +1024,26 @@
        "pitfall": {
         "ko": "너무 크게 확대하면 도면틀이 화면 밖으로 나가 어디에 그리는지 감이 안 옵니다. `Z` 엔터 `A` 엔터로 돌아가 다시 잡아요.",
         "en": "Zoom in too far and the border leaves the screen, so you lose your bearings. `Z`, Enter, `A`, Enter and try again."
-       }
+       },
+       "on": "sheet",
+       "spots": [
+        {
+         "x": 20,
+         "y": 20,
+         "hover": {
+          "ko": "줌 윈도우의 첫 구석입니다. 도면틀 왼쪽 아래 사분면에서 그냥 클릭해요. 치수에 걸린 점이 아니라 아무 데나 됩니다.",
+          "en": "The first corner of the zoom window. Just click in the lower-left quadrant of the border - this point is not on any dimension."
+         }
+        },
+        {
+         "x": 230,
+         "y": 180,
+         "hover": {
+          "ko": "반대 구석. 이 안이 화면을 채웁니다. 작게 놓고 그리면 스냅이 어디에 붙었는지 안 보여요.",
+          "en": "The opposite corner. This fills the screen. Draw it small and you cannot see where the snap landed."
+         }
+        }
+       ]
       },
       {
        "n": 4,
@@ -1282,7 +1301,18 @@
        "pitfall": {
         "ko": "낱개로 그렸으면 `PE` 엔터, 선을 고르고 `J` 결합 옵션으로 이어 붙일 수 있습니다. 다시 그려도 됩니다.",
         "en": "If they came out separate, `PE`, Enter, pick a line and use the `J` join option - or simply draw it again."
-       }
+       },
+       "feature": "basehl",
+       "spots": [
+        {
+         "x": 60,
+         "y": 0,
+         "hover": {
+          "ko": "방금 그린 외곽 위 아무 데나 클릭합니다. 여섯 변이 한꺼번에 파랗게 잡히면 폴리선 하나로 잘 그린 겁니다.",
+          "en": "Click anywhere on the outline you just drew. If all six edges highlight at once, it went in as a single polyline."
+         }
+        }
+       ]
       }
      ]
     }

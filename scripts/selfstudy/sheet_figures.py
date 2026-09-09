@@ -11,6 +11,8 @@
 `build_deck_selfstudy.py` 의 `.ss .cfw .si{...}` 계열이 그 처리다.
 
 좌표는 A3 실치수(420×297)를 그린 것이 아니라 도해용으로 줄인 값이다.
+라벨은 좌표가 아니라 **그 자리를 어떻게 잡는지**를 적는다 — 정책 1번대로
+용지선 두 구석만 좌표이고 나머지는 스냅이다.
 용지선 rect(30,30,462,327) · 도면선 rect(41,41,440,305) · 표제란(261,313,220,33).
 """
 
@@ -25,19 +27,24 @@ SVG_A3 = (
  '<text class="sl" x="47" y="66">10</text>'
  '<text class="sl" x="30" y="372" text-anchor="middle">0,0</text>'
  '<text class="sl" x="486" y="24" text-anchor="middle">420,297</text>'
- '<text class="slh" x="48" y="336">10,10</text>'
- '<text class="slh" x="474" y="36" text-anchor="end">410,287</text>'
- '<text class="slh" x="256" y="370" text-anchor="end">210,10</text>'
- '<text class="slh" x="476" y="308" text-anchor="end">410,40</text>'
+ '<text class="slh" x="48" y="336">끝점 스냅</text>'
+ '<text class="slh" x="474" y="58" text-anchor="end">OFFSET 10</text>'
+ '<text class="slh" x="256" y="370" text-anchor="end">중간점 스냅</text>'
+ '<text class="slh" x="476" y="308" text-anchor="end">끝점에서 시작</text>'
  '<text class="slh" x="371" y="308" text-anchor="middle">310</text>'
  '<text class="sl" x="316" y="308" text-anchor="middle">200 × 30</text>'
  '<text class="sl" x="46" y="190">148.5</text>'
  '<text class="sl" x="46" y="208">중심 마크</text>'
- '<text class="slh" x="277" y="329">225,20</text>'
+ '<text class="slh" x="277" y="329">중간-센터</text>'
  '<text class="sl" x="277" y="343">이름</text>'
- '<text class="slh" x="387" y="329">325,20</text>'
+ '<text class="slh" x="387" y="329">중간-센터</text>'
  '<text class="sl" x="387" y="343">사번</text>'
  '<text class="sl" x="261" y="390" text-anchor="middle">A3 420 × 297 · 문자 높이 10</text>'
+ # 강조 겹선 — 코치 마크가 「지금 그리는 것」을 켤 때 쓴다. 평소에는 stroke:none 이라 보이지 않는다.
+ '<rect class="hl" data-feature="sh-paper" x="30" y="30" width="462" height="327"/>'
+ '<rect class="hl" data-feature="sh-frame" x="41" y="41" width="440" height="305"/>'
+ '<path class="hl" data-feature="sh-mark" d="M261 357 L261 346 M261 41 L261 30 M30 194 L41 194 M481 194 L492 194"/>'
+ '<rect class="hl" data-feature="sh-title" x="261" y="313" width="220" height="33"/>'
  '</svg>')
 
 SVG_THIRD = (

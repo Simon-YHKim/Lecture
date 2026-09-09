@@ -32,6 +32,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import build_deck_frames as F
 import figures as _figures
+import sheet_figures as _sheet
 
 # 녹화 자리표시자인가. 파일 이름이 아니라 안에 있는 것으로 가른다 — 2차시의
 # 녹화 프레임은 08-build-template 이라 이름으로는 못 가려낸다.
@@ -70,84 +71,46 @@ ACT_LAB = {'ask': '묻는 것', 'move': '마우스', 'snap': '스냅', 'click': 
            'key': '키', 'see': '확인', 'alt': '또는', 'type': '입력'}
 
 # ── 코치 마크 ──────────────────────────────────────────────────
-# 정면도 SVG 는 부품 좌표를 그대로 쓴다. 베이스 왼쪽 아래 구석 (0,0) 이 SVG 의
-# (58,208) 이고 y 는 아래로 자란다. figures.build_map()['front'] 의 viewBox 가
-# "48 108 140 110" 인 것과 밑변 path 가 M58 208 L178 208 인 것에서 나온 값이다.
-SVG_X0, SVG_Y0 = 58.0, 208.0
+# 찍는 규칙은 `coach.py` 한 곳에 있다. 자습 교재와 이 데크가 같은 규칙을 써야
+# 두 산출물이 갈라지지 않는다 (LESSON_STYLE 12번).
+import coach as _coach
 
 
 def to_svg(x, y):
-    return SVG_X0 + float(x), SVG_Y0 - float(y)
+    return _coach.place({'x': x, 'y': y}, 'front')
 
 
-# 오토캐드가 커서 옆에 띄우는 표식. 모양이 곧 스냅 종류다.
-SNAP_NAME = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사분점',
-             'int': '교차점', 'tan': '접점', 'per': '직교', 'nea': '근처점'}
+SNAP_NAME = _coach.SNAP_NAME
+snap_glyph = _coach.snap_glyph
+FEATURE_KO = _coach.FEATURE_KO
 
 
-def snap_glyph(kind, x, y, r=4.2):
-    """표식 하나를 도면 좌표 위에 그린다. 획 굵기는 배율과 무관하게 둔다."""
-    a = 'class="mk" vector-effect="non-scaling-stroke"'
-    if kind == 'end':
-        return '<rect %s x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>' % (
-            a, x - r, y - r, r * 2, r * 2)
-    if kind == 'mid':
-        return '<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f Z"/>' % (
-            a, x, y - r, x + r, y + r, x - r, y + r)
-    if kind in ('cen', 'nea'):
-        return '<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>' % (a, x, y, r)
-    if kind == 'qua':
-        return '<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f L%.2f %.2f Z"/>' % (
-            a, x, y - r, x + r, y, x, y + r, x - r, y)
-    if kind == 'int':
-        return ('<path %s d="M%.2f %.2f L%.2f %.2f M%.2f %.2f L%.2f %.2f"/>'
-                % (a, x - r, y - r, x + r, y + r, x + r, y - r, x - r, y + r))
-    if kind == 'tan':
-        return ('<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>'
-                '<path %s d="M%.2f %.2f L%.2f %.2f"/>'
-                % (a, x, y, r, a, x - r, y - r, x + r, y - r))
-    if kind == 'per':
-        return ('<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f M%.2f %.2f L%.2f %.2f"/>'
-                % (a, x - r, y - r, x - r, y + r, x + r, y + r,
-                   x - r, y + r * .35, x - r * .35, y + r * .35))
-    return '<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>' % (a, x, y, r)
-
-
-FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 원', 'bore': '축 구멍',
-              'fillet': '필렛', 'slot': '장공', 'tap': '탭 구멍',
-              # 같은 형상이라도 재는 곳이 다르면 켜는 것도 다르다.
-              'basehl': '베이스 윤곽', 'neck': '목과 밑동 라운드',
-              'bossc': '보스 중심선', 'filletc': '필렛 중심선',
-              'slotc': '장공 중심선', 'thick': '옆면도의 두께'}
-
-
-def fig_block(spots, front, feature=None):
+def fig_block(spots, figs, feature=None, surface='front'):
     """정면도 한 장 위에 자리 표시를 얹고, 아래에 무엇을 볼지 적는다.
 
     `feature` 가 있으면 그 형상의 강조 겹선을 켠다. 자리만 찍어 두면 「여기를
     누르라」는 말은 되지만 「무엇을 그리는 중인지」는 안 보인다. 단계마다 그리는
     것이 다른데 도면이 늘 같은 모습이면 도면이 지시를 따라오지 못한다.
     """
-    marks, caps = [], []
-    for i, sp in enumerate(spots, 1):
-        x, y = to_svg(sp['x'], sp['y'])
-        kind = sp.get('snap')
-        marks.append('<g class="cm">'
-                     '<circle class="ring" cx="%.2f" cy="%.2f" r="8.6"/>'
-                     '%s'
-                     '<circle class="bg" cx="%.2f" cy="%.2f" r="5.4"/>'
-                     '<text class="bn" x="%.2f" y="%.2f">%d</text>'
-                     '</g>'
-                     % (x, y, snap_glyph(kind, x, y) if kind else '',
-                        x + 10.2, y - 10.2, x + 10.2, y - 8.5, i))
+    base = figs.get(surface) if isinstance(figs, dict) else figs
+    if not base:
+        return ''
+    marks_svg, rows = _coach.marks(spots, surface)
+    caps = []
+    for i, hover, snapname in rows:
         caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
-                    % (i, rich(ko(sp.get('hover'))),
-                       ('<em> — %s 표식</em>' % esc(SNAP_NAME[kind])) if kind in SNAP_NAME else ''))
-    body = front.replace('</svg>', '<g class="coach">%s</g></svg>' % ''.join(marks))
-    body = body.replace('<svg class="dwg"', '<svg class="dwg cdwg"', 1)
+                    % (i, rich(ko(hover)),
+                       ('<em> — %s 표식</em>' % esc(snapname)) if snapname else ''))
+    # 강조를 먼저 켜고 나서 표현을 박는다. 순서가 바뀌면 stylize 가 class 뒤에
+    # 속성을 끼워 넣어 `class="hl" data-feature=` 짝이 깨지고 강조가 안 켜진다.
     if feature:
-        body = body.replace('class="hl" data-feature="%s"' % feature,
+        base = base.replace('class="hl" data-feature="%s"' % feature,
                             'class="hl hot" data-feature="%s"' % feature)
+    # 선 표현을 속성으로 박아 둔다. 데크 CSS 는 정면도만 알고 A3 도면틀의
+    # 클래스(si·sh·sd·sl)는 모르기 때문에, 안 박으면 까만 상자가 나온다.
+    body = _coach.stylize(base).replace('</svg>', '<g class="coach">%s</g></svg>' % marks_svg)
+    body = body.replace('<svg class="dwg"', '<svg class="dwg cdwg"', 1)
+    body = body.replace('<svg viewBox', '<svg class="dwg cdwg" viewBox', 1)
     # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
     head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
     return ('<figure class="fig" data-memo="도면 코치 마크">'
@@ -300,7 +263,7 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
       % {'c': cid, 's': clock, 'd': dur, 'fs': size,
          'fx': ' hasfig' if spots else '',
          'sst': (' style="font-size:%dpx"' % ssz) if ssz else '',
-         'fig': fig_block(spots, front, st.get('feature')) if spots else '',
+         'fig': fig_block(spots, front, st.get('feature'), st.get('on', 'front')) if spots else '',
          'lab': esc('%s단계%s · %s' % (st['n'], (' (%d/%d)' % part) if part else '',
                                       ko(st.get('title')))),
          'title': rich(ko(st.get('title'))) + (
@@ -679,7 +642,9 @@ def main(lesson_dir, lesson_json, outpath):
     by_label = {ko(s.get('label')): s for s in L['sections']}
     # 코치 마크가 앉을 정면도. 도면을 그리는 코드가 하나뿐이라 자습본 쪽
     # 그림과 어긋날 수 없다.
-    front = _figures.build_map(keep_hl=True)['front']
+    _fm = _figures.build_map(keep_hl=True)
+    front = {'front': _fm['front'], 'frontdim': _fm['frontdim'], 'three': _fm['three'],
+             'sheet': _sheet.SVG_A3}
 
     bodies, tls, slides, clock = [], [], [], 0.0
     dropped = 0

@@ -2347,7 +2347,35 @@
        "pitfall": {
         "ko": "REC 로 그린 사각형은 네 변이 한 덩어리인 폴리선입니다. 한 번 클릭에 네 변이 같이 잡히면 제대로 된 거예요. 한 변만 다뤄야 하는 선은 REC 로 그리지 마세요.",
         "en": "A rectangle drawn with REC is a polyline: four edges in one object. If one click grabs all four edges, it is right. Do not use REC for a line you need to handle on its own."
-       }
+       },
+       "on": "sheet",
+       "feature": "sh-frame",
+       "spots": [
+        {
+         "x": 0,
+         "y": 0,
+         "hover": {
+          "ko": "용지선의 첫 구석입니다. 여기만 좌표로 `0,0` 을 칩니다 — 아직 잡을 형상이 없거든요.",
+          "en": "The first corner of the sheet line. This is one of only two places you type a coordinate, because there is no geometry to snap to yet."
+         }
+        },
+        {
+         "x": 420,
+         "y": 297,
+         "hover": {
+          "ko": "반대 구석 `420,297`. A3 가로의 크기 그대로입니다.",
+          "en": "The opposite corner, `420,297` - the size of a landscape A3 exactly."
+         }
+        },
+        {
+         "x": 210,
+         "y": 150,
+         "hover": {
+          "ko": "간격띄우기 방향을 묻습니다. 용지선 **안쪽** 아무 데나 클릭하면 도면선이 안으로 생깁니다.",
+          "en": "Offset asks which way. Click anywhere **inside** the sheet line and the border lands inward."
+         }
+        }
+       ]
       },
       {
        "n": 12,
@@ -2434,7 +2462,47 @@
        "pitfall": {
         "ko": "엔터를 두 번 연달아 치는 게 아니에요. 점을 찍고 마지막에 한 번 더 눌러 빠져나옵니다. 세모 표식을 안 보고 클릭하면 한가운데가 아닌 자리에서 시작돼요. 표식이 안 뜨면 `F3` 을 켭니다.",
         "en": "You are not pressing Enter twice in a row. You place the points, then press once more to exit. Click without waiting for the triangle marker and the line starts somewhere other than the middle. If no marker appears, turn `F3` on."
-       }
+       },
+       "on": "sheet",
+       "feature": "sh-mark",
+       "spots": [
+        {
+         "x": 210,
+         "y": 0,
+         "hover": {
+          "ko": "아래 변에 커서를 올리면 세모 표식이 뜹니다. 중간점이에요. 표식을 보고 나서 클릭합니다.",
+          "en": "Rest the cursor on the bottom edge until the triangle appears - that is the midpoint. Click only after you see it."
+         },
+         "snap": "mid"
+        },
+        {
+         "x": 210,
+         "y": 297,
+         "hover": {
+          "ko": "위 변의 중간점. 여기서 아래로 `30` 입니다.",
+          "en": "Midpoint of the top edge. From here you go `30` down."
+         },
+         "snap": "mid"
+        },
+        {
+         "x": 0,
+         "y": 148.5,
+         "hover": {
+          "ko": "왼쪽 변의 중간점. 오른쪽으로 `30`.",
+          "en": "Midpoint of the left edge, then `30` to the right."
+         },
+         "snap": "mid"
+        },
+        {
+         "x": 420,
+         "y": 148.5,
+         "hover": {
+          "ko": "오른쪽 변의 중간점. 왼쪽으로 `30`.",
+          "en": "Midpoint of the right edge, then `30` to the left."
+         },
+         "snap": "mid"
+        }
+       ]
       },
       {
        "n": 13,
@@ -2531,7 +2599,29 @@
        "pitfall": {
         "ko": "가운데 세로선은 사각형이 아니라 선입니다. REC 가 아니라 L 로 그려요. REC 로 그리면 폴리선이 하나 더 생겨 나중에 손댈 때 걸려요.",
         "en": "The dividing line is a line, not a rectangle. Draw it with L, not REC. Drawn with REC it becomes another polyline that gets in your way later."
-       }
+       },
+       "on": "sheet",
+       "feature": "sh-title",
+       "spots": [
+        {
+         "x": 410,
+         "y": 10,
+         "hover": {
+          "ko": "도면선의 오른쪽 아래 모서리입니다. 네모 표식이 뜨면 클릭합니다. 여기서 시작해야 표제란이 도면선에 딱 붙습니다.",
+          "en": "The lower-right corner of the border. Click when the square marker appears; starting here is what makes the title block sit flush."
+         },
+         "snap": "end"
+        },
+        {
+         "x": 310,
+         "y": 40,
+         "hover": {
+          "ko": "가로 200 세로 30 이 붙은 뒤, 그 위 변의 중간점입니다. 여기서 아래로 `30` 을 그으면 칸이 둘로 나뉩니다.",
+          "en": "Once the 200 by 30 box is there, this is the midpoint of its top edge. A line `30` down from here splits it in two."
+         },
+         "snap": "mid"
+        }
+       ]
       }
      ]
     },
@@ -2737,7 +2827,29 @@
        "pitfall": {
         "ko": "왼쪽이 이름, 오른쪽이 사번입니다. 순서를 바꾸지 않습니다. X 자는 글자를 넣은 뒤에 지웁니다. 먼저 지우면 붙일 교차점이 사라져요. 글자가 물음표로 나오면 14단계로 돌아가세요.",
         "en": "Name on the left, number on the right. Do not swap them. Erase the X only after the text is in; erase it first and the intersection you snap to is gone. If the text comes out as question marks, go back to step 14."
-       }
+       },
+       "on": "sheet",
+       "feature": "sh-title",
+       "spots": [
+        {
+         "x": 260,
+         "y": 25,
+         "hover": {
+          "ko": "왼쪽 칸에 그은 X 자가 만나는 자리입니다. 가위표 표식, 교차점이 뜨면 클릭합니다. 이름이 여기 가운데로 들어갑니다.",
+          "en": "Where the X you drew across the left cell crosses. Click on the cross marker - the intersection. The name lands centered here."
+         },
+         "snap": "int"
+        },
+        {
+         "x": 360,
+         "y": 25,
+         "hover": {
+          "ko": "오른쪽 칸도 같은 방법이에요. 사번이 들어갑니다.",
+          "en": "Same again in the right cell, for the employee number."
+         },
+         "snap": "int"
+        }
+       ]
       },
       {
        "n": 16,

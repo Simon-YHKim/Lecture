@@ -1037,7 +1037,27 @@
        "pitfall": {
         "ko": "도면층 옵션을 현재로 바꾸지 않으면 복사본이 원본을 따라 외형선 레이어로 갑니다. 그러면 보조 원이 형상선으로 남아요. 선 종류 축척이 맞지 않으면 중심선 레이어인데도 실선처럼 보여요.",
         "en": "Leave the Layer option on Source and the copy follows the original onto the visible-line layer, leaving a construction circle posing as geometry. And if the linetype scale is wrong, it looks solid even though it is on the centerline layer."
-       }
+       },
+       "feature": "boss",
+       "spots": [
+        {
+         "x": 60,
+         "y": 90,
+         "hover": {
+          "ko": "간격띄우기할 객체를 물어봅니다. 보스 Ø56 원의 선을 클릭해요. 위쪽 사분점 근처가 잡기 쉽습니다.",
+          "en": "It asks which object to offset. Click the Ø56 boss circle; near the top quadrant is the easiest place to catch it."
+         },
+         "snap": "qua"
+        },
+        {
+         "x": 60,
+         "y": 62,
+         "hover": {
+          "ko": "어느 쪽으로 띄울지 물어봅니다. 원 **안쪽** 아무 곳이나 클릭하면 지름 44 피치원이 안쪽에 생깁니다.",
+          "en": "It asks which way. Click anywhere **inside** the circle and the Ø44 pitch circle lands inside."
+         }
+        }
+       ]
       },
       {
        "n": 4,
@@ -1189,7 +1209,19 @@
        "pitfall": {
         "ko": "끝점 표식이 뜨기 전에 클릭하면 중심이 미세하게 어긋납니다. 그 오차가 원형 배열로 네 배가 됩니다. 실제 도면은 탭 구멍을 골지름과 바깥지름 두 원으로 그리지만 이 실습에서는 원 하나로 그려요.",
         "en": "Click before the marker shows and the center is slightly off, and the polar array multiplies that error by four. Note that a real drawing shows a tapped hole as two circles, root and major diameter; in this exercise one circle is enough."
-       }
+       },
+       "feature": "tap",
+       "spots": [
+        {
+         "x": 75.556,
+         "y": 77.556,
+         "hover": {
+          "ko": "45도 보조선의 바깥쪽 끝입니다. 네모 표식, 끝점이 뜨면 클릭해요. 이 점이 첫 탭 구멍의 중심입니다.",
+          "en": "The far end of the 45-degree guide line. Click on the square marker - the endpoint. This is the centre of the first tapped hole."
+         },
+         "snap": "end"
+        }
+       ]
       },
       {
        "n": 6,
@@ -1719,7 +1751,26 @@
        "pitfall": {
         "ko": "클릭했는데 아무것도 안 잘리면 접점이 안 맞은 것입니다. 9단계의 13과 3을 다시 확인합니다. 자르기를 빼먹으면 알약 안에 곡선 두 개가 남아요. 그 선이 남으면 나중에 해칭 경계가 갈라지고 치수를 잴 때 엉뚱한 점에 스냅이 붙습니다.",
         "en": "If clicking cuts nothing, the tangency is off - re-check 13 and 3 from step 9. Skip the trim and two curves stay inside the pill. Those leftovers split a hatch boundary later and pull dimension snaps onto the wrong points."
-       }
+       },
+       "feature": "slot",
+       "spots": [
+        {
+         "x": 34,
+         "y": 8,
+         "hover": {
+          "ko": "왼쪽 장공에서 왼쪽 끝원의 **오른쪽 반**입니다. 장공 안쪽으로 들어간 부분이라 지웁니다.",
+          "en": "The **right half** of the left end circle of the left slot - the part that reaches into the slot. That is what goes."
+         }
+        },
+        {
+         "x": 36,
+         "y": 8,
+         "hover": {
+          "ko": "오른쪽 끝원의 **왼쪽 반**. 같은 이유로 지웁니다. 남는 것은 바깥쪽 반원 둘과 위아래 직선 둘이에요.",
+          "en": "The **left half** of the right end circle, for the same reason. What is left is two outer half-circles and two straight sides."
+         }
+        }
+       ]
       },
       {
        "n": 11,
@@ -1891,7 +1942,18 @@
        "pitfall": {
         "ko": "여기서는 모든 객체를 경계로 잡지 않습니다. 잘라 낼 선 자체가 경계에 섞이면 어디서 끊길지 알 수 없습니다. 자른 뒤 닫혀 있던 폴리선이 열린 폴리선 하나가 되는지 확인하세요.",
         "en": "Do not take every object as a boundary here. If the line you are cutting is itself in the boundary set, you cannot predict where it breaks. Afterwards, check that the closed polyline has become one open polyline."
-       }
+       },
+       "feature": "basehl",
+       "spots": [
+        {
+         "x": 60,
+         "y": 16,
+         "hover": {
+          "ko": "베이스 윗면의 한가운데입니다. 두 목 선 사이에 낀 구간이에요. 여기를 클릭하면 그 구간만 사라집니다.",
+          "en": "The middle of the base top face - the stretch caught between the two web lines. Click here and only that stretch goes."
+         }
+        }
+       ]
       },
       {
        "n": 13,
@@ -1957,7 +2019,26 @@
        "pitfall": {
         "ko": "반지름을 설정하지 않고 두 선을 고르면 호 대신 각진 모서리가 만들어집니다. 오류가 나지 않아 그냥 넘어가기 쉬워요. 남기고 싶은 쪽이 아닌 반대쪽을 클릭하면 살려야 할 구간이 잘려 나가요.",
         "en": "Pick two lines without setting the radius and you get a sharp corner instead of an arc, with no error to warn you. Click the wrong side and the stretch you needed is the one that goes."
-       }
+       },
+       "feature": "fillet",
+       "spots": [
+        {
+         "x": 110,
+         "y": 16,
+         "hover": {
+          "ko": "첫 번째 객체는 윗면의 오른쪽 토막입니다. **남기고 싶은 쪽**을 클릭하세요. 모서리 바깥쪽입니다.",
+          "en": "The first object is the right stub of the top face. Click the **side you want to keep** - outward from the corner."
+         }
+        },
+        {
+         "x": 100,
+         "y": 30,
+         "hover": {
+          "ko": "두 번째 객체는 오른쪽 목 선입니다. 역시 남기고 싶은 쪽, 모서리보다 위쪽을 클릭합니다.",
+          "en": "The second object is the right web line. Again click the side you keep - above the corner."
+         }
+        }
+       ]
       },
       {
        "n": 14,
