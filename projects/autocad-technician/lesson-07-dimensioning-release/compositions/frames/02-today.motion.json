@@ -1,1 +1,49 @@
-{"duration": 152, "assertions": [{"kind": "appearsBy", "selector": "#l7f2 h1", "bySec": 3}, {"kind": "appearsBy", "selector": "#l7f2 .c1", "bySec": 47.5}, {"kind": "appearsBy", "selector": "#l7f2 .c2", "bySec": 78.8}, {"kind": "before", "a": "#l7f2 .c1", "b": "#l7f2 .c2"}, {"kind": "appearsBy", "selector": "#l7f2 .c3", "bySec": 107.9}, {"kind": "before", "a": "#l7f2 .c2", "b": "#l7f2 .c3"}, {"kind": "appearsBy", "selector": "#l7f2 .c4", "bySec": 127.0}, {"kind": "before", "a": "#l7f2 .c3", "b": "#l7f2 .c4"}, {"kind": "staysInFrame", "selector": "#l7f2 .body"}]}
+{
+  "duration": 159.02,
+  "assertions": [
+    {
+      "kind": "appearsBy",
+      "selector": "#l7f2 h1",
+      "bySec": 3
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l7f2 .c1",
+      "bySec": 47.5
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l7f2 .c2",
+      "bySec": 78.8
+    },
+    {
+      "kind": "before",
+      "a": "#l7f2 .c1",
+      "b": "#l7f2 .c2"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l7f2 .c3",
+      "bySec": 107.9
+    },
+    {
+      "kind": "before",
+      "a": "#l7f2 .c2",
+      "b": "#l7f2 .c3"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l7f2 .c4",
+      "bySec": 127.0
+    },
+    {
+      "kind": "before",
+      "a": "#l7f2 .c3",
+      "b": "#l7f2 .c4"
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l7f2 .body"
+    }
+  ]
+}

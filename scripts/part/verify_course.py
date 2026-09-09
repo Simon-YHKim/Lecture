@@ -81,6 +81,22 @@ def fail(where, msg):
 
 
 
+def measured_frames(lesson_dir):
+    """프레임 이름 → (잰 시작, 잰 길이). 잰 적이 없으면 빈 dict.
+
+    `beats.load_measured()` 는 같은 파일의 `beats[]` 를 읽는다. 여기서 읽는 것은
+    `frames[]` 이고, 그쪽은 index.html 슬롯이 쓰는 값이다. 배열이 둘인 이유가
+    이것이라 하나로 합칠 수 없다.
+    """
+    path = os.path.join(lesson_dir, "narration-timing.json")
+    if not os.path.isfile(path):
+        return {}
+    doc = json.load(io.open(path, encoding="utf-8"))
+    return {f["id"]: (float(f["start"]), float(f["duration"]))
+            for f in doc.get("frames", [])
+            if "id" in f and "duration" in f and "start" in f}
+
+
 def check_episodes(slug):
     """Every frame in exactly one episode, in order, and none over the cap.
 
@@ -206,8 +222,12 @@ def check_lesson(slug, cp_in, cp_out):
         return fail(slug, "대본이 내놓는 프레임 %d개 vs index %d개"
                     % (len(expect), len(slots)))
 
+    measured_dur = measured_frames(d)
+    measured_beats = beats.load_measured(d)
+
     total = 0
-    for (stem, start, dur), (line_no, segs, part_sec) in zip(slots, expect):
+    for slot_i, ((stem, start, dur), (line_no, segs, part_sec)) in enumerate(
+            zip(slots, expect), 1):
         start, dur = float(start), float(dur)
         if abs(start - total) > 0.01:
             fail(slug, "%s 시작이 %.1f 인데 앞 프레임 합은 %.1f" % (stem, start, total))
@@ -219,10 +239,31 @@ def check_lesson(slug, cp_in, cp_out):
             if steps and line_no == demo_line:
                 fixed = demo_total
         spans, want = beats.plan(segs, duration=fixed)
-        if abs(dur - want) > 0.01:
+        # 잰 값이 있으면 그것이 기준이다. 글자 수 추정은 아직 녹음하지 않은
+        # 차시에만 답이고, 잰 뒤로는 답이 아니다 — 맞는 값을 틀렸다고 말하게 된다.
+        if stem in measured_dur:
+            # 잰 것은 말한 시간이다. 슬롯은 그보다 LEAD_SEC 만큼 길다 — 머리글이
+            # 첫 마디보다 먼저 들어오는 몫이고, 그 몫은 음성 바깥에 있다.
+            want = measured_dur[stem][1] + beats.LEAD_SEC
+            if abs(dur - want) > 0.01:
+                fail(slug, "%s 길이 %.3f 인데 narration-timing.json 은 %.3f "
+                           "— 실측을 다시 반영하지 않았다" % (stem, dur, want))
+                continue
+        elif abs(dur - want) > 0.01:
             fail(slug, "%s 길이 %.0f 인데 SCRIPT.md 기준은 %.0f "
                        "— 대본을 고치고 스캐폴드를 다시 돌리지 않았다" % (stem, dur, want))
             continue
+
+        # 비트가 어디에 있는지도 잰 값이 답이다. 음절 추정은 실측과 몇 초씩
+        # 어긋나서, 실측에 맞춰 놓은 모션을 「비트에 걸린 모션이 없다」고 말한다.
+        # 기준점은 index.html 의 누적 시각이 아니라 narration-timing 의 start 다 —
+        # 슬롯 시작은 그보다 LEAD_SEC 뒤이고, 프레임 안 시계는 잰 시작에서 흐른다.
+        if measured_beats.get(slot_i) and stem in measured_dur:
+            m_start = measured_dur[stem][0]
+            got = beats.measured_plan(segs, measured_beats[slot_i],
+                                      m_start, m_start + dur)
+            if got:
+                spans = got
 
         mp = os.path.join(d, "compositions", "frames", stem + ".motion.json")
         if os.path.isfile(mp):
