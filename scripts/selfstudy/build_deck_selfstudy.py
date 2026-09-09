@@ -1,0 +1,806 @@
+# -*- coding: utf-8 -*-
+"""자습용 강의 슬라이드 — 기존 프레임 위에 자습본 내용을 얹는다.
+
+`build_deck_frames.py` 는 동영상 강의의 프레임을 그대로 덱으로 만든다. 그것만으로는
+자습이 되지 않는다. 강의에는 강사가 화면을 보며 말하는 몫이 있고, 시연 프레임은
+`USER RECORDING` 자리표시자라 혼자 보는 사람에게는 빈 화면이기 때문이다.
+
+그래서 이 판은 두 가지를 한다.
+
+  · **시연 프레임을 뺀다.** 자리에 자습본의 따라 하기 단계를 한 단계 한 장씩 깐다.
+    한 장 안에 명령·묻는 것·입력값·확인이 순서대로 있고, 오른쪽에 「이렇게 되면
+    맞습니다 · 왜 이 순서인가 · 안 되면 여기」가 붙는다. 강사가 말로 때우던 몫이
+    화면에 남는다.
+  · **개념 프레임 뒤에 보강 장을 넣는다.** 강의 프레임은 좌표 표기 세 가지를
+    가르친다. 자습본은 거기에 객체 스냅과 자유 클릭을 더해 「점을 찍는 네 가지
+    방법」으로 넓혔고, 고르는 기준을 한 문장으로 준다. 그 절이 한 장이 된다.
+
+새로 만드는 장은 프레임의 조판을 그대로 쓴다. `.clip` · `.topline` · `.card` ·
+`.note` 는 프레임 스타일시트에 이미 있는 것이고, 덱에 프레임이 함께 실리므로
+그 규칙이 그대로 닿는다. 이 파일이 더하는 스타일은 조작 목록 하나뿐이다.
+
+    python scripts/selfstudy/build_deck_selfstudy.py <lesson-dir> <lesson.json> [출력]
+"""
+import io
+import json
+import math
+import os
+import re
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import build_deck_frames as F
+import figures as _figures
+
+# 녹화 자리표시자인가. 파일 이름이 아니라 안에 있는 것으로 가른다 — 2차시의
+# 녹화 프레임은 08-build-template 이라 이름으로는 못 가려낸다.
+FILM = re.compile(r'class="film"')
+
+# 자습본의 어느 절이 어느 프레임 뒤에 한 장으로 붙는가.
+# 차시마다 강의가 어디까지 말하고 자습본이 어디를 더 채우는지가 달라서,
+# 자동으로 고를 수 있는 값이 아니다.
+EXTRA = {
+    # 1차시는 보강 장을 두지 않는다. 강의 프레임이 이미 같은 말을 한다.
+    # 점을 찍는 방법은 도면틀을 그리기 전에 있어야 한다. 3차시에서 2차시로 옮겼다.
+    2: [('07-sheet-and-layers', '점을 찍는 네 가지 방법', 'concept'),
+        ('07-sheet-and-layers', '스냅 표식을 보고 누릅니다', 'concept')],
+    3: [('03-concept', '이렇게도 됩니다 — 원점을 옮겨 좌표로 그리기', 'split')],
+    4: [('03-concept', '안쪽 형상 넷 — 축 구멍·탭·장공·필렛', 'concept'),
+        ('03-concept', '계산해서 나오는 값들', 'concept')],
+    5: [('03-concept', '투상선은 도면에 남지 않는 선입니다', 'concept'),
+        ('03-concept', '숨은선 셋의 서로 다른 길이', 'concept')],
+    6: [('03-concept', '지울까 자를까 늘릴까', 'concept'),
+        ('03-concept', '레이어 점검 세 가지 방법', 'concept')],
+    7: [('03-concept', '치수 다섯 종류', 'concept'),
+        ('03-concept', '치수선 방향과 기준면', 'concept')],
+    8: [('02-exam', '시험에서 자주 어긋나는 세 자리', 'concept')],
+}
+
+# 녹화 프레임이 없는 차시는 따라 하기를 어느 프레임 뒤에 깔지 정해 준다.
+# 1차시는 실습이 2차시로 넘어가 깔 것이 없다.
+AFTER = {8: '02-exam'}
+
+# 덱에서 빼는 강의 프레임. 오리엔테이션에서 「이번 차시와 다음 차시」는
+# 바로 앞 로드맵과 같은 말을 두 번 한다.
+DROP_FRAMES = {1: {'05-recap'}}
+
+INLINE = re.compile(r'`([^`]+)`|\*\*([^*]+)\*\*')
+ACT_LAB = {'ask': '묻는 것', 'move': '마우스', 'snap': '스냅', 'click': '클릭',
+           'key': '키', 'see': '확인', 'alt': '또는', 'type': '입력'}
+
+# ── 코치 마크 ──────────────────────────────────────────────────
+# 정면도 SVG 는 부품 좌표를 그대로 쓴다. 베이스 왼쪽 아래 구석 (0,0) 이 SVG 의
+# (58,208) 이고 y 는 아래로 자란다. figures.build_map()['front'] 의 viewBox 가
+# "48 108 140 110" 인 것과 밑변 path 가 M58 208 L178 208 인 것에서 나온 값이다.
+SVG_X0, SVG_Y0 = 58.0, 208.0
+
+
+def to_svg(x, y):
+    return SVG_X0 + float(x), SVG_Y0 - float(y)
+
+
+# 오토캐드가 커서 옆에 띄우는 표식. 모양이 곧 스냅 종류다.
+SNAP_NAME = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사분점',
+             'int': '교차점', 'tan': '접점', 'per': '직교', 'nea': '근처점'}
+
+
+def snap_glyph(kind, x, y, r=4.2):
+    """표식 하나를 도면 좌표 위에 그린다. 획 굵기는 배율과 무관하게 둔다."""
+    a = 'class="mk" vector-effect="non-scaling-stroke"'
+    if kind == 'end':
+        return '<rect %s x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>' % (
+            a, x - r, y - r, r * 2, r * 2)
+    if kind == 'mid':
+        return '<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f Z"/>' % (
+            a, x, y - r, x + r, y + r, x - r, y + r)
+    if kind in ('cen', 'nea'):
+        return '<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>' % (a, x, y, r)
+    if kind == 'qua':
+        return '<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f L%.2f %.2f Z"/>' % (
+            a, x, y - r, x + r, y, x, y + r, x - r, y)
+    if kind == 'int':
+        return ('<path %s d="M%.2f %.2f L%.2f %.2f M%.2f %.2f L%.2f %.2f"/>'
+                % (a, x - r, y - r, x + r, y + r, x + r, y - r, x - r, y + r))
+    if kind == 'tan':
+        return ('<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>'
+                '<path %s d="M%.2f %.2f L%.2f %.2f"/>'
+                % (a, x, y, r, a, x - r, y - r, x + r, y - r))
+    if kind == 'per':
+        return ('<path %s d="M%.2f %.2f L%.2f %.2f L%.2f %.2f M%.2f %.2f L%.2f %.2f"/>'
+                % (a, x - r, y - r, x - r, y + r, x + r, y + r,
+                   x - r, y + r * .35, x - r * .35, y + r * .35))
+    return '<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>' % (a, x, y, r)
+
+
+FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 원', 'bore': '축 구멍',
+              'fillet': '필렛', 'slot': '장공', 'tap': '탭 구멍',
+              # 같은 형상이라도 재는 곳이 다르면 켜는 것도 다르다.
+              'basehl': '베이스 윤곽', 'neck': '목과 밑동 라운드',
+              'bossc': '보스 중심선', 'filletc': '필렛 중심선',
+              'slotc': '장공 중심선', 'thick': '옆면도의 두께'}
+
+
+def fig_block(spots, front, feature=None):
+    """정면도 한 장 위에 자리 표시를 얹고, 아래에 무엇을 볼지 적는다.
+
+    `feature` 가 있으면 그 형상의 강조 겹선을 켠다. 자리만 찍어 두면 「여기를
+    누르라」는 말은 되지만 「무엇을 그리는 중인지」는 안 보인다. 단계마다 그리는
+    것이 다른데 도면이 늘 같은 모습이면 도면이 지시를 따라오지 못한다.
+    """
+    marks, caps = [], []
+    for i, sp in enumerate(spots, 1):
+        x, y = to_svg(sp['x'], sp['y'])
+        kind = sp.get('snap')
+        marks.append('<g class="cm">'
+                     '<circle class="ring" cx="%.2f" cy="%.2f" r="8.6"/>'
+                     '%s'
+                     '<circle class="bg" cx="%.2f" cy="%.2f" r="5.4"/>'
+                     '<text class="bn" x="%.2f" y="%.2f">%d</text>'
+                     '</g>'
+                     % (x, y, snap_glyph(kind, x, y) if kind else '',
+                        x + 10.2, y - 10.2, x + 10.2, y - 8.5, i))
+        caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
+                    % (i, rich(ko(sp.get('hover'))),
+                       ('<em> — %s 표식</em>' % esc(SNAP_NAME[kind])) if kind in SNAP_NAME else ''))
+    body = front.replace('</svg>', '<g class="coach">%s</g></svg>' % ''.join(marks))
+    body = body.replace('<svg class="dwg"', '<svg class="dwg cdwg"', 1)
+    if feature:
+        body = body.replace('class="hl" data-feature="%s"' % feature,
+                            'class="hl hot" data-feature="%s"' % feature)
+    # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
+    head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
+    return ('<figure class="fig" data-memo="도면 코치 마크">'
+            '<div class="fh">%s</div>'
+            '%s<ul class="cap%s">%s</ul></figure>'
+            % (head, body, ' many' if len(spots) > 4 else '', ''.join(caps)))
+
+
+def esc(s):
+    return (s or '').replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def rich(s):
+    """백틱은 명령 토큰, **강조**는 굵게. 나머지는 이스케이프한다."""
+    out, i = [], 0
+    for m in INLINE.finditer(s or ''):
+        out.append(esc(s[i:m.start()]))
+        out.append('<span class="cmd">%s</span>' % esc(m.group(1))
+                   if m.group(1) is not None else '<b>%s</b>' % esc(m.group(2)))
+        i = m.end()
+    out.append(esc((s or '')[i:]))
+    return ''.join(out)
+
+
+def plain(s):
+    """길이를 셀 때는 마크업을 뺀 글자 수가 기준이다."""
+    return INLINE.sub(lambda m: m.group(1) or m.group(2), s or '')
+
+
+def ko(node):
+    return (node or {}).get('ko', '')
+
+
+# ── 조작 목록의 글자 크기 ──────────────────────────────────────
+# 단계마다 조작이 2줄에서 11줄까지 온다. 한 크기로 박아 두면 긴 단계가 넘치고
+# 짧은 단계는 허전하다. 들어갈 크기 중 가장 큰 것을 고른다.
+SIZES = (28, 26, 24, 22, 20, 18)
+OPS_H = 700          # .body 안에서 조작 목록이 쓸 수 있는 높이(px)
+OPS_W = 940          # 글이 놓이는 폭(px). 라벨 칸을 뺀 값이다.
+
+
+def ops_font(actions, narrow=False):
+    """들어가는 가장 큰 크기와, 그 크기에서 어림한 높이를 함께 준다.
+
+    라벨 칸이 줄을 하나 더 만드는 경우가 있어 실제가 어림보다 조금 크다.
+    그만큼 한도를 낮춰 잡는다.
+    """
+    w, gap, cap = (740, 9, 358) if narrow else (OPS_W, 15, 640)
+    last = (SIZES[-1], 0.0)
+    for size in SIZES:
+        cpl = max(12, int(w / (size * 0.98)))   # 한글은 글자 한 자가 약 1em
+        line = size * 1.45
+        h = 0.0
+        for a in actions:
+            txt = plain(ko(a.get('do'))) + ('  ' + (a.get('type') or ''))
+            h += max(1, math.ceil(len(txt) / cpl)) * line + gap
+        last = (size, h)
+        if h <= cap:
+            return size, h, cap
+    return last[0], last[1], cap
+
+
+SIDE_SIZES = (21, 20, 19, 18, 17, 16)
+
+
+def side_font(texts, w=600, cap=700):
+    """카드 세 장이 한 칸에 세로로 설 때 들어가는 크기를 고른다.
+
+    라벨 한 줄, 본문 몇 줄, 패딩과 사이 여백까지 세어 본다. 넘치면 잘려서
+    「안 되면 여기」가 화면 밖으로 나간다 — 정확히 그 카드가 필요한 사람이
+    못 보게 된다.
+    """
+    for size in SIDE_SIZES:
+        cpl = max(10, int((w - 36) / (size * 0.98)))
+        h = 0.0
+        for t in texts:
+            h += (size + 3) * 1.25 + max(1, math.ceil(len(t) / cpl)) * size * 1.4 + 40
+        if h + 16 * (len(texts) - 1) <= cap:
+            return size
+    return SIDE_SIZES[-1]
+
+
+def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
+    """따라 하기 한 단계 = 한 장. 조각 하나에 조작 한 줄씩 열린다.
+
+    `spots` 가 있으면 정면도가 한 칸을 차지한다. 커서를 어디에 올려야 하는지는
+    글로 적어 봐야 「베이스 윗면 왼쪽에서 조금 오른쪽」 같은 말이 될 뿐이고,
+    그것은 자습자가 화면에서 찾아내야 하는 탐색 지시다. 자리를 그림으로 찍어
+    주면 찾을 것이 없다.
+    """
+    acts = st.get('actions', [])
+    spots = st.get('spots') if front else None
+    size, est, cap = ops_font(acts, narrow=bool(spots))
+    if est > cap and len(acts) > 4 and part is None:
+        # 가장 작은 크기로도 한 장에 안 들어가는 단계가 있다. 글자를 더 줄이는
+        # 대신 장을 나눈다. 열두 줄을 한 화면에 몰아 넣어 봐야 읽히지 않는다.
+        half = (len(acts) + 1) // 2
+        out = []
+        for k, chunk in enumerate(([acts[:half], acts[half:]])):
+            sub = dict(st, actions=chunk)
+            # 앞장에는 「왜 이 순서인가」를, 뒷장에는 「이렇게 되면 맞습니다」와
+            # 「안 되면 여기」를 둔다. 앞장에서 셋을 다 빼면 그 장은 카드가 없어
+            # 마지막 조각에서 아무 일도 안 일어나고, 발표자 노트도 비어 버린다.
+            for key in (('expect', 'pitfall') if k == 0 else ('why',)):
+                sub.pop(key, None)
+            one = step_slide(sub, '%s%s' % (cid, 'ab'[k]), clock,
+                             sec_label, total, front, part=(k + 1, 2))
+            out += one
+            clock += one[-1][3]
+        return out
+    ops = []
+    for k, a in enumerate(acts):
+        kind = a.get('kind') or ('type' if a.get('type') else '')
+        lab = ACT_LAB.get(kind, '')
+        cmd = ('<span class="cmd">%s</span>' % esc(a['type'])) if a.get('type') else ''
+        ops.append('<li class="op o%d %s" data-memo="%s"><span class="lab">%s</span>'
+                   '<span class="w">%s%s</span></li>'
+                   % (k + 1, esc(kind), esc('%s단계 · 조작 %d' % (st['n'], k + 1)),
+                      esc(lab), cmd, rich(ko(a.get('do')))))
+
+    side, texts = [], []
+    for cls, lab, key in (('', '이렇게 되면 맞습니다', 'expect'),
+                          ('', '왜 이 순서인가', 'why'),
+                          (' pit', '안 되면 여기', 'pitfall')):
+        if st.get(key):
+            side.append('<div class="card sc%s" data-memo="%s"><b>%s</b>'
+                        '<span>%s</span></div>'
+                        % (cls, esc('%s단계 · %s' % (st['n'], lab)), lab,
+                           rich(ko(st[key]))))
+            texts.append(plain(ko(st[key])))
+    ssz = side_font(texts) if (texts and not spots) else 0
+
+    # 마지막 조각에서 오른쪽 카드가 열린다. 카드가 없으면 그 조각은 넘겨도
+    # 화면이 그대로라 헛걸음이 된다.
+    n_frag = len(ops) + (1 if side else 0) or 1
+    dur = float(n_frag)
+    body = (
+      '<div id="%(c)s-root" data-composition-id="%(c)s" data-start="%(s)s" '
+      'data-duration="%(d)s" data-width="1920" data-height="1080" '
+      'data-label="%(lab)s">\n'
+      '<section id="%(c)s" class="clip ss" data-start="%(s)s" data-duration="%(d)s" '
+      'data-track-index="1">\n'
+      '<header class="topline"><div><div class="index">03 · DO</div>'
+      '<h1>%(title)s</h1></div><div class="prompt">%(sec)s · %(n)s / %(tot)s</div></header>\n'
+      '<main class="body ssbody%(fx)s">'
+      '<ol class="ops" style="font-size:%(fs)dpx">%(ops)s</ol>'
+      '%(fig)s'
+      '<aside class="side"%(sst)s>%(side)s</aside>'
+      '</main>\n</section>\n</div>'
+      % {'c': cid, 's': clock, 'd': dur, 'fs': size,
+         'fx': ' hasfig' if spots else '',
+         'sst': (' style="font-size:%dpx"' % ssz) if ssz else '',
+         'fig': fig_block(spots, front, st.get('feature')) if spots else '',
+         'lab': esc('%s단계%s · %s' % (st['n'], (' (%d/%d)' % part) if part else '',
+                                      ko(st.get('title')))),
+         'title': rich(ko(st.get('title'))) + (
+             ' <span class="pt">%d / %d</span>' % part if part else ''),
+         'sec': esc(sec_label.split('—')[0].strip()),
+         'n': st['n'], 'tot': total, 'ops': ''.join(ops), 'side': ''.join(side)})
+
+    tl = ['tl.fromTo("#%s .topline",{opacity:0,y:-18},'
+          '{opacity:1,y:0,duration:.4,ease:"power3.out"},0);' % cid]
+    if spots:
+        # 자리부터 보여 준다. 어디를 잡을지 모르는 채로 명령을 치게 두지 않는다.
+        tl.append('tl.fromTo("#%s .fig",{opacity:0},'
+                  '{opacity:1,duration:.4,ease:"power2.out"},.1);' % cid)
+    for k in range(len(ops)):
+        tl.append('tl.fromTo("#%s .o%d",{opacity:0,x:-14},'
+                  '{opacity:1,x:0,duration:.45,ease:"power2.out"},%s);'
+                  % (cid, k + 1, k + 0.5))
+    if side:
+        # 나눈 장의 앞쪽에는 카드가 없다. 없는 것을 향해 트윈을 걸면 GSAP 이
+        # 「대상 없음」 경고를 내고, 진짜 결함이 그 경고에 묻힌다.
+        tl.append('tl.fromTo("#%s .sc",{opacity:0,y:14},'
+                  '{opacity:1,y:0,duration:.45,stagger:.08,ease:"power2.out"},%s);'
+                  % (cid, len(ops) + 0.5))
+    frags = [round(clock + k + 1.0, 2) for k in range(n_frag)]
+    notes = ' / '.join(x for x in (ko(st.get('expect')), ko(st.get('why'))) if x)
+    return [(body, tl, {'sceneId': cid, 'notes': notes or '—',
+                        'fragments': frags}, dur)]
+
+
+CONCEPT_W = {'cards': 2.2, 'para': 1.4, 'fig': 0.0}
+CONCEPT_ROOM = 4.4          # 한 장이 감당하는 몫
+CONCEPT_ROOM_FIG = 2.6      # 그림이 오른쪽 절반을 가져가면 왼쪽 몫이 줄어든다
+
+
+def concept_slide(sec, cid, clock):
+    """개념 한 절 = 한 장, 넘치면 여러 장.
+
+    절이 무엇으로 짜였는지는 절마다 다르다. 표로 된 절도 있고 카드로 된 절도
+    있고, 문단과 그림뿐인 절도 있다. 표만 읽으면 나머지 절은 빈 화면이 된다 —
+    「치수선 방향과 기준면」이 실제로 그랬다.
+
+    있는 것을 있는 대로 싣되 한 장에 다 밀어 넣지는 않는다. 밀어 넣으면 카드가
+    자기 칸을 넘겨 아래 문단 위로 겹쳐 앉는다. 그렇다고 글자만 줄이면 읽을 수
+    없다. 그래서 덩어리마다 몫을 매기고 몫이 차면 장을 넘긴다.
+
+    나누는 단위는 원문의 블록이다. 표 하나를 두 장에 걸쳐 쪼개면 넉 장짜리
+    비교가 두 장 대 두 장이 되어 비교가 아니게 된다.
+    """
+    groups, note = [], ''
+    for b in sec.get('blocks', []):
+        t = b.get('type')
+        if t == 'table':
+            cards = []
+            for row in b['rows']:
+                cells = [rich(ko(c)) for c in row]
+                cards.append('<div class="card cc" data-memo="%s"><b>%s</b>'
+                             '<strong>%s</strong><span>%s</span></div>'
+                             % (esc(ko(row[0])), cells[0],
+                                cells[1] if len(cells) > 1 else '',
+                                cells[2] if len(cells) > 2 else ''))
+            groups.append(('cards', cards))
+        elif t == 'cards':
+            groups.append(('cards', [
+                '<div class="card cc" data-memo="%s"><b>%s</b><span>%s</span></div>'
+                % (esc(ko(it.get('label'))), rich(ko(it.get('label'))),
+                   rich(ko(it.get('body')))) for it in b['items']]))
+        elif t == 'list':
+            groups.append(('cards', [
+                '<div class="card cc" data-memo="%s"><span>%s</span></div>'
+                % (esc(plain(ko(it))[:40]), rich(ko(it))) for it in b['items']]))
+        elif t == 'p':
+            groups.append(('para', ['<p class="cp" data-memo="%s">%s</p>'
+                                    % (esc(plain(ko(b))[:40]), rich(ko(b)))]))
+        elif t == 'figure' and b.get('svg') and not any(k == 'fig' for k, _ in groups):
+            groups.append(('fig', ['<figure class="cfig"><div class="cfw">%s</div>'
+                                   '<figcaption>%s</figcaption></figure>'
+                                   % (b['svg'], esc(ko(b.get('caption'))))]))
+        elif t == 'note' and not note:
+            note = ('<div class="note nn" data-memo="%s"><b class="lb">%s</b>%s</div>'
+                    % (esc(ko(b.get('label'))), esc(ko(b.get('label'))), rich(ko(b))))
+    if not groups:
+        groups = [('para', ['<p class="cp">%s</p>' % rich(ko(sec.get('lede')))])]
+
+    pages, cur, w = [], [], 0.0
+    for g in groups:
+        kind, items = g
+        add = CONCEPT_W[kind] * (1 if kind != 'cards' else max(1, (len(items) + 3) // 4))
+        room = CONCEPT_ROOM_FIG if (kind == 'fig' or any(k == 'fig' for k, _ in cur)) \
+            else CONCEPT_ROOM
+        if cur and w + add > room:
+            pages.append(cur)
+            cur, w = [], 0.0
+        cur.append(g)
+        w += add
+    if cur:
+        pages.append(cur)
+
+    out = []
+    for pi, page in enumerate(pages):
+        pcid = cid if len(pages) == 1 else '%s%s' % (cid, 'abcdefgh'[pi])
+        cards = [h for k, hs in page if k == 'cards' for h in hs]
+        paras = [h for k, hs in page if k == 'para' for h in hs]
+        pfig = ''.join(h for k, hs in page if k == 'fig' for h in hs)
+        pnote = note if pi == len(pages) - 1 else ''
+        n_frag = len(cards) + len(paras) + (1 if pfig else 0) + (1 if pnote else 0)
+        dur = float(max(1, n_frag))
+        cols = 3 if len(cards) in (3, 5, 6) else min(4, max(1, len(cards)))
+        left = ''
+        if cards:
+            left += ('<section class="ccrow" style="grid-template-columns:'
+                     'repeat(%d,minmax(0,1fr))">%s</section>' % (cols, ''.join(cards)))
+        if paras:
+            left += '<div class="cps">%s</div>' % ''.join(paras)
+        part = (' <span class="pt">%d / %d</span>' % (pi + 1, len(pages))) if len(pages) > 1 else ''
+        body = (
+          '<div id="%(c)s-root" data-composition-id="%(c)s" data-start="%(s)s" '
+          'data-duration="%(d)s" data-width="1920" data-height="1080" data-label="%(lab)s">\n'
+          '<section id="%(c)s" class="clip ss" data-start="%(s)s" data-duration="%(d)s" '
+          'data-track-index="1">\n'
+          '<header class="topline"><div><div class="index">02 · HOW</div>'
+          '<h1>%(title)s</h1></div><div class="prompt">%(lede)s</div></header>\n'
+          '<main class="body ccbody%(fx)s">%(main)s%(note)s</main>\n</section>\n</div>'
+          % {'c': pcid, 's': clock, 'd': dur,
+             'lab': esc(ko(sec.get('label')) + (' (%d/%d)' % (pi + 1, len(pages))
+                                                if len(pages) > 1 else '')),
+             'title': rich(ko(sec.get('label'))) + part,
+             'lede': esc(ko(sec.get('lede'))),
+             'fx': ' hasfig' if pfig else '',
+             'main': ('<div class="ccmain">%s</div>%s' % (left, pfig)) if pfig else left,
+             'note': pnote})
+
+        tl = ['tl.fromTo("#%s .topline",{opacity:0,y:-18},'
+              '{opacity:1,y:0,duration:.4,ease:"power3.out"},0);' % pcid]
+        k = 0
+        for j in range(len(cards)):
+            k += 1
+            tl.append('tl.fromTo("#%s .cc:nth-child(%d)",{opacity:0,y:16},'
+                      '{opacity:1,y:0,duration:.5,ease:"power2.out"},%s);'
+                      % (pcid, j + 1, k - 0.5))
+        for j in range(len(paras)):
+            k += 1
+            tl.append('tl.fromTo("#%s .cp:nth-child(%d)",{opacity:0,y:14},'
+                      '{opacity:1,y:0,duration:.5,ease:"power2.out"},%s);'
+                      % (pcid, j + 1, k - 0.5))
+        if pfig:
+            k += 1
+            tl.append('tl.fromTo("#%s .cfig",{opacity:0},'
+                      '{opacity:1,duration:.5,ease:"power2.out"},%s);' % (pcid, k - 0.5))
+        if pnote:
+            k += 1
+            tl.append('tl.fromTo("#%s .nn",{opacity:0,y:12},'
+                      '{opacity:1,y:0,duration:.5,ease:"power3.out"},%s);' % (pcid, k - 0.5))
+        frags = [round(clock + j + 1.0, 2) for j in range(max(1, n_frag))]
+        out.append((body, tl, {'sceneId': pcid, 'notes': ko(sec.get('lede')) or '—',
+                               'fragments': frags}, dur))
+        clock += dur
+    return out
+
+
+def split_slide(sec, cid, clock):
+    """화면을 둘로 갈라 「이렇게도 됩니다」를 옆에 세운다.
+
+    다른 방법을 본문에 섞으면 자습자는 어느 쪽을 따라가야 하는지 모른다.
+    왼쪽이 이 과정이 걷는 길, 오른쪽이 알아 두면 되는 다른 길이다.
+    """
+    cards = []
+    for b in sec.get('blocks', []):
+        if b.get('type') == 'cards':
+            cards = b['items'][:2]
+            break
+    if len(cards) != 2:
+        raise SystemExit('「%s」 절에 카드가 둘이어야 한다' % ko(sec.get('label')))
+    foot = ''
+    for b in sec.get('blocks', []):
+        if b.get('type') == 'note' and not foot:
+            foot = '<b>%s</b> %s' % (esc(ko(b.get('label'))), rich(ko(b)))
+    cols = []
+    for k, h in enumerate(cards):
+        cols.append('<div class="half h%d" data-memo="%s"><div class="tag">%s</div>'
+                    '<h3>%s</h3><p class="bd">%s</p>%s</div>'
+                    % (k + 1, esc(ko(h.get('label'))),
+                       '이 과정이 걷는 길' if k == 0 else '알아만 두면 되는 길',
+                       rich(ko(h.get('label'))), rich(ko(h.get('body'))),
+                       ('<p class="ft">%s</p>' % foot) if (k == 1 and foot) else ''))
+    dur = 2.0
+    body = (
+      '<div id="%(c)s-root" data-composition-id="%(c)s" data-start="%(s)s" '
+      'data-duration="%(d)s" data-width="1920" data-height="1080" data-label="%(lab)s">\n'
+      '<section id="%(c)s" class="clip ss" data-start="%(s)s" data-duration="%(d)s" '
+      'data-track-index="1">\n'
+      '<header class="topline"><div><div class="index">02 · ALSO</div><h1>%(title)s</h1></div>'
+      '<div class="prompt">%(lede)s</div></header>\n'
+      '<main class="body splitbody">%(cols)s</main>\n</section>\n</div>'
+      % {'c': cid, 's': clock, 'd': dur, 'lab': esc(ko(sec.get('label'))),
+         'title': rich(ko(sec.get('label'))), 'lede': esc(ko(sec.get('lede'))),
+         'cols': ''.join(cols)})
+    tl = ['tl.fromTo("#%s .topline",{opacity:0,y:-18},'
+          '{opacity:1,y:0,duration:.4,ease:"power3.out"},0);' % cid,
+          'tl.fromTo("#%s .h1",{opacity:0,x:-18},'
+          '{opacity:1,x:0,duration:.5,ease:"power2.out"},.5);' % cid,
+          'tl.fromTo("#%s .h2",{opacity:0,x:18},'
+          '{opacity:1,x:0,duration:.5,ease:"power2.out"},1.5);' % cid]
+    return body, tl, {'sceneId': cid, 'notes': ko(sec.get('lede')) or '—',
+                      'fragments': [round(clock + 1.0, 2), round(clock + 2.0, 2)]}, dur
+
+
+STYLE = """
+/* 자습 장 — 프레임 조판을 그대로 쓰고, 조작 목록만 여기서 정한다. */
+/* 머리글은 제 높이만, 본문이 남는 높이를 전부 가져간다. 이게 없으면 내용이
+   적은 장마다 바닥에 빈 띠가 남는다. */
+.ss{display:grid;grid-template-rows:auto minmax(0,1fr);gap:0}
+/* 프레임 조판의 .body 는 높이가 724px 로 못 박혀 있다. 강의 프레임에는 맞는
+   값이지만 자습 장에서는 그 아래가 통째로 남는다. 자습 장에서만 푼다. */
+.ss>.body{min-height:0;height:auto}
+.ss .ssbody{display:grid;grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);
+  gap:38px;align-content:stretch;grid-template-rows:minmax(0,1fr)}
+/* 한 줄짜리 격자를 본문 높이만큼 늘려 둔다. 줄 높이를 조작 목록에 맞추면
+   그보다 긴 카드 칸이 그 높이에 갇혀 「안 되면 여기」가 잘린다. */
+/* 프레임 스타일시트의 `.card b{display:block;color:#C7004C;font-size:28px}` 는
+   카드 제목을 위한 규칙이다. 본문 안의 **강조**까지 그 규칙에 걸리면 문장 한
+   토막이 큰 빨간 제목으로 튀어나온다. 본문의 굵은 글씨는 굵기만 준다. */
+.ss .card span b,.ss .card strong b{display:inline;font-size:inherit;color:inherit;
+  font-weight:600}
+.ss .note .lb{display:block;margin-bottom:6px}
+.ss .ops{margin:0;padding:0;list-style:none;display:grid;align-content:center;gap:15px}
+.ss .op{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;
+  align-items:baseline;line-height:1.45;color:#111}
+.ss .op .lab{font-size:.62em;color:#8A8788;text-align:right;letter-spacing:.04em;
+  white-space:nowrap}
+.ss .op.snap .lab,.ss .op.click .lab,.ss .op.move .lab{color:#C7004C}
+.ss .op.see{border-left:3px solid #A4A3A4;padding-left:14px;margin-left:-17px}
+.ss h1 .pt{font-size:.55em;color:#8A8788;letter-spacing:0;margin-left:12px}
+.ss .op.alt{color:#666}
+.ss .op.alt .lab{font-style:italic;color:#A4A3A4}
+.ss .cmd{display:inline-block;font-family:ui-monospace,Consolas,monospace;
+  font-size:.92em;background:#F5F5F3;border:1px solid #A4A3A4;color:#111;
+  padding:1px 10px;margin-right:10px;white-space:nowrap}
+.ss .op.alt .cmd{background:#FFF;color:#666}
+.ss .side{display:grid;align-content:center;gap:16px}
+.ss .side .card{padding:18px 22px}
+.ss .side .card b{font-size:1.1em}
+.ss .side .card span{margin-top:6px;font-size:1em;line-height:1.5}
+.ss .side .card.pit{border-color:#C7004C}
+.ss .side .card.pit b{color:#C7004C}
+.ss .ccrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;
+  align-content:center}
+.ss .ccrow .card{padding:26px 26px 24px}
+.ss .ccrow .card strong{font-size:22px;line-height:1.4}
+.ss .ccrow .card span{font-size:20px}
+/* 개념 장 — 있는 것만 위에서부터 쌓고, 남는 높이는 문단이 가져간다. */
+.ss .ccbody{display:flex;flex-direction:column;gap:20px}
+.ss .ccbody>.ccrow,.ss .ccmain>.ccrow{flex:0 0 auto}
+.ss .ccbody>.note{flex:0 0 auto}
+.ss .ccmain{display:flex;flex-direction:column;gap:18px;min-height:0}
+.ss .ccbody>.cps,.ss .ccmain>.cps{flex:1 1 auto;display:flex;flex-direction:column;
+  justify-content:center;gap:18px;min-height:0}
+.ss .cps .cp{margin:0;font-size:27px;line-height:1.6;color:#1A1A1A;
+  word-break:keep-all;overflow-wrap:break-word}
+.ss .cps .cp+.cp{padding-top:16px;border-top:1px solid #E4E3E1}
+/* 그림이 있으면 왼쪽에 글, 오른쪽에 그림. 노트는 아래로 폭 전체를 쓴다. */
+.ss .ccbody.hasfig{display:grid;grid-template-rows:minmax(0,1fr) auto;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:28px}
+.ss .ccbody.hasfig>.note{grid-column:1/-1}
+.ss .cfig{margin:0;display:grid;grid-template-rows:minmax(0,1fr) auto;
+  gap:10px;min-height:0}
+.ss .cfw{display:grid;place-items:center;min-height:0}
+.ss .cfw svg{width:100%;height:auto;max-height:100%}
+.ss .cfig figcaption{font-size:19px;line-height:1.5;color:#666;
+  word-break:keep-all}
+/* 자습본 그림의 선 종류. 이름이 짧아 슬라이드 쪽 클래스와 부딪히므로
+   반드시 .cfw 안쪽으로만 적용한다 — sc 는 여기선 중심선, 밖에선 점검 카드다. */
+.ss .cfw svg{background:#FBFAF8;border:1px solid #D8D2C8;border-radius:4px;
+  padding:10px;box-sizing:border-box}
+.ss .cfw .si{stroke:#1B1A18;fill:none;stroke-width:1.6}
+.ss .cfw .sh{stroke:#A51C30;fill:none;stroke-width:1.9}
+.ss .cfw .sd{stroke:#6F695F;fill:none;stroke-width:1}
+.ss .cfw .sc{stroke:#A51C30;fill:none;stroke-width:1;
+  stroke-dasharray:12 3 3 3;stroke-linecap:butt}
+.ss .cfw .sn{stroke:#6F695F;fill:none;stroke-width:1;
+  stroke-dasharray:6 3;stroke-linecap:butt}
+.ss .cfw .sl{fill:#4A4741;stroke:none;font-size:11px;
+  font-family:ui-monospace,Consolas,monospace}
+.ss .cfw .slh{fill:#A51C30;stroke:none;font-size:11px;font-weight:700;
+  font-family:ui-monospace,Consolas,monospace}
+.ss .cfw .sf{fill:#E6E1D9;stroke:none}
+
+/* 코치 마크 — 도면 한 장이 「어디에 올리는가」를 대신 말한다. */
+.ss .ssbody.hasfig{grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr) auto;align-content:stretch}
+.ss .ssbody.hasfig .ops{grid-column:1;grid-row:1;align-content:start;overflow:hidden}
+.ss .ssbody.hasfig .fig{grid-column:2;grid-row:1}
+.ss .ssbody.hasfig .side{grid-column:1 / -1;grid-row:2;gap:16px;align-content:start;
+  grid-template-columns:repeat(3,minmax(0,1fr));overflow:hidden}
+.ss .ssbody.hasfig .side .card{padding:12px 16px}
+.ss .ssbody.hasfig .side .card b{font-size:20px}
+.ss .ssbody.hasfig .side .card span{margin-top:4px;font-size:18px;line-height:1.4}
+.ss .fig{margin:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:10px;
+  border:2px solid #A4A3A4;background:#F5F5F3;padding:12px 16px 14px}
+.ss .fig .fh{font-size:19px;letter-spacing:.04em;color:#8A8788}
+.ss .cdwg{width:100%;height:100%;display:block}
+.ss .cdwg .outline{fill:none;stroke:#111;stroke-width:.5;vector-effect:non-scaling-stroke}
+.ss .cdwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2;
+  vector-effect:non-scaling-stroke}
+/* 강조 겹선은 기본이 꺼짐이다. 이 단계가 그리는 형상만 켠다. */
+.ss .cdwg .hl{fill:none;stroke:none}
+.ss .cdwg .hl.hot{stroke:#C7004C;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;
+  vector-effect:non-scaling-stroke}
+.ss .fig .fh b{color:#C7004C}
+.ss .coach .ring{fill:none;stroke:#C7004C;stroke-width:1.1;stroke-dasharray:2.6 1.8;
+  vector-effect:non-scaling-stroke}
+.ss .coach .mk{fill:none;stroke:#C7004C;stroke-width:1.4}
+.ss .coach .bg{fill:#C7004C;stroke:none}
+.ss .coach .bn{fill:#FFF;font-size:7px;text-anchor:middle;
+  font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.ss .fig .cap{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.ss .fig .cap li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;
+  align-items:baseline;font-size:21px;line-height:1.4;color:#111}
+.ss .fig .cap .bd{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
+  background:#C7004C;color:#FFF;font-size:15px}
+.ss .fig .cap em{font-style:normal;color:#C7004C}
+/* 한 단계에서 다섯 자리 넘게 찍을 때가 있다. 그때는 목록이 도면을 밀어낸다. */
+/* 자리가 다섯 곳을 넘으면 목록이 도면 높이를 다 먹는다. 두 줄로 접는다. */
+.ss .fig .cap.many{gap:3px 22px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.ss .fig .cap.many li{font-size:17px;grid-template-columns:21px minmax(0,1fr);gap:8px}
+.ss .fig .cap.many .bd{width:21px;height:21px;font-size:13px}
+
+/* 분할 화면 — 왼쪽이 이 과정이 걷는 길, 오른쪽이 다른 길. */
+.ss .splitbody{grid-template-columns:repeat(2,minmax(0,1fr));align-content:stretch}
+.ss .half{border:2px solid #A4A3A4;background:#FFF;padding:30px 34px;
+  display:grid;align-content:start;gap:14px}
+.ss .half.h2{background:#F5F5F3}
+.ss .half .tag{font-size:22px;letter-spacing:.08em;color:#8A8788}
+.ss .half.h1 .tag{color:#C7004C}
+.ss .half h3{margin:0;font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif;
+  font-size:40px;letter-spacing:-.03em;line-height:1.18;color:#111}
+.ss .half .bd{margin:0;font-size:27px;line-height:1.5;color:#111}
+.ss .half .ft b{color:#C7004C}
+.ss .half .ft{margin:6px 0 0;padding-top:14px;border-top:2px solid #A4A3A4;
+  font-size:22px;line-height:1.45;color:#666}
+"""
+
+
+def main(lesson_dir, lesson_json, outpath):
+    index = io.open(os.path.join(lesson_dir, 'index.html'), encoding='utf-8').read()
+    slots = F.slots_of(index)
+    if not slots:
+        raise SystemExit('index.html 에서 프레임 슬롯을 못 찾았다: %s' % lesson_dir)
+    notes = F.notes_for(os.path.join(lesson_dir, 'SCRIPT.md'))
+    # 강의 프레임은 자기 대본의 박자에서 조각 자리를 얻는다. 그래야 「다음」이
+    # 강의가 걷던 순서 그대로 걷는다.
+    tpath = os.path.join(lesson_dir, 'narration-timing.json')
+    timing = json.load(io.open(tpath, encoding='utf-8')) if os.path.exists(tpath) else None
+    beats, f_start = {}, {}
+    if timing:
+        for f in timing['frames']:
+            f_start[f['frame']] = f['start']
+        for b in timing['beats']:
+            beats.setdefault(b['frame'], []).append(b['observedStart'])
+    script = io.open(os.path.join(lesson_dir, 'SCRIPT.md'), encoding='utf-8').read()
+    heads = {int(m.group(3)): m.group(2) for m in F.LINE_HEAD.finditer(script)}
+
+    L = json.load(io.open(lesson_json, encoding='utf-8'))
+    steps, sec_of = [], {}
+    for s in L['sections']:
+        if s.get('kind') != 'practice':
+            continue
+        for b in s.get('blocks', []):
+            if b.get('type') != 'steps':
+                continue
+            for st in b['items']:
+                steps.append(st)
+                sec_of[st['n']] = ko(s.get('label'))
+    extra = {}
+    for name, label, kind in EXTRA.get(L['no'], []):
+        extra.setdefault(name, []).append((label, kind))
+    by_label = {ko(s.get('label')): s for s in L['sections']}
+    # 코치 마크가 앉을 정면도. 도면을 그리는 코드가 하나뿐이라 자습본 쪽
+    # 그림과 어긋날 수 없다.
+    front = _figures.build_map(keep_hl=True)['front']
+
+    bodies, tls, slides, clock = [], [], [], 0.0
+    dropped = 0
+    after = AFTER.get(L['no'])
+
+    def lay_steps():
+        """따라 하기를 한 단계 한 장씩 깐다. 차시마다 한 번만 부른다."""
+        nonlocal clock
+        for st in steps:
+            scid = 'ss%dp%02d' % (L['no'], st['n'])
+            for b, t, sl, dd in step_slide(st, scid, clock, sec_of[st['n']],
+                                           len(steps), front):
+                bodies.append(b); tls.append((sl['sceneId'], t))
+                slides.append(sl); clock += dd
+
+    for n, (cid, src, _s, dur) in enumerate(slots, 1):
+        base = os.path.basename(src)[:-5]
+        path = os.path.join(lesson_dir, src.replace('/', os.sep))
+        body = F.frame_body(path)
+        if base in DROP_FRAMES.get(L['no'], ()):
+            continue
+        if after is None and FILM.search(body):
+            # 시연은 자습본에서 단계 장이 대신한다.
+            if dropped == 0:
+                lay_steps()
+            dropped += 1
+            continue
+        body = re.sub(r'(id="%s-root"[^>]*?)data-start="0"' % re.escape(cid),
+                      r'\1data-start="%s"' % clock, body, count=1)
+        # 대본은 프레임 파일 이름으로 번호를 매기고, 시각표는 슬롯 차례로 매긴다.
+        # 시연이 05-demo-a·b·c 로 셋인 차시에서는 이 둘이 두 칸 어긋난다. 노트를
+        # 슬롯 차례로 찾으면 「확인」 화면에 「오늘 친 것」 대본이 붙고, 마지막 두
+        # 화면은 노트가 아예 비어 버린다.
+        fnum = int(base[:2]) if base[:2].isdigit() else n
+        if 'data-label=' not in body[:400] and heads.get(fnum):
+            body = body.replace('data-composition-id="%s"' % cid,
+                                'data-composition-id="%s" data-label="%s"'
+                                % (cid, esc(heads[fnum])), 1)
+        bodies.append('<!-- %s · %s -->\n%s' % (cid, base, body))
+        entry = {'sceneId': cid, 'notes': notes.get(fnum, '') or '—'}
+        bts, f0 = beats.get(n) or [], f_start.get(n)
+        if bts and f0 is not None:
+            frag = [round(clock + (t - f0), 2) for t in bts]
+            frag = [t for t in frag if clock <= t <= clock + dur]
+            if frag:
+                entry['fragments'] = frag
+        slides.append(entry)
+        clock += dur
+
+        for label, kind in extra.get(base, []):
+            sec = by_label.get(label)
+            if sec is None:
+                raise SystemExit('자습본에 「%s」 절이 없다' % label)
+            scid = 'ss%dc%d' % (L['no'], len(slides))
+            if kind == 'split':
+                made = [split_slide(sec, scid, clock)]
+            else:
+                # 내용이 한 장에 안 들어가면 개념 장은 스스로 여러 장으로 나뉜다.
+                made = concept_slide(sec, scid, clock)
+            for b, t, sl, d in made:
+                bodies.append(b); tls.append((sl['sceneId'], t))
+                slides.append(sl); clock += d
+
+        if base == after and not dropped:
+            # 녹화 프레임이 없는 차시. 지정한 프레임 뒤에 단계를 깐다.
+            lay_steps()
+            dropped = 1
+
+    if steps and not dropped:
+        raise SystemExit('%d차시 따라 하기를 놓을 자리를 못 찾았다' % L['no'])
+
+    island = json.dumps({'slides': slides, 'slideSequences': []},
+                        ensure_ascii=False, indent=1)
+    nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
+    title = re.search(r'#\s*SCRIPT\s*—\s*(.*)', script)
+    title = title.group(1).strip() if title else os.path.basename(lesson_dir)
+    made = '\n'.join('<script>(function(){var tl=gsap.timeline({paused:true});%s'
+                     'window.__timelines=window.__timelines||{};'
+                     'window.__timelines["%s"]=tl;})();</script>' % (''.join(t), cid)
+                     for cid, t in tls)
+
+    doc = """<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>%s · 자습본</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#0B0A0A}
+  /* 프레임은 자기가 화면의 전부라고 보고 inset:0 으로 앉는다. 덱에서는 형제라
+     무대가 자리를 정해야 하므로 이 세 줄이 이겨야 한다. inset 은 네 변을 한
+     번에 쓰는 축약이라 left/top 보다 먼저 지워야 한다. */
+  #stage [data-composition-id]{inset:auto!important;position:absolute!important;
+    left:50%%!important;top:50%%!important}
+%s</style>
+</head>
+<body>
+<script type="application/hyperframes-slideshow+json">
+%s
+</script>
+%s
+<script>window.__timelines = window.__timelines || {};</script>
+%s
+%s
+</body>
+</html>
+""" % (title, STYLE, island, '\n'.join(bodies), made, nav)
+
+    outdir = os.path.dirname(os.path.abspath(outpath))
+    if outdir and not os.path.isdir(outdir):
+        os.makedirs(outdir)
+    io.open(outpath, 'w', encoding='utf-8', newline='\n').write(doc)
+    print('%-30s 슬라이드 %2d (강의 %2d · 자습 %2d) · %.0f초 · %d B'
+          % (os.path.basename(lesson_dir.rstrip('/\\')), len(slides),
+             len(slides) - len(tls), len(tls), clock, os.path.getsize(outpath)))
+    return 0
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        raise SystemExit(__doc__.strip().splitlines()[-1].strip())
+    out = sys.argv[3] if len(sys.argv) > 3 else os.path.join(sys.argv[1], 'deck-selfstudy.html')
+    sys.exit(main(sys.argv[1], sys.argv[2], out))

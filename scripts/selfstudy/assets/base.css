@@ -29,7 +29,12 @@
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
-  font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%}
+  font-size:16px;line-height:1.75;-webkit-text-size-adjust:100%;
+  /* 한국어는 어절 사이에서 끊긴다. 이게 없으면 줄 끝에서 낱말이 음절째 갈라져
+     오타처럼 읽힌다. overflow-wrap 은 anywhere 가 아니라 break-word 여야 한다 —
+     anywhere 는 다음 줄에 통째로 들어갈 어절도 채우기 위해 갈라 버린다.
+     프레임 컴포지션이 쓰는 규칙과 같다. */
+  word-break:keep-all;overflow-wrap:break-word}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -142,6 +147,13 @@ ol.steps>li.done::before{background:var(--accent);color:var(--on-accent);border-
 .act{display:flex;gap:.5rem;align-items:baseline;margin:.3rem 0;font-size:.92rem}
 .act .cmd{flex:0 0 auto}
 .act .txt{flex:1 1 8rem;min-width:0}
+/* 조작 종류 — 타이핑인지 마우스인지 스냅 확인인지가 줄 앞에서 읽혀야 한다 */
+.act .kind{flex:0 0 3.4rem;font-family:var(--head);font-size:.7rem;color:var(--ink-3);
+  text-align:right;padding-top:.12em}
+.act.move .kind,.act.snap .kind,.act.click .kind{color:var(--accent)}
+.act.see{border-left:2px solid var(--rule);padding-left:.5rem;margin-left:-.5rem}
+.act.alt{color:var(--ink-3);font-size:.88rem}
+.act.alt .kind{font-style:italic}
 .st-f{display:grid;gap:.32rem;margin-top:.55rem;font-size:.87rem;color:var(--ink-2)}
 .st-f>div{padding-left:.6rem;border-left:2px solid var(--rule)}
 .st-f b{font-family:var(--head);font-size:.71rem;letter-spacing:.02em;

@@ -46,10 +46,11 @@ VIEW_LABELS = [('>평면도<', '>평면도 TOP<'),
                ('>우측면도<', '>우측면도 RIGHT<')]
 
 
-def adapt(svg, keep_features=False):
+def adapt(svg, keep_features=False, keep_hl=False):
     for a, b in VIEW_LABELS:
         svg = svg.replace(a, b)
-    svg = DROP.sub('', svg)
+    if not keep_hl:
+        svg = DROP.sub('', svg)
     svg = BG.sub('', svg)
     svg = OLDSTYLE.sub(STYLE + '\n', svg)
     if not keep_features:
@@ -60,8 +61,12 @@ def adapt(svg, keep_features=False):
     return svg.strip()
 
 
-def build_map():
+def build_map(keep_hl=False):
     """정본 생성기를 돌려 {이름: svg} 로 돌려준다. 저장소에 .svg 파일을 남기지 않는다.
+
+    `keep_hl` 은 강조 겹선(.hl)과 형상 이름(data-feature)을 남긴다. 슬라이드가
+    「지금 그리는 것은 이것」을 도면 위에서 짚어 줄 때 그 겹선을 켠다. 읽는 판은
+    켤 일이 없으므로 기본은 지운 판이다.
 
     이 저장소의 가드는 벡터·래스터 이미지 파일을 확장자로 차단한다. 그래서 도면은
     파일로 커밋하지 않고, 빌드할 때마다 scripts/part/edu_ib_02.py 에서 다시 뽑아
@@ -75,7 +80,8 @@ def build_map():
         for name, args in PROFILES:
             subprocess.run([sys.executable, GEN, tmp] + args,
                            check=True, capture_output=True)
-            out[name] = adapt(io.open(tmp, encoding='utf-8').read())
+            out[name] = adapt(io.open(tmp, encoding='utf-8').read(),
+                              keep_features=keep_hl, keep_hl=keep_hl)
         return out
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)

@@ -84,6 +84,20 @@ def attr(node):
 
 
 # ── 블록 렌더 ──────────────────────────────────────────────────
+# 조작 한 줄이 어떤 종류인지. 타이핑과 마우스 작업이 한 덩어리로 보이면
+# 자습자가 「어디에 커서를 올려야 하는지」를 문장에서 찾아내야 한다.
+ACT_KIND = {
+    'ask': {'ko': '묻는 것', 'en': 'It asks'},
+    'move': {'ko': '마우스', 'en': 'Mouse'},
+    'snap': {'ko': '스냅', 'en': 'Snap'},
+    'click': {'ko': '클릭', 'en': 'Click'},
+    'key': {'ko': '키', 'en': 'Key'},
+    'see': {'ko': '확인', 'en': 'Look'},
+    # 같은 점을 다른 방법으로도 찍을 수 있을 때. 한 가지 손동작만 적어 두면
+    # 절차서는 되지만 방법을 배우지는 못한다.
+    'alt': {'ko': '또는', 'en': 'Or'},
+}
+
 NOTE_LABEL = {
     'why': {'ko': '왜', 'en': 'Why'},
     'warn': {'ko': '주의', 'en': 'Watch out'},
@@ -143,7 +157,14 @@ def render_steps(items, ctx):
         for a in st.get('actions', []):
             cmd = a.get('type')
             tok = ('<span class="cmd">%s</span>' % esc(cmd)) if cmd else ''
-            acts.append('<div class="act">%s%s</div>' % (tok, bi_txt(a.get('do'))))
+            # 마우스로 하는 일은 타이핑과 다른 종류의 동작이다. 한 줄에 뭉쳐 두면
+            # 「어디에 올리고 무엇이 뜨면 누르는지」가 문장 속에 묻힌다.
+            kind = a.get('kind')
+            lab = ''
+            if kind and kind in ACT_KIND:
+                lab = bi(ACT_KIND[kind], 'span', 'kind', False)
+            acts.append('<div class="act %s">%s%s%s</div>'
+                        % (esc(kind or ''), lab, tok, bi_txt(a.get('do'))))
         foot = []
         if st.get('expect'):
             foot.append('<div><b class="k">이렇게 되면 맞습니다</b><b class="e">You did it right if</b>%s</div>'
