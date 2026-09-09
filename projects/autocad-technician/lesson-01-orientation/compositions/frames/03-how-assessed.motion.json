@@ -1,1 +1,19 @@
-{"duration": 95, "assertions": [{"kind": "appearsBy", "selector": "#l1f3 h1", "bySec": 3}, {"kind": "appearsBy", "selector": "#l1f3 .note", "bySec": 79.1}, {"kind": "staysInFrame", "selector": "#l1f3 .body"}]}
+{
+  "duration": 80.472,
+  "assertions": [
+    {
+      "kind": "appearsBy",
+      "selector": "#l1f3 h1",
+      "bySec": 3
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l1f3 .note",
+      "bySec": 79.1
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l1f3 .body"
+    }
+  ]
+}

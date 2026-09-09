@@ -145,3 +145,6 @@ docs/autocad-technician/self-study/bilingual-review.csv
 # derivable, so it is generated when someone needs a single link rather than
 # tracked: python scripts/selfstudy/build_single.py
 docs/autocad-technician/self-study/autocad-self-study-all-in-one.html
+
+# 검수하며 브라우저가 남긴 흔적 — 산출물이 아니다
+.playwright-mcp/

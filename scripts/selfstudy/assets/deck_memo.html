@@ -1,0 +1,472 @@
+<style>
+/* 검수 메모 — 오른쪽 오버레이. 본문을 밀지 않는다.
+   슬라이드는 1920×1080 을 축소해 앉히는 무대라, 패널이 자리를 차지하면
+   배율이 흔들린다. 그래서 덮는다. */
+#mm{position:fixed;top:0;right:0;bottom:56px;width:min(420px,38vw);z-index:40;
+  background:#111011;border-left:1px solid #2a2627;color:#E6E3E1;display:none;
+  grid-template-rows:auto auto minmax(0,1fr) auto;
+  font:15px/1.55 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif}
+#mm.on{display:grid}
+#mm h2{margin:0;padding:16px 18px 12px;font-size:17px;font-weight:600;color:#FFF;
+  border-bottom:1px solid #2a2627;display:flex;align-items:center;gap:10px}
+#mm h2 .n{font-size:13px;color:#8A8788;font-variant-numeric:tabular-nums}
+#mm h2 button{margin-left:auto}
+#mm .hint{padding:11px 18px;font-size:13px;line-height:1.5;color:#8A8788;
+  border-bottom:1px solid #2a2627}
+#mm .list{overflow:auto;padding:12px 14px;display:grid;gap:10px;align-content:start}
+#mm .m{border:1px solid #2a2627;border-radius:6px;background:#171516;padding:11px 12px;
+  display:grid;gap:7px}
+#mm .m .where{font-size:12px;color:#C7004C;letter-spacing:.02em}
+#mm .m blockquote{margin:0;padding-left:9px;border-left:2px solid #4a4446;
+  font-size:13px;color:#B7B3B0;max-height:5.2em;overflow:hidden}
+#mm .m textarea{width:100%;min-height:56px;resize:vertical;font:inherit;font-size:14px;
+  background:#0E0D0E;color:#E6E3E1;border:1px solid #2a2627;border-radius:4px;padding:7px 8px}
+#mm .m .row{display:flex;gap:8px;align-items:center}
+#mm .m .row button{padding:4px 9px;font-size:12px}
+#mm .empty{color:#6d6a6b;font-size:14px;padding:8px 4px}
+#mm .foot{border-top:1px solid #2a2627;padding:12px 14px;display:grid;gap:8px}
+#mm .foot .r{display:flex;gap:8px}
+#mm button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid #4a4446;
+  border-radius:4px;background:#1d1a1b;color:#F5F5F3;cursor:pointer}
+#mm button:hover{border-color:#C7004C;color:#C7004C}
+#mm button:focus-visible,#mmtoggle:focus-visible{outline:3px solid #C7004C;outline-offset:2px}
+#mm button.pri{background:#C7004C;border-color:#C7004C;color:#fff}
+#mm button.pri:hover{background:#a80340;color:#fff}
+#mm #mmout{width:100%;min-height:120px;font:12px/1.5 ui-monospace,Consolas,monospace;
+  background:#0E0D0E;color:#E6E3E1;border:1px solid #2a2627;border-radius:4px;padding:8px}
+#mm .say{font-size:12px;color:#8A8788;min-height:1.2em}
+
+/* 드래그로 고른 자리에 뜨는 단추 */
+#mmpick{position:fixed;z-index:45;display:none;padding:6px 12px;border-radius:4px;
+  background:#C7004C;color:#fff;border:0;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.5);
+  font:13px/1 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif}
+#mmpick.on{display:block}
+
+/* 요소 메모 — 메모를 걸 수 있는 블록에 커서를 올리면 핀이 뜬다 */
+#stage [data-memo]{position:relative}
+#stage [data-memo].mmhot{outline:2px dashed rgba(199,0,76,.75);outline-offset:3px}
+#mmpin{position:fixed;z-index:44;display:none;width:30px;height:30px;border-radius:50%;
+  background:#C7004C;color:#fff;border:0;cursor:pointer;font:15px/1 system-ui,sans-serif;
+  box-shadow:0 3px 10px rgba(0,0,0,.5)}
+#mmpin.on{display:block}
+#mm .m.hi{border-color:#C7004C}
+/* 요소 고르기 — 켜면 무대 위 어느 블록이든 눌러 메모할 수 있다 */
+body.mmpickmode #stage{cursor:crosshair}
+body.mmpickmode #stage *{cursor:crosshair}
+#mmhalo{position:fixed;z-index:43;display:none;pointer-events:none;
+  outline:2px solid #C7004C;outline-offset:2px;background:rgba(199,0,76,.10);border-radius:3px}
+#mmhalo.on{display:block}
+#mmtip{position:fixed;z-index:46;display:none;pointer-events:none;padding:4px 9px;
+  border-radius:4px;background:#C7004C;color:#fff;max-width:46vw;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;
+  font:12px/1.4 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif}
+#mmtip.on{display:block}
+#mm .tools{display:flex;gap:8px;padding:10px 14px;border-bottom:1px solid #2a2627}
+#mm .tools button{flex:1}
+#mm .tools button.act{background:#C7004C;border-color:#C7004C;color:#fff}
+#mm .tools button.all{border-style:dashed;color:#E6A8BE;border-color:#5a4048}
+#mm .tools button.all:hover{border-color:#C7004C;color:#C7004C}
+/* 공통 메모는 장에 매이지 않는다. 목록에서도 따로 선다. */
+#mm .m.all{border-color:#4a3a40;background:#1b1517}
+#mm .m.all .where{color:#E6A8BE}
+#mm .grp{font-size:12px;color:#8A8788;letter-spacing:.04em;padding:2px 2px 0}
+@media print{#mm,#mmpick,#mmpin,#mmtoggle{display:none!important}}
+</style>
+<button id="mmtoggle" hidden></button>
+<button id="mmpick" type="button">메모</button>
+<button id="mmpin" type="button" title="이 요소에 메모 / Note this element">＋</button>
+<div id="mmhalo"></div><div id="mmtip"></div>
+<aside id="mm" aria-label="검수 메모">
+  <h2>검수 메모 <span class="n" id="mmn">0</span><button id="mmclose" type="button">닫기</button></h2>
+  <div class="tools">
+    <button id="mmslide" type="button" title="지금 보는 장 전체에 메모">이 화면</button>
+    <button id="mmelem" type="button" title="무대 위 블록을 골라 메모 (E)">요소 고르기</button>
+    <button id="mmall" class="all" type="button" title="여덟 차시 전부에 적용할 메모 (A)">공통</button>
+  </div>
+  <div class="hint"><b>이 화면 메모</b>는 지금 보는 장 전체에, <b>공통 메모</b>는 여덟 차시 전부에 답니다.
+  <b>요소 고르기</b>를 켜면 무대 위 아무 블록이나 눌러 그 부분만 집을 수 있어요.
+  글을 드래그해도 되고, 대본은 <b>N</b> 으로 노트를 열어 <b>고치기</b>로 고칩니다.
+  다 적었으면 <b>프롬프트 복사</b>를 눌러 대화창에 붙여 넣으세요.</div>
+  <div class="list" id="mmlist"></div>
+  <div class="foot">
+    <div class="r">
+      <button id="mmcopy" class="pri" type="button">프롬프트 복사</button>
+      <button id="mmshow" type="button">텍스트 보기</button>
+      <button id="mmclear" type="button">전부 지우기</button>
+    </div>
+    <div class="say" id="mmsay"></div>
+    <textarea id="mmout" hidden readonly aria-label="조립된 프롬프트"></textarea>
+  </div>
+</aside>
+<script>
+(function () {
+  'use strict';
+  var KEY = 'acad-deck-memo:' + (location.pathname.split('/').pop() || 'deck');
+  var mem = null;                       // localStorage 가 막히면 여기에 담는다
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) { return mem || []; }
+  }
+  function save(list) {
+    mem = list;
+    try { localStorage.setItem(KEY, JSON.stringify(list)); return true; }
+    catch (e) { return false; }
+  }
+
+  var items = load();
+  var panel = document.getElementById('mm');
+  var listEl = document.getElementById('mmlist');
+  var sayEl = document.getElementById('mmsay');
+  var outEl = document.getElementById('mmout');
+  var pick = document.getElementById('mmpick');
+  var pin = document.getElementById('mmpin');
+  var stage = document.getElementById('stage');
+
+  function say(t) { sayEl.textContent = t || ''; }
+
+  // 지금 보고 있는 장이 어디인지. 아래 막대가 이미 알고 있으므로 읽어 온다.
+  function where() {
+    var pos = (document.getElementById('pos') || {}).textContent || '';
+    var lab = (document.getElementById('lab') || {}).textContent || '';
+    var lsn = document.getElementById('lsn');
+    var l = (lsn && !lsn.hidden && lsn.options[lsn.selectedIndex])
+      ? lsn.options[lsn.selectedIndex].textContent : '';
+    return [pos.trim(), l, lab.trim()].filter(Boolean).join(' · ');
+  }
+
+  function render() {
+    var sc = (window.__deckScript && window.__deckScript.count()) || 0;
+    var na = items.filter(function (x) { return x.scope === 'all'; }).length;
+    document.getElementById('mmn').textContent =
+      items.length + (na ? ' (공통 ' + na + ')' : '') + (sc ? ' · 대본 ' + sc : '');
+    listEl.textContent = '';
+    if (!items.length) {
+      var p = document.createElement('div');
+      p.className = 'empty';
+      p.textContent = '아직 메모가 없습니다.';
+      listEl.appendChild(p);
+      return;
+    }
+    var order = items.map(function (it, n) { return [it, n]; });
+    order.sort(function (a, b) {
+      var x = a[0].scope === 'all' ? 0 : 1, y = b[0].scope === 'all' ? 0 : 1;
+      return x - y || a[1] - b[1];
+    });
+    var lastGrp = null;
+    order.forEach(function (pair) {
+      var it = pair[0], n = pair[1];
+      var grp = it.scope === 'all' ? '전 차시 공통' : '슬라이드별';
+      if (grp !== lastGrp) {
+        var g = document.createElement('div');
+        g.className = 'grp';
+        g.textContent = grp;
+        listEl.appendChild(g);
+        lastGrp = grp;
+      }
+      var d = document.createElement('div');
+      d.className = 'm' + (it.scope === 'all' ? ' all' : '');
+      var w = document.createElement('div');
+      w.className = 'where';
+      w.textContent = (n + 1) + ') ' + it.where;
+      d.appendChild(w);
+      if (it.quote) {
+        var q = document.createElement('blockquote');
+        q.textContent = it.quote;
+        d.appendChild(q);
+      }
+      var ta = document.createElement('textarea');
+      ta.value = it.note || '';
+      ta.placeholder = it.scope === 'all'
+        ? '여덟 차시 전부에 적용할 내용을 적으세요'
+        : '무엇을 고쳤으면 하는지 적으세요';
+      ta.addEventListener('input', function () {
+        it.note = ta.value;
+        if (!save(items)) say('브라우저 저장이 막혀 이 창에서만 유지됩니다.');
+      });
+      d.appendChild(ta);
+      var row = document.createElement('div');
+      row.className = 'row';
+      var go = document.createElement('button');
+      go.type = 'button';
+      go.textContent = '그 장으로';
+      go.disabled = typeof it.slide !== 'number';
+      go.addEventListener('click', function () {
+        if (typeof it.slide === 'number') window.__deckGo && window.__deckGo(it.slide);
+      });
+      var del = document.createElement('button');
+      del.type = 'button';
+      del.textContent = '삭제';
+      del.addEventListener('click', function () {
+        items.splice(n, 1); save(items); render();
+      });
+      row.appendChild(go); row.appendChild(del);
+      d.appendChild(row);
+      listEl.appendChild(d);
+    });
+  }
+
+  // textContent 는 블록 사이에 공백을 안 넣어 「안 되면 여기그래도…」 가 된다.
+  // innerText 도 축소 변환이 걸린 무대 안에서는 줄바꿈을 안 줄 때가 있어,
+  // 자식 블록을 직접 이어 붙인다.
+  function blockText(el) {
+    var kids = el.children;
+    if (!kids.length) return el.textContent;
+    var out = [];
+    for (var i = 0; i < kids.length; i++) {
+      var t = kids[i].textContent.replace(/\s+/g, ' ').trim();
+      if (t) out.push(t);
+    }
+    return out.length ? out.join(' — ') : el.textContent;
+  }
+
+  function add(quote, anchor, scope) {
+    var pos = parseInt(((document.getElementById('pos') || {}).textContent || '').split('/')[0], 10);
+    items.push({
+      scope: scope || 'slide',
+      where: scope === 'all' ? '전 차시 공통'
+                             : where() + (anchor ? ' · 「' + anchor + '」' : ''),
+      quote: (quote || '').replace(/\s+/g, ' ').trim().slice(0, 400),
+      note: '',
+      slide: (scope === 'all' || isNaN(pos)) ? null : pos - 1
+    });
+    if (!save(items)) say('브라우저 저장이 막혀 이 창에서만 유지됩니다.');
+    openPanel(true);
+    render();
+    var boxes = listEl.querySelectorAll('.m textarea');
+    if (boxes.length) boxes[boxes.length - 1].focus();
+  }
+
+  // ── 패널이 열리면 무대가 그만큼 물러난다 ────────────────────
+  function reflow() {
+    var w = panel.classList.contains('on')
+      ? Math.ceil(panel.getBoundingClientRect().width) : 0;
+    document.documentElement.style.setProperty('--mmw', w + 'px');
+    if (window.__deckLayout) window.__deckLayout();
+    else if (window.__deckFit) window.__deckFit();
+    setTimeout(function () { if (window.__deckFit) window.__deckFit(); }, 180);
+  }
+  function openPanel(on) {
+    panel.classList.toggle('on', on !== false);
+    reflow();
+  }
+  window.addEventListener('resize', reflow);
+
+  // ── 이 화면 전체에 메모 ─────────────────────────────────────
+  document.getElementById('mmslide').addEventListener('click', function () {
+    var on = document.querySelector('#stage [data-composition-id].on');
+    var h = on ? on.querySelector('h1,h2,.title h2,.close h2') : null;
+    add(h ? h.textContent : '', '이 화면 전체');
+  });
+
+  // 여덟 차시 전부에 걸리는 이야기는 장에 매달 자리가 없다. 따로 받는다.
+  document.getElementById('mmall').addEventListener('click', function () {
+    add('', '', 'all');
+  });
+
+  // ── 요소 고르기 ─────────────────────────────────────────────
+  // 커서를 올린 자리에서 위로 올라가며 「인용할 만한 덩어리」를 찾는다.
+  var BLOCKS = '[data-memo],.card,.note,.half,.op,.fig,.sp,.tag,figure,table,tr,li,'
+    + 'h1,h2,h3,p,blockquote,.topline,.prompt,.index,.cap,.ccrow,section';
+  var halo = document.getElementById('mmhalo');
+  var tip = document.getElementById('mmtip');
+  var elemBtn = document.getElementById('mmelem');
+  var picking = false, target = null;
+
+  function labelOf(el) {
+    var d = el.getAttribute && el.getAttribute('data-memo');
+    if (d) return d;
+    var t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    var kind = el.tagName === 'LI' ? '줄'
+      : (el.className && String(el.className).indexOf('card') >= 0) ? '카드'
+      : el.tagName === 'H1' ? '제목' : el.tagName.toLowerCase();
+    return kind + ' · ' + (t.slice(0, 24) || '(빈 칸)');
+  }
+
+  function best(node) {
+    while (node && node !== document.body) {
+      if (node.matches && node.matches(BLOCKS)) return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function setPicking(on) {
+    picking = on;
+    document.body.classList.toggle('mmpickmode', on);
+    elemBtn.classList.toggle('act', on);
+    elemBtn.textContent = on ? '고르기 끄기 (Esc)' : '요소 고르기';
+    if (!on) { halo.classList.remove('on'); tip.classList.remove('on'); target = null; }
+  }
+  elemBtn.addEventListener('click', function () { setPicking(!picking); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && picking) { e.preventDefault(); setPicking(false); }
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!picking) return;
+    if (e.target.closest && e.target.closest('#mm,#bar,#note')) {
+      halo.classList.remove('on'); tip.classList.remove('on'); target = null; return;
+    }
+    var el = best(e.target);
+    if (!el) { halo.classList.remove('on'); tip.classList.remove('on'); target = null; return; }
+    target = el;
+    var r = el.getBoundingClientRect();
+    halo.style.left = r.left + 'px'; halo.style.top = r.top + 'px';
+    halo.style.width = r.width + 'px'; halo.style.height = r.height + 'px';
+    halo.classList.add('on');
+    tip.textContent = labelOf(el);
+    tip.style.left = Math.min(window.innerWidth - 200, r.left) + 'px';
+    tip.style.top = Math.max(2, r.top - 24) + 'px';
+    tip.classList.add('on');
+  }, true);
+
+  document.addEventListener('click', function (e) {
+    if (!picking || !target) return;
+    if (e.target.closest && e.target.closest('#mm,#bar,#note')) return;
+    e.preventDefault(); e.stopPropagation();
+    add(blockText(target), labelOf(target));
+  }, true);
+
+  // ── 드래그 메모 ────────────────────────────────────────────
+  document.addEventListener('mouseup', function (e) {
+    if (e.target.closest && e.target.closest('#mm,#mmpick,#bar')) return;
+    setTimeout(function () {
+      var s = String(window.getSelection());
+      if (s.trim().length < 2) { pick.classList.remove('on'); return; }
+      pick.style.left = Math.min(window.innerWidth - 90, e.clientX + 8) + 'px';
+      pick.style.top = Math.max(8, e.clientY - 42) + 'px';
+      pick.classList.add('on');
+      pick.dataset.q = s;
+    }, 0);
+  });
+  pick.addEventListener('click', function () {
+    add(pick.dataset.q, '');
+    pick.classList.remove('on');
+    window.getSelection().removeAllRanges();
+  });
+
+  // ── 요소 메모 ──────────────────────────────────────────────
+  var hot = null;
+  function unhot() { if (hot) { hot.classList.remove('mmhot'); hot = null; } pin.classList.remove('on'); }
+  (stage || document).addEventListener('mousemove', function (e) {
+    if (picking) { unhot(); return; }   // 고르기 모드에서는 후광 하나만 쓴다
+    var el = e.target.closest && e.target.closest('[data-memo]');
+    if (!el) { if (hot && !pin.matches(':hover')) unhot(); return; }
+    if (el === hot) return;
+    unhot();
+    hot = el;
+    el.classList.add('mmhot');
+    var r = el.getBoundingClientRect();
+    pin.style.left = Math.min(window.innerWidth - 38, r.right - 14) + 'px';
+    pin.style.top = Math.max(4, r.top - 14) + 'px';
+    pin.classList.add('on');
+  });
+  pin.addEventListener('click', function () {
+    if (!hot) return;
+    add(blockText(hot), hot.getAttribute('data-memo'));
+    unhot();
+  });
+
+  // ── 프롬프트 조립 ──────────────────────────────────────────
+  function total() {
+    var p = ((document.getElementById('pos') || {}).textContent || '').split('/');
+    return (p[1] || '').trim() || '?';
+  }
+
+  function compose() {
+    var head = '아래는 AutoCAD Technician 자습 슬라이드를 검수하며 남긴 것입니다.\n'
+      + '자료: ' + document.title + '\n';
+    function block(list) {
+      return list.map(function (it, n) {
+        var s = (n + 1) + ') ' + it.where + '\n';
+        if (it.quote) s += '   인용: "' + it.quote + '"\n';
+        s += '   메모: ' + (it.note || '(비어 있음)') + '\n';
+        return s;
+      }).join('\n');
+    }
+    // 여덟 차시 전부에 걸리는 이야기는 한 장에 매달 자리가 없다. 앞에 따로 세운다.
+    var common = items.filter(function (x) { return x.scope === 'all'; });
+    var one = items.filter(function (x) { return x.scope !== 'all'; });
+    var out = head;
+    if (common.length) {
+      out += '\n■ 전 차시 공통으로 적용할 것\n\n' + block(common);
+    }
+    out += '\n■ 슬라이드별 검수 메모\n\n' + (block(one) || '(없음)\n');
+
+    // 발표자 노트는 대본이다. 고친 것이 있으면 원문과 나란히 낸다.
+    var sc = (window.__deckScript && window.__deckScript.list()) || [];
+    if (sc.length) {
+      out += '\n■ 대본 수정 제안 (발표자 노트)\n\n';
+      out += sc.map(function (e, n) {
+        return (n + 1) + ') ' + e.n + ' / ' + total() + ' · ' + e.label + '\n'
+          + '   원문: ' + (e.orig || '(비어 있음)') + '\n'
+          + '   고친 글: ' + e.now + '\n';
+      }).join('\n');
+    }
+    return out
+      + '\n위 항목을 반영해 주세요. 대본을 고친 항목은 슬라이드 본문과 어긋나지 않는지'
+      + ' 함께 봐 주세요. 상충하는 항목이 있으면 먼저 짚고 우선순위를 제시한 뒤 진행할 것.\n';
+  }
+
+  document.getElementById('mmcopy').addEventListener('click', function () {
+    render();
+    var text = compose();
+    outEl.value = text;
+    function done(ok) {
+      say(ok ? '복사했습니다. 대화창에 붙여 넣으세요.'
+             : '복사가 막혔습니다. 아래 상자의 글을 직접 선택해 복사하세요.');
+      if (!ok) { outEl.hidden = false; outEl.select(); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); },
+                                              function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      outEl.hidden = false;
+      outEl.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      done(ok);
+    }
+  });
+  document.getElementById('mmshow').addEventListener('click', function () {
+    outEl.value = compose();
+    outEl.hidden = !outEl.hidden;
+    if (!outEl.hidden) outEl.select();
+  });
+  document.getElementById('mmclear').addEventListener('click', function () {
+    if (!items.length) return;
+    if (!window.confirm('메모 ' + items.length + '개를 지웁니다. 되돌릴 수 없어요.')) return;
+    items = []; save(items); render(); say('');
+  });
+  document.getElementById('mmclose').addEventListener('click', function () {
+    setPicking(false);
+    openPanel(false);
+  });
+
+  // 아래 막대의 단추와 키보드
+  var btn = document.createElement('button');
+  btn.id = 'mmopen';
+  btn.type = 'button';
+  btn.textContent = '메모 M';
+  btn.addEventListener('click', function () {
+    openPanel(!panel.classList.contains('on'));
+    if (!panel.classList.contains('on')) setPicking(false);
+    render();
+  });
+  var bar = document.getElementById('bar');
+  if (bar) bar.insertBefore(btn, document.getElementById('nb'));
+  document.addEventListener('keydown', function (e) {
+    if (window.__deckTyping && window.__deckTyping(e.target)) return;
+    if (e.key === 'm' || e.key === 'M') { e.preventDefault(); btn.click(); }
+    else if (e.key === 'e' || e.key === 'E') { e.preventDefault(); elemBtn.click(); }
+    else if (e.key === 'a' || e.key === 'A') { e.preventDefault(); document.getElementById('mmall').click(); }
+  });
+
+  if (!save(items)) say('브라우저 저장이 막혀 이 창에서만 유지됩니다.');
+  render();
+})();
+</script>

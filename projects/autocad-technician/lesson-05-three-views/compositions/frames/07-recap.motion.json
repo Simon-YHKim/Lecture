@@ -1,1 +1,29 @@
-{"duration": 152, "assertions": [{"kind": "appearsBy", "selector": "#l5f7 h1", "bySec": 3}, {"kind": "appearsBy", "selector": "#l5f7 .p-done", "bySec": 4.6}, {"kind": "appearsBy", "selector": "#l5f7 .p-next", "bySec": 83.7}, {"kind": "before", "a": "#l5f7 .p-done", "b": "#l5f7 .p-next"}, {"kind": "staysInFrame", "selector": "#l5f7 .body"}]}
+{
+  "duration": 102.572,
+  "assertions": [
+    {
+      "kind": "appearsBy",
+      "selector": "#l5f7 h1",
+      "bySec": 3
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l5f7 .p-done",
+      "bySec": 4.6
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l5f7 .p-next",
+      "bySec": 83.7
+    },
+    {
+      "kind": "before",
+      "a": "#l5f7 .p-done",
+      "b": "#l5f7 .p-next"
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l5f7 .body"
+    }
+  ]
+}

@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080"><script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script><style>
   *{margin:0;padding:0;box-sizing:border-box}html,body{width:1920px;height:1080px;overflow:hidden;background:#FFFFFF}#root{position:relative;width:1920px;height:1080px;overflow:hidden}#root>[data-composition-src]{position:absolute;inset:0}
-</style></head><body><div id="root" data-composition-id="main" data-start="0" data-duration="440" data-width="1920" data-height="1080">
-  <div id="l1-slot-01" class="clip" data-composition-id="l1f1" data-composition-src="compositions/frames/01-title.html" data-start="0" data-duration="12" data-track-index="1" data-width="1920" data-height="1080"></div>
-  <div id="l1-slot-02" class="clip" data-composition-id="l1f2" data-composition-src="compositions/frames/02-why-drawings.html" data-start="12" data-duration="141" data-track-index="1" data-width="1920" data-height="1080"></div>
-  <div id="l1-slot-03" class="clip" data-composition-id="l1f3" data-composition-src="compositions/frames/03-how-assessed.html" data-start="153" data-duration="95" data-track-index="1" data-width="1920" data-height="1080"></div>
-  <div id="l1-slot-04" class="clip" data-composition-id="l1f4" data-composition-src="compositions/frames/04-roadmap.html" data-start="248" data-duration="112" data-track-index="1" data-width="1920" data-height="1080"></div>
-  <div id="l1-slot-05" class="clip" data-composition-id="l1f5" data-composition-src="compositions/frames/05-recap.html" data-start="360" data-duration="62" data-track-index="1" data-width="1920" data-height="1080"></div>
-  <div id="l1-slot-06" class="clip" data-composition-id="l1f6" data-composition-src="compositions/frames/06-closing.html" data-start="422" data-duration="18" data-track-index="1" data-width="1920" data-height="1080"></div>
+</style></head><body><div id="root" data-composition-id="main" data-start="0" data-duration="450.819" data-width="1920" data-height="1080">
+  <div id="l1-slot-01" class="clip" data-composition-id="l1f1" data-composition-src="compositions/frames/01-title.html" data-start="0" data-duration="16.053" data-track-index="1" data-width="1920" data-height="1080"></div>
+  <div id="l1-slot-02" class="clip" data-composition-id="l1f2" data-composition-src="compositions/frames/02-why-drawings.html" data-start="16.053" data-duration="141.899" data-track-index="1" data-width="1920" data-height="1080"></div>
+  <div id="l1-slot-03" class="clip" data-composition-id="l1f3" data-composition-src="compositions/frames/03-how-assessed.html" data-start="157.952" data-duration="80.472" data-track-index="1" data-width="1920" data-height="1080"></div>
+  <div id="l1-slot-04" class="clip" data-composition-id="l1f4" data-composition-src="compositions/frames/04-roadmap.html" data-start="238.424" data-duration="126.798" data-track-index="1" data-width="1920" data-height="1080"></div>
+  <div id="l1-slot-05" class="clip" data-composition-id="l1f5" data-composition-src="compositions/frames/05-recap.html" data-start="365.222" data-duration="65.6" data-track-index="1" data-width="1920" data-height="1080"></div>
+  <div id="l1-slot-06" class="clip" data-composition-id="l1f6" data-composition-src="compositions/frames/06-closing.html" data-start="430.822" data-duration="19.997" data-track-index="1" data-width="1920" data-height="1080"></div>
+
+  <!-- 낭독. 길이는 scripts/part/narrate_tts.py 가 실제로 읽혀 잰 값이고,
+       프레임 길이가 그 값을 따른다 (LESSON_STYLE.md 14번). 음성 파일은
+       저장소에 들어가지 않는다 — *.wav 는 가드가 막는다. -->
+  <audio id="l1-vo-01" class="clip" src="assets/narration/01-title.wav" preload="auto" data-start="0.0" data-duration="13.533" data-track-index="2"></audio>
+  <audio id="l1-vo-02" class="clip" src="assets/narration/02-why-drawings.wav" preload="auto" data-start="13.533" data-duration="145.424" data-track-index="2"></audio>
+  <audio id="l1-vo-03" class="clip" src="assets/narration/03-how-assessed.wav" preload="auto" data-start="158.957" data-duration="97.799" data-track-index="2"></audio>
+  <audio id="l1-vo-04" class="clip" src="assets/narration/04-roadmap.wav" preload="auto" data-start="256.756" data-duration="115.045" data-track-index="2"></audio>
+  <audio id="l1-vo-05" class="clip" src="assets/narration/05-recap.wav" preload="auto" data-start="371.801" data-duration="63.085" data-track-index="2"></audio>
+  <audio id="l1-vo-06" class="clip" src="assets/narration/06-closing.wav" preload="auto" data-start="434.886" data-duration="18.397" data-track-index="2"></audio>
 </div>
 <script>window.__timelines=window.__timelines||{};window.__timelines["main"]=gsap.timeline({paused:true});</script>
 </body></html>

@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "AutoCAD 기본 과정 1~7차시를 마친 Technician 인증 응시자"
-length: 9m41s
+length: 9m28s
 angle: lesson-08-exam-and-qa
 narration: user-recorded
 style_preset: lg-training
