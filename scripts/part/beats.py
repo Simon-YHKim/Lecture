@@ -210,15 +210,42 @@ def measured_plan(segments, frame_beats, frame_start, frame_end):
         return None
 
     span = round(frame_end - frame_start, 2)
+
+    # A run of gap paragraphs between two measured beats has to *share* the
+    # space between them. Giving each one the next beat's start and then
+    # padding it to a minimum walks the next beat forward by 0.8s a paragraph,
+    # so the guard then asks for motion where nobody is speaking yet. Lesson 2's
+    # recap lost 2.4 seconds that way and reported a beat with no motion on it.
+    n = len(segments)
+    starts = [None] * n
+    ends = [None] * n
+    for i in known:
+        starts[i], ends[i] = known[i]
+
+    i = 0
+    prev_end = 0.0
+    while i < n:
+        if starts[i] is not None:
+            prev_end = ends[i]
+            i += 1
+            continue
+        j = i
+        while j < n and starts[j] is None:
+            j += 1
+        lo = prev_end
+        hi = starts[j] if j < n else span
+        gap = max(hi - lo, 0.0)
+        step = gap / (j - i) if j > i else 0.0
+        for k in range(i, j):
+            starts[k] = round(lo + step * (k - i), 2)
+            ends[k] = round(lo + step * (k - i + 1), 2)
+        prev_end = ends[j - 1]
+        i = j
+
     spans, prev_end = [], 0.0
     for i, (idx, _t) in enumerate(segments):
-        if i in known:
-            a, b = known[i]
-        else:
-            later = [known[j][0] for j in sorted(known) if j > i]
-            a, b = prev_end, (later[0] if later else span)
-        a = max(a, prev_end)
-        b = max(b, a + 0.8)
+        a = max(starts[i], prev_end)
+        b = max(ends[i], a + 0.05)
         spans.append((idx, round(a, 2), round(b, 2)))
         prev_end = b
     return spans
