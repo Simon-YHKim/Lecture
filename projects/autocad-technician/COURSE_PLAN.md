@@ -4,18 +4,18 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
 처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.
 도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.
 
-전체 264:26 · A3 가로 · 제3각법 · 레이어 네 개
+전체 248:16 · A3 가로 · 제3각법 · 레이어 네 개
 
 | 차시 | 주제 | 길이 | 프레임 | 여는 파일 | 저장하는 상태 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 오리엔테이션 | 7:20 | 6 | — | — |
-| 2 | 부품 이해와 도면 환경 | 33:41 | 11 | — | L02_TEMPLATE |
-| 3 | 기준선과 외곽 | 38:17 | 10 | L02_TEMPLATE | L03_PROFILE |
-| 4 | 원·호·오프셋 | 39:11 | 11 | L03_PROFILE | L04_FEATURES |
-| 5 | 제3각법 3뷰와 반복 | 44:43 | 11 | L04_FEATURES | L05_VIEWS |
-| 6 | 편집과 표현 | 42:30 | 11 | L05_VIEWS | L06_REPRESENTED |
-| 7 | 치수와 출도 | 49:03 | 11 | L06_REPRESENTED | L07_RELEASE |
-| 8 | 시험 안내와 Q&A | 9:41 | 7 | — | — |
+| 1 | 오리엔테이션 | 7:30 | 6 | — | — |
+| 2 | 부품 이해와 도면 환경 | 36:57 | 11 | — | L02_TEMPLATE |
+| 3 | 기준선과 외곽 | 36:58 | 10 | L02_TEMPLATE | L03_PROFILE |
+| 4 | 원·호·오프셋 | 36:25 | 11 | L03_PROFILE | L04_FEATURES |
+| 5 | 제3각법 3뷰와 반복 | 39:07 | 11 | L04_FEATURES | L05_VIEWS |
+| 6 | 편집과 표현 | 38:48 | 11 | L05_VIEWS | L06_REPRESENTED |
+| 7 | 치수와 출도 | 43:06 | 11 | L06_REPRESENTED | L07_RELEASE |
+| 8 | 시험 안내와 Q&A | 9:25 | 7 | — | — |
 
 ## 편
 
@@ -23,27 +23,28 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
 
 | 차시 | 편 | 제목 | 길이 | 프레임 |
 | --- | --- | --- | --- | --- |
-| 1 | 1편 | 오리엔테이션 | 7:20 | `01-title` · `02-why-drawings` · `03-how-assessed` · `04-roadmap` · `05-recap` · `06-closing` |
-| 2 | 1편 | 부품과 도면 규칙 | 16:00 | `01-title` · `02-what-is-this-part` · `03-surfaces` · `04-why-this-shape` · `05-reading-dimensions` · `06-reading-symbols` · `07-sheet-and-layers` |
-| 2 | 2편 | A3 템플릿 만들기 | 17:41 | `08-build-template` · `09-recap` · `10-keys` · `11-closing` |
-| 3 | 1편 | 원점과 중심선 | 17:01 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
-| 3 | 2편 | 베이스 외곽과 목 | 12:35 | `05-demo-b` |
-| 3 | 3편 | 검산과 정리 | 8:41 | `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 4 | 1편 | 축 구멍과 탭 네 개 | 18:59 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
-| 4 | 2편 | 장공과 필렛 | 10:18 | `05-demo-b` |
-| 4 | 3편 | 검산과 정리 | 9:54 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 5 | 1편 | 평면도 | 18:11 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
-| 5 | 2편 | 우측면도와 축 구멍 | 10:33 | `05-demo-b` |
-| 5 | 3편 | 숨은선과 정리 | 15:59 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 6 | 1편 | 투상선 정리 | 18:41 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
-| 6 | 2편 | 대칭 검산과 레이어 | 11:29 | `05-demo-b` |
-| 6 | 3편 | 선 종류 축척과 정리 | 12:20 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 7 | 1편 | 치수 스타일과 전체 크기 | 18:06 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
-| 7 | 2편 | 치수 기입 | 18:19 | `05-demo-b` |
-| 7 | 3편 | 축척 확인과 출도 | 12:38 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 8 | 1편 | 시험 안내와 Q&A | 9:41 | `01-title` · `02-exam` · `03-qa` · `04-technician-work` · `05-field-commands` · `06-recap` · `07-closing` |
+| 1 | 1편 | 오리엔테이션 | 7:30 | `01-title` · `02-why-drawings` · `03-how-assessed` · `04-roadmap` · `05-recap` · `06-closing` |
+| 2 | 1편 | 부품과 도면 규칙 | 16:07 | `01-title` · `02-what-is-this-part` · `03-surfaces` · `04-why-this-shape` · `05-reading-dimensions` · `06-reading-symbols` · `07-sheet-and-layers` |
+| 2 | 2편 | A3 템플릿 만들기 | 16:12 | `08-build-template` |
+| 2 | 3편 | 정리와 오늘 친 것 | 4:37 | `09-recap` · `10-keys` · `11-closing` |
+| 3 | 1편 | 원점과 중심선 | 16:08 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 3 | 2편 | 베이스 외곽과 목 | 12:45 | `05-demo-b` |
+| 3 | 3편 | 검산과 정리 | 8:05 | `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 4 | 1편 | 축 구멍과 탭 네 개 | 17:48 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 4 | 2편 | 장공과 필렛 | 9:49 | `05-demo-b` |
+| 4 | 3편 | 검산과 정리 | 8:48 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 5 | 1편 | 평면도 | 16:27 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 5 | 2편 | 우측면도와 축 구멍 | 8:33 | `05-demo-b` |
+| 5 | 3편 | 숨은선과 정리 | 14:07 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 6 | 1편 | 투상선 정리 | 18:54 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 6 | 2편 | 대칭 검산과 레이어 | 9:47 | `05-demo-b` |
+| 6 | 3편 | 선 종류 축척과 정리 | 10:08 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 7 | 1편 | 치수 스타일과 전체 크기 | 15:02 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 7 | 2편 | 치수 기입 | 14:21 | `05-demo-b` |
+| 7 | 3편 | 축척 확인과 출도 | 13:43 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 8 | 1편 | 시험 안내와 Q&A | 9:25 | `01-title` · `02-exam` · `03-qa` · `04-technician-work` · `05-field-commands` · `06-recap` · `07-closing` |
 
-합계 19편. 끊는 자리와 그 이유는 `scripts/part/episodes.json` 에 있다.
+합계 20편. 끊는 자리와 그 이유는 `scripts/part/episodes.json` 에 있다.
 
 
 ## 이 과정이 스스로 지키는 것
@@ -69,12 +70,6 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
     python scripts/part/scaffold_lesson_02.py projects/autocad-technician/lesson-02-part-and-template
     python scripts/part/scaffold_lessons_3_7.py
     python scripts/part/lesson_eight.py
-
-문서도 손으로 쓰지 않는다. 정본 기하와 차시 연결에서 생성된다.
-
-    python scripts/part/edu_ib_02.py projects/autocad-technician/master-part-geometry.json --json
-    python scripts/part/write_master_spec.py     # MASTER_DRAWING_SPEC.md
-    python scripts/part/write_course_docs.py     # course-continuity.json · recording-map.json
 
 스캐폴드는 한 번만 돌린다. 그 뒤 프레임은 HyperFrames Studio 에서 직접 편집하는
 저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.

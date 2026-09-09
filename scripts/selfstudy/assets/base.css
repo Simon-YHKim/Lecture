@@ -272,3 +272,41 @@ details.q .ans::before{content:"A";font-family:var(--head);color:var(--ink-3);
   details.q .ans{display:block!important}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── 코치 마크 ─────────────────────────────────────────────────
+   사용자 정책 2번 — 작도 단계에는 도면과 코치 마크를 함께 둔다. 그동안 이 그림은
+   검수용 데크에만 있었고 정작 학생이 읽는 이 교재에는 없었다.
+   도해는 쪽마다 한 벌만 심고(<symbol>) 단계는 <use> 로 부른다. 정면도가 14KB 라
+   단계마다 복사해 넣으면 열네 단계에서 100KB 한도를 넘는다. */
+ol.steps>li.hasfig{display:grid;grid-template-columns:minmax(0,1fr) minmax(11rem,17rem);
+  gap:.2rem 1.1rem;align-items:start}
+ol.steps>li.hasfig>.st-h,ol.steps>li.hasfig>.st-f{grid-column:1}
+ol.steps>li.hasfig>.act{grid-column:1}
+ol.steps>li.hasfig>.coachfig{grid-column:2;grid-row:1 / span 40}
+.coachfig{margin:0;display:grid;gap:.4rem;border:1px solid var(--rule);
+  background:var(--paper-2);padding:.5rem .6rem .6rem;position:sticky;top:.5rem}
+.coachfig .fh{font-size:.72rem;letter-spacing:.02em;color:var(--ink-3);font-family:var(--head)}
+.coachfig .fh b{color:var(--accent);font-weight:600}
+.coachfig svg.cdwg{width:100%;height:auto;display:block;padding:0;color:var(--ink)}
+/* use 안쪽은 바깥 CSS 가 닿지 않는다. 선 표현은 coach.stylize 가 속성으로 박고,
+   여기서는 물려받는 color 만 준다. */
+/* 강조 겹선은 기본이 꺼짐이다. 이 단계가 그리는 형상만 켠다. */
+.dwg .hl{fill:none;stroke:none}
+.dwg .hl.hot{stroke:var(--accent);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;
+  vector-effect:non-scaling-stroke}
+.coach .ring{fill:none;stroke:var(--accent);stroke-width:1.1;stroke-dasharray:2.6 1.8;
+  vector-effect:non-scaling-stroke}
+.coach .mk{fill:none;stroke:var(--accent);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.coach .bg{fill:var(--accent);stroke:none}
+.coach .bn{fill:var(--on-accent);font-size:7px;text-anchor:middle;font-family:var(--head)}
+.coachfig .cap{margin:0;padding:0;list-style:none;display:grid;gap:.3rem}
+.coachfig .cap li{display:grid;grid-template-columns:1.05rem minmax(0,1fr);gap:.4rem;
+  align-items:baseline;font-size:.78rem;line-height:1.4;color:var(--ink-2)}
+.coachfig .cap .bd{display:grid;place-items:center;width:1.05rem;height:1.05rem;
+  border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:.62rem}
+.coachfig .cap em{font-style:normal;color:var(--accent)}
+@media (max-width:44rem){
+  ol.steps>li.hasfig{display:block}
+  ol.steps>li.hasfig>.coachfig{margin:.5rem 0 .7rem;position:static}
+}
+@media print{.coachfig{position:static;break-inside:avoid}}

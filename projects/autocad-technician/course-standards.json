@@ -1,0 +1,228 @@
+{
+  "$comment": [
+    "이 과정이 학습자에게 '치라'고 시키는 규격의 정본이다. LESSON_STYLE.md 6번",
+    "(규격은 지어내지 않는다) 이 요구하는 근거가 여기 모여 있다. 값마다 source 가",
+    "붙어 있고, source 가 'course' 인 것만 이 과정이 스스로 정한 값이다.",
+    "",
+    "고칠 때는 이 파일만 고친다. scripts/check-standards.py 가 SCRIPT.md ·",
+    "자습본 JSON · MASTER_DRAWING_SPEC.md 가 이 값과 어긋나면 실패시킨다."
+  ],
+  "provenance": {
+    "primary": {
+      "title": "LGIT 테크니션 인증제_실습과정 — AutoCAD 기본 과정 v2",
+      "slides": 63,
+      "modified": "2026-03-16",
+      "note": "사용자가 2026-09-10 에 재첨부한 사내 정본 교안. 이 파일의 source='material' 값은 전부 여기서 왔다."
+    },
+    "problems": {
+      "title": "테크니션 인증제 실습문제 v1",
+      "slides": 18,
+      "note": "실습/시험 문제지. 문제마다 선 종류 표를 따로 지정한다 — 문제지 지시가 언제나 이 파일보다 우선한다."
+    }
+  },
+  "layers": {
+    "$comment": "원본 교안 26쪽 「Layer 구성을 그림과 같이 구성해보시오」 의 도면층 관리자 화면이 근거다.",
+    "source": "material:slide-26",
+    "rows": [
+      {
+        "name": "외형선",
+        "colorName": "초록",
+        "aci": 3,
+        "linetype": "Continuous",
+        "lineweight": 0.3,
+        "ltscale": null,
+        "use": "보이는 모양",
+        "source": "material:slide-26"
+      },
+      {
+        "name": "중심선",
+        "colorName": "빨강",
+        "aci": 1,
+        "linetype": "CENTER",
+        "lineweight": 0.15,
+        "ltscale": 0.5,
+        "use": "중심과 대칭축",
+        "source": "material:slide-26",
+        "ltscaleSource": "course"
+      },
+      {
+        "name": "숨은선",
+        "colorName": "노랑",
+        "aci": 2,
+        "linetype": "HIDDEN",
+        "lineweight": 0.15,
+        "ltscale": 0.5,
+        "use": "가려진 모양",
+        "source": "material:slide-26",
+        "ltscaleSource": "course"
+      },
+      {
+        "name": "치수선",
+        "colorName": "흰색",
+        "aci": 7,
+        "linetype": "Continuous",
+        "lineweight": 0.15,
+        "ltscale": null,
+        "use": "치수 · 보조선 · 뷰를 맞추는 투상선",
+        "source": "material:slide-26"
+      }
+    ],
+    "globalLtscale": 1,
+    "globalLtscaleSource": "course",
+    "notes": [
+      "선가중치 0.30 대 0.15 — 외형선만 나머지의 정확히 두 배다. 인쇄물에서 형상이 먼저 읽힌다.",
+      "선 종류 축척은 굵기가 아니라 점선의 간격이다. 값이 붙는 줄은 CENTER 와 HIDDEN 뿐이고 Continuous 에는 조정할 간격이 없다.",
+      "원본 교안의 도면층 관리자에는 선 종류 축척 열이 없다. 개체 축척 0.5 · 전체 축척 1 은 이 과정이 정한 값이다(source: course).",
+      "교재 도해는 인쇄 관례로 그린다 — 외형선 검정, 중심선 빨강. 화면의 AutoCAD 색(외형선 초록)과 다른 것이 정상이다."
+    ]
+  },
+  "sheet": {
+    "size": "A3",
+    "orientation": "가로",
+    "widthMm": 420,
+    "heightMm": 297,
+    "marginMm": 10,
+    "source": "material:slide-6",
+    "note": "원본 교안 6쪽의 용지 표. 같은 쪽의 A1 은 841×564 로 적혀 있으나 KS/ISO 값은 841×594 다 — 이 과정은 A3 만 쓰므로 영향은 없고, 학습자가 물으면 594 라고 답한다."
+  },
+  "projection": {
+    "method": "제3각법",
+    "layout": "정면도 기준으로 위가 평면도, 오른쪽이 우측면도",
+    "source": "material:slide-8,9"
+  },
+  "functionKeys": {
+    "$comment": "원본 교안 부록(단축키 v2) 2쪽의 기능키 표. 좌표를 치지 않고 그리려면 이 여섯 개의 상태를 학습자가 직접 확인할 수 있어야 한다.",
+    "source": "material:appendix-1-2",
+    "rows": [
+      {
+        "key": "F3",
+        "name": "객체 스냅",
+        "what": "끝점·중간점·중심 같은 특징점에 커서가 달라붙습니다",
+        "policy": "항상 켭니다"
+      },
+      {
+        "key": "F7",
+        "name": "그리드",
+        "what": "모눈 표시를 켜고 끕니다",
+        "policy": "이 과정은 끕니다 — 모눈에 스냅되지 않고 화면만 어지럽습니다"
+      },
+      {
+        "key": "F8",
+        "name": "직교",
+        "what": "커서가 수평·수직으로만 움직입니다",
+        "policy": "수평 수직선을 그을 때 켭니다"
+      },
+      {
+        "key": "F9",
+        "name": "스냅",
+        "what": "커서가 일정 간격 격자에 걸립니다",
+        "policy": "이 과정은 끕니다 — 형상의 특징점을 못 잡게 만듭니다"
+      },
+      {
+        "key": "F10",
+        "name": "극좌표 추적",
+        "what": "정해 둔 각도마다 안내선이 뜹니다",
+        "policy": "기울어진 방향이 필요할 때 켭니다"
+      },
+      {
+        "key": "F11",
+        "name": "객체 스냅 추적",
+        "what": "특징점에서 뻗은 안내선이 만나는 자리에 없는 점을 잡습니다",
+        "policy": "켭니다 — 좌표 없이 중심을 잡는 주된 방법입니다"
+      },
+      {
+        "key": "F12",
+        "name": "동적 입력",
+        "what": "커서 옆 입력칸에 길이와 각도를 직접 칩니다",
+        "policy": "켭니다 — 「방향은 마우스, 길이는 숫자」가 이것 위에서 돕니다"
+      }
+    ]
+  },
+  "specialText": {
+    "$comment": "원본 교안 부록 2쪽 「특수문자 입력방법」. 치수 문자와 문자 명령에서 같이 쓴다.",
+    "source": "material:appendix-1-3",
+    "rows": [
+      {
+        "code": "%%c",
+        "glyph": "Ø",
+        "name": "지름"
+      },
+      {
+        "code": "%%d",
+        "glyph": "°",
+        "name": "도"
+      },
+      {
+        "code": "%%p",
+        "glyph": "±",
+        "name": "플러스마이너스"
+      }
+    ]
+  },
+  "editKeys": {
+    "source": "material:appendix-1-2",
+    "rows": [
+      {
+        "key": "Ctrl+1",
+        "what": "특성 창을 엽니다 — 개체 하나의 레이어·색·선 종류 축척을 직접 봅니다"
+      },
+      {
+        "key": "Ctrl+A",
+        "what": "전체를 선택합니다"
+      },
+      {
+        "key": "Ctrl+C",
+        "what": "복사합니다"
+      },
+      {
+        "key": "Ctrl+Shift+C",
+        "what": "기준점을 지정해 복사합니다 — 다른 도면에 같은 자리로 붙일 때 씁니다"
+      },
+      {
+        "key": "Ctrl+V",
+        "what": "붙여넣습니다"
+      },
+      {
+        "key": "Ctrl+X",
+        "what": "잘라냅니다"
+      },
+      {
+        "key": "Ctrl+Z",
+        "what": "되돌립니다 (UNDO)"
+      },
+      {
+        "key": "Enter",
+        "what": "직전 명령을 반복합니다 — Space Bar 도 같습니다"
+      },
+      {
+        "key": "Esc",
+        "what": "명령을 취소합니다 — 다음 명령 전에 명령행을 비웁니다"
+      }
+    ]
+  },
+  "selection": {
+    "$comment": "사용자 정책 3번. 원본 교안에는 그림으로만 있고 글로 설명되지 않는다.",
+    "source": "course",
+    "rows": [
+      {
+        "drag": "왼쪽 → 오른쪽",
+        "name": "윈도우",
+        "border": "실선",
+        "picks": "상자 안에 완전히 들어온 것만 골라집니다"
+      },
+      {
+        "drag": "오른쪽 → 왼쪽",
+        "name": "크로싱",
+        "border": "파선",
+        "picks": "상자에 걸치기만 해도 골라집니다"
+      }
+    ]
+  },
+  "policy": {
+    "$comment": "사용자가 영구 정책으로 지정한 것. HANDOFF 「적용 중인 정책」 과 같은 내용이다.",
+    "coordinates": "좌표 입력을 가르치지 않는다. 마우스 커서 + 객체 스냅 + 수치 입력으로 쓴다. 예외는 용지선 두 구석(0,0 과 420,297) 뿐이다.",
+    "coachMarks": "작도 실습 화면에는 도면 + 코치 마크 + 지금 그리는 요소 강조를 함께 둔다.",
+    "tone": "합쇼체 70~80% · 해요체 20~30%. 문어체 '~한다' 금지.",
+    "offline": "학습자에게 가는 산출물은 내려받는 단일 파일이고 바깥에서 가져오는 것이 없다."
+  }
+}

@@ -17,6 +17,9 @@ that needs either translated frames or an English layer over them, which is a
 decision, not a build step.
 
     python scripts/selfstudy/build_deck_frames.py <lesson-dir> [출력 파일]
+
+**폐기.** 2세대. 기존 78프레임을 그대로 마운트하는 방식이라 영어 덱을 만들 수
+없어 접었다. 현행 정본은 `build_deck_selfstudy.py` 다.
 """
 import io
 import json

@@ -3,7 +3,7 @@
   "source": "synthesised",
   "voice": "Microsoft Heami Desktop",
   "note": "Windows 음성으로 대본을 읽어 만든 시각이다. 문단마다 따로 합성해 길이를 그대로 읽었으므로 정렬 오차가 없고 다시 돌려도 같은 값이 나온다. 사람이 녹음하면 그 값이 이것을 대체한다.",
-  "totalSeconds": 2347.974,
+  "totalSeconds": 2329.573,
   "frames": [
     {
       "frame": 1,
@@ -19,70 +19,70 @@
       "id": "02-today",
       "line": 2,
       "start": 7.289,
-      "end": 110.554,
-      "duration": 103.265,
+      "end": 109.834,
+      "duration": 102.545,
       "audio": "02-today.wav"
     },
     {
       "frame": 3,
       "id": "03-concept",
       "line": 3,
-      "start": 110.554,
-      "end": 294.536,
-      "duration": 183.982,
+      "start": 109.834,
+      "end": 292.377,
+      "duration": 182.543,
       "audio": "03-concept.wav"
     },
     {
       "frame": 4,
       "id": "04-on-the-drawing",
       "line": 4,
-      "start": 294.536,
-      "end": 485.472,
-      "duration": 190.936,
+      "start": 292.377,
+      "end": 482.264,
+      "duration": 189.887,
       "audio": "04-on-the-drawing.wav"
     },
     {
       "frame": 5,
       "id": "05-demo-a",
       "line": 5,
-      "start": 485.472,
-      "end": 986.203,
-      "duration": 500.731,
+      "start": 482.264,
+      "end": 978.996,
+      "duration": 496.732,
       "audio": "05-demo-a.wav"
     },
     {
       "frame": 6,
       "id": "05-demo-b",
       "line": 5,
-      "start": 986.203,
-      "end": 1505.791,
-      "duration": 519.588,
+      "start": 978.996,
+      "end": 1490.095,
+      "duration": 511.099,
       "audio": "05-demo-b.wav"
     },
     {
       "frame": 7,
       "id": "05-demo-c",
       "line": 5,
-      "start": 1505.791,
-      "end": 1977.26,
-      "duration": 471.469,
+      "start": 1490.095,
+      "end": 1960.154,
+      "duration": 470.059,
       "audio": "05-demo-c.wav"
     },
     {
       "frame": 8,
       "id": "06-check",
       "line": 6,
-      "start": 1977.26,
-      "end": 2109.081,
-      "duration": 131.821,
+      "start": 1960.154,
+      "end": 2090.835,
+      "duration": 130.681,
       "audio": "06-check.wav"
     },
     {
       "frame": 9,
       "id": "07-recap",
       "line": 7,
-      "start": 2109.081,
-      "end": 2210.053,
+      "start": 2090.835,
+      "end": 2191.807,
       "duration": 100.972,
       "audio": "07-recap.wav"
     },
@@ -90,17 +90,17 @@
       "frame": 10,
       "id": "08-keys",
       "line": 8,
-      "start": 2210.053,
-      "end": 2328.738,
-      "duration": 118.685,
+      "start": 2191.807,
+      "end": 2310.337,
+      "duration": 118.53,
       "audio": "08-keys.wav"
     },
     {
       "frame": 11,
       "id": "09-closing",
       "line": 9,
-      "start": 2328.738,
-      "end": 2347.974,
+      "start": 2310.337,
+      "end": 2329.573,
       "duration": 19.236,
       "audio": "09-closing.wav"
     }
@@ -109,302 +109,302 @@
     {
       "frame": 2,
       "beat": 1,
-      "observedStart": 36.528,
-      "observedEnd": 56.439
+      "observedStart": 36.293,
+      "observedEnd": 56.204
     },
     {
       "frame": 2,
       "beat": 2,
-      "observedStart": 56.889,
-      "observedEnd": 76.4
+      "observedStart": 56.654,
+      "observedEnd": 76.146
     },
     {
       "frame": 2,
       "beat": 3,
-      "observedStart": 76.85,
-      "observedEnd": 91.837
+      "observedStart": 76.596,
+      "observedEnd": 91.583
     },
     {
       "frame": 2,
       "beat": 4,
-      "observedStart": 92.287,
-      "observedEnd": 109.354
+      "observedStart": 92.033,
+      "observedEnd": 108.634
     },
     {
       "frame": 3,
       "beat": 1,
-      "observedStart": 120.952,
-      "observedEnd": 206.082
+      "observedStart": 120.232,
+      "observedEnd": 205.012
     },
     {
       "frame": 3,
       "beat": 2,
-      "observedStart": 206.532,
-      "observedEnd": 232.837
+      "observedStart": 205.462,
+      "observedEnd": 231.572
     },
     {
       "frame": 3,
       "beat": 3,
-      "observedStart": 233.287,
-      "observedEnd": 257.208
+      "observedStart": 232.022,
+      "observedEnd": 255.943
     },
     {
       "frame": 3,
       "beat": 4,
-      "observedStart": 257.658,
-      "observedEnd": 293.336
+      "observedStart": 256.393,
+      "observedEnd": 291.177
     },
     {
       "frame": 4,
       "beat": 1,
-      "observedStart": 304.294,
-      "observedEnd": 325.25
+      "observedStart": 302.135,
+      "observedEnd": 323.081
     },
     {
       "frame": 4,
       "beat": 2,
-      "observedStart": 325.7,
-      "observedEnd": 354.115
+      "observedStart": 323.531,
+      "observedEnd": 351.761
     },
     {
       "frame": 4,
       "beat": 3,
-      "observedStart": 354.565,
-      "observedEnd": 385.75
+      "observedStart": 352.211,
+      "observedEnd": 383.371
     },
     {
       "frame": 4,
       "beat": 4,
-      "observedStart": 386.2,
-      "observedEnd": 414.749
+      "observedStart": 383.821,
+      "observedEnd": 412.371
     },
     {
       "frame": 4,
       "beat": 5,
-      "observedStart": 415.199,
-      "observedEnd": 457.357
+      "observedStart": 412.821,
+      "observedEnd": 454.608
     },
     {
       "frame": 4,
       "beat": 6,
-      "observedStart": 457.807,
-      "observedEnd": 484.272
+      "observedStart": 455.058,
+      "observedEnd": 481.064
     },
     {
       "frame": 5,
       "beat": 1,
-      "observedStart": 487.072,
-      "observedEnd": 522.246
+      "observedStart": 483.864,
+      "observedEnd": 518.918
     },
     {
       "frame": 5,
       "beat": 2,
-      "observedStart": 522.696,
-      "observedEnd": 561.863
+      "observedStart": 519.368,
+      "observedEnd": 558.211
     },
     {
       "frame": 5,
       "beat": 3,
-      "observedStart": 562.313,
-      "observedEnd": 679.938
+      "observedStart": 558.661,
+      "observedEnd": 675.32
     },
     {
       "frame": 5,
       "beat": 4,
-      "observedStart": 680.388,
-      "observedEnd": 798.579
+      "observedStart": 675.77,
+      "observedEnd": 793.032
     },
     {
       "frame": 5,
       "beat": 5,
-      "observedStart": 799.029,
-      "observedEnd": 874.477
+      "observedStart": 793.482,
+      "observedEnd": 868.5
     },
     {
       "frame": 5,
       "beat": 6,
-      "observedStart": 874.927,
-      "observedEnd": 985.003
+      "observedStart": 868.95,
+      "observedEnd": 977.796
     },
     {
       "frame": 6,
       "beat": 1,
-      "observedStart": 987.803,
-      "observedEnd": 1080.393
+      "observedStart": 980.596,
+      "observedEnd": 1073.051
     },
     {
       "frame": 6,
       "beat": 2,
-      "observedStart": 1080.843,
-      "observedEnd": 1162.218
+      "observedStart": 1073.501,
+      "observedEnd": 1154.002
     },
     {
       "frame": 6,
       "beat": 3,
-      "observedStart": 1162.668,
-      "observedEnd": 1277.878
+      "observedStart": 1154.452,
+      "observedEnd": 1269.472
     },
     {
       "frame": 6,
       "beat": 4,
-      "observedStart": 1278.328,
-      "observedEnd": 1404.138
+      "observedStart": 1269.922,
+      "observedEnd": 1388.718
     },
     {
       "frame": 6,
       "beat": 5,
-      "observedStart": 1404.588,
-      "observedEnd": 1455.684
+      "observedStart": 1389.168,
+      "observedEnd": 1440.199
     },
     {
       "frame": 6,
       "beat": 6,
-      "observedStart": 1456.134,
-      "observedEnd": 1504.591
+      "observedStart": 1440.649,
+      "observedEnd": 1488.895
     },
     {
       "frame": 7,
       "beat": 1,
-      "observedStart": 1507.391,
-      "observedEnd": 1603.799
+      "observedStart": 1491.695,
+      "observedEnd": 1587.538
     },
     {
       "frame": 7,
       "beat": 2,
-      "observedStart": 1604.249,
-      "observedEnd": 1729.257
+      "observedStart": 1587.988,
+      "observedEnd": 1712.806
     },
     {
       "frame": 7,
       "beat": 3,
-      "observedStart": 1729.707,
-      "observedEnd": 1867.014
+      "observedStart": 1713.256,
+      "observedEnd": 1849.923
     },
     {
       "frame": 7,
       "beat": 4,
-      "observedStart": 1867.464,
-      "observedEnd": 1976.06
+      "observedStart": 1850.373,
+      "observedEnd": 1958.954
     },
     {
       "frame": 8,
       "beat": 1,
-      "observedStart": 1991.868,
-      "observedEnd": 2020.242
+      "observedStart": 1974.762,
+      "observedEnd": 2002.921
     },
     {
       "frame": 8,
       "beat": 2,
-      "observedStart": 2020.692,
-      "observedEnd": 2051.921
+      "observedStart": 2003.371,
+      "observedEnd": 2034.195
     },
     {
       "frame": 8,
       "beat": 3,
-      "observedStart": 2052.371,
-      "observedEnd": 2073.322
+      "observedStart": 2034.645,
+      "observedEnd": 2055.221
     },
     {
       "frame": 8,
       "beat": 4,
-      "observedStart": 2073.772,
-      "observedEnd": 2107.881
+      "observedStart": 2055.671,
+      "observedEnd": 2089.635
     },
     {
       "frame": 9,
       "beat": 1,
-      "observedStart": 2110.681,
-      "observedEnd": 2138.141
+      "observedStart": 2092.435,
+      "observedEnd": 2119.895
     },
     {
       "frame": 9,
       "beat": 2,
-      "observedStart": 2138.591,
-      "observedEnd": 2208.853
+      "observedStart": 2120.345,
+      "observedEnd": 2190.607
     },
     {
       "frame": 10,
       "beat": 1,
-      "observedStart": 2226.345,
-      "observedEnd": 2233.343
+      "observedStart": 2207.944,
+      "observedEnd": 2214.942
     },
     {
       "frame": 10,
       "beat": 2,
-      "observedStart": 2233.793,
-      "observedEnd": 2241.317
+      "observedStart": 2215.392,
+      "observedEnd": 2222.916
     },
     {
       "frame": 10,
       "beat": 3,
-      "observedStart": 2241.767,
-      "observedEnd": 2248.865
+      "observedStart": 2223.366,
+      "observedEnd": 2230.464
     },
     {
       "frame": 10,
       "beat": 4,
-      "observedStart": 2249.315,
-      "observedEnd": 2259.723
+      "observedStart": 2230.914,
+      "observedEnd": 2241.322
     },
     {
       "frame": 10,
       "beat": 5,
-      "observedStart": 2260.173,
-      "observedEnd": 2266.536
+      "observedStart": 2241.772,
+      "observedEnd": 2248.135
     },
     {
       "frame": 10,
       "beat": 6,
-      "observedStart": 2266.986,
-      "observedEnd": 2275.849
+      "observedStart": 2248.585,
+      "observedEnd": 2257.448
     },
     {
       "frame": 10,
       "beat": 7,
-      "observedStart": 2276.299,
-      "observedEnd": 2285.057
+      "observedStart": 2257.898,
+      "observedEnd": 2266.656
     },
     {
       "frame": 10,
       "beat": 8,
-      "observedStart": 2285.507,
-      "observedEnd": 2291.896
+      "observedStart": 2267.106,
+      "observedEnd": 2273.495
     },
     {
       "frame": 10,
       "beat": 9,
-      "observedStart": 2292.346,
-      "observedEnd": 2301.069
+      "observedStart": 2273.945,
+      "observedEnd": 2282.668
     },
     {
       "frame": 10,
       "beat": 10,
-      "observedStart": 2301.519,
-      "observedEnd": 2310.392
+      "observedStart": 2283.118,
+      "observedEnd": 2291.991
     },
     {
       "frame": 10,
       "beat": 11,
-      "observedStart": 2310.842,
-      "observedEnd": 2319.48
+      "observedStart": 2292.441,
+      "observedEnd": 2301.079
     },
     {
       "frame": 10,
       "beat": 12,
-      "observedStart": 2319.93,
-      "observedEnd": 2327.538
+      "observedStart": 2301.529,
+      "observedEnd": 2309.137
     },
     {
       "frame": 11,
       "beat": 1,
-      "observedStart": 2330.338,
-      "observedEnd": 2339.711
+      "observedStart": 2311.937,
+      "observedEnd": 2321.31
     },
     {
       "frame": 11,
       "beat": 2,
-      "observedStart": 2340.161,
-      "observedEnd": 2346.774
+      "observedStart": 2321.76,
+      "observedEnd": 2328.373
     }
   ]
 }

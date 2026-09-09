@@ -113,8 +113,8 @@
     {
      "type": "note",
      "tone": "tip",
-     "ko": "레이어 값은 `MASTER_DRAWING_SPEC.md` 가 정본입니다. 굵기는 외형선만 0.5, 나머지 셋은 0.25예요. 2차시 화면 표와 다르면 이 값을 따르세요.",
-     "en": "`MASTER_DRAWING_SPEC.md` is the authority for layer settings. Lineweight is 0.5 mm on the visible layer and 0.25 on the other three. Linetype scale is 0.5 on center and hidden only. Where the Lesson 2 table differs, follow these."
+     "ko": "레이어 값은 `course-standards.json` 이 정본이고, 근거는 사내 정본 교안 26쪽입니다. 선가중치는 외형선만 0.30, 나머지 셋은 0.15예요. 2차시 화면 표와 다르면 이 값을 따르세요.",
+     "en": "`course-standards.json` is the authority for layer settings, and it follows page 26 of the in-house course deck. Lineweight is 0.30 mm on the visible layer and 0.15 on the other three. Linetype scale is 0.5 on center and hidden only. Where the Lesson 2 table differs, follow these."
     }
    ]
   },

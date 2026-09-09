@@ -130,6 +130,67 @@ def retime_frame(path, beats, dur, dry=False):
             for j, m in enumerate(sorted(solo[sel], key=lambda x: float(x.group('time')))):
                 newtime[m.start()] = round(on if j == 0 else off, 2)
 
+    # 계열 이름이 번호로 끝나지 않는 프레임이 있다. 2분할 마무리의 `.p-done` ·
+    # `.p-next`, 도면틀 조립의 `.sh-paper` · `.sh-frame` … 이 그렇다. 계열로는
+    # 하나도 안 잡혀서 박자가 통째로 비었다 — 검수에서 「다음을 눌러도 안 변한다」
+    # 로 올라온 자리다.
+    #
+    # 마지막 수단으로 **등장 순서**를 쓴다. 항목은 대본이 말하는 차례대로 뜨므로,
+    # 셀렉터를 지금 시각 순으로 줄 세워 박자에 하나씩 붙이면 그 뜻이 그대로 산다.
+    if beats and len(_covered_beats(newtime, beats)) < len(beats):
+        first_by_sel = {}
+        for m in calls:
+            sel = m.group('sel')
+            if '.topline' in sel or m.start() in newtime:
+                continue
+            first_by_sel.setdefault(sel, []).append(m)
+        order_sel = sorted(first_by_sel,
+                           key=lambda s: min(float(x.group('time')) for x in first_by_sel[s]))
+        # 계열 전체를 한 번에 잡는 등장 연출(쉼표가 있고 번호 계열)은 항목이 아니다.
+        order_sel = [s for s in order_sel
+                     if not (s.count(',') >= 1 and FAMILY.search(s))]
+        # 한 항목이 두 셀렉터로 나뉘어 있는 경우가 있다 — 2분할 마무리의 `.p-done`
+        # (칸)과 `.p-done-li`(그 안의 줄)가 그렇다. 클래스 이름이 앞뒤로 걸리면
+        # 같은 항목으로 묶는다. 안 묶으면 항목 수가 박자 수의 두 배가 된다.
+        groups, taken = [], set()
+        for s in order_sel:
+            if s in taken:
+                continue
+            cls = _cls(s)
+            mates = [t for t in order_sel
+                     if t not in taken and (_cls(t) == cls or _cls(t).startswith(cls + '-'))]
+            for t in mates:
+                taken.add(t)
+            groups.append(mates)
+        # 한 박자에서 도형과 그 옆 라벨이 함께 뜨는 자리가 있다 — 용지선과
+        # 「A3 420 × 297」, 도면선과 「사방 10」이 그렇다. 이름은 남남이지만
+        # 지금 시각이 붙어 있으면 같은 박자의 식구다. 안 묶으면 항목이 박자보다
+        # 많아져 순서 맞추기가 통째로 포기된다.
+        def _t0(mates):
+            return min(float(x.group('time')) for s in mates for x in first_by_sel[s])
+
+        groups.sort(key=_t0)
+        merged = []
+        for g in groups:
+            if merged and _t0(g) - _t0(merged[-1]) < 1.5:
+                merged[-1] = merged[-1] + g
+            else:
+                merged.append(list(g))
+        if len(merged) == len(beats):
+            groups = merged
+
+        if len(groups) == len(beats):
+            for k, mates in enumerate(groups):
+                on, off = beats[k]
+                nxt = beats[k + 1][0] if k + 1 < len(beats) else off
+                ms = sorted((m for s in mates for m in first_by_sel[s]),
+                            key=lambda x: float(x.group('time')))
+                base = float(ms[0].group('time'))
+                for m in ms:
+                    # 같은 항목 안에서 처음 뜨는 것들은 함께 켜고, 뒤늦은 것은 물러난다.
+                    same = abs(float(m.group('time')) - base) < 1.5
+                    newtime[m.start()] = round(on if same else nxt, 2)
+
     # 등장 연출(계열 전체를 한 번에 잡는 호출)과 퇴장을 양 끝으로 옮긴다.
     first_on = beats[0][0] if beats else 0.0
     for m in calls:
@@ -142,6 +203,13 @@ def retime_frame(path, beats, dur, dry=False):
             newtime[m.start()] = round(max(0.0, dur - 1.05), 2)
 
     if not newtime:
+        # 맞출 트윈이 없어도 길이는 바뀐다. 인사 화면과 녹화 프레임이 그렇다.
+        s = ROOT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), head + tl, count=1)
+        s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
+        if not dry and s != head + tl:
+            io.open(path, 'w', encoding='utf-8', newline='\n').write(s)
+        if not dry:
+            sync_motion(path, dur)
         return 0, '맞출 것 없음'
 
     out, last, n = [], 0, 0
@@ -160,7 +228,107 @@ def retime_frame(path, beats, dur, dry=False):
     s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
     if not dry:
         io.open(path, 'w', encoding='utf-8', newline='\n').write(s)
+        sync_motion(path, dur)
     return n, ''
+
+
+def _cls(sel):
+    """`#l3f7 .p-done-li` → `p-done-li`. 없으면 셀렉터 자체를 이름으로 쓴다."""
+    m = re.search(r'\.([A-Za-z][\w-]*)\s*$', sel.strip())
+    return m.group(1) if m else sel.strip()
+
+
+def _covered_beats(newtime, beats):
+    """새로 잡은 시각이 실제로 덮은 박자 번호."""
+    got = set()
+    for t in newtime.values():
+        for k, (on, _off) in enumerate(beats):
+            if abs(t - on) < 0.05:
+                got.add(k)
+    return got
+
+
+def sync_motion(frame_path, dur):
+    """`.motion.json` 의 duration 을 프레임과 같게 둔다.
+
+    프레임 HTML 만 고치고 이 파일을 두면 검사기가 「motion.json 길이가 슬롯과
+    다르다」로 잡는다. 같은 값을 두 곳에 적어 두는 구조라 한쪽만 고치면 반드시
+    어긋난다 — 고치는 자리를 한 곳으로 모은다.
+    """
+    p = frame_path[:-5] + '.motion.json'
+    if not os.path.exists(p):
+        return
+    doc = json.load(io.open(p, encoding='utf-8'))
+    if abs(float(doc.get('duration', 0)) - dur) < 5e-4:
+        return
+    doc['duration'] = round(dur, 3)
+    with io.open(p, 'w', encoding='utf-8', newline='\n') as fh:
+        fh.write(json.dumps(doc, ensure_ascii=False, indent=2) + '\n')
+
+
+def planned_spans(lesson_dir, slug):
+    """대본에서 계산한 박자 — 잰 박자가 없는 프레임(녹화)이 쓰는 답.
+
+    `narrate_tts` 는 `(N …)` 표식이 붙은 문단만 비트로 적는다. 녹화 프레임은
+    단계를 `### N단계` 로 쓰므로 잰 비트가 하나도 없고, 그러면 이 스크립트가
+    그 프레임을 건너뛰어 단계 띠가 옛 시각에 남는다. 실제로 2차시 녹화 프레임의
+    9~16단계가 그렇게 어긋나 있었다.
+
+    검사기(`verify_course`)가 그 프레임을 판정할 때 쓰는 것과 **같은 계산**을
+    여기서도 한다. 다른 계산을 쓰면 고쳐도 검사기는 계속 틀렸다고 말한다.
+
+    돌려주는 것: {stem: [(on, off), ...]} — 프레임 시작을 0으로 잰 값.
+    """
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import beats as B
+    import episodes as E
+
+    sp = os.path.join(lesson_dir, 'SCRIPT.md')
+    if not os.path.isfile(sp):
+        return {}
+    script = B.parse_script(sp)
+    steps = B.parse_steps(sp, 5) or B.parse_steps(sp, 8)
+    demo_line = 5 if B.parse_steps(sp, 5) else 8
+    if steps:
+        script[demo_line] = list(steps)
+    try:
+        cuts = E.cuts_for(slug)
+    except SystemExit:
+        cuts = []
+
+    demo_total = None
+    if steps:
+        demo_total = int(round(sum(B.read_seconds(t) for _, t in steps)
+                               * B.DEMO_FACTOR / 10.0)) * 10
+
+    expect = []
+    for line_no in sorted(script):
+        if steps and line_no == demo_line and cuts:
+            sl = B.split_steps(steps, cuts)
+            lens = B.split_lengths(
+                demo_total, [sum(B.read_seconds(t) for _, t in x[1]) for x in sl])
+            for segs, dur in zip([x[1] for x in sl], lens):
+                expect.append((line_no, segs, dur))
+        else:
+            expect.append((line_no, script[line_no], None))
+
+    idx = io.open(os.path.join(lesson_dir, 'index.html'), encoding='utf-8').read()
+    stems = re.findall(r'data-composition-src="compositions/frames/([^"]+)\.html"', idx)
+    if len(stems) != len(expect):
+        return {}
+
+    out = {}
+    for stem, (line_no, segs, part_sec) in zip(stems, expect):
+        fixed = part_sec
+        if fixed is None:
+            fixed = 12 if line_no == 1 else None
+            if steps and line_no == demo_line:
+                fixed = demo_total
+        spans, _ = B.plan(segs, duration=fixed)
+        bs = [(a, b) for _i, a, b in B.beat_spans(spans)]
+        if bs:
+            out[stem] = bs
+    return out
 
 
 def main(argv=None):
@@ -173,6 +341,8 @@ def main(argv=None):
                                encoding='utf-8'))
     idx_path = os.path.join(a.lesson, 'index.html')
     idx = io.open(idx_path, encoding='utf-8').read()
+    slug = os.path.basename(os.path.normpath(a.lesson))
+    planned = planned_spans(a.lesson, slug)
 
     spans, clock = {}, 0.0
     for f in timing['frames']:
@@ -187,9 +357,13 @@ def main(argv=None):
             print('   %-24s 파일 없음' % f['id'])
             continue
         _fr, bs = beats_of(timing, f['frame'])
+        src = '잼'
+        if not bs and f['id'] in planned:
+            bs, src = planned[f['id']], '대본'
         n, why = retime_frame(path, bs, spans[f['id']][1], a.dry)
         total += n
-        print('   %-24s 박자 %2d · 시각 %2d개 %s' % (f['id'], len(bs), n, why))
+        print('   %-24s 박자 %2d(%s) · 시각 %2d개 %s'
+              % (f['id'], len(bs), src, n, why))
 
     idx = SLOT.sub(lambda m: (m.group(1) + ('%g' % spans[m.group('id')][0]) + m.group(4)
                               + ('%g' % spans[m.group('id')][1]) + m.group(6))

@@ -557,32 +557,32 @@
        "actions": [
         {
          "do": {
-          "ko": "외형선 — Continuous · 굵기 0.5 · 흰색(7). 넷 중 이것만 굵습니다.",
-          "en": "Visible line - Continuous, 0.5, white (7). The only thick one of the four."
+          "ko": "외형선 — Continuous · 선가중치 0.30 · 초록(3). 넷 중 이것만 굵습니다.",
+          "en": "Visible line - Continuous, 0.30, green (3). The only thick one of the four."
          }
         },
         {
          "do": {
-          "ko": "중심선 — Center · 굵기 0.25 · 빨강(1) · 선 종류 축척 0.5.",
+          "ko": "중심선 — CENTER · 선가중치 0.15 · 빨강(1) · 선 종류 축척 0.5.",
           "en": "Centerline - Center, 0.25, red (1), linetype scale 0.5."
          }
         },
         {
          "do": {
-          "ko": "숨은선 — Hidden · 굵기 0.25 · 노랑(2) · 선 종류 축척 0.5.",
+          "ko": "숨은선 — HIDDEN · 선가중치 0.15 · 노랑(2) · 선 종류 축척 0.5.",
           "en": "Hidden line - Hidden, 0.25, yellow (2), linetype scale 0.5."
          }
         },
         {
          "do": {
-          "ko": "치수선 — Continuous · 굵기 0.25 · 보라(6). Continuous 라 선 종류 축척은 넣지 않습니다. 치수와 보조선을 같이 씁니다.",
-          "en": "Dimension line - Continuous, 0.25, magenta (6). Dimensions and extension lines share it."
+          "ko": "치수선 — Continuous · 선가중치 0.15 · 흰색(7). Continuous 라 선 종류 축척은 넣지 않습니다. 치수와 보조선을 같이 씁니다.",
+          "en": "Dimension line - Continuous, 0.15, white (7). Dimensions and extension lines share it."
          }
         }
        ],
        "expect": {
-        "ko": "레이어 관리자에 정확히 넷이 있습니다. 외형선만 굵기 0.5 이고 나머지 셋은 0.25 입니다. 선 종류 축척 값이 붙은 것은 중심선과 숨은선뿐입니다.",
-        "en": "The layer manager holds exactly four. Only the visible line is 0.5; the other three are 0.25. Only the centerline and the hidden line carry a linetype scale."
+        "ko": "레이어 관리자에 정확히 넷이 있습니다. 외형선만 선가중치 0.30 이고 나머지 셋은 0.15 입니다. 선 종류 축척 값이 붙은 것은 중심선과 숨은선뿐입니다.",
+        "en": "The layer manager holds exactly four. Only the visible line is 0.30; the other three are 0.15. Only the centerline and the hidden line carry a linetype scale."
        },
        "why": {
         "ko": "굵기와 색, 선 종류 축척을 왜 그렇게 잡는지는 2차시에서 다뤘습니다. 여기서는 값을 보고 넷을 시간 안에 만들면 됩니다.",
@@ -1324,6 +1324,424 @@
      "en": "No lesson started a new file. Each one opened what the last had saved, which is how seven lessons ended up on one sheet."
     }
    ]
+  },
+  {
+   "id": "material-map",
+   "kind": "concept",
+   "label": {
+    "ko": "부록 · 원본 교안 대응표",
+    "en": "Appendix - map to the in-house course deck"
+   },
+   "lede": {
+    "ko": "사내 정본 교안이 표로 주는 것 중, 작도 차시에서 그때그때 쓰느라 한자리에 모이지 않았던 것들입니다. 시험 전에 여기만 훑어도 됩니다.",
+    "en": "The tables the in-house deck gives you, gathered in one place because the drawing lessons use them a few at a time. Skimming this before the exam is enough."
+   },
+   "blocks": [
+    {
+     "type": "p",
+     "ko": "기능키 일곱 개가 상태 막대의 일곱 단추와 하나씩 짝입니다. 이 과정은 다섯을 켜고 둘을 끕니다. 켜고 끄는 이유가 방법과 붙어 있어요. 스냅으로 형상에서 점을 뽑는 방식이라, 커서를 다른 데로 끌고 가는 기능은 방해가 됩니다.",
+     "en": "Seven function keys, one for each button on the status bar. This course turns five on and two off, and the reason is tied to the method: when you pull points off the geometry with snaps, anything that drags the cursor elsewhere is in the way."
+    },
+    {
+     "type": "table",
+     "head": [
+      {
+       "ko": "키",
+       "en": "Key"
+      },
+      {
+       "ko": "이름",
+       "en": "Name"
+      },
+      {
+       "ko": "무엇을 하나",
+       "en": "What it does"
+      },
+      {
+       "ko": "이 과정에서",
+       "en": "In this course"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "F3",
+        "en": "F3"
+       },
+       {
+        "ko": "객체 스냅",
+        "en": "객체 스냅"
+       },
+       {
+        "ko": "끝점·중간점·중심 같은 특징점에 커서가 달라붙습니다",
+        "en": "끝점·중간점·중심 같은 특징점에 커서가 달라붙습니다"
+       },
+       {
+        "ko": "항상 켭니다",
+        "en": "항상 켭니다"
+       }
+      ],
+      [
+       {
+        "ko": "F7",
+        "en": "F7"
+       },
+       {
+        "ko": "그리드",
+        "en": "그리드"
+       },
+       {
+        "ko": "모눈 표시를 켜고 끕니다",
+        "en": "모눈 표시를 켜고 끕니다"
+       },
+       {
+        "ko": "이 과정은 끕니다 — 모눈에 스냅되지 않고 화면만 어지럽습니다",
+        "en": "이 과정은 끕니다 — 모눈에 스냅되지 않고 화면만 어지럽습니다"
+       }
+      ],
+      [
+       {
+        "ko": "F8",
+        "en": "F8"
+       },
+       {
+        "ko": "직교",
+        "en": "직교"
+       },
+       {
+        "ko": "커서가 수평·수직으로만 움직입니다",
+        "en": "커서가 수평·수직으로만 움직입니다"
+       },
+       {
+        "ko": "수평 수직선을 그을 때 켭니다",
+        "en": "수평 수직선을 그을 때 켭니다"
+       }
+      ],
+      [
+       {
+        "ko": "F9",
+        "en": "F9"
+       },
+       {
+        "ko": "스냅",
+        "en": "스냅"
+       },
+       {
+        "ko": "커서가 일정 간격 격자에 걸립니다",
+        "en": "커서가 일정 간격 격자에 걸립니다"
+       },
+       {
+        "ko": "이 과정은 끕니다 — 형상의 특징점을 못 잡게 만듭니다",
+        "en": "이 과정은 끕니다 — 형상의 특징점을 못 잡게 만듭니다"
+       }
+      ],
+      [
+       {
+        "ko": "F10",
+        "en": "F10"
+       },
+       {
+        "ko": "극좌표 추적",
+        "en": "극좌표 추적"
+       },
+       {
+        "ko": "정해 둔 각도마다 안내선이 뜹니다",
+        "en": "정해 둔 각도마다 안내선이 뜹니다"
+       },
+       {
+        "ko": "기울어진 방향이 필요할 때 켭니다",
+        "en": "기울어진 방향이 필요할 때 켭니다"
+       }
+      ],
+      [
+       {
+        "ko": "F11",
+        "en": "F11"
+       },
+       {
+        "ko": "객체 스냅 추적",
+        "en": "객체 스냅 추적"
+       },
+       {
+        "ko": "특징점에서 뻗은 안내선이 만나는 자리에 없는 점을 잡습니다",
+        "en": "특징점에서 뻗은 안내선이 만나는 자리에 없는 점을 잡습니다"
+       },
+       {
+        "ko": "켭니다 — 좌표 없이 중심을 잡는 주된 방법입니다",
+        "en": "켭니다 — 좌표 없이 중심을 잡는 주된 방법입니다"
+       }
+      ],
+      [
+       {
+        "ko": "F12",
+        "en": "F12"
+       },
+       {
+        "ko": "동적 입력",
+        "en": "동적 입력"
+       },
+       {
+        "ko": "커서 옆 입력칸에 길이와 각도를 직접 칩니다",
+        "en": "커서 옆 입력칸에 길이와 각도를 직접 칩니다"
+       },
+       {
+        "ko": "켭니다 — 「방향은 마우스, 길이는 숫자」가 이것 위에서 돕니다",
+        "en": "켭니다 — 「방향은 마우스, 길이는 숫자」가 이것 위에서 돕니다"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "note",
+     "tone": "why",
+     "label": {
+      "ko": "스냅이 안 잡히는 것 같으면",
+      "en": "When snapping seems broken"
+     },
+     "ko": "F9 스냅이 켜져 있는지부터 보세요. 켜져 있으면 커서가 일정 간격 격자에 먼저 걸려서, 끝점 표식이 떠도 그 자리에 못 갑니다. 객체 스냅(F3)이 고장 난 것처럼 보이는 원인의 대부분이 이것입니다.",
+     "en": "Check F9 first. With grid snap on, the cursor lands on the spacing grid before it can reach the endpoint, so object snap (F3) looks broken when it is not."
+    },
+    {
+     "type": "p",
+     "ko": "특수문자 셋은 문자 명령과 치수 문자에서 똑같이 씁니다. 치수 명령이 자동으로 붙여 주는 Ø 와 달리, 주기나 지시선에 직접 쓸 때 필요해요.",
+     "en": "Three special codes, the same in text commands and in dimension text. The dimension commands add Ø for you; these are for when you type it yourself in a note or a leader."
+    },
+    {
+     "type": "table",
+     "head": [
+      {
+       "ko": "입력",
+       "en": "Type"
+      },
+      {
+       "ko": "나오는 기호",
+       "en": "You get"
+      },
+      {
+       "ko": "이름",
+       "en": "Name"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "%%c",
+        "en": "%%c"
+       },
+       {
+        "ko": "Ø",
+        "en": "Ø"
+       },
+       {
+        "ko": "지름",
+        "en": "지름"
+       }
+      ],
+      [
+       {
+        "ko": "%%d",
+        "en": "%%d"
+       },
+       {
+        "ko": "°",
+        "en": "°"
+       },
+       {
+        "ko": "도",
+        "en": "도"
+       }
+      ],
+      [
+       {
+        "ko": "%%p",
+        "en": "%%p"
+       },
+       {
+        "ko": "±",
+        "en": "±"
+       },
+       {
+        "ko": "플러스마이너스",
+        "en": "플러스마이너스"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "편집 단축키는 윈도우에서 쓰던 것과 대부분 같습니다. 하나만 다릅니다. Ctrl+Shift+C 는 기준점을 먼저 묻습니다. 다른 도면에 붙였을 때 같은 자리에 놓이게 하는 것이 이 한 걸음이에요.",
+     "en": "The editing shortcuts are the Windows ones you already know, with one exception: Ctrl+Shift+C asks for a base point first. That single step is what lands the paste in the same place in another drawing."
+    },
+    {
+     "type": "table",
+     "head": [
+      {
+       "ko": "키",
+       "en": "Key"
+      },
+      {
+       "ko": "무엇을 하나",
+       "en": "What it does"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "Ctrl+1",
+        "en": "Ctrl+1"
+       },
+       {
+        "ko": "특성 창을 엽니다 — 개체 하나의 레이어·색·선 종류 축척을 직접 봅니다",
+        "en": "특성 창을 엽니다 — 개체 하나의 레이어·색·선 종류 축척을 직접 봅니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+A",
+        "en": "Ctrl+A"
+       },
+       {
+        "ko": "전체를 선택합니다",
+        "en": "전체를 선택합니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+C",
+        "en": "Ctrl+C"
+       },
+       {
+        "ko": "복사합니다",
+        "en": "복사합니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+Shift+C",
+        "en": "Ctrl+Shift+C"
+       },
+       {
+        "ko": "기준점을 지정해 복사합니다 — 다른 도면에 같은 자리로 붙일 때 씁니다",
+        "en": "기준점을 지정해 복사합니다 — 다른 도면에 같은 자리로 붙일 때 씁니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+V",
+        "en": "Ctrl+V"
+       },
+       {
+        "ko": "붙여넣습니다",
+        "en": "붙여넣습니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+X",
+        "en": "Ctrl+X"
+       },
+       {
+        "ko": "잘라냅니다",
+        "en": "잘라냅니다"
+       }
+      ],
+      [
+       {
+        "ko": "Ctrl+Z",
+        "en": "Ctrl+Z"
+       },
+       {
+        "ko": "되돌립니다 (UNDO)",
+        "en": "되돌립니다 (UNDO)"
+       }
+      ],
+      [
+       {
+        "ko": "Enter",
+        "en": "Enter"
+       },
+       {
+        "ko": "직전 명령을 반복합니다 — Space Bar 도 같습니다",
+        "en": "직전 명령을 반복합니다 — Space Bar 도 같습니다"
+       }
+      ],
+      [
+       {
+        "ko": "Esc",
+        "en": "Esc"
+       },
+       {
+        "ko": "명령을 취소합니다 — 다음 명령 전에 명령행을 비웁니다",
+        "en": "명령을 취소합니다 — 다음 명령 전에 명령행을 비웁니다"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "p",
+     "ko": "마지막으로 선택입니다. 마우스를 어느 쪽으로 끄느냐에 따라 고르는 것이 달라집니다. 자르기와 지우기에서 이것을 모르면 왜 어떤 것은 골라지고 어떤 것은 안 골라지는지 알 수 없어요.",
+     "en": "Last, selection. Which way you drag decides what gets picked. Without this, trimming and erasing look arbitrary."
+    },
+    {
+     "type": "table",
+     "head": [
+      {
+       "ko": "끄는 방향",
+       "en": "Drag"
+      },
+      {
+       "ko": "이름",
+       "en": "Name"
+      },
+      {
+       "ko": "상자 테두리",
+       "en": "Box border"
+      },
+      {
+       "ko": "골라지는 것",
+       "en": "What it picks"
+      }
+     ],
+     "rows": [
+      [
+       {
+        "ko": "왼쪽 → 오른쪽",
+        "en": "왼쪽 → 오른쪽"
+       },
+       {
+        "ko": "윈도우",
+        "en": "윈도우"
+       },
+       {
+        "ko": "실선",
+        "en": "실선"
+       },
+       {
+        "ko": "상자 안에 완전히 들어온 것만 골라집니다",
+        "en": "상자 안에 완전히 들어온 것만 골라집니다"
+       }
+      ],
+      [
+       {
+        "ko": "오른쪽 → 왼쪽",
+        "en": "오른쪽 → 왼쪽"
+       },
+       {
+        "ko": "크로싱",
+        "en": "크로싱"
+       },
+       {
+        "ko": "파선",
+        "en": "파선"
+       },
+       {
+        "ko": "상자에 걸치기만 해도 골라집니다",
+        "en": "상자에 걸치기만 해도 골라집니다"
+       }
+      ]
+     ]
+    }
+   ]
   }
  ],
  "verify": [
@@ -1363,8 +1781,8 @@
     "en": "Layer count and weights"
    },
    "how": {
-    "ko": "레이어가 정확히 넷인지 세고, 외형선만 0.5 이고 나머지 셋이 0.25 인지 봅니다.",
-    "en": "Count exactly four, and confirm only the visible line is 0.5 while the other three are 0.25."
+    "ko": "레이어가 정확히 넷인지 세고, 외형선만 0.30 이고 나머지 셋이 0.15 인지 봅니다.",
+    "en": "Count exactly four, and confirm only the visible line is 0.30 while the other three are 0.15."
    }
   },
   {
