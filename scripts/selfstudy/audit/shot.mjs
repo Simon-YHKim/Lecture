@@ -3,8 +3,8 @@ import { pathToFileURL } from 'url';
 const [file, ...rest] = process.argv.slice(2);
 const b = await chromium.launch();
 const pg = await b.newPage({ viewport: { width: 1600, height: 900 } });
-await pg.goto(pathToFileURL(file).href);
-await pg.waitForFunction(() => window.__deckGo && window.__timelines);
+await pg.goto(pathToFileURL(file).href, { timeout: 180000 });
+await pg.waitForFunction(() => window.__deckGo && window.__timelines, null, { timeout: 180000 });
 for (const spec of rest) {
   const [n, k] = spec.split(':').map(Number);
   await pg.evaluate((i) => window.__deckGo(i - 1), n);

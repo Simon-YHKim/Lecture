@@ -106,7 +106,7 @@ PLAN = {
         r(244, 64, "int", "45도 선과 뒷면 선의 교차점. 20 떨어진 자리예요. 깊이가 이렇게 평면도에서 우측면도로 건너갑니다.",
           "Where it crosses the back line - 20 across. This is how depth travels from the top view to the side view."),
     ]),
-    10: ("profile", [
+    10: (None, [
         s(8, 0, "int", "판 앞면 세로선과 바닥선의 교차점입니다. 첫 점이에요.",
           "Where the plate-front vertical meets the base line. That is your first point."),
         s(20, 0, "int", "뒷면 세로선과 바닥선의 교차점.",

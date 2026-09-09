@@ -72,7 +72,7 @@ SNAP_NAME = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사�
 
 def snap_glyph(kind, x, y, r=4.2):
     """표식 하나를 도면 좌표 위에 그린다. 획 굵기는 배율과 무관하게 둔다."""
-    a = 'class="mk" vector-effect="non-scaling-stroke"'
+    a = 'class="mk"'
     if kind == 'end':
         return '<rect %s x="%.2f" y="%.2f" width="%.2f" height="%.2f"/>' % (
             a, x - r, y - r, r * 2, r * 2)
@@ -151,11 +151,11 @@ def viewbox(svg):
 # 색은 `currentColor` 라 바탕 테마(밝은/어두운)를 그대로 따라간다.
 PRESENT = {
     'outline': 'fill="none" stroke="currentColor" stroke-width=".55" '
-               'stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"',
+               'stroke-linejoin="round" stroke-linecap="round"',
     'hidden': 'fill="none" stroke="currentColor" stroke-width=".3" opacity=".6" '
-              'stroke-dasharray="2.4 1.2" stroke-linecap="butt" vector-effect="non-scaling-stroke"',
+              'stroke-dasharray="2.4 1.2" stroke-linecap="butt"',
     'center': 'fill="none" stroke="currentColor" stroke-width=".28" opacity=".72" '
-              'stroke-dasharray="6 1.2 1 1.2" stroke-linecap="butt" vector-effect="non-scaling-stroke"',
+              'stroke-dasharray="6 1.2 1 1.2" stroke-linecap="butt"',
     'dim': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
     'ext': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
     'tangent': 'fill="none" stroke="currentColor" stroke-width=".26" opacity=".55"',
@@ -163,9 +163,9 @@ PRESENT = {
     'chk': 'fill="none" stroke="currentColor" stroke-width=".18" opacity=".4"',
     'hl': 'fill="none" stroke="none"',
     'hl hot': 'fill="none" stroke="#C7004C" stroke-width="1.9" stroke-linejoin="round" '
-              'stroke-linecap="round" vector-effect="non-scaling-stroke"',
+              'stroke-linecap="round"',
     # A3 도면틀 도해 쪽 이름
-    'si': 'fill="none" stroke="currentColor" stroke-width="1.4" vector-effect="non-scaling-stroke"',
+    'si': 'fill="none" stroke="currentColor" stroke-width="1.4"',
     'sh': 'fill="none" stroke="currentColor" stroke-width="1.4" opacity=".8" '
           'vector-effect="non-scaling-stroke"',
     'sd': 'fill="none" stroke="currentColor" stroke-width="1" opacity=".5" stroke-dasharray="4 3"',
@@ -197,17 +197,17 @@ def stylize(svg):
 SYMBOL_CSS = (
     '<style>'
     '.outline{fill:none;stroke:currentColor;stroke-width:.55;stroke-linejoin:round;'
-    'stroke-linecap:round;vector-effect:non-scaling-stroke}'
+    'stroke-linecap:round}'
     '.hidden{fill:none;stroke:currentColor;stroke-width:.3;opacity:.6;'
-    'stroke-dasharray:2.4 1.2;stroke-linecap:butt;vector-effect:non-scaling-stroke}'
+    'stroke-dasharray:2.4 1.2;stroke-linecap:butt}'
     '.center{fill:none;stroke:currentColor;stroke-width:.28;opacity:.72;'
-    'stroke-dasharray:6 1.2 1 1.2;stroke-linecap:butt;vector-effect:non-scaling-stroke}'
+    'stroke-dasharray:6 1.2 1 1.2;stroke-linecap:butt}'
     '.dim,.ext,.tangent{fill:none;stroke:currentColor;stroke-width:.26;opacity:.55}'
     '.arrow{fill:currentColor;stroke:none;opacity:.55}'
     '.chk{fill:none;stroke:currentColor;stroke-width:.18;opacity:.4}'
     '.hl{fill:none;stroke:none}'
     'text{fill:currentColor;opacity:.6}'
-    '.si{fill:none;stroke:currentColor;stroke-width:1.4;vector-effect:non-scaling-stroke}'
+    '.si{fill:none;stroke:currentColor;stroke-width:1.4}'
     '.sh{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.8;'
     'vector-effect:non-scaling-stroke}'
     '.sd{fill:none;stroke:currentColor;stroke-width:1;opacity:.5;stroke-dasharray:4 3}'
@@ -215,16 +215,21 @@ SYMBOL_CSS = (
     '</style>')
 
 
-def to_symbol(svg, sid):
-    """도해 하나를 `<symbol>` 로 바꾼다. 쪽마다 한 벌만 두고 `<use>` 로 부른다.
+def to_symbol(svg, sid, css=True):
+    """도해 하나를 `<symbol>` 로 바꾼다. 한 벌만 두고 `<use>` 로 부른다.
 
     자습 교재는 한 쪽이 100KB 를 넘으면 안 된다(지침 §2). 정면도가 14KB 라
     단계마다 복사해 넣으면 열네 단계에서 이미 한도를 넘는다.
+
+    `css` 를 끄면 표현을 속성으로 박는다. `<use>` 는 심볼 안을 **통째로 복제**하는데,
+    안에 `<style>` 이 있으면 그 스타일시트까지 인스턴스 수만큼 복제돼 파싱된다.
+    여덟 차시 묶음(`<use>` 82개)에서 그것 때문에 첫 화면이 40초 걸렸다. 인스턴스가
+    몇 개뿐인 자습 교재는 켜 두고(파일이 작아진다), 묶음 데크는 끈다.
     """
     body = svg[svg.index('>', svg.index('<svg')) + 1:]
     body = body[:body.rindex('</svg>')]
-    return '<symbol id="%s" viewBox="%s">%s%s</symbol>' % (
-        sid, viewbox(svg), SYMBOL_CSS, body)
+    inner = (SYMBOL_CSS + body) if css else stylize(body)
+    return '<symbol id="%s" viewBox="%s">%s</symbol>' % (sid, viewbox(svg), inner)
 
 
 def hl_for(svg, feature):

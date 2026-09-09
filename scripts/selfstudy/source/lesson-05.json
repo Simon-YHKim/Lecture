@@ -1937,7 +1937,6 @@
         "en": "The C here is LINE's close option, not CIRCLE. Type C after starting a fresh command and you begin a circle. Reorder the six points and the outline crosses itself, so pick them in sequence."
        },
        "on": "three",
-       "feature": "profile",
        "spots": [
         {
          "view": "side",

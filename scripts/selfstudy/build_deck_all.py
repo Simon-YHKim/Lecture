@@ -118,13 +118,14 @@ def main(outpath, tmpdir, gsap=None):
 %s
 </script>
 %s
+%s
 <script>window.__timelines = window.__timelines || {};</script>
 %s
 %s
 %s
 </body>
 </html>
-""" % (lib, B.STYLE, manifest, '\n'.join(bodies), nav, memo, banner)
+""" % (lib, B.STYLE, manifest, B.surface_defs(), '\n'.join(bodies), nav, memo, banner)
     io.open(outpath, 'w', encoding='utf-8', newline='\n').write(doc)
     print('\n엮음 %d차시 · 슬라이드 %d장 · %.1f MB'
           % (len(lessons), len(slides), os.path.getsize(outpath) / 1048576.0))
