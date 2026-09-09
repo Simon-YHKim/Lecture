@@ -3,13 +3,18 @@
 이 파일이 세션 간 인수인계의 정본이다. 세션을 시작하면 먼저 읽고, 끝낼 때 갱신한다.
 최신 블록만 `## Latest` 를 달고, 이전 블록은 `## <날짜>` 로 내린다.
 
+> 최종 갱신 **2026-09-10 01:28 KST** · Claude Code (Opus 5) · 커밋은 이 파일의 git 이력 참조
+
 ---
 
 ## Latest — 2026-09-09 / 자습본 검수 반영 — 강조 정합·상대좌표 제거·전 슬라이드 여백 검사
 
 ### 어디까지 왔나
-- main HEAD: `24e7496` (이번 세션에 머지한 코드 PR 없음 — 이 핸드오프가 첫 머지)
-- 이번 세션 머지된 PR: 없음. **작업물 130개가 커밋되지 않은 채 워킹 트리에만 있다.**
+- main HEAD: `ca6b489`
+- 이번 세션 머지된 PR: **#9** (핸드오프 + 검사 도구) · **#10** (요청 원문 + 번호 대응표)
+  — 둘 다 문서와 도구뿐이고 **강의 작업물은 하나도 안 들어갔다.**
+- **작업물 130개가 커밋되지 않은 채 워킹 트리에만 있다.**
+- 원격에 남은 브랜치: `feat/measured-timing` (머지 여부 미확인 — 처리할 것)
 - CI: `private-materials-guard` — main 최근 3회 전부 green.
 - working tree: **dirty (수정 110 · 신규 20)** — 커밋은 사용자 판단으로 남겨 둠
 
@@ -19,19 +24,31 @@
 `origin/main` 을 따로 떼어 같은 검사를 돌리면 **0건 통과**다. 즉 커밋 안 된
 작업물 쪽 문제이고, 이 핸드오프 커밋(문서 + 검사 도구)에는 영향이 없다.
 
-원인은 결함이 아니라 **검사기와 프로젝트가 갈라선 것**이다.
+> ⚠️ **앞선 판에서 내가 이 절을 틀리게 적었다.** 183건을 한 가지 원인으로
+> 적었는데 실제로는 네 가지다. 검사기의 글자 수 기준만 고치면 **105건이 남는다.**
+> 아래는 `python scripts/part/verify_course.py` 를 실제로 돌려 센 값이다.
 
-- `index.html` 의 프레임 길이가 char-count 추정값(12, 141, 95…)에서
-  **실측값**(16.053, 141.899, 80.472…)으로 바뀌어 있다. `feat/measured-timing`
-  에서 정한 방식이다 — "Measure how long the Korean takes instead of counting
-  characters".
-- 그런데 `check-course-projects.ps1` 은 여전히 SCRIPT.md 글자 수로 기준을 만든다.
-  그래서 "대본을 고치고 스캐폴드를 다시 돌리지 않았다" 로 183건이 뜬다.
+| 건수 | 메시지 | 진짜 원인 |
+|---|---|---|
+| **78** | `길이 N 인데 SCRIPT.md 기준은 N — 대본을 고치고 스캐폴드를 다시 돌리지 않았다` | 검사기가 아직 글자 수로 기준을 만든다 |
+| **78** | `N편 N 길이가 마스터와 다르다` | `compositions/episodes/ep*.html` 이 index.html 변경을 따라 **재생성되지 않았다** |
+| **19** | `N편 전체 길이가 슬롯 합과 다르다` | 같은 원인 |
+| **8** | `BRIEF.md length 가 실제 길이 Ns 와 다르다` | `BRIEF.md` 의 `length:` 헤더가 낡았다 |
 
-**따라서 작업물 커밋 전에 검사기를 먼저 고쳐야 한다.** `narration-timing.json`
-이 있으면 그것을 기준으로 삼고, 없을 때만 글자 수로 떨어지게 하는 것이 맞다
-(`narration-timing.json` 8개는 아직 untracked 이므로 함께 커밋해야 한다).
+**세 가지를 해야 한다. 하나가 아니다.**
+
+1. `check-course-projects.ps1` / `verify_course.py` 가 `narration-timing.json` 이
+   있으면 그것을 기준으로 삼고, 없을 때만 글자 수로 떨어지게 한다. → 78건
+2. `compositions/episodes/ep*.html` 을 다시 굽는다. `git status` 로 확인하면 이
+   폴더는 **수정되지 않았다** — 편 분할(`62da030`)이 옛 길이 위에 서 있다. → 97건
+3. 차시마다 `BRIEF.md` 의 `length:` 를 실제 길이로 고친다. → 8건
+
+`narration-timing.json` 8개는 아직 untracked 이므로 함께 커밋해야 한다.
 이걸 안 하고 커밋하면 자동 머지가 막히고, 억지로 넘기면 검사기가 무의미해진다.
+
+**프레임 길이가 바뀐 경위** — char-count 추정값(12, 141, 95…)에서 실측값
+(16.053, 141.899, 80.472…)으로 바뀌었다. `feat/measured-timing` 에서 정한 방식이다
+("Measure how long the Korean takes instead of counting characters").
 
 ### 이번 세션에 한 일
 
@@ -91,8 +108,9 @@
 
 | # | 작업 | 크기 | 권장 |
 |---|---|---|---|
+| 0 | **작업 폴더에 남은 판단을 저장소로 올리기** — 이미 `scripts/selfstudy/patches/` 와 `sheet_figures.py` 로 옮겼다. 남은 것이 있는지 한 번 더 볼 것 | small | 좌표표·매핑표가 휘발성 폴더에만 있으면 B·C 가 좌표 없이 시작한다 |
 | A | **`check-course-projects.ps1` 을 실측 시간 기준으로 고치고, 130개 작업물 + `narration-timing.json` 8개를 커밋** | small | ⭐ 위 「막힌 것」. 이걸 안 하면 이번 세션 결과물이 저장소에 못 들어간다. 다른 무엇보다 먼저 |
-| B | A3 용지 도해 + 3뷰 도해를 만들고 나머지 74개 실습 단계에 코치 마크 | large | 사용자 정책 2번이고 검수 메모 8~11·13이 전부 이것이다. 실습 단계 103개 중 아직 29개만 붙어 있다. 2차시(도면틀)는 A3 용지 도해가, 5차시(3뷰)는 3뷰 도해가 없어서 막혀 있다 |
+| B | 나머지 74개 실습 단계에 코치 마크 | **medium** | 사용자 정책 2번이고 검수 메모 8~11·13이 전부 이것이다. 실습 단계 103개 중 29개만 붙어 있다. **「도해가 없어서 막혔다」고 적었던 것은 사실이 아니다** — A3 도면틀과 제3각법 비교 도해는 이미 그려져 있었고 `scripts/selfstudy/sheet_figures.py` 로 옮겨 두었다. 막힌 것은 **슬라이드로 옮기는 경로**다(아래 참조) |
 | C | 3~5차시 대본 낭독 시간 재측정 → 프레임 재조정 | medium | 녹화 대본을 다시 썼다. 영상 제작 전에 필요. **자습본 데크에는 영향 없다**(바뀐 곳이 전부 녹화 프레임 안이라) |
 | D | `scripts/selfstudy/source/curriculum.json` 의 옛 방법 정리 | small | 기획 문서라 사용자에게 안 보이지만, 다시 빌드하는 사람이 옛 방법을 되살릴 수 있다 |
 
@@ -268,6 +286,62 @@
 > 2건(2차시 프레임3 −489자, 프레임7 −260자)을 **잘린 대본을 보고** 검수하셨다. 잘림은
 > 없앴고, 수정은 실제로 보신 범위에만 적용하고 뒷부분은 보존했다.
 
+### 문서에 없던 것들 (대조 검사로 찾음)
+
+문서 · 실제 diff · 작업 폴더를 따로 조사해 대조한 결과다. 아래는 **바뀌었는데
+핸드오프가 설명하지 않던 것**이다.
+
+**`scripts/part/narrate_tts.py` (신규 369줄) — 이름조차 없었다.**
+`narration-timing.json` 8개를 만든 유일한 주체이고, index.html 8개와 프레임 61개가
+전부 여기서 파생됐다. 이번 세션 변경의 상류다.
+`python scripts/part/narrate_tts.py <lesson-dir> [--out DIR] [--dry-run] | --all`
+문단마다 SAPI 로 합성해 wav 를 만들고, 커밋용 `narration-timing.json` 과
+`.gitignore` 대상인 `media.local.json` 을 낸다.
+⚠️ **생성기가 둘이다** — `scripts/build-narration-timing.ps1`(Whisper 정렬 방식)이
+저장소에 그대로 살아 있다. 어느 쪽이 정본인지 정하고 하나를 폐기할 것.
+
+**`narration-timing.json` 스키마 — 두 배열의 소비자가 다르다.**
+최상위: `schemaVersion` `source` `voice` `note` `totalSeconds` `frames` `beats`.
+- `frames[]` = `{frame, id, line, start, end, duration, audio}` → **index.html 슬롯**이 쓴다
+- `beats[]` = `{frame, beat, observedStart, observedEnd}` → **`beats.load_measured()`** 만 쓴다
+
+키 이름을 바꾸면 `scripts/part/beats.py` 가 조용히 빈 dict 를 돌려준다. 오류가 안 난다.
+
+**산출물이 하나가 아니라 둘이다.** 「활성 인프라 — 네트워크 참조 0」은 ①에만 맞다.
+- ① 자습본 검수판 — 오프라인 단일 HTML, 2.4MB, GSAP 인라인, **네트워크 참조 0**
+- ② `docs/autocad-technician/deck/{ko,en}/` (신규 8파일 502KB) — `build_deck.py` 산출.
+  **`cdn.jsdelivr.net` 의 hyperframes-player 를 부른다. 오프라인이 아니다.**
+  이것을 커밋할지 폐기할지 미결.
+
+**덱 빌더가 넷이고 세대가 있다.** 문서는 뒤 둘만 적고 있었다.
+`build_deck.py`(1세대 · docs/deck 산출 · 유지 여부 미결) →
+`build_deck_frames.py`(2세대 · 기존 78프레임 마운트 · 영어 덱 불가로 폐기) →
+**`build_deck_selfstudy.py`(현행 정본)** + `build_deck_all.py`(8차시 묶기)
+
+**자습본 조작에 `kind` 필드가 생겼다 (627건).**
+2차시 97 · 3차시 115 · 4차시 111 · 5차시 166 · 6차시 65 · 7차시 71 · 8차시 2.
+값 8종 — `type` `see` `key` `move` `snap` `click` `alt` `ask`.
+렌더러 `build_selfstudy.py:ACT_KIND`, 스타일 `assets/base.css` 의 `.act .kind`,
+자동 판별 규칙 `scripts/selfstudy/patches/tag_kinds.py`.
+
+**1차시 「시작하기 전 점검」 절 142줄이 사라진 것은 삭제가 아니라 이설이다.**
+2차시 앞머리 PREFLIGHT 로 옮겼다.
+
+### 미결 질문
+
+| 코드 | 질문 | 안 정하면 무엇이 막히나 |
+|---|---|---|
+| `Q-260910-01` | **치수선 색이 정해지지 않았다.** 국문 본문은 「빨강 계열 12」, 패치 스크립트는 「빨강 1 + 선 종류 축척 0.25」, 영문 본문에는 magenta 서술이 남아 있다 | 확정 전에 6·8차시 레이어 표를 다시 구우면 세 값이 더 벌어진다 |
+| `Q-260910-02` | `docs/autocad-technician/deck/` 를 커밋할 것인가 폐기할 것인가 | 커밋하면 저장소에 CDN 의존 산출물이 들어간다 |
+| `Q-260910-03` | 참고 치수 (95.7) 의 기준점이 대본·도면·geometry 셋에서 다르다 | 7차시 15단계를 확정할 수 없다 |
+
+### 사용자 확인 요청
+
+`REQ-260910-01` — **공개 배포 전 확인 필요.** 8차시 대본에 사내 시험이라는 사실과
+조직명이 들어 있다(`LG이노텍` 이 64개 파일). `private-materials-guard` 는 **경로만
+본다 — 조직명과 실명은 잡지 않는다.** 이 저장소가 공개라면 배포 전에 사용자 판단이
+필요하다.
+
 ### 적용 중인 정책 (영구 — 사용자가 명시한 것)
 
 1. **좌표 입력 금지.** "좌표를 이용한 작업은 권장하지 않음. 너무 어렵고 불편한 방법임.
@@ -297,6 +371,11 @@
   개인 경로가 남는 것을 막는 규칙이라 맞는 동작이고, **이 문서에 그 형태를 예시로
   적어도 걸린다**(직접 겪었다). 도구 스크립트는 경로를 런타임에 찾아야 한다 —
   `scripts/selfstudy/audit/pw.mjs` 가 그 방법이다.
+- **자습본 빌드는 `BUILD_STAMP` 가 필요하다.** 없으면 헤더 작성 시각이 빈칸으로
+  나간다(`작성  · 발행 Claude Code`). 실제로 그렇게 나간 파일이 있다.
+  `BUILD_STAMP='YYYY-MM-DD HH:MM KST' python scripts/selfstudy/build_selfstudy.py …`
+- **`.playwright-mcp/` 는 `.gitignore` 에 없다.** 86파일 1.1MB 의 검수 흔적이다.
+  작업물을 커밋하기 전에 무시 목록에 넣을 것.
 - **SCRIPT.md 는 문장마다 줄을 나누고 네 칸을 들여 쓴다.** 여러 문장을 한 덩어리로
   바꾸려 하면 안 맞는다. **문단이 교체 단위**이고 앞에 `'    '` 를 붙인다.
 - **데크 화면을 눈으로 확인할 때는 장면을 이름으로 집는다.** 데크는 장면을 겹쳐 두고
@@ -315,7 +394,10 @@ scripts/selfstudy/figures.py                정본 도면을 슬라이드용으�
 scripts/selfstudy/audit/audit_deck.mjs      전 슬라이드 애니메이션·노트 누락 검사
 scripts/selfstudy/audit/audit_fit.mjs       넘침·아래 빈 띠 검사
 scripts/selfstudy/audit/shot.mjs            슬라이드 화면 캡쳐 (n 또는 n:조각)
-scripts/part/edu_ib_02.py                   정본 도면 생성기. 형상별 강조 겹선이 여기 있다
+scripts/selfstudy/sheet_figures.py          A3 도면틀 · 제3각법 비교 도해 (큐 B 가 쓸 것)
+scripts/selfstudy/patches/                 한 번 돌리고 끝난 스크립트 + 그 안의 판단. README 먼저
+scripts/part/narrate_tts.py                narration-timing.json 생성기 — 이번 세션 변경의 상류
+scripts/part/edu_ib_02.py                  정본 도면 생성기. 형상별 강조 겹선이 여기 있다
 scripts/part/retime_frames.py               프레임 트윈을 다시 잰 박자에 맞춘다
 projects/autocad-technician/lesson-0N-*/    대본(SCRIPT.md) · 프레임 · narration-timing.json
 ```
