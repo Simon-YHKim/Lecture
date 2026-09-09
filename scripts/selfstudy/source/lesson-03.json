@@ -15,8 +15,8 @@
    "en": "You open the A3 template you built last lesson and draw the first lines of the part: the base outline first, then two centerlines pulled out of it, then the boss circle and the two web lines."
   },
   "why": {
-   "ko": "스냅으로 잡을 것이 있으려면 형상이 먼저 있어야 합니다. 외곽이 서면 중심선도 보스 중심도 목 접점도 전부 형상에서 나와요. 오늘 치는 절대좌표는 하나도 없습니다.",
-   "en": "A snap needs something to catch, so the shape has to come first. Once the outline stands, the centerlines, the boss centre and the tangents all come out of it. Not one absolute coordinate is typed today."
+   "ko": "스냅으로 잡을 것이 있으려면 형상이 먼저 있어야 합니다. 외곽이 서면 중심선도 보스 중심도 목 접점도 전부 형상에서 나와요. 오늘 치는 숫자는 도면에 적힌 치수뿐입니다.",
+   "en": "A snap needs something to catch, so the shape has to come first. Once the outline stands, the centerlines, the boss centre and the tangents all come out of it. The only numbers you type today are the dimensions printed on the drawing."
   },
   "where": {
    "ko": "지금 파일에는 도면틀과 표제란, 레이어 네 개만 있습니다. 오늘이 끝나면 정면도에 베이스 외곽과 중심선 두 개, 보스 원, 목 접선 두 개까지 그려져 있어요.",
@@ -29,7 +29,7 @@
    "en": "You can open the previous lesson's file, draw on top of it, and save under a new name to keep a per-lesson state."
   },
   {
-   "ko": "베이스 외곽을 폴리선 하나로 그립니다. 첫 점은 자유 클릭이고, 나머지는 도면에 적힌 숫자를 상대좌표로 넣습니다.",
+   "ko": "베이스 외곽을 사각형 하나로 세웁니다. 첫 구석은 자유 클릭이고, 가로 120 과 세로 16 은 REC 의 치수 옵션으로 넣습니다. 모따기는 그다음에 CHAMFER 로 자릅니다.",
    "en": "You can draw the base outline as a single polyline: the first point by a free click, every other number straight off the drawing as a relative coordinate."
   },
   {
@@ -395,6 +395,7 @@
     },
     {
      "type": "cards",
+     "altPath": true,
      "items": [
       {
        "label": {
@@ -420,6 +421,7 @@
     },
     {
      "type": "note",
+     "altPath": true,
      "tone": "why",
      "label": {
       "ko": "언제 옮길 만한가",
@@ -2264,7 +2266,7 @@
     "en": "Did any line jump while you drew"
    },
    "how": {
-    "ko": "선이 방금 그리던 자리에서 뚝 떨어진 곳으로 튀었다면 골뱅이를 빠뜨린 거예요.",
+    "ko": "그은 선의 방향이 미심쩍으면 상태 막대의 직교 단추가 눌려 있는지 보세요.",
     "en": "A line that jumped far from where you were drawing means the @ was left out."
    }
   }
@@ -2286,7 +2288,7 @@
     "en": "Your line jumped far from where you were drawing. What did you omit and how do you undo it?"
    },
    "a": {
-    "ko": "골뱅이를 빠뜨려 상대좌표가 절대좌표로 읽혔습니다. 폴리선 명령이 진행 중이면 `U` 엔터로 마지막 한 점만 취소합니다. 명령을 이미 빠져나왔으면 `Ctrl+Z` 예요.",
+    "ko": "직교가 꺼진 채로 길이만 쳐서 선이 반 도쯤 기울었습니다. 명령이 진행 중이면 `U` 엔터로 마지막 한 점만 취소합니다. 명령을 이미 빠져나왔으면 `Ctrl+Z` 예요.",
     "en": "You left out the @, so a relative entry was read as absolute. If the polyline command is still running, type `U` and Enter to undo just the last point. If you have already left the command, use `Ctrl+Z`."
    }
   },
@@ -2594,7 +2596,7 @@
     "en": "Stepping 40 either side of where the centerline meets the top face gave both web starts, and the tangent snap put their far ends on the circle."
    },
    {
-    "ko": "점을 찍는 네 가지 방법이 한 도형 안에서 다 나왔습니다. 자유 클릭 한 번, 방향과 거리 두 번, 스냅 일곱 번, 좌표는 전부 상대좌표였어요.",
+    "ko": "점을 찍는 네 가지 방법이 한 도형 안에서 다 나왔습니다. 자유 클릭 한 번, 방향과 거리 두 번, 스냅과 추적 일곱 번, 그리고 치수 옵션으로 준 숫자 둘이에요. 좌표는 한 번도 치지 않았습니다.",
     "en": "All four ways of placing a point turned up in one shape: one free click, two direction-and-distance moves, five snaps, and coordinates only where the drawing printed the number."
    },
    {

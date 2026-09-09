@@ -1867,8 +1867,8 @@
         },
         {
          "do": {
-          "ko": "베이스 윗면의 한가운데를 클릭합니다. `60,16` 근처입니다.",
-          "en": "Click the middle of the base top face, near 60,16."
+          "ko": "베이스 윗면의 한가운데를 클릭합니다. 두 목 선 사이에 낀 구간이에요.",
+          "en": "Click the middle of the base top face - the stretch caught between the two web lines."
          },
          "kind": "click"
         },

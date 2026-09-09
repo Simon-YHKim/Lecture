@@ -201,8 +201,8 @@
         "en": "Color"
        },
        {
-        "ko": "빨강 계열 12번",
-        "en": "Magenta (6)"
+        "ko": "흰색 7번",
+        "en": "White (7)"
        }
       ],
       [
@@ -1425,8 +1425,8 @@
         }
        ],
        "expect": {
-        "ko": "화면 위 레이어 표시가 치수선으로 바뀝니다. 색은 빨강 계열 12번입니다.",
-        "en": "The layer on the ribbon changes to the dimension layer, magenta (6)."
+        "ko": "화면 위 레이어 표시가 치수선으로 바뀝니다. 색은 흰색 7번입니다.",
+        "en": "The layer on the ribbon changes to the dimension layer, white (7)."
        },
        "why": {
         "ko": "치수가 외형선과 겹쳐 있어 나중에 골라내기가 어려워요. 그리기 전에 한 번 바꾸는 게 훨씬 낫습니다.",

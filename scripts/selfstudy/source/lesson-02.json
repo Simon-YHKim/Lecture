@@ -1098,8 +1098,8 @@
         "en": "Continuous"
        },
        {
-        "ko": "빨강 계열 12",
-        "en": "red 12"
+        "ko": "흰색 7",
+        "en": "white 7"
        },
        {
         "ko": "0.25",
@@ -1118,8 +1118,8 @@
     },
     {
      "type": "p",
-     "ko": "표에 숫자가 두 종류입니다. 헷갈리기 쉬운 자리라 짚고 갈게요. 선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.5, 나머지는 0.25 로 정확히 두 배예요. 인쇄된 도면에서 형상이 먼저 눈에 들어와야 하기 때문입니다.",
-     "en": "There are two kinds of number in that table. It is an easy place to slip, so look at it closely. Lineweight is the thickness of the line, in millimeters. Only the visible line is 0.5 and the rest are 0.25, exactly double. The shape has to reach your eye first on a printed drawing."
+     "ko": "표에 숫자가 두 종류입니다. 헷갈리기 쉬운 자리라 짚고 갈게요. 선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.30, 나머지는 0.15 로 정확히 두 배예요. 인쇄된 도면에서 형상이 먼저 눈에 들어와야 하기 때문입니다.",
+     "en": "There are two kinds of number in that table. It is an easy place to slip, so look at it closely. Lineweight is the thickness of the line, in millimeters. Only the visible line is 0.30 and the rest are 0.15, exactly double. The shape has to reach your eye first on a printed drawing."
     },
     {
      "type": "figure",
@@ -1276,8 +1276,8 @@
         "en": "Type a coordinate"
        },
        {
-        "ko": "`60,62` · `0,0` — 원점에서 잰 값을 그대로",
-        "en": "`60,62`, `0,0` - the value measured from the origin, as it is"
+        "ko": "쓰지 않습니다 — 용지선 두 구석만 예외",
+        "en": "Not used - the two sheet-border corners are the only exception"
        },
        {
         "ko": "도면이 **원점 기준** 값을 줄 때. 이 과정에서는 용지선 두 구석뿐이에요",
@@ -1305,8 +1305,8 @@
         "en": "Must be exact — today"
        },
        "body": {
-        "ko": "베이스 여섯 꼭짓점, 보스 중심 `60,62`, 목이 시작하는 `20,16` 과 `100,16`, 보스 원에 닿는 두 접점. 꼭짓점만 상대좌표로 넣고, 나머지는 스냅으로 잡습니다.",
-        "en": "The six base vertices, the boss centre `60,62`, the web feet at `20,16` and `100,16`, and the two points where the web meets the circle. The first three by coordinate, the tangents by snap."
+        "ko": "베이스 네 꼭짓점, 보스 중심, 목이 시작하는 두 점, 보스 원에 닿는 두 접점. 사각형은 REC 의 치수 옵션으로 세우고 나머지는 전부 스냅과 추적으로 잡습니다.",
+        "en": "The four base corners, the boss centre, the two web feet and the two tangent points. The rectangle goes in through the Dimensions option of REC; everything else comes off the geometry by snap and tracking."
        }
       },
       {
@@ -1354,7 +1354,7 @@
      "rows": [
       [
        {
-        "ko": "절대좌표 `x,y`",
+        "ko": "좌표 입력 `x,y`",
         "en": "Absolute `x,y`"
        },
        {
@@ -2180,8 +2180,8 @@
         },
         {
          "do": {
-          "ko": "치수선 행은 색상 12번을 고릅니다. 빨강 계열이라 눈에 띄면서, 중심선이 쓰는 1번 빨강과는 구분돼요. 선 종류는 Continuous 그대로 두고, 선 종류 축척은 0.25 로 넣습니다.",
-          "en": "On the dimension line row choose magenta (6). Leave the linetype as Continuous."
+          "ko": "치수선 행은 색상 7번 흰색을 고릅니다. 외형선이 초록 3번이라 화면에서 둘이 섞이지 않아요. 선 종류는 Continuous 그대로 두고, 선가중치는 0.15 입니다. Continuous 에는 조정할 간격이 없으니 선 종류 축척은 비워 둡니다.",
+          "en": "On the dimension line row choose white (7). The visible line is green (3), so the two never blur together on screen. Leave the linetype as Continuous and set the lineweight to 0.15. Continuous has no gaps to scale, so leave linetype scale empty."
          },
          "kind": "click"
         },
@@ -2525,7 +2525,7 @@
         "en": "A 200 by 30 rectangle meets the lower right border corner, split into two cells."
        },
        "why": {
-        "ko": "표제란은 도면선 모서리에 딱 붙어야 합니다. 그 모서리를 끝점 스냅으로 잡으면 붙는 것이 보장돼요. 크기는 도면에 적힌 200 과 30 을 골뱅이 붙인 상대좌표로 그대로 넣습니다.",
+        "ko": "표제란은 도면선 모서리에 딱 붙어야 합니다. 그 모서리를 끝점 스냅으로 잡으면 붙는 것이 보장돼요. 크기는 REC 의 치수 옵션으로 200 과 30 을 그대로 넣습니다.",
         "en": "The title block has to meet the border corner exactly. Catch that corner with an endpoint snap and it meets by construction. The size goes in as a relative coordinate - the 200 and the 30 the drawing states."
        },
        "pitfall": {
@@ -2989,8 +2989,8 @@
     "en": "What is the difference between lineweight and linetype scale?"
    },
    "a": {
-    "ko": "선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.5, 나머지는 0.25 입니다. 선 종류 축척은 점선의 간격이라 중심선과 숨은선에만 값이 있습니다. Continuous 에는 조정할 간격이 없어요. 틀렸으면 「레이어 네 개」로 돌아가세요.",
-    "en": "Lineweight is the thickness of the line in millimeters: 0.5 for the visible line and 0.25 for the rest. Linetype scale is the spacing of the dashes, so only the centerline and the hidden line carry a value. Continuous has no spacing to adjust. If you missed this, go back to the four-layer section."
+    "ko": "선가중치는 선의 두께이고 단위는 밀리미터입니다. 외형선만 0.30, 나머지는 0.15 입니다. 선 종류 축척은 점선의 간격이라 중심선과 숨은선에만 값이 있습니다. Continuous 에는 조정할 간격이 없어요. 틀렸으면 「레이어 네 개」로 돌아가세요.",
+    "en": "Lineweight is the thickness of the line in millimeters: 0.30 for the visible line and 0.15 for the rest. Linetype scale is the spacing of the dashes, so only the centerline and the hidden line carry a value. Continuous has no spacing to adjust. If you missed this, go back to the four-layer section."
    }
   }
  ],
@@ -3247,7 +3247,7 @@
    }
   ],
   "next": {
-   "ko": "3차시는 기준선과 외곽입니다. 드디어 선을 그어요. 절대좌표와 상대좌표와 극좌표로 점을 찍습니다. 셋을 각각 언제 쓰는지 봐요. LINE 과 PLINE 의 차이도 봅니다. 원점과 기준면을 정하고 120 × 16 베이스를 작도해요. 오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그립니다. 시작할 때 EDU-IB-02_L02_TEMPLATE 을 엽니다. 새로 만들지 마세요.",
+   "ko": "3차시는 기준선과 외곽입니다. 드디어 선을 그어요. 점 찍는 방법 넷을 봅니다. 객체 스냅, 직교와 수치 입력, 스냅 추적과 FROM, 자유 클릭이에요. 넷 중 무엇을 쓸지 가르는 기준도 함께 봐요. LINE 과 PLINE 의 차이도 봅니다. 원점과 기준면을 정하고 120 × 16 베이스를 작도해요. 오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그립니다. 시작할 때 EDU-IB-02_L02_TEMPLATE 을 엽니다. 새로 만들지 마세요.",
    "en": "Lesson 3 is the baseline and the outline, and you finally draw. You place points with absolute, relative, and polar coordinates and see when each one fits. You also see how LINE differs from PLINE. You fix the origin and the datum face, then draw the 120 by 16 base from typed coordinates. With the tangent snap you turned on today you draw the web lines tangent to the boss circle. Open EDU-IB-02_L02_TEMPLATE to start. Do not create a new file."
   }
  }
