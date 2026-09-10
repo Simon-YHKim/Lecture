@@ -522,7 +522,7 @@
        },
        {
         "ko": "2-R10 · 2-장공 R5",
-        "en": "2-R10, 2-장공 R5 (two R5 slots)"
+        "en": "2-R10, 2-SLOT R5"
        }
       ],
       [
@@ -673,7 +673,7 @@
      },
      "alt": {
       "ko": "정면도 아래에 12 와 29 와 80 과 50 과 120 과 괄호 친 95.7 이 층을 이룹니다. 왼쪽에는 16 과 62 와 90 이, 오른쪽에는 8 과 26 이, 위쪽에는 60 이 놓여요. Ø25 H7 과 2-장공 R5 와 PCD Ø44 는 왼쪽으로, Ø56 과 4-M5 깊이 10 과 2-R10 과 2-C5 와 45도는 오른쪽으로 뽑혀 나갑니다.",
-      "en": "Below the front view, 12, 29, 80, 50, 120, and the parenthesised 95.7 stack in layers; 16, 62, and 90 sit left, 8 and 26 right, 60 above. Ø25 H7, 2-장공 R5 (two R5 slots), and PCD Ø44 pull out left; Ø56, 4-M5 깊이 10, 2-R10, 2-C5, and the 45 degrees pull out right."
+      "en": "Below the front view, 12, 29, 80, 50, 120, and the parenthesised 95.7 stack in layers; 16, 62, and 90 sit left, 8 and 26 right, 60 above. Ø25 H7, 2-SLOT R5, and PCD Ø44 pull out left; Ø56, 4-M5 DEPTH 10, 2-R10, 2-C5, and the 45 degrees pull out right."
      }
     },
     {
@@ -942,7 +942,7 @@
        },
        {
         "ko": "2-장공 R5",
-        "en": "2-장공 R5 (two R5 slots)"
+        "en": "2-SLOT R5"
        },
        {
         "ko": "장공 끝의 반원",
@@ -1101,7 +1101,7 @@
       {
        "label": {
         "ko": "`4-M5 깊이 10` — 탭",
-        "en": "`4-M5 깊이 10` - the tapped holes"
+        "en": "`4-M5 DEPTH 10` - the tapped holes"
        },
        "body": {
         "ko": "지름 치수는 화면에 그린 원의 지름만 보여 줍니다. 나사 규격과 깊이는 지시선에 따로 명시합니다.",
@@ -1153,7 +1153,7 @@
       [
        {
         "ko": "2-장공 R5",
-        "en": "2-장공 R5 (two R5 slots)"
+        "en": "2-SLOT R5"
        },
        {
         "ko": "장공 끝원 넷",
@@ -1181,7 +1181,7 @@
       [
        {
         "ko": "4-M5 깊이 10",
-        "en": "4-M5 깊이 10"
+        "en": "4-M5 DEPTH 10"
        },
        {
         "ko": "탭 네 개",
@@ -2092,7 +2092,7 @@
        "n": 11,
        "title": {
         "ko": "반지름 2-R10과 2-장공 R5",
-        "en": "Radii 2-R10 and 2-장공 R5 (two R5 slots)"
+        "en": "Radii 2-R10 and 2-SLOT R5"
        },
        "actions": [
         {
@@ -2143,7 +2143,7 @@
         {
          "do": {
           "ko": "— 측정값 앞에 치고 뒤에 한 칸 띄웁니다. 편집기를 닫고 치수선을 장공 아래 빈 자리에 놓으면 2-장공 R5 입니다.",
-          "en": "- type it in front of the measured value, trailing space and all. Close the editor and place the dimension below the slot; it reads 2-장공 R5, two slots at R5."
+          "en": "- type it in front of the measured value, trailing space and all. Close the editor and place the dimension below the slot; it reads 2-SLOT R5, two slots at R5."
          },
          "type": "2-장공",
          "kind": "type"
@@ -2151,7 +2151,7 @@
        ],
        "expect": {
         "ko": "2-R10 과 2-장공 R5 두 반지름 치수가 형상 밖으로 뻗어 나옵니다.",
-        "en": "2-R10 and 2-장공 R5 reach out beyond the geometry."
+        "en": "2-R10 and 2-SLOT R5 reach out beyond the geometry."
        },
        "why": {
         "ko": "둘 다 호라서 반지름으로 적습니다. 접두어를 붙이려면 치수선 위치를 찍기 전에 M 옵션으로 편집기를 먼저 열어야 해요.",
@@ -2466,7 +2466,7 @@
        "n": 14,
        "title": {
         "ko": "탭 4-M5 깊이 10",
-        "en": "The tapped holes, 4-M5 깊이 10"
+        "en": "The tapped holes, 4-M5 DEPTH 10"
        },
        "actions": [
         {
@@ -2492,7 +2492,7 @@
        ],
        "expect": {
         "ko": "탭 구멍 하나를 가리키는 지시선 끝에 4-M5 깊이 10 이 붙습니다.",
-        "en": "4-M5 깊이 10, four M5 threads 10 deep, sits at the end of a leader on one tapped hole."
+        "en": "4-M5 DEPTH 10, four M5 threads 10 deep, sits at the end of a leader on one tapped hole."
        },
        "why": {
         "ko": "지름 치수는 화면에 그린 원의 지름만 보여 줍니다. 이 연습의 지름 5 원은 M5 호칭을 나타내는 교육용 표현이에요. 나사 규격과 깊이 10은 지시선에 명시합니다.",
@@ -3376,7 +3376,7 @@
    },
    {
     "ko": "축 구멍 Ø25 H7 과 보스 Ø56 을 지름으로, 필렛 2-R10 과 장공 2-장공 R5 를 반지름으로 기입했습니다.",
-    "en": "You dimensioned Ø25 H7 and Ø56 as diameters, 2-R10 and 2-장공 R5 as radii."
+    "en": "You dimensioned Ø25 H7 and Ø56 as diameters, 2-R10 and 2-SLOT R5 as radii."
    },
    {
     "ko": "피치원 PCD Ø44 와 45도를 기입했고, 45도 중심선은 이번에 도면에 남겼습니다.",
@@ -3388,7 +3388,7 @@
    },
    {
     "ko": "숫자만으로 안 되는 표기는 지시선으로 뽑았습니다. 2-C5 와 4-M5 깊이 10 입니다.",
-    "en": "You pulled out on leaders what a bare number cannot say: 2-C5 and 4-M5 깊이 10."
+    "en": "You pulled out on leaders what a bare number cannot say: 2-C5 and 4-M5 DEPTH 10."
    },
    {
     "ko": "플롯 대화상자에서 A3 에 1대1 인지 확인하고 PDF 로 내보낸 뒤 EDU-IB-02_L07_RELEASE 로 저장했습니다.",
