@@ -3,11 +3,100 @@
 이 파일이 세션 간 인수인계의 정본이다. 세션을 시작하면 먼저 읽고, 끝낼 때 갱신한다.
 최신 블록만 `## Latest` 를 달고, 이전 블록은 `## <날짜>` 로 내린다.
 
-> 최종 갱신 **2026-09-10 16:18:52 KST** · Codex · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-11 00:21 KST** · Claude Opus 5 · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-10 / 첫 공개판 게시 완료와 후속 녹화 준비
+## Latest — 2026-09-11 / AutoCAD 2024 개편이 **미커밋 상태**로 작업 트리에만 있다
+
+### 어디까지 왔나
+- main HEAD: `534aaddba060ca025200f1cd0f5bbfe7ff3ce67c` — PR #21 (`fix: preserve narration and connect verified practice recordings`) merge 완료.
+- 작업 브랜치 `codex/heami-course-sync` 는 `origin/main` 과 **동일하다** (ahead 0 · behind 0). 즉 브랜치에 아직 남은 커밋이 없다.
+- **working tree: dirty — 수정 250개 · 추적 안 됨 9개 (+20,012 / −6,935).** 이 세션에서 머지된 PR 은 없다.
+- 테스트 상태: **전부 통과 (144개)** — `scripts` 7 · `scripts/part` 107(skip 1) · `scripts/selfstudy` 22 · node `test_review_transfer.cjs` 8.
+- 가드: `test-private-materials-guard.ps1` 통과 · `check-private-materials.ps1 -Mode all` 통과.
+
+### ⚠️ 최우선 — 유실 위험
+AutoCAD 2024 개편 작업 전체가 **커밋되지 않은 채 이 PC 의 작업 트리에만** 있다. push 도 태그도 없다.
+`git checkout`, `git stash`, 컨테이너 재시작, 다른 PC 로 이동 중 어느 하나로도 사라진다. 다음 세션의 첫 판단은 **이걸 커밋할지 폐기할지**다.
+
+미커밋 내용 요약 (git diff 로 확인한 것만 적는다):
+- `projects/autocad-technician/course-standards.json` — `policy` 에 확정 정책을 박았다: `autocadVersion: 2024`, `deliveryUnit: lesson`, `lessonCount: 8`, `narrationPlaybackRate: 1.38`, `starterFilesProvided: false`, 채점·시험운영 `"공유 예정"`, 도움 연락처는 **이름만** 공개(김정웅·김양환), 제작 순서 `["ko","en"]`.
+- 같은 파일에서 사내 정본 교안 note 를 고쳤다 — **현재 환경에 원본 교안 파일이 없어 이번 개편에서 원문 대조를 완료한 것으로 취급하지 않는다**고 명시.
+- `projects/autocad-technician/course-continuity.json` — `totalSec` 14895 → **10909**, `videoCount: 8`, `deliveryMode: "lesson"`, 1차시 450 → 336초. 차시별 episodes 분할 구조를 통합 영상 한 개 구조로 바꿨다.
+- 8개 차시의 `compositions/frames` HTML·motion.json 약 156개 + BRIEF/SCRIPT/STORYBOARD/index/narration-timing 갱신.
+- 새 스크립트 `scripts/part/refresh_recording_labels.py` (SCRIPT.md 에서 녹화 자막만 갱신, 장면 재빌드 없음).
+- 새 테스트 8개: `part/test_edu_ib_02.py`, `part/test_keys_pages.py`, `part/test_recording_labels.py`, `part/test_tempo_delivery.py`, `selfstudy/test_coach.py`, `selfstudy/test_deck_grouping.py`, `selfstudy/test_shortcut_coverage.py`, `test_check_editions.py`.
+- `.github/workflows/private-materials-guard.yml` — `python -m unittest discover -s scripts` 한 줄 추가 (루트 테스트가 CI 에서 안 돌던 구멍을 막는다).
+- `CHANGELOG.md` · `README.md` 갱신.
+
+### 🐛 미커밋 작업에서 발견한 실제 결함
+- `README.md` 의 미커밋 diff 가 `docs/autocad-technician/revision-20260910-report.html` 를 링크하는데 **그 파일은 디스크 어디에도 없다** (`docs/autocad-technician/` 에는 README.md · master-plan · public-artifact-manifest.json · reference · reports · self-study 만 있다). 이대로 커밋하면 끊긴 링크가 그대로 나간다. 파일을 만들거나 링크를 빼야 한다.
+
+### 활성 인프라
+- repo: `https://github.com/Simon-YHKim/Lecture` · `gh` 2.93.0 로그인됨 (`Simon-YHKim`).
+- 첫 공개판 태그 `autocad-2026.09.10-preview.1` — 첨부 11개 · 256,574,576 bytes. **덮어쓰지 않는다.** 사용자 검수가 이 판 기준으로 진행 중이다.
+- CI: `.github/workflows/private-materials-guard.yml` 하나. push · pull_request 에서 돈다.
+- 원본 자료 · WAV · 전사 · 폰트 바이너리는 저장소 밖. 공개 대상 아니다.
+
+### 로컬 환경 함정 (이 PC 한정)
+- **`python` 이 PATH 에 없다.** `python` / `python3` 는 Microsoft Store 스텁이라 실행하면 exit 9009. **`py` 를 써야 한다** (Python 3.14.5).
+- 그래서 `scripts/check-course-projects.ps1` 이 로컬에서 exit 9009 로 실패한다. 스크립트가 `python` 을 호출하기 때문이며 **저장소 결함이 아니다**. CI 는 ubuntu-latest 라 `python` 이 있어 정상이다. 로컬 검증은 아래 `py` 명령으로 대신한다.
+
+### 다음 작업 큐
+| # | 작업 | 크기 | 권장 |
+|---|---|---|---|
+| A | 미커밋 250+9 파일을 커밋·PR 할지 폐기할지 결정하고 처리 | large | ⭐ **먼저 한다.** 유실 위험이 가장 크고 B~D 가 전부 여기 얹힌다 |
+| B | README 의 `revision-20260910-report.html` 끊긴 링크 해결 (파일 생성 or 링크 제거) | small | A 커밋 전에 같이 처리 |
+| C | 2~7차시 실제 AutoCAD 2024 녹화 + 실제 조작 검증 | large | 실제 AutoCAD 가 있는 환경 필요. 이 환경엔 없다 |
+| D | 영문판 자습·슬라이드·대본·영상 | large | 국문 완성 후. 정책상 순서 고정 |
+| E | 게시판 P2 잔여 5건 (직교 상태, 장공 보조선/명령 순서, 자습 투상선 삭제, 29mm 측정 기준점, 참고 치수 고정 문자) | medium | C 와 함께. 실제 조작·원본 대조 필요 |
+
+### 적용 중인 정책 (영구)
+1. **실제 녹화·실제 AutoCAD 검증 없이 완료로 표시하지 않는다. 결과를 지어내지 않는다.** 환경에 실제 AutoCAD 가 없으면 "미검증"이라고 적는다.
+2. 첫 공개판(`preview.1`) 파일을 **덮어쓰지 않는다.** 사용자 검수 기준이 유지돼야 한다. 정정은 릴리즈 안내와 후속 판으로 반영한다.
+3. 원본 자료 · 별도 녹음 WAV · 전사 · 폰트 바이너리는 **공개하지 않는다.** 승인된 완성 파일만 Release 첨부로 나간다.
+4. 제작 순서는 **국문 완성 → 영문**. 워크북에 이미 있는 영문은 초안이지 완성된 영문 과정이 아니다.
+5. 차시마다 **통합 영상 한 개**. 녹화 내부 조각을 별도 에피소드로 공개하지 않는다.
+6. 좌표 입력을 가르치지 않는다. 마우스 커서 + 객체 스냅 + 수치 입력. 예외는 용지선 두 구석(0,0 / 420,297).
+7. 문체: 합쇼체 70~80% · 해요체 20~30%. 문어체 '~한다' 금지.
+8. 보호 설정을 우회하지 않고 branch 를 삭제하지 않는다.
+9. 채점·합격 기준·시험 운영은 `"공유 예정"` 으로 둔다. 도움 연락처는 **이름만** 공개한다.
+
+### 핵심 파일 위치
+```
+docs/HANDOFF.md                                       이 파일 — 인수인계 정본
+projects/autocad-technician/course-standards.json     정책·출처 정본 (policy 블록)
+projects/autocad-technician/course-continuity.json    차시 연결·길이 (write_course_docs.py 생성물)
+projects/autocad-technician/lesson-0N-*/SCRIPT.md     차시 대본 — 녹화 자막의 출처
+projects/autocad-technician/lesson-0N-*/compositions/frames/   장면 HTML + motion.json
+scripts/part/                                         영상·장면·녹화 파이프라인 + 테스트
+scripts/selfstudy/                                    자습 교재 빌드 + 테스트
+scripts/check-private-materials.ps1                   비공개 자료 가드 (CI 에서 돈다)
+.github/workflows/private-materials-guard.yml         유일한 CI 워크플로
+```
+
+### 검증
+```bash
+py -m unittest discover -s scripts -p 'test_*.py'
+py -m unittest discover -s scripts/part -p 'test_*.py'
+py -m unittest discover -s scripts/selfstudy -p 'test_*.py'
+node --test scripts/selfstudy/test_review_transfer.cjs
+pwsh ./scripts/test-private-materials-guard.ps1
+pwsh ./scripts/check-private-materials.ps1 -Mode all
+```
+`check-course-projects.ps1` 은 이 PC 에서 `python` 부재로 실패한다. CI 에서 확인한다.
+
+### 다음 세션 시작하는 법
+```bash
+git fetch origin main && git pull origin main
+cat docs/HANDOFF.md
+git status --porcelain | wc -l   # 250+ 이면 미커밋 개편이 아직 살아 있다 → A 작업부터
+```
+
+---
+
+## 2026-09-10 / 첫 공개판 게시 완료와 후속 녹화 준비
 
 - **PR #20 merge 완료**, 커밋 `9a96d9cee909058c2c455f5359b5c8fcfe975b9e`. 태그 `autocad-2026.09.10-preview.1`도 이 커밋을 가리킨다. [첫 공개판](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)에 MP4 5편, 영상 ZIP, 자습 ZIP, 통합 교재 HTML, 검수 HTML, manifest와 SHA256SUMS **11개 파일**을 게시했다.
 - 첨부 11개 **256,574,576 bytes**를 로그인 없이 다시 내려받아 원본 크기와 SHA-256을 모두 대조했다. GitHub의 업로드 digest도 일치한다. `public-release-verification.json`, `publication-report.html`에 저장소 밖 근거가 있다. 원본 자료·WAV·전사·폰트 바이너리는 공개하지 않았다.
