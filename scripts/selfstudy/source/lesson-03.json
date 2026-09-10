@@ -977,8 +977,8 @@
         {
          "kind": "click",
          "do": {
-          "ko": "레이어 드롭다운에서 고릅니다. 흰색 실선이에요.",
-          "en": "from the layer dropdown. It is a white continuous line."
+          "ko": "레이어 드롭다운에서 고릅니다. 초록색 실선이에요.",
+          "en": "from the layer dropdown. It is a green continuous line."
          },
          "type": "외형선"
         },

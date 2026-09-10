@@ -28,3 +28,8 @@ jobs:
 
       - name: Test review feedback transfer
         run: node --test scripts/selfstudy/test_review_transfer.cjs
+
+      - name: Test course preparation and self-study
+        run: |
+          python -m unittest discover -s scripts/part -p 'test_*.py'
+          python -m unittest discover -s scripts/selfstudy -p 'test_*.py'
