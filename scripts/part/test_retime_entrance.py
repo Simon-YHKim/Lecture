@@ -125,6 +125,35 @@ tl.fromTo("#f .c1",{opacity:0},{opacity:1,duration:1},3);
             retime_frame(str(path),[(2,20)],30)
             self.assertEqual(json.loads(spec.read_text(encoding='utf-8'))['assertions'][0]['bySec'],4.4)
 
+    def test_paged_command_rows_follow_the_beat_that_lights_them(self):
+        """24개짜리 명령표는 행 하나하나에 조건이 붙는다.
+
+        행의 등장은 스물넉 줄을 한 선택자에 묶어 부르므로 선택자로 찾는 규칙이
+        `#f .ky13` 을 못 찾는다. 그래서 시각을 다시 맞춰도 조건만 옛 값으로
+        남았고, 4차시 영문판에서 13·14행이 「6초 늦게 나타남」으로 잡혔다.
+        조건은 그 행을 켜는 tl.to 를 따라가야 한다.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'frame.html'
+            path.write_text('''<div data-composition-id="f" data-duration="60"></div>
+const tl=gsap.timeline({paused:true});
+tl.fromTo("#f .ky1,#f .ky2",{opacity:0,y:14},{opacity:1,y:0,duration:0.95,stagger:0.1},3);
+tl.to("#f .ky1",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8},4);
+tl.to("#f .ky1",{opacity:1,backgroundColor:'#FFF',duration:0.8},20);
+tl.to("#f .ky2",{opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8},20);
+tl.to("#f .ky2",{opacity:1,backgroundColor:'#FFF',duration:0.8},40);
+''', encoding='utf-8')
+            spec = path.with_suffix('.motion.json')
+            spec.write_text(json.dumps({'duration': 60, 'assertions': [
+                {'kind': 'appearsBy', 'selector': '#f .ky1', 'bySec': 7},
+                {'kind': 'appearsBy', 'selector': '#f .ky2', 'bySec': 23},
+                {'kind': 'staysInFrame', 'selector': '#f .ky2'}]}), encoding='utf-8')
+            retime_frame(str(path), [(10, 30), (30, 50)], 52)
+            assertions = json.loads(spec.read_text(encoding='utf-8'))['assertions']
+            self.assertEqual(assertions[0]['bySec'], 13)
+            self.assertEqual(assertions[1]['bySec'], 33)
+            self.assertEqual(assertions[2], {'kind': 'staysInFrame', 'selector': '#f .ky2'})
+
     def test_explicit_mixed_selectors_follow_their_named_beats(self):
         html = '''<div data-composition-id="f" data-duration="30"></div>
 const tl=gsap.timeline({paused:true});
