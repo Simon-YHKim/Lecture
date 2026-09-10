@@ -108,7 +108,7 @@
  "대칭으로 복사한다": "Mirrors a copy",
  "좌우 대칭 형상. 한 번만 그리고 뒤집는다": "Left-right symmetry. Draw it once and flip it",
  "레이어를 만들고 관리한다": "Creates and manages layers",
- "선 종류·색상을 개체가 아니라 레이어로 정할 때": "When linetype and color belong to the layer",
+ "선 종류·색상을 개체가 아니라 레이어로 정할 때": "Linetype and color by layer",
  "조건에 맞는 객체를 한 번에 고른다": "Selects everything matching a condition",
  "구성선만 골라 지울 때": "To pick out only the construction lines",
  "도면 전체의 선 종류 축척을 바꾼다": "Changes the linetype scale",

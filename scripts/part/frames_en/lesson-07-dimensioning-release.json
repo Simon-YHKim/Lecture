@@ -103,7 +103,7 @@
  "선을 긋는다": "Draws a line",
  "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선": "Pieces you need singly — to trim or round later",
  "레이어를 만들고 관리한다": "Creates and manages layers",
- "선 종류·색상을 개체가 아니라 레이어로 정할 때": "When linetype and color belong to the layer",
+ "선 종류·색상을 개체가 아니라 레이어로 정할 때": "Linetype and color by layer",
  "치수 스타일을 정한다": "Sets the dimension style",
  "문자 높이·화살표·소수 자릿수를 도면 축척에 맞출 때": "To match text, arrows and decimals to the drawing scale",
  "수평·수직 치수를 넣는다": "Puts on a horizontal or vertical dimension",

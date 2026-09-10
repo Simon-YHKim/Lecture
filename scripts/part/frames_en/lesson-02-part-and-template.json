@@ -153,7 +153,7 @@
  "선 종류를 불러온다": "Loads a linetype",
  "CENTER·HIDDEN 을 레이어에 지정하기 전": "Before CENTER and HIDDEN go on layers",
  "레이어를 만들고 관리한다": "Creates and manages layers",
- "선 종류·색상을 개체가 아니라 레이어로 정할 때": "When linetype and color belong to the layer",
+ "선 종류·색상을 개체가 아니라 레이어로 정할 때": "Linetype and color by layer",
  "도면 전체의 선 종류 축척을 바꾼다": "Changes the linetype scale",
  "점선이 실선처럼 보일 때": "When a dashed line reads as continuous",
  "직사각형을 폴리선으로 그린다": "Draws a rectangle as one polyline",
