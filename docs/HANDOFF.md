@@ -6,11 +6,149 @@
 > 지난 블록은 월별로 내렸다 — [`docs/handoff-archive/`](handoff-archive/).
 > 최신 블록과 직전 블록만 이 파일에 둔다. 한 파일 100KB 를 넘기지 않기 위해서다.
 
-> 최종 갱신 **2026-09-11 04:35 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-11 06:30 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-11 (4차) / 영문 강의가 굴러간다 — 1·8차시 영상 완성 · 프레임 지도 여덟 차시 (PR #34~#37)
+## Latest — 2026-09-11 (5차) / 영문 대본 여덟 차시 완성 · 프레임 넘침 11장을 0으로 (브랜치 `feat/english-scripts-2-7`)
+
+### 어디까지 왔나
+
+- 브랜치 **`feat/english-scripts-2-7`** · 커밋 8개 · main 은 `5db786b` 그대로.
+  **PR 은 아직 안 열었다** — 이 블록을 커밋한 뒤 연다.
+- **영문 대본이 여덟 차시 다 갖춰졌다.** 2~7차시 627문단을 이 세션에서 썼다.
+- 영문 음성도 2~7차시를 합성했다(Zira 1.15배). 프레임 시각까지 맞췄다.
+- **영문 프레임이 캔버스 밖으로 넘치던 것을 찾아 고쳤다.** 78장을 전수로 재
+  보니 영문 11장이 잘리고 있었다. 지금은 0장이다.
+
+| 무엇 | 상태 |
+| --- | --- |
+| 영문 자습 교재 | 완료 |
+| 영문 도면 | 완료 |
+| 영문 프레임 지도 | 여덟 차시 973줄 |
+| 영문 대본 | **여덟 차시 706문단 완료** |
+| 영문 음성 | **여덟 차시 완료** (2~7차시는 이 세션) |
+| 영문 영상 | 1·8차시만 (2~7차시는 녹화 대기) |
+
+### 영문 대본은 국문과 **같은 뼈대**여야 한다
+
+문단이 하나만 달라도 그 차시의 강조 시점이 통째로 밀린다. 그래서 번역이기
+이전에 구조가 같아야 한다 — 같은 Line, 같은 문단 수, 같은 비트 번호.
+
+- `test_script_editions.py` 가 Line·문단·비트를 검사한다. 영문 대본이 있는
+  차시만 본다.
+- 비트는 문단 첫 글자가 `(1` 처럼 **괄호와 숫자**로 시작할 때만 잡힌다.
+  「(card 1 · …)」로 쓰면 비트가 통째로 사라진다. 「(1 card — …)」로 쓴다.
+- 녹화 Line 의 단계 제목은 국문 `### 3단계`, 영문 `### Step 3` 둘 다 읽는다
+  (`beats._STEP_HEAD`).
+- **단계별 명령 표기(`step_keys`)와 첫 사용 순서(`shortcuts_in`)가 국문과
+  완전히 같은지도 맞춰 두었다.** 옵션으로 치는 글자가 명령으로 세어지지 않게
+  영문에도 「chamfer option」「fillet option」「the layer option」「the close
+  option」「current layer」를 적었다. 안 적으면 그 차시의 명령표가 어긋난다.
+
+| 차시 | 문단 | 단계 | 명령 |
+| --- | --- | --- | --- |
+| 2 | 130 | 16 | — |
+| 3 | 85 | 16 | 15 |
+| 4 | 100 | 16 | 24 |
+| 5 | 105 | 16 | 11 |
+| 6 | 104 | 16 | 17 |
+| 7 | 103 | 17 | 17 |
+
+### 프레임 넘침 — 원인은 번역 길이가 아니었다
+
+`.clip` 은 `overflow:hidden` 이라 넘친 부분이 **조용히 잘린다**. 잘린 화면은
+"원래 그런 그림" 처럼 보이므로 눈으로는 못 찾는다. 한계선은 **1016px** —
+1080 캔버스에서 `.clip` 아래 여백 64 를 뺀 값.
+
+원인은 표 설명 칸의 인라인 `white-space:nowrap` 이었다. 국문은 「선을 긋는다」
+처럼 짧아 문제가 없지만, 영문은 같은 자리가 한 문장이라 그 칸이 624px 를 먹고
+옆 칸이 114px 로 찌그러진다. 그러면 옆 칸이 네댓 줄로 접히며 표가 통째로
+내려간다. 3차시 명령표가 724px 자리에서 **1470px** 이 됐고 4차시에서는 겹침
+오류까지 났다.
+
+- `build_english_lesson.py` 가 사본에서 **먹색 설명 칸의 줄바꿈 금지만** 푼다.
+  명령 이름·치수 값이 들어가는 강조색 칸은 그대로 둔다.
+- 그래도 남은 것은 문장을 줄였다 — 카드 6개, 명령 설명 38개.
+  **명령 설명은 여덟 차시가 같은 문장을 쓰므로 지도 전체에 한 번에 건다.**
+  한 차시만 고치면 같은 명령이 차시마다 다르게 설명된다.
+- **문장을 깎는 것으로 닫히지 않는 자리가 있다.** 표가 자동 배치라 한 칸을
+  줄이면 열 너비가 다시 나뉘면서 다른 행이 대신 두 줄이 된다 — 6차시 명령표는
+  세 줄짜리 두 행을 없앴는데 전체 높이가 585px 그대로였다. 그래서 영문 사본에서만
+  `table.spec.tight` 의 셀 여백을 6px→3px 로 좁힌다. 글자 크기는 안 건드린다.
+
+```
+국문 78장 넘침 0 · 영문 78장 넘침 11 → 0
+```
+
+### 재는 방법 (`scripts/part/frame_sheet.py`)
+
+프레임 본문은 `<template>` 안에 있어 파일을 그냥 열면 아무것도 안 보인다.
+측정 쪽이 `fetch` 로 읽어 복제해 붙인다.
+
+```bash
+python scripts/part/frame_sheet.py <잴 폴더> --en <영문 사본들이 모인 폴더>
+cd <잴 폴더> && python -m http.server 8731 --bind 127.0.0.1
+# 브라우저(Playwright MCP headless)로 measure.html 을 열고 await measureAll()
+```
+
+⚠ **이 측정값은 상대 비교용이다.** hyperframes check 는 JetBrains Mono 를
+받아 `@font-face` 를 주입하므로 같은 프레임이 30~60px 더 높게 잡힌다.
+넘침의 최종 판정은 언제나 `hyperframes check` 다.
+
+### 영문 강의를 만드는 길 (4차 블록과 같다, 한 줄 추가)
+
+```bash
+python scripts/part/build_english_lesson.py <국문 차시> <비공개 사본>
+python scripts/part/narrate_tts.py <사본> --voice "Microsoft Zira Desktop" --out <새 폴더>
+python scripts/part/retime_frames.py <사본>
+python scripts/part/prepare_lecture.py <사본> --out <렌더 폴더> --gsap <gsap.min.js> --preview
+python scripts/part/prepare_scene_checks.py <렌더 폴더> --out <장면 폴더>   # ← 긴 차시는 이것부터
+npx hyperframes@0.8.33 check <렌더 폴더> --json --at-transitions
+```
+
+**긴 차시는 통짜 check 의 모션 판정을 믿으면 안 된다.** 0.8.33 은 모션을 300점
+까지만 훑으므로 30분 차시는 6초에 한 번 본다. 그러면 2초짜리 등장이 통째로
+"늦게 나타남" 오류가 된다. `prepare_scene_checks.py` 가 장면별로 쪼개 준다.
+**레이아웃·대비 판정은 통짜 check 도 정확하다.**
+
+### 이 세션의 영문 음성 길이 (Zira 1.15배, 실측)
+
+| 차시 | 길이 | | 차시 | 길이 |
+| --- | --- | --- | --- | --- |
+| 2 | 30:06 | | 5 | 33:55 |
+| 3 | 30:48 | | 6 | 31:54 |
+| 4 | 31:08 | | 7 | 36:27 |
+
+국문보다 3~5분 길다. 1.15배가 1.38배보다 느린 것이 그대로 반영된 값이다.
+
+### 사용자 확인 대기 (4차 블록에서 그대로)
+
+- **국문 낭독도 1.15 로 내릴까.** 지금은 영문만 1.15 다. 국문까지 내리면 8차시
+  음성을 다시 합성하고 프레임 시각을 다시 맞춰야 하며, 공개된 첫 판과 달라진다.
+- 저장소 루트의 추적 파일 **`--help`** (31,150B · 참조 0) 삭제 여부.
+- 머지 끝난 원격 브랜치 정리 여부.
+
+### 남은 것
+
+| # | 작업 | 크기 | 메모 |
+| --- | --- | --- | --- |
+| A | 2~7차시 실제 AutoCAD 2024 녹화 | large | **사용자 몫.** 국문·영문 영상이 같이 막혀 있다 |
+| B | 작도 안내 P2 잔여 5건 | medium | 실제 조작·원본 대조 필요 → A 와 함께 |
+| C | 2~7차시 영문 **장면별** 모션 check 완주 | small | lint·runtime·layout·contrast 는 여섯 차시 전부 오류 0 · 경고 0 으로 확인했다. 모션만 남았다 |
+
+### 다음 세션 시작하는 법
+
+```bash
+git fetch origin main && git pull --ff-only origin main
+cat docs/HANDOFF.md
+python -m unittest discover -s scripts/part -p 'test_*.py'   # 126개 통과여야 한다
+python scripts/selfstudy/check_english.py                    # 통과여야 한다
+```
+
+---
+
+## 2026-09-11 (4차) / 영문 강의가 굴러간다 — 1·8차시 영상 완성 · 프레임 지도 여덟 차시 (PR #34~#37)
 
 ### 어디까지 왔나
 
@@ -82,247 +220,3 @@ python scripts/part/frame_text.py projects/autocad-technician/lesson-02-part-and
 
 ---
 
-## 2026-09-11 (3차) / 영문 자습판 완료 · 영문 강의 착수 (PR #25~#32)
-
-### 어디까지 왔나
-
-- main HEAD **`65bd451`** · CI 초록 · 열린 PR 0 · 워킹 트리 깨끗.
-- 사용자가 이 세션에 정한 것 둘.
-  1. **영문판은 영문 도면을 따로 쓴다.** 국문 도면은 검수 중이라 건드리지 않는다.
-  2. **영문은 대본·영상 8편까지 끝까지 간다.** (자습만 하고 멈추지 않는다.)
-- 머지된 PR 여섯 — #25 영문 1단계 · #26 핸드오프 분할 · #27 영문 도면 · #28 표기 인용 ·
-  #29 인수인계 · #30 도해 영문 짝.
-
-### 이 세션이 닫은 것
-
-| 무엇 | 시작 | 지금 |
-| --- | --- | --- |
-| 학습자용 영문의 한글 잔존·용어 흔들림 | **91건** | **0건** (보류도 0) |
-| 도면의 언어 | 국문 하나 | `--lang ko\|en` · 영문 도면 한글 0자 |
-| `docs/HANDOFF.md` | 96,917B | 12.6KB + 월별 보관 |
-| 자습 검수 파일 | 282장(구판) | **222장** 개정판을 사용자에게 보냄 |
-| 도해 23개의 영문 짝 | 없음 (한글 161자리) | **161자리 전부** · 실측 넘침 0 · 겹침 0 |
-| 영문 자습 교재 | 없음 | `SELFSTUDY_LANG=en` 으로 빌드해 사용자에게 보냄 |
-
-- 영문 도면은 다섯 글자만 바꾼다 — `4-M5 DEPTH 10` · `2-SLOT R5` · `FRONT/TOP/RIGHT SIDE VIEW`.
-  **선은 한 줄도 움직이지 않는다**(두 판에서 `<text>` 를 걷어낸 SVG 가 같다는 검사).
-  국문 도면 출력은 바뀌기 전과 SHA-256 이 같다.
-- `SELFSTUDY_LANG=en` 이 도면 언어와 `data-lang` 을 자습 빌더까지 나른다.
-- `check_english.py` + `test_english.py` 가 CI 에서 돈다. 규칙은 이름을 겨냥하고
-  `the base outline` 같은 보통명사는 잡지 않는다 — 그 구분도 검사로 고정했다.
-
-### 다음 작업 큐
-
-| # | 작업 | 크기 | 메모 |
-| --- | --- | --- | --- |
-| A | ~~도해 23개의 영문 짝~~ **닫음** | — | 161자리 전부. 넘친 2 · 겹친 7 을 문구를 줄여 0 으로. 국문 좌표는 안 건드렸다. 재는 방법은 `figure_sheet.py` 로 남겼다 |
-| B | **영문 강의 — 대본 8편 · 슬라이드 78장 · 영상 8편** | large | ⭐ 1차시 대본은 썼다(PR #32). 남은 대본 7편 · 프레임 영문화 · 합성 · 렌더 |
-| B-1 | 영문 낭독 속도 결정 | small | **사용자 답 대기.** 표본 보냄 — Zira rate 0 은 326자에 **23.88초**, 1.38배는 **17.29초** |
-| B-3 | 영문 대본 2~8차시 | large | 1차시와 같은 규칙 — Line·문단·비트 번호를 국문과 맞춘다. `test_script_editions.py` 가 지킨다 |
-| B-4 | 강의 프레임 영문화 | large | 아래 설계 참조. **번역 단위 1,685개 · 한글 81,081자**(78장) |
-| B-2 | `narrate_tts` 의 언어 문 열기 | small | 지금은 `voice != Heami` 또는 `tempo != 1.38` 이면 거부한다. 영문 판정을 더하되 국문 정책은 그대로 둔다 |
-| C | 2~7차시 실제 AutoCAD 2024 녹화 | large | **사용자 몫.** 이 PC 에도 AutoCAD 가 없다 |
-| D | 작도 안내 P2 잔여 5건 | medium | 실제 조작·원본 대조 필요 → C 와 함께 |
-| E | 개편 보고서 HTML | small | 저쪽 PC 의 보고서를 못 가져오면 여기서 다시 만든다 |
-
-### 강의 프레임 영문화 — 설계와 실측 (다음 세션이 여기서 시작한다)
-
-프레임의 GSAP 타임라인은 `.brand` · `h2` · `.rule` 같은 **구조 선택자**를 쓴다.
-단어를 감싼 `<span class="kw">` 는 한국어가 어절 중간에서 줄바꿈되지 않게 하려는
-것이지 애니메이션 대상이 아니다. **그래서 문장을 통째로 갈아도 모션이 안 깨진다.**
-
-바꿔 넣는 방법은 이미 저장소에 있다 — `lesson_kit.keep_words(ko)` 가 파일에 있는
-그 마크업을 그대로 만들어 내므로, 그것을 열쇠로 영문을 넣으면 된다. 78장 전수로 쟀다.
-
-```
-그대로 바꿔 넣을 수 있는 글  1,063  (94%)
-못 찾는 글                    70    &nbsp; 같은 엔티티가 섞였거나 SVG 안의 도면 표기
-번역 단위(잎 요소)          1,685   한글 81,081자
-```
-
-국문 프레임은 **건드리지 않는다**. 영문은 차시마다 `{국문: 영문}` 지도를 두고
-빌드할 때 비공개 사본에 적용한다 — 검수 중인 국문 화면이 흔들리지 않는다.
-영문이 길어 28px 하한에서 넘칠 수 있으므로 사본마다 `npm run check` 로 재야 한다.
-
-### 이 PC 환경 (2차 블록과 같다)
-
-Python 3.12.10 · node 24.14.1 · FFmpeg 8.1.1 · Chrome · gh · **Heami + Zira** 음성.
-Git Bash 에서 Python 한글 출력은 `PYTHONIOENCODING=utf-8` 를 붙여야 안 깨진다.
-⚠ **Bash heredoc 은 `\\` 를 `\` 로 접는다** — 정규식이나 경로가 든 파이썬은 heredoc 대신
-파일로 쓴다(Write). 이 세션에서 세 번 걸렸다.
-
-### 사용자 확인 대기
-
-- 저장소 루트의 추적 파일 **`--help`** (31,150B) 삭제 여부. `build_deck_all.py --help` 가
-  출력 경로를 `--help` 로 읽어 만든 산출물이다 — 이번 세션에 재현했다. 참조 0.
-- 머지 끝난 원격 브랜치 정리 여부.
-
-### 다음 세션 시작하는 법
-
-```bash
-git fetch origin main && git pull --ff-only origin main
-cat docs/HANDOFF.md
-python scripts/selfstudy/check_english.py     # 통과여야 한다
-# 큐 A 부터. 도해 하나를 두 벌로 만들고 브라우저로 넘침을 재는 것이 한 단위다.
-```
-
----
-
-## 2026-09-11 (2차) / 개편분을 회수해 main 에 넣었다 (PR #23)
-
-### 어디까지 왔나
-
-- main HEAD **`cfcda5f`** (PR #23 merge) · CI 초록. 열린 PR 0 · 워킹 트리 깨끗.
-- 회수 경로 — 다른 PC(`C:\Lecture`)의 미커밋 250+9 파일을 사용자가 `codex/autocad2024-revision`
-  브랜치로 push → 이 세션이 검증·수정하고 PR #23 으로 머지했다. **앞 블록의 유실 위험은 닫혔다.**
-- 들어간 규모 — 260파일 **+20,924 / −7,026** · 추가 9 · 수정 251 · **삭제 0 · 리네임 0**.
-- **작업 PC 가 바뀌었다.** 이 세션은 `E:\Lecture` 다. `C:\Lecture` · `C:\LectureDelivery` ·
-  `C:\Users\Soha.Bae` 는 **이 PC 에 없다.** 저장소 밖 산출물(1·8차시 개정 MP4 · WAV ·
-  개편 보고서 · 촬영 큐)은 전부 그 PC 에만 있다 — 필요하면 회수하거나 여기서 다시 만든다.
-
-### 이 PC 환경 — 앞 블록의 함정 표는 그 PC 한정이다
-
-| 무엇 | 값 |
-| --- | --- |
-| Python | **3.12.10 · `python` 이 PATH 에 있다.** `check-course-projects.ps1` 이 그대로 돈다 |
-| node · FFmpeg | 24.14.1 · 8.1.1 (`ffmpeg`·`ffprobe` 둘 다 PATH) |
-| SAPI 음성 | **Heami(한국어) + Zira(영어)** — 영문판 TTS 를 여기서 만들 수 있다 |
-| 그 외 | Chrome · gh 로그인됨 · Playwright MCP(headless) |
-
-⚠ Git Bash 에서 Python 한글 출력이 cp949 로 깨진다. **`PYTHONIOENCODING=utf-8` 를 붙인다.**
-
-### 이 세션이 고친 것 둘
-
-1. **회수 커밋의 CI 실패** — `test_narration_identity` 의 「합성 중 대본이 바뀌면 timing 을 쓰지
-   않는다」 검사가 FFmpeg 없는 러너에서 tempo 사전 점검(`Local FFmpeg is required...`)에 먼저
-   걸렸다. 그 조사만 stub 해 **낭독 원문 동일성만이 실패 원인**이 되게 했다.
-   FFmpeg 를 PATH 에서 감춘 CI 동형 실행으로 확인했다 — 7 / 91(skip 8) / 22, CI 개수와 일치한다.
-2. **README 끊긴 링크** — 저장소에 없는 `docs/autocad-technician/revision-20260910-report.html`
-   를 가리키던 문단을 걷어냈다. README 의 남은 로컬 링크는 전부 실재한다(스크립트로 확인).
-
-### 검증 (이 PC 실행값)
-
-```
-Python 136개 통과       scripts 7 · scripts/part 107 · scripts/selfstudy 22
-node 8개 통과           test_review_transfer.cjs
-CI 동형(FFmpeg 감춤)     7 / 91(skip 8) / 22 통과
-과정 검사 통과           8차시 78프레임 181:49   ← 1.38배 반영 전 247:52
-규격 검사 통과(문서 18개) · 판 대조 통과
-가드 자체검사 통과 · 비공개 자료 전수 검사 통과 · 커밋마다 staged 검사 통과
-```
-
-### 다음 작업 큐
-
-| # | 작업 | 크기 | 권장 |
-| --- | --- | --- | --- |
-| A | **2~7차시 실제 AutoCAD 2024 녹화** | large | ⭐ 남은 15편의 전제. **사용자 몫** — 이 PC 에도 AutoCAD 가 없다 |
-| B | 영문판 자습·슬라이드·대본·영상 | large | 정책상 국문 완성 후. **Zira 음성이 이 PC 에 있어 실행 가능** |
-| C | 작도 안내 P2 잔여 5건 | medium | 실제 조작·원본 대조 필요 → A 와 함께 |
-| D | 개편 보고서 HTML (사용자 검수용) | small | 그 PC 의 보고서를 못 가져오면 여기서 다시 만든다 |
-| E | ~~`docs/HANDOFF.md` 분할~~ **닫음** | — | 96.9KB → **12.6KB**. 옛 블록 여덟 개는 `docs/handoff-archive/2026-09.md` (84.7KB) 로 내렸다 |
-
-### 사용자 확인 대기
-
-- **E(핸드오프 분할)** — 상한을 넘기 직전이라 이번 응답에서 물었다.
-- 저장소 루트의 추적 파일 **`--help`** (31,150B · `d47cfe0` 에서 리다이렉트 사고로 유입 ·
-  참조 0) 삭제 여부. §7 정지 조건(파일 삭제)이라 묻고 진행한다.
-- 머지 끝난 원격 브랜치 정리 여부. `codex/heami-course-sync` 는 다른 세션이 쓸 수 있어 남기길 권한다.
-
-### 다음 세션 시작하는 법
-
-```bash
-git fetch origin main && git pull --ff-only origin main
-cat docs/HANDOFF.md
-# 큐 A 는 사용자 녹화 대기. 에이전트가 지금 진행할 수 있는 것은 B · D 다.
-```
-
----
-
-## 2026-09-11 (1차) / AutoCAD 2024 개편이 **미커밋 상태**로 작업 트리에만 있었다 — 2차 블록에서 회수됨
-
-### 어디까지 왔나
-- main HEAD: `534aaddba060ca025200f1cd0f5bbfe7ff3ce67c` — PR #21 (`fix: preserve narration and connect verified practice recordings`) merge 완료.
-- 작업 브랜치 `codex/heami-course-sync` 는 `origin/main` 과 **동일하다** (ahead 0 · behind 0). 즉 브랜치에 아직 남은 커밋이 없다.
-- **working tree: dirty — 수정 250개 · 추적 안 됨 9개 (+20,012 / −6,935).** 이 세션에서 머지된 PR 은 없다.
-- 테스트 상태: **전부 통과 (144개)** — `scripts` 7 · `scripts/part` 107(skip 1) · `scripts/selfstudy` 22 · node `test_review_transfer.cjs` 8.
-- 가드: `test-private-materials-guard.ps1` 통과 · `check-private-materials.ps1 -Mode all` 통과.
-
-### ⚠️ 최우선 — 유실 위험
-AutoCAD 2024 개편 작업 전체가 **커밋되지 않은 채 이 PC 의 작업 트리에만** 있다. push 도 태그도 없다.
-`git checkout`, `git stash`, 컨테이너 재시작, 다른 PC 로 이동 중 어느 하나로도 사라진다. 다음 세션의 첫 판단은 **이걸 커밋할지 폐기할지**다.
-
-미커밋 내용 요약 (git diff 로 확인한 것만 적는다):
-- `projects/autocad-technician/course-standards.json` — `policy` 에 확정 정책을 박았다: `autocadVersion: 2024`, `deliveryUnit: lesson`, `lessonCount: 8`, `narrationPlaybackRate: 1.38`, `starterFilesProvided: false`, 채점·시험운영 `"공유 예정"`, 도움 연락처는 **이름만** 공개(김정웅·김양환), 제작 순서 `["ko","en"]`.
-- 같은 파일에서 사내 정본 교안 note 를 고쳤다 — **현재 환경에 원본 교안 파일이 없어 이번 개편에서 원문 대조를 완료한 것으로 취급하지 않는다**고 명시.
-- `projects/autocad-technician/course-continuity.json` — `totalSec` 14895 → **10909**, `videoCount: 8`, `deliveryMode: "lesson"`, 1차시 450 → 336초. 차시별 episodes 분할 구조를 통합 영상 한 개 구조로 바꿨다.
-- 8개 차시의 `compositions/frames` HTML·motion.json 약 156개 + BRIEF/SCRIPT/STORYBOARD/index/narration-timing 갱신.
-- 새 스크립트 `scripts/part/refresh_recording_labels.py` (SCRIPT.md 에서 녹화 자막만 갱신, 장면 재빌드 없음).
-- 새 테스트 8개: `part/test_edu_ib_02.py`, `part/test_keys_pages.py`, `part/test_recording_labels.py`, `part/test_tempo_delivery.py`, `selfstudy/test_coach.py`, `selfstudy/test_deck_grouping.py`, `selfstudy/test_shortcut_coverage.py`, `test_check_editions.py`.
-- `.github/workflows/private-materials-guard.yml` — `python -m unittest discover -s scripts` 한 줄 추가 (루트 테스트가 CI 에서 안 돌던 구멍을 막는다).
-- `CHANGELOG.md` · `README.md` 갱신.
-
-### 🐛 미커밋 작업에서 발견한 실제 결함
-- `README.md` 의 미커밋 diff 가 `docs/autocad-technician/revision-20260910-report.html` 를 링크하는데 **그 파일은 디스크 어디에도 없다** (`docs/autocad-technician/` 에는 README.md · master-plan · public-artifact-manifest.json · reference · reports · self-study 만 있다). 이대로 커밋하면 끊긴 링크가 그대로 나간다. 파일을 만들거나 링크를 빼야 한다.
-
-### 활성 인프라
-- repo: `https://github.com/Simon-YHKim/Lecture` · `gh` 2.93.0 로그인됨 (`Simon-YHKim`).
-- 첫 공개판 태그 `autocad-2026.09.10-preview.1` — 첨부 11개 · 256,574,576 bytes. **덮어쓰지 않는다.** 사용자 검수가 이 판 기준으로 진행 중이다.
-- CI: `.github/workflows/private-materials-guard.yml` 하나. push · pull_request 에서 돈다.
-- 원본 자료 · WAV · 전사 · 폰트 바이너리는 저장소 밖. 공개 대상 아니다.
-
-### 로컬 환경 함정 (이 PC 한정)
-- **`python` 이 PATH 에 없다.** `python` / `python3` 는 Microsoft Store 스텁이라 실행하면 exit 9009. **`py` 를 써야 한다** (Python 3.14.5).
-- 그래서 `scripts/check-course-projects.ps1` 이 로컬에서 exit 9009 로 실패한다. 스크립트가 `python` 을 호출하기 때문이며 **저장소 결함이 아니다**. CI 는 ubuntu-latest 라 `python` 이 있어 정상이다. 로컬 검증은 아래 `py` 명령으로 대신한다.
-
-### 다음 작업 큐
-| # | 작업 | 크기 | 권장 |
-|---|---|---|---|
-| A | 미커밋 250+9 파일을 커밋·PR 할지 폐기할지 결정하고 처리 | large | ⭐ **먼저 한다.** 유실 위험이 가장 크고 B~D 가 전부 여기 얹힌다 |
-| B | README 의 `revision-20260910-report.html` 끊긴 링크 해결 (파일 생성 or 링크 제거) | small | A 커밋 전에 같이 처리 |
-| C | 2~7차시 실제 AutoCAD 2024 녹화 + 실제 조작 검증 | large | 실제 AutoCAD 가 있는 환경 필요. 이 환경엔 없다 |
-| D | 영문판 자습·슬라이드·대본·영상 | large | 국문 완성 후. 정책상 순서 고정 |
-| E | 게시판 P2 잔여 5건 (직교 상태, 장공 보조선/명령 순서, 자습 투상선 삭제, 29mm 측정 기준점, 참고 치수 고정 문자) | medium | C 와 함께. 실제 조작·원본 대조 필요 |
-
-### 적용 중인 정책 (영구)
-1. **실제 녹화·실제 AutoCAD 검증 없이 완료로 표시하지 않는다. 결과를 지어내지 않는다.** 환경에 실제 AutoCAD 가 없으면 "미검증"이라고 적는다.
-2. 첫 공개판(`preview.1`) 파일을 **덮어쓰지 않는다.** 사용자 검수 기준이 유지돼야 한다. 정정은 릴리즈 안내와 후속 판으로 반영한다.
-3. 원본 자료 · 별도 녹음 WAV · 전사 · 폰트 바이너리는 **공개하지 않는다.** 승인된 완성 파일만 Release 첨부로 나간다.
-4. 제작 순서는 **국문 완성 → 영문**. 워크북에 이미 있는 영문은 초안이지 완성된 영문 과정이 아니다.
-5. 차시마다 **통합 영상 한 개**. 녹화 내부 조각을 별도 에피소드로 공개하지 않는다.
-6. 좌표 입력을 가르치지 않는다. 마우스 커서 + 객체 스냅 + 수치 입력. 예외는 용지선 두 구석(0,0 / 420,297).
-7. 문체: 합쇼체 70~80% · 해요체 20~30%. 문어체 '~한다' 금지.
-8. 보호 설정을 우회하지 않고 branch 를 삭제하지 않는다.
-9. 채점·합격 기준·시험 운영은 `"공유 예정"` 으로 둔다. 도움 연락처는 **이름만** 공개한다.
-
-### 핵심 파일 위치
-```
-docs/HANDOFF.md                                       이 파일 — 인수인계 정본
-projects/autocad-technician/course-standards.json     정책·출처 정본 (policy 블록)
-projects/autocad-technician/course-continuity.json    차시 연결·길이 (write_course_docs.py 생성물)
-projects/autocad-technician/lesson-0N-*/SCRIPT.md     차시 대본 — 녹화 자막의 출처
-projects/autocad-technician/lesson-0N-*/compositions/frames/   장면 HTML + motion.json
-scripts/part/                                         영상·장면·녹화 파이프라인 + 테스트
-scripts/selfstudy/                                    자습 교재 빌드 + 테스트
-scripts/check-private-materials.ps1                   비공개 자료 가드 (CI 에서 돈다)
-.github/workflows/private-materials-guard.yml         유일한 CI 워크플로
-```
-
-### 검증
-```bash
-py -m unittest discover -s scripts -p 'test_*.py'
-py -m unittest discover -s scripts/part -p 'test_*.py'
-py -m unittest discover -s scripts/selfstudy -p 'test_*.py'
-node --test scripts/selfstudy/test_review_transfer.cjs
-pwsh ./scripts/test-private-materials-guard.ps1
-pwsh ./scripts/check-private-materials.ps1 -Mode all
-```
-`check-course-projects.ps1` 은 이 PC 에서 `python` 부재로 실패한다. CI 에서 확인한다.
-
-### 다음 세션 시작하는 법
-```bash
-git fetch origin main && git pull origin main
-cat docs/HANDOFF.md
-git status --porcelain | wc -l   # 250+ 이면 미커밋 개편이 아직 살아 있다 → A 작업부터
-```
-
----
