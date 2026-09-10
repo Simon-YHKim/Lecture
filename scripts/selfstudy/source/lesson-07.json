@@ -2848,7 +2848,7 @@
     "en": "The plot preview"
    },
    "how": {
-    "ko": "도면틀이 잘리지 않았는지, 치수 문자가 겹치지 않는지, 표제란이 들어와 있는지 봐요. 최종 판정은 화면이 아니라 종이입니다.",
+    "ko": "도면틀이 잘리지 않았는지, 치수 문자가 겹치지 않는지, 표제란이 들어와 있는지 봐요. 최종 판정은 종이에서 납니다.",
     "en": "Border not clipped, no dimension text overlapping, title block in. The paper decides, not the screen."
    }
   },
@@ -2880,7 +2880,7 @@
     "en": "The left vertical edge of the base only rises to 11, yet the dimension reads 16. Why?"
    },
    "a": {
-    "ko": "선형 치수가 직선거리가 아니라 치수선 방향의 성분만 재기 때문입니다. 옆으로 빼면 세로 성분을 재니까 바닥에서 윗면까지의 16 이 나와요. 모따기가 45도로 5 를 잘라내서 세로 변만 11 인 겁니다.",
+    "ko": "선형 치수는 치수선 방향의 성분만 재기 때문입니다. 옆으로 빼면 세로 성분을 재니까 바닥에서 윗면까지의 16 이 나와요. 모따기가 45도로 5 를 잘라내서 세로 변만 11 인 겁니다.",
     "en": "Because a linear dimension measures the component along the direction you pulled the line, not the straight-line distance. Pulled to the side it measures vertically: 16, from the bottom to the top face. The chamfer cuts 5 at 45 degrees, so only the vertical edge is 11."
    }
   },

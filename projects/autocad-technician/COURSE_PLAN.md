@@ -4,7 +4,7 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
 처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.
 도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.
 
-전체 248:16 · A3 가로 · 제3각법 · 레이어 네 개
+전체 248:15 · A3 가로 · 제3각법 · 레이어 네 개
 
 | 차시 | 주제 | 길이 | 프레임 | 여는 파일 | 저장하는 상태 |
 | --- | --- | --- | --- | --- | --- |
@@ -13,8 +13,8 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
 | 3 | 기준선과 외곽 | 36:58 | 10 | L02_TEMPLATE | L03_PROFILE |
 | 4 | 원·호·오프셋 | 36:25 | 11 | L03_PROFILE | L04_FEATURES |
 | 5 | 제3각법 3뷰와 반복 | 39:07 | 11 | L04_FEATURES | L05_VIEWS |
-| 6 | 편집과 표현 | 38:48 | 11 | L05_VIEWS | L06_REPRESENTED |
-| 7 | 치수와 출도 | 43:06 | 11 | L06_REPRESENTED | L07_RELEASE |
+| 6 | 편집과 표현 | 38:45 | 11 | L05_VIEWS | L06_REPRESENTED |
+| 7 | 치수와 출도 | 43:08 | 11 | L06_REPRESENTED | L07_RELEASE |
 | 8 | 시험 안내와 Q&A | 9:25 | 7 | — | — |
 
 ## 편
@@ -36,12 +36,12 @@ LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나�
 | 5 | 1편 | 평면도 | 16:27 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
 | 5 | 2편 | 우측면도와 축 구멍 | 8:33 | `05-demo-b` |
 | 5 | 3편 | 숨은선과 정리 | 14:07 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 6 | 1편 | 투상선 정리 | 18:54 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 6 | 1편 | 투상선 정리 | 18:51 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
 | 6 | 2편 | 대칭 검산과 레이어 | 9:47 | `05-demo-b` |
 | 6 | 3편 | 선 종류 축척과 정리 | 10:08 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
-| 7 | 1편 | 치수 스타일과 전체 크기 | 15:02 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
+| 7 | 1편 | 치수 스타일과 전체 크기 | 15:05 | `01-title` · `02-today` · `03-concept` · `04-on-the-drawing` · `05-demo-a` |
 | 7 | 2편 | 치수 기입 | 14:21 | `05-demo-b` |
-| 7 | 3편 | 축척 확인과 출도 | 13:43 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
+| 7 | 3편 | 축척 확인과 출도 | 13:41 | `05-demo-c` · `06-check` · `07-recap` · `08-keys` · `09-closing` |
 | 8 | 1편 | 시험 안내와 Q&A | 9:25 | `01-title` · `02-exam` · `03-qa` · `04-technician-work` · `05-field-commands` · `06-recap` · `07-closing` |
 
 합계 20편. 끊는 자리와 그 이유는 `scripts/part/episodes.json` 에 있다.

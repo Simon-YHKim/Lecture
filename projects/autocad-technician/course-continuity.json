@@ -10,7 +10,7 @@
     "치수선"
   ],
   "lessonCount": 8,
-  "totalSec": 14896,
+  "totalSec": 14895,
   "note": "차시마다 새 파일을 열지 않는다. 앞 차시의 checkpointOut 파일을 열어 이어 그린다. 이 파일은 scripts/part/write_course_docs.py 가 만든다.",
   "lessons": [
     {
@@ -262,16 +262,16 @@
       "no": 6,
       "slug": "lesson-06-editing-symbols",
       "topic": "편집과 표현",
-      "durationSec": 2328,
+      "durationSec": 2325,
       "frames": 11,
       "checkpointIn": "L05_VIEWS",
       "checkpointOut": "L06_REPRESENTED",
       "demoId": "DEMO-01",
-      "demoSec": 1228,
+      "demoSec": 1227,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 438
+          "lengthSec": 437
         },
         {
           "id": "DEMO-01B",
@@ -289,7 +289,7 @@
       "episodes": [
         {
           "title": "투상선 정리",
-          "lengthSec": 1134,
+          "lengthSec": 1131,
           "frames": [
             "01-title",
             "02-today",
@@ -322,7 +322,7 @@
       "no": 7,
       "slug": "lesson-07-dimensioning-release",
       "topic": "치수와 출도",
-      "durationSec": 2586,
+      "durationSec": 2588,
       "frames": 11,
       "checkpointIn": "L06_REPRESENTED",
       "checkpointOut": "L07_RELEASE",
@@ -349,7 +349,7 @@
       "episodes": [
         {
           "title": "치수 스타일과 전체 크기",
-          "lengthSec": 902,
+          "lengthSec": 905,
           "frames": [
             "01-title",
             "02-today",
@@ -367,7 +367,7 @@
         },
         {
           "title": "축척 확인과 출도",
-          "lengthSec": 823,
+          "lengthSec": 821,
           "frames": [
             "05-demo-c",
             "06-check",

@@ -671,7 +671,7 @@
       "ko": "왜 12가 아니라 6인가",
       "en": "Why 6, not 12"
      },
-     "ko": "오프셋은 지름이 아니라 반지름을 밉니다. 지름은 56에서 44로 12만큼 줄지만 반지름은 28에서 22로 6만큼 줍니다. 그래서 거리 칸에 6을 넣어요. 그리고 중심 좌표를 다시 치지 않으니 보스와 피치원의 중심이 어긋날 수가 없어요.",
+     "ko": "오프셋이 미는 것은 반지름입니다. 지름은 56에서 44로 12만큼 줄지만 반지름은 28에서 22로 6만큼 줍니다. 그래서 거리 칸에 6을 넣어요. 그리고 중심 좌표를 다시 치지 않으니 보스와 피치원의 중심이 어긋날 수가 없어요.",
      "en": "Offset moves the radius, not the diameter. The diameter drops 12, from 56 to 44, but the radius drops 6, from 28 to 22. So 6 goes in the distance prompt. And because you never retype the center, the boss and the bolt circle cannot end up off-center from each other."
     },
     {

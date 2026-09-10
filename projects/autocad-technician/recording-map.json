@@ -92,7 +92,7 @@
       "lesson": 6,
       "slug": "lesson-06-editing-symbols",
       "demoId": "DEMO-01",
-      "lengthSec": 1228,
+      "lengthSec": 1227,
       "steps": 16,
       "cutAfterStep": [
         7,
@@ -101,7 +101,7 @@
       "parts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 438
+          "lengthSec": 437
         },
         {
           "id": "DEMO-01B",
@@ -307,7 +307,7 @@
       "list": [
         {
           "title": "투상선 정리",
-          "lengthSec": 1134,
+          "lengthSec": 1131,
           "frames": [
             "01-title",
             "02-today",
@@ -342,7 +342,7 @@
       "list": [
         {
           "title": "치수 스타일과 전체 크기",
-          "lengthSec": 902,
+          "lengthSec": 905,
           "frames": [
             "01-title",
             "02-today",
@@ -360,7 +360,7 @@
         },
         {
           "title": "축척 확인과 출도",
-          "lengthSec": 823,
+          "lengthSec": 821,
           "frames": [
             "05-demo-c",
             "06-check",

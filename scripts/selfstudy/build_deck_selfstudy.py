@@ -335,7 +335,18 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
                   '{opacity:1,y:0,duration:.45,stagger:.08,ease:"power2.out"},%s);'
                   % (cid, len(ops) + 0.5))
     frags = [round(clock + k + 1.0, 2) for k in range(n_frag)]
-    notes = ' / '.join(x for x in (ko(st.get('expect')), ko(st.get('why'))) if x)
+    # 노트는 이 장이 실제로 시키는 일에서 만든다. 예전에는 `expect` 와 `why` 만
+    # 썼는데, 단계를 나누면 그 둘은 첫 장과 마지막 장에만 남아 가운데 장 마흔
+    # 곳이 빈 노트가 됐다 — 검수에서 「대본 누락」으로 올라온 자리다.
+    said = []
+    for a in acts:
+        t = (a.get('type') or '').strip()
+        d = plain(ko(a.get('do')))
+        line = ('%s — %s' % (t, d)) if t and d else (d or t)
+        if line:
+            said.append(line)
+    notes = ' / '.join(x for x in
+                       [' '.join(said)] + [ko(st.get('expect')), ko(st.get('why'))] if x)
     return [(body, tl, {'sceneId': cid, 'notes': notes or '—',
                         'fragments': frags}, dur)]
 
@@ -343,6 +354,31 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
 CONCEPT_W = {'cards': 2.2, 'para': 1.4, 'fig': 0.0}
 CONCEPT_ROOM = 4.4          # 한 장이 감당하는 몫
 CONCEPT_ROOM_FIG = 2.6      # 그림이 오른쪽 절반을 가져가면 왼쪽 몫이 줄어든다
+
+
+def part_notes(sec, page, pi, pnote):
+    """이 장이 실제로 담은 내용으로 발표자 노트를 만든다.
+
+    나뉜 개념 절의 모든 장에 절의 lede 를 그대로 붙이고 있었다. 그래서 2/4, 3/4,
+    4/4 가 1/4 과 똑같은 한 줄을 노트로 갖고, 검수에서 「대본 누락」으로 올라왔다.
+    빈 노트가 아니라 **같은 노트**여서 빈 노트 검사에도 안 걸렸다.
+
+    첫 장은 절을 여는 문장으로 시작하고, 뒷장은 그 장에 있는 글로만 만든다.
+    """
+    say = []
+    if pi == 0 and ko(sec.get('lede')):
+        say.append(plain(ko(sec['lede'])))
+    for _kind, items in page:
+        for h in items:
+            t = re.sub(r'\s+', ' ', plain(re.sub(r'<[^>]+>', ' ', h))).strip()
+            if t:
+                say.append(t)
+    if pnote:
+        t = re.sub(r'\s+', ' ', plain(re.sub(r'<[^>]+>', ' ', pnote))).strip()
+        if t:
+            say.append(t)
+    out = ' '.join(say).strip()
+    return out or (ko(sec.get('lede')) or '—')
 
 
 def concept_slide(sec, cid, clock):
@@ -464,7 +500,7 @@ def concept_slide(sec, cid, clock):
             tl.append('tl.fromTo("#%s .nn",{opacity:0,y:12},'
                       '{opacity:1,y:0,duration:.5,ease:"power3.out"},%s);' % (pcid, k - 0.5))
         frags = [round(clock + j + 1.0, 2) for j in range(max(1, n_frag))]
-        out.append((body, tl, {'sceneId': pcid, 'notes': ko(sec.get('lede')) or '—',
+        out.append((body, tl, {'sceneId': pcid, 'notes': part_notes(sec, page, pi, pnote),
                                'fragments': frags}, dur))
         clock += dur
     return out
