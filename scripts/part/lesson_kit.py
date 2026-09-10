@@ -364,7 +364,10 @@ COMMANDS = {
 
 # Backticked in the scripts but not something typed at a prompt — a fit grade,
 # a value, a file name.
-NOT_COMMANDS = {"H7", "ESC", "DELETE"}
+# CENTERLINE is a layer name. In the Korean scripts the four layer names are
+# Hangul and never look like a command; in English one of them is a single word,
+# so it has to be named here or it stops the build as an unknown command.
+NOT_COMMANDS = {"H7", "ESC", "DELETE", "CENTERLINE"}
 
 # A command in one lesson, an option inside a running command in another.
 # Counted only where the step introduces the command by name. `D` starts

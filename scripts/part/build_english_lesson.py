@@ -27,6 +27,22 @@ HANGUL = re.compile(r'[가-힣]')
 DROP = ('narration-timing.json', 'media.local.json', 'SCRIPT.en.md')
 MAPS = Path(__file__).resolve().parent / 'frames_en'
 
+# 표의 설명 칸은 국문에서 「선을 긋는다」처럼 짧아서 줄바꿈을 막아 두었다.
+# 영문은 같은 자리가 한 문장이라, 줄바꿈을 막으면 그 칸이 한 줄 전체 너비를
+# 차지하고 옆 칸이 100px 남짓으로 찌그러진다. 그러면 옆 칸이 네댓 줄로 접히면서
+# 표가 캔버스 밖으로 내려간다 — 3차시 명령표가 724px 자리에서 1470px 이 됐다.
+# 그래서 **먹색 설명 칸에서만** 줄바꿈 금지를 푼다. 명령 이름과 치수 값이 들어가는
+# 강조색 칸은 짧고 끊기면 안 되므로 그대로 둔다.
+WRAP = re.compile(r'(style="color:#111;(?:font-size:\d+px;)?)white-space:nowrap"')
+
+# 명령표는 국문에서 한 줄로 앉는 칸이 영문에서 두 줄이 된다. 17개짜리 표는
+# 그것만으로 칸(573px)을 넘긴다. 칸을 줄이려고 문장을 더 깎으면 표가 자동
+# 배치라 열 너비가 다시 나뉘면서 다른 행이 대신 두 줄이 된다 — 6차시에서 세 줄
+# 짜리 두 행을 없앴는데 전체 높이가 585px 그대로였다. 그래서 글자 크기는
+# 건드리지 않고 **행 사이만** 좁힌다. 6px → 3px 로 한 줄에 6px, 열 줄에 60px.
+ROW_PADDING = ('table.spec.tight th,table.spec.tight td{padding:6px 8px}',
+               'table.spec.tight th,table.spec.tight td{padding:3px 8px}')
+
 
 def private(path):
     out = Path(path).resolve()
@@ -56,11 +72,14 @@ def build(lesson_dir, out_dir):
             target.unlink()
     shutil.copyfile(english_script, out / 'SCRIPT.md')
 
-    missing, left = {}, {}
+    missing, left, unwrapped = {}, {}, 0
     for path in frame_text.frames(str(out)):
         source = Path(path).read_text(encoding='utf-8')
         localised, gaps = frame_text.localise(source, english)
         localised = localised.replace('<html lang="ko">', '<html lang="en">')
+        localised, hits = WRAP.subn(lambda m: m.group(1).rstrip(';') + '"', localised)
+        unwrapped += hits
+        localised = localised.replace(*ROW_PADDING)
         Path(path).write_text(localised, encoding='utf-8', newline='\n')
         if gaps:
             missing[os.path.basename(path)] = gaps
@@ -70,7 +89,8 @@ def build(lesson_dir, out_dir):
             left[os.path.basename(path)] = len(rest)
 
     print('영문 사본 %s' % out)
-    print('프레임 %d장 · 번역 지도 %d줄' % (len(frame_text.frames(str(out))), len(english)))
+    print('프레임 %d장 · 번역 지도 %d줄 · 설명 칸 줄바꿈 허용 %d곳'
+          % (len(frame_text.frames(str(out))), len(english), unwrapped))
     if missing:
         print('바꾸지 못한 글자가 있다:')
         for name, gaps in missing.items():

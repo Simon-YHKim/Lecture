@@ -385,8 +385,10 @@ def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=None):
 
     total_chars = sum(len(t) for _, t in jobs)
     if dry_run:
-        print("%-34s 문단 %3d · 글자 %6d · 프레임 %d · Rate 0 → atempo 1.38"
-              % (slug, len(jobs), total_chars, len(order)))
+        # 배속은 목소리를 따른다. 여기에 1.38 을 박아 두면 영문 분량을 셀 때
+        # 실제로 쓰이는 1.15 대신 국문 값을 보여 준다.
+        print("%-34s 문단 %3d · 글자 %6d · 프레임 %d · Rate 0 → atempo %g"
+              % (slug, len(jobs), total_chars, len(order), tempo))
         return None
 
     if os.path.exists(outdir):
