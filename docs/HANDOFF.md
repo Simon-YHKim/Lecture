@@ -15,13 +15,17 @@
 
 ### 어디까지 왔나
 
-- PR #13 머지 완료 (`2ae7ed7`). 이번 라운드는 브랜치
-  `feat/coach-marks-three-view` 에 커밋 둘.
-- **코치 마크 41 → 82개.** 5차시 열세 단계에 제3각법 세 뷰 바탕을 붙였다.
+- main HEAD: `7e0f913` · **워킹 트리 깨끗하다. 작업물은 전부 `main` 에 있다.**
+  다른 세션은 `git pull origin main` 만 하면 이어받는다.
+- 이번 세션 머지된 PR: **#13** (정본 교안 반영 · 두 판 분리 · TTS 재합성) ·
+  **#14** (제3각법 코치 마크 · 보라색 제거 · 데크 경량화)
+- CI `private-materials-guard` — 두 머지 커밋 모두 green.
+- **코치 마크 29 → 82개.** 5차시 열세 단계에 제3각법 세 뷰 바탕을 붙였다.
 - **스냅으로 점을 잡는 단계 30개가 전부 코치 마크를 갖는다** (전 29/30).
   이 대응은 이제 `check-editions.py` 가 센다.
 - 검사 넷 다 초록 — 과정 · 규격(문서 18개) · 판 대조 · 가드.
   데크 전수 검사 0/0/0/0, 자습 교재 26쪽 전부 100KB 안.
+- 원격 브랜치 정리됨. `feat/measured-timing` 만 남아 있다 (머지 여부 미확인).
 
 ### 세 뷰 바탕 — 좌표를 어디서 가져왔나
 
@@ -115,6 +119,104 @@ coach.to_symbol(css=…)                      인스턴스가 많으냐 적으�
 build_selfstudy.render_section_split()      절이 예산을 넘으면 단계 경계에서 나눈다
 build_deck_selfstudy.surface_defs()         데크의 도해를 한 벌만
 ```
+
+### 활성 인프라
+
+외부 서비스 없음. 전부 국지 빌드다. 계정도 키도 쓰지 않는다.
+
+| 무엇 | 어디 | 비고 |
+| --- | --- | --- |
+| TTS 음성 | Windows SAPI `Microsoft Heami Desktop` (ko-KR) · **Rate 0** | 지난 세션에 확인한 속도. `speech_costs.json` 의 `rate: 0`, 초당 5.42음절 |
+| wav 파일 | `%TEMP%\tts-out\<차시>\` — **저장소 밖** | `media.local.json` 이 가리킨다. `.gitignore` 대상 |
+| 학생용 산출물 | `docs/autocad-technician/self-study/*.html` 26쪽 | 한 쪽 100KB 안 · 네트워크 참조 0 · 첫 화면 0.1초 |
+| 검수용 산출물 | 오프라인 단일 HTML 220장 · 2.02MB | `build_deck_all.py --standalone <gsap.min.js>` · 첫 화면 40초 |
+| GSAP | 저장소에 없다. `npm pack gsap@3.14.2` 로 받아 `--standalone` 에 넘긴다 | 데크를 오프라인으로 만드는 유일한 외부 파일 |
+| CI | GitHub Actions `private-materials-guard` 하나 | 경로만 본다 — 조직명·실명은 안 잡는다 |
+
+### 적용 중인 정책 (영구 — 사용자가 명시한 것)
+
+1. **좌표 입력 금지.** 마우스 커서 + 객체 스냅 + 수치 입력. 예외는 용지선 두
+   구석(`0,0`·`420,297`)뿐. → `check-standards.py` 가 강제한다.
+2. **작도 실습에는 도면 + 코치 마크 + 지금 그리는 요소 강조.** 판정 기준은
+   「조작에 `snap` 이 있는 단계」다. → `check-editions.py` 가 강제한다.
+3. **윈도우(좌→우) / 크로싱(우→좌) 선택의 차이를 설명한다.**
+4. **박스 중심 텍스트** — X 사선 + DTEXT 중간-센터 + X 지우기.
+5. **슬라이드 아래 빈 공간 금지.** → `audit_fit.mjs` 가 전수 검사한다.
+6. **문체** — 합쇼체 70~80% / 해요체 20~30%. → `tone_check.py` 가 강제한다.
+7. **디테일한 키 입력 규제보다 방법을 알려주는 데 초점.**
+8. **학습자에게 가는 것은 내려받는 단일 파일.** 사용자는 아티팩트를 못 보는
+   환경이다. 네트워크 참조 0.
+9. **보라색 선을 쓰지 않는다** (2026-09-10 확인). 치수선은 흰색 7번.
+10. **규격은 지어내지 않는다.** 근거는 사내 정본 교안이고 정본은
+    `course-standards.json` 하나다. 값을 두 곳에 적지 않는다.
+
+### 핵심 파일 위치
+
+```
+projects/autocad-technician/course-standards.json   규격 정본 — 레이어·기능키·특수문자·선택
+projects/autocad-technician/TWO_EDITIONS.md         두 판의 경계. 무엇이 같아야 하는가
+projects/autocad-technician/LESSON_STYLE.md         차시 공통 작성 규칙 31개
+projects/autocad-technician/lesson-0N/SCRIPT.md     강의용 원본. 낭독이 길이를 정한다
+projects/autocad-technician/lesson-0N/compositions/ 프레임(저작물) · 편(재생 목록)
+scripts/selfstudy/source/lesson-0N.json             자습용 원본
+scripts/selfstudy/source/curriculum.json            기획 문서. 다시 쓸 때 읽는다
+scripts/selfstudy/coach.py                          코치 마크 — 좌표·표식·형상 이름의 정본
+scripts/selfstudy/build_selfstudy.py                학생용 쪽 렌더러
+scripts/selfstudy/build_deck_all.py                 검수용 묶음 (--standalone 로 오프라인)
+scripts/part/narrate_tts.py                         narration-timing.json 생성기 — 모든 시각의 상류
+scripts/part/retime_frames.py                       프레임 트윈을 잰 박자에 맞춘다
+scripts/part/rebuild_episodes.py                    편과 BRIEF length 를 마스터에서 다시
+scripts/patches/pNN_*.py                            한 번 돌리고 끝난 스크립트 + 그 안의 판단
+```
+
+### 검증
+
+```bash
+# 1) CI 와 같은 것 — 이 셋이 종료 코드로 판정한다
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/check-private-materials.ps1 -Mode all
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/check-course-projects.ps1
+#   └ 위 하나가 check-standards.py 와 check-editions.py 를 함께 부른다
+
+# 2) 자습본 내용과 문체 (차시마다)
+python scripts/selfstudy/validate_content.py scripts/selfstudy/source/lesson-0N.json
+python scripts/selfstudy/tone_check.py       scripts/selfstudy/source/lesson-0N.json
+
+# 3) 산출물을 짓고
+SELFSTUDY_SRC="$PWD/scripts/selfstudy/source" BUILD_STAMP='YYYY-MM-DD HH:MM KST' \
+  python scripts/selfstudy/build_selfstudy.py           # 학생용 26쪽
+npm pack gsap@3.14.2 --pack-destination /tmp && tar xzf /tmp/gsap-3.14.2.tgz -C /tmp package/dist/gsap.min.js
+BUILD_STAMP='YYYY-MM-DD HH:MM KST' \
+  python scripts/selfstudy/build_deck_all.py <출력.html> --standalone /tmp/package/dist/gsap.min.js
+
+# 4) 데크 전수 검사 — 넷 다 0 이어야 한다
+node scripts/selfstudy/audit/audit_deck.mjs <출력.html>   # 정지 구간 · 빈 노트 · 콘솔 오류
+node scripts/selfstudy/audit/audit_fit.mjs  <출력.html>   # 넘침 · 아래 빈 띠
+```
+
+`audit_*.mjs` 는 playwright 가 필요하다. 없으면 `npm i -g playwright`,
+또는 `PLAYWRIGHT_PKG=<경로>` 로 알려 준다.
+**BUILD_STAMP 를 빠뜨리면 헤더 작성 시각이 빈칸으로 나간다.**
+
+### 대본을 고쳤을 때 반드시 따라오는 것
+
+낭독 시간이 프레임 길이를 정한다(`LESSON_STYLE.md` 13·14번). 건너뛰면 모션이 옛
+녹음을 가리킨 채 남고, 아무도 알려 주지 않는다.
+
+```bash
+python scripts/part/narrate_tts.py --all --out <저장소 밖>   # 8차시 재합성 (수십 분)
+for d in projects/autocad-technician/lesson-0*/; do python scripts/part/retime_frames.py "$d"; done
+python scripts/part/rebuild_episodes.py       # 편과 BRIEF length
+python scripts/part/write_course_docs.py      # COURSE_PLAN · recording-map
+```
+
+### 다음 세션 시작하는 법
+
+```bash
+git fetch origin main && git pull origin main
+cat docs/HANDOFF.md
+# 큐 A(화면 녹화)는 사용자 몫이다. 코드 쪽은 C 또는 D 부터.
+```
+
 
 
 ---
