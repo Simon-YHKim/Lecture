@@ -414,8 +414,12 @@ _FILLET_OPTION = re.compile(
     r'(?:필렛|모깎기|fillet)\s*(?:옵션|option)|첫(?:\s*번째)?\s*(?:구석|모서리)', re.I)
 _COMMAND_OPTIONS = {
     'F': _FILLET_OPTION,
+    # 영문판은 같은 자리를 「current layer」「first distance」라고 부른다. 국문 표현만
+    # 알아보면 영문 대본에서 OFFSET 의 도면층 옵션 C 가 CIRCLE 명령으로 세어진다.
     'C': re.compile(r'(?:모따기|chamfer)\s*(?:옵션|option)|첫\s*거리|둘째\s*거리|'
-                    r'닫(?:기|습|으|아)|\bclose\b|현재\s*(?:레이어|도면층)|원본으로.{0,30}현재로', re.I),
+                    r'(?:first|second)\s*distance|'
+                    r'닫(?:기|습|으|아)|\bclose\b|현재\s*(?:레이어|도면층)|current\s*layer|'
+                    r'원본으로.{0,30}현재로', re.I),
     'L': re.compile(r'(?:도면층|레이어|layer)\s*(?:옵션|option)', re.I),
 }
 _COMMAND_CLAUSE_END = re.compile(r'[.!?;\n]')
