@@ -1,41 +1,29 @@
-"""Speak the course's narration with the Windows Korean voice, and time it exactly.
+"""Create measured Heami Rate 0 narration with pitch-preserving 1.38x tempo.
 
-The course was built to wait for a human recording: `frame.md` makes the spoken
-narration the master clock, and every tracked duration stays a planning value
-until one arrives. This produces that recording synthetically, which closes the
-loop without a microphone.
+Each paragraph is synthesised separately and converted with local FFmpeg
+atempo. Boundaries are measured from the resulting PCM, not estimated by
+dividing the source length. Inter-paragraph silence and frame holds also use
+the approved tempo. Pronunciation and instructional meaning need human review.
 
-It is not a substitute for a person reading it. A synthesised voice has no
-emphasis and no judgement about where to slow down, and `LESSON_STYLE.md` 29
-treats the same voice as a *reference* for exactly that reason. What it is good
-for is a course that plays end to end today, and a set of timings that are
-correct rather than estimated.
+    python scripts/part/narrate_tts.py <lesson-dir> --tempo 1.38 --out DIR
+    python scripts/part/narrate_tts.py --all --tempo 1.38 --out DIR
 
-The timing is better than the transcription path it replaces. `build-narration-timing.ps1`
-runs Whisper over a recording and aligns it to the script character by character,
-which the repository README warns is not bit-reproducible — two runs can place a
-boundary seconds apart. Here every paragraph is synthesised on its own, so its
-start and end are known rather than recovered, `matchedRatio` is 1.0 by
-construction, and a re-run produces the same numbers.
-
-    python scripts/part/narrate_tts.py <lesson-dir> [--out DIR] [--dry-run]
-    python scripts/part/narrate_tts.py --all [--out DIR]
-
-Writes, per lesson:
-
-    <out>/<lesson>/frame-NN.wav      the audio — never enters this repository
-    <lesson>/narration-timing.json   numbers only, committed
-    <lesson>/media.local.json        absolute paths, gitignored
-
-Needs Windows with the ko-KR voice. `--voice` picks another installed one.
+DIR must be outside Git and each lesson's destination must be fresh. It keeps
+the Rate 0 source frames in `_source/` and converted frames in the lesson root.
+Tracked narration-timing.json contains numbers, relative names and hashes;
+gitignored media.local.json holds paths and preserves recording bindings.
+Requires Windows Microsoft Heami Desktop and local FFmpeg. --dry-run only
+counts the current script and frame mapping without writing or synthesising.
 """
 
 import argparse
 import hashlib
 import io
 import json
+import math
 import os
 import re
+import shutil
 import struct
 import subprocess
 import sys
@@ -44,9 +32,12 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
+import episodes  # noqa: E402
 
 ROOT = "projects/autocad-technician"
 VOICE = "Microsoft Heami Desktop"
+TEMPO = 1.38
+BASE_FRAME_HOLD = 1.6
 
 # Silence around a paragraph, matching what beats.plan assumes for a reading.
 LEAD = getattr(beats, "LEAD_SEC", 0.4)
@@ -85,6 +76,87 @@ def verify_script_hash(lesson_dir, timing):
         raise ValueError('대본 식별정보가 없습니다. TTS를 다시 생성하세요.')
     if expected != spoken_hash(os.path.join(lesson_dir, 'SCRIPT.md')):
         raise ValueError('대본이 음성 생성 뒤 바뀌었습니다. TTS를 다시 생성하세요.')
+
+
+def timing_identity(timing):
+    payload = {k: v for k, v in timing.items() if k != 'timingSha256'}
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True,
+                                    separators=(',', ':'), allow_nan=False).encode('utf-8')).hexdigest()
+
+
+def verify_tempo_timing(timing, required=False):
+    """Keep old reference audio distinct from the current 1.38x delivery voice."""
+    if 'tempo' not in timing:
+        if required:
+            raise ValueError('Current delivery requires regenerated 1.38x tempo timing')
+        return 1.0
+    if (timing.get('schemaVersion') != 2 or timing.get('rate') != 0
+            or timing.get('tempo') != TEMPO or timing.get('tempoMethod') != 'ffmpeg-atempo-per-paragraph'
+            or not timing.get('tempoToolVersion') or timing.get('voice') != VOICE):
+        raise ValueError('Expected Heami Rate 0 followed by pitch-preserving 1.38x tempo conversion')
+    if timing.get('timingSha256') != timing_identity(timing):
+        raise ValueError('Narration timing identity changed; regenerate speech')
+    if timing.get('sourceFrameHoldSeconds') != BASE_FRAME_HOLD or abs(timing.get('frameHoldSeconds', -1) - BASE_FRAME_HOLD / TEMPO) > 1e-9:
+        raise ValueError('Frame hold must use the same approved tempo')
+    expected_beats, clock, source_clock = [], 0.0, 0.0
+    for seq, frame in enumerate(timing['frames'], 1):
+        for key in ('duration', 'sourceDuration', 'start', 'end', 'sourceStart', 'sourceEnd'):
+            if not isinstance(frame.get(key), (int, float)) or not math.isfinite(frame[key]) or frame[key] < 0:
+                raise ValueError('Narration times must be finite and nonnegative')
+        if (frame['frame'] != seq or frame['duration'] <= 0 or frame['sourceDuration'] <= 0
+                or abs(frame['start'] - clock) > .002 or abs(frame['sourceStart'] - source_clock) > .002
+                or abs(frame['end'] - clock - frame['duration']) > .002
+                or abs(frame['sourceEnd'] - source_clock - frame['sourceDuration']) > .002):
+            raise ValueError('Narration frames do not form continuous measured timelines')
+        for key in ('audioSha256', 'sourceAudioSha256'):
+            if not re.fullmatch(r'[0-9a-f]{64}', frame.get(key, '')):
+                raise ValueError('Narration is missing a source or output identity')
+        previous, source_previous = 0.0, 0.0
+        if not frame.get('units'):
+            raise ValueError('Measured paragraph boundaries are required')
+        for unit in frame['units']:
+            values = [unit.get(k) for k in ('start', 'end', 'sourceStart', 'sourceEnd')]
+            if any(not isinstance(v, (int, float)) or not math.isfinite(v) for v in values):
+                raise ValueError('Paragraph times must be finite')
+            a, b, sa, sb = values
+            if not (previous <= a < b <= frame['duration'] and source_previous <= sa < sb <= frame['sourceDuration']):
+                raise ValueError('Paragraphs overlap or leave their measured frame')
+            previous, source_previous = b, sb
+            if unit['beat'] is not None:
+                expected_beats.append({'frame': seq, 'beat': unit['beat'],
+                    'observedStart': round(clock + a, 3), 'observedEnd': round(clock + b, 3),
+                    'sourceObservedStart': round(source_clock + sa, 3),
+                    'sourceObservedEnd': round(source_clock + sb, 3)})
+        clock += frame['duration']
+        source_clock += frame['sourceDuration']
+    if (timing['beats'] != expected_beats or abs(timing['totalSeconds'] - clock) > .002
+            or abs(timing['sourceTotalSeconds'] - source_clock) > .002):
+        raise ValueError('Measured beats or totals differ from their paragraph timelines')
+    return TEMPO
+
+
+def frame_hold(timing):
+    return BASE_FRAME_HOLD / verify_tempo_timing(timing)
+
+
+def change_tempo(source, target, tempo=TEMPO):
+    """Create new PCM with atempo; source audio and its pitch are preserved."""
+    if tempo != TEMPO:
+        raise ValueError('The approved narration tempo is 1.38')
+    source, target = private_output(source), private_output(target)
+    if source == target or target.exists():
+        raise ValueError('Tempo output must be a fresh file')
+    exe = shutil.which('ffmpeg')
+    if not exe:
+        raise ValueError('Local FFmpeg is required for pitch-preserving 1.38x speech')
+    target.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run([exe, '-nostdin', '-v', 'error', '-xerror', '-i', str(source),
+                    '-map', '0:a:0', '-af', 'atempo=1.38', '-c:a', 'pcm_s16le', '-n', str(target)],
+                   capture_output=True, check=True, timeout=max(60, wav_seconds(source) * 2 + 30))
+    original, result = read_wav(source), read_wav(target)
+    if original['fmt'][:16] != result['fmt'][:16] or not result['data']:
+        raise ValueError('Tempo conversion changed the PCM format or produced empty audio')
+    return str(target)
 
 
 def private_output(path):
@@ -191,7 +263,7 @@ def speak_many(items, outdir, voice):
     return {key: os.path.join(outdir, key + ".wav") for key, _ in items}
 
 
-def concat_wavs(parts, gaps, outpath):
+def concat_wavs(parts, gaps, outpath, tail=TAIL):
     """Join 16-bit PCM parts with silence between them. Returns [(start, end)].
 
     Every part comes from the same synthesiser, so the format is identical and
@@ -212,13 +284,12 @@ def concat_wavs(parts, gaps, outpath):
         elif w["fmt"] != meta["fmt"]:
             raise ValueError("wave format changed mid-frame: %s" % p)
         data += silence(gaps[i])
-        clock += gaps[i]
-        start = clock
+        start = len(data) / float(meta['byte_rate'])
         data += w["data"]
-        clock += len(w["data"]) / float(meta["byte_rate"])
+        clock = len(data) / float(meta['byte_rate'])
         spans.append((round(start, 3), round(clock, 3)))
-    data += silence(TAIL)
-    clock += TAIL
+    data += silence(tail)
+    clock = len(data) / float(meta['byte_rate'])
 
     write_wav(outpath, meta["fmt"], bytes(data))
     return spans, round(clock, 3)
@@ -227,10 +298,10 @@ def concat_wavs(parts, gaps, outpath):
 def lesson_frames(lesson_dir):
     """{line_no: [frame_id, ...]} keyed by the frame file's own number.
 
-    A Line is not a frame. The recording Line of lessons 3 to 7 is cut into two
-    or three frames — `05-demo-a`, `05-demo-b`, `05-demo-c` — so that no episode
-    runs past twenty minutes, and all of them carry the number of the Line they
-    came from. Counting files in order instead puts every frame after the demo
+    A Line is not a frame. The recording Line of lessons 3 to 7 uses two or
+    three internal recording fragments — `05-demo-a`, `05-demo-b`, `05-demo-c` —
+    and all of them carry the number of the Line they came from. These are
+    assembled into one lesson delivery. Counting files in order instead puts every frame after the demo
     one place early, which is silent: the audio still plays, under the wrong
     picture.
     """
@@ -245,17 +316,8 @@ def lesson_frames(lesson_dir):
 
 def cuts_for(lesson_dir):
     """The step numbers this lesson's recording is cut after, from the contract."""
-    path = os.path.join(ROOT, "course-continuity.json")
     slug = os.path.basename(lesson_dir.rstrip("/\\"))
-    try:
-        with io.open(path, encoding="utf-8") as fh:
-            doc = json.load(fh)
-    except OSError:
-        return []
-    for l in doc.get("lessons", []):
-        if l.get("slug") == slug:
-            return list(l.get("cutAfterStep") or [])
-    return []
+    return episodes.cuts_for(slug) if slug in episodes.slugs() else []
 
 
 def synthesis_plan(script):
@@ -296,34 +358,58 @@ def synthesis_plan(script):
     return jobs, units, order
 
 
-def narrate(lesson_dir, outroot, voice, dry_run=False):
+def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=TEMPO):
+    if tempo != TEMPO or voice != VOICE:
+        raise ValueError('Use Microsoft Heami Desktop Rate 0 with tempo 1.38')
     outroot = str(private_output(outroot))
     script = os.path.join(lesson_dir, 'SCRIPT.md')
     input_hash = spoken_hash(script)
     jobs, units, order = synthesis_plan(script)
     slug = os.path.basename(lesson_dir.rstrip('/\\'))
     outdir = os.path.join(outroot, slug)
-    partdir = os.path.join(outdir, '_parts')
+    partdir = os.path.join(outdir, '_parts-rate0')
 
     total_chars = sum(len(t) for _, t in jobs)
     if dry_run:
-        print("%-34s 문단 %3d · 글자 %6d · 프레임 %d"
+        print("%-34s 문단 %3d · 글자 %6d · 프레임 %d · Rate 0 → atempo 1.38"
               % (slug, len(jobs), total_chars, len(order)))
         return None
 
     if os.path.exists(outdir):
         raise ValueError('Choose a fresh narration output directory: ' + outdir)
+    if not jobs:
+        raise ValueError('No narration paragraphs were found')
+    lesson = Path(lesson_dir)
+    originals = {name: (lesson / name).read_bytes() if (lesson / name).exists() else None
+                 for name in ('narration-timing.json', 'media.local.json')}
+    local = json.loads(originals['media.local.json']) if originals['media.local.json'] is not None else {}
+    if not isinstance(local, dict):
+        raise ValueError('Existing media.local.json must be an object')
+    exe = shutil.which('ffmpeg')
+    if not exe:
+        raise ValueError('Local FFmpeg is required for pitch-preserving 1.38x speech')
+    tool_version = subprocess.run([exe, '-version'], capture_output=True, text=True,
+                                  check=True, timeout=30).stdout.splitlines()[0]
     verify_script_hash(lesson_dir, {'spokenTextSha256': input_hash})
     made = speak_many(jobs, partdir, voice)
     verify_script_hash(lesson_dir, {'spokenTextSha256': input_hash})
+    fast = {key: change_tempo(path, Path(outdir) / '_parts-tempo' / (key + '.wav'), tempo)
+            for key, path in made.items()}
+    verify_script_hash(lesson_dir, {'spokenTextSha256': input_hash})
 
-    frames_out, beats_out, clock = [], [], 0.0
+    frames_out, beats_out, clock, source_clock = [], [], 0.0, 0.0
+    source_dir = Path(outdir) / '_source'
+    source_dir.mkdir(parents=True, exist_ok=True)
     for seq, (line_no, part, fid) in enumerate(order, 1):
         entries = units[(line_no, part)]
-        wavs = [made[k] for k, _ in entries]
+        wavs = [fast[k] for k, _ in entries]
         gaps = [LEAD if i == 0 else GAP for i in range(len(wavs))]
         dest = os.path.join(outdir, "%s.wav" % fid)
-        spans, dur = concat_wavs(wavs, gaps, dest)
+        source_dest = source_dir / ('%s.wav' % fid)
+        source_spans, source_dur = concat_wavs([made[k] for k, _ in entries], gaps, source_dest)
+        spans, dur = concat_wavs(wavs, [gap / tempo for gap in gaps], dest, tail=TAIL / tempo)
+        unit_times = [{'beat': beat_idx, 'start': s, 'end': e, 'sourceStart': sa, 'sourceEnd': se}
+                      for (_, beat_idx), (s, e), (sa, se) in zip(entries, spans, source_spans)]
 
         frames_out.append({
             "frame": seq,
@@ -334,43 +420,55 @@ def narrate(lesson_dir, outroot, voice, dry_run=False):
             "duration": dur,
             "audio": os.path.basename(dest),
             "audioSha256": hashlib.sha256(Path(dest).read_bytes()).hexdigest(),
+            "sourceAudio": source_dest.name,
+            "sourceAudioSha256": hashlib.sha256(source_dest.read_bytes()).hexdigest(),
+            "sourceStart": round(source_clock, 3),
+            "sourceEnd": round(source_clock + source_dur, 3),
+            "sourceDuration": source_dur,
+            "units": unit_times,
         })
-        for (key, beat_idx), (s, e) in zip(entries, spans):
+        for (key, beat_idx), (s, e), (sa, se) in zip(entries, spans, source_spans):
             if beat_idx is not None:
                 beats_out.append({
                     "frame": seq,
                     "beat": beat_idx,
                     "observedStart": round(clock + s, 3),
                     "observedEnd": round(clock + e, 3),
+                    "sourceObservedStart": round(source_clock + sa, 3),
+                    "sourceObservedEnd": round(source_clock + se, 3),
                 })
         clock += dur
+        source_clock += source_dur
 
     timing = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "source": "synthesised",
         "voice": voice,
         "rate": 0,
+        "tempo": tempo,
+        "tempoMethod": "ffmpeg-atempo-per-paragraph",
+        "tempoToolVersion": tool_version,
+        "sourceFrameHoldSeconds": BASE_FRAME_HOLD,
+        "frameHoldSeconds": BASE_FRAME_HOLD / tempo,
         "spokenTextSha256": input_hash,
-        "note": ("Windows 음성으로 대본을 읽어 만든 시각이다. 문단마다 따로 합성해 "
-                 "길이를 그대로 읽었으므로 정렬 오차가 없고 다시 돌려도 같은 값이 나온다. "
-                 "사람이 녹음하면 그 값이 이것을 대체한다."),
+        "note": ("Heami Rate 0 원본 문단을 atempo=1.38로 변환하고 결과 PCM 길이를 다시 쟀다. "
+                 "문단 경계는 실제 합친 음성의 시각이며 문장 내부의 발음·의미는 별도 검수한다. "
+                 "원본 음성과 변환 음성, 도구 버전과 해시를 비공개 출력에 함께 보존한다."),
         "totalSeconds": round(clock, 3),
+        "sourceTotalSeconds": round(source_clock, 3),
         "frames": frames_out,
         "beats": beats_out,
     }
+    timing['timingSha256'] = timing_identity(timing)
     verify_script_hash(lesson_dir, timing)
-    with io.open(os.path.join(lesson_dir, "narration-timing.json"), "w",
-                 encoding="utf-8", newline="\n") as fh:
-        fh.write(json.dumps(timing, ensure_ascii=False, indent=2) + "\n")
-
-    local_path = os.path.join(lesson_dir, "media.local.json")
-    local = json.loads(Path(local_path).read_text(encoding='utf-8')) if os.path.isfile(local_path) else {}
+    verify_tempo_timing(timing, required=True)
     local.update({"narrationDir": os.path.abspath(outdir),
                   "frames": {f["id"]: os.path.abspath(os.path.join(outdir, f["audio"]))
-                             for f in frames_out}})
-    with io.open(local_path, "w",
-                 encoding="utf-8", newline="\n") as fh:
-        fh.write(json.dumps(local, ensure_ascii=False, indent=2) + "\n")
+                              for f in frames_out},
+                  "sourceFrames": {f['id']: str((source_dir / f['sourceAudio']).resolve()) for f in frames_out}})
+    # Reuse the two-file transaction; a concurrent metadata editor must survive.
+    from ingest_recording import write_metadata
+    write_metadata(lesson.resolve(), {'narration-timing.json': timing, 'media.local.json': local}, originals)
 
     print("%-34s 프레임 %2d · 비트 %3d · %6.1f초 (%d:%02d)"
           % (slug, len(frames_out), len(beats_out), clock, clock // 60, clock % 60))
@@ -383,6 +481,8 @@ def main(argv=None):
     ap.add_argument("--all", action="store_true", help="여덟 차시 전부")
     ap.add_argument("--out", default=None, help="음성을 둘 곳 (저장소 밖)")
     ap.add_argument("--voice", default=VOICE)
+    ap.add_argument("--tempo", type=float, choices=[TEMPO], default=TEMPO,
+                    help="Rate 0 원본의 음높이를 보존한 1.38배속")
     ap.add_argument("--dry-run", action="store_true", help="분량만 세고 쓰지 않는다")
     a = ap.parse_args(argv)
 
@@ -398,7 +498,7 @@ def main(argv=None):
 
     total = 0.0
     for t in targets:
-        r = narrate(t, outroot, a.voice, a.dry_run)
+        r = narrate(t, outroot, a.voice, a.dry_run, a.tempo)
         if r:
             total += r["totalSeconds"]
     if total:

@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### AutoCAD 2024 integrated-lesson revision
+
+- Set the practice baseline to AutoCAD 2024 with no supplied starter files. Keep grading, pass thresholds and exam operations as “To be shared,” and publish only the two help contacts' names.
+- Deliver one integrated video per lesson and process Rate 0 narration at 1.38× with pitch preserved. Derive all scene clocks from the resulting audio; keep older preview assets unchanged.
+- Correct bracket projection boundaries, slot-radius leaders, fillet-center reference dimensions and center marks. Clarify snap targets, cursor directions, command options, Enter sequences and construction-line cleanup.
+- Keep TRIM/EXTEND practice on temporary lines, preserve the completed part and remove the practice lines afterward.
+- Consolidate self-study slides without removing actions, checkpoints or recovery guidance; refresh command indexes and recording captions from the revised instructions.
+- Reject inconsistent integrated-master timing before export and distinguish command names from option letters in command recaps.
+- Prepare revised Korean self-study, review HTML, lesson slides and scripts. Integrated videos for lessons 1 and 8 are available; practice recordings for lessons 2–7 and the complete English edition remain pending.
+
+## 2026-09-10 — First preview and recording-intake follow-up
+
 ### Follow-up after the first preview
 
 - Align lesson 7's recording captions with all 17 spoken steps, including the missing snap/ortho setup and final SAVEAS caption.

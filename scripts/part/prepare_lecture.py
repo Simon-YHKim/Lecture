@@ -14,8 +14,9 @@ import shutil
 import tempfile
 
 import ingest_recording as recordings
+import episodes
 from lesson_docs import _SLOT
-from narrate_tts import private_output, verify_script_hash, wav_seconds
+from narrate_tts import frame_hold, private_output, verify_script_hash, verify_tempo_timing, wav_seconds
 from sync_narration import attach
 
 
@@ -75,6 +76,28 @@ def episode_slots(source):
     if len(tags.audio) != len(rows) or any(a.get('data-role') != 'narration' for a in tags.audio):
         raise ValueError('Episode audio must belong one-to-one to its measured frames')
     return rows, tags
+
+
+def unified_master_slots(source, timing):
+    """Validate the whole lesson clock against its measured audio and hold."""
+    rows, tags = episode_slots(source)
+    if len(rows) != len(timing['frames']) or len(tags.roots) != 1:
+        raise ValueError('Unified master needs one root and every measured narration frame')
+    clock, hold = 0.0, frame_hold(timing)
+    for index, ((_, stem, start, length), frame) in enumerate(zip(rows, timing['frames'])):
+        start, length = float(start), float(length)
+        expected_length = round(frame['duration'] + hold, 3)
+        if (stem != frame['id'] or not all(math.isfinite(n) for n in (start, length))
+                or length <= 0 or (index == 0 and start != 0)
+                or abs(start - clock) > .002 or abs(length - expected_length) > .002):
+            raise ValueError('Unified master slots must be continuous from zero with measured narration and hold')
+        clock += expected_length
+    root = tags.roots[0]
+    root_start = float(root.get('data-start', 'nan'))
+    root_duration = float(root.get('data-duration', 'nan'))
+    if root_start != 0 or not math.isfinite(root_duration) or abs(root_duration - clock) > .002:
+        raise ValueError('Unified master root must end with its complete measured frame sequence')
+    return rows
 
 
 def selected_entry(lesson, episode, playlists, master):
@@ -213,6 +236,9 @@ def connect_recording(text, comp, length, part, media, used):
 
 
 def prepare(lesson, output, gsap, preview=False, episode=None):
+    unified = episodes.is_unified(Path(lesson).name)
+    if unified and episode is not None:
+        raise ValueError('Current delivery exports the whole lesson; episode selection is retired')
     if episode is not None and (not isinstance(episode, str) or not EPISODE.fullmatch(episode)):
         raise ValueError('Episode must have the form ep1, ep2, ...')
     lesson, gsap = Path(lesson).resolve(), Path(gsap).resolve()
@@ -223,12 +249,16 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
     script_original = (lesson / 'SCRIPT.md').read_bytes()
     timing = json.loads(timing_original)
     verify_script_hash(lesson, timing)
+    verify_tempo_timing(timing, required=unified)
     if not timing.get('spokenTextSha256'):
         raise ValueError('Regenerate speech to record its script identity before exporting')
     media_original = (lesson / 'media.local.json').read_bytes()
     media = json.loads(media_original)
     playlists, playlist_originals = {}, {}
-    for playlist in [lesson / 'index.html', *sorted((lesson / 'compositions/episodes').glob('ep*.html'))]:
+    active_playlists = [lesson / 'index.html']
+    if not unified:
+        active_playlists += sorted((lesson / 'compositions/episodes').glob('ep*.html'))
+    for playlist in active_playlists:
         original = playlist.read_bytes()
         # Match read_text's universal-newline behavior while hashing raw bytes.
         source = original.decode('utf-8').replace('\r\n', '\n').replace('\r', '\n')
@@ -242,11 +272,13 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
     measured = [f['id'] for f in timing['frames']]
     if len({stem.casefold() for stem in stems}) != len(stems) or stems != measured:
         raise ValueError('Narration frames must match the complete master playlist in order')
+    if unified:
+        slots = unified_master_slots(playlists[entry], timing)
     if episode is not None:
         episode_slots(playlists[entry])
         entry, slots = selected_entry(lesson, episode, playlists, slots)
     selected_ids = [stem for _, stem, _, _ in slots]
-    wave_files, wave_names = {}, set()
+    wave_files, wave_names, source_wave_files = {}, set(), {}
     for f in timing['frames']:
         if not re.fullmatch(r'[a-zA-Z0-9_-]+\.wav', f['audio']):
             raise ValueError('Invalid narration filename')
@@ -258,6 +290,14 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
             raise ValueError('WAV identity is missing or changed; regenerate speech: ' + f['id'])
         if abs(wav_seconds(audio) - float(f['duration'])) > .003:
             raise ValueError('WAV duration differs from measured timing: ' + f['id'])
+        if 'tempo' in timing:
+            if not re.fullmatch(r'[a-zA-Z0-9_-]+\.wav', f.get('sourceAudio', '')):
+                raise ValueError('Invalid source narration filename')
+            source_audio = private_output(media.get('sourceFrames', {}).get(f['id'], ''))
+            if (not source_audio.is_file() or recordings.file_sha256(source_audio) != f['sourceAudioSha256']
+                    or abs(wav_seconds(source_audio) - f['sourceDuration']) > .003):
+                raise ValueError('Rate 0 source narration identity or duration changed: ' + f['id'])
+            source_wave_files[source_audio] = f['sourceAudioSha256']
         wave_files[f['audio']] = audio
     if 'gsap' not in gsap.read_text(encoding='utf-8') or gsap.stat().st_size < 10000:
         raise ValueError('A local GSAP distributable is required')
@@ -265,7 +305,7 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
               'hyperframes.json', 'BRIEF.md', 'SCRIPT.md', 'narration-timing.json']
              if (lesson / name).is_file()]
     files.insert(0, entry)
-    if episode is None:
+    if episode is None and not unified:
         files += sorted((lesson / 'compositions').rglob('*.html'))
         files += sorted((lesson / 'compositions').rglob('*.motion.json'))
     else:
@@ -286,7 +326,7 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
                 matches = RECORDING.findall(text)
                 if matches != [canonical_recordings[source.stem]]:
                     raise ValueError('Canonical recording placeholder is missing or has the wrong part ID')
-            if episode is not None and source != entry:
+            if (episode is not None or unified) and source != entry:
                 tags = CompositionTags(text)
                 if tags.refs or tags.audio:
                     raise ValueError('Nested frame or audio references require an explicit export plan: ' + str(relative))
@@ -316,6 +356,9 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
     audio_seconds = round(sum(float(f['duration']) for f in selected_frames), 3) if episode else timing['totalSeconds']
     manifest = {
         'lesson': lesson.name, 'spokenTextSha256': timing['spokenTextSha256'],
+        'deliveryMode': 'lesson' if unified else 'legacy-episodes',
+        'narrationTempo': timing.get('tempo', 1.0), 'narrationRate': timing.get('rate'),
+        'narrationTimingSha256': timing.get('timingSha256'),
         'entrySource': entry.relative_to(lesson).as_posix(), 'episode': episode,
         'sourceFiles': hashes, 'audioFrames': len(wave_files),
         'audioFrameIds': selected_ids, 'audioSources': audio_sources,
@@ -365,6 +408,9 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
         for relative, identity in {**hashes, **manifest['validationSources']}.items():
             if recordings.file_sha256(lesson / relative) != identity:
                 raise ValueError('Source changed during export: ' + relative)
+        for source, identity in source_wave_files.items():
+            if recordings.file_sha256(source) != identity:
+                raise ValueError('Rate 0 source narration changed during export')
         if output.exists():
             raise ValueError('Output appeared during export; choose a fresh directory')
         stage.rename(output)
@@ -379,7 +425,7 @@ def main():
     ap.add_argument('--out', required=True, type=Path)
     ap.add_argument('--gsap', required=True, type=Path)
     ap.add_argument('--preview', action='store_true', help='Allow recording placeholders for validation only')
-    ap.add_argument('--episode', help='Export one canonical episode, for example ep1 or ep3')
+    ap.add_argument('--episode', help='Legacy projects only; the current course is exported as whole lessons')
     args = ap.parse_args()
     print(json.dumps(prepare(args.lesson, args.out, args.gsap, args.preview, args.episode), ensure_ascii=False))
 

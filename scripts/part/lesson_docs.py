@@ -116,7 +116,7 @@ def refresh(lesson_dir, descs):
         # The whole recording, not just its first part.
         note = clock(int(round(sum(demo))))
         if len(demo) > 1:
-            note += " · %d편" % len(demo) + "".join(
+            note += " · 내부 녹화 %d조각" % len(demo) + "".join(
                 " " + clock(int(round(x))) for x in demo)
         t = re.sub(r"\(`DEMO-01`[^)]*\)", "(`DEMO-01`, %s)" % note, t, count=1)
     rows = (["| # | 컴포지션 | 시작 | 길이 | 화면 | 비트 |",

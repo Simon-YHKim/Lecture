@@ -91,9 +91,9 @@ def f_concept(comp, dur, spans, L):
             + '<div class="note"><b>기억할 것</b> ' + L["concept_note"] + '</div></main>')
     items = [beats.item(".tk%d" % i) for i in range(1, 5)]
     tl = "\n".join([beats.chrome(comp), beats.read_along(comp, items, spans),
-                    beats.cue(comp, ".note", max(dur - 14.0, 4.0), dy=12),
+                    beats.closing_note(comp, spans),
                     beats.outro(comp, dur)])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans, extra=[beats.closing_note_assertion(comp, spans)])
 
 
 def f_ondrawing(comp, dur, spans, L):
@@ -192,9 +192,9 @@ def f_check(comp, dur, spans, L):
             + '<div class="note"><b>고치는 법</b> ' + L["check_note"] + '</div></main>')
     items = [beats.item(".ck%d" % i) for i in range(1, 5)]
     tl = "\n".join([beats.chrome(comp), beats.read_along(comp, items, spans),
-                    beats.cue(comp, ".note", max(dur - 14.0, 4.0), dy=12),
+                    beats.closing_note(comp, spans),
                     beats.outro(comp, dur)])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans, extra=[beats.closing_note_assertion(comp, spans)])
 
 
 def f_keys(comp, dur, spans, L):
@@ -223,7 +223,19 @@ def f_keys(comp, dur, spans, L):
                 '<thead><tr><th>입력</th><th>무엇을 하나</th><th>언제 쓰나</th>'
                 '</tr></thead><tbody>' + rows + '</tbody></table>')
 
-    if len(keys) > 9:
+    paged = len(keys) == 24
+    if paged:
+        # Twelve full-size rows per page fit above the unchanged function-key
+        # note. The two pages occupy the same slot and switch at spoken row 13.
+        pages = []
+        for offset, name in ((0, 'earlier'), (12, 'later')):
+            inner = (table(keys[offset:offset + 6], offset + 1)
+                     + table(keys[offset + 6:offset + 12], offset + 7))
+            pages.append('<div class="keys-page keys-%s" style="grid-area:1/1;'
+                         'display:grid;grid-template-columns:1fr 1fr;gap:26px;'
+                         'align-content:start;min-width:0">%s</div>' % (name, inner))
+        sec = '<section style="display:grid;min-height:0">' + ''.join(pages) + '</section>'
+    elif len(keys) > 9:
         half = (len(keys) + 1) // 2
         inner = table(keys[:half], 1) + table(keys[half:], half + 1)
         sec = ('<section style="display:grid;grid-template-columns:1fr 1fr;gap:26px;'
@@ -240,14 +252,37 @@ def f_keys(comp, dur, spans, L):
             + sec
             + '<div class="note"><b>기능키</b> ' + fk + '</div></main>')
     items = [beats.item(".ky%d" % i, kind="row") for i in range(1, len(keys) + 1)]
+    page_timeline = ''
+    page_assertions = []
+    if paged:
+        bs = beats.beat_spans(spans)
+        if [i for i, _a, _b in bs] != list(range(1, 25)):
+            raise ValueError('The two-page command table requires all 24 spoken beats')
+        boundary = round(bs[12][1], 2)
+        page_timeline = '\n'.join([
+            '    gsap.set("#%s .keys-earlier",{autoAlpha:1});' % comp,
+            '    gsap.set("#%s .keys-later",{autoAlpha:0});' % comp,
+            '    tl.to("#%s .keys-earlier",{autoAlpha:0,duration:0},%s);'
+            ' // narration-beat: 13 on' % (comp, boundary),
+            '    tl.fromTo("#%s .keys-later",{autoAlpha:0},{autoAlpha:1,duration:0},%s);'
+            ' // narration-beat: 13 on' % (comp, boundary),
+        ])
+        for i, start, _end in bs:
+            selector = '#%s .ky%d' % (comp, i)
+            page_assertions.extend([
+                {'kind': 'appearsBy', 'selector': selector, 'bySec': round(start + 3, 2)},
+                {'kind': 'staysInFrame', 'selector': selector},
+            ])
     tl = "\n".join([
         beats.chrome(comp),
         beats.cue(comp, "thead", 1.5, dy=8, dur=0.7, ease="power2.out"),
         beats.read_along(comp, items, spans),
-        beats.cue(comp, ".note", max(dur - 12.0, 4.0), dy=12),
+        page_timeline,
+        beats.closing_note(comp, spans),
         beats.outro(comp, dur),
     ])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), beats.assertions(
+        comp, items, spans, extra=[beats.closing_note_assertion(comp, spans)] + page_assertions)
 
 
 def f_recap(comp, dur, spans, L):

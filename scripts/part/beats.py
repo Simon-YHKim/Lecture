@@ -261,7 +261,7 @@ _TINT = {
     # the words instead of needing its own tween.
     "card": ("borderColor:'%s',backgroundColor:'%s',color:'%s'" % (ACCENT, CARD_BG, ACCENT),
              "borderColor:'%s',backgroundColor:'#FFF',color:'%s'" % (LINE, INK)),
-    "row": ("backgroundColor:'%s'" % ROW_BG, "backgroundColor:'rgba(0,0,0,0)'"),
+    "row": ("backgroundColor:'%s'" % ROW_BG, "backgroundColor:'#FFF'"),
     "plain": ("", ""),
 }
 
@@ -298,6 +298,10 @@ def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10, overview_a
     """
     items = [item(s) if isinstance(s, str) else s for s in items]
     out = []
+    rows = [_sel(comp, it['sel']) for it in items if it['kind'] == 'row']
+    if rows:
+        # A transparent-black endpoint darkens the row during color interpolation.
+        out.append('    gsap.set("%s",{backgroundColor:"#FFF"});' % ','.join(rows))
 
     present = [it for it in items if it["mode"] == "present"]
     if present:
@@ -403,7 +407,33 @@ def dim_highlight(comp, dims, spans, lead=0.2):
     return attr_highlight(comp, "dim", dims, spans, lead)
 
 
-_TICK = re.compile(r"`([A-Za-z][A-Za-z0-9]{0,11})`")
+_TICK = re.compile(r"`([A-Za-z][A-Za-z0-9]{0,31})`")
+_FILLET_COMMAND = re.compile(r'\bFILLET\b|모깎기|필렛\s*명령', re.I)
+_FILLET_OPTION = re.compile(
+    r'(?:필렛|모깎기|fillet)\s*(?:옵션|option)|첫(?:\s*번째)?\s*(?:구석|모서리)', re.I)
+_COMMAND_OPTIONS = {
+    'F': _FILLET_OPTION,
+    'C': re.compile(r'(?:모따기|chamfer)\s*(?:옵션|option)|첫\s*거리|둘째\s*거리|'
+                    r'닫(?:기|습|으|아)|\bclose\b|현재\s*(?:레이어|도면층)|원본으로.{0,30}현재로', re.I),
+    'L': re.compile(r'(?:도면층|레이어|layer)\s*(?:옵션|option)', re.I),
+}
+_COMMAND_CLAUSE_END = re.compile(r'[.!?;\n]')
+
+
+def _command_token_context(text, token):
+    # parse_steps joins source lines. Bound each occurrence by prose clauses
+    # so an option cannot suppress a later command with the same shortcut.
+    start = max(text.rfind(c, 0, token.start()) for c in '.!?;\n') + 1
+    stop = _COMMAND_CLAUSE_END.search(text, token.end())
+    end = stop.end() if stop else len(text)
+    context = text[start:end]
+    following_stop = _COMMAND_CLAUSE_END.search(text, end)
+    following = text[end:following_stop.end() if following_stop else len(text)]
+    # A command/option explanation often follows "C, Enter." in its own sentence.
+    # Never borrow another typed command's explanation.
+    if not _TICK.search(following):
+        context += following
+    return context
 
 
 def shortcuts_in(path, line_no):
@@ -421,17 +451,29 @@ def shortcuts_in(path, line_no):
         lines = fh.read().splitlines()
 
     inside, seen, unknown = False, [], []
-    for raw in lines:
+    for row_index, raw in enumerate(lines):
         m = _LINE_HEAD.match(raw)
         if m:
             inside = int(m.group(1)) == line_no
             continue
         if not inside:
             continue
-        for tok in _TICK.findall(raw):
-            key = tok.upper()
+        for token in _TICK.finditer(raw):
+            key = token.group(1).upper()
             if key in kit.NOT_COMMANDS or key in seen:
                 continue
+            if key in _COMMAND_OPTIONS:
+                prose = raw
+                if row_index + 1 < len(lines) and lines[row_index + 1].startswith(('    ', '\t')):
+                    prose += ' ' + lines[row_index + 1].strip()
+                context = _command_token_context(prose, token)
+                if _COMMAND_OPTIONS[key].search(context):
+                    continue
+            # RECTANG also accepts F while it is asking for the first corner.
+            # Like D/M below, require the actual command to be introduced.
+            if key == "F":
+                if not _FILLET_COMMAND.search(context):
+                    continue
             # Some letters are a command in one lesson and an option inside a
             # running command in another. `D` starts DIMSTYLE in lesson 7 and
             # answers CIRCLE's radius prompt in lessons 3 and 4 — counted as
@@ -469,8 +511,10 @@ def step_keys(path, line_no):
     out = []
     for _no, text in parse_steps(path, line_no):
         found = []
-        for tok in _TICK.findall(text):
-            key = tok.upper()
+        for token in _TICK.finditer(text):
+            key = token.group(1).upper()
+            if key in _COMMAND_OPTIONS and _COMMAND_OPTIONS[key].search(_command_token_context(text, token)):
+                continue
             if key in kit.AMBIGUOUS_KEYS:
                 if not (kit.COMMANDS.get(key, ("",))[0] in text
                         or (key == "M" and "이동 명령" in text)):
@@ -496,6 +540,17 @@ def segment_at(spans, i):
 def cue(comp, sel, at, dy=14, dur=0.9, ease="power3.out"):
     return ('    tl.fromTo("#%s %s",{opacity:0,y:%s},{opacity:1,y:0,duration:%s,ease:"%s"},%s);'
             % (comp, sel, dy, dur, ease, round(at, 2)))
+
+
+def closing_note(comp, spans, sel=".note", dy=12):
+    """Keep a supplementary note with the final measured narration paragraph."""
+    index, start, _end = beat_spans(spans)[-1]
+    return cue(comp, sel, start, dy=dy) + ' // narration-beat: %d on' % index
+
+
+def closing_note_assertion(comp, spans, sel=".note"):
+    _index, start, _end = beat_spans(spans)[-1]
+    return {"kind": "appearsBy", "selector": _sel(comp, sel), "bySec": round(start + 1.0, 2)}
 
 
 def outro(comp, duration, sels=(".topline", ".body"), fade=0.9):

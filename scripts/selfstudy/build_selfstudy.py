@@ -169,8 +169,9 @@ def surface_svg(name):
 def coach_figure(st, ctx):
     """이 단계가 잡을 자리를 도면 위에 찍는다. `spots` 가 없으면 아무것도 안 낸다."""
     spots = st.get('spots')
-    if not spots:
+    if not spots and not st.get('construction'):
         return ''
+    spots = spots or []
     surface = st.get('on', 'front')
     svg = surface_svg(surface)
     if not svg:
@@ -179,16 +180,24 @@ def coach_figure(st, ctx):
     feature = st.get('feature')
     only = {n for a in st.get('actions', []) for n in _coach.spot_badges(a)} or None
     body, _caps = _coach.marks(spots, surface, only)
+    temporary = _coach.construction_for(st, surface)
     head = ('지금 그리는 것 — <b>%s</b>' % esc(_coach.FEATURE_KO[feature])) \
         if feature in _coach.FEATURE_KO else '도면 위에서 지금 잡을 자리'
+    if temporary:
+        head += ' · <span class="k">점선: 이 단계의 임시선·가공 전 선</span><span class="e">Dashed: temporary or pre-edit lines</span>'
+    if st.get('diagramOnly'):
+        head = '<span class="k">이 단계의 작도 도해 · 점선: 조작할 선</span><span class="e">Step diagram · dashed: lines to act on</span>'
+    elif st.get('diagramNote'):
+        head += '<br>' + bi(st['diagramNote'], 'span')
+    base = '' if st.get('diagramOnly') else _coach.use_tag('sfc-' + surface, svg) + _coach.hl_for(svg, feature)
     # 자리 설명을 도면 아래에 또 적지 않는다. 같은 말이 조작 줄에 있고, 번호로
     # 서로 짚는다. 비는 자리는 도면이 가져간다.
     return ('<figure class="coachfig" data-memo="도면 코치 마크">'
             '<div class="fh">%s</div>'
             '<svg class="dwg cdwg" viewBox="%s" role="img" aria-label="%s">'
             '%s%s<g class="coach">%s</g></svg></figure>'
-            % (head, _coach.viewbox(svg), attr(head.replace('<b>', '').replace('</b>', '')),
-               _coach.use_tag('sfc-' + surface, svg), _coach.hl_for(svg, feature), body))
+            % (head, _coach.figure_viewbox(st, surface, svg), attr('이 단계의 도면과 선택점'),
+               base, temporary, body))
 
 
 def surface_defs(used):
@@ -313,18 +322,20 @@ def shell(title, eyebrow, h1, meta, tabs, panels, pager='', grade='S', body_attr
 <style>%(css)s</style>
 </head>
 <body data-lang="ko"%(battrs)s>
+<p class="translation-status"><span class="k">국문을 먼저 검수합니다. 영문은 의미를 맞춘 초안이며 국문 완료 후 정식 제작합니다.</span><span class="e">Korean is reviewed first. English is an alignment draft; full English production follows Korean approval.</span></p>
+<p class="translation-status"><span class="k">음성 구성 시간은 내레이션과 화면 전환을 합친 길이입니다. 2~7차시는 실제 녹화 후 길이가 달라질 수 있습니다.</span><span class="e">Narrated timeline duration includes narration and scene transitions. Lessons 2–7 may change in length after screen recording.</span></p>
 <div class="banner"><span class="k">이 파일은 <b>내려받아 브라우저로 열어야</b> 메모 저장과 진도 저장이 동작합니다. 미리보기 창에서는 저장이 막힐 수 있어요.</span><span class="e">Download this file and open it in a browser — notes and progress only persist there. Sandboxed previews may block storage.</span></div>
 <header class="top">
   <div class="bar">
     <div class="brand">
       <p class="eyebrow">%(eyebrow)s</p>
       <h1>%(h1)s</h1>
-      <p class="meta">%(meta)s<span class="grade"><span class="k">등급 %(grade)s</span><span class="e">Grade %(grade)s</span></span></p>
+      <p class="meta">%(meta)s</p>
     </div>
     <div class="tools">
       <span class="seg" role="group" aria-label="언어 / Language">
         <button type="button" class="t" data-lang-btn="ko" aria-pressed="true">국문</button>
-        <button type="button" class="t" data-lang-btn="en" aria-pressed="false">EN</button>
+        <button type="button" class="t" data-lang-btn="en" aria-pressed="false" aria-label="English alignment draft">EN · 초안</button>
       </span>
       <button type="button" class="t" id="theme-btn"><span class="k">자동</span><span class="e">Auto</span></button>
       <button type="button" class="t" id="memo-btn" aria-pressed="false" aria-controls="memo"><span class="k">&#128221; 메모</span><span class="e">&#128221; Notes</span></button>
@@ -389,7 +400,7 @@ def build_lesson(L, nav):
         sum_html.append('<ul class="plain">%s</ul>'
                         % ''.join('<li>%s</li>' % bi(o) for o in L['objectives']))
 
-    rows = [[{'ko': '영상 길이', 'en': 'Video length'}, {'ko': L.get('videoLength', '—'), 'en': L.get('videoLength', '—')}],
+    rows = [[{'ko': '음성 구성 시간', 'en': 'Narrated timeline duration'}, {'ko': L.get('videoLength', '—'), 'en': L.get('videoLength', '—')}],
             [{'ko': '자습 소요(권장)', 'en': 'Self-study time'},
              {'ko': '약 %d분' % L.get('selfStudyMin', 0), 'en': 'about %d min' % L.get('selfStudyMin', 0)}],
             [{'ko': '여는 파일', 'en': 'Open this file'},
@@ -497,8 +508,8 @@ def build_lesson(L, nav):
 
     buckets['check'] = chk
 
-    meta = ('<span class="k">작성 %s · 발행 Claude Code · 자습 약 %d분 (영상 %s) · </span>'
-            '<span class="e">Written %s · Claude Code · about %d min self-study (video %s) · </span>'
+    meta = ('<span class="k">작성 %s · AutoCAD 교육 과정 · 자습 약 %d분 (음성 구성 시간 %s) · </span>'
+            '<span class="e">Written %s · AutoCAD course · about %d min self-study (narrated timeline duration %s) · </span>'
             % (STAMP, L.get('selfStudyMin', 0), L.get('videoLength', '—'),
                STAMP, L.get('selfStudyMin', 0), L.get('videoLength', '—')))
     tko = (L.get('title') or {}).get('ko', '')
@@ -778,8 +789,8 @@ def build_index(C, lessons, progress_file=None, part2=None):
                                    '`reference.html`. Keep that page open in a second tab while you work.'
                                    % (len(C.get('glossary', [])), len(C.get('shortcutIndex', [])))}, ctx))
 
-    meta = ('<span class="k">작성 %s · 발행 Claude Code · 자습 총 %d분(약 %.1f시간) · </span>'
-            '<span class="e">Written %s · Claude Code · %d min total (about %.1f h) · </span>'
+    meta = ('<span class="k">작성 %s · AutoCAD 교육 과정 · 자습 총 %d분(약 %.1f시간) · </span>'
+            '<span class="e">Written %s · AutoCAD course · %d min total (about %.1f h) · </span>'
             % (STAMP, total_min, total_min / 60.0, STAMP, total_min, total_min / 60.0))
     ctitle = (C.get('courseTitle') or {}).get('ko', '자습 교재')
     eyeb = ('<span class="k">LG이노텍 Green Star · for technician · 자습 과정</span>'

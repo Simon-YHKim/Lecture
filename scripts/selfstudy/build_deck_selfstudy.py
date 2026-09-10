@@ -11,9 +11,8 @@
     한 장 안에 명령·묻는 것·입력값·확인이 순서대로 있고, 오른쪽에 「이렇게 되면
     맞습니다 · 왜 이 순서인가 · 안 되면 여기」가 붙는다. 강사가 말로 때우던 몫이
     화면에 남는다.
-  · **개념 프레임 뒤에 보강 장을 넣는다.** 강의 프레임은 좌표 표기 세 가지를
-    가르친다. 자습본은 거기에 객체 스냅과 자유 클릭을 더해 「점을 찍는 네 가지
-    방법」으로 넓혔고, 고르는 기준을 한 문장으로 준다. 그 절이 한 장이 된다.
+  · **개념 프레임 뒤에 보강 장을 넣는다.** 객체 스냅·방향·거리로 점을 정하는
+    기준과 결과 확인을 함께 싣는다.
 
 새로 만드는 장은 프레임의 조판을 그대로 쓴다. `.clip` · `.topline` · `.card` ·
 `.note` 는 프레임 스타일시트에 이미 있는 것이고, 덱에 프레임이 함께 실리므로
@@ -46,7 +45,7 @@ EXTRA = {
     # 점을 찍는 방법은 도면틀을 그리기 전에 있어야 한다. 3차시에서 2차시로 옮겼다.
     2: [('07-sheet-and-layers', '점을 찍는 네 가지 방법', 'concept'),
         ('07-sheet-and-layers', '스냅 표식을 보고 누릅니다', 'concept')],
-    3: [('03-concept', '이렇게도 됩니다 — 원점을 옮겨 좌표로 그리기', 'split')],
+    3: [('03-concept', '다른 방법 — 보조선으로 기준 잡기', 'concept')],
     4: [('03-concept', '안쪽 형상 넷 — 축 구멍·탭·장공·필렛', 'concept'),
         ('03-concept', '계산해서 나오는 값들', 'concept')],
     5: [('03-concept', '투상선은 도면에 남지 않는 선입니다', 'concept'),
@@ -55,7 +54,7 @@ EXTRA = {
         ('03-concept', '레이어 점검 세 가지 방법', 'concept')],
     7: [('03-concept', '치수 다섯 종류', 'concept'),
         ('03-concept', '치수선 방향과 기준면', 'concept')],
-    8: [('02-exam', '시험에서 자주 어긋나는 세 자리', 'concept')],
+    8: [('02-exam', '전체 작도에서 다시 확인할 세 자리', 'concept')],
 }
 
 # 녹화 프레임이 없는 차시는 따라 하기를 어느 프레임 뒤에 깔지 정해 준다.
@@ -111,7 +110,7 @@ def surface_defs():
             'style="position:absolute;width:0;height:0;overflow:hidden">%s</svg>' % syms)
 
 
-def fig_block(spots, figs, feature=None, surface='front', only=None):
+def fig_block(spots, figs, feature=None, surface='front', only=None, step=None):
     """정면도 한 장 위에 자리 표시를 얹고, 아래에 무엇을 볼지 적는다.
 
     `feature` 가 있으면 그 형상의 강조 겹선을 켠다. 자리만 찍어 두면 「여기를
@@ -121,7 +120,8 @@ def fig_block(spots, figs, feature=None, surface='front', only=None):
     base = figs.get(surface) if isinstance(figs, dict) else figs
     if not base:
         return ''
-    marks_svg, rows = _coach.marks(spots, surface, only)
+    step = step or {}
+    marks_svg, rows = _coach.marks(spots or [], surface, only)
     caps = []
     for i, hover, snapname in rows:
         caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
@@ -131,16 +131,24 @@ def fig_block(spots, figs, feature=None, surface='front', only=None):
     # 복사하면 여덟 차시 묶음이 4MB 를 넘어 브라우저가 30초 안에 못 연다 —
     # 실제로 그렇게 됐다. 강조 겹선만 인스턴스에 직접 그린다(`<use>` 안쪽은
     # 바깥에서 켤 수 없다).
-    USED_SURFACES.add(surface)
-    vb = _coach.viewbox(base).split()
+    separate = bool(step.get('diagramOnly'))
+    construction = _coach.construction_for(step, surface)
+    if not separate:
+        USED_SURFACES.add(surface)
+    viewport = _coach.figure_viewbox(step, surface, base)
+    vb = viewport.split()
     body = ('<svg class="dwg cdwg" viewBox="%s" width="%s" height="%s" '
-            'preserveAspectRatio="xMidYMid meet">%s%s'
+            'preserveAspectRatio="xMidYMid meet">%s%s%s'
             '<g class="coach">%s</g></svg>'
-            % (_coach.viewbox(base), vb[2], vb[3],
-               _coach.use_tag('dsfc-' + surface, base),
-               _coach.hl_for(base, feature), marks_svg))
+            % (viewport, vb[2], vb[3],
+               '' if separate else _coach.use_tag('dsfc-' + surface, base),
+               '' if separate else _coach.hl_for(base, feature), construction, marks_svg))
     # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
     head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
+    if separate:
+        head = '이 단계의 작도 도해'
+    if construction:
+        head += '<span class="construction-key">점선: 이 단계의 임시선</span>'
     # 캡션 목록은 내지 않는다. 같은 말이 왼쪽 조작 줄에 이미 있고, 번호로 서로
     # 짚을 수 있게 했다. 비는 자리는 도면이 가져간다.
     return ('<figure class="fig" data-memo="도면 코치 마크">'
@@ -192,7 +200,9 @@ def ops_font(actions, narrow=False):
     라벨 칸이 줄을 하나 더 만드는 경우가 있어 실제가 어림보다 조금 크다.
     그만큼 한도를 낮춰 잡는다.
     """
-    w, gap, cap = (740, 9, 358) if narrow else (OPS_W, 15, 640)
+    # 도면/확인 카드는 오른쪽에 둔다. 왼쪽 조작 영역은 도면의 높이와 무관하게
+    # 끝까지 쓰므로 작은 조각으로 잘라 명령과 입력값을 갈라놓을 필요가 없다.
+    w, gap, cap = (900, 12, 700) if narrow else (OPS_W, 15, 700)
     last = (SIZES[-1], 0.0)
     for size in SIZES:
         cpl = max(12, int(w / (size * 0.98)))   # 한글은 글자 한 자가 약 1em
@@ -205,6 +215,37 @@ def ops_font(actions, narrow=False):
         if h <= cap:
             return size, h, cap
     return last[0], last[1], cap
+
+
+def action_pages(actions, narrow=False):
+    """28px에서 들어가는 만큼 묶되 명령·응답의 순서와 원문은 보존한다."""
+    pages, start = [], 0
+    while start < len(actions):
+        _, first_height, first_cap = ops_font(actions[start:start + 1], narrow)
+        if first_height > first_cap:
+            raise ValueError('One action exceeds the readable slide area; split its explanation at source')
+        end = start + 1
+        while end < len(actions):
+            _, height, cap = ops_font(actions[start:end + 1], narrow)
+            if height > cap:
+                break
+            end += 1
+        if end < len(actions):
+            # 확인 뒤/다음 명령 앞을 우선한다. 질문 직후에는 나누지 않는다.
+            candidates = [i for i in range(start + 1, end + 1)
+                          if actions[i - 1].get('kind') == 'see'
+                          or (i < len(actions) and actions[i].get('type')
+                              and re.fullmatch(r'[A-Z][A-Z_-]{1,}', actions[i]['type']))]
+            candidates = [i for i in candidates
+                          if actions[i - 1].get('kind') != 'ask'
+                          and ops_font(actions[start:i], narrow)[1] >= cap * .55]
+            if candidates:
+                end = candidates[-1]
+            elif actions[end - 1].get('kind') == 'ask' and end > start + 1:
+                end -= 1
+        pages.append(actions[start:end])
+        start = end
+    return pages or [[]]
 
 
 SIDE_SIZES = (21, 20, 19, 18, 17, 16)
@@ -227,8 +268,8 @@ def side_font(texts, w=600, cap=700):
     return SIDE_SIZES[-1]
 
 
-def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
-    """따라 하기 한 단계 = 한 장. 조각 하나에 조작 한 줄씩 열린다.
+def step_slide(st, cid, clock, sec_label, total, front=None, part=None, action_start=0):
+    """따라 하기 한 단계를 읽을 수 있는 문맥 단위로 묶는다.
 
     `spots` 가 있으면 정면도가 한 칸을 차지한다. 커서를 어디에 올려야 하는지는
     글로 적어 봐야 「베이스 윗면 왼쪽에서 조금 오른쪽」 같은 말이 될 뿐이고,
@@ -237,16 +278,16 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
     """
     acts = st.get('actions', [])
     spots = st.get('spots') if front else None
-    size, est, cap = ops_font(acts, narrow=bool(spots))
-    if est > cap and len(acts) > 1 and part is None:
+    has_fig = bool(front and (spots or st.get('construction')))
+    size, est, cap = ops_font(acts, narrow=has_fig)
+    if est > cap and part is None:
         # 한 장에 안 들어가면 글자를 줄이는 대신 장을 나눈다(LESSON_STYLE 11번).
         # 두 장으로 모자란 단계가 있어 필요한 만큼 나눈다 — 조작이 스물한 줄인
         # 단계까지 있다.
-        parts = min(len(acts), max(2, int(math.ceil(est / cap))))
-        size_of = int(math.ceil(len(acts) / float(parts)))
-        chunks = [acts[i:i + size_of] for i in range(0, len(acts), size_of)]
+        chunks = action_pages(acts, narrow=has_fig)
         parts = len(chunks)
         out = []
+        offset = action_start
         for k, chunk in enumerate(chunks):
             sub = dict(st, actions=chunk)
             # 첫 장에는 「왜 이 순서인가」를, 마지막 장에는 「이렇게 되면
@@ -258,9 +299,11 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
                 sub.pop('expect', None)
                 sub.pop('pitfall', None)
             one = step_slide(sub, '%s%s' % (cid, 'abcdefgh'[k]), clock,
-                             sec_label, total, front, part=(k + 1, parts))
+                             sec_label, total, front, part=(k + 1, parts),
+                             action_start=offset)
             out += one
             clock += one[-1][3]
+            offset += len(chunk)
         return out
     ops = []
     for k, a in enumerate(acts):
@@ -270,10 +313,11 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
         # 도면 위 자리 표시와 같은 번호를 이 줄에 단다. 도면 아래에 같은 말을 또
         # 적는 대신 여기서 대조하게 하는 것이 검수 요청이다.
         badge = ''.join('<span class="spotno">%d</span>' % n for n in _coach.spot_badges(a))
-        ops.append('<li class="op o%d %s%s" data-memo="%s"><span class="lab">%s</span>'
+        ops.append('<li class="op o%d %s%s" data-memo="%s" data-action="%d"><span class="lab">%s</span>'
                    '<span class="w">%s%s%s</span></li>'
                    % (k + 1, esc(kind), ' pointed' if badge else '',
-                      esc('%s단계 · 조작 %d' % (st['n'], k + 1)),
+                      esc('%s단계 · 조작 %d' % (st['n'], action_start + k + 1)),
+                      action_start + k + 1,
                       esc(lab), badge, cmd, rich(ko(a.get('do')))))
 
     side, texts = [], []
@@ -286,12 +330,10 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
                         % (cls, esc('%s단계 · %s' % (st['n'], lab)), lab,
                            rich(ko(st[key]))))
             texts.append(plain(ko(st[key])))
-    ssz = side_font(texts) if (texts and not spots) else 0
+    ssz = side_font(texts) if (texts and not has_fig) else 0
 
-    # 마지막 조각에서 오른쪽 카드가 열린다. 카드가 없으면 그 조각은 넘겨도
-    # 화면이 그대로라 헛걸음이 된다.
-    n_frag = len(ops) + (1 if side else 0) or 1
-    dur = float(n_frag)
+    # 입력 한 줄마다 다음을 누르지 않는다. 이 장의 명령·응답·확인은 함께 읽는다.
+    n_frag, dur = 1, 1.0
     body = (
       '<div id="%(c)s-root" data-composition-id="%(c)s" data-start="%(s)s" '
       'data-duration="%(d)s" data-width="1920" data-height="1080" '
@@ -302,15 +344,15 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
       '<h1>%(title)s</h1></div><div class="prompt">%(sec)s · %(n)s / %(tot)s</div></header>\n'
       '<main class="body ssbody%(fx)s">'
       '<ol class="ops" style="font-size:%(fs)dpx">%(ops)s</ol>'
-      '%(fig)s'
+      '<div class="guide">%(fig)s'
       '<aside class="side"%(sst)s>%(side)s</aside>'
-      '</main>\n</section>\n</div>'
+      '</div></main>\n</section>\n</div>'
       % {'c': cid, 's': clock, 'd': dur, 'fs': size,
-         'fx': ' hasfig' if spots else '',
+         'fx': ' hasfig' if has_fig else '',
          'sst': (' style="font-size:%dpx"' % ssz) if ssz else '',
          'fig': fig_block(spots, front, st.get('feature'), st.get('on', 'front'),
-                          only={n for a in acts for n in _coach.spot_badges(a)})
-                if spots else '',
+                          only={n for a in acts for n in _coach.spot_badges(a)}, step=st)
+                if has_fig else '',
          'lab': esc('%s단계%s · %s' % (st['n'], (' (%d/%d)' % part) if part else '',
                                       ko(st.get('title')))),
          'title': rich(ko(st.get('title'))) + (
@@ -320,20 +362,19 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
 
     tl = ['tl.fromTo("#%s .topline",{opacity:0,y:-18},'
           '{opacity:1,y:0,duration:.4,ease:"power3.out"},0);' % cid]
-    if spots:
+    if has_fig:
         # 자리부터 보여 준다. 어디를 잡을지 모르는 채로 명령을 치게 두지 않는다.
         tl.append('tl.fromTo("#%s .fig",{opacity:0},'
                   '{opacity:1,duration:.4,ease:"power2.out"},.1);' % cid)
-    for k in range(len(ops)):
-        tl.append('tl.fromTo("#%s .o%d",{opacity:0,x:-14},'
-                  '{opacity:1,x:0,duration:.45,ease:"power2.out"},%s);'
-                  % (cid, k + 1, k + 0.5))
+    if ops:
+        tl.append('tl.fromTo("#%s .op",{opacity:0,x:-14},'
+                  '{opacity:1,x:0,duration:.35,ease:"power2.out"},.15);' % cid)
     if side:
         # 나눈 장의 앞쪽에는 카드가 없다. 없는 것을 향해 트윈을 걸면 GSAP 이
         # 「대상 없음」 경고를 내고, 진짜 결함이 그 경고에 묻힌다.
         tl.append('tl.fromTo("#%s .sc",{opacity:0,y:14},'
-                  '{opacity:1,y:0,duration:.45,stagger:.08,ease:"power2.out"},%s);'
-                  % (cid, len(ops) + 0.5))
+                  '{opacity:1,y:0,duration:.35,stagger:.05,ease:"power2.out"},.2);'
+                  % cid)
     frags = [round(clock + k + 1.0, 2) for k in range(n_frag)]
     # 노트는 이 장이 실제로 시키는 일에서 만든다. 예전에는 `expect` 와 `why` 만
     # 썼는데, 단계를 나누면 그 둘은 첫 장과 마지막 장에만 남아 가운데 장 마흔
@@ -346,8 +387,11 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
         if line:
             said.append(line)
     notes = ' / '.join(x for x in
-                       [' '.join(said)] + [ko(st.get('expect')), ko(st.get('why'))] if x)
+                       [' '.join(said)] + [ko(st.get('expect')), ko(st.get('why')),
+                                           ko(st.get('pitfall'))] if x)
     return [(body, tl, {'sceneId': cid, 'notes': notes or '—',
+                        'sourceStep': st['n'],
+                        'sourceActions': list(range(action_start + 1, action_start + len(acts) + 1)),
                         'fragments': frags}, dur)]
 
 
@@ -574,7 +618,7 @@ STYLE = """
 .ss .ops{margin:0;padding:0;list-style:none;display:grid;align-content:center;gap:15px}
 .ss .op{display:grid;grid-template-columns:86px minmax(0,1fr);gap:16px;
   align-items:baseline;line-height:1.45;color:#111}
-.ss .op .lab{font-size:.62em;color:#8A8788;text-align:right;letter-spacing:.04em;
+.ss .op .lab{font-size:.62em;color:#666;text-align:right;letter-spacing:.04em;
   white-space:nowrap}
 .ss .op.snap .lab,.ss .op.click .lab,.ss .op.move .lab{color:#C7004C}
 .ss .op.see{border-left:3px solid #A4A3A4;padding-left:14px;margin-left:-17px}
@@ -586,6 +630,7 @@ STYLE = """
   padding:1px 10px;margin-right:10px;white-space:nowrap}
 .ss .op.alt .cmd{background:#FFF;color:#666}
 .ss .side{display:grid;align-content:center;gap:16px}
+.ss .guide{min-height:0;display:grid;align-content:center;gap:16px}
 .ss .side .card{padding:18px 22px}
 .ss .side .card b{font-size:1.1em}
 .ss .side .card span{margin-top:6px;font-size:1em;line-height:1.5}
@@ -634,15 +679,15 @@ STYLE = """
 .ss .cfw .sf{fill:#E6E1D9;stroke:none}
 
 /* 코치 마크 — 도면 한 장이 「어디에 올리는가」를 대신 말한다. */
-.ss .ssbody.hasfig{grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows:minmax(0,1fr) auto;align-content:stretch}
-.ss .ssbody.hasfig .ops{grid-column:1;grid-row:1;align-content:start;overflow:hidden}
-.ss .ssbody.hasfig .fig{grid-column:2;grid-row:1}
-.ss .ssbody.hasfig .side{grid-column:1 / -1;grid-row:2;gap:16px;align-content:start;
-  grid-template-columns:repeat(3,minmax(0,1fr));overflow:hidden}
+.ss .ssbody.hasfig{grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);
+  grid-template-rows:minmax(0,1fr);align-content:stretch}
+.ss .ssbody.hasfig .ops{grid-column:1;grid-row:1;align-content:center;gap:12px}
+.ss .ssbody.hasfig .guide{grid-column:2;grid-row:1;align-content:stretch;
+  grid-template-rows:minmax(260px,1fr) auto}
+.ss .ssbody.hasfig .side{gap:10px;align-content:start;grid-template-columns:minmax(0,1fr)}
 .ss .ssbody.hasfig .side .card{padding:12px 16px}
 .ss .ssbody.hasfig .side .card b{font-size:20px}
-.ss .ssbody.hasfig .side .card span{margin-top:4px;font-size:18px;line-height:1.4}
+.ss .ssbody.hasfig .side .card span{margin-top:4px;font-size:20px;line-height:1.4}
 .ss .fig{margin:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px;
   border:2px solid #A4A3A4;background:#F5F5F3;padding:12px 16px 14px}
 /* 조작 줄의 코치 마크 번호. 도면 위 표시와 같은 숫자다. */
@@ -651,7 +696,9 @@ STYLE = """
   margin-right:.4em;vertical-align:.06em;
   font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
 .ss .op.pointed .lab{color:#C7004C}
-.ss .fig .fh{font-size:19px;letter-spacing:.04em;color:#8A8788}
+.ss .fig .fh{font-size:19px;letter-spacing:.04em;color:#666}
+.ss .construction-key{display:block;margin-top:4px;color:#555;letter-spacing:0}
+.ss .construction{color:#666}
 .ss .cdwg{width:100%;height:100%;display:block}
 .ss .cdwg .outline{fill:none;stroke:#111;stroke-width:.5;vector-effect:non-scaling-stroke}
 .ss .cdwg .center{fill:none;stroke:#111;stroke-width:.25;stroke-dasharray:6 1.2 1 1.2;
@@ -695,7 +742,7 @@ STYLE = """
 """
 
 
-def main(lesson_dir, lesson_json, outpath):
+def main(lesson_dir, lesson_json, outpath, include_symbols=True):
     index = io.open(os.path.join(lesson_dir, 'index.html'), encoding='utf-8').read()
     slots = F.slots_of(index)
     if not slots:
@@ -803,7 +850,9 @@ def main(lesson_dir, lesson_json, outpath):
     if steps and not dropped:
         raise SystemExit('%d차시 따라 하기를 놓을 자리를 못 찾았다' % L['no'])
 
-    island = json.dumps({'slides': slides, 'slideSequences': []},
+    island = json.dumps({'slides': slides, 'slideSequences': [], 'language': 'ko',
+                        'practiceSteps': len(steps),
+                        'practiceActions': sum(len(st.get('actions', [])) for st in steps)},
                         ensure_ascii=False, indent=1)
     nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
     title = re.search(r'#\s*SCRIPT\s*—\s*(.*)', script)
@@ -839,7 +888,8 @@ def main(lesson_dir, lesson_json, outpath):
 %s
 </body>
 </html>
-""" % (title, STYLE, island, '\n'.join(bodies), made, nav)
+""" % (title, STYLE, island,
+       (surface_defs() if include_symbols else '') + '\n'.join(bodies), made, nav)
 
     outdir = os.path.dirname(os.path.abspath(outpath))
     if outdir and not os.path.isdir(outdir):

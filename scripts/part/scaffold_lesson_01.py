@@ -137,7 +137,7 @@ def build_task(comp, dur, spans):
     cc = "".join('<div class="card tk tk%d" style="padding:26px 26px 24px">%s<b style="margin-top:16px">%s</b>'
                  '<strong>%s</strong><span>%s</span></div>'
                  % (i, kit.icon(ic, 58), a, b, c) for i, (ic, a, b, c) in enumerate(TASKS, 1))
-    body = (kit.header("02 · TASK", "실습 과제로 확인합니다", "형상을 치수에 맞게 작성하거나 투상한다")
+    body = (kit.header("02 · TASK", "실습 예시로 확인합니다", "이 과정의 연습 · 시험 운영은 공유 예정")
             + '\n      <main class="body" style="grid-template-rows:1fr auto">'
             + '<section style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;'
               'align-content:center">' + cc + '</section>'
@@ -164,7 +164,7 @@ ROAD = [("1", "오리엔테이션", "지금 보고 있는 차시"),
         ("5", "제3각법 3뷰", "폭과 높이를 옮겨 평면도와 우측면도를 그린다"),
         ("6", "편집과 표현", "남은 보조선을 정리하고 도면 기호를 읽는다"),
         ("7", "치수와 출도", "치수를 기입하고 축척을 확인해 내보낸다"),
-        ("8", "시험 안내와 Q&amp;A", "시험이 어떻게 진행되는지와 자주 나온 질문")]
+        ("8", "시험 안내와 Q&amp;A", "시험 공지 확인 항목과 자주 나온 질문")]
 
 
 def build_roadmap(comp, dur, spans):
@@ -176,8 +176,7 @@ def build_roadmap(comp, dur, spans):
                        "EDU-IB-02 아이들러 풀리 브래킷")
             + '\n      <main class="body" style="grid-template-rows:auto 1fr">'
             + '<section class="lead" style="font-size:30px;color:#666;max-width:1500px">'
-            + '지난 시간에 저장한 파일을 열어 다음 작업을 이어갑니다. '
-            + '다시 연습할 때도 저장한 지점부터 시작하세요.</section>'
+            + 'AutoCAD 2024 · 2차시에서 직접 만든 파일을 차시마다 이어갑니다.</section>'
             + '<section><table class="spec"><thead><tr><th>차시</th><th>주제</th><th>하는 일</th>'
             + '</tr></thead><tbody>' + rows + '</tbody></table></section></main>')
     items = [beats.item(".rd%d" % i, kind="row", read=1) for i in range(1, len(ROAD) + 1)]
@@ -201,7 +200,7 @@ DONE = ("이번에 한 일", "이 과정을 이해했습니다",
         ["도면은 작성자의 의도를 누가 읽어도 같게 전달하기 위한 수단이라는 것",
          "도면이 갖춰야 할 다섯 가지 요건 — 형상·치수, 자세·위치, 표면·재료·가공, 모호하지 않을 것, 찾아 쓸 수 있을 것",
          "실습 과제는 주어진 형상을 치수에 맞게 작성하거나 정투상으로 투상하는 방식이라는 것",
-         "일곱 차시에 걸쳐 부품 하나를 누적해 완성한다는 전체 흐름"])
+         "여섯 차시에 걸쳐 부품 하나를 누적해 완성한다는 전체 흐름"])
 NEXT = ("다음", "2차시 · 부품 이해와 도면 환경",
         ["아이들러 풀리 브래킷이 무엇이고 각 면을 어떤 방법으로 가공하는지",
          "면마다 왜 그 가공을 선택했는지와 그것이 부품 수명·성능에 미치는 영향",

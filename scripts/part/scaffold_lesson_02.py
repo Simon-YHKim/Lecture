@@ -84,7 +84,7 @@ def frame(stem, comp, line_no, items, build, fixed=None):
 
 # ---------------------------------------------------------------- 1 title
 def build_title(comp, dur, spans):
-    return (kit.title_card(comp, dur, "부품 이해와 도면 환경", "AutoCAD 기본 과정 · 2차시"),
+    return (kit.title_card(comp, dur, "부품 이해와 도면 환경", "AutoCAD 2024 · 2차시"),
             [{"kind": "appearsBy", "selector": "#%s .brand" % comp, "bySec": 3},
              {"kind": "appearsBy", "selector": "#%s h2" % comp, "bySec": round(dur * .33 + 3, 1)},
              {"kind": "before", "a": "#%s .brand" % comp, "b": "#%s h2" % comp},
@@ -207,7 +207,7 @@ frame("03-surfaces", "l2f3", 3, SURF, build_surfaces)
 # --------------------------------------------------------- 4 why this shape
 SHAPE = [("profile", "베이스 120 × 16", "축이 만드는 비트는 힘을 두 볼트가 멀리 벌어져 받아낸다"),
          ("slot", "장공 중심거리 12", "벨트를 끼운 뒤 장력을 보며 좌우로 12 만큼 조정할 수 있다"),
-         ("profile", "목 밑동 80 → 54", "굽힘 모멘트가 가장 큰 밑동이 가장 두껍고 위로 갈수록 좁아진다"),
+         ("profile", "목 밑동 80 · 위로 좁아짐", "밑동 폭은 주어진 치수, 윗부분은 보스 원에 접하는 두 목 선으로 정한다"),
          ("boss", "보스 Ø56 · 앞으로 8", "뒷면은 프레임에 밀착해야 하므로 평면으로 두고 돌출은 앞으로만"),
          ("bore", "축 구멍 Ø25", "보스 중심과 같은 축에 두어 힘이 한쪽으로 쏠리지 않는다")]
 

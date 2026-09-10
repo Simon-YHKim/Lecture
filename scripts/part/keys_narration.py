@@ -54,6 +54,8 @@ def usage(when):
     card, where the reader can take it at their own pace.
     """
     head = when.split(". ")[0]
+    if head.endswith("같다"):
+        return head[:-2] + "같습니다"
     if head.endswith(("때", "전")):
         return head + " 씁니다"
     return head + "에 씁니다"

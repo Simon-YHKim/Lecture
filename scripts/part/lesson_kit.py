@@ -301,6 +301,12 @@ ICONS = {
 # the steps type, and an unknown entry stops the build rather than quietly
 # leaving a gap in the summary table.
 COMMANDS = {
+    "DSETTINGS": ("DSETTINGS", "제도 보조 설정을 연다", "극좌표 추적의 증분 각도를 정할 때"),
+    "COPYMODE": ("COPYMODE", "복사 명령의 반복 여부를 정한다", "한 번 복사 뒤 명령을 끝낼 때"),
+    "TRIMMODE": ("TRIMMODE", "모따기와 모깎기 뒤 원래 선의 정리를 정한다", "호나 경사선 끝에 맞춰 원래 선을 자를 때"),
+    "DIMCENTER": ("DIMCENTER", "원과 호의 중심 표식을 만든다", "탭·필렛·장공 끝호의 중심을 표시할 때"),
+    "DIMCEN": ("DIMCEN", "중심 표식의 크기와 방식을 정한다", "표식 크기를 3으로 통일할 때"),
+    "DIMSCALE": ("DIMSCALE", "치수와 중심 표식의 전체 축척을 정한다", "모형 1대1의 표시 크기를 유지할 때"),
     "L": ("LINE", "선을 긋는다", "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선"),
     "PL": ("PLINE", "이어진 선을 하나의 객체로 긋는다",
            "한 바퀴 도는 윤곽. 레이아웃에서 영역 넓이를 재거나 통째로 옮길 때"),
@@ -352,12 +358,13 @@ COMMANDS = {
     "UCSICON": ("UCSICON", "좌표계 아이콘 표시를 정한다", "옮긴 원점이 어디인지 눈으로 확인할 때"),
     "LWDISPLAY": ("LWDISPLAY", "선가중치를 화면에 보일지 정한다", "굵기 차이를 화면에서 확인할 때"),
     "MIRRTEXT": ("MIRRTEXT", "대칭할 때 문자를 뒤집을지 정한다", "문자가 포함된 것을 대칭 복사하기 전"),
+    "TRIMEXTENDMODE": ("TRIMEXTENDMODE", "자르기와 연장의 선택 방식을 정한다", "자를 기준을 먼저 고를 때"),
     "ST": ("STYLE", "문자 스타일과 글꼴을 정한다", "한글이 물음표로 나올 때. 글자를 쓰기 전"),
 }
 
 # Backticked in the scripts but not something typed at a prompt — a fit grade,
 # a value, a file name.
-NOT_COMMANDS = {"H7"}
+NOT_COMMANDS = {"H7", "ESC", "DELETE"}
 
 # A command in one lesson, an option inside a running command in another.
 # Counted only where the step introduces the command by name. `D` starts
@@ -368,7 +375,7 @@ AMBIGUOUS_KEYS = {"D", "M"}
 
 # Typed inside a running command as an option or a snap, not on a blank prompt.
 OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "P", "OR", "ON",
-               "ALL", "AS", "FROM", "TAN", "CENTER", "HIDDEN", "RE", "SELECT"}
+               "ALL", "AS", "FROM", "TAN", "INT", "PER", "CENTER", "HIDDEN", "RE", "SELECT"}
 
 FUNCTION_KEYS = [
     ("F3", "객체 스냅", "끝점·중심·접점에 붙는다. 꺼져 있으면 눈대중이 된다"),
@@ -612,6 +619,13 @@ def write_episodes(lesson_dir, slots, episodes, os_mod):
 
     Returns [(file, title, seconds, [stem, ...]), ...].
     """
+    import episodes as delivery
+    slug = os_mod.path.basename(os_mod.path.normpath(lesson_dir))
+    if delivery.is_unified(slug):
+        if len(episodes) != 1 or episodes[0]['frames'] != [s[2] for s in slots]:
+            raise ValueError('Unified delivery must contain every master frame exactly once')
+        # Do not overwrite or copy old ep*.html. Only the master is delivered.
+        return [('index.html', episodes[0]['title'], sum(s[4] for s in slots), list(episodes[0]['frames']))]
     by_stem = {s[2]: s for s in slots}
     d = os_mod.path.join(lesson_dir, "compositions", "episodes")
     # Rewrite only the declared episode files. Preview caches and private

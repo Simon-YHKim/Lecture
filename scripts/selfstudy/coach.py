@@ -22,6 +22,8 @@
 없이 남아 있었다. 검수 메모 8~11 이 그 자리다.
 """
 import re
+import math
+
 
 # ── 바탕과 좌표 ────────────────────────────────────────────────
 # 정면도 SVG 는 부품 좌표를 그대로 쓴다. 베이스 왼쪽 아래 구석 (0,0) 이 SVG 의
@@ -246,6 +248,10 @@ def to_symbol(svg, sid, css=True):
     여덟 차시 묶음(`<use>` 82개)에서 그것 때문에 첫 화면이 40초 걸렸다. 인스턴스가
     몇 개뿐인 자습 교재는 켜 두고(파일이 작아진다), 묶음 데크는 끈다.
     """
+    # Practice diagrams show geometry before students add dimensions.
+    # Reading figures keep their dimensions; only these reusable coach symbols omit them.
+    svg = re.sub(r'<(?:path|line|circle|polygon)[^>]*class="(?:dim|ext|arrow)"[^>]*/>', '', svg)
+    svg = re.sub(r'<text[^>]*class="dimtext"[^>]*>.*?</text>', '', svg, flags=re.S)
     body = svg[svg.index('>', svg.index('<svg')) + 1:]
     body = body[:body.rindex('</svg>')]
     inner = (SYMBOL_CSS + body) if css else stylize(body)
@@ -271,3 +277,83 @@ def spot_badges(a):
     if v is None:
         return []
     return [v] if isinstance(v, int) else list(v)
+
+# Temporary geometry is authored with the step, never inferred from a marker.
+# The views use the same part-to-SVG transform as canonical geometry and marks.
+def _finite(value):
+    result = float(value)
+    if not math.isfinite(result):
+        raise ValueError("Non-finite diagram coordinate")
+    return result
+
+
+def _construction_point(pair, view, surface):
+    if not isinstance(pair, (list, tuple)) or len(pair) != 2:
+        raise ValueError("Construction points require exactly two coordinates")
+    if view not in {"front", "top", "side", "raw"}:
+        raise ValueError("Unknown construction view")
+    return place({"view": view, "x": _finite(pair[0]), "y": _finite(pair[1])}, surface)
+
+
+def construction_for(step, surface):
+    """SVG for explicitly authored guide/before/remove/practice objects.
+
+    Shape schema: kind=line|polyline|circle, view=front|top|side|raw,
+    points=[[a,b],...], or centre=[a,b] with radius; role identifies purpose.
+    Numeric coordinates describe the teaching diagram, not student keyboard input.
+    """
+    output = []
+    for item in step.get("construction", []):
+        kind, view = item.get("kind"), item.get("view", "front")
+        role = item.get("role", "guide")
+        if role not in {"guide", "before", "remove", "practice"}:
+            raise ValueError("Unknown construction role")
+        style = ('fill="none" stroke="currentColor" stroke-width="1.2" '
+                 'stroke-dasharray="4 3" vector-effect="non-scaling-stroke"')
+        if kind == "circle":
+            x, y = _construction_point(item["centre"], view, surface)
+            radius = _finite(item["radius"])
+            if radius <= 0 or surface == "sheet":
+                raise ValueError("Construction circle requires a positive model radius")
+            shape = '<circle cx="%.6f" cy="%.6f" r="%.6f" %s/>' % (x, y, radius, style)
+        elif kind in {"line", "polyline"}:
+            pairs = item.get("points", [])
+            if (kind == "line" and len(pairs) != 2) or len(pairs) < 2:
+                raise ValueError("Construction line/polyline has too few points")
+            points = [_construction_point(pair, view, surface) for pair in pairs]
+            path = " ".join(("M" if i == 0 else "L") + "%.6f %.6f" % q
+                            for i, q in enumerate(points))
+            if item.get("closed"):
+                path += " Z"
+            shape = '<path d="%s" %s/>' % (path, style)
+        else:
+            raise ValueError("Unknown construction kind")
+        output.append('<g class="construction" data-role="%s">%s</g>' % (role, shape))
+    return "".join(output)
+
+
+def figure_viewbox(step, surface, svg):
+    """Use explicit step focus; otherwise crop a single-view marker group."""
+    focus = step.get("focus")
+    if focus:
+        bounds = focus.get("bounds", [])
+        if len(bounds) != 4:
+            raise ValueError("Focus requires four bounds")
+        x0, y0, x1, y1 = map(_finite, bounds)
+        if x1 <= x0 or y1 <= y0:
+            raise ValueError("Focus bounds must be increasing")
+        pts = [_construction_point([x0,y0], focus.get("view","front"), surface),
+               _construction_point([x1,y1], focus.get("view","front"), surface)]
+        padding = _finite(focus.get("padding", 12))
+        if padding < 0:
+            raise ValueError("Focus padding must not be negative")
+    else:
+        spots = step.get("spots", [])
+        if not spots or surface == "sheet" or len({s.get("view","front") for s in spots}) > 1:
+            return viewbox(svg)
+        pts = [place(s, surface) for s in spots]
+        padding = 22.0
+    xmin, xmax = min(p[0] for p in pts), max(p[0] for p in pts)
+    ymin, ymax = min(p[1] for p in pts), max(p[1] for p in pts)
+    width, height = max(55.0, xmax-xmin+2*padding), max(45.0, ymax-ymin+2*padding)
+    return "%.6f %.6f %.6f %.6f" % ((xmin+xmax-width)/2,(ymin+ymax-height)/2,width,height)

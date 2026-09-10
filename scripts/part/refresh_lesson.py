@@ -1,4 +1,4 @@
-"""Refresh episode playlists and timing documentation without rebuilding frames."""
+"""Refresh the current delivery and timing docs without rebuilding authored frames."""
 import json
 import os
 from pathlib import Path
@@ -8,7 +8,7 @@ import episodes
 import lesson_docs
 import lesson_kit
 from sync_narration import sync
-from narrate_tts import verify_script_hash
+from narrate_tts import verify_script_hash, verify_tempo_timing
 from lesson_edit import staged_edit
 
 
@@ -20,6 +20,7 @@ def refresh_inplace(lesson_dir):
     root = Path(lesson_dir)
     timing = json.loads((root / 'narration-timing.json').read_text(encoding='utf-8'))
     verify_script_hash(root, timing)
+    verify_tempo_timing(timing, required=episodes.is_unified(root.name))
     source = (root / 'index.html').read_text(encoding='utf-8')
     slots = []
     for tag in re.findall(r'<div\b[^>]*data-composition-src="compositions/frames/[^>]+>', source):
@@ -72,7 +73,8 @@ def refresh_inplace(lesson_dir):
         % (total // 60, total % 60), script, count=1, flags=re.M)
     if timing.get('source') == 'synthesised':
         script = re.sub(r'^\*\*Voice:\*\*.*$',
-            '**Voice:** Windows SAPI · %s · Rate %s<br>' % (timing['voice'], timing['rate']),
+            '**Voice:** Windows SAPI · %s · Rate %s 원본 · 음높이 보존 %.2f배속<br>'
+            % (timing['voice'], timing['rate'], timing.get('tempo', 1.0)),
             script, count=1, flags=re.M)
     script_path.write_text(script, encoding='utf-8', newline='\n')
     return total

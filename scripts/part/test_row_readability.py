@@ -37,7 +37,7 @@ class RowReadabilityTests(unittest.TestCase):
         states = calls(source)
         self.assertIn('},{opacity:1', states[0]['mid'])
         self.assertIn("opacity:1.0,backgroundColor:'#F5F5F3',duration:0.8", states[1]['mid'])
-        self.assertIn("opacity:1,backgroundColor:'rgba(0,0,0,0)',duration:0.8", states[2]['mid'])
+        self.assertIn("opacity:1,backgroundColor:'#FFF',duration:0.8", states[2]['mid'])
         self.assertEqual([float(m['time']) for m in states], [7.6, 10, 18])
         stacked = beats.read_along('f', [beats.item('.r1', kind='row', mode='reveal', read=0)], [(1, 10, 18)])
         self.assertIn('duration:0.25', stacked)
@@ -61,9 +61,52 @@ tl.to("#f .r1 .child",{opacity:0.64,duration:.8},10);
         before, after = calls(source), calls(fixed)
         self.assertEqual([(m['sel'], m['time']) for m in before], [(m['sel'], m['time']) for m in after])
         self.assertIn('},{opacity:1,duration:.95,stagger:.1}', after[0]['mid'])
-        self.assertIn("opacity:1,backgroundColor:'rgba(0,0,0,0)',duration:.8", after[1]['mid'])
+        self.assertIn("opacity:1,backgroundColor:'#FFF',duration:.8", after[1]['mid'])
         for i in (2, 3, 4, 5):
             self.assertEqual(before[i].group(0), after[i].group(0))
+        self.assertEqual(retime_frames.fix_row_readability(fixed), fixed)
+
+    def test_single_mixed_cool_tween_keeps_its_seed_on_second_pass(self):
+        source = '''<div id="f"><table><tr class="shared"><td>row</td></tr></table>
+<div class="shared">note</div></div>
+tl.to("#f .shared",{backgroundColor:'rgba(0,0,0,0)',duration:.8},18);
+'''
+        fixed = retime_frames.fix_row_readability(source)
+        self.assertEqual(fixed.count('row-readability-background'), 1)
+        self.assertEqual(retime_frames.fix_row_readability(fixed), fixed)
+
+    def test_opaque_row_tints_start_and_end_on_white_without_retiming(self):
+        source = '''<div id="f"><table><tr class="r1"><td>row</td></tr></table></div>
+const tl=gsap.timeline({paused:true});
+tl.to("#f .r1",{opacity:1,backgroundColor:'#F5F5F3',duration:.8},5);
+tl.to("#f .r1",{opacity:1,backgroundColor:'rgba(0,0,0,0)',duration:.8},18);
+'''
+        fixed = retime_frames.fix_row_readability(source)
+        self.assertNotIn("backgroundColor:'rgba(0,0,0,0)'", fixed)
+        self.assertIn("backgroundColor:'#FFF'", calls(fixed)[1]['mid'])
+        self.assertIn("backgroundColor:'#F5F5F3'", calls(fixed)[0]['mid'])
+        self.assertLess(fixed.index('gsap.set('), fixed.index('tl.to('))
+        self.assertIn("filter(target=>target.tagName==='TR')", fixed)
+        self.assertEqual([m['time'] for m in calls(fixed)], ['5', '18'])
+        self.assertEqual(retime_frames.fix_row_readability(fixed), fixed)
+
+    def test_mixed_background_tween_preserves_every_nonrow_target(self):
+        source = '''<div id="f"><table><tr class="shared"><td class="cell">row</td></tr></table>
+<div class="shared">note</div><svg><path class="shape"/></svg></div>
+const tl=gsap.timeline({paused:true});
+tl.to("#f .shared",{backgroundColor:'#F5F5F3',duration:.8,stagger:.2},5);
+tl.to("#f .shared",{backgroundColor:'rgba(0,0,0,0)',duration:.8,stagger:.2},18);
+tl.to("#f .cell",{backgroundColor:'rgba(0,0,0,0)',duration:.8},18);
+tl.to("#f .shape",{backgroundColor:'rgba(0,0,0,0)',duration:.8},18);
+'''
+        fixed = retime_frames.fix_row_readability(source)
+        before, after = calls(source), calls(fixed)
+        self.assertIn("target.tagName==='TR'?'#FFF':'rgba(0,0,0,0)'", after[1]['mid'])
+        self.assertEqual(after[0].group(0), before[0].group(0))
+        self.assertEqual(after[2].group(0), before[2].group(0))
+        self.assertEqual(after[3].group(0), before[3].group(0))
+        self.assertEqual([(m['sel'], m['time']) for m in before], [(m['sel'], m['time']) for m in after])
+        self.assertIn('stagger:.2', after[1]['mid'])
         self.assertEqual(retime_frames.fix_row_readability(fixed), fixed)
 
     def test_existing_mixed_group_preserves_stagger_and_nonrow_opacity(self):
