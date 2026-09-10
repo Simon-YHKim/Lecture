@@ -981,49 +981,56 @@
           "ko": "정면도 왼쪽 아래 모서리를 끝점 스냅으로 클릭. 왼쪽 끝 0입니다.",
           "en": "Click the lower left corner with the endpoint snap. That is 0."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "오른쪽 아래 모서리를 클릭. 오른쪽 끝 120입니다.",
           "en": "Click the lower right corner. That is 120."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 2
         },
         {
          "do": {
           "ko": "왼쪽 모따기의 위쪽 끝점을 클릭. 5입니다.",
           "en": "Click the upper end of the left chamfer. That is 5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "do": {
           "ko": "오른쪽 모따기의 위쪽 끝점을 클릭. 115입니다.",
           "en": "Click the upper end of the right chamfer. That is 115."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         },
         {
          "do": {
           "ko": "보스 원의 왼쪽 사분점을 클릭. 32입니다.",
           "en": "Click the boss left quadrant. That is 32."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 5
         },
         {
          "do": {
           "ko": "보스 원의 오른쪽 사분점을 클릭. 88입니다.",
           "en": "Click its right quadrant. That is 88."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 6
         },
         {
          "do": {
           "ko": "보스 원의 중심을 클릭. 60이고 중심선에 씁니다.",
           "en": "Click its center. That is 60, used later for a centerline."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 7
         },
         {
          "do": {
@@ -1140,7 +1147,8 @@
           "ko": "보스 원의 위쪽 사분점을 클릭. 높이 90을 지나는 수평선이 생깁니다. 엔터로 끝냅니다.",
           "en": "Click the boss top quadrant. A horizontal appears at height 90. Enter to finish."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "type": "O",
@@ -1163,7 +1171,8 @@
           "ko": "방금 그은 수평선을 클릭하고 그 위쪽 아무 데나 클릭. 30 위에 생긴 선이 평면도 맨 아래, 보스 앞면입니다. 엔터로 끝냅니다.",
           "en": "Click the horizontal just drawn, then click anywhere above it. The line 30 above is the top view lowest edge, the boss front face. Enter to finish."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 2
         },
         {
          "type": "O",
@@ -1186,7 +1195,8 @@
           "ko": "방금 만든 선을 클릭하고 위쪽 클릭. 판 앞면입니다. 보스가 앞으로 8 나와 있으니 판 앞면은 그보다 8 뒤입니다.",
           "en": "Click the new line, then above it. That is plate front face - 8 behind the boss face."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 3
         },
         {
          "type": "O",
@@ -1209,7 +1219,8 @@
           "ko": "판 앞면 선을 클릭하고 위쪽 클릭. 뒷면이고 판 두께 12입니다.",
           "en": "Click the plate front line, then above it. That is back face, 12 of plate away."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 4
         }
        ],
        "expect": {
@@ -1292,20 +1303,23 @@
           "ko": "보스 앞면 선과 왼쪽 투상선의 교차점을 클릭. 가로선의 시작점입니다.",
           "en": "Click where boss front line crosses the leftmost projector. That starts the horizontal."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "같은 선과 오른쪽 투상선의 교차점을 클릭하고 엔터. 폭 전체를 가로지르는 선 하나가 생깁니다.",
           "en": "Click where it crosses the rightmost projector, then Enter. One line now spans the full width."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
           "ko": "같은 방법으로 판 앞면 선 위에 하나, 뒷면 선 위에 하나. 가로는 세 줄입니다.",
           "en": "Do the same on the plate front line and the back line. Three horizontals."
-         }
+         },
+         "spot": 3
         },
         {
          "type": "L",
@@ -1326,7 +1340,8 @@
          "do": {
           "ko": "같은 방법으로 5, 32, 88, 115, 120 자리에도 하나씩. 세로는 여섯 줄입니다.",
           "en": "Repeat at 5, 32, 88, 115, and 120. Six verticals."
-         }
+         },
+         "spot": 4
         }
        ],
        "expect": {
@@ -1412,28 +1427,32 @@
           "ko": "보스 앞면 선에서 32 왼쪽 구간을 클릭. 사라집니다.",
           "en": "On the boss front line, click the segment left of 32. It disappears."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
           "ko": "같은 선에서 88 오른쪽 구간을 클릭. 보스 앞면은 32에서 88 사이에만 있습니다.",
           "en": "On the same line, click right of 88. The boss front face exists only between 32 and 88."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 2
         },
         {
          "do": {
           "ko": "판 앞면 선에서 32와 88 사이 구간을 클릭. 그 구간은 보스가 앞을 덮고 있습니다.",
           "en": "On the plate front line, click between 32 and 88. The boss covers the front there."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 3
         },
         {
          "do": {
           "ko": "왼쪽 세로선의 맨 아래 8 구간을 클릭. 판의 양 끝에는 보스가 없습니다.",
           "en": "Click the lowest 8 of the left vertical. There is no boss at the plate ends."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 4
         },
         {
          "do": {
@@ -1447,7 +1466,8 @@
           "ko": "32 세로선에서 판 앞면보다 위쪽 구간을 클릭. 보스 단차는 앞으로 나온 8 구간에만 있습니다.",
           "en": "On the 32 vertical, click above the plate front line. The boss step exists only in the 8 it projects."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 5
         },
         {
          "do": {
@@ -1583,7 +1603,8 @@
           "ko": "정면도 오른쪽 끝에서 올린 수직 투상선을 클릭하고 그 오른쪽을 클릭. 우측면도의 맨 왼쪽 선이고 여기가 보스 앞면입니다. 엔터로 끝냅니다.",
           "en": "Click the projector raised from the right end of the front view, then click to its right. That is right view's leftmost line, the boss front face. Enter to finish."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 1
         },
         {
          "type": "XL",
@@ -1614,7 +1635,8 @@
           "ko": "방금 만든 세로선과 평면도 맨 아래 선의 교차점을 클릭. 두 뷰의 앞면끼리 만나는 점입니다. 엔터로 끝냅니다.",
           "en": "Click where that vertical crosses the top view lowest line - where both front faces meet. Enter to finish."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "type": "XL",
@@ -1637,14 +1659,16 @@
           "ko": "45도 선과 평면도 판 앞면 선의 교차점을 클릭. 우측면도 왼쪽 선에서 8 떨어진 자리가 됩니다.",
           "en": "Click where 45-degree line crosses the plate front line. That lands 8 from the right view's left line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "do": {
           "ko": "45도 선과 뒷면 선의 교차점도 클릭하고 엔터. 20 떨어진 자리입니다.",
           "en": "Click where it crosses the back line too, then Enter. That lands at 20."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         }
        ],
        "expect": {
@@ -1729,7 +1753,8 @@
           "ko": "정면도 왼쪽 아래 모서리를 클릭. 바닥 0입니다.",
           "en": "Click the lower left corner. That is floor, 0."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
@@ -1743,28 +1768,32 @@
           "ko": "오른쪽 세로변의 위쪽 끝점을 클릭. 11이고 모따기가 시작되는 높이입니다. 16에서 5를 뺀 값입니다.",
           "en": "Click the upper end of the right vertical edge. That is 11, where the chamfer starts - 16 minus 5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
           "ko": "보스 원의 아래쪽 사분점을 클릭. 34입니다.",
           "en": "Click the boss bottom quadrant. That is 34."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "do": {
           "ko": "보스 원의 중심을 클릭. 62이고 중심선에 씁니다.",
           "en": "Click its center. That is 62, for a centerline."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         },
         {
          "do": {
           "ko": "왼쪽 장공의 왼쪽 끝원 중심을 클릭. 8이고 이것도 중심선용입니다. 엔터로 끝냅니다.",
           "en": "Click the left slot's left end-arc center. That is 8, also for a centerline. Enter to finish."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 5
         }
        ],
        "expect": {
@@ -1855,42 +1884,48 @@
           "ko": "판 앞면 세로선과 바닥선의 교차점을 클릭. 첫 점입니다.",
           "en": "Click where plate front vertical meets the floor line. First point."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "뒷면 세로선과 바닥선의 교차점을 클릭.",
           "en": "Click where back vertical meets the floor line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
           "ko": "뒷면 세로선과 90선의 교차점을 클릭.",
           "en": "Click where back vertical meets the 90 line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 90선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the 90 line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         },
         {
          "do": {
           "ko": "보스 앞면 세로선과 34선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the 34 line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 5
         },
         {
          "do": {
           "ko": "판 앞면 세로선과 34선의 교차점을 클릭.",
           "en": "Click where plate front vertical meets the 34 line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 6
         },
         {
          "type": "C",
@@ -2035,14 +2070,16 @@
           "ko": "60 수직 투상선과 평면도 보스 앞면 선의 교차점을 기준점으로 클릭.",
           "en": "Click where 60 projector meets the top view boss front line as the base point."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "kind": "move",
          "do": {
           "ko": "커서를 그 점의 아래에 둡니다. 직교가 방향을 잡아 줍니다.",
           "en": "Put the cursor below of that point; ortho holds the direction."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "type",
@@ -2081,7 +2118,8 @@
           "ko": "62 수평 투상선과 우측면도 보스 앞면 세로선의 교차점을 클릭.",
           "en": "Click where 62 projector meets the right view's boss front vertical."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "kind": "move",
@@ -2127,7 +2165,8 @@
           "ko": "8 수평 투상선과 우측면도 판 앞면 세로선의 교차점을 클릭.",
           "en": "Click where 8 projector meets the right view's plate front vertical."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         },
         {
          "kind": "move",
@@ -2299,14 +2338,16 @@
           "ko": "축 구멍 원의 왼쪽 사분점을 클릭. 47.5입니다.",
           "en": "Click the bore circle's left quadrant. That is 47.5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "오른쪽 사분점을 클릭하고 엔터. 72.5입니다.",
           "en": "Click its right quadrant, then Enter. That is 72.5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
@@ -2328,7 +2369,11 @@
           "ko": "왼쪽 투상선과 평면도 보스 앞면 선의 교차점을 클릭. 같은 투상선과 뒷면 선의 교차점도 클릭하고 엔터.",
           "en": "Click where left projector meets the boss front line, then the back line, then Enter."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": [
+          3,
+          4
+         ]
         },
         {
          "do": {
@@ -2427,14 +2472,16 @@
           "ko": "축 구멍 원의 위쪽 사분점을 클릭. 74.5입니다.",
           "en": "Click the bore circle's top quadrant. That is 74.5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "아래쪽 사분점을 클릭하고 엔터. 49.5이고 중심 62에서 12.5씩이에요.",
           "en": "Click its bottom quadrant, then Enter. That is 49.5 - 12.5 each side of center 62."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
@@ -2456,7 +2503,11 @@
           "ko": "보스 앞면 세로선과 위쪽 투상선의 교차점을 클릭. 뒷면 세로선과 같은 투상선의 교차점도 클릭하고 엔터.",
           "en": "Click where boss front vertical meets the upper projector, then the back vertical, then Enter."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": [
+          3,
+          4
+         ]
         },
         {
          "do": {
@@ -2555,14 +2606,16 @@
           "ko": "왼쪽 위 탭 원의 왼쪽 사분점과 오른쪽 사분점을 클릭.",
           "en": "Click the left and right quadrants of the upper left tap circle."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
           "ko": "오른쪽 위 탭 원도 같은 두 점을 클릭하고 엔터. 투상선은 네 개예요. 아래쪽 탭 두 개는 가로 자리가 같아서 같은 선에 겹칩니다.",
           "en": "Click the same two points on the upper right tap circle, then Enter. Four projectors. The lower two taps share those same positions."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 1
         },
         {
          "do": {
@@ -2584,7 +2637,8 @@
           "ko": "첫 번째 투상선과 평면도 보스 앞면 선의 교차점을 클릭.",
           "en": "Click where first projector meets the boss front line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "type": "10",
@@ -2592,7 +2646,8 @@
           "ko": "커서를 그 점보다 위에 두고 입력하고 엔터, 다시 엔터. 방향은 직교가 잡아 줍니다.",
           "en": "Hold the cursor above that point, type it and Enter, then Enter again. Ortho holds the direction."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 4
         },
         {
          "do": {
@@ -2697,7 +2752,8 @@
           "ko": "위쪽 탭 원의 위쪽 사분점과 아래쪽 사분점을 클릭하고 엔터.",
           "en": "Click the top and bottom quadrants of the upper tap circle, then Enter."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
@@ -2719,7 +2775,8 @@
           "ko": "보스 앞면 세로선과 위쪽 투상선의 교차점을 클릭.",
           "en": "Click where boss front vertical meets the upper projector."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "type": "10",
@@ -2755,14 +2812,16 @@
           "ko": "우측면도 축 중심선의 왼쪽 끝점을 클릭. 대칭선의 첫 번째 점입니다.",
           "en": "Click the left end of the right view's bore centerline. First point of the mirror line."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "do": {
           "ko": "같은 중심선의 오른쪽 끝점을 클릭.",
           "en": "Click the right end of the same centerline."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 4
         },
         {
          "type": "N",
@@ -2864,14 +2923,16 @@
           "ko": "왼쪽 장공에서 왼쪽 끝원의 왼쪽 사분점을 클릭. 24입니다.",
           "en": "On the left slot, click its left end arc's left quadrant. That is 24."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "do": {
           "ko": "오른쪽 끝원의 오른쪽 사분점을 클릭하고 엔터. 46이에요. 끝원 중심이 29와 41이고 반지름이 5입니다.",
           "en": "Click the right end arc's right quadrant, then Enter. That is 46 - the end arcs sit at 29 and 41 with radius 5."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 2
         },
         {
          "do": {
@@ -2893,7 +2954,11 @@
           "ko": "왼쪽 투상선과 평면도 판 앞면 선의 교차점을 클릭. 같은 투상선과 뒷면 선의 교차점도 클릭하고 엔터.",
           "en": "Click where left projector meets the plate front line, then the back line, then Enter."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": [
+          3,
+          4
+         ]
         },
         {
          "do": {
@@ -2921,7 +2986,8 @@
           "ko": "평면도 축 중심선의 위쪽 끝점과 아래쪽 끝점을 차례로 클릭.",
           "en": "Click the upper then the lower end of the top view bore centerline."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 5
         },
         {
          "type": "N",

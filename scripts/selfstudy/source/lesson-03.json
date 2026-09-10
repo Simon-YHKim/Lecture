@@ -1003,7 +1003,11 @@
          "do": {
           "ko": "도면틀 왼쪽 아래 사분면에서 부품이 들어갈 만한 사각형을 마우스로 끕니다. 두 구석을 차례로 클릭하면 돼요.",
           "en": "Drag a rectangle in the lower-left quadrant of the border, big enough to hold the part. Click the two corners."
-         }
+         },
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "kind": "see",
@@ -1072,7 +1076,8 @@
          "do": {
           "ko": "확대해 둔 자리의 왼쪽 아래쯤을 그냥 클릭합니다. 여기가 베이스의 왼쪽 아래 구석이 됩니다.",
           "en": "Just click near the lower left of the area you zoomed into. That becomes the base's lower-left corner."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "see",
@@ -1156,7 +1161,8 @@
          "do": {
           "ko": "왼쪽 위 구석을 이루는 두 변을 차례로 클릭합니다. 윗변 먼저, 왼쪽 변 다음이에요. 순서는 상관없습니다.",
           "en": "Click the two edges that meet at the top-left corner - the top edge, then the left edge. The order does not matter."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "see",
@@ -1178,7 +1184,8 @@
          "do": {
           "ko": "오른쪽 위 구석의 두 변을 클릭합니다. 이제 여섯 변짜리 윤곽입니다.",
           "en": "Click the two edges at the top-right corner. Now the outline has six edges."
-         }
+         },
+         "spot": 3
         },
         {
          "kind": "alt",
@@ -1249,7 +1256,8 @@
          "do": {
           "ko": "한 번 클릭합니다.",
           "en": "Click once."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "see",
@@ -1426,7 +1434,8 @@
          "do": {
           "ko": "커서를 베이스 밑변 가운데쯤에 올립니다.",
           "en": "Rest the cursor near the middle of the base bottom edge."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1585,7 +1594,8 @@
          "do": {
           "ko": "커서를 세로 중심선과 베이스 밑변이 만나는 자리에 올립니다.",
           "en": "Hover where the vertical centerline crosses the base bottom."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1755,7 +1765,8 @@
          "do": {
           "ko": "커서를 두 중심선이 만나는 자리에 올립니다.",
           "en": "Rest the cursor where the two centerlines cross."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1832,7 +1843,12 @@
          "do": {
           "ko": "두 시작점은 중심에서 좌우로 40씩 떨어진 자리입니다. 그래서 세로 중심선과 베이스 윗면의 교차점을 기준으로 잡습니다.",
           "en": "Both start points are 40 either side of the centre, so the base point is where the vertical centerline crosses the top face."
-         }
+         },
+         "spot": [
+          1,
+          2,
+          3
+         ]
         },
         {
          "kind": "key",
@@ -1919,7 +1935,8 @@
          "do": {
           "ko": "커서를 세로 중심선과 베이스 윗면이 만나는 자리에 올립니다.",
           "en": "Rest the cursor where the vertical centerline meets the top face of the base."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1963,7 +1980,8 @@
          "do": {
           "ko": "커서를 보스 원의 왼쪽 둘레, 왼쪽 사분점보다 조금 위로 가져갑니다.",
           "en": "Move onto the left of the boss circle, a little above the left quadrant."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "snap",
@@ -2050,7 +2068,8 @@
          "do": {
           "ko": "같은 교차점을 다시 클릭합니다. 가위표 표식을 보고 누릅니다.",
           "en": "Click the same intersection again, on the cross."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "move",
@@ -2080,7 +2099,8 @@
          "do": {
           "ko": "커서를 보스 원의 오른쪽 둘레, 오른쪽 사분점보다 조금 위로 가져갑니다.",
           "en": "Move onto the right of the circle, a little above the right quadrant."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "snap",

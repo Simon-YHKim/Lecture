@@ -2286,7 +2286,8 @@
           "ko": "첫 번째 구석점을 묻습니다. 화면에 아직 아무것도 없어 잡을 것이 없는 자리라 좌표로 넣습니다. 입력하고 엔터를 누릅니다.",
           "en": "It asks for the first corner. Nothing is drawn yet, so there is nothing to catch here and the value goes in as a coordinate. Type it and press Enter."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 1
         },
         {
          "type": "420,297",
@@ -2294,7 +2295,8 @@
           "ko": "반대 구석점을 묻습니다. 입력하고 엔터를 누릅니다. 용지선이 그려집니다. 또는 `D` 엔터로 길이 `420`, 폭 `297` 을 넣고 마우스를 오른쪽 위에 두고 클릭해도 같은 사각형이 나와요.",
           "en": "It asks for the opposite corner. Type this and press Enter. That is the sheet outline. Or press `D`, give length `420` and width `297`, and click with the mouse up and to the right - the same rectangle."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 2
         },
         {
          "type": "OFFSET",
@@ -2317,7 +2319,8 @@
          "do": {
           "ko": "용지선을 클릭합니다. 어느 쪽에 만들지 물어보면 용지선 안쪽 아무 자리나 클릭합니다. 엔터로 명령을 끝냅니다. 사방 10 씩 들어간 도면선이 그려집니다.",
           "en": "Click the sheet outline. When it asks which side, click anywhere inside it, then press Enter to end the command. The border appears, 10 in on every side."
-         }
+         },
+         "spot": 3
         },
         {
          "type": "Z",
@@ -2404,7 +2407,8 @@
          "do": {
           "ko": "세모 표식이 뜨면 그 변의 중간점입니다. **표식을 보고 나서** 클릭합니다. 안 보고 누르면 근처의 다른 점이 잡혀요. 두 표식이 겹쳐 뜨면 `Tab` 으로 넘깁니다.",
           "en": "A triangle marker means the midpoint of that edge. **See the marker first, then** click. Click without looking and you catch some other point. When two compete, press `Tab` to cycle."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "move",
@@ -2426,7 +2430,12 @@
          "do": {
           "ko": "같은 방법으로 세 개를 더 그립니다. 위 변의 중간점에서 아래로 `30`, 왼쪽 변의 중간점에서 오른쪽으로 `30`, 오른쪽 변의 중간점에서 왼쪽으로 `30` 입니다. 넷 다 용지선 안쪽으로 넉넉히 나갑니다.",
           "en": "Draw the other three the same way: from the top edge midpoint down `30`, from the left edge midpoint right `30`, from the right edge midpoint left `30`. All four run generously inward."
-         }
+         },
+         "spot": [
+          2,
+          3,
+          4
+         ]
         },
         {
          "type": "TRIM",
@@ -2524,7 +2533,8 @@
          "do": {
           "ko": "첫 번째 구석점은 도면선의 오른쪽 아래 모서리입니다. 그 모서리에 커서를 올려 네모 표식, 끝점이 뜨면 클릭합니다.",
           "en": "The first corner is the lower right corner of the border. Hover it, wait for the square endpoint marker, and click."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "type",
@@ -2577,7 +2587,8 @@
          "do": {
           "ko": "표제란 위 변에 커서를 올려 세모 표식이 뜨면 클릭합니다. 그 변의 중간점입니다.",
           "en": "Hover the top edge of the title block, wait for the triangle midpoint marker, and click."
-         }
+         },
+         "spot": 2
         },
         {
          "type": "30",
@@ -2776,7 +2787,8 @@
          "do": {
           "ko": "X 자가 만나는 자리에 커서를 올립니다. 가위표 표식, 교차점이 뜨면 클릭합니다.",
           "en": "Hover where the X crosses. Click when the cross-shaped intersection marker appears."
-         }
+         },
+         "spot": 1
         },
         {
          "type": "10",
@@ -2806,7 +2818,8 @@
          "do": {
           "ko": "오른쪽 칸도 같은 방법이에요. X 자를 두 줄 긋고, `DTEXT` 엔터, `J` 엔터, `MC` 엔터, 교차점 클릭, 높이 `10`, 각도 `0`, 사번 입력, 엔터, 엔터.",
           "en": "The right cell goes the same way: draw the X, then `DTEXT`, `J`, `MC`, click the intersection, height `10`, angle `0`, type the number, Enter, Enter."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "click",

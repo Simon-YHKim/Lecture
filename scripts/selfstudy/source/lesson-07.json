@@ -1556,7 +1556,11 @@
           "en": "then Enter - DIMLINEAR, the linear dimension. Click the left then the right end of the base bottom with the endpoint snap. Move down into empty space and click; 120 goes in."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -1564,7 +1568,8 @@
           "en": "then Enter, this time vertical. Same bottom-left end, then the top of the boss circle where the quadrant snap appears. Put the line in the empty space to the left."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": 3
         }
        ],
        "expect": {
@@ -1623,7 +1628,11 @@
           "en": "then Enter. Pick the bottom-left end, then the upper end of the chamfer: follow the left vertical edge up to where it slants and take the top of that slant. Pulled left it reads 16."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -1631,7 +1640,8 @@
           "en": "then Enter. Pick the bottom-left end and the boss center: hover over the boss circle and the center snap appears. Pulled down it reads 60."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": 3
         },
         {
          "do": {
@@ -1736,7 +1746,11 @@
           "en": "then Enter. Pick the bottom-left end and the left end-arc center of the left slot: hover over the arc and the snap appears at the center. Below, it reads 29."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -1752,7 +1766,8 @@
           "en": "then Enter. The left end-arc center of each slot, line below; it reads 50."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": 3
         },
         {
          "do": {
@@ -1819,7 +1834,11 @@
           "en": "then Enter. Asked for the first origin, hover over the left sloping web edge and move away. Then hover over the top face of the base: a marker appears where the two lines would meet if extended. Click there. Take the second origin the same way on the right; below, it reads 80."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         }
        ],
        "expect": {
@@ -1869,7 +1888,11 @@
           "en": "then Enter - DIMDIAMETER, the diameter dimension. Click the bore circle, drag out beyond it into empty space, and click."
          },
          "type": "DDI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -1908,7 +1931,8 @@
           "en": "then Enter. Click the outer circle of the boss, drag out to empty space, and click; it reads Ø56."
          },
          "type": "DDI",
-         "kind": "type"
+         "kind": "type",
+         "spot": 3
         }
        ],
        "expect": {
@@ -1967,7 +1991,11 @@
           "en": "then Enter - DIMRADIUS. Click the right-hand fillet arc."
          },
          "type": "DRA",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -1991,7 +2019,8 @@
           "en": "then Enter. Click the left end arc of the left slot."
          },
          "type": "DRA",
-         "kind": "type"
+         "kind": "type",
+         "spot": 3
         },
         {
          "do": {
@@ -2119,7 +2148,8 @@
          "do": {
           "ko": "중심 표식이 뜨면 클릭합니다. 두 중심선의 교차점을 잡아도 같은 자리예요.",
           "en": "Click on the centre marker. The intersection of the two centerlines lands on the same point."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -2212,7 +2242,8 @@
           "en": "then Enter - DIMALIGNED. Pick the lower and upper ends of the left chamfer line and pull the dimension out past the sloped face. It reads about 7.07 and shows as 7."
          },
          "type": "DAL",
-         "kind": "type"
+         "kind": "type",
+         "spot": 1
         },
         {
          "do": {
@@ -2227,7 +2258,8 @@
           "en": "then Enter - the multileader. Arrowhead on the right chamfer face, landing in empty space outside the drawing."
          },
          "type": "MLEADER",
-         "kind": "type"
+         "kind": "type",
+         "spot": 2
         },
         {
          "do": {
@@ -2285,7 +2317,11 @@
           "en": "then Enter. Arrowhead on one of the four tap circles, landing in empty space outside the boss."
          },
          "type": "MLEADER",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {
@@ -2359,7 +2395,11 @@
           "en": "then Enter and come back down to the front view for one reference dimension. Snap to the centre of the left fillet arc, then the right one, and put the dimension line below. It reads 96."
          },
          "type": "DLI",
-         "kind": "type"
+         "kind": "type",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "do": {

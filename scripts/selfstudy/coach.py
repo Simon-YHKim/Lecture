@@ -107,14 +107,19 @@ FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 �
               'sh-title': '표제란'}
 
 
-def marks(spots, surface):
+def marks(spots, surface, only=None):
     """자리 표시 무리와 그 설명 목록을 만든다. (svg 조각, [(번호, 설명, 표식이름)])
 
     표시 크기는 **자리끼리 얼마나 붙어 있는지**로 정한다. 평면도는 깊이가 20 밖에
     안 돼서, 앞면·판앞면·뒷면 세 자리를 같은 크기로 찍으면 고리 셋이 겹쳐 어느
     것이 어느 것인지 안 보인다. 붙어 있으면 작게 찍는다.
     """
-    pts = [place(sp, surface) for sp in spots]
+    # `only` 가 있으면 그 번호만 그린다. 단계가 두 장으로 쪼개졌을 때 이 장에
+    # 설명이 있는 자리만 도면에 뜬다 — 설명 없는 번호가 도면에 남으면 학습자가
+    # 그것을 찾아 헤맨다.
+    keep = [(i + 1, sp) for i, sp in enumerate(spots)
+            if only is None or (i + 1) in only]
+    pts = [place(sp, surface) for _n, sp in keep]
     r = 8.6
     if len(pts) > 1:
         near = min(((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** .5
@@ -122,7 +127,7 @@ def marks(spots, surface):
         r = max(3.4, min(8.6, near * 0.46))
     k = r / 8.6
     out, caps = [], []
-    for i, (sp, (x, y)) in enumerate(zip(spots, pts), 1):
+    for (i, sp), (x, y) in zip(keep, pts):
         kind = sp.get('snap')
         out.append('<g class="cm">'
                    '<circle class="ring" cx="%.2f" cy="%.2f" r="%.2f"/>'
@@ -145,6 +150,21 @@ HL_OF = re.compile(r'<(?:path|rect|circle|line|polyline) class="hl" data-feature
 def viewbox(svg):
     m = VIEWBOX.search(svg)
     return m.group(1) if m else '0 0 100 100'
+
+
+def use_tag(sid, svg):
+    """`<symbol>` 을 부르는 태그. viewBox 의 원점까지 맞춰 준다.
+
+    `<use>` 는 x·y 를 안 주면 (0,0) 에 심볼 뷰포트를 놓는다. 그런데 정면도의
+    viewBox 는 `48 108 140 110` 이라 바깥 좌표계의 (0,0) 이 보이는 영역 밖이다.
+    그래서 도면이 화면 왼쪽 위로 밀려 나가 **보이지 않는다** — 검수에서 「도면
+    누락」으로 올라온 여덟 장이 전부 이것이었다.
+
+    원점이 0 인 도해(세 뷰 `0 0 296 274`, A3 `0 0 560 400`)는 우연히 맞아서
+    멀쩡해 보였고, 그래서 원점이 있는 도해만 골라 틀렸다.
+    """
+    x, y, w, h = viewbox(svg).split()
+    return '<use href="#%s" x="%s" y="%s" width="%s" height="%s"/>' % (sid, x, y, w, h)
 
 
 # 선 종류별 표현. `<use>` 안쪽은 바깥 CSS 가 닿지 않으므로 속성으로 박아 둔다.
@@ -243,3 +263,11 @@ def hl_for(svg, feature):
     got = [m.group(0).replace('class="hl"', 'class="hl hot"')
            for m in HL_OF.finditer(svg) if m.group('f') == feature]
     return ''.join(got)
+
+
+def spot_badges(a):
+    """조작 한 줄이 짚는 자리 번호들. 정수 하나도, 여럿도 받는다."""
+    v = a.get('spot')
+    if v is None:
+        return []
+    return [v] if isinstance(v, int) else list(v)

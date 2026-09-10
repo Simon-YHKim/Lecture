@@ -899,7 +899,8 @@
          "do": {
           "ko": "커서를 보스 원 Ø56 의 둘레로 가져갑니다.",
           "en": "Move the cursor onto the rim of the Ø56 boss circle."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1001,14 +1002,16 @@
           "ko": "간격띄우기할 객체를 물어봅니다. 보스 Ø56 원의 선을 클릭합니다.",
           "en": "It asks which object to offset. Click the line of the Ø56 boss circle."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
           "ko": "어느 쪽으로 띄울지 물어봅니다. 원 안쪽 아무 곳이나 클릭하고 엔터로 명령을 끝냅니다.",
           "en": "It asks which side. Click anywhere inside the circle, then press Enter to end the command."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 2
         },
         {
          "do": {
@@ -1093,7 +1096,8 @@
          "do": {
           "ko": "중심 표식이 뜨면 클릭합니다. 보스 중심이에요.",
           "en": "Click on the centre marker - that is the boss centre."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "key",
@@ -1179,7 +1183,8 @@
           "ko": "중심점을 물어봅니다. 여기서는 좌표를 치지 않습니다. 방금 그은 보조선의 바깥쪽 끝에 마우스를 가져갑니다. 네모난 끝점 표식이 뜨면 그때 클릭합니다.",
           "en": "It asks for the center. Do not type a coordinate here. Hover over the outer end of the construction line you just drew. When the square endpoint marker appears, click."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "type": "D",
@@ -1257,7 +1262,8 @@
          "do": {
           "ko": "보스 원 둘레에 커서를 올려 중심 표식이 뜨면 클릭합니다. 탭은 보스 중심을 돌아가니까요.",
           "en": "Hover the boss rim, wait for the centre marker, and click - the taps turn about the boss centre."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "type",
@@ -1428,7 +1434,8 @@
          "do": {
           "ko": "장공 중심은 베이스 왼쪽 아래 구석에서 오른쪽 29, 위 8입니다. 그 자리에는 잡을 것이 없어요. 그래서 잡을 것을 먼저 만듭니다.",
           "en": "The slot center is 29 right and 8 up from the base's lower-left corner. There is nothing to snap to there, so make something first."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "type",
@@ -1525,7 +1532,8 @@
          "do": {
           "ko": "기준점을 물어봅니다. 방금 그린 원의 둘레에 커서를 올려 중심 표식이 뜨면 클릭합니다.",
           "en": "It asks for a base point. Hover that circle's rim and click its centre marker."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "key",
@@ -1621,14 +1629,16 @@
          "do": {
           "ko": "마름모 표식이 뜨면 클릭합니다. 사분점이에요. 원의 상하좌우 네 점을 잡아 줍니다.",
           "en": "Click on the diamond - the quadrant, which catches a circle at its four compass points."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
          "do": {
           "ko": "오른쪽 끝원의 맨 위에서도 마름모 표식을 보고 클릭합니다.",
           "en": "Do the same on top of the right end circle."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "key",
@@ -1723,14 +1733,16 @@
           "ko": "왼쪽 원의 오른쪽 반을 클릭합니다. 장공 안쪽으로 들어간 부분입니다. 사라집니다.",
           "en": "Click the right half of the left circle - the part that reaches into the slot. It disappears."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
           "ko": "오른쪽 원의 왼쪽 반을 클릭합니다. 사라집니다.",
           "en": "Click the left half of the right circle. It disappears."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 2
         },
         {
          "do": {
@@ -1806,7 +1818,8 @@
          "do": {
           "ko": "커서를 세로 중심선의 아래 끝으로 가져갑니다.",
           "en": "Move to the lower end of the vertical centerline."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "snap",
@@ -1820,7 +1833,8 @@
          "do": {
           "ko": "두 번째 점은 같은 중심선의 위 끝입니다. 네모 표식을 보고 클릭합니다.",
           "en": "The second point is the top end of the same line. Click its square."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "type",
@@ -1921,7 +1935,8 @@
           "ko": "베이스 윗면의 한가운데를 클릭합니다. 두 목 선 사이에 낀 구간이에요.",
           "en": "Click the middle of the base top face - the stretch caught between the two web lines."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
@@ -1998,14 +2013,16 @@
           "ko": "첫 번째 객체는 방금 남긴 윗면 오른쪽 토막입니다. 100에서 115까지 남은 높이 16짜리 수평선을 클릭합니다. 이때 남기고 싶은 쪽을 클릭합니다. 오른쪽 필렛이니 모서리보다 오른쪽입니다.",
           "en": "The first object is the right-hand stub of the top face you just left - the horizontal line at height 16 running from 100 to 115. Click on the side you want to keep. This is the right fillet, so click to the right of the corner."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
           "ko": "두 번째 객체는 오른쪽 목 선입니다. 역시 남기고 싶은 쪽, 모서리보다 위쪽을 클릭합니다.",
           "en": "The second object is the right web edge. Again click the side you want to keep, above the corner."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 2
         }
        ],
        "expect": {
@@ -2110,7 +2127,11 @@
           "ko": "왼쪽 장공의 두 끝원 중심을 차례로 클릭합니다. 중심 스냅이 잡히면 클릭합니다. 명령행에 12가 나와야 합니다.",
           "en": "Click the two end-arc centers of the left slot in turn, waiting for the center snap each time. The command line should read 12."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "type": "DI",
@@ -2125,7 +2146,8 @@
           "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나와야 합니다. 29에서 79까지입니다.",
           "en": "Click the left end-arc center of the left slot and the left end-arc center of the right slot. It should read 50 - from 29 to 79."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 3
         },
         {
          "type": "LI",
@@ -2140,7 +2162,8 @@
           "ko": "피치원을 클릭하고 엔터. 도면층이 중심선인지, 반지름이 22인지 봅니다. 반지름 22면 지름 44입니다. 문자 창은 `F2` 로 닫습니다.",
           "en": "Click the bolt circle and press Enter. Check the layer is the centerline layer and the radius is 22 - radius 22 means Ø44. Close the text window with F2."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 4
         },
         {
          "do": {
