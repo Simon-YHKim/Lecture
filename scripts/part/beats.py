@@ -269,9 +269,10 @@ _TINT = {
 def item(sel, kind="card", mode="present", hold=False, dx=0, dy=None, read=None):
     """One on-screen item and how it should behave.
 
-    mode "present": on screen from the start, faint. The viewer takes in the
+    mode "present": on screen from the start. The viewer takes in the
     whole screen at once and the emphasis alone carries the narration. Right for
-    dense reference tables, where arrivals would be a distraction.
+    dense reference tables, whose text stays opaque while the background carries
+    emphasis. Other items retain the faint unread/read states.
 
     mode "reveal": arrives when the narrator reaches it. Right where the items
     are few and large, so the screen does not open cluttered.
@@ -285,10 +286,11 @@ def item(sel, kind="card", mode="present", hold=False, dx=0, dy=None, read=None)
     """
     return {"sel": sel, "kind": kind, "mode": mode, "hold": hold,
             "dx": dx, "dy": 22 if dy is None else dy,
-            "read": READ if read is None else read}
+            "read": (1 if kind == "row" else READ) if read is None else read}
 
 
-def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10):
+def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10, overview_at=None,
+               unread=UNREAD):
     """Three-state read-along: unread -> active while spoken -> read.
 
     Items are 1-based by beat index. A beat with no matching item is skipped
@@ -297,7 +299,7 @@ def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10):
     items = [item(s) if isinstance(s, str) else s for s in items]
     out = []
 
-    present = [it["sel"] for it in items if it["mode"] == "present"]
+    present = [it for it in items if it["mode"] == "present"]
     if present:
         # Arrive just before the narrator reaches the first of them. A frame
         # whose script opens with half a minute of framing should spend that
@@ -305,10 +307,24 @@ def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10):
         # yet.
         first = min((a for _, a, _ in beat_spans(spans)), default=LEAD_SEC)
         at = max(round(LEAD_SEC * 0.4, 2), round(first - 2.4, 2))
-        out.append('    tl.fromTo("%s",{opacity:0,y:14},{opacity:%s,y:0,duration:%s,'
-                   'stagger:%s,ease:"power2.out"},%s);'
-                   % (",".join(_sel(comp, s) for s in present), UNREAD, entrance,
-                      group_stagger, at))
+        if overview_at is not None:
+            at = max(0, overview_at)
+        # Split only consecutive runs, preserving each item's original stagger
+        # index. Collecting all notes into a new group at `at` would reveal them
+        # before the preceding table rows.
+        runs = []
+        for index, it in enumerate(present):
+            opaque = it["kind"] == "row"
+            if runs and runs[-1][0] == opaque:
+                runs[-1][2].append(it["sel"])
+            else:
+                runs.append((opaque, index, [it["sel"]]))
+        for opaque, index, selectors in runs:
+            start = at if index == 0 else round(at + index * group_stagger, 10)
+            out.append('    tl.fromTo("%s",{opacity:0,y:14},{opacity:%s,y:0,duration:%s,'
+                       'stagger:%s,ease:"power2.out"},%s);'
+                       % (",".join(_sel(comp, s) for s in selectors), 1 if opaque else unread,
+                          entrance, group_stagger, start))
 
     for idx, a, b in beat_spans(spans):
         if idx < 1 or idx > len(items):
@@ -320,16 +336,18 @@ def read_along(comp, items, spans, entrance=0.95, group_stagger=0.10):
         hot, cool = _TINT[it["kind"]]
         hot = (hot + ",") if hot else ""
         cool = (cool + ",") if cool else ""
+        stacked = it['mode'] == 'reveal' and it['read'] == 0
         if it["mode"] == "reveal":
             out.append('    tl.fromTo("%s",{opacity:0,x:%s,y:%s},{opacity:%s,%sx:0,y:0,'
                        'duration:%s,ease:"power3.out"},%s);'
-                       % (s, it["dx"], it["dy"], ACTIVE, hot, entrance + 0.15, a))
+                       % (s, it["dx"], it["dy"], ACTIVE, hot, .25 if stacked else entrance + 0.15, a))
         else:
             out.append('    tl.to("%s",{opacity:%s,%sduration:%s,ease:"%s"},%s);'
                        % (s, ACTIVE, hot, FADE, EASE, a))
         if not it["hold"]:
             out.append('    tl.to("%s",{opacity:%s,%sduration:%s,ease:"%s"},%s);'
-                       % (s, it["read"], cool, FADE, EASE, b))
+                       % (s, it["read"], cool, .18 if stacked else FADE, EASE,
+                          round(max(a, b - .2), 2) if stacked else b))
         elif hot:
             out.append('    tl.to("%s",{%sduration:%s,ease:"%s"},%s);'
                        % (s, cool, FADE, EASE, b))
@@ -366,10 +384,14 @@ def attr_highlight(comp, attr, values, spans, lead=0.2, fade=0.7):
         for sel, prop, on, off in ((stroke, "stroke", "'%s'" % ACCENT, "'%s'" % INK),
                                    (fill, "fill", "'%s'" % ACCENT, "'%s'" % INK),
                                    (over, "opacity", 1, 0)):
-            out.append('    tl.to("%s",{%s:%s,duration:%s,ease:"%s"},%s);'
-                       % (sel, prop, on, fade, EASE, round(a + lead, 2)))
-            out.append('    tl.to("%s",{%s:%s,duration:%s,ease:"%s"},%s);'
-                       % (sel, prop, off, fade, EASE, round(b, 2)))
+            # Some features consist only of an overlay, others only of lines;
+            # no geometry kind is mandatory for every feature.
+            out.append('    if(document.querySelectorAll("%s").length){' % sel)
+            out.append('    tl.to("%s",{%s:%s,duration:%s,ease:"%s"},%s); // narration-beat: %d on'
+                       % (sel, prop, on, fade, EASE, round(a + lead, 2), idx))
+            out.append('    tl.to("%s",{%s:%s,duration:%s,ease:"%s"},%s); // narration-beat: %d off'
+                       % (sel, prop, off, fade, EASE, round(b, 2), idx))
+            out.append('    }')
     return "\n".join(out)
 
 
@@ -417,7 +439,8 @@ def shortcuts_in(path, line_no):
             # never ran. The step says which it is: a command is introduced by
             # name, an option is not.
             if key in kit.AMBIGUOUS_KEYS:
-                if kit.COMMANDS.get(key, ("",))[0] in raw:
+                if (kit.COMMANDS.get(key, ("",))[0] in raw
+                        or (key == "M" and "이동 명령" in raw)):
                     seen.append(key)
                 continue
             if key in kit.OPTION_KEYS:
@@ -448,6 +471,12 @@ def step_keys(path, line_no):
         found = []
         for tok in _TICK.findall(text):
             key = tok.upper()
+            if key in kit.AMBIGUOUS_KEYS:
+                if not (kit.COMMANDS.get(key, ("",))[0] in text
+                        or (key == "M" and "이동 명령" in text)):
+                    continue
+            if key in kit.OPTION_KEYS:
+                continue
             if key in kit.COMMANDS and key not in found:
                 found.append(key)
         fk = re.findall(r"Ctrl\+[A-Za-z0-9]+|\bF(?:[3-9]|1[0-2])\b", text)

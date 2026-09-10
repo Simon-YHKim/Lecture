@@ -163,7 +163,7 @@ def f_demo(comp, dur, spans, L):
     tl = "\n".join([
         '    tl.fromTo("#%s .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,'
         'ease:"power3.out"},.35);' % comp,
-        '    tl.fromTo("#%s .strip",{opacity:0,y:26},{opacity:1,y:0,duration:.9,'
+        '    tl.fromTo("#%s .strip",{opacity:0,y:0},{opacity:1,y:0,duration:.9,'
         'ease:"power3.out"},.7);' % comp,
         beats.read_along(comp, items, spans),
         '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.2);'

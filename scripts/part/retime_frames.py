@@ -23,14 +23,19 @@
 import argparse
 import io
 import json
+import math
 import os
+from html.parser import HTMLParser
+from pathlib import Path
 import re
 import sys
+from narrate_tts import verify_script_hash
+from lesson_edit import staged_edit
 
 # tl.to("#l1f3 .tk1",{ … },9.34);  ―  마지막 인자가 시각이다
 CALL = re.compile(
-    r'(?P<head>tl\.(?P<kind>fromTo|to|from|set)\(")(?P<sel>[^"]+)"(?P<mid>.*?),\s*'
-    r'(?P<time>-?\d+(?:\.\d+)?)\s*\);', re.S)
+    r'(?P<head>tl\.(?P<kind>fromTo|to|from|set)\(")(?P<sel>[^"]+)"(?P<mid>[^;]*?),\s*'
+    r'(?P<time>-?(?:\d+(?:\.\d*)?|\.\d+))\s*\);', re.S)
 FAMILY = re.compile(r'#\w+\s+\.([a-zA-Z][\w-]*?)(\d+)\b')
 ROOT_DUR = re.compile(r'(data-composition-id="(?P<cid>[^"]+)"[^>]*?data-duration=")(?P<d>[\d.]+)(")')
 SECT_DUR = re.compile(r'(<section id="(?P<cid>[^"]+)"[^>]*?data-duration=")(?P<d>[\d.]+)(")')
@@ -42,18 +47,107 @@ MAIN_DUR = re.compile(r'(id="root"[^>]*?data-duration=")(?P<d>[\d.]+)(")')
 TAIL = 1.6          # 말이 끝난 뒤 프레임이 더 서 있는 시간
 LEAD = 0.9          # 첫 박자 전에 등장 연출을 끝내 둘 여유
 
+_ROW_SELECTOR = re.compile(r'#(?P<scope>[\w-]+)\s+(?P<tag>[A-Za-z][\w-]*)?(?P<classes>(?:\.[\w-]+)*)\Z')
+_ROW_OPACITY = re.compile(r'(\bopacity\s*:\s*)(0?\.34|0?\.64)(?![\d.])')
+
+
+class _RowTargets(HTMLParser):
+    """Resolve only the scoped tag/class selectors emitted by our generators."""
+    _VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+             'link', 'meta', 'param', 'source', 'track', 'wbr'}
+
+    def __init__(self, source):
+        super().__init__()
+        self.stack, self.nodes = [], []
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        self.nodes.append((tag, set(attrs.get('class', '').split()),
+                           {identity for _, identity in self.stack if identity}))
+        if tag not in self._VOID:
+            self.stack.append((tag, attrs.get('id')))
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index][0] == tag:
+                del self.stack[index:]
+                break
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self._VOID:
+            self.handle_endtag(tag)
+
+    def matches(self, selector):
+        match = _ROW_SELECTOR.fullmatch(selector.strip())
+        if not match or not (match['tag'] or match['classes']):
+            return None
+        classes = set(re.findall(r'\.([\w-]+)', match['classes']))
+        return [tag for tag, found, ancestors in self.nodes
+                if match['scope'] in ancestors and classes <= found
+                and (not match['tag'] or match['tag'].lower() == tag)]
+
+
+def fix_row_readability(source):
+    """Keep generated row states opaque without touching animation timing.
+
+    A mixed selector retains its original tween and stagger. Its deterministic
+    GSAP value function returns 1 only for TR targets, leaving every other
+    target's old opacity intact. Unsupported selectors are left unchanged.
+    """
+    if '<tr' not in source.lower():
+        return source
+    targets = _RowTargets(source)
+
+    def fix(call):
+        if not _ROW_OPACITY.search(call['mid']):
+            return call.group(0)
+        matched = [targets.matches(selector) for selector in call['sel'].split(',')]
+        if any(tags is None or not tags for tags in matched):
+            return call.group(0)
+        tags = [tag for group in matched for tag in group]
+        if 'tr' not in tags:
+            return call.group(0)
+        only_rows = all(tag == 'tr' for tag in tags)
+        def opacity(match):
+            value = '1' if only_rows else "(i,target)=>target.tagName==='TR'?1:" + match[2]
+            return match[1] + value
+        mid = _ROW_OPACITY.sub(opacity, call['mid'])
+        start, end = call.start('mid') - call.start(), call.end('mid') - call.start()
+        return call.group(0)[:start] + mid + call.group(0)[end:]
+
+    return CALL.sub(fix, source)
+
 
 def beats_of(timing, frame):
     f = [x for x in timing['frames'] if x['frame'] == frame][0]
-    bs = [(b['observedStart'] - f['start'], b['observedEnd'] - f['start'])
-          for b in timing['beats'] if b['frame'] == frame]
+    raw = [b for b in timing['beats'] if b['frame'] == frame]
+    if len({b['beat'] for b in raw}) != len(raw):
+        raise ValueError('Duplicate beat in frame: ' + f['id'])
+    bs = [(float(b['observedStart']) - float(f['start']),
+           float(b['observedEnd']) - float(f['start'])) for b in raw]
     bs.sort()
+    validate_beats(bs, float(f['duration']))
     return f, bs
+
+
+def validate_beats(spans, duration):
+    if not math.isfinite(duration) or duration <= 0:
+        raise ValueError('Frame duration must be finite and positive')
+    previous_end = 0
+    for start, end in spans:
+        if not all(math.isfinite(v) for v in (start, end)):
+            raise ValueError('Beat times must be finite')
+        if start < previous_end - .003 or end <= start or end > duration + .003:
+            raise ValueError('Beats must be ordered, disjoint, and inside their frame')
+        previous_end = end
 
 
 def retime_frame(path, beats, dur, dry=False):
     """이 프레임의 tl.* 호출 시각을 새 박자에 맞춘다."""
-    s = io.open(path, encoding='utf-8').read()
+    validate_beats(beats, dur)
+    s = Path(path).read_text(encoding='utf-8')
     head = s[:s.index('const tl')] if 'const tl' in s else s
     if 'const tl' not in s:
         return 0, '타임라인 없음'
@@ -88,14 +182,14 @@ def retime_frame(path, beats, dur, dry=False):
         if got:
             streams.setdefault(got[0], []).append((got[1], m))
 
-    newtime = {}
+    newtime, newmid = {}, {}
     for key, items in streams.items():
         if key.startswith('fam:'):
             seen = {}
             for idx, m in items:
                 seen.setdefault(idx, []).append(m)
             keys = sorted(seen)
-            groups = [sorted(seen[k], key=lambda x: float(x.group('time'))) for k in keys]
+            groups = [seen[k] for k in keys]
         else:
             # 갈래 안에서는 켜짐·꺼짐이 번갈아 온다. 둘씩 묶는다.
             ms = [m for _i, m in items]
@@ -109,8 +203,60 @@ def retime_frame(path, beats, dur, dry=False):
             nxt = beats[k + 1][0] if k + 1 < len(beats) else off
             for j, m in enumerate(ms):
                 newtime[m.start()] = round(on if j == 0 else nxt, 2)
+                if key in ('fam:sp', 'fam:wy'):
+                    # Step captions share one physical slot: finish fading the
+                    # old label before revealing the next, not on top of it.
+                    if j:
+                        newtime[m.start()] = round(max(on, nxt - .2), 2)
+                    newmid[m.start()] = re.sub(r'duration:[\d.]+',
+                        'duration:0.25' if j == 0 else 'duration:0.18', m.group('mid'))
 
     order = streams          # 아래 홑 요소 처리가 쓰는 이름을 맞춰 둔다
+
+    explicit = re.search(r'// narration-beats: (\[[^\n]+\])', tl)
+    if explicit:
+        groups = json.loads(explicit.group(1))
+        if len(groups) != len(beats):
+            raise ValueError('Explicit scene beat mapping differs from measured narration')
+        for index, selectors in enumerate(groups):
+            on, off = beats[index]
+            next_on = beats[index + 1][0] if index + 1 < len(beats) else off
+            for selector in selectors:
+                matched = [m for m in calls if m.group('sel') == selector]
+                if not matched:
+                    raise ValueError('A mapped beat has no animation: ' + selector)
+                for j, m in enumerate(matched):
+                    newtime[m.start()] = round(on if j == 0 else next_on, 2)
+
+    for call in calls:
+        tagged = re.match(r'[^\S\n]*// narration-beat: (\d+) (on|off)\b', tl[call.end():])
+        if not tagged:
+            continue
+        index, phase = int(tagged[1]) - 1, tagged[2]
+        if not 0 <= index < len(beats):
+            raise ValueError('A drawing highlight names an absent narration beat')
+        on, off = beats[index]
+        if phase == 'off' and index + 1 < len(beats):
+            off = beats[index + 1][0]
+        newtime[call.start()] = round(on if phase == 'on' else off, 2)
+
+    if 'USER RECORDING' in head:
+        for m in calls:
+            sel, mid = m.group('sel'), m.group('mid')
+            if sel.endswith(' .strip'):
+                newtime[m.start()] = float(m.group('time')) if m.group('kind') == 'fromTo' else round(dur - 1.05, 2)
+                newmid[m.start()] = re.sub(r'y:-?[\d.]+', 'y:0', mid)
+                if m.group('kind') == 'fromTo':
+                    # Older retiming could merge two calls and turn the strip's
+                    # target opacity into zero. Restore the visible entry state.
+                    newmid[m.start()] = re.sub(r'(\},\{opacity:)\d+(?:\.\d+)?',
+                                               r'\g<1>1', newmid[m.start()])
+            elif sel.endswith(' .tag') and m.group('kind') == 'to':
+                newtime[m.start()] = round(dur - 1.4, 2)
+            elif sel.endswith(' .prog'):
+                newtime[m.start()] = float(m.group('time'))
+                newmid[m.start()] = re.sub(r'duration:[\d.]+',
+                    'duration:%g' % max(.1, dur - float(m.group('time')) - 1.05), mid)
 
     # 계열이 박자보다 하나 적으면 마지막 박자를 받을 홑 요소를 찾는다.
     covered = max((len(set(i for i, _ in v)) for k, v in order.items()
@@ -191,6 +337,39 @@ def retime_frame(path, beats, dur, dry=False):
                     same = abs(float(m.group('time')) - base) < 1.5
                     newtime[m.start()] = round(on if same else nxt, 2)
 
+    # Recap bullets share one measured paragraph per panel. A stale, evenly
+    # spaced stagger can reveal the last bullet after the next paragraph has
+    # started. Show the whole list with its panel until item timings exist.
+    recap_lists = ('p-done-li', 'p-next-li')
+    if len(beats) == 2 and all(any(
+            m.group('kind') == 'fromTo' and m.group('sel').endswith(' .' + name)
+            for m in calls) for name in recap_lists):
+        for name, (on, _off) in zip(recap_lists, beats):
+            panel = name.removesuffix('-li')
+            for m in calls:
+                if m.group('kind') != 'fromTo':
+                    continue
+                if m.group('sel').endswith((' .' + panel, ' .' + name)):
+                    newtime[m.start()] = round(on, 2)
+                    newmid[m.start()] = re.sub(r'stagger:[\d.]+', 'stagger:0',
+                                              newmid.get(m.start(), m.group('mid')))
+
+    title_exit = next((m for m in calls if m.group('kind') == 'to'
+        and all(name in m.group('sel') for name in (' .brand', ' .cert', ' .sub'))), None)
+    if title_exit:
+        fade_at = round(max(0.0, dur - 1.05), 2)
+        newtime[title_exit.start()] = fade_at
+        for m in calls:
+            if m.group('kind') != 'fromTo' or not m.group('sel').endswith(
+                    (' .brand', ' .cert', ' h2', ' .rule', ' .sub')):
+                continue
+            duration = re.search(r'duration:([\d.]+)', m.group('mid'))
+            if duration:
+                # Short titles need the subtitle before the outro, with time
+                # to read it. Keep the established rhythm when it already fits.
+                latest = max(0.0, fade_at - float(duration[1]) - 2.0)
+                newtime[m.start()] = round(min(float(m.group('time')), latest), 2)
+
     # 등장 연출(계열 전체를 한 번에 잡는 호출)과 퇴장을 양 끝으로 옮긴다.
     first_on = beats[0][0] if beats else 0.0
     for m in calls:
@@ -198,7 +377,10 @@ def retime_frame(path, beats, dur, dry=False):
         if m.start() in newtime:
             continue
         if sel.count(',') >= 1 and FAMILY.search(sel):
-            newtime[m.start()] = round(max(0.0, first_on - LEAD), 2)
+            # An overview can intentionally be visible during the spoken
+            # introduction. Do not postpone it until the first item is named.
+            newtime[m.start()] = round(min(float(m.group('time')),
+                                          max(0.0, first_on - LEAD)), 2)
         elif '.topline' in sel and '.body' in sel:
             newtime[m.start()] = round(max(0.0, dur - 1.05), 2)
 
@@ -206,8 +388,9 @@ def retime_frame(path, beats, dur, dry=False):
         # 맞출 트윈이 없어도 길이는 바뀐다. 인사 화면과 녹화 프레임이 그렇다.
         s = ROOT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), head + tl, count=1)
         s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
+        s = fix_row_readability(s)
         if not dry and s != head + tl:
-            io.open(path, 'w', encoding='utf-8', newline='\n').write(s)
+            Path(path).write_text(s, encoding='utf-8', newline='\n')
         if not dry:
             sync_motion(path, dur)
         return 0, '맞출 것 없음'
@@ -218,7 +401,7 @@ def retime_frame(path, beats, dur, dry=False):
             continue
         out.append(tl[last:m.start()])
         out.append('%s%s"%s,%s);' % (m.group('head'), m.group('sel'),
-                                     m.group('mid'), newtime[m.start()]))
+                                     newmid.get(m.start(), m.group('mid')), newtime[m.start()]))
         last = m.end()
         n += 1
     out.append(tl[last:])
@@ -226,9 +409,10 @@ def retime_frame(path, beats, dur, dry=False):
 
     s = ROOT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
     s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
+    s = fix_row_readability(s)
     if not dry:
-        io.open(path, 'w', encoding='utf-8', newline='\n').write(s)
-        sync_motion(path, dur)
+        Path(path).write_text(s, encoding='utf-8', newline='\n')
+        sync_motion(path, dur, beats)
     return n, ''
 
 
@@ -248,7 +432,7 @@ def _covered_beats(newtime, beats):
     return got
 
 
-def sync_motion(frame_path, dur):
+def sync_motion(frame_path, dur, beats=None):
     """`.motion.json` 의 duration 을 프레임과 같게 둔다.
 
     프레임 HTML 만 고치고 이 파일을 두면 검사기가 「motion.json 길이가 슬롯과
@@ -258,10 +442,50 @@ def sync_motion(frame_path, dur):
     p = frame_path[:-5] + '.motion.json'
     if not os.path.exists(p):
         return
-    doc = json.load(io.open(p, encoding='utf-8'))
-    if abs(float(doc.get('duration', 0)) - dur) < 5e-4:
-        return
+    doc = json.loads(Path(p).read_text(encoding='utf-8'))
+    original = json.dumps(doc, sort_keys=True)
     doc['duration'] = round(dur, 3)
+    source = Path(frame_path).read_text(encoding='utf-8')
+    first_calls = {}
+    for call in CALL.finditer(source):
+        first_calls.setdefault(call.group('sel'), call)
+    if beats:
+        for a in doc['assertions']:
+            if a['kind'] != 'appearsBy':
+                continue
+            call = first_calls.get(a['selector'])
+            if call and call.group('kind') == 'fromTo' and call.group('mid').lstrip().startswith(',{opacity:0'):
+                at = float(call.group('time'))
+                if any(abs(at - start) < .05 for start, _ in beats):
+                    # An entrance tied to measured speech can move later when
+                    # the script grows. Keep the deadline tied to that beat.
+                    a['bySec'] = round(at + 2.4, 3)
+    explicit = re.search(r'// narration-beats: (\[[^\n]+\])', source)
+    if explicit and beats:
+        groups = json.loads(explicit.group(1))
+        for a in doc['assertions']:
+            if a['kind'] != 'appearsBy':
+                continue
+            for i, selectors in enumerate(groups):
+                # A motion condition may name one SVG member of a group that
+                # animates together (e.g. the title-block rectangle and text).
+                if any(a['selector'] == sel or a['selector'] == sel.replace(' .', ' g.') for sel in selectors):
+                    a['bySec'] = round(beats[i][0] + 2.4, 3)
+    if beats and len(beats) == 2:
+        recap = [next((sel for sel in first_calls if sel.endswith(' .' + name)), None)
+                 for name in ('p-done-li', 'p-next-li')]
+        if all(recap):
+            for selector, (on, _off) in zip(recap, beats):
+                # Checking only the panel misses bullets delayed past the clip.
+                last = selector + ':last-child'
+                assertion = next((a for a in doc['assertions']
+                    if a['kind'] == 'appearsBy' and a['selector'] == last), None)
+                if assertion is None:
+                    assertion = {'kind': 'appearsBy', 'selector': last}
+                    doc['assertions'].append(assertion)
+                assertion['bySec'] = round(on + 2.4, 3)
+    if json.dumps(doc, sort_keys=True) == original:
+        return
     with io.open(p, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(json.dumps(doc, ensure_ascii=False, indent=2) + '\n')
 
@@ -312,7 +536,7 @@ def planned_spans(lesson_dir, slug):
         else:
             expect.append((line_no, script[line_no], None))
 
-    idx = io.open(os.path.join(lesson_dir, 'index.html'), encoding='utf-8').read()
+    idx = (Path(lesson_dir) / 'index.html').read_text(encoding='utf-8')
     stems = re.findall(r'data-composition-src="compositions/frames/([^"]+)\.html"', idx)
     if len(stems) != len(expect):
         return {}
@@ -337,12 +561,19 @@ def main(argv=None):
     ap.add_argument('--dry', action='store_true')
     a = ap.parse_args(argv)
 
-    timing = json.load(io.open(os.path.join(a.lesson, 'narration-timing.json'),
-                               encoding='utf-8'))
-    idx_path = os.path.join(a.lesson, 'index.html')
-    idx = io.open(idx_path, encoding='utf-8').read()
-    slug = os.path.basename(os.path.normpath(a.lesson))
-    planned = planned_spans(a.lesson, slug)
+    if a.dry:
+        return retime_lesson(a.lesson, dry=True)
+    return staged_edit(a.lesson, lambda root: retime_lesson(str(root)))
+
+
+def retime_lesson(lesson, dry=False):
+
+    timing = json.loads((Path(lesson) / 'narration-timing.json').read_text(encoding='utf-8'))
+    verify_script_hash(lesson, timing)
+    idx_path = os.path.join(lesson, 'index.html')
+    idx = Path(idx_path).read_text(encoding='utf-8')
+    slug = os.path.basename(os.path.normpath(lesson))
+    planned = planned_spans(lesson, slug)
 
     spans, clock = {}, 0.0
     for f in timing['frames']:
@@ -352,15 +583,14 @@ def main(argv=None):
 
     total = 0
     for f in timing['frames']:
-        path = os.path.join(a.lesson, 'compositions', 'frames', f['id'] + '.html')
+        path = os.path.join(lesson, 'compositions', 'frames', f['id'] + '.html')
         if not os.path.exists(path):
-            print('   %-24s 파일 없음' % f['id'])
-            continue
+            raise ValueError('Frame is missing: ' + f['id'])
         _fr, bs = beats_of(timing, f['frame'])
         src = '잼'
         if not bs and f['id'] in planned:
             bs, src = planned[f['id']], '대본'
-        n, why = retime_frame(path, bs, spans[f['id']][1], a.dry)
+        n, why = retime_frame(path, bs, spans[f['id']][1], dry)
         total += n
         print('   %-24s 박자 %2d(%s) · 시각 %2d개 %s'
               % (f['id'], len(bs), src, n, why))
@@ -369,9 +599,11 @@ def main(argv=None):
                               + ('%g' % spans[m.group('id')][1]) + m.group(6))
                    if m.group('id') in spans else m.group(0), idx)
     idx = MAIN_DUR.sub(lambda m: m.group(1) + ('%g' % round(clock, 3)) + m.group(3), idx, count=1)
-    if not a.dry:
-        io.open(idx_path, 'w', encoding='utf-8', newline='\n').write(idx)
-    print('   %s · 시각 %d개 · 전체 %.1f초' % (os.path.basename(a.lesson.rstrip('/\\')), total, clock))
+    if not dry:
+        Path(idx_path).write_text(idx, encoding='utf-8', newline='\n')
+        from refresh_lesson import refresh_inplace
+        refresh_inplace(lesson)
+    print('   %s · 시각 %d개 · 전체 %.1f초' % (os.path.basename(lesson.rstrip('/\\')), total, clock))
     return 0
 
 

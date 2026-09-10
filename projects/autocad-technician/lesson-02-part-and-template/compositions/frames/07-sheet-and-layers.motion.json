@@ -9,12 +9,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-paper",
-      "bySec": 23.8
+      "bySec": 23.766
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-frame",
-      "bySec": 33.0
+      "bySec": 33.603
     },
     {
       "kind": "before",
@@ -24,7 +24,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-mark",
-      "bySec": 54.0
+      "bySec": 54.484
     },
     {
       "kind": "before",
@@ -33,28 +33,28 @@
     },
     {
       "kind": "appearsBy",
-      "selector": "#l2f7 .sh-title",
-      "bySec": 63.7
+      "selector": "#l2f7 g.sh-title",
+      "bySec": 64.567
     },
     {
       "kind": "before",
       "a": "#l2f7 .sh-mark",
-      "b": "#l2f7 .sh-title"
+      "b": "#l2f7 g.sh-title"
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f7 thead",
-      "bySec": 78.7
+      "bySec": 80.179
     },
     {
       "kind": "before",
-      "a": "#l2f7 .sh-title",
+      "a": "#l2f7 g.sh-title",
       "b": "#l2f7 thead"
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .note1",
-      "bySec": 139.6
+      "bySec": 149.536
     },
     {
       "kind": "before",
@@ -64,7 +64,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .note2",
-      "bySec": 188.3
+      "bySec": 195.983
     },
     {
       "kind": "before",

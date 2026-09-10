@@ -14,14 +14,21 @@
 #>
 [CmdletBinding()]
 param(
-    [switch]$RunHyperFramesChecks
+    [switch]$RunHyperFramesChecks,
+    [string]$PythonPath = $env:LECTURE_PYTHON
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = (& git rev-parse --show-toplevel).Trim()
 
-$python = Join-Path $repoRoot '.venv\Scripts\python.exe'
-if (-not (Test-Path -LiteralPath $python)) { $python = 'python' }
+$python = $PythonPath
+if (-not $python) {
+    $python = Join-Path $repoRoot '.venv\Scripts\python.exe'
+    if (-not (Test-Path -LiteralPath $python)) { $python = 'python' }
+}
+if (-not (Get-Command $python -ErrorAction SilentlyContinue)) {
+    throw "Python 실행 파일을 찾을 수 없습니다: $python"
+}
 
 $env:PYTHONIOENCODING = 'utf-8'
 $env:PYTHONUTF8 = '1'
@@ -39,6 +46,7 @@ foreach ($extra in @('scripts\check-standards.py', 'scripts\check-editions.py'))
 if ($RunHyperFramesChecks -and $code -eq 0) {
     $courseRoot = Join-Path $repoRoot 'projects\autocad-technician'
     foreach ($dir in Get-ChildItem -LiteralPath $courseRoot -Directory -Filter 'lesson-*') {
+        if (-not (Test-Path -LiteralPath (Join-Path $dir.FullName 'package.json'))) { continue }
         Write-Host ''
         Write-Host "== $($dir.Name) =="
         Push-Location $dir.FullName

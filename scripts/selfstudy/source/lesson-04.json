@@ -5,7 +5,7 @@
   "ko": "원·호·오프셋",
   "en": "Circles, Arcs, Offset"
  },
- "videoLength": "39:11",
+ "videoLength": "36:27",
  "selfStudyMin": 100,
  "opens": "EDU-IB-02_L03_PROFILE",
  "saves": "EDU-IB-02_L04_FEATURES",
@@ -29,24 +29,24 @@
    "en": "You can tell a Ø callout from an R callout. You can then pick diameter or radius entry in CIRCLE to match."
   },
   {
-   "ko": "보스 원 둘레에서 중심 스냅을 잡아 축 구멍 Ø25를 보스와 동심으로 그릴 수 있습니다.",
-   "en": "You can catch the boss circle's center with the center snap and draw the Ø25 bore concentric with it."
+   "ko": "보스 원 둘레에서 중심 스냅을 잡습니다. 축 구멍 Ø25를 보스와 동심으로 그립니다.",
+   "en": "Catch the boss circle's center with the center snap. Draw the Ø25 bore concentric with the boss."
   },
   {
    "ko": "보스 Ø56을 안쪽으로 6 오프셋해 피치원 PCD Ø44를 만들 수 있습니다. 그 6이 (56−44)÷2에서 나온 값임을 설명할 수 있습니다.",
    "en": "You can offset the Ø56 boss inward by 6 to make the PCD Ø44 bolt circle. You can explain that the 6 comes from (56 - 44) / 2."
   },
   {
-   "ko": "OFFSET의 도면층 옵션을 현재로 바꿔 보조 원을 중심선 레이어에 넣을 수 있습니다.",
-   "en": "You can switch the OFFSET layer option to Current so the construction circle lands on the centerline layer."
+   "ko": "OFFSET의 도면층 옵션을 현재로 바꿉니다. 보조 원은 중심선 레이어에 넣습니다.",
+   "en": "Set OFFSET's layer option to Current. Place the construction circle on the centerline layer."
   },
   {
    "ko": "선 종류 축척을 0.5로 고쳐 중심선이 일점쇄선으로 보이게 만들 수 있습니다.",
    "en": "You can set the linetype scale to 0.5 so a centerline reads as a chain line."
   },
   {
-   "ko": "극좌표 추적 45도 안내선 위에서 거리 22만 입력해 45도 보조선을 긋고 탭 첫 구멍 자리를 정확히 잡을 수 있습니다.",
-   "en": "You can draw the 45-degree construction line by typing only the distance 22 on the polar tracking guide, and so locate the first tapped hole exactly."
+   "ko": "극좌표 추적의 45도 안내선을 따라 거리 22만 입력합니다. 이 보조선으로 탭 첫 구멍 자리를 정확히 잡습니다.",
+   "en": "Enter only the distance 22 along the 45-degree polar tracking guide. Use that construction line to locate the first tapped hole exactly."
   },
   {
    "ko": "ARRAYPOLAR에서 항목 수 4, 사이의 각도 90, 연관 끄기를 지정할 수 있습니다. 그러면 탭 네 개를 45·135·225·315도에 놓을 수 있습니다.",
@@ -57,16 +57,16 @@
    "en": "You can build a slot from two end circles and two tangent lines. You know that trimming the inner halves turns the circles into arcs."
   },
   {
-   "ko": "MIRROR로 세로 중심선 60을 기준 삼아 오른쪽 장공을 대칭 복사할 수 있습니다.",
-   "en": "You can mirror the right-hand slot across the vertical centerline at x = 60."
+   "ko": "세로 중심선 60을 MIRROR의 기준으로 삼습니다. 오른쪽 장공을 대칭 복사합니다.",
+   "en": "Use the vertical centerline at 60 as the MIRROR axis. Mirror the slot to the right."
   },
   {
    "ko": "FILLET의 반지름을 R 옵션으로 먼저 설정할 수 있습니다. 그다음 두 선을 골라 R10 라운드를 넣을 수 있습니다.",
    "en": "You can set the FILLET radius with the R option first. You can then pick two lines to drop in an R10 round."
   },
   {
-   "ko": "TRIM의 절단 모서리를 필요한 선만 골라 지정할 수 있습니다. 필렛에서 남기고 싶은 쪽을 클릭한다는 규칙도 쓸 수 있습니다.",
-   "en": "You can select only the cutting edges you need in TRIM. You can also apply the rule that in FILLET you click the side you want to keep."
+   "ko": "TRIM의 절단 모서리는 필요한 선만 골라 지정합니다. FILLET에서는 남기고 싶은 쪽을 클릭하는 규칙을 적용합니다.",
+   "en": "Select only the cutting edges you need in TRIM. In FILLET, apply the rule of clicking the side you want to keep."
   },
   {
    "ko": "DI와 LI로 그린 것이 실제로 그 값인지 숫자로 검산할 수 있습니다.",

@@ -31,6 +31,7 @@ Needs Windows with the ko-KR voice. `--voice` picks another installed one.
 """
 
 import argparse
+import hashlib
 import io
 import json
 import os
@@ -39,6 +40,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
@@ -66,6 +68,31 @@ def speakable(text):
     out = TICK.sub(r"\1", out)
     out = re.sub(r"\s+", " ", out).strip()
     return out
+
+
+def spoken_hash(script):
+    """Hash exactly the frame/part/beat jobs sent to the speech engine."""
+    jobs, units, order = synthesis_plan(script)
+    content = {'jobs': jobs, 'units': sorted((line, part, value)
+               for (line, part), value in units.items()), 'order': order}
+    return hashlib.sha256(json.dumps(content, ensure_ascii=False,
+                                    separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def verify_script_hash(lesson_dir, timing):
+    expected = timing.get('spokenTextSha256')
+    if not expected:
+        raise ValueError('대본 식별정보가 없습니다. TTS를 다시 생성하세요.')
+    if expected != spoken_hash(os.path.join(lesson_dir, 'SCRIPT.md')):
+        raise ValueError('대본이 음성 생성 뒤 바뀌었습니다. TTS를 다시 생성하세요.')
+
+
+def private_output(path):
+    root = Path(__file__).resolve().parents[2]
+    target = Path(path).expanduser().resolve()
+    if target == root or root in target.parents or any((p / '.git').exists() for p in (target, *target.parents)):
+        raise ValueError('음성은 Git 저장소 밖의 폴더에 저장해야 합니다.')
+    return target
 
 
 def read_wav(path):
@@ -119,6 +146,7 @@ def wav_seconds(path):
 
 PS_SPEAK = r"""
 param([string]$InFile, [string]$OutDir, [string]$Voice)
+$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Speech
 $syn = New-Object System.Speech.Synthesis.SpeechSynthesizer
 $syn.SelectVoice($Voice)
@@ -230,35 +258,27 @@ def cuts_for(lesson_dir):
     return []
 
 
-def narrate(lesson_dir, outroot, voice, dry_run=False):
-    script = os.path.join(lesson_dir, "SCRIPT.md")
+def synthesis_plan(script):
+    lesson_dir = str(Path(script).parent)
     sections = beats.parse_script(script)
-    frames = dict(lesson_frames(lesson_dir))
-    slug = os.path.basename(lesson_dir.rstrip("/\\"))
-    outdir = os.path.join(outroot, slug)
-    partdir = os.path.join(outdir, "_parts")
-
+    frames = dict(lesson_frames(lesson_dir)) if (Path(lesson_dir) / 'compositions/frames').is_dir() else {}
+    slug = Path(lesson_dir).name
     cuts = cuts_for(lesson_dir)
-
     # units[(line_no, part)] = [(key, beat_index_or_None)] — one entry per frame
     jobs, units, order = [], {}, []
     for line_no in sorted(sections):
         ids = frames.get(line_no) or ["frame-%02d" % line_no]
-        if len(ids) == 1:
-            groups = [[(b, t) for b, t in sections[line_no]]]
-        else:
-            # The recording Line becomes several frames. Cut it where the
-            # contract says the work finishes, not where the paragraphs fall.
-            steps = beats.parse_steps(script, line_no)
-            if not steps:
-                groups = [[(b, t) for b, t in sections[line_no]]]
+        steps = beats.parse_steps(script, line_no)
+        if steps:
+            if len(ids) == 1:
+                groups = [steps]
             else:
                 pieces = beats.split_steps(steps, cuts)
                 groups = [[(i, t) for i, t in piece] for _off, piece in pieces]
-            if len(groups) != len(ids):
-                raise SystemExit(
-                    "%s Line %d: 프레임 %d개인데 조각이 %d개다 (cutAfterStep %r)"
-                    % (slug, line_no, len(ids), len(groups), cuts))
+        else:
+            groups = [[(b, t) for b, t in sections[line_no]]]
+        if len(groups) != len(ids):
+            raise ValueError('%s Line %d: frame and narration group counts differ' % (slug, line_no))
 
         for part, (fid, group) in enumerate(zip(ids, groups)):
             entries = []
@@ -273,13 +293,29 @@ def narrate(lesson_dir, outroot, voice, dry_run=False):
                 units[(line_no, part)] = entries
                 order.append((line_no, part, fid))
 
+    return jobs, units, order
+
+
+def narrate(lesson_dir, outroot, voice, dry_run=False):
+    outroot = str(private_output(outroot))
+    script = os.path.join(lesson_dir, 'SCRIPT.md')
+    input_hash = spoken_hash(script)
+    jobs, units, order = synthesis_plan(script)
+    slug = os.path.basename(lesson_dir.rstrip('/\\'))
+    outdir = os.path.join(outroot, slug)
+    partdir = os.path.join(outdir, '_parts')
+
     total_chars = sum(len(t) for _, t in jobs)
     if dry_run:
         print("%-34s 문단 %3d · 글자 %6d · 프레임 %d"
-              % (slug, len(jobs), total_chars, len(frames)))
+              % (slug, len(jobs), total_chars, len(order)))
         return None
 
+    if os.path.exists(outdir):
+        raise ValueError('Choose a fresh narration output directory: ' + outdir)
+    verify_script_hash(lesson_dir, {'spokenTextSha256': input_hash})
     made = speak_many(jobs, partdir, voice)
+    verify_script_hash(lesson_dir, {'spokenTextSha256': input_hash})
 
     frames_out, beats_out, clock = [], [], 0.0
     for seq, (line_no, part, fid) in enumerate(order, 1):
@@ -297,6 +333,7 @@ def narrate(lesson_dir, outroot, voice, dry_run=False):
             "end": round(clock + dur, 3),
             "duration": dur,
             "audio": os.path.basename(dest),
+            "audioSha256": hashlib.sha256(Path(dest).read_bytes()).hexdigest(),
         })
         for (key, beat_idx), (s, e) in zip(entries, spans):
             if beat_idx is not None:
@@ -312,6 +349,8 @@ def narrate(lesson_dir, outroot, voice, dry_run=False):
         "schemaVersion": 1,
         "source": "synthesised",
         "voice": voice,
+        "rate": 0,
+        "spokenTextSha256": input_hash,
         "note": ("Windows 음성으로 대본을 읽어 만든 시각이다. 문단마다 따로 합성해 "
                  "길이를 그대로 읽었으므로 정렬 오차가 없고 다시 돌려도 같은 값이 나온다. "
                  "사람이 녹음하면 그 값이 이것을 대체한다."),
@@ -319,14 +358,17 @@ def narrate(lesson_dir, outroot, voice, dry_run=False):
         "frames": frames_out,
         "beats": beats_out,
     }
+    verify_script_hash(lesson_dir, timing)
     with io.open(os.path.join(lesson_dir, "narration-timing.json"), "w",
                  encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps(timing, ensure_ascii=False, indent=2) + "\n")
 
-    local = {"narrationDir": os.path.abspath(outdir),
-             "frames": {f["id"]: os.path.abspath(os.path.join(outdir, f["audio"]))
-                        for f in frames_out}}
-    with io.open(os.path.join(lesson_dir, "media.local.json"), "w",
+    local_path = os.path.join(lesson_dir, "media.local.json")
+    local = json.loads(Path(local_path).read_text(encoding='utf-8')) if os.path.isfile(local_path) else {}
+    local.update({"narrationDir": os.path.abspath(outdir),
+                  "frames": {f["id"]: os.path.abspath(os.path.join(outdir, f["audio"]))
+                             for f in frames_out}})
+    with io.open(local_path, "w",
                  encoding="utf-8", newline="\n") as fh:
         fh.write(json.dumps(local, ensure_ascii=False, indent=2) + "\n")
 

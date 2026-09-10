@@ -84,6 +84,16 @@
       n.focus(); selectTab(n.getAttribute('aria-controls'), true);
     });
   });
+  $$('a[data-tab-link]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = link.getAttribute('data-tab-link');
+      var target = tabs.find(function (t) { return t.getAttribute('aria-controls') === id; });
+      if (!target) return;
+      e.preventDefault();
+      selectTab(id, true);
+      target.focus();
+    });
+  });
   if (tabs.length) {
     var want = (location.hash || '').slice(1) || store.get('tab', '') || tabs[0].getAttribute('aria-controls');
     if (!document.getElementById(want)) want = tabs[0].getAttribute('aria-controls');

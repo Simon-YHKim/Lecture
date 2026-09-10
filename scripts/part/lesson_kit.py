@@ -306,6 +306,7 @@ COMMANDS = {
            "한 바퀴 도는 윤곽. 레이아웃에서 영역 넓이를 재거나 통째로 옮길 때"),
     "C": ("CIRCLE", "원을 그린다", "구멍, 축, 피치원"),
     "REC": ("RECTANG", "직사각형을 폴리선으로 그린다", "도면틀, 표제란, 판재 외곽"),
+    "CHA": ("CHAMFER", "두 변 사이를 모따기한다", "지정 거리로 위쪽 모서리를 비스듬히 자를 때"),
     "XL": ("XLINE", "무한히 뻗는 구성선을 긋는다", "투상선. 도면에 남기지 않고 뷰를 맞출 때"),
     "O": ("OFFSET", "일정 거리만큼 떨어진 같은 모양을 만든다",
           "중심을 다시 찍지 않고 동심원·평행선. 벽체 두께, 여유 간격"),
@@ -314,7 +315,7 @@ COMMANDS = {
     "F": ("FILLET", "두 선 사이에 라운드를 넣는다", "응력이 몰리는 안쪽 모서리. 반지름 0이면 각지게 잇는다"),
     "MI": ("MIRROR", "대칭으로 복사한다", "좌우 대칭 형상. 한 번만 그리고 뒤집는다"),
     "CO": ("COPY", "같은 것을 다른 자리에 둔다", "반복되는 부품, 같은 구멍"),
-    "M": ("MOVE", "옮긴다", "뷰 배치를 다시 잡을 때"),
+    "M": ("MOVE", "옮긴다", "중심선이나 뷰의 위치를 기준점에 맞출 때"),
     "E": ("ERASE", "지운다", "보조선 정리"),
     "ARRAYPOLAR": ("ARRAYPOLAR", "중심을 두고 원형으로 배열한다", "볼트 구멍처럼 각도로 균등 배치된 것"),
     "MA": ("MATCHPROP", "특성을 다른 객체에 복사한다", "레이어가 틀린 선을 다시 그리지 않고 옮길 때"),
@@ -359,14 +360,14 @@ COMMANDS = {
 NOT_COMMANDS = {"H7"}
 
 # A command in one lesson, an option inside a running command in another.
-# Counted only where the step introduces it by its full name. `D` starts
+# Counted only where the step introduces the command by name. `D` starts
 # DIMSTYLE in lesson 7 and answers CIRCLE's radius prompt in lessons 3 and 4;
-# `M` is only ever the multiline-text option inside DIMRADIUS and DIMDIAMETER,
-# so counting it as MOVE claimed a command no recording runs.
+# `M` is MOVE in lesson 3, but a multiline-text option inside DIMRADIUS and
+# DIMDIAMETER. The Korean introduction "이동 명령" also identifies MOVE.
 AMBIGUOUS_KEYS = {"D", "M"}
 
 # Typed inside a running command as an option or a snap, not on a blank prompt.
-OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "OR", "ON",
+OPTION_KEYS = {"A", "W", "N", "V", "H", "R", "S", "U", "X", "I", "P", "OR", "ON",
                "ALL", "AS", "FROM", "TAN", "CENTER", "HIDDEN", "RE", "SELECT"}
 
 FUNCTION_KEYS = [
@@ -613,9 +614,8 @@ def write_episodes(lesson_dir, slots, episodes, os_mod):
     """
     by_stem = {s[2]: s for s in slots}
     d = os_mod.path.join(lesson_dir, "compositions", "episodes")
-    if os_mod.path.isdir(d):
-        for f in os_mod.listdir(d):
-            os_mod.remove(os_mod.path.join(d, f))
+    # Rewrite only the declared episode files. Preview caches and private
+    # assets in the same directory must survive a timing refresh.
     os_mod.makedirs(d, exist_ok=True)
 
     out = []
@@ -656,9 +656,9 @@ def write_project(lesson_dir, name, slots, total, os_mod, json_mod):
     put(os_mod.path.join(lesson_dir, "package.json"), json_mod.dumps({
         "name": name, "private": True, "type": "module",
         "scripts": {
-            "dev": "npx --yes hyperframes@0.7.111 preview",
-            "check": "npx --yes hyperframes@0.7.111 check",
-            "render": "npx --yes hyperframes@0.7.111 render",
-            "publish": "npx --yes hyperframes@0.7.111 publish",
+            "dev": "npx --yes hyperframes@0.8.33 preview",
+            "check": "npx --yes hyperframes@0.8.33 check",
+            "render": "npx --yes hyperframes@0.8.33 render",
+            "publish": "npx --yes hyperframes@0.8.33 publish",
         },
     }, indent=2, ensure_ascii=False) + "\n")

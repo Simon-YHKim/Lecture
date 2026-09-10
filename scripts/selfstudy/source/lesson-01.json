@@ -15,8 +15,8 @@
    "en": "This lesson draws nothing. It settles why the course exists and what it assesses. You do not need AutoCAD open yet."
   },
   "why": {
-   "ko": "뒤 차시는 「오늘은 무엇을 한다」를 다시 안내하지 않습니다. 전체 지도를 여기서 한 번만 폅니다. 여기를 건너뛰면 파일 이름과 레이어 값을 규격으로 착각하게 돼요.",
-   "en": "Later lessons never repeat a 'here is today's plan' page. The map is opened once, here. Skip it and you will mistake file names and layer values for a standard."
+   "ko": "뒤 차시는 여기서 본 순서에 따라 진행합니다. 전체 흐름과 파일을 이어 쓰는 방법부터 알아 두세요. 연습용 레이어 값과 과제에서 정한 규격도 구분합니다.",
+   "en": "Later lessons follow the sequence introduced here. First learn the overall flow and how to continue from a saved file. Also distinguish practice layer settings from the requirements of an assigned task."
   },
   "where": {
    "ko": "부품은 아직 한 선도 그려지지 않았습니다. 1차시는 열 파일도 저장할 파일도 없습니다. 첫 파일은 2차시에서 만듭니다.",
@@ -78,8 +78,8 @@
     "en": "How to use this workbook"
    },
    "lede": {
-    "ko": "강사가 쥐고 있던 진행 제어를 이제 직접 쥡니다. 어디에 무엇이 있는지 먼저 보고 가세요.",
-    "en": "The instructor used to control the pace. Now you do. Look at what sits where before you start."
+    "ko": "읽는 속도와 쉬는 시점은 직접 정합니다. 필요한 설명을 어디서 찾을 수 있는지 먼저 살펴보세요.",
+    "en": "You decide how quickly to read and when to pause. First see where to find the explanations you need."
    },
    "blocks": [
     {
@@ -89,8 +89,8 @@
     },
     {
      "type": "p",
-     "ko": "영상에는 없던 절입니다. 옆에서 물어볼 사람이 없거든요. 대신 쓸 장치를 여기서 한 번에 소개할게요.",
-     "en": "This section was not in the video. Nobody is sitting next to you. Here are the tools that replace them."
+     "ko": "혼자 실습하다 막혔을 때 참고할 안내입니다. 결과 확인, 문제 해결, 진행 기록을 어디서 하는지 알아볼게요.",
+     "en": "Use this guide when you get stuck while practising on your own. It shows where to check results, solve problems and record progress."
     },
     {
      "type": "table",
@@ -308,8 +308,8 @@
     },
     {
      "type": "p",
-     "ko": "도면은 그 말을 누가 읽어도 같게 만듭니다. 치수와 형상으로 적으면 해석이 하나로 고정됩니다. 그래서 도면에는 갖춰야 할 요건이 있습니다.",
-     "en": "A drawing makes the same words read the same to everyone. Written as dimensions and geometry, the reading is fixed to one. That is why a drawing has requirements to meet."
+     "ko": "도면에는 위치와 크기를 형상과 치수로 적습니다. 서로 같은 부분과 값을 보며 이야기할 수 있겠죠. 뜻을 분명히 전하려면 다음 다섯 요건을 갖춰야 합니다.",
+     "en": "A drawing states position and size through geometry and dimensions. Everyone can discuss the same features and values. To communicate clearly, it must meet the following five requirements."
     }
    ]
   },
@@ -357,8 +357,8 @@
         "en": "Orientation and position"
        },
        "body": {
-        "ko": "그 형상이 어디에 어떤 방향으로 놓이는지입니다. 같은 구멍이라도 기준면에서 떨어진 거리가 다르면 다른 부품입니다. 그래서 도면만 보고 두 부품을 구분할 수 있어요.",
-        "en": "Where the shape sits and which way it faces. The same hole at a different distance from the datum face makes a different part. That is how two parts are told apart from the drawings alone."
+        "ko": "형상이 놓이는 자리와 방향을 나타냅니다. 같은 구멍도 기준면에서 떨어진 거리가 다르면 다른 부품입니다. 위치를 함께 읽어야 두 부품을 구분할 수 있어요.",
+        "en": "This shows where the shape sits and which way it faces. The same hole at a different distance from the datum face makes a different part. Read its position as well as its size to tell the parts apart."
        }
       },
       {
@@ -377,8 +377,8 @@
         "en": "Free of ambiguity"
        },
        "body": {
-        "ko": "읽는 사람마다 다르게 해석되면 그건 도면이 아닙니다. 도면의 존재 이유가 해석을 하나로 만드는 것입니다. 해석이 갈리는 순간 목적 자체가 무너져요.",
-        "en": "If two readers take it two ways, it is not a drawing. A drawing exists to make the reading single. The moment readings split, the purpose collapses."
+        "ko": "위치와 크기, 가공 조건을 한 가지 뜻으로 읽을 수 있게 적습니다. 해석이 갈리면 제작 결과도 달라질 수 있습니다. 읽는 사람이 다시 추측해야 하는 부분은 없는지 살펴보세요.",
+        "en": "State positions, sizes and machining requirements so they have one clear meaning. Different interpretations can produce different parts. Check whether any detail still leaves the reader guessing."
        }
       },
       {
@@ -413,14 +413,14 @@
     "en": "What a technician does with drawings"
    },
    "lede": {
-    "ko": "설비를 직접 다루는 사람이 도면을 읽고 그릴 줄 알면 일이 달라집니다.",
-    "en": "When the person who works the machine can read and draw, the work changes."
+    "ko": "작업 개선, 설비 배치, 부품 조달에 도면을 활용합니다.",
+    "en": "Use drawings to improve work, plan equipment layouts and source parts."
    },
    "blocks": [
     {
      "type": "p",
-     "ko": "테크니션에게 이게 왜 필요할까요? 문제를 처음 보는 사람이 도면도 그릴 줄 안다고 해 보세요. 그러면 문제와 해법 사이에 통역이 끼지 않습니다.",
-     "en": "Why does a technician need this? Suppose the person who first sees the problem can also draw. Then no translator sits between problem and fix."
+     "ko": "테크니션은 설비의 문제를 현장에서 직접 봅니다. 필요한 형상과 위치를 도면으로 설명하면 개선안을 다른 사람에게 정확히 전할 수 있어요.",
+     "en": "Technicians see equipment problems first-hand. Showing the required shapes and positions in a drawing helps them communicate an improvement clearly."
     },
     {
      "type": "cards",
@@ -431,8 +431,8 @@
         "en": "Proposing a jig"
        },
        "body": {
-        "ko": "작업이 불편하면 치구를 직접 그려서 제안합니다. 말로 부탁하는 것과 도면을 내미는 것은 다릅니다. 제안이 부탁이 아니라 도면이 돼요.",
-        "en": "When the work is awkward, draw the jig yourself and propose it. Asking in words and handing over a drawing are not the same thing. The proposal stops being a favor and becomes a drawing."
+        "ko": "작업이 불편하면 치구를 그려 개선안을 제안합니다. 필요한 형상과 치수를 함께 적습니다. 검토하는 사람도 어떤 치구를 만들려는지 알 수 있겠죠.",
+        "en": "When a task is awkward, draw a jig to propose an improvement. Include the required shape and dimensions so the reviewer can see what you intend to make."
        }
       },
       {
@@ -451,8 +451,8 @@
         "en": "Urgent spare-part sourcing"
        },
        "body": {
-        "ko": "설비가 멈추면 조립도를 열어 그 부품을 찾습니다. 그다음 부품 도면을 확인합니다. 그 도면을 들고 가공집과 이야기합니다.",
-        "en": "When a machine stops, open the assembly drawing and find the part. Then check that part's own drawing. Then take it to the machine shop and talk."
+        "ko": "설비가 멈추면 조립도에서 필요한 부품을 찾습니다. 해당 부품의 도면을 확인한 뒤 가공 업체와 이야기합니다. 형상과 치수를 함께 확인하는 순서입니다.",
+        "en": "When a machine stops, find the required part in the assembly drawing. Check its part drawing before speaking with the machine shop, so you can discuss the same shape and dimensions."
        }
       }
      ]
@@ -548,8 +548,8 @@
     },
     {
      "type": "p",
-     "ko": "정확하게 소통하려고 도면을 읽고 그리는 것입니다. 말로 설명하고 다시 확인하는 과정이 없어집니다.",
-     "en": "You read and draw in order to communicate exactly. The explain-and-re-confirm loop goes away."
+     "ko": "도면을 읽고 그리는 목적은 작업 의도를 정확히 전하는 데 있습니다. 서로 다른 뜻으로 이해해 다시 설명하거나 재가공하는 일을 줄입니다.",
+     "en": "The purpose of reading and making drawings is to communicate the intended work accurately. This reduces repeated explanations and rework caused by misunderstandings."
     }
    ]
   },
@@ -613,8 +613,8 @@
     {
      "type": "note",
      "tone": "warn",
-     "ko": "화면에서 비슷해 보인다고 눈대중으로 맞추면 안 됩니다. 화면 배율은 계속 바뀝니다. 눈으로 맞춘 값은 확대하면 어긋나 있어요. 좌표를 입력하거나 치수를 지정해서 그립니다.",
-     "en": "Do not match it by eye because it looks close on screen. The zoom keeps changing. A value matched by eye is wrong once you zoom in. Enter coordinates, or specify the dimension, and draw from that.",
+     "ko": "화면 배율이 달라져도 형상의 크기와 위치는 같아야 합니다. 비슷해 보이는지만으로 판단하지 마세요. 이 과정에서는 객체 스냅으로 점을 잡고, 커서로 방향을 정한 뒤 길이를 입력합니다.",
+     "en": "The shape must keep the same size and position at any zoom level. Do not judge it only by how close it looks. In this course, use object snaps to locate points, move the cursor to set a direction, then enter the distance.",
      "label": {
       "ko": "눈대중이 안 되는 이유",
       "en": "Why eyeballing fails"
@@ -927,8 +927,8 @@
         "en": "Datum Lines and the Outline"
        },
        {
-        "ko": "좌표를 입력해 베이스와 목의 외곽을 그립니다.",
-        "en": "Enter coordinates and draw the outline of the base and the web."
+        "ko": "객체 스냅과 길이 입력으로 베이스와 목의 외곽을 그립니다.",
+        "en": "Draw the base and web outline using object snaps and distance entry."
        }
       ],
       [
@@ -941,8 +941,8 @@
         "en": "Circles, Arcs, Offset"
        },
        {
-        "ko": "축 구멍과 보스, 장공, 목의 필렛을 넣습니다.",
-        "en": "Add the bore, the boss, the slots, and the fillets on the web."
+        "ko": "축 구멍과 탭 배열, 장공, 목의 필렛을 넣습니다.",
+        "en": "Add the bore, the tapped-hole array, the slots and the web fillets."
        }
       ],
       [
@@ -951,12 +951,12 @@
         "en": "Lesson 5"
        },
        {
-        "ko": "제3각법 3뷰와 반복",
-        "en": "Third-Angle Views and Repetition"
+        "ko": "제3각법 3뷰",
+        "en": "Three Views in Third-Angle Projection"
        },
        {
-        "ko": "투상해 세 뷰를 만들고 탭 구멍을 배열로 반복합니다.",
-        "en": "Project the three views, then repeat the tapped holes with an array."
+        "ko": "정면도에서 폭과 높이를 옮겨 평면도와 우측면도를 그립니다.",
+        "en": "Transfer the width and height from the front view to draw the top and right views."
        }
       ],
       [
@@ -1039,8 +1039,8 @@
     {
      "type": "note",
      "tone": "why",
-     "ko": "대본은 「일곱 차시에 걸쳐 완성한다」고 말합니다. 로드맵은 여덟 차시입니다. 실제로 도면을 그리는 차시는 2차시부터 7차시까지 여섯 개예요. 1차시와 8차시는 그리지 않습니다.",
-     "en": "The narration says the part is finished 'over seven lessons'. The roadmap has eight, and the lessons that actually draw are the six from 2 to 7. Lessons 1 and 8 draw nothing.",
+     "ko": "과정은 모두 여덟 차시입니다. 실제 작도는 2차시부터 7차시까지 여섯 차시에 걸쳐 진행해요. 1차시는 과정 안내, 8차시는 시험 안내와 질문 정리입니다.",
+     "en": "The course has eight lessons. Drawing takes place across the six lessons from 2 to 7. Lesson 1 introduces the course; Lesson 8 covers the exam and frequently asked questions.",
      "label": {
       "ko": "일곱 차시와 여덟 차시",
       "en": "Seven lessons or eight"

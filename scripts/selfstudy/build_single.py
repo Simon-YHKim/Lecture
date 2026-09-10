@@ -54,9 +54,22 @@ def strip_progress(html):
     return PROGRESS.sub('', html)
 
 
+def lesson_tab_links(html):
+    """The combined workbook navigates to its own lesson panels."""
+    return re.sub(r'href="lesson-(0[1-8])\.html"',
+                  r'href="#p-l\1" data-tab-link="p-l\1"', html)
+
+
 def prefix_ids(html, prefix):
     """차시를 한 문서에 모으면 절 id 가 겹칠 수 있다. 차시 번호를 앞에 붙인다."""
     return ID_ATTR.sub(lambda m: '%s id="%s-%s"' % (m.group(1), prefix, m.group(2)), html)
+
+
+def consolidate_surfaces(html):
+    """Shared SVG symbols must be defined once, outside any hideable tab."""
+    html = re.sub(r'<svg\b[^>]*class="sfcdefs"[^>]*>.*?</svg>', '', html, flags=re.S)
+    used = set(re.findall(r'href="#sfc-([\w-]+)"', html))
+    return re.sub(r'(<body\b[^>]*>)', lambda m: m[1] + B.surface_defs(used), html, count=1)
 
 
 ARTIFACT_TITLE = 'AutoCAD 브래킷 자습 과정'
@@ -117,7 +130,7 @@ def main(outpath):
                 '<button type="button" class="t" id="reset-prog">'
                 '<span class="k">진도 초기화</span><span class="e">Reset progress</span></button></p></div>'
                 % (total_steps, total_steps))
-        start.append(re.sub(r'^<h2[^>]*>.*?</h2>', '', ip.get('p-cur', ''), count=1, flags=re.S))
+        start.append(lesson_tab_links(re.sub(r'^<h2[^>]*>.*?</h2>', '', ip.get('p-cur', ''), count=1, flags=re.S)))
         tabs.append(('p-start', {'ko': '시작', 'en': 'Start'}))
         panels.append(('p-start', ''.join(start)))
 
@@ -160,6 +173,7 @@ def main(outpath):
     html = B.shell((C.get('courseTitle') or {}).get('ko', '자습 교재'), eyeb,
                    B.bi(C.get('courseTitle')), meta, tabs, panels, '',
                    grade='M', body_attrs=body_attrs)
+    html = consolidate_surfaces(html)
 
     if os.environ.get('SELFSTUDY_ARTIFACT') == '1':
         html = to_artifact(html)

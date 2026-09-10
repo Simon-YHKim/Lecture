@@ -9,7 +9,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l8f6 .p-done",
-      "bySec": 4.6
+      "bySec": 4.0
     },
     {
       "kind": "before",
@@ -19,6 +19,16 @@
     {
       "kind": "staysInFrame",
       "selector": "#l8f6 .body"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l8f6 .p-done-li:last-child",
+      "bySec": 4.0
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l8f6 .p-next-li:last-child",
+      "bySec": 40.153
     }
   ]
 }

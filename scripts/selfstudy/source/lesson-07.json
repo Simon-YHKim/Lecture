@@ -5,7 +5,7 @@
   "ko": "치수와 출도",
   "en": "Dimensioning and Release"
  },
- "videoLength": "49:03",
+ "videoLength": "43:01",
  "selfStudyMin": 137,
  "opens": "EDU-IB-02_L06_REPRESENTED",
  "saves": "EDU-IB-02_L07_RELEASE",
@@ -29,16 +29,16 @@
    "en": "You can make the dimension layer current before dimensioning, and explain why it comes first."
   },
   {
-   "ko": "치수 스타일 `EDU-A3` 을 만들어 문자 높이 5 · 화살표 크기 5 · 소수 정밀도 0자리 · 전체 축척 1 · 측정 축척 비율 1 로 맞추고 현재로 설정할 수 있습니다.",
-   "en": "You can build `EDU-A3` with text height 5, arrow size 5, precision 0, overall scale 1, measurement scale 1, then set it current."
+   "ko": "치수 스타일 `EDU-A3` 을 만들 수 있습니다. 문자 높이 5 · 화살표 크기 5 · 소수 정밀도 0자리로 맞춥니다. 전체 축척 1 · 측정 축척 비율 1로 맞춘 뒤 현재 스타일로 설정합니다.",
+   "en": "You can create the `EDU-A3` dimension style. You can set text height 5, arrow size 5, and precision 0. You can also set overall scale 1 and measurement scale 1, then make the style current."
   },
   {
    "ko": "재는 대상을 보고 선형 · 정렬 · 지름 · 반지름 · 각도 다섯 중 어느 명령인지 고를 수 있습니다.",
    "en": "You can pick linear, aligned, diameter, radius, or angular by looking at what you measure."
   },
   {
-   "ko": "기준면을 왼쪽 변과 아래 변으로 모아 이 도면의 치수를 전부 기입하고, 수량 접두어 · 참고 치수 괄호 · 지시선을 갈라 쓸 수 있습니다.",
-   "en": "You can dimension the whole sheet from the left and bottom datum faces, and tell quantity prefixes, reference parentheses, and leaders apart."
+   "ko": "왼쪽 변과 아래 변을 기준면으로 삼아 이 도면의 치수를 전부 기입할 수 있습니다. 수량 접두어 · 참고 치수 괄호 · 지시선도 구별해 쓸 수 있습니다.",
+   "en": "You can dimension the whole sheet from the left and bottom datum faces. You can also distinguish quantity prefixes, reference parentheses, and leaders."
   },
   {
    "ko": "플롯 대화상자에서 A3 와 1대1 을 눈으로 확인해 PDF 로 내보내고 `EDU-IB-02_L07_RELEASE` 로 저장할 수 있습니다.",
@@ -56,8 +56,8 @@
     "en": "Hidden lines show as yellow dashes and centerlines as red chain lines."
    },
    {
-    "ko": "레이어 넷의 전구가 다 켜져 있나요. 빈 자리에서 왼쪽 위 → 오른쪽 아래로 끌어 도면 전체를 감싸면(왼쪽에서 오른쪽이니 윈도우예요) 색상 · 선 종류 · 선가중치가 전부 도면층별입니다. Ctrl+A 로 잡아도 같아요.",
-    "en": "All four layer bulbs on? Drag from empty space, upper left to lower right, so the box encloses the whole drawing - left to right, so it is a window - and color, linetype, and lineweight all read ByLayer. Ctrl+A does the same."
+    "ko": "레이어 넷의 전구가 다 켜져 있나요. 빈 자리에서 왼쪽 위 → 오른쪽 아래로 끌어 도면 전체를 감쌉니다. 왼쪽에서 오른쪽으로 끄는 윈도우 선택이에요. 색상 · 선 종류 · 선가중치가 전부 도면층별인지 확인합니다. Ctrl+A 로 잡아도 같아요.",
+    "en": "Are all four layer bulbs on? Drag from empty space at the upper left to the lower right to enclose the whole drawing. This left-to-right drag is a window selection. Check that color, linetype, and lineweight all read ByLayer. Ctrl+A selects the drawing too."
    },
    {
     "ko": "F3 을 눌러 객체 스냅이 켜져 있는지 봅니다. 오늘 찍는 점은 거의 전부 스냅으로 잡아요.",
@@ -1047,8 +1047,8 @@
     },
     {
      "type": "note",
-     "ko": "이 도면에는 참고 치수를 하나 더 답니다. 값은 95.7 이고 괄호를 쳐요. 좌우 필렛 중심 사이를 잰 값입니다. 오른쪽 필렛 중심이 가로 107.86, 왼쪽이 12.14 라 그 차이가 95.72 이고, 소수 한 자리로 적으면 95.7 이 됩니다. 두 필렛의 R10 과 목의 기울기가 이미 이 거리를 정하고 있어요. 그래서 괄호를 칩니다.",
-     "en": "One more value goes on as a reference dimension: 95.7, in parentheses. It spans the two fillet centers. The right center sits at x 107.86 and the left at 12.14, so the difference is 95.72, written 95.7 at one decimal place. The two R10 fillets and the slope of the web already fix that distance, which is why it takes parentheses.",
+     "ko": "이 도면에는 참고 치수를 하나 더 답니다. 값은 95.7 이고 괄호를 쳐요. 좌우 필렛 중심 사이를 잰 값입니다. 오른쪽 필렛 중심의 가로 위치는 107.86, 왼쪽은 12.14입니다. 두 값의 차이는 95.72입니다. 소수 한 자리로 적으면 95.7이 돼요. 두 필렛의 R10 과 목의 기울기가 이미 이 거리를 정하고 있어요. 그래서 괄호를 칩니다.",
+     "en": "One more value goes on as a reference dimension: 95.7, in parentheses. It spans the two fillet centers. The right center is at x 107.86 and the left at 12.14. The difference is 95.72, which becomes 95.7 at one decimal place. The two R10 fillets and the slope of the web already fix that distance, which is why it takes parentheses.",
      "label": {
       "ko": "참고 치수 (95.7)",
       "en": "The reference dimension (95.7)"

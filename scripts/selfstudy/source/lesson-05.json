@@ -5,7 +5,7 @@
   "ko": "제3각법 3뷰와 반복",
   "en": "Third-Angle Views and Repetition"
  },
- "videoLength": "44:43",
+ "videoLength": "39:09",
  "selfStudyMin": 144,
  "opens": "EDU-IB-02_L04_FEATURES",
  "saves": "EDU-IB-02_L05_VIEWS",
@@ -25,7 +25,7 @@
  },
  "objectives": [
   {
-   "ko": "제3각법이 본 방향에 그 뷰를 놓는 방식임을 설명하고, 정면도 위에 평면도·오른쪽에 우측면도를 배치할 수 있습니다.",
+   "ko": "제3각법에서는 본 방향에 뷰를 놓는다고 설명할 수 있습니다. 정면도 위에 평면도, 오른쪽에 우측면도를 배치할 수 있습니다.",
    "en": "You can explain that third-angle projection puts each view on the side you looked from. You can place the top view above the front view and the right side view to its right."
   },
   {
@@ -33,16 +33,16 @@
    "en": "You can choose the front view by three criteria: the face that shows the shape best, the assembled attitude, and the fewest hidden lines."
   },
   {
-   "ko": "XLINE 구성선을 치수선 레이어에 긋고 모서리·모따기 끝점·원 사분점에서 폭과 높이를 받아온 뒤, OFFSET 8과 12로 두께 20을 구성할 수 있습니다.",
-   "en": "You can draw XLINE projectors on the dimension layer. You can carry width and height across from corners, chamfer ends and quadrants, then build the 20 thickness with OFFSET at 8 and 12."
+   "ko": "XLINE 구성선을 치수선 레이어에 그을 수 있습니다. 모서리·모따기 끝점·원 사분점에서 폭과 높이를 받아옵니다. 이어 OFFSET 8과 12로 두께 20을 구성할 수 있습니다.",
+   "en": "You can draw XLINE projectors on the dimension layer and carry width and height across from corners, chamfer ends and quadrants. You can then build the 20 thickness with OFFSET at 8 and 12."
   },
   {
-   "ko": "45도 선을 두 뷰의 앞면이 만나는 점에 걸어 깊이를 재지 않고 옮기고, 격자 후 TRIM과 교차점 따라 그리기를 구분해 쓸 수 있습니다.",
-   "en": "You can hang the 45-degree line where both front faces meet to transfer depth without measuring, and choose between grid-and-trim and tracing intersections."
+   "ko": "45도 선을 두 뷰의 앞면이 만나는 점에 놓아 깊이를 재지 않고 옮길 수 있습니다. 격자를 만든 뒤 TRIM으로 정리하는 방법과 교차점을 따라 그리는 방법을 구별해 씁니다.",
+   "en": "You can place the 45-degree line where the two front faces meet and transfer depth without measuring it. You can distinguish between trimming a grid and drawing along its intersections."
   },
   {
-   "ko": "축 구멍 20 관통·탭 10 깊이·장공 12 구간으로 숨은선 길이를 달리 긋고, MIRROR로 대칭을 만든 뒤 치수선 레이어를 껐다 켜 검산할 수 있습니다.",
-   "en": "You can draw three hidden-line lengths: bore through 20, taps 10 deep, slots across 12. You can mirror the symmetric ones and cross-check by toggling the dimension layer."
+   "ko": "축 구멍은 20 관통, 탭은 10 깊이, 장공은 12 구간입니다. 이 길이에 맞춰 숨은선을 그을 수 있습니다. MIRROR로 대칭을 만든 뒤 치수선 레이어를 껐다 켜 검산합니다.",
+   "en": "You can draw the hidden lines to suit each feature: bore through 20, taps 10 deep, and slots across 12. You can mirror the symmetric lines and cross-check by toggling the dimension layer."
   }
  ],
  "before": {
@@ -113,7 +113,7 @@
     {
      "type": "note",
      "tone": "tip",
-     "ko": "레이어 값은 `course-standards.json` 이 정본이고, 근거는 사내 정본 교안 26쪽입니다. 선가중치는 외형선만 0.30, 나머지 셋은 0.15예요. 2차시 화면 표와 다르면 이 값을 따르세요.",
+     "ko": "레이어 값의 정본은 `course-standards.json` 입니다. 사내 정본 교안 26쪽을 근거로 합니다. 선가중치는 외형선만 0.30, 나머지 셋은 0.15예요. 2차시 화면 표와 다르면 이 값을 따르세요.",
      "en": "`course-standards.json` is the authority for layer settings, and it follows page 26 of the in-house course deck. Lineweight is 0.30 mm on the visible layer and 0.15 on the other three. Linetype scale is 0.5 on center and hidden only. Where the Lesson 2 table differs, follow these."
     }
    ]
