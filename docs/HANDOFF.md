@@ -3,22 +3,27 @@
 이 파일이 세션 간 인수인계의 정본이다. 세션을 시작하면 먼저 읽고, 끝낼 때 갱신한다.
 최신 블록만 `## Latest` 를 달고, 이전 블록은 `## <날짜>` 로 내린다.
 
-> 최종 갱신 **2026-09-10 11:32 KST** · Claude Code (Opus 5) · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-10 11:52 KST** · Claude Code (Opus 5) · 커밋은 이 파일의 git 이력 참조
 
 ---
 
 ## Latest — 2026-09-10 (3차) / 검수 라운드 — 도면 누락 · 대본 누락 · 2차시 메모 · 문체 점검
 
 사용자가 자습 슬라이드를 처음부터 끝까지 읽고 **공통 5 · 개별 17** 개의 메모를 줬다.
-이 라운드는 그 스물두 개를 닫는다. PR **#16** 머지.
+이 라운드는 그 스물두 개를 닫는다. PR **#16**(반영) · **#17**(이 문서) 머지.
 
 ### 어디까지 왔나
 
-- main HEAD: `32e2fb7` · **워킹 트리 깨끗하다.** 다른 세션은 `git pull origin main` 이면 된다.
+- main HEAD: `43024ae` · **워킹 트리 깨끗하다.** 다른 세션은 `git pull origin main` 이면 된다.
 - 이번 세션 머지된 PR: **#13**(정본 교안 반영) · **#14**(제3각법 코치 마크) ·
-  **#15**(핸드오프) · **#16**(검수 라운드).
-- CI `private-materials-guard` — green. 파일 삭제 · 시크릿 · 마이그레이션 · 과금 없음.
+  **#15**(핸드오프) · **#16**(검수 라운드) · **#17**(이 문서).
+- CI `private-materials-guard` — main 의 세 커밋 모두 green.
+  이 세션이 main 에 올린 79개 파일에 **삭제 0 · 리네임 0 · 마이그레이션 0 · 시크릿 0 ·
+  `.env` 0** — §7 정지 조건에 걸리는 것이 없다.
 - **메모 스물두 개 중 스물하나가 닫혔다.** 남은 하나는 종결 다양성(아래 큐 A).
+- 사용자에게 보낸 것 둘 — 검수판 데크 283장(2.17MB 오프라인 단일 파일) ·
+  완료 보고 HTML(31KB · 네트워크 참조 0 · 메모 사이드바). **둘 다 저장소 밖이다** —
+  데크는 `build_deck_all.py` 로 언제든 다시 짓고, 보고서는 이 블록이 정본이다.
 
 ### 검수 메모를 어떻게 처리했나
 
@@ -147,6 +152,14 @@ audit_deck.mjs  도면 표시 검사               렌더 사각형이 화면 �
 git fetch origin main && git pull origin main
 cat docs/HANDOFF.md
 # 큐 A(종결 다양성)부터. 차시 하나씩, 고친 차시는 TTS 를 다시 합성한다.
+```
+
+`git pull` 이 안 되는 곳(저장소를 아직 안 받은 컨테이너)에서는 아래 셋 중 하나로 읽는다.
+
+```
+PR    https://github.com/Simon-YHKim/Lecture/pull/17
+Raw   https://raw.githubusercontent.com/Simon-YHKim/Lecture/main/docs/HANDOFF.md
+브랜치 git fetch origin main && git show origin/main:docs/HANDOFF.md
 ```
 
 ---
