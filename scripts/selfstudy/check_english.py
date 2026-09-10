@@ -49,6 +49,35 @@ BANNED = [
 PENDING = set()
 
 
+TEXT = re.compile(r'<text([^>]*)>(.*?)</text>', re.S)
+CLASSES = re.compile(r'class\s*=\s*["\']([^"\']*)["\']')
+
+
+def figure_rows(svg, name, where):
+    """도해 안의 한글 글자마다 영문 짝이 있는지 본다.
+
+    쪽은 `.k` / `.e` 로 한 언어만 보여 준다. 한글 `<text>` 바로 뒤에 같은 자리의
+    영문 `<text>` 가 없으면 영문판에서 한글이 그대로 보인다. `class` 가 두 번
+    붙은 자리도 잡는다 — 파서가 뒤엣것을 버려 짝이 무효가 된다.
+    """
+    found = []
+    items = TEXT.findall(svg)
+    for index, (attrs, body) in enumerate(items):
+        if len(CLASSES.findall(attrs)) > 1:
+            found.append((name, where, 'class 가 두 번 붙어 짝이 무효다', body.strip()))
+            continue
+        if not HANGUL.search(body):
+            continue
+        names = CLASSES.search(attrs)
+        names = names.group(1).split() if names else []
+        nxt_attrs, nxt_body = items[index + 1] if index + 1 < len(items) else ('', '')
+        nxt = CLASSES.search(nxt_attrs)
+        nxt = nxt.group(1).split() if nxt else []
+        if 'k' not in names or 'e' not in nxt or HANGUL.search(nxt_body):
+            found.append((name, where, '도해의 한글에 영문 짝이 없다', body.strip()))
+    return found
+
+
 def pairs(node, path, found):
     """ko/en 짝을 전부 모은다. 경로는 사람이 파일에서 찾아갈 수 있게 남긴다."""
     if isinstance(node, dict):
@@ -74,6 +103,18 @@ def violations(name, where, ko, en):
     return found
 
 
+def figures(node, path, found):
+    if isinstance(node, dict):
+        for key, value in node.items():
+            if key == 'svg' and isinstance(value, str):
+                found.append((path + '/svg', value))
+            elif isinstance(value, (dict, list)):
+                figures(value, path + '/' + str(key), found)
+    elif isinstance(node, list):
+        for index, value in enumerate(node):
+            figures(value, path + '/' + str(index), found)
+
+
 def check(files):
     found = []
     for name in files:
@@ -83,6 +124,10 @@ def check(files):
         pairs(data, '', rows)
         for where, ko, en in rows:
             found.extend(violations(name, where, ko, en))
+        drawings = []
+        figures(data, '', drawings)
+        for where, svg in drawings:
+            found.extend(figure_rows(svg, name, where))
     return found
 
 

@@ -70,6 +70,14 @@ workbook is a draft, not a completed English course.
   `python scripts/selfstudy/build_deck_all.py <output.html> <temporary-directory> --standalone <gsap.min.js>`.
   Review transfer regression checks: `node --test scripts/selfstudy/test_review_transfer.cjs`.
 
+Build the English edition by setting `SELFSTUDY_LANG=en`. It takes the English
+drawing (`edu_ib_02.py --lang en`) and shows English first. English labels run
+longer than Korean, so measure them before shipping: `python
+scripts/selfstudy/figure_sheet.py <out.html> en` lays every authored figure on
+one page, which a browser can measure for text leaving its viewBox or colliding
+with another label. Tabs hide figures inside the workbook, so measuring there
+silently skips most of them.
+
 New review editions have different slide and content identifiers. Keep the old
 review HTML with its feedback backup; importing old feedback into a revised deck
 is deliberately rejected to avoid attaching notes to the wrong slide.
