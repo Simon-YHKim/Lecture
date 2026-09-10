@@ -35,6 +35,14 @@ MAPS = Path(__file__).resolve().parent / 'frames_en'
 # 강조색 칸은 짧고 끊기면 안 되므로 그대로 둔다.
 WRAP = re.compile(r'(style="color:#111;(?:font-size:\d+px;)?)white-space:nowrap"')
 
+# 명령표는 국문에서 한 줄로 앉는 칸이 영문에서 두 줄이 된다. 17개짜리 표는
+# 그것만으로 칸(573px)을 넘긴다. 칸을 줄이려고 문장을 더 깎으면 표가 자동
+# 배치라 열 너비가 다시 나뉘면서 다른 행이 대신 두 줄이 된다 — 6차시에서 세 줄
+# 짜리 두 행을 없앴는데 전체 높이가 585px 그대로였다. 그래서 글자 크기는
+# 건드리지 않고 **행 사이만** 좁힌다. 6px → 3px 로 한 줄에 6px, 열 줄에 60px.
+ROW_PADDING = ('table.spec.tight th,table.spec.tight td{padding:6px 8px}',
+               'table.spec.tight th,table.spec.tight td{padding:3px 8px}')
+
 
 def private(path):
     out = Path(path).resolve()
@@ -71,6 +79,7 @@ def build(lesson_dir, out_dir):
         localised = localised.replace('<html lang="ko">', '<html lang="en">')
         localised, hits = WRAP.subn(lambda m: m.group(1).rstrip(';') + '"', localised)
         unwrapped += hits
+        localised = localised.replace(*ROW_PADDING)
         Path(path).write_text(localised, encoding='utf-8', newline='\n')
         if gaps:
             missing[os.path.basename(path)] = gaps
