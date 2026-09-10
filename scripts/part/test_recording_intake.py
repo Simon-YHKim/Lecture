@@ -12,6 +12,7 @@ from unittest.mock import patch
 import wave
 
 import ingest_recording as intake
+import episodes
 import prepare_lecture
 from narrate_tts import spoken_hash
 from prepare_lecture import prepare
@@ -32,6 +33,11 @@ class RecordingIntakeTests(unittest.TestCase):
                         'yuv420p', str(cls.clip)], check=True, timeout=30)
 
     def setUp(self):
+        # These fixtures retain the old 0.2s WAV/1.8s clocks to isolate intake
+        # regressions. Current unified/tempo delivery is tested separately.
+        legacy = patch.object(episodes, 'is_unified', return_value=False)
+        legacy.start()
+        self.addCleanup(legacy.stop)
         self.work = tempfile.TemporaryDirectory()
         self.addCleanup(self.work.cleanup)
         self.base = Path(self.work.name)

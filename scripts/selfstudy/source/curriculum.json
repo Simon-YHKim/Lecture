@@ -13,24 +13,24 @@
  },
  "prerequisites": [
   {
-   "ko": "AutoCAD가 설치된 Windows PC와 마우스. 터치패드만으로는 스냅을 정확히 집기 어렵습니다.",
-   "en": "A Windows PC with AutoCAD installed, and a mouse. A trackpad alone makes object snaps hard to hit accurately."
+   "ko": "AutoCAD 2024가 설치된 Windows PC와 마우스. 터치패드만으로는 스냅을 정확히 집기 어렵습니다.",
+   "en": "A Windows PC with AutoCAD 2024 installed, and a mouse. A trackpad alone makes object snaps hard to hit accurately."
   },
   {
-   "ko": "밀리미터 단위 템플릿 acadiso.dwt에 접근할 수 있을 것. 2차시 1단계에서 이 파일을 고릅니다.",
-   "en": "Access to the millimeter template acadiso.dwt. You pick this file in Lesson 2, step 1."
+   "ko": "AutoCAD에 기본으로 들어 있는 밀리미터 템플릿 acadiso.dwt를 사용합니다. 별도 스타터 파일은 제공하지 않으며, 2차시에서 직접 만든 파일을 이어 씁니다.",
+   "en": "Use the built-in millimeter template acadiso.dwt. No separate starter file is supplied; continue from the file you create in Lesson 2."
   },
   {
-   "ko": "한 번에 40~60분씩 앉을 수 있는 시간. 차시 하나가 1시간 40분에서 2시간 30분이라 한 자리에서 끝내지 않아도 되게 절마다 멈춤점을 두었습니다.",
-   "en": "Blocks of 40 to 60 minutes. A lesson runs 1h40 to 2h30, so every section ends at a stop point - you are not expected to finish one in a single sitting."
+   "ko": "명령을 직접 입력하고 결과를 확인할 시간을 마련합니다. 절마다 멈춤점이 있으니 한 차시를 한 번에 끝내지 않아도 됩니다.",
+   "en": "Allow time to enter commands and check the result. Each section has a stopping point, so you do not need to finish a lesson in one sitting."
   },
   {
    "ko": "본인 이름과 사번. 2차시에서 표제란에 직접 넣습니다.",
    "en": "Your own name and employee number. You type them into the title block in Lesson 2."
   },
   {
-   "ko": "저장할 폴더 한 곳. 차시마다 파일이 하나씩 쌓여 일곱 개가 됩니다. 지우지 않습니다.",
-   "en": "One folder to save into. One file per lesson accumulates to seven. Do not delete the earlier ones."
+   "ko": "저장할 폴더 한 곳. 2~7차시에서 본인이 만든 파일을 새 이름으로 남깁니다. 앞 차시 파일도 보관해야 되돌아갈 수 있습니다.",
+   "en": "One folder to save into. Keep your own files from Lessons 2–7 under new names so you can return to an earlier checkpoint."
   }
  ],
  "outcomes": [
@@ -40,7 +40,7 @@
   },
   {
    "ko": "객체 스냅·직교와 수치 입력·스냅 추적을 구분해 쓰고, 눈대중 없이 형상 위에서 점을 잡아 그릴 수 있습니다.",
-   "en": "You can tell absolute, relative, and relative polar coordinates apart, and draw to values instead of by eye."
+   "en": "You can distinguish object snaps, ortho with distance entry, and object snap tracking, and locate points on geometry without guessing by eye."
   },
   {
    "ko": "원·호·오프셋·필렛·원형 배열·대칭 복사로 구멍과 라운드를 계산된 자리에 넣을 수 있습니다.",
@@ -73,8 +73,8 @@
  ],
  "totalSelfStudyHours": 13.9,
  "timeBasis": {
-  "ko": "영상 러닝타임에 배수를 곱한 값이 아닙니다. 자습본이 실제로 담을 항목 수를 세어 다시 계산했습니다. 네 가지를 더합니다. ① 읽기 = 개념 절 수 × 40초 (본문 30초 + 도해·표 대조 10초). ② 따라 하기 = 조작 항목 수 × 25초 + 조작 단계 수 × 90초. 조작 항목 하나는 명령 입력·좌표 입력·클릭·대화상자 선택 하나입니다. 25초의 근거는 3·4차시 녹화 예상 길이 20분 10초를 그 차시 조작 항목 수 108개·96개로 나눈 강사 페이스 약 11~13초이고, 자습자는 지시를 읽고 화면을 옮기고 입력한 뒤 결과를 대조하는 왕복을 혼자 하므로 두 배로 잡았습니다. 90초는 단계마다 붙는 「왜 이렇게 하나 / 이렇게 되면 맞습니다 / 안 되면 여기를 보세요」를 읽고 화면과 맞추는 시간입니다. ③ 검산 = 검산 항목 수 × 90초. DI·LIST·QSELECT·레이어 껐다 켜기는 명령을 실제로 쳐야 값이 나오므로 읽기 시간이 아닙니다. ④ 마무리 = 차시당 5분 (단축키 표 훑기, 체크포인트 파일 저장 확인). 8차시에는 40분 모의 작도 1회를 따로 더했습니다. 차시별 값은 28 · 130 · 107 · 100 · 144 · 93 · 137 · 97분이고 합계 836분 = 13.9시간입니다. 영상 264분의 3.2배입니다. 배수가 아니라 항목 수에서 나온 값이므로 집필 중 절이 늘거나 줄면 같은 식으로 다시 계산합니다. 영상 길이 자체가 추정치(실측 나레이션이 들어오면 바뀜)이므로 이 값도 확정값처럼 쓰지 않습니다.",
-  "en": "This is not the video runtime multiplied by a factor. It is recalculated from a count of what the workbook will actually contain. Four terms add up. (1) Reading = number of concept sections x 40 s (30 s of text plus 10 s checking it against the diagram or table). (2) Hands-on = number of operation items x 25 s + number of operation steps x 90 s. One operation item is a single command entry, coordinate entry, click, or dialog choice. The 25 s comes from the estimated recording length of Lessons 3 and 4 (20 min 10 s) divided by their operation-item counts (108 and 96), which gives an instructor pace of roughly 11-13 s; a self-study learner reads the instruction, switches windows, types, and checks the result alone, so the figure is doubled. The 90 s per step covers reading the 'why this way / this is what correct looks like / if it did not work, look here' block and matching it against the screen. (3) Cross-check = number of check items x 90 s, because DIST, LIST, QSELECT, and toggling layers all require actually running a command. (4) Wrap-up = 5 min per lesson (skimming the shortcut table, confirming the checkpoint file saved). Lesson 8 adds one 40-minute timed mock drawing. Per lesson: 28, 130, 107, 100, 144, 93, 137, 97 minutes; total 836 minutes = 13.9 hours, which is 3.2x the 264 minutes of video. Because the figure comes from item counts rather than a multiplier, recompute it the same way if sections are added or removed during writing. The video lengths are themselves estimates that will change once measured narration arrives, so do not present this number as settled either."
+  "ko": "자습 시간은 읽기, 조작, 검산과 저장 확인에 필요한 시간을 합친 계획 추정치입니다. 영상 재생 시간이나 시험 제한 시간이 아닙니다. 이번 개편에서는 내용을 묶고 조작 설명을 고치므로 기존 시간 표시는 다시 계산할 대상입니다. 8차시의 전체 작도 복습은 실제 걸린 시간을 기록하며, 정해진 시험 시간으로 판정하지 않습니다.",
+  "en": "Self-study time is a planning estimate covering reading, operations, checks and saving. It is neither video runtime nor an exam time limit. Grouping content and revising operations in this edition means the existing estimates need recalculation. In Lesson 8, record the actual time spent rehearsing the full drawing; do not treat it as a fixed exam limit."
  },
  "modules": [
   {
@@ -84,7 +84,7 @@
     "ko": "오리엔테이션",
     "en": "Orientation"
    },
-   "videoLength": "07:20",
+   "videoLength": "05:36",
    "selfStudyMin": 28,
    "opens": null,
    "saves": null,
@@ -106,8 +106,8 @@
      "en": "You can distinguish the two task formats and explain why eyeballing does not work."
     },
     {
-     "ko": "외형선·중심선·숨은선·치수선이 각자 자기 레이어에 들어가야 한다는 채점 관점을 압니다.",
-     "en": "You know the assessment view that visible, center, hidden, and dimension lines must each sit on their own layer."
+     "ko": "외형선·중심선·숨은선·치수선이 각자 자기 레이어에 들어갔는지 연습 결과를 확인할 수 있습니다. 채점 기준은 공유 예정입니다.",
+     "en": "You can check that visible, center, hidden, and dimension lines are on their respective layers in your practice drawing. Grading criteria are to be shared."
     },
     {
      "ko": "이 과정에서 정하는 용지·레이어·색상 값은 연습용 기본값이고 실제 과제 지시가 언제나 우선한다는 것을 압니다.",
@@ -185,7 +185,7 @@
       "ko": "여덟 차시와 체크포인트 사슬",
       "en": "The eight lessons and the checkpoint chain"
      },
-     "note": "3열 표(차시 / 주제 / 하는 일) 여덟 행. 영상 로드맵에는 일부러 없던 체크포인트 파일명 열을, 자습본에서는 표가 아니라 별도 도해로 붙입니다. 자습에서는 학습자가 실제로 그 이름을 입력하고 찾아야 하기 때문입니다(LESSON_STYLE 22번의 조건이 자습본에서는 충족됩니다). 도해는 사슬 그림 하나 — 1차시(파일 없음) → 2차시가 EDU-IB-02_L02_TEMPLATE을 만들고 → 3차시가 그걸 열어 L03_PROFILE을 남기고 → ... → 7차시가 L07_RELEASE에서 끝나고 → 8차시(파일 없음). 한 차시를 건너뛴 사람이 어느 고리로 돌아오는지도 이 그림에서 읽히게 합니다. 대본이 「일곱 차시에 걸쳐」라고 말하지만 실제 작도 차시는 2~7차시 여섯 개라는 점은 집필 전 확인 대상입니다(openQuestions)."
+     "note": "3열 표(차시 / 주제 / 하는 일) 여덟 행. 영상 로드맵에는 일부러 없던 체크포인트 파일명 열을, 자습본에서는 표가 아니라 별도 도해로 붙입니다. 자습에서는 학습자가 실제로 그 이름을 입력하고 찾아야 하기 때문입니다(LESSON_STYLE 22번의 조건이 자습본에서는 충족됩니다). 도해는 사슬 그림 하나 — 1차시(파일 없음) → 2차시가 EDU-IB-02_L02_TEMPLATE을 만들고 → 3차시가 그걸 열어 L03_PROFILE을 남기고 → ... → 7차시가 L07_RELEASE에서 끝나고 → 8차시(파일 없음). 한 차시를 건너뛴 사람이 어느 고리로 돌아오는지도 이 그림에서 읽히게 합니다. 실제 작도 차시는 2~7차시 여섯 개이며 대본과 교재도 이 수에 맞춥니다."
     },
     {
      "kind": "orient",
@@ -305,7 +305,7 @@
     "ko": "부품 이해와 도면 환경",
     "en": "Reading the Part, Building the Sheet"
    },
-   "videoLength": "33:41",
+   "videoLength": "26:55",
    "selfStudyMin": 130,
    "opens": null,
    "saves": "EDU-IB-02_L02_TEMPLATE",
@@ -558,7 +558,7 @@
     "ko": "기준선과 외곽",
     "en": "Datum Lines and the Outline"
    },
-   "videoLength": "38:17",
+   "videoLength": "26:47",
    "selfStudyMin": 107,
    "opens": "EDU-IB-02_L02_TEMPLATE",
    "saves": "EDU-IB-02_L03_PROFILE",
@@ -803,7 +803,7 @@
     "ko": "원·호·오프셋",
     "en": "Circles, Arcs, Offset"
    },
-   "videoLength": "39:11",
+   "videoLength": "27:26",
    "selfStudyMin": 100,
    "opens": "EDU-IB-02_L03_PROFILE",
    "saves": "EDU-IB-02_L04_FEATURES",
@@ -1048,7 +1048,7 @@
     "ko": "제3각법 3뷰와 반복",
     "en": "Third-Angle Views and Repetition"
    },
-   "videoLength": "44:43",
+   "videoLength": "28:39",
    "selfStudyMin": 144,
    "opens": "EDU-IB-02_L04_FEATURES",
    "saves": "EDU-IB-02_L05_VIEWS",
@@ -1293,7 +1293,7 @@
     "ko": "편집과 표현",
     "en": "Cleaning Up and Reading the Symbols"
    },
-   "videoLength": "42:30",
+   "videoLength": "28:14",
    "selfStudyMin": 93,
    "opens": "EDU-IB-02_L05_VIEWS",
    "saves": "EDU-IB-02_L06_REPRESENTED",
@@ -1546,7 +1546,7 @@
     "ko": "치수와 출도",
     "en": "Dimensioning and Release"
    },
-   "videoLength": "49:03",
+   "videoLength": "31:37",
    "selfStudyMin": 137,
    "opens": "EDU-IB-02_L06_REPRESENTED",
    "saves": "EDU-IB-02_L07_RELEASE",
@@ -1651,7 +1651,7 @@
       "ko": "이 도면에 들어가는 치수 전부",
       "en": "Every dimension this sheet carries"
      },
-     "note": "여섯 묶음으로 갈라 표로 싣고, 행마다 도면 위 해당 치수를 강조합니다. ① 전체 120·90 ② 보스 중심 60·62와 베이스 높이 16 ③ 장공 29·50·12·8 ④ 지름과 반지름 Ø25 H7 · Ø56 · 2-R10 · 2-장공 R5 ⑤ PCD Ø44와 45도 ⑥ 두께 12·20, 참고 치수 (95.7)과 26, 목 밑동 80. 그리고 지시선으로 가는 둘 — 2-C5와 4-M5 깊이 10. 판정 기준을 함께 씁니다: 재서 나오지 않는 값(M5는 나사 규격이라 재면 드릴 구멍 지름이 나옵니다. 깊이 10은 정면에서 안 보입니다)과 한 줄에 여러 정보를 담아야 하는 것이 지시선으로 갑니다. 중복 치수 세 경우도 여기서 판별합니다 — 장공 폭 10은 R5가 이미 정하고 있어 안 적고, 좌우 필렛은 앞의 2가 두 개라는 뜻이라 왼쪽에 다시 안 넣고, 정면도와 평면도의 120은 한 번만 적습니다. 참고 치수 괄호의 뜻(만들 때 참고하고 검사할 때는 재지 말라)과, 괄호를 빼먹으면 반올림 때문에 멀쩡한 부품이 불합격된다는 결과까지. (95.7)의 두 점은 대본과 프레임 도면이 어긋나므로 자습본은 값만 싣고 두 점을 단정하지 않으며 확인 표시를 답니다."
+     "note": "여섯 묶음으로 갈라 표로 싣고, 행마다 도면 위 해당 치수를 강조합니다. ① 전체 120·90 ② 보스 중심 60·62와 베이스 높이 16 ③ 장공 29·50·12·8 ④ 지름과 반지름 Ø25 H7 · Ø56 · 2-R10 · 2-장공 R5 ⑤ PCD Ø44와 45도 ⑥ 두께 12·20, 참고 치수 (95.7)과 26, 목 밑동 80. 그리고 지시선으로 가는 둘 — 2-C5와 4-M5 깊이 10. 판정 기준을 함께 씁니다: 재서 나오지 않는 값(M5는 나사 규격이라 재면 드릴 구멍 지름이 나옵니다. 깊이 10은 정면에서 안 보입니다)과 한 줄에 여러 정보를 담아야 하는 것이 지시선으로 갑니다. 중복 치수 세 경우도 여기서 판별합니다 — 장공 폭 10은 R5가 이미 정하고 있어 안 적고, 좌우 필렛은 앞의 2가 두 개라는 뜻이라 왼쪽에 다시 안 넣고, 정면도와 평면도의 120은 한 번만 적습니다. 참고 치수 괄호의 뜻(만들 때 참고하고 검사할 때는 재지 말라)과, 괄호를 빼먹으면 반올림 때문에 멀쩡한 부품이 불합격된다는 결과까지. (95.7)은 좌우 R10 필렛 중심 사이의 수평 거리입니다. 실제 측정값 약 95.719939를 소수 한 자리로 표시하고 문자 재지정은 (<>)로 측정값을 유지합니다."
     },
     {
      "kind": "practice",
@@ -1699,7 +1699,7 @@
       "ko": "7차시에서 확정된 것 — 도면 한 장의 완성",
       "en": "Settled in Lesson 7 - the sheet is finished"
      },
-     "note": "이걸로 도면 한 장이 완성되고 그리는 일은 여기서 끝납니다. 스타일 → 다섯 종류 골라 쓰기 → 여섯 묶음 기입 → 지시선 둘 → 축척 확인 → 내보내기 순으로 정리합니다. 완료 상태 그림은 치수까지 들어간 A3 한 장 전체 — 2차시 첫 절의 빈 A3 규격도와 나란히 놓아 일곱 차시가 무엇을 쌓았는지 한눈에 보이게 합니다. 마지막에 「여기까지 오면 현장에서 도면을 씁니다. 도면은 그림이 아니라 지시 문서입니다」와 함께 가공집에 넘어가는 것도 이 PDF라는 사실을 둡니다."
+     "note": "이걸로 도면 한 장이 완성되고 그리는 일은 여기서 끝납니다. 스타일 → 다섯 종류 골라 쓰기 → 여섯 묶음 기입 → 지시선 둘 → 축척 확인 → 내보내기 순으로 정리합니다. 완료 상태 그림은 치수까지 들어간 A3 한 장 전체 — 2차시 첫 절의 빈 A3 규격도와 나란히 놓아 여섯 실습 차시가 무엇을 쌓았는지 한눈에 보이게 합니다. 마지막에 「여기까지 오면 현장에서 도면을 씁니다. 도면은 그림이 아니라 지시 문서입니다」와 함께 가공집에 넘어가는 것도 이 PDF라는 사실을 둡니다."
     },
     {
      "kind": "shortcuts",
@@ -1797,8 +1797,8 @@
     "en": "Print the finished PDF, or open it at 100 percent, and put a ruler on it. (1) Measure the overall 120 - it must be 120 mm. (2) Measure the 90 as well. (3) If either is off, go back to PLOT, confirm fit-to-paper is cleared and the scale is 1:1, and plot again. (4) Finally, point at each dimension in turn and say out loud which datum face it starts from. Any dimension you stumble over is one whose datum sits somewhere else than the rest."
    },
    "recoveryNote": {
-    "ko": "7차시를 건너뛰면 도면이 완성되지 않고, 8차시의 40분 모의 작도에서 치수 기입 단계를 처음 해 보게 됩니다 — 시험 범위가 「템플릿부터 치수까지」라 이 차시를 빼면 범위의 마지막 토막이 비어 있는 채로 시험을 봅니다. 되돌아오는 길은 EDU-IB-02_L06_REPRESENTED를 열어 「따라 하기 1~4」(1~16단계)를 하고 L07_RELEASE로 저장하는 것입니다. 다른 차시와 달리 읽기 절을 건너뛰기 어렵습니다 — 「치수 스타일 EDU-A3」을 안 읽으면 문자 높이와 전체 축척의 관계를 몰라 미리보기에서 글자가 깨알이 된 원인을 못 찾고, 「치수선을 어디로 빼느냐 · 기준면을 어디로 모으느냐」를 안 읽으면 16과 5를 뒤집어 기입합니다. 최소한 이 두 절과 「이 도면에 들어가는 치수 전부」는 읽고 조작에 들어가세요.",
-    "en": "Skip Lesson 7 and the drawing is never finished, and Lesson 8's 40-minute mock run becomes the first time you ever dimension anything - the exam scope is 'template through dimensions', so skipping this lesson leaves the last segment of that scope blank. The way back is to open EDU-IB-02_L06_REPRESENTED, work through 'Do it 1-4' (steps 1-16), and save as L07_RELEASE. Unlike other lessons the reading here is hard to skip: without 'The EDU-A3 dimension style' you will not know how text height and overall scale interact, so you cannot find why the preview text is tiny; without 'Where the dimension line goes, where the datum sits' you will enter 16 and 5 the wrong way round. Read at least those two sections and 'Every dimension this sheet carries' before starting the hands-on part."
+    "ko": "7차시는 도면에 치수를 넣어 한 장으로 마무리합니다. 빠뜨렸다면 본인이 저장한 EDU-IB-02_L06_REPRESENTED를 열고 치수 실습을 마친 뒤 L07_RELEASE로 저장하세요. 먼저 「치수 스타일 EDU-A3」, 「치수선을 어디로 빼느냐 · 기준면을 어디로 모으느냐」, 「이 도면에 들어가는 치수 전부」를 읽어야 문자 크기와 치수 기준을 확인할 수 있습니다. 8차시에서는 이 순서를 복습합니다. 실제 시험 범위는 공유 예정이에요.",
+    "en": "Lesson 7 finishes the sheet with dimensions. If you missed it, open your saved EDU-IB-02_L06_REPRESENTED, complete the dimensioning practice and save as L07_RELEASE. First read the EDU-A3 dimension style, dimension-line and datum placement, and the full dimension list to check text size and reference points. Lesson 8 revisits this sequence. The actual exam scope is to be shared."
    }
   },
   {
@@ -1808,30 +1808,18 @@
     "ko": "시험 안내와 Q&A",
     "en": "Exam Briefing and Q&A"
    },
-   "videoLength": "09:41",
+   "videoLength": "06:35",
    "selfStudyMin": 97,
    "opens": null,
    "saves": null,
    "objectives": [
     {
-     "ko": "시험 방식·출제 형태·시간·작업 범위·제출 방법·장소 여섯 항목을 보지 않고 말할 수 있습니다.",
-     "en": "You can state all six items from memory: format, source material, time, scope, submission, and venue."
+     "ko": "시험 공지에서 방식·출제 형태·제한 시간·범위·제출 방법·일시와 장소를 확인할 수 있습니다.",
+     "en": "You can identify format, source material, time limit, scope, submission rules, and date and venue in the exam notice."
     },
     {
-     "ko": "시험이 대면이고 문제지는 현장에서 출력해 나눠 준다는 것을 알고, 집에서 받는 시험이 아님을 압니다.",
-     "en": "You know the exam is in person and the question sheet is printed and handed out on site - it is not a take-home."
-    },
-    {
-     "ko": "종이에 인쇄된 3D 형상 그림과 거기 적힌 치수를 보고 제3각법으로 작도하는 것이 출제 형태임을 압니다.",
-     "en": "You know the task is to draw in third-angle projection from a printed 3D view and the dimensions written on it."
-    },
-    {
-     "ko": "40분 안에 템플릿부터 치수까지 끝내는 순서를 손에 붙여 두고, 화면 앞에서 무엇을 먼저 할지 고민하지 않습니다.",
-     "en": "You have the template-to-dimensions sequence in your hands well enough that you do not stop to think about order at the screen."
-    },
-    {
-     "ko": "다 그린 파일을 사번_이름 형식으로 저장하고 현장에서 안내받은 주소로 제출할 수 있습니다.",
-     "en": "You can save the finished file as employeeNumber_name and submit it to the address given on site."
+     "ko": "템플릿부터 치수까지 이어지는 순서를 익히고, 각 단계에서 걸린 시간을 기록할 수 있습니다.",
+     "en": "You can rehearse the template-to-dimensions sequence and record the time spent on each step."
     },
     {
      "ko": "숨은선과 실선이 겹치면 실선 기준으로 표현한다는 규칙을 적용할 수 있습니다.",
@@ -1854,26 +1842,26 @@
      "en": "You can explain how this drawing skill applies to proposing a jig, checking a layout, and sourcing a spare part urgently."
     },
     {
-     "ko": "채점 기준 표·시험 일시·시험 장소·제출 주소·연습 도면은 아직 확정되지 않았고 별도 공지로 받는다는 것을 압니다.",
-     "en": "You know the marking scheme, date, venue, submission address, and practice drawings are not settled yet and will come by separate notice."
+     "ko": "채점 기준과 합격선, 시험 운영 안내가 공유 예정임을 알고 연습용 검산과 구분합니다.",
+     "en": "You distinguish practice checks from the marking scheme, pass mark, and exam operations that will be shared later."
     }
    ],
    "sectionPlan": [
     {
      "kind": "orient",
      "label": {
-      "ko": "이 차시에는 파일이 없습니다",
-      "en": "This lesson has no file"
+      "ko": "시험 준비에 쓸 자료",
+      "en": "Materials for exam preparation"
      },
-     "note": "체크포인트 배지는 「여는 파일: 없음 → 저장할 파일: 없음」입니다. 대신 확인할 것은 앞 차시의 결과물 — EDU-IB-02_L07_RELEASE.dwg와 그 PDF가 손에 있는가, 도면의 120이 종이에서 120밀리미터로 나오는가. 이 두 개가 있으면 시험 범위를 한 번은 통째로 지나온 것입니다. 없으면 7차시 recoveryNote로 보냅니다. 그리고 이 차시의 주된 작업이 읽기가 아니라 40분 모의 작도 한 번이라는 것을 여기서 예고합니다 — 자습본에서 시간이 가장 많이 드는 절이 마지막에 있습니다."
+     "note": "7차시에서 본인이 저장한 EDU-IB-02_L07_RELEASE.dwg와 PDF를 확인합니다. 도면의 120이 1:1 출력한 종이에서 120밀리미터인지 재 봅니다. 새 제출 체크포인트는 없으며 전체 작도 복습에 걸린 시간을 기록합니다."
     },
     {
      "kind": "concept",
      "label": {
-      "ko": "시험 여섯 항목",
-      "en": "The exam in six items"
+      "ko": "시험 공지에서 확인할 여섯 항목",
+      "en": "Six items to check in the exam notice"
      },
-     "note": "표 하나에 여섯 행 — 시험 방식(대면. 문제지는 현장에서 출력해 나눠 줍니다. 집에서 받는 시험이 아닙니다) / 출제 형태(종이에 인쇄된 3D 형상 그림과 거기 적힌 치수를 보고 제3각법으로 작도) / 시간(40분. 지나면 즉시 제출) / 작업 범위(도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 — 2차시부터 7차시까지 전부) / 제출(저장 후 현장에서 알려 주는 주소로 이메일. 파일 이름은 사번_이름) / 장소와 일시(별도 공지, 아직 확정 아님). 확정되지 않은 칸은 점선 테두리에 「공유 예정」으로 둡니다. 장소를 「평택 교육센터나 구미가 될 예정」이라고 둘 중 하나로 단정하지 않습니다."
+     "note": "시험 방식·출제 형태·제한 시간·작업 범위·제출 방법·일시와 장소를 여섯 행으로 나눕니다. 모든 행은 공유 예정입니다. 공지를 받기 전에는 연습 방법을 실제 시험 조건으로 확정하지 않습니다."
     },
     {
      "kind": "concept",
@@ -1881,7 +1869,7 @@
       "ko": "채점 기준 — 공유 예정",
       "en": "Marking scheme - to be shared"
      },
-     "note": "이 절은 내용이 비어 있는 것이 내용입니다. 점선 테두리 안에 「공유 예정」만 두고 배점·감점 항목·합격선을 지어내지 않습니다. 대신 왜 비워 두는지를 한 줄로 씁니다 — 지어낸 기준은 틀렸을 때 학습자가 그것을 믿고 준비하므로 빈 자리보다 나쁩니다. 그리고 이 자습본의 검산 목록이 채점 기준이 아니라는 것을 명시합니다. 자습본의 검산은 대본이 말한 준비 항목을 자기 검산용으로 옮긴 것입니다. 기준 표가 공유되면 이 자리를 채운다는 갱신 예고까지 둡니다."
+     "note": "채점 기준과 합격선은 공유 예정입니다. 배점과 감점 항목은 공식 안내에서 확인합니다. 자습본의 검산은 오류를 스스로 찾는 연습용이며 시험 채점표가 아님을 명시합니다."
     },
     {
      "kind": "concept",
@@ -1889,15 +1877,15 @@
       "ko": "반복해 나온 질문 다섯",
       "en": "Five questions that kept coming up"
      },
-     "note": "질문과 답을 짝으로. ① 평가 기준은 무엇인가 → 아직 받지 못했습니다(앞 절로 링크). ② 막히면 누구에게 물어보나 → 김정웅 기장, 김양환 선임. 연락 경로는 대본에 없으므로 이름만 적고 경로는 비워 둡니다. ③ 투상이 약한데 어떻게 연습하나 → 3D 모델링을 직접 해 보는 것이 가장 좋고, 여건이 안 되면 2D 도면을 많이 그립니다. ④ 숨은선과 실선이 겹치면 → 실선 기준입니다. 두 선을 겹쳐 그리면 읽는 사람이 그 자리가 보이는 모양인지 가려진 모양인지 판단하지 못합니다. 화면에서는 실선에 가려 보이지 않다가 출력하면 파선이 비쳐 나옵니다. ⑤ 치수선 간격은 얼마인가 → 명확한 기준이 없습니다. 숫자를 지어내지 않고, 잘 만들어진 도면을 옆에 놓고 정리된 느낌이 날 때까지 맞춥니다. 치수는 정면도 외형선 기준으로 최대한 뽑습니다."
+     "note": "질문과 답을 짝으로. ① 평가 기준은 무엇인가 → 아직 받지 못했습니다(앞 절로 링크). ② 막히면 누구에게 물어보나 → 김정웅, 김양환. 문의 담당자는 이름만 표시합니다. ③ 투상이 약한데 어떻게 연습하나 → 3D 모델링을 직접 해 보는 것이 가장 좋고, 여건이 안 되면 2D 도면을 많이 그립니다. ④ 숨은선과 실선이 겹치면 → 실선 기준입니다. 두 선을 겹쳐 그리면 읽는 사람이 그 자리가 보이는 모양인지 가려진 모양인지 판단하지 못합니다. 화면에서는 실선에 가려 보이지 않다가 출력하면 파선이 비쳐 나옵니다. ⑤ 치수선 간격은 얼마인가 → 명확한 기준이 없습니다. 숫자를 지어내지 않고, 잘 만들어진 도면을 옆에 놓고 정리된 느낌이 날 때까지 맞춥니다. 치수는 정면도 외형선 기준으로 최대한 뽑습니다."
     },
     {
      "kind": "practice",
      "label": {
-      "ko": "40분 모의 작도 — 일곱 단계",
-      "en": "The 40-minute mock run - seven steps"
+      "ko": "전체 작도 복습 — 일곱 단계",
+      "en": "Rehearse the full drawing — seven steps"
      },
-     "note": "이 자습본에서 유일하게 시간을 재는 절입니다. 조작 절이지만 새 명령이 없습니다 — 2~7차시의 순서를 시간 안에 다시 밟는 것이 내용입니다. ① 템플릿(A3 도면틀, 사방 10, 중심 마크, 표제란 200×30 두 칸, 왼쪽 이름 오른쪽 사번, 문자 높이 10) ② 레이어 넷(외형선만 선가중치 0.30, 나머지 0.15. 선 종류 축척은 중심선과 숨은선에만 0.5) ③ 3D 형상 그림을 읽고 정면 정하기(형상을 그리기 시작한 뒤에 정면을 바꾸면 세 뷰를 전부 다시 배치해야 하고 40분에 그 여유가 없습니다) ④ 제3각법으로 세 뷰 작도 ⑤ 겹치는 선 정리 — 실선 우선 ⑥ 치수 기입 — 정면도 외형선 기준 ⑦ 저장하고 제출(40분에 저장과 전송 시간을 빼 둡니다). 단계마다 목표 경과 시간을 두지 않습니다 — 대본에 근거가 없으므로 지어내지 않고, 대신 「어느 단계에서 시간이 샜는지 적으세요」라는 기록란을 둡니다. 이 기록이 두 번째 모의 작도의 계획이 됩니다."
+     "note": "2~7차시의 순서를 일곱 단계로 복습합니다. ① A3 도면틀 420×297, 사방 10, 중심 마크, 표제란 200×30과 100씩 두 칸, 이름·사번, 문자 높이 10 ② 레이어 넷, 외형선 0.30·나머지 0.15, CENTER/HIDDEN 선종류 축척 0.5 ③ 정면과 뷰 배치 선정 ④ 제3각법 세 뷰 ⑤ 보조선·겹친 선 정리 ⑥ 치수 기입 ⑦ 구분되는 이름으로 저장하고 다시 열어 확인. 각 단계 소요 시간을 기록하며 시험 제한 시간으로 판정하지 않습니다. 본인이 만든 도면을 참고할 수 있고 별도 스타터 파일은 없습니다."
     },
     {
      "kind": "verify",
@@ -1905,13 +1893,13 @@
       "ko": "모의 작도 자가 점검",
       "en": "Checking your mock run"
      },
-     "note": "13항목. 맨 위에 시간 판정 — 40분 안에 끝났는가, 아니면 어느 단계에서 몇 분을 썼는가. 이어 값과 개수로 판정되는 것 — 도면선이 용지선에서 사방 10 안쪽인가 / 표제란이 200×30이고 100씩 두 칸이며 왼쪽 이름 오른쪽 사번이고 문자 높이 10인가 / 레이어가 정확히 넷이고 외형선만 0.5인가 / 선 종류 축척이 중심선과 숨은선에만 0.5인가 / 평면도가 위에 우측면도가 오른쪽에 있는가(반대면 제1각법입니다) / 숨은선과 실선이 겹친 자리에 실선만 남았는가 / 치수 대부분이 정면도에 붙어 있는가 / 같은 치수가 두 뷰에 중복되지 않았는가 / 치수선 간격이 견본 도면과 비교해 정리된 느낌인가(숫자 기준이 없으므로 비교로 판정합니다) / 출력 전 축척이 1대1인가 / 파일 이름이 사번_이름 형식인가. 마지막 항목은 고지입니다 — 이 목록은 채점 기준이 아닙니다."
+     "note": "13개 항목의 자가 점검입니다. 소요 시간 기록, A3 도면틀 사방 10, 표제란 200×30·100씩 두 칸·높이 10, 네 레이어 외형선 0.30과 나머지 0.15, CENTER/HIDDEN 축척 0.5, 제3각법 배치, 실선 우선, 치수 기준과 중복, 치수선 겹침, 1:1 출력, 연습 파일 저장 상태를 확인합니다. 마지막 항목에서 이 목록이 채점 기준이 아님을 안내합니다."
     },
     {
      "kind": "onDrawing",
      "label": {
-      "ko": "시험에서 자주 어긋나는 세 자리",
-      "en": "Three places the exam goes wrong"
+      "ko": "전체 작도에서 다시 확인할 세 자리",
+      "en": "Three areas to recheck in the complete drawing"
      },
      "note": "도면 위에서 옳은 쪽과 틀린 쪽을 나란히 보입니다. ① 배치 — 제3각법과 제1각법. 판별 기준은 원의 좌우 위치가 아니라 제3각법 기호에서 원뿔대의 작은 끝이 원을 향한다는 것입니다. ② 겹친 선 — 실선 밑에 숨은선을 남겨 둔 경우. 화면에서는 안 보이다가 출력하면 파선이 비쳐 나옵니다. ③ 치수 — 정면도에서도 뽑을 수 있는 치수를 측면도로 보낸 경우와, 같은 치수를 두 뷰에 중복으로 넣은 경우. 세 자리 모두 형상은 맞는데 읽는 사람이 다시 물어보게 되는 종류라는 공통점을 정리합니다."
     },
@@ -1921,7 +1909,7 @@
       "ko": "시험 뒤에 남는 것",
       "en": "What is left after the exam"
      },
-     "note": "테크니션 업무 셋을 마지막으로 다시 놓습니다 — 지그 제안(작업을 편하게 만들 치구를 직접 그려 제안), 레이아웃 확인(설비가 들어올 자리를 도면에서 먼저 보고 통로·문·간섭을 미리 잡음), 스페어 파트 긴급 공수(설비가 섰을 때 조립도에서 부품을 찾고 스페어 파트 도면을 확인해 가공집과 이야기). 1차시의 같은 카드와 짝을 이루게 하되, 이번에는 각 카드에 「이 과정에서 배운 것 중 무엇을 쓰는가」를 한 줄씩 붙입니다 — 지그 제안에는 2차시 템플릿과 3차시 좌표 입력, 레이아웃 확인에는 4차시 오프셋과 7차시 1대1 출력, 스페어 파트에는 2차시 기호 읽기와 7차시 PDF."
+     "note": "테크니션 업무 셋을 마지막으로 다시 놓습니다 — 지그 제안(작업을 편하게 만들 치구를 직접 그려 제안), 레이아웃 확인(설비가 들어올 자리를 도면에서 먼저 보고 통로·문·간섭을 미리 잡음), 스페어 파트 긴급 공수(설비가 섰을 때 조립도에서 부품을 찾고 스페어 파트 도면을 확인해 가공집과 이야기). 1차시의 같은 카드와 짝을 이루게 하되, 이번에는 각 카드에 「이 과정에서 배운 것 중 무엇을 쓰는가」를 한 줄씩 붙입니다 — 지그 제안에는 2차시 템플릿과 3차시 스냅·방향·길이 입력, 레이아웃 확인에는 4차시 오프셋과 7차시 1대1 출력, 스페어 파트에는 2차시 기호 읽기와 7차시 PDF."
     },
     {
      "kind": "shortcuts",
@@ -1937,7 +1925,7 @@
       "ko": "여덟 차시 되짚기",
       "en": "The eight lessons, end to end"
      },
-     "note": "1차시 도면의 필요 → 2차시 부품 읽기와 A3 템플릿 → 3차시 좌표와 외곽 → 4차시 원과 호 → 5차시 제3각법 3뷰와 배열 → 6차시 보조선 정리와 레이어 → 7차시 치수와 출도. 각 차시에 그 차시가 남긴 파일 이름을 붙여 체크포인트 사슬을 완성된 형태로 다시 보입니다(1차시의 같은 그림과 짝). 그리고 부품 하나가 도면 한 장이 되기까지의 상태 그림 일곱 장을 작은 크기로 한 줄에 늘어놓습니다 — 빈 A3에서 치수까지 들어간 완성본까지."
+     "note": "1차시 도면의 필요 → 2차시 부품 읽기와 A3 템플릿 → 3차시 스냅·방향·길이로 외곽 작도 → 4차시 원과 호 → 5차시 제3각법 3뷰와 배열 → 6차시 보조선 정리와 레이어 → 7차시 치수와 출도. 각 차시에 그 차시가 남긴 파일 이름을 붙여 체크포인트 사슬을 완성된 형태로 다시 보입니다(1차시의 같은 그림과 짝). 그리고 부품 하나가 도면 한 장이 되기까지의 상태 그림 일곱 장을 작은 크기로 한 줄에 늘어놓습니다 — 빈 A3에서 치수까지 들어간 완성본까지."
     },
     {
      "kind": "checks",
@@ -1953,19 +1941,19 @@
       "ko": "시험까지 할 일 네 가지",
       "en": "Four things to do before the exam"
      },
-     "note": "계획표 한 장. ① 템플릿 다시 만들기(빈 도면에서 도면틀·표제란·레이어 넷까지, 몇 분 걸리는지 재기) ② 세 뷰 배치와 치수 연습 ③ 40분 통째 작도 ④ 오늘 답한 판단 규칙 기억하기. 각 항목에 몇 번 했는지 적는 칸과 걸린 시간을 적는 칸을 둡니다. 자습본이 메모를 저장할 수 있으면 이 표에 앵커를 답니다. 마지막 줄은 「막히면 김정웅 기장이나 김양환 선임에게 물어보세요 — 혼자 붙잡고 있지 않습니다」이고, 연락 경로 칸은 「공유 예정」으로 비워 둡니다."
+     "note": "반복 연습 계획을 적습니다. ① 템플릿 다시 만들기 ② 세 뷰 배치와 치수 연습 ③ 처음부터 끝까지 작도하며 시간 기록 ④ 실선 우선과 치수 기준 확인. 각 항목에 연습 횟수와 소요 시간을 적습니다. 문의 담당자는 김정웅, 김양환의 이름만 표시하며, 별도 연습 자료나 연락 경로의 공개를 약속하지 않습니다."
     }
    ],
    "diagrams": [
     {
      "id": "d08-exam-six",
-     "what": "시험 여섯 항목 카드. 확정된 넷(대면 / 3D 형상 그림 / 40분 / 템플릿부터 치수까지)은 실선 테두리, 미정인 둘(장소와 일시 / 제출 주소)은 점선 테두리에 「공유 예정」.",
-     "why": "확정과 미정을 같은 모양으로 그리면 학습자가 미정을 확정으로 읽습니다. 테두리 하나로 갈리는 것을 그림 규칙으로 못 박습니다."
+     "what": "시험 공지에서 확인할 여섯 항목 카드. 모든 항목을 공유 예정으로 표시합니다.",
+     "why": "미공유 시험 조건을 확정된 연습용 값과 구분합니다."
     },
     {
      "id": "d08-40min-sequence",
-     "what": "40분 모의 작도의 일곱 단계를 가로 띠로 놓고, 각 단계가 어느 차시에서 배운 것인지 아래에 차시 번호를 붙인 그림. 목표 경과 시간은 비워 둡니다.",
-     "why": "시험 범위가 '2차시부터 7차시까지 전부'라는 말은 이 대응이 보일 때만 실감이 납니다. 시간 배분은 근거가 없으므로 칸만 두고 값을 넣지 않습니다."
+     "what": "전체 작도 복습의 일곱 단계를 가로 띠로 놓고 각 단계의 차시 번호와 실제 소요 시간을 기록하는 칸을 둡니다.",
+     "why": "복습 순서를 익히고 오래 걸린 단계를 찾습니다. 시험의 범위나 제한 시간을 대신 정하지 않습니다."
     },
     {
      "id": "d08-third-angle-check",
@@ -1979,7 +1967,7 @@
     },
     {
      "id": "d08-course-chain-done",
-     "what": "일곱 차시의 도면 상태를 작은 크기로 한 줄에 — 빈 A3, 외곽, 구멍과 라운드, 세 뷰, 정리된 세 뷰, 치수까지 들어간 완성본. 각 칸 아래에 그 차시가 남긴 파일 이름.",
+     "what": "여섯 실습 차시의 도면 상태를 작은 크기로 한 줄에 — 빈 A3, 외곽, 구멍과 라운드, 세 뷰, 정리된 세 뷰, 치수까지 들어간 완성본. 각 칸 아래에 그 차시가 남긴 파일 이름.",
      "why": "1차시의 체크포인트 사슬 그림과 짝을 이루어, 계획이 결과로 닫히는 것을 한 줄로 보여 줍니다."
     }
    ],
@@ -1988,50 +1976,50 @@
      "ko": "시험 시간과 작업 범위는 무엇입니까?",
      "en": "What are the exam time and the scope of work?",
      "answer": {
-      "ko": "40분이고, 40분이 지나면 즉시 제출입니다. 범위는 템플릿부터 치수까지 — 도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 넣습니다. 2차시부터 7차시까지 전부입니다.",
-      "en": "Forty minutes, and you submit the moment it is up. The scope is template through dimensions: build the border, title block, and four layers, draw the geometry, then dimension it - everything from Lesson 2 through Lesson 7."
+      "ko": "시험 시간과 작업 범위는 공유 예정입니다. 공식 안내를 받은 뒤 확인하며, 연습용 작도 순서나 임의의 시간을 시험 조건으로 단정하지 않습니다.",
+      "en": "The exam time and scope will be shared later. Use the official notice, not a practice sequence or invented limit."
      }
     },
     {
      "ko": "채점 기준의 배점은 어떻게 됩니까?",
      "en": "How is the marking scheme weighted?",
      "answer": {
-      "ko": "아직 공유받지 못했습니다. 배점·감점 항목·합격선 전부 미정이고 별도 공지로 받습니다. 이 자습본의 검산 목록은 채점 기준이 아니라 대본이 말한 준비 항목을 자기 검산용으로 옮긴 것입니다. 「모르겠습니다, 아직 안 정해졌습니다」가 이 문항의 정답입니다.",
-      "en": "It has not been shared yet. Weighting, deductions, and the pass mark are all undecided and will come by separate notice. The check lists in this workbook are not a marking scheme - they are the script's preparation items turned into self-checks. 'I do not know, it is not decided yet' is the correct answer here."
+      "ko": "채점 기준과 합격선은 공유 예정입니다. 이 자습본의 검산 목록은 오류를 스스로 찾기 위한 연습용이며 채점표가 아닙니다.",
+      "en": "The marking scheme and pass mark will be shared later. These self-checks support practice and are not a marking scheme."
      }
     },
     {
      "ko": "숨은선과 실선이 겹쳤습니다. 무엇을 남깁니까?",
      "en": "A hidden line and a visible line coincide. Which one stays?",
      "answer": {
-      "ko": "실선입니다. 보이는 선이 우선입니다. 두 선을 겹쳐 그리면 읽는 사람이 그 자리가 보이는 모양인지 가려진 모양인지 판단하지 못하고, 화면에서는 실선에 가려 있다가 출력하면 파선이 비쳐 나옵니다.",
-      "en": "The visible line. Visible wins. Leaving both stacked means the reader cannot tell whether that edge is seen or obscured, and although the visible line hides it on screen, the dashes show through when you plot."
+      "ko": "실선입니다. 보이는 선이 우선입니다. 두 선을 겹쳐 두면 읽는 사람이 판단하지 못해요. 그 자리가 보이는 모양인지 가려진 모양인지 알 수 없으니까요. 화면에서는 가려 있다가 출력하면 파선이 비쳐 나옵니다.",
+      "en": "The visible line. Visible wins. Leaving both stacked means the reader cannot tell whether that edge is seen or hidden. The dashes also show through when you plot."
      }
     },
     {
      "ko": "치수는 어느 뷰에서 뽑습니까? 치수선 간격 기준은 몇 밀리미터입니까?",
-     "en": "Which view do you take dimensions from, and what is the spacing standard in millimeters?",
+     "en": "Which view do you dimension from, and what is the spacing standard?",
      "answer": {
-      "ko": "정면도 외형선을 기준으로 최대한 많이 뽑고, 정면도에서 표현이 어려운 것만 측면도·평면도에서 뽑습니다. 한 뷰에 모아야 읽는 사람이 시선을 옮기지 않습니다. 간격에는 명확한 기준이 없습니다 — 숫자를 지어내 맞추려 하지 말고, 잘 만들어진 도면을 옆에 놓고 정리된 느낌이 날 때까지 맞춥니다.",
-      "en": "Take as many as possible from the front view's visible outline, and only what the front view cannot express from the side and top views - keeping them in one view saves the reader from moving their eyes. There is no defined spacing standard; do not invent a number, compare against a well-made drawing until it looks tidy."
+      "ko": "정면도 외형선을 기준으로 최대한 많이 뽑습니다. 정면도에서 표현이 어려운 것만 측면도·평면도에서 뽑습니다. 간격에는 명확한 기준이 없습니다. 숫자를 지어내지 말고 잘 만들어진 도면을 옆에 놓고 맞추세요.",
+      "en": "Take as many as you can from the front view's visible outline. Only what it cannot express goes to the side and top views. There is no defined spacing. Do not invent a number - match a well-made drawing instead."
      }
     },
     {
-     "ko": "다 그렸습니다. 파일 이름은 어떻게 짓고 40분 중 마지막 몇 분은 무엇에 씁니까?",
-     "en": "You have finished drawing. How do you name the file, and what are the last few minutes of the 40 for?",
+     "ko": "연습 도면을 마쳤습니다. 무엇을 확인합니까?",
+     "en": "What do you check after finishing a practice drawing?",
      "answer": {
-      "ko": "사번_이름 형식입니다. 여러 명이 같은 주소로 보내므로 파일 이름 자체가 신원입니다. 마지막 몇 분은 저장과 전송에 씁니다 — 40분이 지나면 즉시 제출이므로 그 시간을 미리 빼 둡니다. 제출 주소와 파일 형식은 현장 안내를 따릅니다.",
-      "en": "employeeNumber_name. Everyone submits to the same address, so the file name is your identity. Leave the last few minutes for saving and sending - submission is immediate once the 40 minutes are up, so budget that time in advance. Follow the on-site instructions for the address and file format."
+      "ko": "구분되는 이름으로 저장한 뒤 다시 열어 확인합니다. 시험 제출 방법·파일 형식·이름 규칙은 공유될 운영 안내를 따릅니다.",
+      "en": "Save with a distinct name and reopen it. Follow the forthcoming exam notice for submission, format, and naming rules."
      }
     }
    ],
    "exercise": {
-    "ko": "40분 모의 작도를 두 번 하세요. 첫 번째는 EDU-IB-02 아이들러 풀리 브래킷을 아무것도 안 보고 처음부터 다시 그립니다 — 새 도면에서 시작해 템플릿부터 치수까지입니다. 끝나면 어느 단계에서 시간이 샜는지 적습니다. 두 번째는 그 단계만 따로 두 번 연습한 뒤 다시 40분을 잽니다. 두 번의 시간과 걸린 단계를 나란히 적어 두면 시험 전에 무엇을 더 연습해야 하는지가 값으로 나옵니다. 시험에 나올 부품은 미정이므로 이 브래킷이 시험 문제라고 생각하지 않습니다 — 연습하는 것은 형상이 아니라 순서입니다.",
-    "en": "Do the 40-minute mock run twice. The first time, redraw the EDU-IB-02 idler pulley bracket from scratch with nothing in front of you - new drawing, template through dimensions. When the clock stops, write down which step ate the time. The second time, drill that step twice on its own, then run the 40 minutes again. Writing both times and both bottleneck steps side by side turns 'what should I practice' into a number. The exam part is not decided, so do not treat this bracket as the exam question - what you are drilling is the sequence, not the shape."
+    "ko": "첫 번째는 새 도면에서 아이들러 풀리 브래킷을 템플릿부터 치수까지 다시 그립니다. 필요하면 본인이 저장한 도면과 이 교재를 참고하세요. 걸린 시간과 막힌 단계를 적습니다. 두 번째는 막힌 단계를 따로 연습한 뒤 전체를 다시 그려 봅니다. 두 기록을 비교하면 다음에 연습할 부분을 찾을 수 있어요. 이 브래킷은 과정의 연습 부품이며 시험 문제로 확정된 것이 아닙니다.",
+    "en": "First redraw the bracket from a new drawing through dimensions, using your saved work and workbook as needed. Record elapsed time and difficult steps. Practise those steps separately, then redraw the whole part. Compare the records to plan further practice. This course part is not a confirmed exam question."
    },
    "recoveryNote": {
-    "ko": "8차시는 열 파일도 저장할 파일도 없어 언제 읽어도 됩니다. 다만 40분 모의 작도는 7차시를 마친 뒤에 하세요 — 치수 기입을 한 번도 안 해 본 상태로 시간을 재면 어느 단계에서 시간이 샜는지가 아니라 「치수를 못 넣는다」만 나옵니다. 앞 차시를 건너뛴 채 시험이 급하다면 순서는 이렇습니다. ① 2차시 「따라 하기 1~3」으로 템플릿을 손에 붙입니다(시험 범위의 시작이고 시험장에서 여기에 시간을 쓰면 안 됩니다). ② 5차시 「제3각법 — 본 방향에 그 뷰를 놓는다」를 읽습니다(배치를 틀리면 세 뷰를 다시 배치해야 하고 40분에 그 여유가 없습니다). ③ 7차시 「따라 하기 1」로 치수 스타일을 세워 봅니다. ④ 그다음 이 차시의 40분 모의 작도를 합니다. 채점 기준·일시·장소·제출 주소는 이 자습본에 없습니다. 별도 공지로 받습니다.",
-    "en": "Lesson 8 opens and saves no file, so you can read it at any time. Do the 40-minute mock run after Lesson 7 though: timing yourself before you have ever dimensioned anything tells you only 'I cannot dimension', not which step ate the clock. If you skipped earlier lessons and the exam is close, go in this order. (1) Lesson 2's 'Do it 1-3' until the template is automatic - it is the start of the exam scope and not somewhere to spend time on the day. (2) Read Lesson 5's 'Third angle - the view goes where you looked from'; getting the layout wrong means replacing all three views, and 40 minutes has no room for that. (3) Lesson 7's 'Do it 1' to set up a dimension style once. (4) Then the 40-minute mock run here. The marking scheme, date, venue, and submission address are not in this workbook. They come by separate notice."
+    "ko": "전체 작도 연습은 7차시를 마친 뒤에 합니다. 먼저 2차시의 도면틀과 레이어, 5차시의 제3각법 배치, 7차시의 치수 스타일을 다시 확인하세요. 전체를 그리다 막히면 그 단계의 설명으로 돌아와 연습합니다. 본인이 저장한 파일을 참고하며 진행해도 됩니다. 시험 운영과 채점 기준, 합격선은 별도 공지로 확인합니다.",
+    "en": "Rehearse the full drawing after Lesson 7. Review the border and layers in Lesson 2, third-angle placement in Lesson 5, and dimension style in Lesson 7. Return to the relevant instructions whenever you get stuck; you may use your saved files. Exam operations, marking, and the pass mark come by separate notice."
    }
   }
  ],
@@ -2528,8 +2516,8 @@
    "ko": "객체 스냅",
    "en": "object snap",
    "def": {
-    "ko": "커서를 형상 위의 정확한 점에 붙이는 기능입니다. 이 과정은 여섯 개를 켭니다 — 끝점·중간점·중심·사분점·교차점·접점.",
-    "en": "The feature that locks the cursor to exact points on geometry. This course turns on six: endpoint, midpoint, center, quadrant, intersection, tangent."
+    "ko": "명령이 점을 물을 때 커서를 형상 위의 정확한 점에 붙이는 기능입니다. 끝점·중간점·중심·사분점·교차점을 기본으로 켜고, 접점과 수직점은 필요한 순간에 한 번씩 선택합니다.",
+    "en": "The feature that catches exact points on geometry at a point prompt. Keep endpoint, midpoint, center, quadrant and intersection on; select tangent or perpendicular as a one-time snap when needed."
    },
    "lessons": [
     2,
@@ -2932,7 +2920,8 @@
     "en": "For the border, title block, and plate outlines - anywhere four edges act as one object"
    },
    "lessons": [
-    2
+    2,
+    3
    ]
   },
   {
@@ -2950,6 +2939,7 @@
     3,
     4,
     5,
+    6,
     7
    ]
   },
@@ -3011,6 +3001,7 @@
     "en": "To build concentric or parallel geometry without re-picking a center. Wall thicknesses, aisle clearances"
    },
    "lessons": [
+    3,
     4,
     5,
     8
@@ -3070,7 +3061,8 @@
     "en": "To place the same feature elsewhere. Give the base point and second point as coordinates for an exact displacement"
    },
    "lessons": [
-    4
+    4,
+    6
    ]
   },
   {
@@ -3129,8 +3121,11 @@
     "en": "To draw projectors that align the views. Being infinite, one line crosses all three views"
    },
    "lessons": [
+    3,
+    4,
     5,
-    6
+    6,
+    7
    ]
   },
   {
@@ -3201,7 +3196,10 @@
    },
    "lessons": [
     2,
-    3
+    3,
+    5,
+    6,
+    7
    ]
   },
   {
@@ -3257,8 +3255,11 @@
     "en": "To grab everything matching a condition: deleting only construction lines, counting a layer's objects, or applying a scale across a whole layer"
    },
    "lessons": [
+    3,
+    4,
     5,
-    6
+    6,
+    7
    ]
   },
   {
@@ -3401,8 +3402,8 @@
     "en": "Single-line text"
    },
    "when": {
-    "ko": "표제란, 주석. 시작점을 좌표로 주면 두 칸의 글자가 어긋나지 않습니다",
-    "en": "For the title block and notes. Giving the start point as a coordinate keeps text in two cells aligned"
+    "ko": "표제란, 주석. 칸에 임시 대각선 두 개를 긋고 MC 정렬과 교차점 스냅으로 글자를 가운데 놓은 뒤 대각선을 지웁니다",
+    "en": "For title blocks and notes. Draw two temporary diagonals in the cell, place text with MC justification and Intersection snap, then erase the diagonals"
    },
    "lessons": [
     2
@@ -3481,14 +3482,16 @@
   {
    "key": "M",
    "name": {
-    "ko": "여러 줄 문자 옵션",
-    "en": "Multiline text option"
+    "ko": "MOVE · 이동 / 치수의 여러 줄 문자 옵션",
+    "en": "MOVE / dimension multiline-text option"
    },
    "when": {
-    "ko": "치수선 위치를 찍기 전에 측정값 앞에 2- · 2-장공 · PCD 접두어를 붙일 때",
-    "en": "Before picking the dimension-line position, to prefix the measured value with 2-, 2-slot, or PCD"
+    "ko": "빈 명령행에서는 객체를 옮깁니다. 치수 명령 안에서는 측정값 앞에 접두어를 붙이는 여러 줄 문자 옵션입니다.",
+    "en": "On an empty prompt, move objects. Inside a dimension command, M opens multiline text for a prefix."
    },
    "lessons": [
+    3,
+    6,
     7
    ]
   },
@@ -3689,6 +3692,121 @@
    "lessons": [
     2
    ]
+  },
+  {
+   "key": "TRIMMODE",
+   "name": {
+    "ko": "원래 선 정리 설정",
+    "en": "Trim original edges"
+   },
+   "when": {
+    "ko": "모따기·모깎기 뒤 원래 선을 새 경계까지 자르도록 설정합니다.",
+    "en": "Control whether chamfer and fillet trim the original edges."
+   },
+   "lessons": [
+    3,
+    4
+   ]
+  },
+  {
+   "key": "CHA",
+   "name": {
+    "ko": "CHAMFER · 모따기",
+    "en": "CHAMFER - chamfer"
+   },
+   "when": {
+    "ko": "위쪽 두 모서리를 거리 5와 5로 자를 때 씁니다.",
+    "en": "Cut the two upper corners with distances 5 and 5."
+   },
+   "lessons": [
+    3
+   ]
+  },
+  {
+   "key": "DSETTINGS",
+   "name": {
+    "ko": "제도 보조 설정",
+    "en": "Drafting settings"
+   },
+   "when": {
+    "ko": "극좌표 추적의 증분 각도를 정할 때 씁니다.",
+    "en": "Set the increment angle for polar tracking."
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "COPYMODE",
+   "name": {
+    "ko": "복사 반복 설정",
+    "en": "Copy repetition mode"
+   },
+   "when": {
+    "ko": "한 번 복사한 뒤 COPY 명령이 끝나도록 설정합니다.",
+    "en": "Set COPY to end after one copy."
+   },
+   "lessons": [
+    4,
+    6
+   ]
+  },
+  {
+   "key": "TRIMEXTENDMODE",
+   "name": {
+    "ko": "자르기·늘리기 선택 방식",
+    "en": "Trim and extend selection mode"
+   },
+   "when": {
+    "ko": "경계선을 먼저 고르는 표준 모드로 맞출 때 씁니다.",
+    "en": "Use Standard mode to select boundary edges first."
+   },
+   "lessons": [
+    4,
+    6
+   ]
+  },
+  {
+   "key": "DIMSCALE",
+   "name": {
+    "ko": "치수 표시 전체 축척",
+    "en": "Overall dimension display scale"
+   },
+   "when": {
+    "ko": "모형 1대1에서 치수와 중심 표시 크기를 맞출 때 씁니다.",
+    "en": "Set dimension and center-mark display sizes for a 1:1 model."
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "DIMCEN",
+   "name": {
+    "ko": "중심 표시 크기와 방식",
+    "en": "Center mark size and type"
+   },
+   "when": {
+    "ko": "중심에서 끝까지 3인 중심 표식으로 맞출 때 씁니다.",
+    "en": "Set center marks with a center-to-end size of 3."
+   },
+   "lessons": [
+    4
+   ]
+  },
+  {
+   "key": "DIMCENTER",
+   "name": {
+    "ko": "원·호의 중심 표시",
+    "en": "Circle and arc center marks"
+   },
+   "when": {
+    "ko": "탭·필렛·장공 끝호의 중심을 십자로 표시합니다.",
+    "en": "Mark the centers of taps, fillets and slot-end arcs with crosses."
+   },
+   "lessons": [
+    4
+   ]
   }
  ],
  "toneGuide": {
@@ -3730,7 +3848,7 @@
   "보스 = boss, 목 = web, 베이스 = base, 축 구멍 = bore, 탭 = tapped hole, 표제란 = title block, 도면틀 = drawing border(frame 병기 가능), 검산 = cross-check.",
   "Ø는 두 언어 모두 기호 그대로 씁니다 — Ø25, Ø56. 영문에서 'dia. 25'나 'D25'로 풀지 않습니다. H7은 ISO 끼워맞춤 등급이므로 번역하지 않고 그대로 둡니다.",
   "명령어·옵션 키·기능키는 국영 공통으로 대문자 그대로 씁니다 — LINE, PLINE, TRIM, ARRAYPOLAR, MIRRTEXT, F3, Ctrl+1. 국문 본문에서 「선 명령」처럼 풀어 쓰지 않고 「LINE 명령」으로 씁니다.",
-  "좌표 표기는 국영 공통입니다 — 60,62 / @120,0 / @22<45 / 0,0. 쉼표 뒤에 공백을 넣지 않고 대소문자를 바꾸지 않습니다.",
+  "점을 잡는 기본 방식은 두 언어 모두 객체 스냅·방향·길이 입력으로 통일합니다. 용지의 두 모서리만 좌표 입력을 허용하며, 좌표 예제를 다른 단계의 대안으로 권하지 않습니다.",
   "체크포인트 파일명 EDU-IB-02_L02_TEMPLATE 등은 두 언어에서 같은 문자열이며 번역·대소문자 변경·하이픈과 밑줄 교체를 하지 않습니다. 부품 번호 EDU-IB-02도 같습니다.",
   "단위는 밀리미터만 씁니다. 영문에서도 mm 기준이며 인치 환산을 병기하지 않습니다. 각도는 도(degree)로 씁니다.",
   "이 과정의 용지·레이어·색상·문자 높이·축척 값은 두 언어 모두 「연습용 기본값 / practice default」로 부르고 「규격 / standard」로 부르지 않습니다.",
@@ -3746,60 +3864,30 @@
   {
    "item": {
     "ko": "채점 기준 · 배점 · 감점 항목 · 합격선",
-    "en": "Marking scheme, weightings, deductions, pass mark"
+    "en": "Marking scheme, weights, deductions and pass mark"
    },
    "blocks": {
-    "ko": "여덟 차시 어디에도 없습니다. 어디에 시간을 더 써야 할지 정할 수 없어요. 8차시와 각 차시 검산 절 머리를 「공유 예정」 자리로 두었고, 검산 목록이 채점 기준으로 읽히지 않게 고지 문구를 붙였습니다.",
-    "en": "Nothing in the eight lessons carries them, so a learner cannot decide where the extra hour should go. The exam lesson and the head of every cross-check section hold a dotted “to be shared” slot, and a notice keeps the cross-check lists from being read as a marking scheme."
+    "ko": "공유 예정. 자습본의 검산 목록은 연습 결과를 스스로 확인하는 도구이며 채점 기준이나 합격 판정표가 아닙니다.",
+    "en": "To be shared. Workbook checks help learners inspect their practice; they are not a marking scheme or a pass/fail rubric."
    }
   },
   {
    "item": {
-    "ko": "AutoCAD 버전 · 언어 · 리본 구성",
-    "en": "AutoCAD version, language and ribbon"
+    "ko": "시험 운영 — 방식 · 시간 · 일시 · 장소 · 제출 · 시험장 환경",
+    "en": "Exam operations — format, duration, date, venue, submission and setup"
    },
    "blocks": {
-    "ko": "두 곳에 직접 걸립니다. ① `TRIM`이 절단 모서리를 먼저 묻는 버전인지 곧바로 자를 부분을 묻는 버전인지 ② 대화상자 항목 이름(도면층 / 레이어, 선가중치 / 선 굵기). 화면 캡쳐를 쓸 수 없어 프롬프트를 글로 적어야 하는데, 버전이 정해지면 「무엇을 묻는가」 칸을 실제 문구로 확정할 수 있습니다.",
-    "en": "It bites in two places: whether `TRIM` asks for cutting edges first or goes straight to what you want removed, and what the dialogs actually call things. With no screenshots to lean on, the prompts are described in words. Fix the version and the “what it asks” column can carry the real wording."
-   }
-  },
-  {
-   "item": {
-    "ko": "스타터 DWG 파일을 배포합니까",
-    "en": "Are starter DWG files handed out?"
-   },
-   "blocks": {
-    "ko": "배포하지 않으면 한 차시를 건너뛴 사람의 복구 경로가 「앞 차시의 따라 하기를 다 하기」밖에 없습니다. 5차시를 건너뛴 사람은 최소 한 시간을 되돌아가야 합니다. 배포한다면 자습본에 내려받는 자리가 필요합니다. 지금은 배포하지 않는 것으로 보고 썼습니다.",
-    "en": "If not, the only way back for someone who skipped a lesson is to work through the previous lesson's steps. Skipping lesson 5 costs at least an hour to recover. If they are handed out, this material needs a download slot. It is written assuming they are not."
-   }
-  },
-  {
-   "item": {
-    "ko": "시험 운영 — 일시 · 장소 · 제출 · 시험장 PC",
-    "en": "Exam logistics — date, venue, submission, exam-room PCs"
-   },
-   "blocks": {
-    "ko": "일시, 장소(평택 교육센터 또는 구미, 확정 아님), 제출용 주소, 제출 파일 형식(DWG인지 PDF인지), 시험장 PC 환경(AutoCAD 버전, 템플릿 제공 여부, 개인 파일 반입), 시험에 나올 부품, 문제지의 뷰 개수와 제3각법 기호 표시 여부, 연습 도면 제공 시기가 모두 미정입니다. 8차시에 전부 「공유 예정」 자리로 두었습니다.",
-    "en": "The date, the venue (Pyeongtaek training center or Gumi, not settled), where to submit, the file format (DWG or PDF), the exam-room PCs (AutoCAD version, whether a template is provided, whether personal files may be brought in), which part will be set, how many views the sheet shows and whether it carries the third-angle symbol, and when practice drawings arrive — all of it is open. Lesson 8 holds a “to be shared” slot for each."
-   }
-  },
-  {
-   "item": {
-    "ko": "막혔을 때 물어보는 경로",
-    "en": "How to reach someone when you are stuck"
-   },
-   "blocks": {
-    "ko": "8차시가 담당자 두 사람을 이름으로 안내하지만 연락 경로(사내 메신저·메일·내선)가 없습니다. 「막히면 물어보세요」 카드를 완성하려면 경로가 필요합니다. 이름만 적고 경로 칸은 비워 두었습니다.",
-    "en": "Lesson 8 names two people to ask, but no route to them — messenger, mail or extension — is on record. The “ask someone” card needs one. The names are printed and the route is left blank."
+    "ko": "공유 예정. 시험 방식, 제한 시간, 일시와 장소, 제출 경로·파일 형식·이름, 시험장 환경과 출제 내용은 공지에서 확인합니다. 이 과정의 실습 환경은 AutoCAD 2024이며, 이를 시험장 환경의 확정으로 해석하지 않습니다.",
+    "en": "To be shared. Check the announcement for format, time limit, date, venue, submission route, file format and naming, exam setup and content. This course uses AutoCAD 2024; that does not confirm the exam-room setup."
    }
   }
  ],
  "sourceNote": {
-  "ko": "이 자습본은 사내 영상 과정(8차시·19편·264분)의 공개 대본에서 파생했습니다. 치수와 좌표는 `master-part-geometry.json`, 용지·레이어는 `MASTER_DRAWING_SPEC.md`, 차시 연결은 `course-continuity.json`을 근거로 합니다. 실제 과제에 다른 지시가 적혀 있으면 언제나 그 지시가 우선입니다.",
-  "en": "This self-study material is derived from the public scripts of the in-house video course (8 lessons, 19 episodes, 264 minutes). Dimensions and coordinates come from `master-part-geometry.json`, the sheet and layers from `MASTER_DRAWING_SPEC.md`, and the lesson chain from `course-continuity.json`. Where an actual assignment says something different, that instruction always wins."
+  "ko": "이 자습본은 여덟 차시의 공개 대본에서 파생했습니다. 차시마다 하나의 영상으로 이어 보며 국문부터 검수합니다. 형상은 `master-part-geometry.json`, 과정 정책은 `course-standards.json`, 용지·레이어는 `MASTER_DRAWING_SPEC.md`, 차시 연결은 `course-continuity.json`을 근거로 합니다. 실제 과제에 다른 지시가 적혀 있으면 그 지시를 확인하세요.",
+  "en": "This self-study material is derived from the public scripts of eight lessons, each delivered as one continuous video. Review starts with Korean. Geometry comes from `master-part-geometry.json`, course policies from `course-standards.json`, sheet and layer settings from `MASTER_DRAWING_SPEC.md`, and lesson continuity from `course-continuity.json`. Check any different instructions in an actual assignment."
  },
  "settledNote": {
-  "ko": "2026-09-08 에 여섯 건이 닫혔습니다. **참고 치수 (95.7)** 은 좌우 필렛 중심 사이 거리입니다 — 107.86 − 12.14 = 95.72. **목 상단 폭 54** 는 보스 원과 만나는 두 접점 사이입니다 — 87.207 − 32.793 = 54.414. 둘 다 `master-part-geometry.json` 에서 바로 계산됩니다. **레이어 값**은 `MASTER_DRAWING_SPEC.md` 를 정본으로 씁니다(정본 기하에서 생성되는 문서입니다). 2차시 화면 표는 굵기 열이 없고 축척이 달라 아직 어긋나 있어요. **표면 거칠기**는 2차시 대본이 말한 Ra 1.6 · 6.3 · 12.5 를 씁니다. **4차시 제목**은 `COURSE_PLAN.md` 와 `course-continuity.json` 을 따라 「원·호·오프셋」입니다. **영문 글꼴**은 설치된 LG EI 를 먼저 부르고 없으면 운영체제 UI 글꼴로 물러섭니다. 배포 라이선스가 필요 없습니다. **LTSCALE** 은 `1` 입니다 — 6차시 대본이 「그대로 두려면 1」이라고 이미 정해 둔 값이에요. 개체 축척 0.5 와 곱해 화면 간격이 0.5 가 됩니다. 6차시 검산이 눈 판정에서 두 숫자를 읽는 판정으로 바뀌었습니다.",
-  "en": "Six items closed on 2026-09-08. The **reference dimension (95.7)** spans the two fillet centers — 107.86 − 12.14 = 95.72. The **54 across the top of the web** spans the two points where the web meets the boss circle — 87.207 − 32.793 = 54.414. Both fall straight out of `master-part-geometry.json`. **Layer values** follow `MASTER_DRAWING_SPEC.md`, which is generated from that same geometry; the on-screen table in lesson 2 still disagrees on lineweights and scales. **Surface roughness** uses the Ra 1.6 / 6.3 / 12.5 the lesson 2 script states. **Lesson 4 is titled** “Circles, arcs and offset”, following `COURSE_PLAN.md` and `course-continuity.json`. **English type** asks for an installed LG EI face first and falls back to the operating system UI font, so no font is redistributed. **LTSCALE** is `1` — the lesson 6 script already fixed it with “leave it at 1”. Times the object scale of 0.5, the spacing on screen is 0.5. The lesson 6 cross-check now reads two numbers instead of judging dashes by eye."
+  "ko": "2026-09-10 사용자 확인: 실습 기준은 AutoCAD 2024입니다. 별도 스타터 파일은 제공하지 않습니다. 각 차시에서 직접 저장한 파일을 다음 차시에서 이어 쓰고, 파일이 없으면 앞 차시의 실습을 다시 진행합니다. 막혔을 때 물어볼 사람은 김정웅·김양환이며 이름만 안내합니다. 강의는 차시별 통합 영상으로 제공하고 음성은 1.38배로 처리합니다. 국문판을 먼저 완성한 뒤 영문 자습·슬라이드·대본·영상을 제작합니다. 도면 수치와 레이어는 course-standards.json 및 master-part-geometry.json을 기준으로 검산합니다.",
+  "en": "Confirmed by the course author on 2026-09-10: practice uses AutoCAD 2024. No starter files are provided. Continue with the file you saved in the preceding lesson; if it is missing, repeat the preceding practice. Ask Kim Jeong-ung or Kim Yang-hwan when stuck; only their names are published. Each lesson is delivered as one video with narration processed at 1.38×. Complete the Korean edition before producing English self-study, slides, scripts and videos. Check dimensions and layers against course-standards.json and master-part-geometry.json."
  }
 }

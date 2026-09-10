@@ -5,7 +5,7 @@
   "ko": "오리엔테이션",
   "en": "Orientation"
  },
- "videoLength": "07:20",
+ "videoLength": "05:36",
  "selfStudyMin": 28,
  "opens": null,
  "saves": null,
@@ -19,8 +19,8 @@
    "en": "Later lessons follow the sequence introduced here. First learn the overall flow and how to continue from a saved file. Also distinguish practice layer settings from the requirements of an assigned task."
   },
   "where": {
-   "ko": "부품은 아직 한 선도 그려지지 않았습니다. 1차시는 열 파일도 저장할 파일도 없습니다. 첫 파일은 2차시에서 만듭니다.",
-   "en": "Not one line of the part is drawn yet. Lesson 1 opens no file and saves none. The first file is created in Lesson 2."
+   "ko": "1차시는 도면을 그리거나 저장하지 않습니다. 별도 스타터 파일은 없으며, 첫 파일은 2차시에서 직접 만듭니다.",
+   "en": "Lesson 1 does not draw or save a file. No separate starter file is supplied; you create the first file in Lesson 2."
   }
  },
  "objectives": [
@@ -48,8 +48,8 @@
  "before": {
   "checklist": [
    {
-    "ko": "AutoCAD가 설치된 PC를 준비합니다. 준비물은 이것 하나면 됩니다.",
-    "en": "A PC with AutoCAD installed. That is all you need."
+    "ko": "AutoCAD 2024가 설치된 PC를 준비합니다.",
+    "en": "Prepare a PC with AutoCAD 2024 installed."
    },
    {
     "ko": "템플릿 목록에 `acadiso.dwt` 가 있는지 봅니다.",
@@ -628,8 +628,8 @@
     {
      "type": "note",
      "tone": "pend",
-     "ko": "배점, 제한시간, 합격선은 아직 공유받지 못했습니다. 지어내지 않고 자리만 비워 둡니다. 시험이 어떻게 진행되는지는 8차시에서 안내합니다.",
-     "en": "Marks, time limit, and pass mark have not been shared yet. Rather than invent them, the slot is left empty. How the exam runs is explained in Lesson 8.",
+     "ko": "채점 기준과 합격선, 제한 시간을 포함한 시험 운영 안내는 공유 예정입니다. 8차시에서 공지를 받을 때 확인할 항목을 정리합니다.",
+     "en": "The marking scheme, pass mark, and exam operations including the time limit will be shared later. Lesson 8 lists what to check when the notice arrives.",
      "label": {
       "ko": "배점 · 제한시간 · 합격선 — 공유 예정",
       "en": "Marks, time limit, pass mark - To be shared"
@@ -997,8 +997,8 @@
         "en": "Exam Briefing and Q&A"
        },
        {
-        "ko": "그리지 않습니다. 시험 진행과 자주 나온 질문을 다룹니다.",
-        "en": "No drawing. It covers how the exam runs and the questions that come up most."
+        "ko": "시험 공지에서 확인할 항목과 자주 나온 질문을 정리하고, 전체 작도 순서를 복습합니다.",
+        "en": "Review what to check in the exam notice, common questions, and the full drawing sequence."
        }
       ]
      ]

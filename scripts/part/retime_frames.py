@@ -29,7 +29,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 import sys
-from narrate_tts import verify_script_hash
+from narrate_tts import verify_script_hash, verify_tempo_timing, frame_hold
 from lesson_edit import staged_edit
 
 # tl.to("#l1f3 .tk1",{ … },9.34);  ―  마지막 인자가 시각이다
@@ -49,6 +49,9 @@ LEAD = 0.9          # 첫 박자 전에 등장 연출을 끝내 둘 여유
 
 _ROW_SELECTOR = re.compile(r'#(?P<scope>[\w-]+)\s+(?P<tag>[A-Za-z][\w-]*)?(?P<classes>(?:\.[\w-]+)*)\Z')
 _ROW_OPACITY = re.compile(r'(\bopacity\s*:\s*)(0?\.34|0?\.64)(?![\d.])')
+_ROW_CLEAR = re.compile(r'''(\bbackgroundColor\s*:\s*)(['"])rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\)\2''')
+_ROW_TINT = re.compile(r'''\bbackgroundColor\s*:\s*(['"])(?:#F5F5F3|#FFF|rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\))\1''', re.I)
+_ROW_SEED = re.compile(r'gsap\.set\(gsap\.utils\.toArray\([^\n]+; // row-readability-background\r?\n')
 
 
 class _RowTargets(HTMLParser):
@@ -90,7 +93,7 @@ class _RowTargets(HTMLParser):
 
 
 def fix_row_readability(source):
-    """Keep generated row states opaque without touching animation timing.
+    """Keep generated rows opaque on a white base without changing timing.
 
     A mixed selector retains its original tween and stagger. Its deterministic
     GSAP value function returns 1 only for TR targets, leaving every other
@@ -98,24 +101,45 @@ def fix_row_readability(source):
     """
     if '<tr' not in source.lower():
         return source
+    source = _ROW_SEED.sub('', source)
     targets = _RowTargets(source)
 
-    def fix(call):
-        if not _ROW_OPACITY.search(call['mid']):
-            return call.group(0)
+    def row_tags(call):
         matched = [targets.matches(selector) for selector in call['sel'].split(',')]
         if any(tags is None or not tags for tags in matched):
-            return call.group(0)
+            return []
         tags = [tag for group in matched for tag in group]
-        if 'tr' not in tags:
+        return tags if 'tr' in tags else []
+
+    tinted = [call for call in CALL.finditer(source)
+              if (_ROW_TINT.search(call['mid']) or
+                  "backgroundColor:(i,target)=>target.tagName==='TR'?'#FFF':" in call['mid'])
+              and row_tags(call)]
+    selectors = list(dict.fromkeys(selector.strip() for call in tinted
+                                  for selector in call['sel'].split(',')))
+    seed_at = tinted[0].start() if tinted else None
+    # Transparent black is a poor interpolation endpoint on white tables.
+    # Filter at runtime too: a shared class may also identify a card or a note.
+    seed = ('gsap.set(gsap.utils.toArray(%s).filter(target=>target.tagName===\'TR\'),'
+            '{backgroundColor:\'#FFF\'}); // row-readability-background\n'
+            % json.dumps(','.join(selectors)))
+
+    def fix(call):
+        tags = row_tags(call)
+        if not tags:
             return call.group(0)
         only_rows = all(tag == 'tr' for tag in tags)
         def opacity(match):
             value = '1' if only_rows else "(i,target)=>target.tagName==='TR'?1:" + match[2]
             return match[1] + value
+        def background(match):
+            value = "'#FFF'" if only_rows else "(i,target)=>target.tagName==='TR'?'#FFF':" + match[0][len(match[1]):]
+            return match[1] + value
         mid = _ROW_OPACITY.sub(opacity, call['mid'])
+        mid = _ROW_CLEAR.sub(background, mid)
         start, end = call.start('mid') - call.start(), call.end('mid') - call.start()
-        return call.group(0)[:start] + mid + call.group(0)[end:]
+        prefix = seed if call.start() == seed_at else ''
+        return prefix + call.group(0)[:start] + mid + call.group(0)[end:]
 
     return CALL.sub(fix, source)
 
@@ -449,6 +473,18 @@ def sync_motion(frame_path, dur, beats=None):
     first_calls = {}
     for call in CALL.finditer(source):
         first_calls.setdefault(call.group('sel'), call)
+    title = any(call['kind'] == 'to' and all(name in call['sel'] for name in
+                (' .brand', ' .cert', ' .sub')) for call in CALL.finditer(source))
+    if title:
+        for assertion in doc['assertions']:
+            call = first_calls.get(assertion.get('selector'))
+            if assertion['kind'] != 'appearsBy' or not call or call['kind'] != 'fromTo':
+                continue
+            if not call['sel'].endswith((' .brand', ' .cert', ' h2', ' .rule', ' .sub')):
+                continue
+            fade = re.search(r'duration:([\d.]+)', call['mid'])
+            if fade:
+                assertion['bySec'] = round(float(call['time']) + float(fade[1]) + .15, 3)
     if beats:
         for a in doc['assertions']:
             if a['kind'] != 'appearsBy':
@@ -570,14 +606,17 @@ def retime_lesson(lesson, dry=False):
 
     timing = json.loads((Path(lesson) / 'narration-timing.json').read_text(encoding='utf-8'))
     verify_script_hash(lesson, timing)
+    import episodes
+    verify_tempo_timing(timing, required=episodes.is_unified(Path(lesson).name))
     idx_path = os.path.join(lesson, 'index.html')
     idx = Path(idx_path).read_text(encoding='utf-8')
     slug = os.path.basename(os.path.normpath(lesson))
     planned = planned_spans(lesson, slug)
 
     spans, clock = {}, 0.0
+    hold = frame_hold(timing)
     for f in timing['frames']:
-        d = round(f['duration'] + TAIL, 3)
+        d = round(f['duration'] + hold, 3)
         spans[f['id']] = (round(clock, 3), d)
         clock += d
 
@@ -595,10 +634,10 @@ def retime_lesson(lesson, dry=False):
         print('   %-24s 박자 %2d(%s) · 시각 %2d개 %s'
               % (f['id'], len(bs), src, n, why))
 
-    idx = SLOT.sub(lambda m: (m.group(1) + ('%g' % spans[m.group('id')][0]) + m.group(4)
-                              + ('%g' % spans[m.group('id')][1]) + m.group(6))
+    idx = SLOT.sub(lambda m: (m.group(1) + format(spans[m.group('id')][0], '.3f') + m.group(4)
+                              + format(spans[m.group('id')][1], '.3f') + m.group(6))
                    if m.group('id') in spans else m.group(0), idx)
-    idx = MAIN_DUR.sub(lambda m: m.group(1) + ('%g' % round(clock, 3)) + m.group(3), idx, count=1)
+    idx = MAIN_DUR.sub(lambda m: m.group(1) + format(clock, '.3f') + m.group(3), idx, count=1)
     if not dry:
         Path(idx_path).write_text(idx, encoding='utf-8', newline='\n')
         from refresh_lesson import refresh_inplace

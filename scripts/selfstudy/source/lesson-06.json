@@ -5,7 +5,7 @@
   "ko": "편집과 표현",
   "en": "Cleaning Up and Reading the Symbols"
  },
- "videoLength": "38:25",
+ "videoLength": "28:14",
  "selfStudyMin": 93,
  "opens": "EDU-IB-02_L05_VIEWS",
  "saves": "EDU-IB-02_L06_REPRESENTED",
@@ -20,7 +20,7 @@
   },
   "where": {
    "ko": "부품은 정면도·평면도·우측면도 세 뷰가 다 나온 상태입니다. 형상은 더 그릴 것이 없습니다. 다만 뷰를 맞추려고 그은 투상선이 뷰 밖으로 튀어나와 있어요.",
-   "en": "The part now has all three views: front, top, and right side. There is no more geometry to draw. What is left are the magenta projectors, still running out past the views."
+   "en": "The part now has all three views: front, top, and right side. There is no more geometry to draw. What is left are the white projectors, still running out past the views."
   }
  },
  "objectives": [
@@ -52,8 +52,8 @@
     "en": "All three views are present: front, top, and right side."
    },
    {
-    "ko": "뷰 밖으로 튀어나온 투상선이 보입니다. 안 보이면 5차시에서 이미 지웠거나 치수선 레이어가 꺼진 채로 저장된 것입니다.",
-    "en": "Magenta projectors run out past the views. If none show, they were deleted in Lesson 5 or the dimension layer was saved switched off."
+    "ko": "5차시에서 남긴 구성선 투상선이 보입니다. 보이지 않으면 치수선 레이어 전구를 확인하세요.",
+    "en": "The XLINE projectors left in Lesson 5 are visible. If absent, check the dimension-layer light bulb."
    },
    {
     "ko": "레이어 목록을 펼쳐 전구 네 개가 다 켜져 있는지 보세요.",
@@ -69,8 +69,8 @@
    }
   ],
   "recovery": {
-   "ko": "5차시를 건너뛰었으면 열 파일이 없습니다. 스타터 파일은 배포하지 않아요. 되돌아오는 길은 이렇습니다. `EDU-IB-02_L04_FEATURES` 를 열어 5차시의 「따라 하기 1~3」만 합니다. 그리고 `EDU-IB-02_L05_VIEWS` 로 저장합니다. 투상선이 남아 있는 것이 정상이니 그대로 넘어오세요.",
-   "en": "Skip Lesson 5 and there is no file to open. No starter file is distributed. The way back: open EDU-IB-02_L04_FEATURES, do only 'Do it 1-3' of Lesson 5, save as EDU-IB-02_L05_VIEWS. Leftover projectors are correct there, so bring the clutter in."
+   "ko": "5차시를 건너뛰었으면 EDU-IB-02_L04_FEATURES를 열어 5차시의 모든 따라 하기 단계를 순서대로 마칩니다. 세 뷰와 숨은선, 중심선이 모두 있고 투상선을 남긴 상태로 EDU-IB-02_L05_VIEWS에 저장하세요. 시작용 파일은 배포하지 않습니다.",
+   "en": "If you missed Lesson 5, open EDU-IB-02_L04_FEATURES and complete every hands-on step of Lesson 5 in order. Save all three views, hidden lines and centerlines with projectors still present as EDU-IB-02_L05_VIEWS. No starter file is supplied."
   }
  },
  "sections": [
@@ -118,7 +118,7 @@
      "type": "note",
      "tone": "warn",
      "ko": "투상선이 하나도 안 보이면 둘 중 하나예요. 5차시에서 이미 지웠거나, 치수선 레이어가 꺼진 채로 저장된 것입니다. 레이어 목록을 펼쳐 전구부터 확인하세요.",
-     "en": "If you see no magenta projectors at all, one of two things happened. Either they were already deleted in Lesson 5, or the dimension layer was saved switched off. Open the layer list and check the bulbs first."
+     "en": "If you see no white projectors at all, one of two things happened. Either they were already deleted in Lesson 5, or the dimension layer was saved switched off. Open the layer list and check the bulbs first."
     }
    ]
   },
@@ -296,8 +296,8 @@
     {
      "type": "note",
      "tone": "why",
-     "ko": "순서를 왜 이렇게 잡을까요. 구성선을 먼저 지우면 `TR` 에서 절단 모서리를 고르지 않고 엔터로 넘겨도 안전하거든요. 지우기 전에 그렇게 했다면 무한선이 전부 경계가 됐을 거예요.",
-     "en": "Why this order? Once the construction lines are gone, you can press Enter past the cutting-edge prompt in TR and use everything as a boundary. Do that before the delete and every infinite line becomes a boundary."
+     "ko": "구성선을 먼저 지우면 연습선과 부품을 구분하기 쉬워요. 이번 자르기·늘리기는 표준 모드에서 지정한 기준선 하나만 선택합니다.",
+     "en": "Deleting the construction lines makes the practice lines easier to distinguish from the part. This exercise uses Standard mode and selects only the specified boundary."
     },
     {
      "type": "p",
@@ -427,8 +427,8 @@
     {
      "type": "note",
      "tone": "warn",
-     "ko": "객체 유형에서 `구성선` 대신 「선」을 고르면 형상선까지 잡혀요. 조건 칸의 연산자와 값은 건드리지 마세요.",
-     "en": "Filter by Line instead of Construction Line and real geometry comes with it. Leave the operator and value alone."
+     "ko": "객체 유형에서 구성선 대신 선을 고르면 형상선까지 잡혀요. 구성선을 고른 뒤 연산자는 모두 선택, 적용 방식은 새 선택 세트에 포함으로 맞추고 확인합니다.",
+     "en": "Choosing Line instead of Xline also selects geometry. Choose Xline, Select All, and Include in New Selection Set before confirming."
     }
    ]
   },
@@ -643,16 +643,16 @@
         "en": "visible line"
        },
        {
-        "ko": "흰색 7",
-        "en": "White (7)"
+        "ko": "초록 3",
+        "en": "Green (3)"
        },
        {
         "ko": "Continuous",
         "en": "Continuous"
        },
        {
-        "ko": "0.5",
-        "en": "0.5"
+        "ko": "0.30",
+        "en": "0.30"
        },
        {
         "ko": "따로 주지 않습니다",
@@ -673,8 +673,8 @@
         "en": "Center"
        },
        {
-        "ko": "0.25",
-        "en": "0.25"
+        "ko": "0.15",
+        "en": "0.15"
        },
        {
         "ko": "`0.5`",
@@ -695,8 +695,8 @@
         "en": "Hidden"
        },
        {
-        "ko": "0.25",
-        "en": "0.25"
+        "ko": "0.15",
+        "en": "0.15"
        },
        {
         "ko": "`0.5`",
@@ -717,8 +717,8 @@
         "en": "Continuous"
        },
        {
-        "ko": "0.25",
-        "en": "0.25"
+        "ko": "0.15",
+        "en": "0.15"
        },
        {
         "ko": "따로 주지 않습니다",
@@ -745,19 +745,19 @@
    "id": "do-1",
    "kind": "practice",
    "label": {
-    "ko": "따라 하기 1 — 투상선 지우고 형상선 다듬기 (1~8단계)",
-    "en": "Do it 1 - clear the projectors, tidy the geometry (steps 1-8)"
+    "ko": "따라 하기 1 — 투상선 정리와 자르기·늘리기 연습 (1~8단계)",
+    "en": "Do it 1 - clear projectors and practise trim/extend (steps 1-8)"
    },
    "lede": {
-    "ko": "여기서 파일을 열고, 지울 것을 지우고, 남은 형상선을 다듬습니다.",
-    "en": "Here you open the file, delete what goes, and tidy the geometry that stays."
+    "ko": "투상선을 지운 다음 빈 공간에 선 세 개를 그려 자르기와 늘리기를 연습합니다. 연습선은 모두 지우고 부품 검산으로 넘어가요.",
+    "en": "Clear the projectors, then practise trim and extend with three lines in empty space. Delete all practice lines before checking the part."
    },
    "blocks": [
     {
      "type": "note",
      "tone": "warn",
-     "ko": "이 절의 조작은 파일 상태에 따라 달라집니다. 어느 선을 자를지는 정해져 있지 않아요. 뷰 밖으로 나간 토막과 교차점에 못 미친 선을 스스로 찾으세요. 앞 절의 도해가 그 예시예요.",
-     "en": "What you do here depends on the state of your file. Which lines to cut is not fixed. Look for pieces running outside the views and lines stopping short of an intersection. The previous section's diagram shows what to look for."
+     "ko": "5차시에서 부품 형상은 완성했습니다. 5~8단계는 부품과 떨어진 빈 공간에서 하는 짧은 연습이에요. 정본 부품을 일부러 자르지 않습니다.",
+     "en": "The part geometry was completed in Lesson 5. Steps 5-8 are a short exercise in empty space away from the part; do not deliberately cut the part."
     },
     {
      "type": "table",
@@ -924,12 +924,12 @@
         }
        ],
        "expect": {
-        "ko": "A3 도면틀 전체가 한 화면에 들어옵니다. 세 뷰와, 뷰 밖으로 튀어나온 투상선이 함께 보입니다.",
-        "en": "The whole A3 border fits on one screen. You see all three views plus projectors running outside them."
+        "ko": "세 뷰와 A3 도면틀, 아직 남아 있는 무한 투상선이 보이는지 확인합니다. 도면틀이 작으면 Z W로 도면틀 두 구석을 찍어 살펴봅니다.",
+        "en": "Check the three views, A3 border and remaining infinite projectors. If the border is small, use Z W and pick its opposite corners."
        },
        "why": {
         "ko": "새 도면을 만들지 않습니다. 이 과정은 한 파일을 여섯 차시에 걸쳐 이어 그립니다. 줌 전체를 먼저 하는 것은 정리할 범위를 도면틀 단위로 잡기 위해서예요.",
-        "en": "You never start a new drawing. This course carries one file through seven lessons. Zoom all comes first so the cleanup scope is the whole border, not one view."
+        "en": "You never start a new drawing. This course carries one file through six lessons. Zoom all comes first so the cleanup scope is the whole border, not one view."
        },
        "pitfall": {
         "ko": "파일 이름부터 확인하세요. 새 도면으로 시작하면 정리할 대상 자체가 없습니다. 이름이 `EDU-IB-02_L05_VIEWS` 인지 보고 여세요.",
@@ -944,49 +944,50 @@
        },
        "actions": [
         {
-         "kind": "see",
-         "do": {
-          "ko": "화면 아래 상태 막대에서 객체 스냅이 켜져 있는지 봅니다.",
-          "en": "Look at the status bar and see whether object snap is on."
-         }
-        },
-        {
          "kind": "key",
          "do": {
-          "ko": "꺼져 있으면 눌러 켭니다.",
-          "en": "Press it if it is off."
-         },
-         "type": "F3"
-        },
-        {
-         "kind": "move",
-         "do": {
-          "ko": "도면의 선 위에 커서를 잠깐 올려 봅니다.",
-          "en": "Rest the cursor on a line in the drawing for a moment."
-         }
-        },
-        {
-         "kind": "see",
-         "do": {
-          "ko": "표식이 뜨면 스냅이 살아 있는 겁니다. 아무것도 안 뜨면 `OS` 엔터로 끝점·중간점·중심·사분점·교차점·접점 여섯 개가 체크돼 있는지 봅니다.",
-          "en": "A marker means the snaps are alive. If nothing appears, type `OS`, Enter and check the six boxes: endpoint, midpoint, center, quadrant, intersection, tangent."
-         }
-        },
-        {
-         "kind": "key",
-         "do": {
-          "ko": "직교 모드가 지금 켜져 있는지도 상태 막대에서 봐 둡니다. 수평·수직으로 그을 때 씁니다.",
-          "en": "Note whether ortho is on, too. You use it for horizontal and vertical lines."
-         },
-         "type": "F8"
-        },
-        {
-         "kind": "key",
-         "do": {
-          "ko": "눌러 명령행을 비웁니다. 모든 명령은 이 상태에서 시작합니다.",
-          "en": "clears the command line. Every command starts from this state."
+          "ko": "Esc를 두 번 눌러 명령과 선택을 비웁니다.",
+          "en": "Press Esc twice to clear commands and selection."
          },
          "type": "Esc"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 객체 스냅 탭에서 끝점·중간점·중심·사분점·교차점·접점 여섯 개를 확인하고 확인을 눌러 닫습니다.",
+          "en": "Type and Enter. On the Object Snap tab, check Endpoint, Midpoint, Center, Quadrant, Intersection and Tangent, then OK."
+         },
+         "type": "OS"
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "상태 막대의 객체 스냅이 꺼져 있을 때만 F3을 눌러 켭니다.",
+          "en": "Press F3 only if Object Snap is off."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 첫 번째 점을 묻는 동안 기존 선의 끝점에 커서를 올립니다. 표식만 보고 클릭하지 않습니다.",
+          "en": "Type and Enter. At the first-point prompt, hover over an existing endpoint without clicking."
+         },
+         "type": "L"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "끝점 네모 표식을 확인한 뒤 Esc를 두 번 눌러 LINE을 취소합니다. 표시가 없으면 OS의 끝점과 F3 상태를 다시 봅니다.",
+          "en": "After checking the square endpoint marker, press Esc twice to cancel LINE. If absent, recheck Endpoint in OS and F3."
+         },
+         "type": "Esc"
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "수평·수직 거리 입력 전에 직교를 확인합니다. 켜야 할 때만 F8을 누릅니다. 대각선이나 접선을 그릴 때는 각 단계의 안내대로 끕니다.",
+          "en": "Check Ortho before horizontal or vertical distance entry. Toggle F8 only as needed; later steps turn it off for diagonals and tangents."
+         }
         }
        ],
        "expect": {
@@ -1053,7 +1054,7 @@
         },
         {
          "do": {
-          "ko": "적용 위치는 전체 도면으로 둡니다.",
+          "ko": "적용 대상은 전체 도면으로 둡니다.",
           "en": "Leave Apply to set to Entire drawing."
          },
          "kind": "click"
@@ -1068,10 +1069,17 @@
         },
         {
          "do": {
-          "ko": "조건 칸은 그대로 두고, 적용 방법이 새 선택 세트에 포함인지 확인하고 확인을 누릅니다.",
-          "en": "Leave the condition fields alone, confirm the result is set to Include in new selection set, and click OK."
+          "ko": "객체 유형 구성선을 확인합니다. 아직 확인을 누르지 않습니다.",
+          "en": "Check that the object type is Xline; do not confirm yet."
          },
          "kind": "click"
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "연산자는 모두 선택, 적용 방법은 새 선택 세트에 포함으로 맞춥니다. 현재 선택 세트에 추가는 끕니다. 확인을 눌러 구성선만 선택합니다.",
+          "en": "Choose Select All and Include in New Selection Set; disable Append to Current Selection Set. Click OK to select only XLINEs."
+         }
         },
         {
          "do": {
@@ -1097,82 +1105,167 @@
       {
        "n": 5,
        "title": {
-        "ko": "TRIM 으로 남은 형상선 다듬기",
-        "en": "Trim the geometry that stays"
+        "ko": "TRIM 으로 자르는 쪽 익히기",
+        "en": "Practice which side TRIM removes"
        },
        "actions": [
         {
-         "type": "TR",
+         "kind": "see",
          "do": {
-          "ko": "입력하고 엔터. 자르기 명령입니다.",
-          "en": "Type it and press Enter. This is the trim command."
-         },
-         "kind": "type"
+          "ko": "5차시 정본 형상을 자르지 않습니다. 부품과 표제란을 피한 빈곳에 연습선 세 개를 만들어요.",
+          "en": "Use three practice lines in empty space clear of the part and title block."
+         }
         },
         {
-         "do": {
-          "ko": "절단 모서리를 물으면 아무것도 고르지 말고 엔터를 한 번 더 누릅니다. 도면 안의 모든 객체가 절단 모서리가 됩니다. 버전에 따라 이 물음이 없기도 한데, 곧바로 자를 선을 물어보면 그대로 갑니다.",
-          "en": "When it asks for cutting edges, select nothing and press Enter again: every object becomes one. Some versions skip the prompt and ask straight away which line to cut - if so, carry on."
-         },
-         "kind": "key"
-        },
-        {
-         "do": {
-          "ko": "잘라 낼 부분을 클릭합니다. 남길 쪽이 아니라 없앨 쪽이에요. 형상 밖으로 튀어나온 토막을 하나씩 클릭합니다.",
-          "en": "Click the part to cut away - the part you remove, not the part you keep. Work through the pieces sticking out one at a time."
-         },
          "kind": "click",
+         "do": {
+          "ko": "현재 레이어를 치수선으로 바꾸고 직교를 켭니다.",
+          "en": "Make the dimension layer current and turn Ortho on."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "L 엔터, 빈곳 첫 점 클릭, 커서를 오른쪽에 두고 40 엔터, 엔터로 끝냅니다.",
+          "en": "L, Enter, pick an empty point, point right, 40, Enter, Enter to finish."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "다른 빈곳에 L 엔터, 첫 점 클릭, 위쪽으로 20 엔터, 엔터. 세로선 하나입니다.",
+          "en": "Elsewhere: L, Enter, first point, point up, 20, Enter, Enter for a vertical line."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "M 엔터, 세로선만 클릭하고 엔터. 세로선 중간점을 기준점으로, 가로선 중간점을 두 번째 점으로 클릭합니다. 이동이 끝납니다.",
+          "en": "M, Enter, select only the vertical and Enter. Snap its midpoint as base, then the horizontal midpoint as destination; MOVE ends."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "COPYMODE 엔터, 1 엔터. CO 엔터, 세로선만 클릭하고 엔터. 중간점을 기준점으로 클릭한 뒤 커서를 오른쪽에 두고 10 엔터. 한 번 복사 뒤 명령이 끝납니다.",
+          "en": "COPYMODE, Enter, 1, Enter. CO, Enter, select the vertical, Enter. Pick its midpoint, point right, 10, Enter. Single-copy mode ends the command."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "TRIMEXTENDMODE 엔터, 0 엔터로 표준 모드에 맞춥니다.",
+          "en": "TRIMEXTENDMODE, Enter, 0, Enter selects Standard mode."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "TR 엔터, 왼쪽 세로 경계선만 클릭하고 엔터. 가로선의 그 경계 오른쪽 부분을 클릭합니다.",
+          "en": "TR, Enter, select only the left vertical boundary, Enter. Click the horizontal to its right."
+         },
          "spot": [
           1,
           2
          ]
         },
         {
-         "type": "U",
+         "kind": "key",
          "do": {
-          "ko": "잘못 잘랐으면 명령을 끝내지 말고 입력하고 엔터. 방금 자른 것 하나만 되살아납니다.",
-          "en": "Cut the wrong thing? Do not leave the command - type it and press Enter. Only the last cut comes back."
-         },
-         "kind": "type"
-        },
-        {
-         "do": {
-          "ko": "다 잘랐으면 엔터를 눌러 명령을 끝냅니다.",
-          "en": "Press Enter to end the command when you are done."
-         },
-         "kind": "key"
+          "ko": "잘못 잘랐으면 명령 안에서 `U` 엔터로 복구합니다. 맞으면 엔터로 끝냅니다.",
+          "en": "Use `U`, Enter within TRIM to undo a wrong cut. Otherwise Enter to finish."
+         }
         }
        ],
        "expect": {
-        "ko": "클릭할 때마다 그 토막만 사라집니다. 선 전체가 아니라 경계와 경계 사이의 한 구간만 없어집니다.",
-        "en": "Each click removes only that piece. Not the whole line - just the span between one boundary and the next."
+        "ko": "가로선 오른쪽 절반이 없어져 길이 20이 됩니다. 세로 경계선 두 개는 남습니다.",
+        "en": "The right half is removed, leaving a horizontal length of 20 and both vertical boundaries."
        },
        "why": {
-        "ko": "구성선을 이미 지웠으니 절단 모서리를 고르지 않고 엔터로 넘겨도 안전합니다. 5차시 평면도는 격자로 그려 놓고 잘라내기로 했고, 그 구간이 아직 남아 있어요.",
-        "en": "With the construction lines already gone, pressing Enter past the cutting-edge prompt is safe. The Lesson 5 top view was laid out as a grid to be trimmed later, and those spans are still there."
+        "ko": "부품 밖의 짧은 선으로 경계 선택과 삭제할 쪽의 클릭을 구분합니다.",
+        "en": "Separate practice lines make the boundary pick and removal-side pick clear."
        },
        "pitfall": {
-        "ko": "남길 쪽을 클릭하면 남겨야 할 것이 사라져요. 잘못 잘랐을 때 `Esc` 로 명령을 나가 버리면 `U` 한 번으로 되돌릴 수 없습니다. 명령 안에서 `U` 를 치세요.",
-        "en": "Click the part you meant to keep and it is the part that goes. And if you leave the command with Esc after a bad cut, a single U will not bring it back. Type U while still inside."
+        "ko": "경계 선택 뒤 엔터를 빠뜨리면 가로선도 경계로 선택됩니다. 명령행이 자를 객체를 묻는지 보세요.",
+        "en": "Without Enter after boundary selection, the horizontal is selected as another boundary. Check the object-to-trim prompt."
        },
        "feature": "profile",
+       "on": "front",
+       "diagramOnly": true,
+       "focus": {
+        "view": "raw",
+        "bounds": [
+         0,
+         0,
+         65,
+         35
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           10,
+           15
+          ],
+          [
+           50,
+           15
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           30,
+           5
+          ],
+          [
+           30,
+           25
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           40,
+           5
+          ],
+          [
+           40,
+           25
+          ]
+         ],
+         "role": "practice"
+        }
+       ],
        "spots": [
         {
-         "x": 20,
-         "y": 16,
-         "snap": "int",
+         "view": "raw",
+         "x": 30,
+         "y": 8,
          "hover": {
-          "ko": "라운드가 베이스 윗면에 닿는 자리 — 여기 너머로 삐져나온 선을 자릅니다",
-          "en": "Where the fillet meets the base top - trim what runs past here"
+          "ko": "선택할 세로 경계선",
+          "en": "Vertical boundary to select"
          }
         },
         {
-         "x": 100,
-         "y": 16,
-         "snap": "int",
+         "view": "raw",
+         "x": 45,
+         "y": 15,
          "hover": {
-          "ko": "반대쪽도 같은 자리에서 자릅니다",
-          "en": "Trim at the matching point on the other side"
+          "ko": "조작할 가로선 부분",
+          "en": "Horizontal section to act on"
          }
         }
        ]
@@ -1180,72 +1273,123 @@
       {
        "n": 6,
        "title": {
-        "ko": "EXTEND 로 모자란 선 늘리기",
-        "en": "Extend the lines that fall short"
+        "ko": "EXTEND 로 경계까지 늘리기",
+        "en": "Extend to the next boundary"
        },
        "actions": [
         {
-         "type": "EX",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 늘리기 명령입니다.",
-          "en": "Type it and press Enter. This is the extend command."
+          "ko": "`EX` 엔터, 오른쪽 세로 경계선만 클릭하고 엔터.",
+          "en": "`EX`, Enter, select only the right vertical boundary, Enter."
          },
-         "kind": "type"
-        },
-        {
-         "do": {
-          "ko": "경계 모서리를 물어봅니다. 늘어난 선이 가서 닿을 선을 클릭하고, 다 골랐으면 엔터.",
-          "en": "It asks for boundary edges. Click the line the extension should reach, then press Enter."
-         },
-         "kind": "key",
-         "spot": 2
-        },
-        {
-         "do": {
-          "ko": "늘릴 선을 클릭합니다. 선의 가운데가 아니라 늘리고 싶은 쪽 끝 근처입니다.",
-          "en": "Click the line to extend - near the end you want lengthened, not in the middle."
-         },
-         "kind": "click",
          "spot": 1
         },
         {
+         "kind": "click",
          "do": {
-          "ko": "끝나면 엔터를 눌러 명령을 나옵니다.",
-          "en": "Press Enter to leave the command when you are done."
+          "ko": "가로선의 오른쪽 끝 가까이를 클릭합니다. 오른쪽 경계까지 10 늘어납니다.",
+          "en": "Click near the right end of the horizontal. It extends 10 to the right boundary."
          },
-         "kind": "key"
+         "spot": 2
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "잘못 늘렸으면 `U` 엔터. 맞으면 엔터로 명령을 끝냅니다.",
+          "en": "`U`, Enter undoes a wrong extension. Enter ends the command."
+         }
         }
        ],
        "expect": {
-        "ko": "선이 경계까지 닿으면 멈춥니다. 지나치지 않습니다.",
-        "en": "The line stops the moment it reaches the boundary. It does not overshoot."
+        "ko": "가로선 길이가 20에서 30으로 늘고 오른쪽 경계에 닿습니다.",
+        "en": "The horizontal grows from 20 to 30 and meets the right boundary."
        },
        "why": {
-        "ko": "AutoCAD는 클릭한 지점에 가까운 끝을 늘립니다. 경계까지만 늘어나므로 손으로 끌어 맞추는 것보다 정확해요.",
-        "en": "AutoCAD lengthens whichever end is nearer your click. It stops at the boundary, which makes it more accurate than dragging by hand."
+        "ko": "선 끝을 눈대중으로 옮기지 않고 경계에 정확히 맞춥니다.",
+        "en": "The boundary fixes the end position precisely."
        },
        "pitfall": {
-        "ko": "선의 반대쪽을 클릭하면 엉뚱한 방향으로 늘어나요. 클릭 위치는 늘리고 싶은 쪽 끝 근처입니다. 경계 모서리를 안 고르고 넘어가면 늘릴 곳이 정해지지 않아요.",
-        "en": "Click the far end and it grows the wrong way. Click near the end you want. Skip the boundary edge and there is nothing for the line to reach."
+        "ko": "늘리고 싶은 끝 가까이를 클릭합니다. 반대쪽 끝을 고르면 원하는 경계로 가지 않습니다.",
+        "en": "Click near the end to extend, not its opposite end."
        },
-       "feature": "basehl",
+       "feature": "profile",
+       "on": "front",
+       "diagramOnly": true,
+       "focus": {
+        "view": "raw",
+        "bounds": [
+         0,
+         0,
+         65,
+         35
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           10,
+           15
+          ],
+          [
+           30,
+           15
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           30,
+           5
+          ],
+          [
+           30,
+           25
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           40,
+           5
+          ],
+          [
+           40,
+           25
+          ]
+         ],
+         "role": "practice"
+        }
+       ],
        "spots": [
         {
-         "x": 0,
-         "y": 0,
-         "snap": "end",
+         "view": "raw",
+         "x": 40,
+         "y": 8,
          "hover": {
-          "ko": "베이스 왼쪽 아래 — 모자란 선은 여기까지 늘립니다",
-          "en": "Base lower left - extend a short line to here"
+          "ko": "선택할 세로 경계선",
+          "en": "Vertical boundary to select"
          }
         },
         {
-         "x": 120,
-         "y": 0,
-         "snap": "end",
+         "view": "raw",
+         "x": 29,
+         "y": 15,
          "hover": {
-          "ko": "베이스 오른쪽 아래 — 경계로 쓸 변입니다",
-          "en": "Base lower right - the edge you use as the boundary"
+          "ko": "조작할 가로선 부분",
+          "en": "Horizontal section to act on"
          }
         }
        ]
@@ -1253,89 +1397,269 @@
       {
        "n": 7,
        "title": {
-        "ko": "한 명령 안에서 자르기와 늘리기 바꾸기",
-        "en": "Switch between trim and extend inside one command"
+        "ko": "Shift로 늘리기에서 자르기로 바꾸기",
+        "en": "Use Shift to trim within EXTEND"
        },
        "actions": [
         {
-         "type": "TR",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 자르기에 들어간 상태입니다.",
-          "en": "Type it and press Enter. You are now inside trim."
+          "ko": "`EX` 엔터, 왼쪽 세로 경계선만 클릭하고 엔터.",
+          "en": "`EX`, Enter, select only the left vertical boundary, Enter."
          },
-         "kind": "type"
+         "spot": 1
         },
         {
+         "kind": "click",
          "do": {
-          "ko": "`Shift` 키를 누른 채 선을 클릭해 보세요. 그 선은 잘리지 않고 늘어납니다.",
-          "en": "Hold Shift and click a line. It extends instead of being trimmed."
+          "ko": "Shift를 누른 채 두 경계 사이 가로선 부분을 클릭합니다. 늘리기 안에서 이 부분이 잘립니다.",
+          "en": "Hold Shift and click the horizontal between the boundaries; EXTEND trims it."
          },
-         "kind": "click"
+         "spot": 2
         },
         {
-         "type": "EX",
+         "kind": "key",
          "do": {
-          "ko": "반대로 이 명령 안에서 `Shift` 를 누르고 클릭하면 잘립니다.",
-          "en": "The other way round: inside this command, Shift and click trims instead."
-         },
-         "kind": "type"
+          "ko": "Shift를 놓고 엔터로 끝냅니다. TRIM에서는 Shift가 늘리기로 바뀝니다.",
+          "en": "Release Shift and press Enter to finish. In TRIM, Shift switches to extend."
+         }
         }
        ],
        "expect": {
-        "ko": "클릭한 선이 반대 동작으로 처리됩니다. 명령을 나가지 않고도 둘을 오갑니다.",
-        "en": "The clicked line gets the opposite action, without leaving the command."
+        "ko": "가로선은 다시 길이 20입니다. 세로 경계선 두 개는 그대로 남습니다.",
+        "en": "The horizontal is back to 20 and both boundaries remain."
        },
        "why": {
-        "ko": "뷰를 정리하다 보면 자를 것과 늘릴 것이 번갈아 나옵니다. 명령을 나갔다 들어오면 경계를 새로 잡아야 합니다. `Shift` 하나로 오가면 한 번만 잡고 끝까지 가요.",
-        "en": "Cleaning up views alternates between cuts and extensions. Leaving and re-entering means re-picking boundaries; switching with Shift lets one set of boundaries serve the whole job."
+        "ko": "명령을 다시 시작하지 않고 Shift를 누르는 동안 반대 기능을 씁니다.",
+        "en": "Shift temporarily invokes the opposite function without restarting."
        },
        "pitfall": {
-        "ko": "`Shift` 를 놓은 상태로 클릭하면 원래 동작이 그대로 실행됩니다. 늘릴 때도 클릭 위치는 늘리고 싶은 쪽 끝 근처여야 해요.",
-        "en": "Let go of Shift and the command's own action runs. And when extending, the click still has to be near the end you want lengthened."
-       }
+        "ko": "경계를 고르는 중에는 Shift를 누르지 않습니다. 경계 선택을 엔터로 마친 뒤 사용하세요.",
+        "en": "Use Shift after confirming boundary selection with Enter."
+       },
+       "on": "front",
+       "feature": "profile",
+       "diagramOnly": true,
+       "focus": {
+        "view": "raw",
+        "bounds": [
+         0,
+         0,
+         65,
+         35
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           10,
+           15
+          ],
+          [
+           40,
+           15
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           30,
+           5
+          ],
+          [
+           30,
+           25
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           40,
+           5
+          ],
+          [
+           40,
+           25
+          ]
+         ],
+         "role": "practice"
+        }
+       ],
+       "spots": [
+        {
+         "view": "raw",
+         "x": 30,
+         "y": 8,
+         "hover": {
+          "ko": "선택할 세로 경계선",
+          "en": "Vertical boundary to select"
+         }
+        },
+        {
+         "view": "raw",
+         "x": 35,
+         "y": 15,
+         "hover": {
+          "ko": "조작할 가로선 부분",
+          "en": "Horizontal section to act on"
+         }
+        }
+       ]
       },
       {
        "n": 8,
        "title": {
-        "ko": "남은 보조선 지우기",
-        "en": "Delete the guides that cannot be trimmed"
+        "ko": "연습선과 남은 보조선 지우기",
+        "en": "Delete practice lines and remaining guides"
        },
        "actions": [
         {
+         "kind": "key",
          "do": {
-          "ko": "지울 선을 클릭해서 선택하고 `Delete` 를 누릅니다.",
-          "en": "Click the line to remove, then press Delete."
-         },
-         "kind": "click"
+          "ko": "Esc를 두 번 눌러 명령과 선택을 끝냅니다.",
+          "en": "Press Esc twice to clear the command and selection."
+         }
         },
         {
-         "type": "E",
+         "kind": "click",
          "do": {
-          "ko": "또는 선택한 다음 입력하고 엔터. 지우기 명령입니다.",
-          "en": "Or select it, then type this and press Enter. This is the erase command."
+          "ko": "연습용 가로선 하나와 세로선 두 개를 하나씩 클릭합니다. 다른 객체가 선택되지 않았는지 보고 Delete를 누릅니다.",
+          "en": "Select the one horizontal and two vertical practice lines individually. Confirm no other objects are selected, then press Delete."
          },
-         "kind": "type"
+         "spot": [
+          1,
+          2,
+          3
+         ]
         },
         {
+         "kind": "type",
          "do": {
-          "ko": "여러 개를 한 번에 지울 때는 빈 곳에서 왼쪽에서 오른쪽으로 드래그합니다. 창 안에 완전히 들어온 객체만 선택됩니다.",
-          "en": "To remove several at once, drag from empty space left to right. Only objects fully inside the box are picked."
-         },
-         "kind": "click"
+          "ko": "Z 엔터, A 엔터로 전체를 봅니다. 따로 그은 보조선이 있으면 그것만 선택하고 Delete로 지웁니다. 없으면 더 지우지 않습니다.",
+          "en": "Z, Enter, A, Enter for the full drawing. Delete only additional temporary guides if present; otherwise stop deleting."
+         }
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "현재 레이어를 외형선으로 되돌립니다.",
+          "en": "Restore the visible layer as current."
+         }
         }
        ],
        "expect": {
-        "ko": "선택된 객체만 사라집니다. 창 선택이면 창 안에 완전히 들어온 것만 잡혀요.",
-        "en": "Only the selected objects go. With a window, only what sits fully inside is caught."
+        "ko": "연습선 세 개와 구성선은 모두 없어지고 세 뷰의 정본 형상은 남습니다.",
+        "en": "All three practice lines and XLINEs are gone, while the three-view geometry remains."
        },
        "why": {
-        "ko": "자를 수 없는 선도 있습니다. 경계가 없어서 통째로 필요 없는 선입니다. 이건 자르지 않고 지워요.",
-        "en": "Some lines cannot be trimmed at all: there is no boundary and the whole line is unwanted. Those get erased, not trimmed."
+        "ko": "연습선을 완성 도면의 모서리로 오해하지 않게 정리합니다.",
+        "en": "Remove practice geometry so it cannot be mistaken for part edges."
        },
        "pitfall": {
-        "ko": "걸침 선택으로 잡으면 지나가는 형상선까지 딸려 들어와 함께 지워져요. 지우기 전에 선택된 것이 무엇인지 화면에서 한 번 보고 누르세요.",
-        "en": "A crossing pick drags in real geometry that merely passes through, and it goes too. Look at what is highlighted before you press Delete."
-       }
+        "ko": "부품과 도면틀, 표제란은 삭제 대상이 아닙니다. Delete 전에 선택을 확인하세요.",
+        "en": "Exclude the part, border and title block. Inspect selection before Delete."
+       },
+       "on": "front",
+       "feature": "profile",
+       "diagramOnly": true,
+       "focus": {
+        "view": "raw",
+        "bounds": [
+         0,
+         0,
+         65,
+         35
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           10,
+           15
+          ],
+          [
+           30,
+           15
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           30,
+           5
+          ],
+          [
+           30,
+           25
+          ]
+         ],
+         "role": "practice"
+        },
+        {
+         "kind": "line",
+         "view": "raw",
+         "points": [
+          [
+           40,
+           5
+          ],
+          [
+           40,
+           25
+          ]
+         ],
+         "role": "practice"
+        }
+       ],
+       "spots": [
+        {
+         "view": "raw",
+         "x": 20,
+         "y": 15,
+         "hover": {
+          "ko": "지울 가로선",
+          "en": "Horizontal to delete"
+         }
+        },
+        {
+         "view": "raw",
+         "x": 30,
+         "y": 8,
+         "hover": {
+          "ko": "지울 왼쪽 세로선",
+          "en": "Left vertical to delete"
+         }
+        },
+        {
+         "view": "raw",
+         "x": 40,
+         "y": 8,
+         "hover": {
+          "ko": "지울 오른쪽 세로선",
+          "en": "Right vertical to delete"
+         }
+        }
+       ]
       }
      ]
     }
@@ -1494,57 +1818,66 @@
        },
        "actions": [
         {
-         "type": "DI",
+         "kind": "see",
          "do": {
-          "ko": "입력하고 엔터. 거리 재기 명령입니다.",
-          "en": "Type it and press Enter. This measures a distance."
-         },
-         "kind": "type"
+          "ko": "F3가 켜져 있고 중심 스냅을 쓸 수 있는지 확인합니다.",
+          "en": "Check F3 and Center snap."
+         }
         },
         {
-         "do": {
-          "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나옵니다. 29에서 79까지입니다.",
-          "en": "Click the left slot's left end-arc center, then the right slot's left end-arc center. It reads 50 - from 29 to 79."
-         },
-         "kind": "snap",
-         "spot": 1
-        },
-        {
-         "type": "DI",
-         "do": {
-          "ko": "다시 입력하고 엔터. 이번에는 오른쪽 장공의 오른쪽 끝원 중심과 도면 오른쪽 끝입니다.",
-          "en": "Type it again. This time take the right slot's right end-arc center and the right edge of the part."
-         },
          "kind": "type",
-         "spot": 2
-        },
-        {
          "do": {
-          "ko": "29가 나옵니다. 91에서 120까지입니다. 왼쪽 끝에서 29, 오른쪽 끝에서 29면 좌우가 맞습니다.",
-          "en": "It reads 29 - from 91 to 120. Twenty-nine in from each end means the pair is symmetric."
+          "ko": "DI 엔터. 왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 거리 50을 확인합니다.",
+          "en": "DI, Enter. Pick the left-end centres of both slots and verify distance 50."
          },
-         "kind": "see"
+         "spot": [
+          1,
+          2
+         ]
         },
         {
+         "kind": "type",
+         "do": {
+          "ko": "DI 엔터. 첫 점은 오른쪽 장공의 오른쪽 끝원 중심입니다.",
+          "en": "DI, Enter; pick the right slot right end centre first."
+         },
+         "spot": 3
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "두 번째 점을 물으면 `PER` 엔터. 베이스 오른쪽 세로변 가운데쯤에 커서를 두고 직교 표식을 확인해 클릭합니다. 거리 29입니다.",
+          "en": "At the second-point prompt, `PER`, Enter. Hover near the middle of the right vertical base edge and click its perpendicular marker. Distance is 29."
+         },
+         "spot": 4
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "DI는 두 점을 찍으면 끝납니다. 모따기나 바닥 끝점으로 재면 대각선 거리이므로 29와 다릅니다.",
+          "en": "DI ends after two picks. A chamfer or bottom endpoint measures a diagonal rather than 29."
+         }
+        },
+        {
+         "kind": "type",
          "type": "MIRRTEXT",
          "do": {
-          "ko": "입력하고 엔터. 지금 값을 보여 줍니다. 0이면 그대로 엔터를 눌러 빠져나옵니다.",
-          "en": "Type it and press Enter. It reports the current value. If it is 0, press Enter to leave it as it is."
-         },
-         "kind": "type"
+          "ko": "입력하고 엔터로 현재 값을 확인한 뒤, 값을 입력하지 않고 엔터로 끝냅니다. 0은 문자를 뒤집지 않고 1은 뒤집습니다. 문자가 있는 객체를 대칭하기 전에 확인하세요.",
+          "en": "Type it and press Enter to inspect the current value, then press Enter without entering a value to finish. 0 keeps text readable; 1 mirrors it. Check before mirroring objects that contain text."
+         }
         }
        ],
        "expect": {
-        "ko": "첫 거리는 50, 두 번째 거리는 29가 나옵니다. `MIRRTEXT` 의 현재 값은 0으로 표시됩니다.",
-        "en": "The first distance reads 50 and the second reads 29. MIRRTEXT reports its current value as 0."
+        "ko": "두 장공의 왼쪽 끝원 중심 간격은 50, 오른쪽 끝원 중심에서 바깥 세로변까지의 수직 거리는 29입니다.",
+        "en": "Left end-centre spacing is 50; the perpendicular distance from the right end centre to the outer vertical edge is 29."
        },
        "why": {
         "ko": "대칭 복사의 나머지 규칙입니다. 원본을 지울지 묻는데 기본값은 아니오예요. 뜬 객체는 원본의 레이어·색·선 종류를 물려받습니다. `MIRRTEXT` 가 0이면 글자는 자리만 옮깁니다.",
         "en": "The rest of the mirror rules: it asks whether to delete the source and defaults to No, the new object inherits the source layer, color, and linetype, and with MIRRTEXT at 0 text only moves."
        },
        "pitfall": {
-        "ko": "객체 스냅이 꺼져 있으면 엉뚱한 점이 찍혀 값이 틀려요. `F3` 부터 확인하세요. `MIRRTEXT` 가 1이면 글자까지 뒤집혀 읽을 수 없습니다. 표제란 근처에서 대칭을 쓸 때 확인하세요.",
-        "en": "With object snap off the pick lands elsewhere and the number is wrong. Check F3 first. At MIRRTEXT 1 text mirrors too and becomes unreadable - check before mirroring near the title block."
+        "ko": "장공 전체의 중심과 끝원의 중심은 다릅니다. 호에 커서를 올려 중심 스냅을 잡으세요.",
+        "en": "A slot centre differs from its end-arc centre. Hover over the arc for Center snap."
        },
        "feature": "slot",
        "spots": [
@@ -1553,8 +1886,17 @@
          "y": 8,
          "snap": "cen",
          "hover": {
-          "ko": "왼쪽 장공 중심 — 왼쪽 끝에서 여기까지가 29 여야 합니다",
-          "en": "Left slot center - 29 from the left edge"
+          "ko": "왼쪽 장공 왼쪽 끝원 중심",
+          "en": "Left slot left end centre"
+         }
+        },
+        {
+         "x": 79,
+         "y": 8,
+         "snap": "cen",
+         "hover": {
+          "ko": "오른쪽 장공 왼쪽 끝원 중심",
+          "en": "Right slot left end centre"
          }
         },
         {
@@ -1562,8 +1904,17 @@
          "y": 8,
          "snap": "cen",
          "hover": {
-          "ko": "오른쪽 장공의 오른쪽 끝 — 오른쪽 끝에서 여기까지도 29 여야 대칭입니다",
-          "en": "Right end of the right slot - 29 from the right edge if it is symmetric"
+          "ko": "오른쪽 장공 오른쪽 끝원 중심",
+          "en": "Right slot right end centre"
+         }
+        },
+        {
+         "x": 120,
+         "y": 8,
+         "snap": "per",
+         "hover": {
+          "ko": "오른쪽 세로변에 내린 수선의 발",
+          "en": "Perpendicular foot on right vertical edge"
          }
         }
        ]
@@ -1576,6 +1927,13 @@
        },
        "actions": [
         {
+         "kind": "see",
+         "do": {
+          "ko": "원본은 정면도 가로 중심선, 대상은 정면도 세로 중심선입니다. 둘 다 맞게 그려졌으면 세로선만 외형선 레이어로 바꾸고 Esc로 선택을 푼 뒤 복구를 연습합니다.",
+          "en": "Use the horizontal front-view centerline as source and the vertical as target. If both are correct, move only the vertical to the visible layer, clear selection with Esc, then practise restoring it."
+         }
+        },
+        {
          "type": "MA",
          "do": {
           "ko": "입력하고 엔터. 특성 일치 명령입니다.",
@@ -1585,8 +1943,8 @@
         },
         {
          "do": {
-          "ko": "먼저 원본 객체를 하나 클릭합니다. 제대로 된 중심선, 곧 빨간 파선으로 보이는 선입니다. 커서가 붓 모양으로 바뀝니다.",
-          "en": "First click a source object - a correct centerline, one showing as a red broken line. The cursor turns into a brush."
+          "ko": "제대로 된 가로 중심선에서 보스 왼쪽 바깥 부분을 클릭합니다. 원본입니다.",
+          "en": "Click the horizontal centerline left of the boss as source."
          },
          "kind": "click",
          "spot": 1
@@ -1608,20 +1966,20 @@
         },
         {
          "do": {
-          "ko": "고칠 객체를 클릭합니다. 더 있으면 계속 클릭하고, 다 됐으면 엔터.",
-          "en": "Click the object to fix. Keep clicking if there are more, then press Enter."
+          "ko": "고칠 세로 중심선에서 베이스 아래로 나온 부분을 클릭합니다. 대상입니다.",
+          "en": "Click the vertical centerline below the base as target."
          },
          "kind": "key",
          "spot": 2
         }
        ],
        "expect": {
-        "ko": "클릭한 선이 원본과 같은 레이어로 옮겨지고 색과 선 종류도 따라 바뀝니다. 축 구멍 중심선이 흰 실선이었다면 빨간 파선이 됩니다.",
-        "en": "The clicked line moves to the source's layer, color and linetype following. A white continuous bore centerline becomes a red broken one."
+        "ko": "클릭한 선이 원본과 같은 레이어로 옮겨지고 색과 선 종류도 따라 바뀝니다. 축 구멍 중심선이 초록 실선이었다면 빨간 일점쇄선이 됩니다.",
+        "en": "The clicked line moves to the source's layer, color and linetype following. A green continuous bore centerline becomes a red broken one."
        },
        "why": {
-        "ko": "정리하다 보면 레이어가 틀린 선이 나옵니다. 축 구멍의 중심선이 빨간 파선이 아니라 흰 실선이면 외형선 레이어에 그려진 것입니다. 지우고 다시 그리면 위치를 또 맞춰야 하고 새 오차가 들어가요.",
-        "en": "Cleanup always turns up a line on the wrong layer. A bore centerline showing white and continuous was drawn on the visible-line layer. Delete and redraw it and you re-place it, which lets new error in."
+        "ko": "정리하다 보면 레이어가 틀린 선이 나옵니다. 축 구멍의 중심선이 빨간 일점쇄선이 아니라 초록 실선이면 외형선 레이어에 그려진 것입니다. 지우고 다시 그리면 위치를 또 맞춰야 하고 새 오차가 들어가요.",
+        "en": "Cleanup always turns up a line on the wrong layer. A bore centerline showing green and continuous was drawn on the visible-line layer. Delete and redraw it and you re-place it, which lets new error in."
        },
        "pitfall": {
         "ko": "색만 바뀌고 레이어가 그대로면 특성 설정을 다시 보세요. 도면층 체크가 빠지면 겉보기만 고쳐집니다. 원본으로 찍는 선이 제대로 된 선인지도 확인하세요. 틀린 선을 찍으면 틀린 특성이 퍼져요.",
@@ -1630,22 +1988,32 @@
        "feature": "bossc",
        "spots": [
         {
-         "x": 60,
+         "x": 30,
          "y": 62,
          "hover": {
-          "ko": "먼저 원본을 클릭합니다. 제대로 된 중심선, 곧 빨간 파선으로 보이는 선이에요. 커서가 붓 모양으로 바뀝니다.",
-          "en": "Click the source first - a centerline that is already right, the one showing as a red dashed line. The cursor turns into a brush."
+          "ko": "원본: 보스 왼쪽 바깥의 수평 중심선",
+          "en": "Source: horizontal centerline left of the boss"
          }
         },
         {
          "x": 60,
-         "y": 62,
+         "y": -3,
          "hover": {
-          "ko": "그다음 고칠 선을 클릭합니다. 클릭한 선이 원본과 같은 레이어로 옮겨지고 색과 선 종류도 따라 바뀝니다.",
-          "en": "Then click the line to fix. It moves to the source's layer and takes its color and linetype."
+          "ko": "대상: 베이스 아래로 나온 세로 중심선",
+          "en": "Target: vertical centerline below the base"
          }
         }
-       ]
+       ],
+       "focus": {
+        "view": "front",
+        "bounds": [
+         20,
+         -8,
+         70,
+         72
+        ],
+        "padding": 7
+       }
       },
       {
        "n": 11,
@@ -1711,7 +2079,7 @@
         },
         {
          "do": {
-          "ko": "적용 위치는 전체 도면, 객체 유형은 다중으로 둡니다. 다중은 모든 종류라는 뜻입니다.",
+          "ko": "적용 대상은 전체 도면, 객체 유형은 다중으로 둡니다. 다중은 모든 종류라는 뜻입니다.",
           "en": "Leave Apply to as Entire drawing and object type as Multiple, which means every type."
          },
          "kind": "click"
@@ -1949,8 +2317,8 @@
         {
          "type": "1",
          "do": {
-          "ko": "그대로 두려면 입력하고 엔터를 누릅니다.",
-          "en": "To leave it alone, type this and press Enter."
+          "ko": "이 과정의 정본 값은 1입니다. 1 엔터로 맞춥니다. 실선처럼 보이면 확대하고 CENTER/HIDDEN과 객체 축척 0.5를 확인하세요.",
+          "en": "The course global value is 1. Enter 1. If lines appear solid, zoom in and check CENTER/HIDDEN and object scale 0.5."
          },
          "kind": "type"
         },
@@ -1972,8 +2340,8 @@
         "en": "On-screen spacing is the product of two values. Object 0.5 with global 1 draws at 0.5. Raise the global to 2 and the object value is unchanged while the spacing doubles. It changes no length, position, or dimension."
        },
        "pitfall": {
-        "ko": "한 번에 정답을 맞히려 하지 마세요. 실선처럼 보이면 값을 키우고, 점이 듬성듬성하면 줄입니다. 화면이 안 바뀌면 값이 안 들어간 게 아니라 재생성이 안 된 거예요.",
-        "en": "Do not try to hit the right number in one go. Still continuous? Raise it. Dashes scattered? Lower it. If nothing changes, the value did go in - the drawing has not regenerated."
+        "ko": "화면 모양만 보고 전체 축척을 임의로 바꾸지 않습니다. LTSCALE 1과 객체 축척 0.5를 각각 확인하세요.",
+        "en": "Keep global LTSCALE 1 and object scale 0.5; do not tune the course standard by appearance alone."
        }
       },
       {
@@ -1983,6 +2351,13 @@
         "en": "Save under a new name"
        },
        "actions": [
+        {
+         "kind": "see",
+         "do": {
+          "ko": "현재 레이어는 외형선, 네 레이어는 모두 켜진 상태입니다. 연습선 세 개와 구성선이 없는지 확인합니다.",
+          "en": "Make the visible layer current, switch all four layers on and verify that practice lines and XLINEs are gone."
+         }
+        },
         {
          "do": {
           "ko": "저장 전에 화면 위 레이어 목록을 펼칩니다. 전구가 네 개 다 켜져 있는지, 동결된 레이어가 없는지 봅니다.",
@@ -2430,8 +2805,8 @@
    "en": "Break one thing on purpose and find it"
   },
   "body": {
-   "ko": "정리가 끝난 파일에서 일부러 하나를 틀려 봅니다. 중심선 하나를 골라 레이어를 외형선으로 바꾸면 흰 실선이 됩니다. `Esc` 로 선택을 풀고 눈으로 찾아보세요. 못 찾으면 `QSELECT` 로 도면층 = 중심선을 걸어, 선택 표시가 없는 자리를 찾습니다. MATCHPROP으로 제자리로 보냅니다. 이 왕복이 실제 도면에서 레이어 오류를 찾는 방식 그대로예요. 끝나면 저장하세요.",
-   "en": "Break something on purpose in your cleaned-up file. Set one centerline's layer to visible-line; it turns white and continuous. Press Esc and try to spot it by eye. If you cannot, run QSELECT with layer = center and find where a centerline should be highlighted but is not. Send it back with MATCHPROP. That round trip is how layer errors get found on real drawings. Save when you are done."
+   "ko": "정리가 끝난 파일에서 일부러 하나를 틀려 봅니다. 중심선 하나를 골라 레이어를 외형선으로 바꾸면 초록 실선이 됩니다. `Esc` 로 선택을 풀고 눈으로 찾아보세요. 못 찾으면 `QSELECT` 로 도면층 = 중심선을 걸어, 선택 표시가 없는 자리를 찾습니다. MATCHPROP으로 제자리로 보냅니다. 이 왕복이 실제 도면에서 레이어 오류를 찾는 방식 그대로예요. 끝나면 저장하세요.",
+   "en": "Break something on purpose in your cleaned-up file. Set one centerline's layer to visible-line; it turns green and continuous. Press Esc and try to spot it by eye. If you cannot, run QSELECT with layer = center and find where a centerline should be highlighted but is not. Send it back with MATCHPROP. That round trip is how layer errors get found on real drawings. Save when you are done."
   },
   "criteria": [
    {
@@ -2443,7 +2818,7 @@
     "en": "After MATCHPROP, clicking that line shows the center layer in the indicator at the top."
    },
    {
-    "ko": "되돌린 선이 다시 빨간 파선으로 보이고 간격도 다른 중심선과 같습니다.",
+    "ko": "되돌린 선이 다시 빨간 일점쇄선으로 보이고 간격도 다른 중심선과 같습니다.",
     "en": "The restored line shows as a red broken line again, with the same spacing as the other centerlines."
    }
   ]
@@ -2472,25 +2847,25 @@
    }
   },
   {
-   "key": "A",
+   "key": "OS",
    "name": {
-    "ko": "ZOOM 의 전체 옵션",
-    "en": "the All option of ZOOM"
+    "ko": "OSNAP · 객체 스냅 항목 설정",
+    "en": "OSNAP settings"
    },
    "when": {
-    "ko": "`Z` 뒤에 이어 입력해 도면틀 전체를 한 화면에 놓을 때",
-    "en": "typed after Z to fit the whole border on screen"
+    "ko": "끝점·중심·접점 등 어떤 스냅이 켜져 있는지 확인하고 바꿀 때",
+    "en": "To see and change which snaps are active - endpoint, center, tangent and the rest"
    }
   },
   {
-   "key": "XL",
+   "key": "L",
    "name": {
-    "ko": "XLINE (구성선)",
-    "en": "XLINE"
+    "ko": "LINE · 선 긋기",
+    "en": "LINE - draw a line"
    },
    "when": {
-    "ko": "무한히 뻗는 구성선을 긋습니다. 5차시에 투상선을 이렇게 그었고, 이 차시에서는 긋지 않습니다",
-    "en": "draws an infinite construction line; Lesson 5 drew the projectors this way, this lesson draws none"
+    "ko": "낱개로 다뤄야 하는 조각. 뒤에 자르거나 둥글릴 선. OFFSET 안에서는 도면층 옵션 키이기도 합니다",
+    "en": "For pieces you must handle individually and will later trim or fillet. Inside OFFSET it is also the Layer option key"
    }
   },
   {
@@ -2505,6 +2880,50 @@
    }
   },
   {
+   "key": "M",
+   "name": {
+    "ko": "MOVE · 이동",
+    "en": "MOVE"
+   },
+   "when": {
+    "ko": "연습선의 중간점을 다른 선의 중간점에 맞춰 옮깁니다.",
+    "en": "Move a practice line by matching its midpoint to another line midpoint."
+   }
+  },
+  {
+   "key": "COPYMODE",
+   "name": {
+    "ko": "복사 반복 설정",
+    "en": "Copy repetition mode"
+   },
+   "when": {
+    "ko": "한 번 복사한 뒤 COPY 명령이 끝나도록 설정합니다.",
+    "en": "Set COPY to end after one copy."
+   }
+  },
+  {
+   "key": "CO",
+   "name": {
+    "ko": "COPY · 복사",
+    "en": "COPY"
+   },
+   "when": {
+    "ko": "같은 구멍을 다른 자리에 둘 때. 기준점과 두 번째 점을 좌표로 주면 정확히 그만큼 옮깁니다",
+    "en": "To place the same feature elsewhere. Give the base point and second point as coordinates for an exact displacement"
+   }
+  },
+  {
+   "key": "TRIMEXTENDMODE",
+   "name": {
+    "ko": "자르기·늘리기 선택 방식",
+    "en": "Trim and extend selection mode"
+   },
+   "when": {
+    "ko": "경계선을 먼저 고르는 표준 모드로 맞출 때 씁니다.",
+    "en": "Use Standard mode to select boundary edges first."
+   }
+  },
+  {
    "key": "TR",
    "name": {
     "ko": "TRIM (자르기)",
@@ -2516,17 +2935,6 @@
    }
   },
   {
-   "key": "U",
-   "name": {
-    "ko": "명령 안에서 한 단계 되돌리기",
-    "en": "one-step undo inside a command"
-   },
-   "when": {
-    "ko": "`TR` 안에서 잘못 잘랐을 때. 명령을 끝내지 않고 방금 자른 것 하나만 되살립니다",
-    "en": "after a bad cut inside TR - restores the last cut without leaving the command"
-   }
-  },
-  {
    "key": "EX",
    "name": {
     "ko": "EXTEND (늘리기)",
@@ -2535,17 +2943,6 @@
    "when": {
     "ko": "경계까지 늘릴 때. 교차점에 못 미친 선에 씁니다",
     "en": "to lengthen a line to a boundary - lines stopping short of an intersection"
-   }
-  },
-  {
-   "key": "E",
-   "name": {
-    "ko": "ERASE (지우기)",
-    "en": "ERASE"
-   },
-   "when": {
-    "ko": "자를 경계가 없어 통째로 필요 없는 보조선을 없앨 때",
-    "en": "to remove a guide line with no boundary, unwanted entirely"
    }
   },
   {
@@ -2582,17 +2979,6 @@
    }
   },
   {
-   "key": "S",
-   "name": {
-    "ko": "MATCHPROP 안의 설정 옵션",
-    "en": "the Settings option inside MATCHPROP"
-   },
-   "when": {
-    "ko": "원본을 찍은 뒤 특성 설정 대화상자를 열어 도면층 체크를 확인할 때",
-    "en": "after picking the source, to open Property Settings and check the Layer tick"
-   }
-  },
-  {
    "key": "LA",
    "name": {
     "ko": "LAYER (레이어 특성 관리자)",
@@ -2601,6 +2987,83 @@
    "when": {
     "ko": "레이어를 관리할 때. 전구를 껐다 켜며 소속을 점검할 때 씁니다",
     "en": "to manage layers, and to audit membership by toggling the bulbs"
+   }
+  },
+  {
+   "key": "LTSCALE",
+   "name": {
+    "ko": "도면 전체 선 종류 축척",
+    "en": "the global linetype scale"
+   },
+   "when": {
+    "ko": "파선이 실선처럼 보일 때. 도면 전체의 간격을 한꺼번에 움직입니다",
+    "en": "when broken lines read as continuous - moves spacing across the whole drawing"
+   }
+  },
+  {
+   "key": "SAVEAS",
+   "name": {
+    "ko": "새 이름으로 저장",
+    "en": "Save As"
+   },
+   "when": {
+    "ko": "차시 종료 상태를 새 이름으로 남길 때. 덮어쓰지 않습니다",
+    "en": "to keep the end-of-lesson state under a new name; never overwrite"
+   }
+  },
+  {
+   "key": "A",
+   "name": {
+    "ko": "ZOOM 의 전체 옵션",
+    "en": "the All option of ZOOM"
+   },
+   "when": {
+    "ko": "`Z` 뒤에 이어 입력해 도면틀 전체를 한 화면에 놓을 때",
+    "en": "typed after Z to fit the whole border on screen"
+   }
+  },
+  {
+   "key": "XL",
+   "name": {
+    "ko": "XLINE (구성선)",
+    "en": "XLINE"
+   },
+   "when": {
+    "ko": "무한히 뻗는 구성선을 긋습니다. 5차시에 투상선을 이렇게 그었고, 이 차시에서는 긋지 않습니다",
+    "en": "draws an infinite construction line; Lesson 5 drew the projectors this way, this lesson draws none"
+   }
+  },
+  {
+   "key": "U",
+   "name": {
+    "ko": "명령 안에서 한 단계 되돌리기",
+    "en": "one-step undo inside a command"
+   },
+   "when": {
+    "ko": "`TR` 안에서 잘못 잘랐을 때. 명령을 끝내지 않고 방금 자른 것 하나만 되살립니다",
+    "en": "after a bad cut inside TR - restores the last cut without leaving the command"
+   }
+  },
+  {
+   "key": "E",
+   "name": {
+    "ko": "ERASE (지우기)",
+    "en": "ERASE"
+   },
+   "when": {
+    "ko": "자를 경계가 없어 통째로 필요 없는 보조선을 없앨 때",
+    "en": "to remove a guide line with no boundary, unwanted entirely"
+   }
+  },
+  {
+   "key": "S",
+   "name": {
+    "ko": "MATCHPROP 안의 설정 옵션",
+    "en": "the Settings option inside MATCHPROP"
+   },
+   "when": {
+    "ko": "원본을 찍은 뒤 특성 설정 대화상자를 열어 도면층 체크를 확인할 때",
+    "en": "after picking the source, to open Property Settings and check the Layer tick"
    }
   },
   {
@@ -2626,17 +3089,6 @@
    }
   },
   {
-   "key": "LTSCALE",
-   "name": {
-    "ko": "도면 전체 선 종류 축척",
-    "en": "the global linetype scale"
-   },
-   "when": {
-    "ko": "파선이 실선처럼 보일 때. 도면 전체의 간격을 한꺼번에 움직입니다",
-    "en": "when broken lines read as continuous - moves spacing across the whole drawing"
-   }
-  },
-  {
    "key": "RE",
    "name": {
     "ko": "REGEN (도면 재생성)",
@@ -2645,17 +3097,6 @@
    "when": {
     "ko": "축척 값을 바꿨는데 화면이 그대로일 때",
     "en": "when a scale change does not show on screen"
-   }
-  },
-  {
-   "key": "SAVEAS",
-   "name": {
-    "ko": "새 이름으로 저장",
-    "en": "Save As"
-   },
-   "when": {
-    "ko": "차시 종료 상태를 새 이름으로 남길 때. 덮어쓰지 않습니다",
-    "en": "to keep the end-of-lesson state under a new name; never overwrite"
    }
   }
  ],

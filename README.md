@@ -42,9 +42,21 @@ publication of original materials, separate narration WAVs, transcripts or font
 binaries. The latest delivery scope and remaining work are recorded in
 [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-The author confirmed publishing **five finished videos first**, with the
-eight-lesson self-study package and one offline review HTML. The remaining
-15 episodes require actual AutoCAD recordings.
+The first preview contains five videos, the eight-lesson self-study package and
+one offline review HTML. It preserves the earlier episode layout and voice speed.
+The current revision targets **AutoCAD 2024**, **one video per lesson** and
+**1.38× narration**, without starter files. Grading and exam operations remain
+to be shared; only the two help contacts' names are disclosed. Complete the
+Korean edition before producing English self-study, slides, scripts and videos.
+Lessons 2–7 still require real AutoCAD recordings. Do not treat the first preview
+as a completed delivery of this revision or replace its files silently.
+
+The AutoCAD 2024 revision prepares Korean self-study, lesson slides and scripts
+for all eight lessons. Only lessons 1 and 8 have complete integrated MP4s at
+this stage; lessons 2–7 require real AutoCAD 2024 recordings and application
+validation. Catalog durations describe the measured narration timeline, not
+guaranteed hands-on completion time. English text already present in the
+workbook is a draft, not a completed English course.
 
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
@@ -57,6 +69,10 @@ eight-lesson self-study package and one offline review HTML. The remaining
 - The review generator supports offline export with
   `python scripts/selfstudy/build_deck_all.py <output.html> <temporary-directory> --standalone <gsap.min.js>`.
   Review transfer regression checks: `node --test scripts/selfstudy/test_review_transfer.cjs`.
+
+New review editions have different slide and content identifiers. Keep the old
+review HTML with its feedback backup; importing old feedback into a revised deck
+is deliberately rejected to avoid attaching notes to the wrong slide.
 
 Recording intake preserves the existing narration bindings. Private lecture
 preparation verifies and copies registered recordings, retains the authored
@@ -153,13 +169,20 @@ regenerate only when the recording itself changes. Do not rebuild it in CI.
 ### Local Heami synthesis
 
 For the current lecture workflow, synthesize the revised script with Windows
-SAPI **Microsoft Heami Desktop, Rate 0**, then refresh the frame and episode clocks:
+SAPI **Microsoft Heami Desktop, Rate 0**, then process the speech at **1.38×**
+with pitch preserved and measure the resulting WAVs. SAPI Rate and playback
+speed are separate settings. Refresh the complete lesson's clock:
 
 ```powershell
-python scripts/part/narrate_tts.py projects/autocad-technician/lesson-01-orientation --out <fresh-private-audio-directory>
+python scripts/part/narrate_tts.py projects/autocad-technician/lesson-01-orientation --tempo 1.38 --out <fresh-private-audio-directory>
 python scripts/part/retime_frames.py projects/autocad-technician/lesson-01-orientation
 python scripts/part/prepare_lecture.py projects/autocad-technician/lesson-01-orientation --out <fresh-private-render-directory> --gsap <local-gsap.min.js>
 ```
+
+When practice step headings or command labels change, run
+`python scripts/part/refresh_recording_labels.py <lesson-directory>` before
+preparing the render. This keeps the authored scene and its measured timing while
+refreshing the recording captions from `SCRIPT.md`.
 
 Both output directories must be outside Git and new for this generation. Use the
 local GSAP 3.14.2 distributable to match the authored compositions. The export
@@ -178,14 +201,12 @@ playlist on its own clock before interpreting overlap warnings.
 Missing AutoCAD recordings block a delivery export. `--preview` permits those
 placeholders only for validation and records them in the private export manifest.
 
-To export one completed episode, add `--episode ep1` (or another canonical
-episode ID). The selected episode becomes the private project's `index.html`,
-with its own clock, frame motion checks, and only its referenced narration WAVs.
-All source playlists and measured WAV identities are still checked first.
-An unused episode's recording placeholder does not block this export; a selected
-placeholder does. The current recording-free set is lesson 1 ep1, lesson 2
-ep1/ep3, lesson 3 ep3, and lesson 8 ep1: five of the course's twenty episodes.
-The other fifteen still require real AutoCAD recordings.
+Export the entire lesson with the command above. Internal recording parts join
+the same lesson; they are not separate public episodes. The old `ep*.html` files
+remain as production history and are excluded from the current delivery path.
+A lesson that still has a recording placeholder cannot be exported for delivery.
+`--preview` is a private validation aid and must not be published as a finished
+AutoCAD lesson.
 
 If a long render fails the temporary-disk capacity check, use the CLI's
 `--low-memory-mode` streaming profile. It uses one screenshot worker and may
@@ -196,7 +217,7 @@ The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do
 not. Legacy timing files without these identities cannot be reused by retiming
 or export. WAV contents and durations are checked again when preparing a render.
-Episodes use their own local clock, including the holds between scene WAVs.
+Each lesson uses one clock, including the holds between scene WAVs.
 Timing updates are prepared in a temporary copy before replacing source files.
 The extended recap lists in lessons 2–8 have one measured paragraph per panel,
 so their bullets appear together. Their motion checks include the last bullet
@@ -224,8 +245,8 @@ The course is organized as eight connected HyperFrames projects under
 `EDU-IB-02` idler pulley bracket from orientation to an A3 third-angle release
 drawing; the eighth covers the exam briefing and its questions. Each lesson owns
 its brief, narration script, storyboard, six to eleven scene compositions, motion
-assertions, and final assembly, and the eight lessons are cut into 20 episodes of
-at most twenty minutes each.
+assertions, and final assembly. Each of the eight lessons is delivered as one
+video; there is no twenty-minute delivery limit or episode subdivision.
 
 The earlier ten-lesson arrangement is kept under
 `projects/autocad-technician/_archive/`. It is not built and not checked.
@@ -238,7 +259,8 @@ layer, projection, checkpoint, and exam-disclosure rules live in
 feature-clearance contract live in `projects/autocad-technician/master-part-geometry.json`.
 The screen-recording sections and their exact frame sources are locked in
 `projects/autocad-technician/recording-map.json`: one section in each of lessons 2
-through 7, cut into 15 pieces so that no episode runs past twenty minutes.
+through 7, with 15 internal recording parts retained at practice boundaries.
+These parts preserve the recording and narration mapping inside each whole lesson.
 All lessons inherit the LG technical-training visual system.
 Drawings, recordings, narration, transcripts, presentation sources and direct slide
 derivatives remain private.

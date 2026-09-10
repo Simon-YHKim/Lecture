@@ -1,5 +1,5 @@
 {
-  "duration": 211.935,
+  "duration": 153.398,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -9,12 +9,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-paper",
-      "bySec": 23.766
+      "bySec": 17.86
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-frame",
-      "bySec": 33.603
+      "bySec": 24.974
     },
     {
       "kind": "before",
@@ -24,7 +24,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .sh-mark",
-      "bySec": 54.484
+      "bySec": 40.088
     },
     {
       "kind": "before",
@@ -34,7 +34,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 g.sh-title",
-      "bySec": 64.567
+      "bySec": 47.376
     },
     {
       "kind": "before",
@@ -44,7 +44,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 thead",
-      "bySec": 80.179
+      "bySec": 58.676
     },
     {
       "kind": "before",
@@ -54,7 +54,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .note1",
-      "bySec": 149.536
+      "bySec": 108.865
     },
     {
       "kind": "before",
@@ -64,7 +64,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f7 .note2",
-      "bySec": 195.983
+      "bySec": 142.511
     },
     {
       "kind": "before",

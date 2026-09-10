@@ -5,7 +5,7 @@
   "ko": "치수와 출도",
   "en": "Dimensioning and Release"
  },
- "videoLength": "43:01",
+ "videoLength": "31:37",
  "selfStudyMin": 137,
  "opens": "EDU-IB-02_L06_REPRESENTED",
  "saves": "EDU-IB-02_L07_RELEASE",
@@ -60,7 +60,7 @@
     "en": "Are all four layer bulbs on? Drag from empty space at the upper left to the lower right to enclose the whole drawing. This left-to-right drag is a window selection. Check that color, linetype, and lineweight all read ByLayer. Ctrl+A selects the drawing too."
    },
    {
-    "ko": "F3 을 눌러 객체 스냅이 켜져 있는지 봅니다. 오늘 찍는 점은 거의 전부 스냅으로 잡아요.",
+    "ko": "상태 막대에서 객체 스냅을 봅니다. 꺼져 있을 때만 F3으로 켭니다. 오늘 찍는 점은 거의 전부 스냅으로 잡아요.",
     "en": "Press F3 and check that object snap is on. Almost every point you pick today comes from a snap."
    },
    {
@@ -221,8 +221,8 @@
         "en": "Lineweight"
        },
        {
-        "ko": "0.25",
-        "en": "0.25"
+        "ko": "0.15",
+        "en": "0.15"
        }
       ],
       [
@@ -566,8 +566,8 @@
     {
      "type": "note",
      "tone": "why",
-     "ko": "호에 지름을 쓰려면 도면에 없는 반대쪽 점을 찍어야 해요. 없는 점은 찍을 수가 없죠.",
-     "en": "A diameter on an arc would need the point on the far side, and that point is not on the drawing. You cannot pick a point that is not there."
+     "ko": "이 도면은 축 구멍과 보스에 지름, 필렛과 장공 끝호에 반지름을 씁니다. DIMDIAMETER는 호도 선택할 수 있으므로 명령의 제한이 아니라 이 도면의 지시 방식입니다.",
+     "en": "Use diameter for this drawing’s bore and boss, radius for its fillets and slot-end arcs. DIMDIAMETER also accepts arcs; this is a drawing convention, not a command restriction."
     },
     {
      "type": "p",
@@ -577,8 +577,8 @@
     {
      "type": "note",
      "tone": "warn",
-     "ko": "측정값 자리를 지우고 숫자를 직접 치면 안 됩니다. 나중에 형상을 고쳐도 치수가 안 따라와요. 옛날 숫자를 그대로 붙들고 있습니다. 예외는 참고 치수 하나뿐이에요.",
-     "en": "Never wipe out the measured value and type a number in its place. Fix the geometry later and the dimension will not follow; it keeps the old number. One exception only: the reference dimension."
+     "ko": "측정값을 지우고 숫자로 덮어쓰지 않습니다. 참고 치수도 (<>)로 실제 측정값을 유지하고 괄호를 붙입니다.",
+     "en": "Never replace a measurement with fixed digits. Reference dimensions also retain the live value with (<>)."
     }
    ]
   },
@@ -1104,8 +1104,8 @@
         "en": "`4-M5 깊이 10` - the tapped holes"
        },
        "body": {
-        "ko": "구멍을 지름 치수로 재면 드릴이 지나간 구멍 지름이 나와요. 나사 규격이 아닙니다. M5 는 어떤 나사를 내라는 지시이고, 깊이 10 은 정면에서 안 보이는 값이에요. 개수, 규격, 깊이 순서로 한 줄에 씁니다.",
-        "en": "Measure the hole with a diameter and you get the drilled size, not the thread. M5 says which thread to cut, and depth 10 cannot be seen from the front. Write quantity, designation, depth on one line."
+        "ko": "지름 치수는 화면에 그린 원의 지름만 보여 줍니다. 나사 규격과 깊이는 지시선에 따로 명시합니다.",
+        "en": "A diameter dimension reports only the drawn circle. Specify the thread and depth separately in the leader."
        }
       }
      ]
@@ -1322,7 +1322,7 @@
         }
        ],
        "expect": {
-        "ko": "형상이 다 들어 있는 지난 도면이 열리고 도면틀까지 화면에 들어옵니다. F3 으로 객체 스냅이 켜져 있는지도 봅니다.",
+        "ko": "형상이 다 들어 있는 지난 도면이 열리고 도면틀까지 화면에 들어옵니다. 객체 스냅이 켜져 있는지도 상태 막대에서 봅니다.",
         "en": "Last lesson's drawing opens with all its geometry and the border in view. Press F3 and check that object snap is on."
        },
        "why": {
@@ -1342,49 +1342,50 @@
        },
        "actions": [
         {
-         "kind": "see",
-         "do": {
-          "ko": "화면 아래 상태 막대에서 객체 스냅이 켜져 있는지 봅니다.",
-          "en": "Look at the status bar and see whether object snap is on."
-         }
-        },
-        {
          "kind": "key",
          "do": {
-          "ko": "꺼져 있으면 눌러 켭니다.",
-          "en": "Press it if it is off."
-         },
-         "type": "F3"
-        },
-        {
-         "kind": "move",
-         "do": {
-          "ko": "도면의 선 위에 커서를 잠깐 올려 봅니다.",
-          "en": "Rest the cursor on a line in the drawing for a moment."
-         }
-        },
-        {
-         "kind": "see",
-         "do": {
-          "ko": "표식이 뜨면 스냅이 살아 있는 겁니다. 아무것도 안 뜨면 `OS` 엔터로 끝점·중간점·중심·사분점·교차점·접점 여섯 개가 체크돼 있는지 봅니다.",
-          "en": "A marker means the snaps are alive. If nothing appears, type `OS`, Enter and check the six boxes: endpoint, midpoint, center, quadrant, intersection, tangent."
-         }
-        },
-        {
-         "kind": "key",
-         "do": {
-          "ko": "직교 모드가 지금 켜져 있는지도 상태 막대에서 봐 둡니다. 수평·수직으로 그을 때 씁니다.",
-          "en": "Note whether ortho is on, too. You use it for horizontal and vertical lines."
-         },
-         "type": "F8"
-        },
-        {
-         "kind": "key",
-         "do": {
-          "ko": "눌러 명령행을 비웁니다. 모든 명령은 이 상태에서 시작합니다.",
-          "en": "clears the command line. Every command starts from this state."
+          "ko": "Esc를 두 번 눌러 명령과 선택을 비웁니다.",
+          "en": "Press Esc twice to clear commands and selection."
          },
          "type": "Esc"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 객체 스냅 탭에서 끝점·중간점·중심·사분점·교차점·접점 여섯 개를 확인하고 확인을 눌러 닫습니다.",
+          "en": "Type and Enter. On the Object Snap tab, check Endpoint, Midpoint, Center, Quadrant, Intersection and Tangent, then OK."
+         },
+         "type": "OS"
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "상태 막대의 객체 스냅이 꺼져 있을 때만 F3을 눌러 켭니다.",
+          "en": "Press F3 only if Object Snap is off."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 첫 번째 점을 묻는 동안 기존 선의 끝점에 커서를 올립니다. 표식만 보고 클릭하지 않습니다.",
+          "en": "Type and Enter. At the first-point prompt, hover over an existing endpoint without clicking."
+         },
+         "type": "L"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "끝점 네모 표식을 확인한 뒤 Esc를 두 번 눌러 LINE을 취소합니다. 표시가 없으면 OS의 끝점과 F3 상태를 다시 봅니다.",
+          "en": "After checking the square endpoint marker, press Esc twice to cancel LINE. If absent, recheck Endpoint in OS and F3."
+         },
+         "type": "Esc"
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "수평·수직 거리 입력 전에 직교를 확인합니다. 켜야 할 때만 F8을 누릅니다. 대각선이나 접선을 그릴 때는 각 단계의 안내대로 끕니다.",
+          "en": "Check Ortho before horizontal or vertical distance entry. Toggle F8 only as needed; later steps turn it off for diagonals and tangents."
+         }
         }
        ],
        "expect": {
@@ -1433,8 +1434,8 @@
         "en": "Dimensions overlap the visible lines, so selecting them afterwards is painful. Switching once before you start is far cheaper."
        },
        "pitfall": {
-        "ko": "이 단계를 건너뛰면 치수가 외형선 레이어에 흰색으로 들어가요. 치수 하나를 클릭하고 오른쪽 버튼으로 유사 선택을 고른 다음, 레이어 목록에서 치수선을 고르면 전부 옮겨 갑니다.",
-        "en": "Skip this and the dimensions land white on the visible-line layer. Click one, right-click, choose Select Similar, then pick the dimension layer and they all move."
+        "ko": "이 단계를 건너뛰면 치수가 외형선 레이어에 초록색으로 들어가요. 치수 하나를 클릭하고 오른쪽 버튼으로 유사 선택을 고른 다음, 레이어 목록에서 치수선을 고르면 전부 옮겨 갑니다.",
+        "en": "Skip this and the dimensions land green on the visible-line layer. Click one, right-click, choose Select Similar, then pick the dimension layer and they all move."
        }
       },
       {
@@ -1481,6 +1482,13 @@
         "en": "Set text, arrows, and decimals, then set current"
        },
        "actions": [
+        {
+         "kind": "see",
+         "do": {
+          "ko": "기호 및 화살표 탭에서는 중심 표시를 없음으로 둡니다(DIMCEN 0). 앞 차시의 중심 표식과 겹치지 않게 합니다.",
+          "en": "In Symbols and Arrows, set Center Marks to None (DIMCEN 0) to avoid duplicating existing marks."
+         }
+        },
         {
          "do": {
           "ko": "— 문자 탭을 열고 문자 높이에 넣습니다. 문자 색상은 도면층별, 문자 배치는 수직 위 · 수평 중심으로 둡니다.",
@@ -1676,12 +1684,12 @@
          }
         },
         {
-         "x": 0,
+         "x": 5,
          "y": 16,
          "snap": "end",
          "hover": {
-          "ko": "왼쪽 세로변 끝 — 베이스 높이 16 의 위쪽 점",
-          "en": "Top of the left edge - the upper point of the 16"
+          "ko": "왼쪽 모따기의 위쪽 끝점 — 높이 16",
+          "en": "Upper endpoint of left chamfer — height 16"
          }
         },
         {
@@ -1829,16 +1837,57 @@
        },
        "actions": [
         {
+         "kind": "see",
          "do": {
-          "ko": "엔터. 첫 번째 원점을 물어보면 왼쪽 목 경사선 위에 마우스를 올렸다 뗍니다. 이어서 베이스 윗면 선 위에 올리면 두 선을 연장했을 때 만나는 자리에 교차점 표시가 뜹니다. 그 자리를 클릭합니다. 두 번째 원점도 오른쪽에서 같은 방법으로 잡고 치수선을 아래로 놓으면 80 입니다.",
-          "en": "then Enter. Asked for the first origin, hover over the left sloping web edge and move away. Then hover over the top face of the base: a marker appears where the two lines would meet if extended. Click there. Take the second origin the same way on the right; below, it reads 80."
-         },
-         "type": "DLI",
+          "ko": "80은 필렛 전의 이론 교차점 간격입니다. 실제 필렛 접점 간격이 아닙니다. 직교를 끄고 치수선 레이어를 현재로 둡니다.",
+          "en": "80 spans the theoretical intersections before filleting, not the fillet tangencies. Turn Ortho off and keep the dimension layer current."
+         }
+        },
+        {
          "kind": "type",
+         "do": {
+          "ko": "XL 엔터. 왼쪽 목 직선의 아래 끝점과 위 끝점을 끝점 스냅으로 클릭하고 엔터. 오른쪽 목에도 같은 순서로 하나 더 만듭니다.",
+          "en": "XL, Enter. Snap the lower and upper endpoints of the left web line, Enter. Repeat for the right web line."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "XL 엔터, H 엔터. 모따기의 위쪽 끝점을 클릭하고 엔터로 끝냅니다.",
+          "en": "XL, Enter, H, Enter. Pick a chamfer upper endpoint and Enter."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "DLI 엔터. 왼쪽 목 구성선과 수평 구성선의 교차점을 클릭하고, 오른쪽 목 구성선과 같은 수평선의 교차점을 클릭합니다.",
+          "en": "DLI, Enter. Pick the left and right web construction-line intersections with the horizontal guide."
+         },
          "spot": [
           1,
           2
          ]
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "치수선을 베이스 아래 빈곳에 놓고 실제 값 80을 확인합니다.",
+          "en": "Place the dimension below the base and verify actual measurement 80."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "QSELECT 엔터. 적용 대상 전체 도면, 객체 유형 구성선, 연산자 모두 선택, 새 선택 세트에 포함을 확인합니다. 선택된 구성선 세 개만 Delete로 지웁니다.",
+          "en": "QSELECT, Enter. Entire drawing, Xline, Select All, Include in New Selection Set. Delete only the three selected construction lines."
+         }
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "치수 80과 원래 형상이 남았는지 봅니다. 이후 목 형상을 바꾸면 이론 교차점을 다시 잡아 검산합니다.",
+          "en": "Verify that dimension 80 and the original shape remain. Reconstruct the theoretical intersections if the web changes later."
+         }
         }
        ],
        "expect": {
@@ -1846,12 +1895,12 @@
         "en": "80 goes in below the front view."
        },
        "why": {
-        "ko": "이 값은 잴 점이 도면에 없어요. R10 필렛이 목 경사선과 베이스 윗면이 만나는 모서리를 둥글게 지웠거든요. 그 이론상의 모서리를 확장 교차점 스냅으로 다시 잡습니다.",
-        "en": "There is no point on the drawing to measure to: an R10 fillet rounded away the corner where the web edge meets the top of the base. The extended intersection snap recovers that theoretical corner."
+        "ko": "필렛 뒤에는 이론 모서리가 없어집니다. 목의 두 끝점에서 복원한 보조선으로 원래 설계 기준을 정확히 찾습니다.",
+        "en": "Fillets remove the theoretical corners. Guides through the web endpoints recover the design datum precisely."
        },
        "pitfall": {
-        "ko": "80 이 아닌 값이 나오면 경사선을 잘못 짚은 거예요. 이 부품은 좌우 대칭이라 두 점은 가운데 60 에서 좌우로 40 씩 떨어진 자리에 있어야 합니다. 가로 20 과 가로 100 입니다.",
-        "en": "Any value but 80 means you hovered over the wrong line. The part is symmetrical, so the points sit 40 either side of the center at 60, at 20 and at 100."
+        "ko": "필렛의 실제 접점은 80의 기준이 아닙니다. 재고 나면 구성선 세 개를 지우고 치수는 남깁니다.",
+        "en": "Fillet tangencies do not define 80. Remove all three guides after dimensioning and keep the dimension."
        },
        "feature": "neck",
        "spots": [
@@ -1860,8 +1909,8 @@
          "y": 16,
          "snap": "int",
          "hover": {
-          "ko": "왼쪽 라운드가 베이스 윗면에 닿는 자리 — 80 의 왼쪽 점",
-          "en": "Where the left fillet meets the base top - the left point of the 80"
+          "ko": "왼쪽 목 직선의 연장선과 베이스 윗면의 이론 교차점",
+          "en": "Theoretical intersection of left web and base top"
          }
         },
         {
@@ -1869,11 +1918,72 @@
          "y": 16,
          "snap": "int",
          "hover": {
-          "ko": "오른쪽 라운드가 닿는 자리 — 80 의 오른쪽 점",
-          "en": "Where the right fillet meets - the right point of the 80"
+          "ko": "오른쪽 목 직선의 연장선과 베이스 윗면의 이론 교차점",
+          "en": "Theoretical intersection of right web and base top"
          }
         }
-       ]
+       ],
+       "construction": [
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           -4,
+           16
+          ],
+          [
+           124,
+           16
+          ]
+         ],
+         "role": "guide"
+        }
+       ],
+       "focus": {
+        "view": "front",
+        "bounds": [
+         6,
+         6,
+         114,
+         42
+        ],
+        "padding": 7
+       },
+       "diagramNote": {
+        "ko": "완성 형상은 위치 참고이며 점선은 이 단계의 보조선 또는 가공 전 선입니다.",
+        "en": "The finished shape is a position reference; dashed lines are guides or pre-edit geometry for this step."
+       }
       },
       {
        "n": 10,
@@ -2054,8 +2164,8 @@
        "feature": "fillet",
        "spots": [
         {
-         "x": 22.14,
-         "y": 26.0,
+         "x": 18.567906384241212,
+         "y": 18.33955556881022,
          "snap": "nea",
          "hover": {
           "ko": "왼쪽 라운드 — 호를 클릭하면 R10 입니다",
@@ -2063,8 +2173,8 @@
          }
         },
         {
-         "x": 97.86,
-         "y": 26.0,
+         "x": 101.43209361575879,
+         "y": 18.33955556881022,
          "snap": "nea",
          "hover": {
           "ko": "오른쪽 라운드 — 같은 값이라 2-R10 으로 묶어 적습니다",
@@ -2089,6 +2199,13 @@
         "en": "PCD Ø44 and the 45 degrees"
        },
        "actions": [
+        {
+         "kind": "see",
+         "do": {
+          "ko": "대각선 중심선을 그릴 때는 직교를 끕니다. 원 중심 두 점을 스냅으로 연결합니다.",
+          "en": "Turn Ortho off for the diagonal centerline and connect the two circle centres by snaps."
+         }
+        },
         {
          "do": {
           "ko": "엔터. 탭 구멍 네 개의 중심이 지나는 피치원을 클릭합니다. 중심선 레이어에 빨간 일점쇄선으로 그려 둔 원입니다.",
@@ -2173,6 +2290,17 @@
          },
          "type": "DAN",
          "kind": "type"
+        },
+        {
+         "kind": "see",
+         "spot": [
+          1,
+          2
+         ],
+         "do": {
+          "ko": "두 중심점을 잇는 선과 수평 중심선 사이의 작은 각이 45도입니다.",
+          "en": "The smaller angle between the centre-to-centre line and horizontal axis is 45 degrees."
+         }
         }
        ],
        "expect": {
@@ -2193,11 +2321,41 @@
          "y": 62,
          "snap": "cen",
          "hover": {
-          "ko": "보스 중심 — 여기서 45도로 22",
-          "en": "The boss centre - then 22 at 45 degrees"
+          "ko": "보스 원 중심",
+          "en": "Boss centre"
+         }
+        },
+        {
+         "x": 75.55634918610404,
+         "y": 77.55634918610404,
+         "snap": "cen",
+         "hover": {
+          "ko": "오른쪽 위 탭 중심",
+          "en": "Upper-right tap centre"
          }
         }
-       ]
+       ],
+       "construction": [
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           62
+          ],
+          [
+           75.55634918610404,
+           77.55634918610404
+          ]
+         ],
+         "role": "before"
+        }
+       ],
+       "diagramNote": {
+        "ko": "완성 형상은 위치 참고이며 점선은 이 단계의 보조선 또는 가공 전 선입니다.",
+        "en": "The finished shape is a position reference; dashed lines are guides or pre-edit geometry for this step."
+       }
       }
      ]
     },
@@ -2337,8 +2495,8 @@
         "en": "4-M5 깊이 10, four M5 threads 10 deep, sits at the end of a leader on one tapped hole."
        },
        "why": {
-        "ko": "구멍을 지름 치수로 재면 드릴 구멍 지름이 나오지 나사 규격이 아닙니다. M5 는 지시이고, 깊이 10 도 정면에서는 안 보이는 값입니다.",
-        "en": "Measuring the hole gives the drilled diameter, not the thread. M5 is an instruction, and depth 10 cannot be seen from the front at all."
+        "ko": "지름 치수는 화면에 그린 원의 지름만 보여 줍니다. 이 연습의 지름 5 원은 M5 호칭을 나타내는 교육용 표현이에요. 나사 규격과 깊이 10은 지시선에 명시합니다.",
+        "en": "A diameter dimension reports only the drawn circle. The D5 circle here is an educational representation of the M5 nominal size. Specify the thread and depth 10 in the leader."
        },
        "pitfall": {
         "ko": "탭 구멍에 지름 치수를 넣으면 나사 지시가 사라집니다. 네 개 다 지시선을 뽑지도 않습니다. 앞의 4 가 개수를 말합니다.",
@@ -2347,18 +2505,18 @@
        "feature": "tap",
        "spots": [
         {
-         "x": 44.444,
-         "y": 77.556,
-         "snap": "cen",
+         "x": 41.94365081389596,
+         "y": 77.55634918610404,
+         "snap": "qua",
          "hover": {
           "ko": "왼쪽 위 탭 — 네 개가 같은 값이라 4-M5 로 묶습니다",
           "en": "The top-left tapped hole - all four are the same, so 4-M5"
          }
         },
         {
-         "x": 75.556,
-         "y": 77.556,
-         "snap": "cen",
+         "x": 78.05634918610404,
+         "y": 77.55634918610404,
+         "snap": "qua",
          "hover": {
           "ko": "오른쪽 위 탭 — 지시선은 하나만 뺍니다",
           "en": "The top-right tapped hole - only one leader is drawn"
@@ -2402,28 +2560,33 @@
          ]
         },
         {
+         "kind": "click",
          "do": {
-          "ko": "엔터.",
-          "en": "then Enter."
-         },
-         "type": "DIMEDIT",
-         "kind": "type"
+          "ko": "방금 넣은 참고 치수만 선택하고 Ctrl+1로 특성 팔레트를 엽니다.",
+          "en": "Select only the reference dimension and open Properties with Ctrl+1."
+         }
         },
         {
+         "kind": "click",
          "do": {
-          "ko": "엔터.",
-          "en": "then Enter."
-         },
-         "type": "N",
-         "kind": "type"
+          "ko": "1차 단위의 정밀도를 소수 한 자리 0.0으로 고릅니다.",
+          "en": "Set Primary Units precision to one decimal, 0.0."
+         }
         },
         {
+         "kind": "type",
          "do": {
-          "ko": "— 편집기에서 측정값 자리를 지우고 직접 칩니다. 괄호까지 같이 칩니다. 편집기를 닫고 방금 넣은 치수를 클릭한 다음 엔터를 누릅니다.",
-          "en": "- clear the measured value in the editor and type this, parentheses included. Close the editor, click the dimension you just placed, and press Enter."
+          "ko": "문자 재지정에 입력하고 엔터. 꺾쇠 자리는 실제 측정값을 유지합니다.",
+          "en": "Enter this in Text override. The angle-bracket placeholder retains the actual measurement."
          },
-         "type": "(95.7)",
-         "kind": "type"
+         "type": "(<>)"
+        },
+        {
+         "kind": "key",
+         "do": {
+          "ko": "Esc로 선택을 풀고 (95.7)을 확인합니다. EDU-A3 기본 정밀도 0은 그대로입니다.",
+          "en": "Press Esc, verify (95.7), and leave EDU-A3 default precision at 0."
+         }
         },
         {
          "do": {
@@ -2439,18 +2602,18 @@
         "en": "12 and 20 sit beside the top view, the parenthesised reference below the front view, and 26 beside it."
        },
        "why": {
-        "ko": "두께는 앞뒤 방향이라 정면도에서는 전부 겹쳐 한 선으로 보입니다. 두 치수가 같은 뒷면에서 출발하는데, 뒷면은 통째로 하나의 평면이라 기준면이 하나로 모입니다. 26 은 높이를 그대로 지시하므로 괄호를 치지 않습니다.",
-        "en": "Thickness runs front to back, so in the front view everything overlaps into one line. Both thicknesses start from the same back face, and because that face is one flat plane the datum gathers to one place. The 26 specifies a height plainly, so no parentheses."
+        "ko": "두께는 같은 뒷면에서 잽니다. 참고 치수의 괄호는 문자 재지정 (<>)로 표시하고 측정값을 유지합니다.",
+        "en": "Both thicknesses use the same rear datum. Text override (<>) adds reference parentheses while retaining measurement."
        },
        "pitfall": {
-        "ko": "괄호를 빼먹으면 그 값이 검사 대상이 되고, 반올림 때문에 멀쩡한 부품이 불합격됩니다.",
-        "en": "Omit the parentheses and rounding alone will fail a good part."
+        "ko": "문자 재지정에 (95.7)을 직접 쓰지 않습니다. (<>)를 쓰고 이 치수만 소수 한 자리로 맞춥니다.",
+        "en": "Do not type (95.7) as fixed text. Use (<>) with one-decimal precision on this dimension only."
        },
        "feature": "filletc",
        "spots": [
         {
-         "x": 12.14,
-         "y": 26.0,
+         "x": 12.140030287375822,
+         "y": 26,
          "snap": "cen",
          "hover": {
           "ko": "왼쪽 필렛 중심 — 여기 높이가 26 입니다",
@@ -2458,8 +2621,8 @@
          }
         },
         {
-         "x": 107.86,
-         "y": 26.0,
+         "x": 107.85996971262418,
+         "y": 26,
          "snap": "cen",
          "hover": {
           "ko": "오른쪽 필렛 중심 — 두 중심 사이가 참고 치수 (95.7)",
@@ -2658,20 +2821,19 @@
          "kind": "click"
         },
         {
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터를 누릅니다. PDF 만 필요할 때는 이 길이 더 짧습니다. 내보내기 항목에서 윈도우를 고르고, 용지선의 왼쪽 아래 모서리와 오른쪽 위 모서리를 아까 PLOT 에서와 같은 순서로 클릭합니다.",
-          "en": "then Enter. When you only need the PDF this is the shorter route. Choose Window under Export, then click the lower-left corner of the sheet outline and the upper-right, in the same order as in PLOT."
+          "ko": "PLOT에서 PDF 파일 이름으로 넣고 저장합니다.",
+          "en": "Use this as the PDF filename when saving from PLOT."
          },
-         "type": "EXPORTPDF",
-         "kind": "type"
+         "type": "EDU-IB-02_L07_RELEASE"
         },
         {
+         "kind": "see",
          "do": {
-          "ko": "— 파일 이름에 넣고 저장을 누릅니다. 나온 PDF 를 열어서 한 번 더 봅니다.",
-          "en": "- enter it as the file name and click Save. Open the PDF and look at it once more."
-         },
-         "type": "EDU-IB-02_L07_RELEASE",
-         "kind": "type"
+          "ko": "저장된 PDF를 열어 A3 가로 페이지, 도면틀과 치수 겹침을 확인합니다. 이번 실습은 PLOT으로 출력합니다.",
+          "en": "Open the PDF and check landscape A3, border and dimension overlaps. This exercise outputs through PLOT."
+         }
         }
        ],
        "expect": {
@@ -2900,8 +3062,8 @@
     "en": "What is wrong with putting a diameter dimension on a tapped hole?"
    },
    "a": {
-    "ko": "재서 나오는 것은 드릴이 지나간 구멍 지름이지 나사 규격이 아니에요. M5 는 어떤 나사를 내라는 지시이고 깊이 10 은 정면에서 안 보이는 값이라, 둘 다 재서 나오지 않습니다. 그래서 지시선으로 4-M5 깊이 10 을 뽑아요. 네 개 다 뽑지 않습니다.",
-    "en": "Measuring gives the drilled diameter, not the thread. M5 says which thread to cut and depth 10 is invisible from the front, so neither can be measured. Pull 4-M5 깊이 10 out on a leader, on one hole only."
+    "ko": "지름 치수는 화면에 그린 원의 지름만 보여 줍니다. 나사 규격과 깊이는 지시선에 따로 명시합니다.",
+    "en": "A diameter dimension reports only the drawn circle. Specify the thread and depth separately in the leader."
    }
   },
   {
@@ -2973,14 +3135,25 @@
    }
   },
   {
-   "key": "A",
+   "key": "OS",
    "name": {
-    "ko": "ZOOM 의 전체 옵션",
-    "en": "The All option of ZOOM"
+    "ko": "OSNAP · 객체 스냅 항목 설정",
+    "en": "OSNAP settings"
    },
    "when": {
-    "ko": "도면틀까지 화면에 넣을 때 씁니다",
-    "en": "To get the whole border on screen"
+    "ko": "끝점·중심·접점 등 어떤 스냅이 켜져 있는지 확인하고 바꿀 때",
+    "en": "To see and change which snaps are active - endpoint, center, tangent and the rest"
+   }
+  },
+  {
+   "key": "L",
+   "name": {
+    "ko": "LINE · 선을 긋습니다",
+    "en": "LINE, draw a line"
+   },
+   "when": {
+    "ko": "낱개로 다뤄야 하는 조각에 씁니다. 여기서는 45도 중심선이에요",
+    "en": "For segments handled one at a time; here the 45-degree centerline"
    }
   },
   {
@@ -3017,6 +3190,28 @@
    }
   },
   {
+   "key": "XL",
+   "name": {
+    "ko": "XLINE · 구성선",
+    "en": "XLINE - construction line"
+   },
+   "when": {
+    "ko": "뷰끼리 값을 맞추는 투상선을 그을 때. 무한히 뻗어 세 뷰를 한 번에 지나갑니다",
+    "en": "To draw projectors that align the views. Being infinite, one line crosses all three views"
+   }
+  },
+  {
+   "key": "QSELECT",
+   "name": {
+    "ko": "신속 선택",
+    "en": "Quick select"
+   },
+   "when": {
+    "ko": "조건에 맞는 객체를 한 번에 고를 때. 구성선만 골라 지울 때, 레이어별로 걸어 개수를 셀 때, 레이어 전체에 축척을 넣을 때",
+    "en": "To grab everything matching a condition: deleting only construction lines, counting a layer's objects, or applying a scale across a whole layer"
+   }
+  },
+  {
    "key": "DDI",
    "name": {
     "ko": "DIMDIAMETER · 지름 치수를 넣습니다",
@@ -3025,39 +3220,6 @@
    "when": {
     "ko": "완전한 원과 구멍에 씁니다",
     "en": "For full circles and holes"
-   }
-  },
-  {
-   "key": "DRA",
-   "name": {
-    "ko": "DIMRADIUS · 반지름 치수를 넣습니다",
-    "en": "DIMRADIUS, place a radius"
-   },
-   "when": {
-    "ko": "라운드와 호에 씁니다",
-    "en": "For fillets and arcs"
-   }
-  },
-  {
-   "key": "DAL",
-   "name": {
-    "ko": "DIMALIGNED · 기울어진 변에 나란한 치수를 넣습니다",
-    "en": "DIMALIGNED, place a dimension parallel to a slanted edge"
-   },
-   "when": {
-    "ko": "경사면의 실제 길이에 씁니다",
-    "en": "For the true length of a sloped face"
-   }
-  },
-  {
-   "key": "DAN",
-   "name": {
-    "ko": "DIMANGULAR · 각도 치수를 넣습니다",
-    "en": "DIMANGULAR, place an angle"
-   },
-   "when": {
-    "ko": "두 선 사이의 각에 씁니다",
-    "en": "For the angle between two lines"
    }
   },
   {
@@ -3072,36 +3234,36 @@
    }
   },
   {
-   "key": "N",
+   "key": "DRA",
    "name": {
-    "ko": "DIMEDIT 의 새로 만들기 옵션",
-    "en": "The New option of DIMEDIT"
+    "ko": "DIMRADIUS · 반지름 치수를 넣습니다",
+    "en": "DIMRADIUS, place a radius"
    },
    "when": {
-    "ko": "측정값 뒤에 H7 을 붙이거나 괄호 친 값으로 바꿀 때 씁니다",
-    "en": "To append H7 or write a parenthesised value"
+    "ko": "라운드와 호에 씁니다",
+    "en": "For fillets and arcs"
    }
   },
   {
-   "key": "M",
+   "key": "DAN",
    "name": {
-    "ko": "여러 줄 문자 옵션",
-    "en": "The multiline text option"
+    "ko": "DIMANGULAR · 각도 치수를 넣습니다",
+    "en": "DIMANGULAR, place an angle"
    },
    "when": {
-    "ko": "치수선 위치를 찍기 전에 접두어를 붙일 때 씁니다",
-    "en": "To add a prefix before clicking where the line goes"
+    "ko": "두 선 사이의 각에 씁니다",
+    "en": "For the angle between two lines"
    }
   },
   {
-   "key": "L",
+   "key": "DAL",
    "name": {
-    "ko": "LINE · 선을 긋습니다",
-    "en": "LINE, draw a line"
+    "ko": "DIMALIGNED · 기울어진 변에 나란한 치수를 넣습니다",
+    "en": "DIMALIGNED, place a dimension parallel to a slanted edge"
    },
    "when": {
-    "ko": "낱개로 다뤄야 하는 조각에 씁니다. 여기서는 45도 중심선이에요",
-    "en": "For segments handled one at a time; here the 45-degree centerline"
+    "ko": "경사면의 실제 길이에 씁니다",
+    "en": "For the true length of a sloped face"
    }
   },
   {
@@ -3127,17 +3289,6 @@
    }
   },
   {
-   "key": "EXPORTPDF",
-   "name": {
-    "ko": "PDF 로 내보냅니다",
-    "en": "Export a PDF"
-   },
-   "when": {
-    "ko": "제출용 파일에 씁니다",
-    "en": "For the file you submit"
-   }
-  },
-  {
    "key": "SAVEAS",
    "name": {
     "ko": "새 이름으로 저장합니다",
@@ -3146,6 +3297,50 @@
    "when": {
     "ko": "차시 종료 상태를 남길 때 씁니다",
     "en": "To leave a lesson end state behind"
+   }
+  },
+  {
+   "key": "A",
+   "name": {
+    "ko": "ZOOM 의 전체 옵션",
+    "en": "The All option of ZOOM"
+   },
+   "when": {
+    "ko": "도면틀까지 화면에 넣을 때 씁니다",
+    "en": "To get the whole border on screen"
+   }
+  },
+  {
+   "key": "N",
+   "name": {
+    "ko": "DIMEDIT 의 새로 만들기 옵션",
+    "en": "The New option of DIMEDIT"
+   },
+   "when": {
+    "ko": "측정값 뒤에 H7 을 붙이거나 괄호 친 값으로 바꿀 때 씁니다",
+    "en": "To append H7 or write a parenthesised value"
+   }
+  },
+  {
+   "key": "M",
+   "name": {
+    "ko": "여러 줄 문자 옵션",
+    "en": "The multiline text option"
+   },
+   "when": {
+    "ko": "치수선 위치를 찍기 전에 접두어를 붙일 때 씁니다",
+    "en": "To add a prefix before clicking where the line goes"
+   }
+  },
+  {
+   "key": "EXPORTPDF",
+   "name": {
+    "ko": "PDF 로 내보냅니다",
+    "en": "Export a PDF"
+   },
+   "when": {
+    "ko": "제출용 파일에 씁니다",
+    "en": "For the file you submit"
    }
   }
  ],

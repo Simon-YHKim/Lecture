@@ -8,11 +8,16 @@
     "origin": "front-view-lower-left",
     "x": "front-view-right",
     "y": "front-view-up",
-    "z": "depth-toward-viewer",
+    "z": "depth-away-from-viewer",
     "datumA": {
       "type": "plane",
       "equation": "y=0",
-      "role": "프레임 접촉 기준면"
+      "role": "베이스 바닥 높이 기준면"
+    },
+    "frameContactPlane": {
+      "type": "plane",
+      "equation": "z=20",
+      "role": "프레임 접촉 뒷면"
     },
     "datumB": {
       "type": "plane",
@@ -30,6 +35,41 @@
     "widthX": 120.0,
     "heightY": 90.0,
     "depthZ": 20.0
+  },
+  "projectionContract": {
+    "solidUnion": "plate profile extruded z=8..20, joined to boss cylinder z=0..8",
+    "centreMarks": {
+      "command": "DIMCENTER",
+      "dimcen": 3,
+      "dimscale": 1,
+      "quantity": 10,
+      "features": [
+        "taps",
+        "fillets",
+        "slot-end-arcs"
+      ]
+    },
+    "topVisiblePlateFront": {
+      "z": 8.0,
+      "xRanges": [
+        [
+          0.0,
+          32.792638917721234
+        ],
+        [
+          87.20736108227877,
+          120.0
+        ]
+      ]
+    },
+    "rightVisiblePlateFront": {
+      "z": 8.0,
+      "yRange": [
+        34.0,
+        68.61509659328588
+      ]
+    },
+    "note": "공유 원통면에는 이음선을 그리지 않는다. 접점 좌표는 교육자 검산용이며 학습자는 목 위쪽 끝점을 투상한다."
   },
   "features": {
     "base": {

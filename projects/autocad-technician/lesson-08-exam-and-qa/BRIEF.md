@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "AutoCAD 기본 과정 1~7차시를 마친 Technician 인증 응시자"
-length: 9m15s
+length: 6m35s
 angle: lesson-08-exam-and-qa
 narration: user-recorded
 style_preset: lg-training
@@ -41,13 +41,13 @@ recording_slots: 0
 
 | # | 파일 | 길이 | 화면 | 비트 |
 | --- | --- | --- | --- | --- |
-| 1 | `01-title` | 11s | 검정 타이틀 · **시험 안내와 Q&A** | — |
-| 2 | `02-exam` | 111s | 왼쪽 시험 안내 표 6행 / 오른쪽 3뷰 도면 | 6 |
-| 3 | `03-qa` | 122s | 질문 카드 5장 — 첫 장은 채점 기준이 들어올 빈자리 | 5 |
-| 4 | `04-technician-work` | 90s | 테크니션 업무 카드 3장 (마크 포함) | 3 |
-| 5 | `05-field-commands` | 122s | 실무 명령 표 6행 + 하단 연습 안내 | 6 |
-| 6 | `06-recap` | 82s | 2분할 마무리 | 2 |
-| 7 | `07-closing` | 17s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 과정 완료 | 2 |
+| 1 | `01-title` | 8s | 검정 타이틀 · **시험 안내와 Q&A** | — |
+| 2 | `02-exam` | 81s | 왼쪽 시험 안내 표 6행 / 오른쪽 3뷰 도면 | 6 |
+| 3 | `03-qa` | 81s | 질문 카드 5장 — 첫 장은 채점 기준이 들어올 빈자리 | 5 |
+| 4 | `04-technician-work` | 65s | 테크니션 업무 카드 3장 (마크 포함) | 3 |
+| 5 | `05-field-commands` | 86s | 실무 명령 표 6행 + 하단 연습 안내 | 6 |
+| 6 | `06-recap` | 60s | 2분할 마무리 | 2 |
+| 7 | `07-closing` | 13s | 인사 — 검정 바탕 · 「고생하셨습니다」 · 과정 완료 | 2 |
 
 프레임 길이와 비트 시각은 `SCRIPT.md` 에서 계산된다
 (`LESSON_STYLE.md` 13·14번). 이 표는 손으로 고치지 않는다.

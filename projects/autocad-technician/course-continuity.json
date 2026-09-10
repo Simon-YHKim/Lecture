@@ -10,14 +10,16 @@
     "치수선"
   ],
   "lessonCount": 8,
-  "totalSec": 14895,
+  "deliveryMode": "lesson",
+  "videoCount": 8,
+  "totalSec": 10909,
   "note": "차시마다 새 파일을 열지 않는다. 앞 차시의 checkpointOut 파일을 열어 이어 그린다. 이 파일은 scripts/part/write_course_docs.py 가 만든다.",
   "lessons": [
     {
       "no": 1,
       "slug": "lesson-01-orientation",
       "topic": "오리엔테이션",
-      "durationSec": 450,
+      "durationSec": 336,
       "frames": 6,
       "checkpointIn": null,
       "checkpointOut": null,
@@ -25,364 +27,292 @@
       "demoSec": 0,
       "demoParts": [],
       "cutAfterStep": [],
-      "episodes": [
-        {
-          "title": "오리엔테이션",
-          "lengthSec": 450,
-          "frames": [
-            "01-title",
-            "02-why-drawings",
-            "03-how-assessed",
-            "04-roadmap",
-            "05-recap",
-            "06-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "오리엔테이션",
+        "lengthSec": 336.377,
+        "frames": [
+          "01-title",
+          "02-why-drawings",
+          "03-how-assessed",
+          "04-roadmap",
+          "05-recap",
+          "06-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 2,
       "slug": "lesson-02-part-and-template",
       "topic": "부품 이해와 도면 환경",
-      "durationSec": 2217,
+      "durationSec": 1615,
       "frames": 11,
       "checkpointIn": null,
       "checkpointOut": "L02_TEMPLATE",
       "demoId": "DEMO-01",
-      "demoSec": 972,
+      "demoSec": 712.195,
       "demoParts": [],
       "cutAfterStep": [],
-      "episodes": [
-        {
-          "title": "부품과 도면 규칙",
-          "lengthSec": 967,
-          "frames": [
-            "01-title",
-            "02-what-is-this-part",
-            "03-surfaces",
-            "04-why-this-shape",
-            "05-reading-dimensions",
-            "06-reading-symbols",
-            "07-sheet-and-layers"
-          ]
-        },
-        {
-          "title": "A3 템플릿 만들기",
-          "lengthSec": 972,
-          "frames": [
-            "08-build-template"
-          ]
-        },
-        {
-          "title": "정리와 오늘 친 것",
-          "lengthSec": 277,
-          "frames": [
-            "09-recap",
-            "10-keys",
-            "11-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "부품 이해와 도면 환경",
+        "lengthSec": 1614.732,
+        "frames": [
+          "01-title",
+          "02-what-is-this-part",
+          "03-surfaces",
+          "04-why-this-shape",
+          "05-reading-dimensions",
+          "06-reading-symbols",
+          "07-sheet-and-layers",
+          "08-build-template",
+          "09-recap",
+          "10-keys",
+          "11-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 3,
       "slug": "lesson-03-baseline-profile",
       "topic": "기준선과 외곽",
-      "durationSec": 2218,
+      "durationSec": 1607,
       "frames": 10,
       "checkpointIn": "L02_TEMPLATE",
       "checkpointOut": "L03_PROFILE",
       "demoId": "DEMO-01",
-      "demoSec": 1119,
+      "demoSec": 760.828,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 354
+          "lengthSec": 265.685
         },
         {
           "id": "DEMO-01B",
-          "lengthSec": 765
+          "lengthSec": 495.143
         }
       ],
       "cutAfterStep": [
         6
       ],
-      "episodes": [
-        {
-          "title": "원점과 중심선",
-          "lengthSec": 968,
-          "frames": [
-            "01-title",
-            "02-today",
-            "03-concept",
-            "04-on-the-drawing",
-            "05-demo-a"
-          ]
-        },
-        {
-          "title": "베이스 외곽과 목",
-          "lengthSec": 765,
-          "frames": [
-            "05-demo-b"
-          ]
-        },
-        {
-          "title": "검산과 정리",
-          "lengthSec": 485,
-          "frames": [
-            "06-check",
-            "07-recap",
-            "08-keys",
-            "09-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "기준선과 외곽",
+        "lengthSec": 1606.854,
+        "frames": [
+          "01-title",
+          "02-today",
+          "03-concept",
+          "04-on-the-drawing",
+          "05-demo-a",
+          "05-demo-b",
+          "06-check",
+          "07-recap",
+          "08-keys",
+          "09-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 4,
       "slug": "lesson-04-circles-arcs",
       "topic": "원·호·오프셋",
-      "durationSec": 2185,
+      "durationSec": 1646,
       "frames": 11,
       "checkpointIn": "L03_PROFILE",
       "checkpointOut": "L04_FEATURES",
       "demoId": "DEMO-01",
-      "demoSec": 1124,
+      "demoSec": 831.185,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 408
+          "lengthSec": 258.448
         },
         {
           "id": "DEMO-01B",
-          "lengthSec": 589
+          "lengthSec": 436.04
         },
         {
           "id": "DEMO-01C",
-          "lengthSec": 127
+          "lengthSec": 136.697
         }
       ],
       "cutAfterStep": [
         6,
         14
       ],
-      "episodes": [
-        {
-          "title": "축 구멍과 탭 네 개",
-          "lengthSec": 1068,
-          "frames": [
-            "01-title",
-            "02-today",
-            "03-concept",
-            "04-on-the-drawing",
-            "05-demo-a"
-          ]
-        },
-        {
-          "title": "장공과 필렛",
-          "lengthSec": 589,
-          "frames": [
-            "05-demo-b"
-          ]
-        },
-        {
-          "title": "검산과 정리",
-          "lengthSec": 528,
-          "frames": [
-            "05-demo-c",
-            "06-check",
-            "07-recap",
-            "08-keys",
-            "09-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "원·호·오프셋",
+        "lengthSec": 1646.298,
+        "frames": [
+          "01-title",
+          "02-today",
+          "03-concept",
+          "04-on-the-drawing",
+          "05-demo-a",
+          "05-demo-b",
+          "05-demo-c",
+          "06-check",
+          "07-recap",
+          "08-keys",
+          "09-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 5,
       "slug": "lesson-05-three-views",
       "topic": "제3각법 3뷰와 반복",
-      "durationSec": 2347,
+      "durationSec": 1719,
       "frames": 11,
       "checkpointIn": "L04_FEATURES",
       "checkpointOut": "L05_VIEWS",
       "demoId": "DEMO-01",
-      "demoSec": 1483,
+      "demoSec": 1097.973,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 498
+          "lengthSec": 347.057
         },
         {
           "id": "DEMO-01B",
-          "lengthSec": 513
+          "lengthSec": 395.999
         },
         {
           "id": "DEMO-01C",
-          "lengthSec": 472
+          "lengthSec": 354.917
         }
       ],
       "cutAfterStep": [
         6,
         12
       ],
-      "episodes": [
-        {
-          "title": "평면도",
-          "lengthSec": 987,
-          "frames": [
-            "01-title",
-            "02-today",
-            "03-concept",
-            "04-on-the-drawing",
-            "05-demo-a"
-          ]
-        },
-        {
-          "title": "우측면도와 축 구멍",
-          "lengthSec": 513,
-          "frames": [
-            "05-demo-b"
-          ]
-        },
-        {
-          "title": "숨은선과 정리",
-          "lengthSec": 847,
-          "frames": [
-            "05-demo-c",
-            "06-check",
-            "07-recap",
-            "08-keys",
-            "09-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "제3각법 3뷰와 반복",
+        "lengthSec": 1719.235,
+        "frames": [
+          "01-title",
+          "02-today",
+          "03-concept",
+          "04-on-the-drawing",
+          "05-demo-a",
+          "05-demo-b",
+          "05-demo-c",
+          "06-check",
+          "07-recap",
+          "08-keys",
+          "09-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 6,
       "slug": "lesson-06-editing-symbols",
       "topic": "편집과 표현",
-      "durationSec": 2325,
+      "durationSec": 1694,
       "frames": 11,
       "checkpointIn": "L05_VIEWS",
       "checkpointOut": "L06_REPRESENTED",
       "demoId": "DEMO-01",
-      "demoSec": 1227,
+      "demoSec": 887.257,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 437
+          "lengthSec": 293.165
         },
         {
           "id": "DEMO-01B",
-          "lengthSec": 587
+          "lengthSec": 442.976
         },
         {
           "id": "DEMO-01C",
-          "lengthSec": 203
+          "lengthSec": 151.116
         }
       ],
       "cutAfterStep": [
         7,
         13
       ],
-      "episodes": [
-        {
-          "title": "투상선 정리",
-          "lengthSec": 1131,
-          "frames": [
-            "01-title",
-            "02-today",
-            "03-concept",
-            "04-on-the-drawing",
-            "05-demo-a"
-          ]
-        },
-        {
-          "title": "대칭 검산과 레이어",
-          "lengthSec": 587,
-          "frames": [
-            "05-demo-b"
-          ]
-        },
-        {
-          "title": "선 종류 축척과 정리",
-          "lengthSec": 608,
-          "frames": [
-            "05-demo-c",
-            "06-check",
-            "07-recap",
-            "08-keys",
-            "09-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "편집과 표현",
+        "lengthSec": 1694.26,
+        "frames": [
+          "01-title",
+          "02-today",
+          "03-concept",
+          "04-on-the-drawing",
+          "05-demo-a",
+          "05-demo-b",
+          "05-demo-c",
+          "06-check",
+          "07-recap",
+          "08-keys",
+          "09-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 7,
       "slug": "lesson-07-dimensioning-release",
       "topic": "치수와 출도",
-      "durationSec": 2588,
+      "durationSec": 1897,
       "frames": 11,
       "checkpointIn": "L06_REPRESENTED",
       "checkpointOut": "L07_RELEASE",
       "demoId": "DEMO-01",
-      "demoSec": 1496,
+      "demoSec": 1094.119,
       "demoParts": [
         {
           "id": "DEMO-01A",
-          "lengthSec": 288
+          "lengthSec": 234.332
         },
         {
           "id": "DEMO-01B",
-          "lengthSec": 861
+          "lengthSec": 621.354
         },
         {
           "id": "DEMO-01C",
-          "lengthSec": 346
+          "lengthSec": 238.433
         }
       ],
       "cutAfterStep": [
         5,
         14
       ],
-      "episodes": [
-        {
-          "title": "치수 스타일과 전체 크기",
-          "lengthSec": 905,
-          "frames": [
-            "01-title",
-            "02-today",
-            "03-concept",
-            "04-on-the-drawing",
-            "05-demo-a"
-          ]
-        },
-        {
-          "title": "치수 기입",
-          "lengthSec": 861,
-          "frames": [
-            "05-demo-b"
-          ]
-        },
-        {
-          "title": "축척 확인과 출도",
-          "lengthSec": 821,
-          "frames": [
-            "05-demo-c",
-            "06-check",
-            "07-recap",
-            "08-keys",
-            "09-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "치수와 출도",
+        "lengthSec": 1896.635,
+        "frames": [
+          "01-title",
+          "02-today",
+          "03-concept",
+          "04-on-the-drawing",
+          "05-demo-a",
+          "05-demo-b",
+          "05-demo-c",
+          "06-check",
+          "07-recap",
+          "08-keys",
+          "09-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     },
     {
       "no": 8,
       "slug": "lesson-08-exam-and-qa",
       "topic": "시험 안내와 Q&A",
-      "durationSec": 565,
+      "durationSec": 395,
       "frames": 7,
       "checkpointIn": null,
       "checkpointOut": null,
@@ -390,21 +320,21 @@
       "demoSec": 0,
       "demoParts": [],
       "cutAfterStep": [],
-      "episodes": [
-        {
-          "title": "시험 안내와 Q&A",
-          "lengthSec": 565,
-          "frames": [
-            "01-title",
-            "02-exam",
-            "03-qa",
-            "04-technician-work",
-            "05-field-commands",
-            "06-recap",
-            "07-closing"
-          ]
-        }
-      ]
+      "delivery": {
+        "entry": "index.html",
+        "title": "시험 안내와 Q&A",
+        "lengthSec": 395.405,
+        "frames": [
+          "01-title",
+          "02-exam",
+          "03-qa",
+          "04-technician-work",
+          "05-field-commands",
+          "06-recap",
+          "07-closing"
+        ]
+      },
+      "narrationTempo": 1.38
     }
   ]
 }

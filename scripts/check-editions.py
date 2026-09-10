@@ -30,8 +30,6 @@ import os
 import re
 import sys
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COURSE = os.path.join(ROOT, "projects", "autocad-technician")
 SELF = os.path.join(ROOT, "scripts", "selfstudy", "source")
@@ -47,6 +45,7 @@ SLUG = {
 NOT_A_COMMAND = re.compile(
     r"^(F\d{1,2}|Ctrl\+\S+|Esc|Enter|Tab|Shift|Delete|Space|"
     r"(EDU-IB-02_)?L0\d_[A-Z_]+|EDU-IB-02\S*|acadiso\.dwt|\S+\.(dwg|dwt|shx)|"
+    r"\([+-]?\d+(?:\.\d+)?\)|<>|\(<>\)|"
     r"\d[\d.,\-]*|[가-힣].*|.{25,})$", re.I)
 TICK = re.compile(r"`([^`\n]+)`")
 STEP_HEAD = re.compile(r"^### (\d+)단계", re.M)
@@ -72,7 +71,8 @@ def demo_span(body):
 
 
 def lecture(no):
-    body = io.open(os.path.join(COURSE, SLUG[no], "SCRIPT.md"), encoding="utf-8").read()
+    with io.open(os.path.join(COURSE, SLUG[no], "SCRIPT.md"), encoding="utf-8") as stream:
+        body = stream.read()
     demo = demo_span(body)
     return {"body": body, "demo": demo,
             "steps": len(STEP_HEAD.findall(demo)),
@@ -80,7 +80,8 @@ def lecture(no):
 
 
 def selfstudy(no):
-    doc = json.load(io.open(os.path.join(SELF, "lesson-%02d.json" % no), encoding="utf-8"))
+    with io.open(os.path.join(SELF, "lesson-%02d.json" % no), encoding="utf-8") as stream:
+        doc = json.load(stream)
     steps, cmds = 0, set()
     for sec in doc.get("sections", []):
         for blk in sec.get("blocks", []):
@@ -188,4 +189,5 @@ def main():
 
 
 if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     raise SystemExit(main())

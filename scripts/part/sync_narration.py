@@ -1,4 +1,4 @@
-"""Place measured narration at its owning frame in the master and every episode.
+"""Place measured narration at its owning frame in the current delivery master.
 
 The WAV already includes its opening silence. Audio starts at the frame start;
 the extra hold at the end of a frame is not part of that WAV. Accumulating only
@@ -12,7 +12,8 @@ from pathlib import Path
 import re
 
 import lesson_docs
-from narrate_tts import verify_script_hash
+import episodes
+from narrate_tts import verify_script_hash, verify_tempo_timing
 
 
 NARRATION = re.compile(
@@ -41,9 +42,10 @@ def attach(source, timing):
         if Path(name).name != name or not re.fullmatch(r'[a-zA-Z0-9_-]+\.wav', name):
             raise ValueError('Invalid narration filename')
         tags.append('  <audio id="narration-%s" class="clip" data-role="narration" '
-                    'src="assets/narration/%s" preload="metadata" data-start="%g" '
-                    'data-duration="%g" data-track-index="2" data-has-audio="true"></audio>'
-                    % (html.escape(comp, quote=True), name, float(start), float(f['duration'])))
+                    'src="assets/narration/%s" preload="metadata" data-start="%s" '
+                    'data-duration="%s" data-track-index="2" data-has-audio="true"></audio>'
+                    % (html.escape(comp, quote=True), name, format(start, '.3f').rstrip('0').rstrip('.'),
+                       format(float(f['duration']), '.3f').rstrip('0').rstrip('.')))
     source = NARRATION.sub('', source)
     source, count = ROOT_END.subn(lambda m: '\n' + '\n'.join(tags) + '\n</div>' + m[1], source)
     if count != 1:
@@ -55,7 +57,10 @@ def sync(lesson_dir):
     root = Path(lesson_dir)
     timing = json.loads((root / 'narration-timing.json').read_text(encoding='utf-8'))
     verify_script_hash(root, timing)
-    files = [root / 'index.html', *sorted((root / 'compositions/episodes').glob('ep*.html'))]
+    verify_tempo_timing(timing, required=episodes.is_unified(root.name))
+    files = [root / 'index.html']
+    if not episodes.is_unified(root.name):
+        files += sorted((root / 'compositions/episodes').glob('ep*.html'))
     prepared = {}
     for path in files:
         source = path.read_text(encoding='utf-8')

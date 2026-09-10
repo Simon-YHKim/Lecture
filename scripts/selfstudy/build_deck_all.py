@@ -56,21 +56,25 @@ def parts(path):
 def main(outpath, tmpdir, gsap=None):
     if not os.path.isdir(tmpdir):
         os.makedirs(tmpdir)
+    B.USED_SURFACES.clear()
     slides, bodies, lessons = [], [], []
     for no, slug, title in LESSONS:
         src = os.path.join(ROOT, 'projects', 'autocad-technician', slug)
         js = os.path.join(HERE, 'source', 'lesson-%02d.json' % no)
         one = os.path.join(tmpdir, 'deck-l%02d.html' % no)
-        B.main(src, js, one)
+        B.main(src, js, one, include_symbols=False)
         island, body = parts(one)
         lessons.append({'no': no, 'title': title, 'at': len(slides) + 1,
-                        'count': len(island['slides'])})
+                        'count': len(island['slides']),
+                        'practiceSteps': island['practiceSteps'],
+                        'practiceActions': island['practiceActions']})
         slides += island['slides']
         bodies.append('<!-- ===== %d차시 %s ===== -->\n%s' % (no, title, body))
 
     review_id = hashlib.sha256((''.join(bodies) + json.dumps(slides, ensure_ascii=False, sort_keys=True)).encode('utf-8')).hexdigest()
     manifest = json.dumps({'slides': slides, 'slideSequences': [], 'reviewId': review_id,
-                           'lessons': lessons}, ensure_ascii=False, indent=1)
+                           'lessons': lessons, 'language': 'ko',
+                           'organization': 'lesson'}, ensure_ascii=False, indent=1)
     nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
     memo = io.open(os.path.join(HERE, 'assets', 'deck_memo.html'), encoding='utf-8').read()
     if gsap:

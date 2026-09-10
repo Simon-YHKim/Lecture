@@ -5,32 +5,32 @@
   "ko": "시험 안내와 Q&A",
   "en": "Exam Briefing and Q&A"
  },
- "videoLength": "09:15",
+ "videoLength": "06:35",
  "selfStudyMin": 97,
  "opens": null,
  "saves": null,
  "summary": {
   "what": {
-   "ko": "새로 그리는 도면이 없습니다. 시험이 어떻게 진행되는지를 여섯 항목으로 확정합니다. 그다음 40분을 재고 2차시부터 7차시까지를 통째로 한 번 그려 봐요.",
-   "en": "There is no new drawing here. You settle how the exam runs, in six items. Then you set a 40-minute clock and redraw Lessons 2 through 7 in one pass."
+   "ko": "시험 공지에서 확인할 여섯 항목과 자주 묻는 질문을 정리합니다. 2~7차시에서 직접 그린 도면을 바탕으로 전체 작도 순서를 다시 연습합니다.",
+   "en": "Review six items to check in the exam notice and common questions. Rehearse the complete drawing sequence using your work from Lessons 2–7."
   },
   "why": {
-   "ko": "시험 진행 방식을 알아야 필요한 준비를 할 수 있습니다. 시간은 40분이고 지나면 즉시 제출합니다. 작도 순서를 미리 익혀 두세요. 화면 앞에서 순서를 고민하는 시간을 줄일 수 있어요.",
-   "en": "Knowing how the exam runs helps you prepare. You have 40 minutes and must submit as soon as time is up. Practise the drawing sequence in advance to reduce time spent deciding what to do next."
+   "ko": "채점 기준과 합격선, 시험 운영 안내는 공유 예정입니다. 공지를 기다리는 동안에는 작도 순서를 익히고 단계별로 걸린 시간을 기록해 보세요.",
+   "en": "The marking scheme, pass mark, and exam operations will be shared later. Meanwhile, practise the sequence and record how long each step takes."
   },
   "where": {
-   "ko": "부품은 7차시에서 이미 끝났습니다. 치수까지 들어간 A3 한 장이 손에 있어요. 이 차시는 그 한 장을 40분 안에 다시 만들 수 있는지를 봐요.",
-   "en": "The part was finished back in Lesson 7. You have one A3 sheet with all the dimensions on it. This lesson asks whether you can rebuild that sheet in 40 minutes."
+   "ko": "부품 도면은 7차시에서 완성했습니다. 여기서는 그 도면을 직접 다시 그리며 막히는 단계를 찾습니다. 새로운 제출용 체크포인트는 만들지 않습니다.",
+   "en": "The part drawing was completed in Lesson 7. Redraw it to find the steps that need practice; this lesson adds no new submission checkpoint."
   }
  },
  "objectives": [
   {
-   "ko": "시험 방식·출제 형태·시간·작업 범위·제출 방법·장소가 여섯 항목입니다. 이 여섯을 보지 않고 말할 수 있습니다.",
-   "en": "You can state all six items from memory: format, source material, time, scope, submission, and venue."
+   "ko": "시험 공지에서 방식·출제 형태·제한 시간·범위·제출 방법·일시와 장소를 확인할 수 있습니다.",
+   "en": "You can identify format, source material, time limit, scope, submission rules, and date and venue in the exam notice."
   },
   {
-   "ko": "40분 안에 템플릿부터 치수까지 끝내는 순서를 미리 익힙니다. 화면 앞에서 무엇을 먼저 할지 망설이지 않고 작도할 수 있습니다.",
-   "en": "You can practise the template-to-dimensions sequence in advance and complete it within 40 minutes without hesitating over what comes next."
+   "ko": "템플릿부터 치수까지 이어지는 순서를 익히고, 각 단계에서 걸린 시간을 기록할 수 있습니다.",
+   "en": "You can rehearse the template-to-dimensions sequence and record the time spent on each step."
   },
   {
    "ko": "숨은선과 실선이 겹치면 실선을 남기고, 치수는 정면도 외형선에서 최대한 뽑을 수 있습니다.",
@@ -41,8 +41,8 @@
    "en": "You remember the six on-the-job commands by situation rather than by name: `PL`, `O`, `DI`, `LI`, `MA`, `PLOT`."
   },
   {
-   "ko": "채점 기준 표·일시·장소·제출 주소·연습 도면은 아직 확정되지 않았습니다. 별도 공지로 받는다는 것을 압니다.",
-   "en": "You know the marking scheme, date, venue, submission address, and practice drawings come by separate notice."
+   "ko": "채점 기준과 합격선, 시험 운영 안내가 공유 예정임을 알고 연습용 검산과 구분합니다.",
+   "en": "You distinguish practice checks from the marking scheme, pass mark, and exam operations that will be shared later."
   }
  ],
  "before": {
@@ -56,21 +56,21 @@
     "en": "You plotted that PDF and measured the 120 as 120 mm on paper."
    },
    {
-    "ko": "40분을 잴 타이머가 옆에 있습니다. 휴대폰 스톱워치면 돼요.",
-    "en": "A timer is beside you. A phone stopwatch is fine."
+    "ko": "작도에 걸린 시간을 기록할 타이머를 준비합니다. 휴대폰 스톱워치도 괜찮아요.",
+    "en": "Prepare a timer to record your drawing time. A phone stopwatch is fine."
    },
    {
     "ko": "빈 도면을 새로 열 수 있는 상태입니다. 모의 작도는 새 도면에서 시작합니다.",
     "en": "You can open a new empty drawing. The mock run starts from one."
    },
    {
-    "ko": "시간이 끊기지 않고 40분을 통째로 쓸 수 있는 자리예요.",
-    "en": "You are somewhere you can give the 40 minutes without interruption."
+    "ko": "집중해서 연습할 자리를 정합니다. 중간에 멈춘 시간도 따로 기록합니다.",
+    "en": "Choose a place to practise and record any interruptions separately."
    }
   ],
   "recovery": {
-   "ko": "8차시는 열 파일도 저장할 파일도 없어 언제 읽어도 돼요. 다만 40분 모의 작도는 7차시를 마친 뒤에 하세요. 치수 기입을 한 번도 안 해 본 상태로 재면 결과가 뻔해요. 어느 단계가 느린지가 아니라 「치수를 못 넣는다」만 나옵니다. 앞 차시를 건너뛴 채 시험이 급하면 순서는 이래요. 첫째, 2차시 「따라 하기 1~3」으로 템플릿을 손에 붙입니다. 둘째, 5차시의 제3각법 절을 읽습니다. 배치를 틀리면 세 뷰를 다시 배치해야 하고 40분에 그 여유가 없습니다. 셋째, 7차시 「따라 하기 1」로 치수 스타일을 한 번 세웁니다. 넷째, 그다음 이 차시의 40분 모의 작도를 하면 돼요. 채점 기준·일시·장소·제출 주소는 이 자습본에 없습니다. 별도 공지로 받습니다.",
-   "en": "Lesson 8 opens and saves no file, so you can read it any time. Do the 40-minute mock run after Lesson 7 though. Timing yourself before you have ever dimensioned anything tells you only 'I cannot dimension', not which step ate the clock. If you skipped earlier lessons and the exam is close, go in this order. First, Lesson 2's 'Do it 1-3' until the template is automatic. Second, read Lesson 5's third-angle section. A wrong layout means replacing all three views, and 40 minutes has no room for it. Third, Lesson 7's 'Do it 1' to set up a dimension style once. Fourth, then run the 40 minutes here. The marking scheme, date, venue, and submission address are not in this workbook. They come by separate notice."
+   "ko": "전체 작도 연습은 7차시를 마친 뒤에 합니다. 먼저 2차시의 도면틀과 레이어, 5차시의 제3각법 배치, 7차시의 치수 스타일을 다시 확인하세요. 전체를 그리다 막히면 그 단계의 설명으로 돌아와 연습합니다. 본인이 저장한 파일을 참고하며 진행해도 됩니다. 시험 운영과 채점 기준, 합격선은 별도 공지로 확인합니다.",
+   "en": "Rehearse the full drawing after Lesson 7. Review the border and layers in Lesson 2, third-angle placement in Lesson 5, and dimension style in Lesson 7. Return to the relevant instructions whenever you get stuck; you may use your saved files. Exam operations, marking, and the pass mark come by separate notice."
   }
  },
  "sections": [
@@ -78,18 +78,18 @@
    "id": "no-file",
    "kind": "orient",
    "label": {
-    "ko": "이 차시에는 파일이 없습니다",
-    "en": "This lesson has no file"
+    "ko": "시험 준비에 쓸 자료",
+    "en": "Materials for exam preparation"
    },
    "lede": {
-    "ko": "여는 파일도 저장할 파일도 없어요.",
-    "en": "Nothing to open, nothing to save."
+    "ko": "본인이 만든 도면과 연습 기록을 준비합니다.",
+    "en": "Have your own drawing and practice record ready."
    },
    "blocks": [
     {
      "type": "p",
-     "ko": "체크포인트 사슬은 7차시에서 닫혔습니다. 그래서 8차시는 새 도면을 열지도 저장하지도 않습니다.",
-     "en": "The checkpoint chain closed at Lesson 7. So Lesson 8 neither opens nor saves a drawing file."
+     "ko": "7차시에서 저장한 도면을 참고합니다. 8차시는 새로운 제출용 파일을 지정하지 않으며, 반복 연습 파일은 본인이 구분할 수 있는 이름으로 저장합니다.",
+     "en": "Refer to your Lesson 7 drawing. Lesson 8 specifies no new submission file; use a distinct name for your practice files."
     },
     {
      "type": "table",
@@ -134,8 +134,8 @@
         "en": "A timer"
        },
        {
-        "ko": "40분을 재야 하니 휴대폰 스톱워치를 옆에 두세요.",
-        "en": "You need to time 40 minutes, so keep a phone stopwatch beside you."
+        "ko": "단계별로 걸린 시간을 재고 기록할 수 있는 도구를 준비합니다.",
+        "en": "Prepare a tool to time and record each step."
        }
       ],
       [
@@ -144,8 +144,8 @@
         "en": "An empty drawing"
        },
        {
-        "ko": "모의 작도는 새 도면에서 시작해요. 템플릿을 불러 쓰지 않습니다.",
-        "en": "The mock run starts from a new drawing. You do not load the template you already have."
+        "ko": "전체 순서를 복습할 때는 새 도면에서 시작합니다. 별도 스타터 파일은 없으며, 본인이 만든 템플릿은 확인용으로 참고합니다.",
+        "en": "Start from a new drawing to rehearse the full sequence. No starter file is supplied; use your own template as a reference."
        }
       ]
      ]
@@ -154,17 +154,17 @@
      "type": "note",
      "tone": "warn",
      "label": {
-      "ko": "이 차시의 무게는 읽기가 아닙니다",
-      "en": "The weight of this lesson is not reading"
+      "ko": "읽은 뒤 직접 다시 그려 봅니다",
+      "en": "Redraw after reading"
      },
-     "ko": "시간이 가장 많이 드는 것은 「40분 모의 작도」 절입니다. 읽기만 하고 넘어가면 이 차시를 한 것이 아니에요. 읽는 시간과 별개로 40분을 통째로 비워 두세요.",
-     "en": "The section that takes the time is the 40-minute mock run. Reading it and moving on is not doing this lesson. Set aside a clear 40 minutes on top of your reading time."
+     "ko": "읽기만 하면 조작이 익숙해졌는지 알기 어렵습니다. 일곱 단계로 다시 그려 보고, 오래 멈춘 자리를 다음 연습에서 먼저 확인하세요.",
+     "en": "Reading alone does not show whether the operations are familiar. Work through the seven steps and practise your slowest steps again."
     },
     {
      "type": "note",
      "tone": "field",
-     "ko": "시험장에서는 문제지와 감독 지시가 먼저입니다. 이 자습본의 템플릿·레이어 값은 연습용 기본값이고, 지시가 다르면 지시를 따르면 돼요.",
-     "en": "On the day, the question sheet and the invigilator's instructions come first. The template and layer values here are practice defaults, and any instruction that differs wins."
+     "ko": "실제 과제에 별도 지시가 있으면 그 지시가 먼저입니다. 이 자습본의 템플릿·레이어 값은 연습용 기본값이고, 지시가 다르면 지시를 따르면 돼요.",
+     "en": "Follow any separate instructions in the actual assignment first. The template and layer settings here are practice defaults; different assignment instructions take precedence."
     }
    ]
   },
@@ -172,19 +172,19 @@
    "id": "exam-six",
    "kind": "concept",
    "label": {
-    "ko": "시험 여섯 항목",
-    "en": "The exam in six items"
+    "ko": "시험 공지에서 확인할 여섯 항목",
+    "en": "Six items to check in the exam notice"
    },
    "lede": {
-    "ko": "시험이 어떻게 진행되는지부터 아셔야 준비할 것이 정해져요.",
-    "en": "Knowing how the exam runs is what fixes your preparation."
+    "ko": "시험 운영 안내는 공유 예정입니다. 공지를 받으면 아래 항목을 확인합니다.",
+    "en": "Exam operations will be shared later. Check these items when the notice arrives."
    },
    "blocks": [
     {
      "type": "table",
      "caption": {
-      "ko": "시험 여섯 항목",
-      "en": "The six items"
+      "ko": "시험 운영 안내 · 공유 예정",
+      "en": "Exam operations · to be shared"
      },
      "head": [
       {
@@ -207,12 +207,12 @@
         "en": "Format"
        },
        {
-        "ko": "대면입니다. 현장에서 문제지를 출력해 나눠 줍니다. 집에서 각자 받아 보는 시험이 아닙니다.",
-        "en": "In person. The question sheet is printed and handed out on site. It is not a take-home exam."
+        "ko": "응시 방식과 절차를 공식 안내에서 확인합니다.",
+        "en": "Check the official format and procedure."
        },
        {
-        "ko": "확정",
-        "en": "Settled"
+        "ko": "공유 예정",
+        "en": "To be shared"
        }
       ],
       [
@@ -221,12 +221,12 @@
         "en": "Source material"
        },
        {
-        "ko": "종이에 인쇄된 3D 형상 그림과 거기 적힌 치수를 보고 제3각법으로 작도합니다.",
-        "en": "A printed 3D view with dimensions written on it. You draw it in third-angle projection."
+        "ko": "어떤 자료를 보고 무엇을 작성하는지 확인해 두세요.",
+        "en": "Check the supplied material and expected output."
        },
        {
-        "ko": "확정",
-        "en": "Settled"
+        "ko": "공유 예정",
+        "en": "To be shared"
        }
       ],
       [
@@ -235,12 +235,12 @@
         "en": "Time"
        },
        {
-        "ko": "40분입니다. 40분이 지나면 즉시 제출입니다.",
-        "en": "Forty minutes. You submit the moment the time is up."
+        "ko": "제한 시간과 종료 시 처리 절차를 살펴봅니다.",
+        "en": "Check the time limit and end procedure."
        },
        {
-        "ko": "확정",
-        "en": "Settled"
+        "ko": "공유 예정",
+        "en": "To be shared"
        }
       ],
       [
@@ -249,12 +249,12 @@
         "en": "Scope"
        },
        {
-        "ko": "도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 넣습니다. 2차시부터 7차시까지 전부입니다.",
-        "en": "Border, title block, four layers, then the geometry, then the dimensions. Lessons 2 through 7, all of it."
+        "ko": "작성할 도면과 설정 범위를 구분합니다.",
+        "en": "Check required drawings and settings."
        },
        {
-        "ko": "확정",
-        "en": "Settled"
+        "ko": "공유 예정",
+        "en": "To be shared"
        }
       ],
       [
@@ -263,12 +263,12 @@
         "en": "Submission"
        },
        {
-        "ko": "저장한 뒤 이메일로 보냅니다. 파일 이름은 `사번_이름` 입니다.",
-        "en": "Save, then send by email. The file name is `사번_이름`, that is employee number then name."
+        "ko": "파일 형식·이름·제출 경로를 확인하세요.",
+        "en": "Check file format, name, and submission route."
        },
        {
-        "ko": "주소는 공유 예정",
-        "en": "Address to be shared"
+        "ko": "공유 예정",
+        "en": "To be shared"
        }
       ],
       [
@@ -277,8 +277,8 @@
         "en": "Venue and date"
        },
        {
-        "ko": "상황에 맞춰 별도로 공지합니다.",
-        "en": "Announced separately, to suit the situation."
+        "ko": "일시와 장소를 확인합니다.",
+        "en": "Check the date and venue."
        },
        {
         "ko": "공유 예정",
@@ -290,19 +290,19 @@
     {
      "type": "note",
      "tone": "why",
-     "ko": "여섯을 먼저 알아야 준비가 문제 맞히기에서 순서와 속도로 옮겨가요. 문제지는 종이로 받으니 미리 볼 방법이 없어요.",
-     "en": "Knowing the six moves your preparation off guessing the question and onto sequence and speed. The sheet is paper handed out on site, so there is no way to see it in advance."
+     "ko": "아직 안내되지 않은 조건을 연습용 기본값과 섞지 않습니다. 공지를 받으면 실제 시험 조건에 맞춰 준비 계획을 조정하세요.",
+     "en": "Keep unpublished exam conditions separate from practice defaults. Adjust your preparation when the official notice arrives."
     },
     {
      "type": "note",
      "tone": "pend",
-     "ko": "장소는 「평택 교육센터나 구미가 될 예정」이라고만 들었습니다. 둘 중 하나로 단정하지 않습니다. 일정과 제출 주소도 별도 공지로 받습니다.",
-     "en": "The venue was given only as \"likely the Pyeongtaek training center or Gumi\". We do not pin it to one of the two. The date and the submission address also come by separate notice."
+     "ko": "일시·장소·응시 방식·출제 형태·제한 시간·작업 범위·제출 규칙은 공유 예정입니다.",
+     "en": "Date, venue, format, source material, time limit, scope, and submission rules will be shared later."
     },
     {
      "type": "p",
-     "ko": "여섯 중 넷은 지금 연습할 수 있고, 둘은 공지를 기다리면 돼요. 기다리는 둘 때문에 연습을 미룰 이유는 없어요.",
-     "en": "Four of the six you can practice today; two you simply wait for. The two you are waiting on are no reason to delay the four."
+     "ko": "그동안에는 직접 만든 도면으로 전체 순서를 복습할 수 있습니다. 익숙하지 않은 명령과 오래 걸리는 단계를 기록해 두세요.",
+     "en": "Meanwhile, rehearse with your own drawing and note unfamiliar commands and slow steps."
     }
    ]
   },
@@ -314,20 +314,20 @@
     "en": "The marking scheme"
    },
    "lede": {
-    "ko": "이 절은 비어 있는 것이 내용이에요.",
-    "en": "In this section, the blank is the content."
+    "ko": "채점 기준과 합격선은 공유 예정입니다.",
+    "en": "The marking scheme and pass mark will be shared later."
    },
    "blocks": [
     {
      "type": "note",
      "tone": "pend",
-     "ko": "채점 기준 표는 아직 받지 못했습니다. 배점·감점 항목·합격선 전부 미정이고 별도 공지로 받습니다.",
-     "en": "A marking scheme will be shared separately. It has not arrived yet. Weighting, deductions, and the pass mark are all undecided."
+     "ko": "채점 기준과 합격선은 공유 예정입니다. 배점과 감점 항목은 공식 안내를 받은 뒤 확인합니다.",
+     "en": "The marking scheme and pass mark will be shared later. Check weighting and deductions in the official notice."
     },
     {
      "type": "p",
-     "ko": "그럴듯한 기준을 지어내면 그걸 믿고 준비하게 됩니다. 틀렸을 때 손해가 빈 자리보다 크기 때문에 이 자리를 비워 뒀어요.",
-     "en": "What happens if we invent a plausible scheme? You prepare against it. When it turns out wrong the damage is worse than an empty slot. So the slot stays empty."
+     "ko": "이 자습본의 검산 목록은 오류를 스스로 찾는 연습용입니다. 시험 배점이나 합격 판정에 그대로 적용하지 않습니다.",
+     "en": "The workbook checks help you find your own errors. They do not assign exam marks or determine a pass."
     },
     {
      "type": "note",
@@ -377,8 +377,8 @@
         "en": "Who do I ask when I get stuck?"
        },
        "body": {
-        "ko": "두 사람입니다. Green Star 운영 담당 김정웅 기장, 강의 제작자 김양환 선임입니다. 혼자 붙잡고 계시지 마세요. 막히는 자리는 대개 정해져 있습니다.",
-        "en": "Two people: Kim Jeong-ung, who runs Green Star, and Kim Yang-hwan, who made this course. Do not sit on it alone. The places people get stuck are mostly the same ones."
+        "ko": "막히면 김정웅, 김양환에게 문의하세요. 사용한 명령과 멈춘 단계, 화면에 나온 문구를 함께 정리하면 설명하기 쉽습니다.",
+        "en": "Contact Kim Jeong-ung or Kim Yang-hwan. Note the command, step, and prompt where you got stuck."
        }
       },
       {
@@ -434,8 +434,8 @@
     {
      "type": "note",
      "tone": "pend",
-     "ko": "연습 도면은 따로 준비해서 제공할 예정입니다. 두 담당자의 연락 경로도 확인되는 대로 함께 안내합니다.",
-     "en": "Practice drawings will be prepared and shared. The contact route for the two people above will be given once it is confirmed."
+     "ko": "별도 연습 도면이나 스타터 파일을 기다릴 필요는 없습니다. 본인이 만든 도면을 다시 그리며 연습합니다.",
+     "en": "No separate practice drawing or starter file is required. Practise by redrawing your own course work."
     }
    ]
   },
@@ -443,20 +443,20 @@
    "id": "mock-run",
    "kind": "practice",
    "label": {
-    "ko": "40분 모의 작도 — 일곱 단계",
-    "en": "The 40-minute mock run - seven steps"
+    "ko": "전체 작도 복습 — 일곱 단계",
+    "en": "Rehearse the full drawing — seven steps"
    },
    "lede": {
-    "ko": "새 명령은 없습니다. 2차시부터 7차시까지의 순서를 시간 안에 다시 밟는 것이 전부예요.",
-    "en": "No new commands here. It is the Lesson 2 to Lesson 7 sequence, run again against a clock."
+    "ko": "새 명령은 없습니다. 2차시부터 7차시까지의 순서를 다시 밟으며 실제 걸린 시간을 기록해요.",
+    "en": "No new commands here. Repeat the Lesson 2–7 sequence and record the time it actually takes."
    },
    "blocks": [
     {
      "type": "figure",
      "ref": "three",
      "caption": {
-      "ko": "40분 안에 여기까지 — 7차시에서 끝낸 세 뷰입니다.",
-      "en": "This far in 40 minutes - the three views you finished in Lesson 7."
+      "ko": "7차시에서 완성한 세 뷰를 다시 그리며 순서를 익힙니다.",
+      "en": "Rehearse by redrawing the three views completed in Lesson 7."
      },
      "alt": {
       "ko": "자동차 엔진에서 사용되는 아이들러 풀리 브래킷의 제3각법 세 뷰입니다. 정면도 위에 평면도, 오른쪽에 우측면도가 있고 치수와 숨은선이 들어 있습니다. 이 부품은 연습 견본이고 시험 문제가 아닙니다.",
@@ -466,13 +466,13 @@
     {
      "type": "figure",
      "id": "fig-40min-sequence",
-     "svg": "<svg viewBox=\"0 0 600 148\" width=\"600\" height=\"148\"><text class=\"slh\" x=\"8\" y=\"15\">40분</text><text class=\"sl\" x=\"52\" y=\"15\">안에 일곱 단계</text><line class=\"sd\" x1=\"8\" y1=\"26\" x2=\"592\" y2=\"26\"/><rect class=\"sh\" x=\"8\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"46\" y=\"58\" text-anchor=\"middle\">템플릿</text><text class=\"sl\" x=\"46\" y=\"86\" text-anchor=\"middle\">2차시</text><rect class=\"sd\" x=\"8\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"46\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"92\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"130\" y=\"58\" text-anchor=\"middle\">레이어 넷</text><text class=\"sl\" x=\"130\" y=\"86\" text-anchor=\"middle\">2차시</text><rect class=\"sd\" x=\"92\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"130\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"176\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"214\" y=\"58\" text-anchor=\"middle\">정면 정하기</text><text class=\"sl\" x=\"214\" y=\"86\" text-anchor=\"middle\">5차시</text><rect class=\"sd\" x=\"176\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"214\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"260\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"298\" y=\"58\" text-anchor=\"middle\">세 뷰 작도</text><text class=\"sl\" x=\"298\" y=\"86\" text-anchor=\"middle\">5차시</text><rect class=\"sd\" x=\"260\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"298\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"344\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"382\" y=\"58\" text-anchor=\"middle\">선 정리</text><text class=\"sl\" x=\"382\" y=\"86\" text-anchor=\"middle\">6차시</text><rect class=\"sd\" x=\"344\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"382\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"428\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"466\" y=\"58\" text-anchor=\"middle\">치수 기입</text><text class=\"sl\" x=\"466\" y=\"86\" text-anchor=\"middle\">7차시</text><rect class=\"sd\" x=\"428\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"466\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"512\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"550\" y=\"58\" text-anchor=\"middle\">저장 · 제출</text><text class=\"sl\" x=\"550\" y=\"86\" text-anchor=\"middle\">7차시</text><rect class=\"sd\" x=\"512\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"550\" y=\"112\" text-anchor=\"middle\">분</text><text class=\"sl\" x=\"8\" y=\"140\">아래 칸에 걸린 시간을 적어 넣으세요</text></svg>",
+     "svg": "<svg viewBox=\"0 0 600 148\" width=\"600\" height=\"148\"><text class=\"slh\" x=\"8\" y=\"15\">복습</text><text class=\"sl\" x=\"52\" y=\"15\">일곱 단계</text><line class=\"sd\" x1=\"8\" y1=\"26\" x2=\"592\" y2=\"26\"/><rect class=\"sh\" x=\"8\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"46\" y=\"58\" text-anchor=\"middle\">템플릿</text><text class=\"sl\" x=\"46\" y=\"86\" text-anchor=\"middle\">2차시</text><rect class=\"sd\" x=\"8\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"46\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"92\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"130\" y=\"58\" text-anchor=\"middle\">레이어 넷</text><text class=\"sl\" x=\"130\" y=\"86\" text-anchor=\"middle\">2차시</text><rect class=\"sd\" x=\"92\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"130\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"176\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"214\" y=\"58\" text-anchor=\"middle\">정면 정하기</text><text class=\"sl\" x=\"214\" y=\"86\" text-anchor=\"middle\">5차시</text><rect class=\"sd\" x=\"176\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"214\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"260\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"298\" y=\"58\" text-anchor=\"middle\">세 뷰 작도</text><text class=\"sl\" x=\"298\" y=\"86\" text-anchor=\"middle\">5차시</text><rect class=\"sd\" x=\"260\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"298\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"344\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"382\" y=\"58\" text-anchor=\"middle\">선 정리</text><text class=\"sl\" x=\"382\" y=\"86\" text-anchor=\"middle\">6차시</text><rect class=\"sd\" x=\"344\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"382\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"428\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"466\" y=\"58\" text-anchor=\"middle\">치수 기입</text><text class=\"sl\" x=\"466\" y=\"86\" text-anchor=\"middle\">7차시</text><rect class=\"sd\" x=\"428\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"466\" y=\"112\" text-anchor=\"middle\">분</text><rect class=\"si\" x=\"512\" y=\"36\" width=\"76\" height=\"34\"/><text class=\"sl\" x=\"550\" y=\"58\" text-anchor=\"middle\">저장 · 확인</text><text class=\"sl\" x=\"550\" y=\"86\" text-anchor=\"middle\">7차시</text><rect class=\"sd\" x=\"512\" y=\"96\" width=\"76\" height=\"24\"/><text class=\"sl\" x=\"550\" y=\"112\" text-anchor=\"middle\">분</text><text class=\"sl\" x=\"8\" y=\"140\">아래 칸에 걸린 시간을 적어 넣으세요</text></svg>",
      "caption": {
       "ko": "일곱 단계와 각 단계가 나온 차시입니다. 아래 칸은 걸린 시간을 적는 자리입니다.",
       "en": "The seven steps and the lesson each came from. The empty boxes are for the minutes you spent."
      },
      "alt": {
-      "ko": "가로 띠 일곱 칸입니다. 처음 둘은 템플릿과 레이어 넷이고 2차시에서 배웠습니다. 다음 둘은 정면 정하기와 세 뷰 작도이고 5차시예요. 다섯째는 선 정리로 6차시입니다. 마지막 둘은 치수 기입과 저장·제출이고 7차시입니다. 칸마다 분을 적는 빈 상자가 있고 목표 시간은 없습니다.",
+      "ko": "가로 띠 일곱 칸입니다. 처음 둘은 템플릿과 레이어 넷이고 2차시에서 배웠습니다. 다음 둘은 정면 정하기와 세 뷰 작도이고 5차시예요. 다섯째는 선 정리로 6차시입니다. 마지막 둘은 치수 기입과 저장·확인이고 7차시입니다. 칸마다 분을 적는 빈 상자가 있고 목표 시간은 없습니다.",
       "en": "A horizontal band of seven boxes. The first two are the template and the four layers, from Lesson 2. The next two are choosing the front and drawing the three views, from Lesson 5. The fifth is cleaning the lines, from Lesson 6. The last two are dimensioning and saving, from Lesson 7. Each box has an empty slot for minutes, and no target time is printed."
      }
     },
@@ -489,7 +489,7 @@
         {
          "do": {
           "ko": "새 도면을 열고 A3 가로 420 × 297 로 시작합니다. 객체 스냅 F3 와 직교 F8 을 켜고 OS 로 스냅 목록을 확인합니다.",
-          "en": "Open a new drawing and start on A3 landscape, 420 x 297."
+          "en": "Open a new drawing on A3 landscape, 420 x 297. Turn on object snap F3 and ortho F8, and check the snap list with OS."
          }
         },
         {
@@ -540,8 +540,8 @@
         "en": "The border stands 10 inside the sheet on all four sides. The 200 x 30 title block sits bottom right, split in two. Each of the four sides carries a centering mark."
        },
        "why": {
-        "ko": "시험 범위가 템플릿부터입니다. 시험장에서 여기에 시간을 쓰면 형상과 치수에 쓸 시간이 줄어들어요. 그래서 첫 단계이고 가장 먼저 손에 붙여야 해요.",
-        "en": "The exam scope starts at the template. Time spent here on the day is time taken from the geometry and the dimensions. That is why it is first and why it has to be automatic."
+        "ko": "도면틀과 레이어를 먼저 준비하면 형상을 그리다 설정을 바꾸느라 멈추는 일이 줄어듭니다. 첫 단계부터 스스로 할 수 있는지 확인합니다.",
+        "en": "Preparing the border and layers first reduces interruptions while drawing. Check that you can do these steps independently."
        },
        "pitfall": {
         "ko": "도면선을 용지선에 붙여 그리면 출력할 때 가장자리가 잘려요. 사방 10 을 반드시 띄웁니다. 표제란의 이름·사번 칸을 좌우 반대로 넣는 것도 흔해요. 왼쪽이 이름, 오른쪽이 사번입니다.",
@@ -564,13 +564,13 @@
         {
          "do": {
           "ko": "중심선 — CENTER · 선가중치 0.15 · 빨강(1) · 선 종류 축척 0.5.",
-          "en": "Centerline - Center, 0.25, red (1), linetype scale 0.5."
+          "en": "Centerline — CENTER, lineweight 0.15, red (1), linetype scale 0.5."
          }
         },
         {
          "do": {
           "ko": "숨은선 — HIDDEN · 선가중치 0.15 · 노랑(2) · 선 종류 축척 0.5.",
-          "en": "Hidden line - Hidden, 0.25, yellow (2), linetype scale 0.5."
+          "en": "Hidden line — HIDDEN, lineweight 0.15, yellow (2), linetype scale 0.5."
          }
         },
         {
@@ -581,16 +581,16 @@
         }
        ],
        "expect": {
-        "ko": "레이어 관리자에 정확히 넷이 있습니다. 외형선만 선가중치 0.30 이고 나머지 셋은 0.15 입니다. 선 종류 축척 값이 붙은 것은 중심선과 숨은선뿐입니다.",
-        "en": "The layer manager holds exactly four. Only the visible line is 0.30; the other three are 0.15. Only the centerline and the hidden line carry a linetype scale."
+        "ko": "연습용 레이어 넷이 있습니다. 그중 외형선만 선가중치 0.30이고 나머지 셋은 0.15입니다. 선 종류 축척 값이 붙은 것은 중심선과 숨은선뿐입니다.",
+        "en": "The four practice layers are present. Among them, the visible layer is 0.30 and the other three are 0.15. Only the centerline and hidden layers have a linetype scale to adjust."
        },
        "why": {
-        "ko": "굵기와 색, 선 종류 축척을 왜 그렇게 잡는지는 2차시에서 다뤘습니다. 여기서는 값을 보고 넷을 시간 안에 만들면 됩니다.",
-        "en": "0.5 against 0.25 is two to one. That ratio is why the shape reads first on paper. Linetype scale controls dash spacing, not weight, so Continuous has nothing to set."
+        "ko": "굵기와 색, 선 종류 축척은 2차시에서 정한 연습용 값입니다. 네 레이어를 구분해 설정했는지 확인합니다.",
+        "en": "These weights, colors, and linetype scales are the Lesson 2 practice settings. Check all four layer roles."
        },
        "pitfall": {
-        "ko": "레이어를 다섯 개 이상 만들거나 이름을 바꾸지 마세요. 이 넷은 연습용 기본값입니다. 시험 지시가 다른 이름·색상·굵기·축척을 지정하면 그 지시가 우선입니다.",
-        "en": "Do not add a fifth layer and do not rename these. They are practice defaults. If the exam instructions name different layers, colors, weights, or scales, follow the instructions."
+        "ko": "여기서 만든 연습용 레이어 넷의 이름과 값을 확인하세요. 이 값은 연습용 기본값입니다. 실제 과제에서 다른 이름·색상·굵기·축척을 지정하면 그 지시가 우선입니다.",
+        "en": "Check the names and settings of the four practice layers you created. These are practice defaults. Follow any different names, colors, weights or scales specified in an actual assignment."
        }
       },
       {
@@ -602,8 +602,8 @@
        "actions": [
         {
          "do": {
-          "ko": "문제지의 3D 형상 그림을 먼저 한 번 훑어 보세요. 치수가 어느 면에 모여 있는지 봅니다.",
-          "en": "Scan the printed 3D view once. See which face carries most of the dimensions."
+          "ko": "연습 도면의 3D 형상과 치수를 먼저 살펴봅니다. 치수가 어느 면에 모여 있는지 확인합니다.",
+          "en": "Inspect the practice drawing’s 3D shape and dimensions. Identify the face that shows the most information."
          },
          "kind": "see"
         },
@@ -624,8 +624,8 @@
         "en": "Once the front is chosen, the other two views' places and contents follow from it. That is why choosing the front comes first."
        },
        "pitfall": {
-        "ko": "형상을 그리기 시작한 뒤에 정면을 바꾸면 이미 그린 세 뷰를 전부 다시 배치해야 합니다. 40분에는 그 재작업을 감당할 여유가 없어요.",
-        "en": "Changing the front after you start drawing means replacing all three views. Forty minutes has no room for that rework."
+        "ko": "형상을 그리기 시작한 뒤 정면을 바꾸면 뷰를 다시 배치해야 합니다. 선을 긋기 전에 정면과 나머지 두 뷰의 자리를 정합니다.",
+        "en": "Changing the front after drawing begins requires moving the views. Decide their positions before drawing."
        }
       },
       {
@@ -659,8 +659,8 @@
         "en": "The three views line up on their projectors. Everything behind material is drawn as hidden lines."
        },
        "why": {
-        "ko": "5차시에서 한 그 투상이에요. 문제지가 3D 형상 그림으로 나오므로 이 변환이 시험의 본체입니다.",
-        "en": "This is the projection you did in Lesson 5. The sheet gives you a 3D view, so this conversion is the exam itself."
+        "ko": "5차시에서 배운 투상 순서입니다. 정면도에서 폭과 높이를 옮기고 두께를 확인하며 세 뷰를 맞춥니다.",
+        "en": "Use the projection sequence from Lesson 5. Transfer width and height from the front and check depth to align the views."
        },
        "pitfall": {
         "ko": "제1각법으로 배치하면 평면도와 우측면도가 반대편으로 갑니다. 판별 기준은 원의 좌우 위치가 아닙니다 — 제3각법 기호에서 원뿔대의 작은 끝이 원을 향합니다.",
@@ -742,34 +742,34 @@
       {
        "n": 7,
        "title": {
-        "ko": "저장하고 이메일 제출",
-        "en": "Save and submit by email"
+        "ko": "저장하고 다시 열어 확인",
+        "en": "Save and reopen to check"
        },
        "actions": [
         {
          "do": {
-          "ko": "파일 이름을 `사번_이름` 형식으로 저장합니다.",
-          "en": "Save the file as `사번_이름` - employee number, underscore, name."
+          "ko": "연습 파일을 앞서 만든 파일과 구분할 수 있는 이름으로 저장합니다.",
+          "en": "Save the practice file under a name distinct from your earlier work."
          }
         },
         {
          "do": {
-          "ko": "현장에서 안내받은 주소로 메일을 보냅니다. 주소를 미리 짐작해 보내지 않습니다.",
-          "en": "Mail it to the address given on site. Do not guess the address in advance."
+          "ko": "저장한 파일을 다시 열어 도면이 남아 있는지 확인합니다. 시험 제출 방법과 파일 이름 규칙은 공유될 공지에서 확인합니다.",
+          "en": "Reopen the file and check its contents. Refer to the forthcoming notice for exam submission and naming rules."
          }
         }
        ],
        "expect": {
-        "ko": "`사번_이름` 형식의 파일이 저장돼 있고, 안내받은 주소로 메일이 나갔습니다.",
-        "en": "A file named `사번_이름` is saved, and the mail has gone to the address you were given."
+        "ko": "저장한 연습 파일을 다시 열 수 있고 도면과 치수가 그대로 남아 있습니다.",
+        "en": "The saved practice file reopens with its geometry and dimensions intact."
        },
        "why": {
-        "ko": "여러 명이 같은 주소로 보내므로 파일 이름 자체가 신원입니다. 규칙을 안 지키면 누구 것인지 찾는 데 시간이 걸려요.",
-        "en": "Everyone sends to the same address, so the file name is your identity. Break the rule and someone spends time working out whose file it is."
+        "ko": "화면에서 완성된 것과 파일로 남은 것은 다를 수 있습니다. 저장 상태까지 확인해야 다음 연습을 이어갈 수 있어요.",
+        "en": "A completed screen is not proof of a saved file. Check the saved state so you can continue later."
        },
        "pitfall": {
-        "ko": "40분에 저장과 전송 시간을 빼 두지 않는 것입니다. 40분이 지나면 즉시 제출이니 마지막 몇 분을 여기에 남겨 두세요. 제출 주소와 파일 형식은 현장 안내를 따릅니다.",
-        "en": "The slip is not reserving time for saving and sending. Submission is immediate at 40 minutes, so keep the last few minutes for this. Follow the on-site instructions for the address and the file format."
+        "ko": "기존 결과물을 덮어쓰지 않도록 파일 이름과 폴더를 확인합니다. 아직 공지되지 않은 제출 경로나 형식을 임의로 정하지 않습니다.",
+        "en": "Check the folder and name to avoid overwriting earlier work. Do not invent unpublished submission rules."
        }
       }
      ]
@@ -796,8 +796,8 @@
    "id": "three-slips",
    "kind": "onDrawing",
    "label": {
-    "ko": "시험에서 자주 어긋나는 세 자리",
-    "en": "Three places the exam goes wrong"
+    "ko": "전체 작도에서 다시 확인할 세 자리",
+    "en": "Three areas to recheck in the complete drawing"
    },
    "lede": {
     "ko": "세 자리 모두 형상은 맞는데 읽는 사람이 다시 물어보게 되는 종류예요.",
@@ -1315,8 +1315,8 @@
     },
     {
      "type": "p",
-     "ko": "시험 범위가 이 목록 그대로입니다. 2차시부터 7차시까지 여섯 줄이 40분에 다시 밟을 단계와 그대로 맞물려요.",
-     "en": "The exam scope is this list. The six rows from Lesson 2 to Lesson 7 map onto the steps you repeat in 40 minutes."
+     "ko": "2차시부터 7차시까지의 흐름은 전체 작도를 복습하는 기준입니다. 실제 시험 범위는 공유될 운영 안내를 따릅니다.",
+     "en": "The Lesson 2–7 sequence guides practice. The actual exam scope follows the forthcoming notice."
     },
     {
      "type": "p",
@@ -1747,12 +1747,12 @@
  "verify": [
   {
    "what": {
-    "ko": "40분 안에 끝났는가",
-    "en": "Did it fit in 40 minutes"
+    "ko": "단계별 소요 시간을 기록했는가",
+    "en": "Did you record time spent per step"
    },
    "how": {
-    "ko": "타이머를 보고 판정합니다. 넘었으면 어느 단계에서 몇 분을 썼는지 그림의 빈 칸에 적습니다.",
-    "en": "Read the timer. If you went over, write the minutes per step into the empty boxes on the figure."
+    "ko": "시작·종료 시각과 중간에 멈춘 단계를 적습니다. 다음 연습에서 같은 조건으로 비교합니다.",
+    "en": "Record start and finish times and any pauses. Compare under the same conditions next time."
    }
   },
   {
@@ -1781,8 +1781,8 @@
     "en": "Layer count and weights"
    },
    "how": {
-    "ko": "레이어가 정확히 넷인지 세고, 외형선만 0.30 이고 나머지 셋이 0.15 인지 봅니다.",
-    "en": "Count exactly four, and confirm only the visible line is 0.30 while the other three are 0.15."
+    "ko": "연습용 레이어 넷의 이름을 확인하고, 그중 외형선만 0.30이고 나머지 셋은 0.15인지 봅니다.",
+    "en": "Check the four practice layer names. Among them, only the visible layer should be 0.30 and the other three 0.15."
    }
   },
   {
@@ -1861,8 +1861,8 @@
     "en": "File name"
    },
    "how": {
-    "ko": "`사번_이름` 형식인지 확인합니다.",
-    "en": "Confirm it follows `사번_이름`, employee number then name."
+    "ko": "연습 파일이 앞서 만든 파일과 구분되는 이름으로 저장됐는지 확인합니다. 시험 파일 이름 규칙은 공유 예정입니다.",
+    "en": "Check that the practice file has a distinct name. Exam file naming rules will be shared later."
    }
   },
   {
@@ -1883,8 +1883,8 @@
     "en": "What are the exam time and the scope of work?"
    },
    "a": {
-    "ko": "40분이고, 40분이 지나면 즉시 제출입니다. 범위는 템플릿부터 치수까지입니다. 도면틀·표제란·레이어 넷을 만들고 형상을 작도한 뒤 치수까지 넣습니다. 2차시부터 7차시까지 전부입니다.",
-    "en": "Forty minutes, and you submit the moment it is up. The scope is template through dimensions: border, title block, four layers, then the geometry, then the dimensions. Everything from Lesson 2 to Lesson 7."
+    "ko": "시험 시간과 작업 범위는 공유 예정입니다. 공식 안내를 받은 뒤 확인하며, 연습용 작도 순서나 임의의 시간을 시험 조건으로 단정하지 않습니다.",
+    "en": "The exam time and scope will be shared later. Use the official notice, not a practice sequence or invented limit."
    }
   },
   {
@@ -1893,8 +1893,8 @@
     "en": "How is the marking scheme weighted?"
    },
    "a": {
-    "ko": "아직 공유받지 못했습니다. 배점·감점 항목·합격선 전부 미정이고 별도 공지로 받습니다. 이 자습본의 검산 목록은 채점 기준이 아닙니다. 「모르겠습니다, 아직 안 정해졌습니다」가 이 문항의 정답이에요.",
-    "en": "It has not been shared. Weighting, deductions, and the pass mark are all undecided and come by separate notice. The check lists here are not a marking scheme. 'I do not know, it is not decided yet' is the right answer."
+    "ko": "채점 기준과 합격선은 공유 예정입니다. 이 자습본의 검산 목록은 오류를 스스로 찾기 위한 연습용이며 채점표가 아닙니다.",
+    "en": "The marking scheme and pass mark will be shared later. These self-checks support practice and are not a marking scheme."
    }
   },
   {
@@ -1919,23 +1919,23 @@
   },
   {
    "q": {
-    "ko": "다 그렸습니다. 파일 이름은 어떻게 짓고 마지막 몇 분은 무엇에 씁니까?",
-    "en": "You have finished. How do you name the file, and what are the last few minutes for?"
+    "ko": "연습 도면을 마쳤습니다. 무엇을 확인합니까?",
+    "en": "What do you check after finishing a practice drawing?"
    },
    "a": {
-    "ko": "`사번_이름` 형식입니다. 여러 명이 같은 주소로 보내므로 파일 이름 자체가 신원입니다. 마지막 몇 분은 저장과 전송에 씁니다. 40분이 지나면 즉시 제출이니 그 시간을 미리 빼 두세요.",
-    "en": "As `사번_이름`, employee number then name. Everyone sends to the same address, so the name is your identity. Keep the last few minutes for saving and sending, because submission is immediate at 40 minutes."
+    "ko": "구분되는 이름으로 저장한 뒤 다시 열어 확인합니다. 시험 제출 방법·파일 형식·이름 규칙은 공유될 운영 안내를 따릅니다.",
+    "en": "Save with a distinct name and reopen it. Follow the forthcoming exam notice for submission, format, and naming rules."
    }
   }
  ],
  "exercise": {
   "title": {
-   "ko": "40분 모의 작도를 두 번",
-   "en": "Run the 40 minutes twice"
+   "ko": "전체 작도를 두 번 연습",
+   "en": "Rehearse the complete drawing twice"
   },
   "body": {
-   "ko": "첫 번째는 아무것도 안 보고 처음부터 다시 그립니다. 대상은 자동차 엔진에서 사용되는 아이들러 풀리 브래킷이에요. 새 도면에서 시작해 템플릿부터 치수까지입니다. 끝나면 어느 단계에서 시간이 샜는지 적습니다. 두 번째는 그 단계만 따로 두 번 연습한 뒤 다시 40분을 재 보세요. 두 번의 시간과 걸린 단계를 나란히 적어 두면 무엇을 더 연습해야 하는지가 값으로 나와요. 시험에 나올 부품은 미정이므로 이 브래킷을 시험 문제라고 생각하지 마세요. 연습하는 것은 형상이 아니라 순서입니다.",
-   "en": "The first time, redraw the EDU-IB-02 idler pulley bracket from scratch with nothing in front of you. New drawing, template through dimensions. When the clock stops, write down which step ate the time. The second time, drill that one step twice on its own, then run the 40 minutes again. Writing both times and both bottleneck steps side by side turns 'what should I practice' into a number. The exam part is undecided, so do not treat this bracket as the question. What you are drilling is the sequence, not the shape."
+   "ko": "첫 번째는 새 도면에서 아이들러 풀리 브래킷을 템플릿부터 치수까지 다시 그립니다. 필요하면 본인이 저장한 도면과 이 교재를 참고하세요. 걸린 시간과 막힌 단계를 적습니다. 두 번째는 막힌 단계를 따로 연습한 뒤 전체를 다시 그려 봅니다. 두 기록을 비교하면 다음에 연습할 부분을 찾을 수 있어요. 이 브래킷은 과정의 연습 부품이며 시험 문제로 확정된 것이 아닙니다.",
+   "en": "First redraw the bracket from a new drawing through dimensions, using your saved work and workbook as needed. Record elapsed time and difficult steps. Practise those steps separately, then redraw the whole part. Compare the records to plan further practice. This course part is not a confirmed exam question."
   },
   "criteria": [
    {
@@ -1951,8 +1951,8 @@
     "en": "You checked whether the second run was faster, and if not, which step stayed the same."
    },
    {
-    "ko": "두 번 모두 검산 12항목을 끝까지 돌렸습니다.",
-    "en": "You ran all 13 cross-checks to the end after each run."
+    "ko": "두 번 모두 검산 목록을 끝까지 확인했습니다.",
+    "en": "You completed the full self-check list after both runs."
    },
    {
     "ko": "모의 작도를 7차시를 마친 뒤에 했습니다.",
@@ -2031,20 +2031,20 @@
  "recap": {
   "did": [
    {
-    "ko": "시험을 여섯 항목으로 정리했습니다 — 방식·출제 형태·시간·작업 범위·제출·장소와 일시입니다.",
-    "en": "Set out the exam in six items: format, source material, time, scope, submission, venue and date."
+    "ko": "시험 공지에서 확인할 여섯 항목을 정리했습니다. 운영 안내와 채점 기준, 합격선은 공유 예정입니다.",
+    "en": "Listed six items to check in the exam notice. Exam operations, marking, and the pass mark will be shared later."
    },
    {
     "ko": "반복해 나온 질문 다섯 개에 답했습니다. 평가 기준만은 자리를 비워 두었어요.",
     "en": "Answered the five recurring questions. Only the marking scheme was left blank."
    },
    {
-    "ko": "40분 모의 작도를 일곱 단계로 밟고 12항목으로 검산했습니다.",
-    "en": "Walked the 40-minute mock run in seven steps and cross-checked it on 13 items."
+    "ko": "전체 작도를 일곱 단계로 복습하고 검산 목록으로 확인했습니다.",
+    "en": "Rehearsed the full drawing in seven steps and used the self-check list."
    },
    {
-    "ko": "시험에서 자주 어긋나는 세 자리를 봤습니다 — 배치·겹친 선·치수입니다.",
-    "en": "Looked at the three places it goes wrong: layout, coincident lines, dimensions."
+    "ko": "전체 작도에서 다시 확인할 세 자리를 봤습니다 — 배치·겹친 선·치수입니다.",
+    "en": "We reviewed three areas to recheck in the complete drawing: view placement, overlapping lines and dimensions."
    },
    {
     "ko": "테크니션 업무 셋과 현장 명령 여섯을 남겼습니다 — `PL` · `O` · `DI` · `LI` · `MA` · `PLOT` 입니다.",
@@ -2056,8 +2056,8 @@
    }
   ],
   "next": {
-   "ko": "다음 차시는 없습니다. AutoCAD 기본 과정은 8차시로 끝납니다. 남은 것은 시험 하나입니다. 장소와 일시, 제출용 이메일 주소는 별도 공지로 안내받습니다. 채점 기준 표와 연습 도면은 준비되는 대로 공유됩니다. 그때까지는 오늘 정한 네 가지를 반복하세요. 첫째, 템플릿을 다시 만들어 봅니다. 둘째, 정면을 먼저 정하고 세 뷰와 치수까지 넣어 봅니다. 셋째, 40분을 재고 통째로 그려 봐요. 넷째, 겹치면 실선이 우선이고 치수는 정면도 외형선 기준입니다. 막히면 김정웅 기장이나 김양환 선임에게 물어보세요. 여덟 차시 동안 고생 많으셨습니다. 시험장에서 뵙겠습니다.",
-   "en": "There is no next lesson. The AutoCAD basics course ends at eight, and what remains is the exam. The venue, the date, and the submission address come by separate notice. The marking scheme and the practice drawings will be shared once ready. Until then, repeat the four things settled today. First, rebuild the template. Second, choose the front and carry three views through to dimensions. Third, run the 40 minutes end to end. Fourth, hold on to the two rules: visible wins, and dimension from the front view outline. If you get stuck, ask Kim Jeong-ung or Kim Yang-hwan. Thank you for the eight lessons, and see you at the exam."
+   "ko": "AutoCAD 기본 과정은 8차시로 끝납니다. 템플릿 만들기, 세 뷰 배치, 치수 기입과 저장을 다시 연습하세요. 걸린 시간과 막힌 단계를 기록하면 다음 연습을 정하기 쉽습니다. 막히면 김정웅, 김양환에게 문의합니다. 채점 기준과 합격선, 시험 운영 안내는 공유 예정입니다.",
+   "en": "The AutoCAD basics course ends here. Rehearse the template, three-view placement, dimensions, and saving. Record elapsed time and difficult steps to plan further practice. Contact Kim Jeong-ung or Kim Yang-hwan if needed. Marking, the pass mark, and exam operations will be shared later."
   }
  }
 }

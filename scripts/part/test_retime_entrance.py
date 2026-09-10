@@ -4,10 +4,32 @@ import unittest
 import json
 import re
 
+import beats
 from retime_frames import CALL, retime_frame, validate_beats
 
 
 class IntroductionTimingTests(unittest.TestCase):
+    def test_supplementary_note_follows_the_last_beat_after_speed_change(self):
+        old_spans = [(1, 4, 40), (2, 45, 100)]
+        source = ('<div data-composition-id="f" data-duration="102"></div>\n'
+                  'const tl=gsap.timeline({paused:true});\n'
+                  + beats.closing_note('f', old_spans))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'frame.html'
+            path.write_text(source, encoding='utf-8')
+            spec = path.with_suffix('.motion.json')
+            spec.write_text(json.dumps({'duration': 102, 'assertions': [
+                beats.closing_note_assertion('f', old_spans)]}), encoding='utf-8')
+            retime_frame(str(path), [(2, 28), (30, 70)], 72)
+            result = path.read_text(encoding='utf-8')
+            call = next(CALL.finditer(result))
+            self.assertEqual(float(call['time']), 30)
+            self.assertLess(float(call['time']) + .9, 70)
+            self.assertLessEqual(json.loads(spec.read_text(encoding='utf-8'))[
+                'assertions'][0]['bySec'], 33.0)
+            retime_frame(str(path), [(2, 28), (30, 70)], 72)
+            self.assertEqual(path.read_text(encoding='utf-8'), result)
+
     def test_title_remains_visible_through_speech_and_exits_inside_its_clip(self):
         source = '''<div data-composition-id="f" data-duration="16"></div>
 const tl=gsap.timeline({paused:true});
@@ -19,8 +41,14 @@ tl.to("#f .brand,#f .cert,#f h2,#f .rule,#f .sub",{opacity:0,duration:.8},11.05)
             with self.subTest(duration=duration), tempfile.TemporaryDirectory() as tmp:
                 path = Path(tmp) / 'frame.html'
                 path.write_text(source, encoding='utf-8')
+                spec = path.with_suffix('.motion.json')
+                spec.write_text(json.dumps({'duration': 16, 'assertions': [
+                    {'kind': 'appearsBy', 'selector': '#f h2', 'bySec': 12},
+                    {'kind': 'appearsBy', 'selector': '#f .sub', 'bySec': 14}]}), encoding='utf-8')
                 retime_frame(str(path), [], duration)
                 result = path.read_text(encoding='utf-8')
+                for assertion in json.loads(spec.read_text(encoding='utf-8'))['assertions']:
+                    self.assertLess(assertion['bySec'], duration)
                 fade = next(m for m in CALL.finditer(result) if m.group('kind') == 'to')
                 at = float(fade.group('time'))
                 self.assertGreaterEqual(at, duration - 1.6)

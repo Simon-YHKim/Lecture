@@ -322,12 +322,13 @@ _hl([(BOSS_C[0] - BOSS_R * 0.54, BOSS_C[1]), (BOSS_C[0] + BOSS_R * 0.54, BOSS_C[
 _hl([(BOSS_C[0], BOSS_C[1] - BOSS_R * 0.54), (BOSS_C[0], BOSS_C[1] + BOSS_R * 0.54)])
 feature("filletc")                     # 필렛 중심의 십자 — 높이 26
 for _fx, _fy in (FC, FC_L):
-    _hl([(_fx - 8.0, _fy), (_fx + 8.0, _fy)])
-    _hl([(_fx, _fy - 8.0), (_fx, _fy + 8.0)])
+    _hl([(_fx - 3.0, _fy), (_fx + 3.0, _fy)])
+    _hl([(_fx, _fy - 3.0), (_fx, _fy + 3.0)])
 feature("slotc")                        # 장공 중심선 — 중심 높이 8
 for _cx, _cy in SLOT_C:
-    _half = SLOT_L / 2 - SLOT_W / 2
-    _hl([(_cx - _half - 6.0, _cy), (_cx + _half + 6.0, _cy)])
+    for _ex in (_cx - SLOT_CTC / 2, _cx + SLOT_CTC / 2):
+        _hl([(_ex - 3.0, _cy), (_ex + 3.0, _cy)])
+        _hl([(_ex, _cy - 3.0), (_ex, _cy + 3.0)])
 feature(None)
 
 feature("boss")
@@ -340,7 +341,8 @@ feature("tap")
 for tx, ty in tap_xy:
     px, py = F(tx, ty)
     circle(px, py, TAP_D / 2, edge("tap"))
-    cross(px, py, TAP_D / 2)
+    line(px - 3, py, px + 3, py, "center")
+    line(px, py - 3, px, py + 3, "center")
 circle(bcx, bcy, TAP_PCD / 2, "center")
 feature("bore")
 cross(bcx, bcy, SHAFT_D / 2)
@@ -350,20 +352,18 @@ for cx, cy in SLOT_C:
     path("M%.3f %.3f L%.3f %.3f A%.3f %.3f 0 0 1 %.3f %.3f L%.3f %.3f A%.3f %.3f 0 0 1 %.3f %.3f Z"
          % (*F(cx - half, cy + r), *F(cx + half, cy + r), r, r, *F(cx + half, cy - r),
             *F(cx - half, cy - r), r, r, *F(cx - half, cy + r)), "outline")
-    sx, sy = F(cx, cy)
-    line(sx - SLOT_L / 2 - 3, sy, sx + SLOT_L / 2 + 3, sy, "center")
-    # A slot is built from two circles joined by tangents, so both end centres
-    # carry a centre mark. Without them the construction basis is unreadable.
+    # DIMCENTER with positive DIMCEN=3: one cross per end-arc centre.
     for ex in (cx - SLOT_CTC / 2, cx + SLOT_CTC / 2):
-        px, _ = F(ex, cy)
-        line(px, sy - r - 3, px, sy + r + 3, "center")
+        px, py = F(ex, cy)
+        line(px - 3, py, px + 3, py, "center")
+        line(px, py - 3, px, py + 3, "center")
 feature(None)
 line(bcx, FY - TOP_Y - 8, bcx, FY + 8, "center")
 feature("fillet")
 for fcx, fcy in (FC, FC_L):                    # fillet arc centres
     px, py = F(fcx, fcy)
-    line(px - 8, py, px + 8, py, "center")
-    line(px, py - 8, px, py + 8, "center")
+    line(px - 3, py, px + 3, py, "center")
+    line(px, py - 3, px, py + 3, "center")
 
 feature(None)
 
@@ -401,7 +401,7 @@ if PROFILE != "front":
  arrow(fp[0], fp[1], 323)
  text(fp[0] + 26, fp[1] - 13.2, f"2-R{FILLET_R:g}", anchor="start")
  dimid(None)
- ps = F(*SLOT_C[0])
+ ps = F(SLOT_C[0][0] - SLOT_CTC / 2, SLOT_C[0][1])
  D("sr5", leader, ps[0], ps[1], SLOT_W / 2, 210, "2-&#51109;&#44277; R5", length=22)
 
  dimid("a45")
@@ -429,11 +429,15 @@ if PROFILE != "front":
 
 if not FRONT_ONLY:
  # ============================================================ TOP VIEW
- path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f Z"
-      % (*T(0, PLATE_Z[0]), *T(BASE_W, PLATE_Z[0]), *T(BASE_W, PLATE_Z[1]), *T(0, PLATE_Z[1])), "outline")
- path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f Z"
-      % (*T(BOSS_C[0] - BOSS_R, BOSS_Z[0]), *T(BOSS_C[0] + BOSS_R, BOSS_Z[0]),
-         *T(BOSS_C[0] + BOSS_R, BOSS_Z[1]), *T(BOSS_C[0] - BOSS_R, BOSS_Z[1])), "outline")
+ # Joined boss and plate share the cylindrical silhouette between the web
+ # tangencies. Only the outboard step edges remain visible at z=8.
+ path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f"
+      % (*T(0, PLATE_Z[0]), *T(0, PLATE_Z[1]), *T(BASE_W, PLATE_Z[1]), *T(BASE_W, PLATE_Z[0])), "outline")
+ line(*T(0, PLATE_Z[0]), *T(TL[0], PLATE_Z[0]), "outline")
+ line(*T(TR[0], PLATE_Z[0]), *T(BASE_W, PLATE_Z[0]), "outline")
+ path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f"
+      % (*T(BOSS_C[0] - BOSS_R, BOSS_Z[1]), *T(BOSS_C[0] - BOSS_R, BOSS_Z[0]),
+         *T(BOSS_C[0] + BOSS_R, BOSS_Z[0]), *T(BOSS_C[0] + BOSS_R, BOSS_Z[1])), "outline")
  for xx in (BOSS_C[0] - SHAFT_D / 2, BOSS_C[0] + SHAFT_D / 2):
      line(*T(xx, 0), *T(xx, DEPTH), "hidden")
  for tx in sorted({round(p[0], 3) for p in tap_xy}):
@@ -444,7 +448,7 @@ if not FRONT_ONLY:
      for xx in (cx - SLOT_L / 2, cx + SLOT_L / 2):
          line(*T(xx, PLATE_Z[0]), *T(xx, PLATE_Z[1]), "hidden")
  # Chamfer: the edge between the slanted face and the base top face runs along z
- # at x = 5 and x = 95, and is seen from above.
+ # at x = 5 and x = 115, and is seen from above.
  for xx in (CHAMFER, BASE_W - CHAMFER):
      line(*T(xx, PLATE_Z[0]), *T(xx, PLATE_Z[1]), "outline")
  # R10 runs the full thickness, so the round starts along a line parallel to z.
@@ -457,7 +461,7 @@ if not FRONT_ONLY:
  path("M%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f L%.3f %.3f Z"
       % (*R(PLATE_Z[0], 0), *R(PLATE_Z[1], 0), *R(PLATE_Z[1], TOP_Y),
          *R(BOSS_Z[0], TOP_Y), *R(BOSS_Z[0], BOSS_BOT), *R(PLATE_Z[0], BOSS_BOT)), "outline")
- line(*R(PLATE_Z[0], BOSS_BOT), *R(PLATE_Z[0], TOP_Y), "outline")
+ line(*R(PLATE_Z[0], BOSS_BOT), *R(PLATE_Z[0], TR[1]), "outline")
  for yy in (BOSS_C[1] - SHAFT_D / 2, BOSS_C[1] + SHAFT_D / 2):
      line(*R(0, yy), *R(DEPTH, yy), "hidden")
  for ty in sorted({round(p[1], 3) for p in tap_xy}):
@@ -538,8 +542,9 @@ if "--json" in sys.argv:
         "authority": "공개용 합성 교육 형상. 실제 시험의 문제지와 감독 지시가 모든 교육용 기본값에 우선한다.",
         "coordinateSystem": {
             "origin": "front-view-lower-left",
-            "x": "front-view-right", "y": "front-view-up", "z": "depth-toward-viewer",
-            "datumA": {"type": "plane", "equation": "y=0", "role": "프레임 접촉 기준면"},
+            "x": "front-view-right", "y": "front-view-up", "z": "depth-away-from-viewer",
+            "datumA": {"type": "plane", "equation": "y=0", "role": "베이스 바닥 높이 기준면"},
+            "frameContactPlane": {"type": "plane", "equation": f"z={PLATE_Z[1]:g}", "role": "프레임 접촉 뒷면"},
             "datumB": {"type": "plane", "equation": f"x={BOSS_C[0]:g}", "role": "좌우 대칭 중심"},
         },
         "depthConvention": {
@@ -547,6 +552,17 @@ if "--json" in sys.argv:
             "note": "뒷면은 프레임에 밀착하므로 평면으로 두고 보스는 앞으로 돌출한다.",
         },
         "envelope": {"widthX": BASE_W, "heightY": TOP_Y, "depthZ": DEPTH},
+        "projectionContract": {
+            "solidUnion": "plate profile extruded z=8..20, joined to boss cylinder z=0..8",
+            "centreMarks": {"command": "DIMCENTER", "dimcen": 3, "dimscale": 1, "quantity": 10, "features": ["taps", "fillets", "slot-end-arcs"]},
+            "topVisiblePlateFront": {
+                "z": PLATE_Z[0], "xRanges": [[0.0, TL[0]], [TR[0], BASE_W]],
+            },
+            "rightVisiblePlateFront": {
+                "z": PLATE_Z[0], "yRange": [BOSS_BOT, TR[1]],
+            },
+            "note": "공유 원통면에는 이음선을 그리지 않는다. 접점 좌표는 교육자 검산용이며 학습자는 목 위쪽 끝점을 투상한다.",
+        },
         "features": {
             "base": {"width": BASE_W, "height": BASE_H, "z": list(PLATE_Z),
                      "purpose": "프레임 접촉 장착면"},

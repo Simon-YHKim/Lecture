@@ -81,6 +81,18 @@ def main():
              + "\n".join("| %g | %s |" % (dc[k], label) for k, label in depth_rows)
              + "\n\n" + dc["note"])
 
+    pc = g["projectionContract"]
+    left, right = pc["topVisiblePlateFront"]["xRanges"]
+    bottom, top = pc["rightVisiblePlateFront"]["yRange"]
+    projection = (
+        "보스와 판은 합체된 교육 형상이다. 공유 원통면에 이음선을 그리지 않는다.\n\n"
+        "| 보는 방향 | z=8에서 보이는 단차선 (교육자 검산값) |\n| --- | --- |\n"
+        "| 평면도 | x=%.6f~%.6f, x=%.6f~%.6f |\n"
+        "| 우측면도 | y=%.6f~%.6f |\n\n"
+        "학습자는 위 수치를 좌표로 입력하지 않는다. 목 직선의 위쪽 끝점을 END로 잡아 투상하고 깊이선과 INT로 만난다.\n\n"
+        "높이 기준면은 y=0인 베이스 바닥이고, 프레임 접촉면은 z=20인 판 뒷면이다. z는 보는 사람에게서 멀어지는 방향으로 증가한다.\n\n"
+    ) % (*left, *right, bottom, top)
+
     io.open(os.path.join(ROOT, "MASTER_DRAWING_SPEC.md"), "w",
             encoding="utf-8", newline="\n").write(
         "# %s 정본 도면\n\n" % g["partId"]
@@ -120,6 +132,7 @@ def main():
           "(`LESSON_STYLE.md` 6번). 실습 문제지는 문제마다 선 종류 표를 따로 준다.\n\n"
           "## 5. 투상\n\n"
           "제3각법. 정면도 기준으로 위가 평면도, 오른쪽이 우측면도.\n\n"
+        + projection +
           "## 6. 생성기가 매번 확인하는 것\n\n"
           "형상은 눈으로 맞추지 않고 풀어서 구한다. 아래 값이 커지면 도면이 틀린 것이다.\n\n"
           "| 검산 | 값 |\n| --- | --- |\n" + checks + "\n\n"

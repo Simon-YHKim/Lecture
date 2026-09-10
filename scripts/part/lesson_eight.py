@@ -44,7 +44,7 @@ def f_exam(comp, dur, spans, L):
         '<td style="color:#111;white-space:nowrap">%s</td>'
         '<td style="color:#666;font-size:21px">%s</td></tr>'
         % (i, r["col1"], r["col2"], r["col3"]) for i, r in enumerate(L["exam"], 1))
-    body = (kit.header("01 · EXAM", L["examTitle"], "대면 · 40분 · 제3각법")
+    body = (kit.header("01 · EXAM", L["examTitle"], "시험 운영 · 공유 예정")
             + '\n      <main class="body" '
               'style="grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)">'
             + '<section><table class="spec"><thead><tr><th>항목</th><th>무엇</th>'
@@ -126,10 +126,10 @@ def f_field(comp, dur, spans, L):
         beats.chrome(comp),
         beats.cue(comp, "thead", 1.5, dy=8, dur=0.7, ease="power2.out"),
         beats.read_along(comp, items, spans),
-        beats.cue(comp, ".note", max(dur - 14.0, 4.0), dy=12),
+        beats.closing_note(comp, spans),
         beats.outro(comp, dur),
     ])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans, extra=[beats.closing_note_assertion(comp, spans)])
 
 
 def f_recap(comp, dur, spans, L):

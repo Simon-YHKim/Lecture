@@ -145,8 +145,8 @@ def main(outpath):
                         body.append(strip_progress(pp[pid]) if pid == 'p-sum' else pp[pid])
             html = prefix_ids(''.join(body), 'l%02d' % no)
             head = ('<h2 class="first"><span class="num">%02d</span>%s</h2>'
-                    '<p class="lede"><span class="k">영상 %s · 자습 약 %d분</span>'
-                    '<span class="e">Video %s · about %d min of self-study</span></p>'
+                    '<p class="lede"><span class="k">음성 구성 시간 %s · 자습 약 %d분</span>'
+                    '<span class="e">Narrated timeline duration %s · about %d min of self-study</span></p>'
                     % (no, B.bi(L.get('title')), L.get('videoLength', '—'),
                        L.get('selfStudyMin', 0), L.get('videoLength', '—'), L.get('selfStudyMin', 0)))
             tabs.append(('p-l%02d' % no, {'ko': '%d차시' % no, 'en': 'L%d' % no}))
@@ -162,9 +162,9 @@ def main(outpath):
     finally:
         B.PAGE_CAP = saved_cap
 
-    meta = ('<span class="k">작성 %s · 발행 Claude Code · 8차시 한 파일 · 자습 총 %d분(약 %.1f시간) · </span>'
-            '<span class="e">Written %s · Claude Code · eight lessons in one file · '
-            '%d min total (about %.1f h) · </span>'
+    meta = ('<span class="k">작성 %s · AutoCAD 교육과정 · 8차시 한 파일 · 자습 계획 추정 %d분(약 %.1f시간) · </span>'
+            '<span class="e">Written %s · AutoCAD course · eight lessons in one file · '
+            'Planning estimate: %d min (about %.1f h) · </span>'
             % (B.STAMP, total_min, total_min / 60.0, B.STAMP, total_min, total_min / 60.0))
     eyeb = ('<span class="k">LG이노텍 Green Star · for technician · 자습 과정 전체</span>'
             '<span class="e">LG Innotek Green Star · for technician · the whole self-study course</span>')

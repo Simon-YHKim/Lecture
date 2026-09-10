@@ -12,7 +12,7 @@
       "title": "LGIT 테크니션 인증제_실습과정 — AutoCAD 기본 과정 v2",
       "slides": 63,
       "modified": "2026-03-16",
-      "note": "사용자가 2026-09-10 에 재첨부한 사내 정본 교안. 이 파일의 source='material' 값은 전부 여기서 왔다."
+      "note": "이전 인수인계가 사내 정본 교안으로 기록한 출처다. source='material' 값의 출처 표시는 유지한다. 현재 작업 환경에 원본 교안 파일이 없어 이번 개편에서 원문 대조를 완료한 것으로 취급하지 않는다."
     },
     "problems": {
       "title": "테크니션 인증제 실습문제 v1",
@@ -220,6 +220,18 @@
   },
   "policy": {
     "$comment": "사용자가 영구 정책으로 지정한 것. HANDOFF 「적용 중인 정책」 과 같은 내용이다.",
+    "confirmedOn": "2026-09-10",
+    "autocadVersion": "2024",
+    "deliveryUnit": "lesson",
+    "lessonCount": 8,
+    "narrationPlaybackRate": 1.38,
+    "starterFilesProvided": false,
+    "assessmentStatus": "공유 예정",
+    "examOperationsStatus": "공유 예정",
+    "helpDisclosure": "names-only",
+    "helpNames": ["김정웅", "김양환"],
+    "productionOrder": ["ko", "en"],
+    "deliveryNote": "차시마다 통합 영상 한 개를 제공한다. 녹화 내부 조각은 별도 에피소드로 공개하지 않는다. 국문 자습·슬라이드·대본·영상 완성 후 영문판을 제작한다.",
     "coordinates": "좌표 입력을 가르치지 않는다. 마우스 커서 + 객체 스냅 + 수치 입력으로 쓴다. 예외는 용지선 두 구석(0,0 과 420,297) 뿐이다.",
     "coachMarks": "작도 실습 화면에는 도면 + 코치 마크 + 지금 그리는 요소 강조를 함께 둔다.",
     "tone": "합쇼체 70~80% · 해요체 20~30%. 문어체 '~한다' 금지.",

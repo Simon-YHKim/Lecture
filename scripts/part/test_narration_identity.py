@@ -1,5 +1,6 @@
 """A timing header edit may reuse speech; a spoken edit may not."""
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -51,8 +52,13 @@ class SpeechIdentityTests(unittest.TestCase):
             def change_script(*args):
                 script.write_text(content.replace('읽습니다', '그립니다'), encoding='utf-8')
                 return {}
+            # A runner without FFmpeg stops at the tempo pre-flight, so stub that
+            # probe and leave the spoken-text identity as the only way to fail.
+            probe = subprocess.CompletedProcess([], 0, stdout='ffmpeg version 0 (stub)')
             with patch('narrate_tts.lesson_frames', return_value=[(1, ['01-title'])]), \
                  patch('narrate_tts.cuts_for', return_value=[]), \
+                 patch('narrate_tts.shutil.which', return_value='ffmpeg'), \
+                 patch('narrate_tts.subprocess.run', return_value=probe), \
                  patch('narrate_tts.speak_many', side_effect=change_script):
                 with self.assertRaisesRegex(ValueError, 'TTS'):
                     narrate(str(root), str(Path(tmp) / 'audio'), 'Microsoft Heami Desktop')

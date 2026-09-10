@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-"""편과 BRIEF 의 길이를 마스터(index.html)에 다시 맞춘다.
+"""차시 전달 목록과 BRIEF 길이를 마스터(index.html)에 다시 맞춘다.
 
-편은 복사본이 아니라 같은 프레임을 가리키는 재생 목록이다(LESSON_STYLE 30번).
-그런데 `narrate_tts` 가 나레이션을 다시 재고 `retime_frames` 가 프레임을 다시
-맞추면 index.html 의 슬롯 길이만 바뀌고, `compositions/episodes/ep*.html` 과
-`BRIEF.md` 의 `length:` 는 옛 값을 든 채 남는다. 검사기가 「편 길이가 마스터와
-다르다」로 잡는 것이 이 상태다.
-
-스캐폴드를 다시 돌리면 이것도 고쳐지지만 Studio 가 심어 둔 편집이 사라진다
-(COURSE_PLAN 「다시 만들기」). 그래서 편만 다시 굽는다 — 프레임은 건드리지 않고
-index.html 을 읽어 슬롯을 그대로 옮긴다.
+현재 과정은 차시당 index.html 하나를 전달한다. 기존 파일명과 호출 API는
+유지하되 과거 compositions/episodes/ 파일은 갱신하지 않는다. master의
+프레임 순서가 정본 선언과 일치하는지 확인하고 BRIEF 길이만 맞춘다.
+저작한 프레임은 건드리지 않는다.
 
     python scripts/part/rebuild_episodes.py            # 여덟 차시 전부
     python scripts/part/rebuild_episodes.py <lesson-dir>
@@ -70,8 +65,8 @@ def one(lesson_dir):
     total = sum(s[4] for s in slots)
     eps = kit.write_episodes(lesson_dir, slots, episodes.episodes_for(slug), os)
     brief = fix_brief(lesson_dir, total)
-    caps = [t for _, _, t, _ in eps if t > episodes.CAP_SEC]
-    print("%-34s 편 %d · 전체 %6.1f초 (%s)%s%s"
+    caps = [t for _, _, t, _ in eps if episodes.CAP_SEC is not None and t > episodes.CAP_SEC]
+    print("%-34s 통합 차시 %d개 · 전체 %6.1f초 (%s)%s%s"
           % (slug, len(eps), total, mmss(total),
              "  BRIEF length: " + brief if brief else "",
              "  ⚠ 20분 초과 %d편" % len(caps) if caps else ""))

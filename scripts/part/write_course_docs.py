@@ -18,6 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
 import episodes  # noqa: E402
 import verify_course as vc  # noqa: E402
+from narrate_tts import verify_script_hash, verify_tempo_timing, frame_hold  # noqa: E402
 
 ROOT = "projects/autocad-technician"
 
@@ -41,8 +42,21 @@ def scan():
     out = []
     for i, (slug, cp_in, cp_out) in enumerate(vc.LESSONS, 1):
         d = os.path.join(ROOT, slug)
-        index = io.open(os.path.join(d, "index.html"), encoding="utf-8").read()
+        with open(os.path.join(d, 'narration-timing.json'), encoding='utf-8') as fh:
+            timing = json.load(fh)
+        verify_script_hash(d, timing)
+        verify_tempo_timing(timing, required=True)
+        with io.open(os.path.join(d, "index.html"), encoding="utf-8") as fh:
+            index = fh.read()
         slots = vc._SLOT.findall(index)
+        if [s[0] for s in slots] != [f['id'] for f in timing['frames']]:
+            raise ValueError(slug + ': master frames differ from narration timing; retime first')
+        clock_sec, hold = 0.0, frame_hold(timing)
+        for (_stem, start, duration), frame in zip(slots, timing['frames']):
+            expected = round(frame['duration'] + hold, 3)
+            if abs(float(start) - clock_sec) > .002 or abs(float(duration) - expected) > .002:
+                raise ValueError(slug + ': master has not adopted current narration timing; retime first')
+            clock_sec = round(clock_sec + expected, 3)
         total = sum(float(s[2]) for s in slots)
         sp = os.path.join(d, "SCRIPT.md")
         steps = beats.parse_steps(sp, 5) or beats.parse_steps(sp, 8)
@@ -52,17 +66,15 @@ def scan():
             "durationSec": int(round(total)), "frames": len(slots),
             "checkpointIn": cp_in, "checkpointOut": cp_out,
             "demoId": "DEMO-01" if demo else None,
-            "demoSec": int(round(sum(float(x[2]) for x in demo))) if demo else 0,
+            "demoSec": round(sum(float(x[2]) for x in demo), 3) if demo else 0,
             "demoParts": [{"id": "DEMO-01" + "ABCDEFGH"[k],
-                           "lengthSec": int(round(float(x[2])))}
+                           "lengthSec": round(float(x[2]), 3)}
                           for k, x in enumerate(demo)] if len(demo) > 1 else [],
             "cutAfterStep": episodes.cuts_for(slug),
             "steps": len(steps),
-            "episodes": [{"title": e["title"],
-                          "lengthSec": int(round(sum(
-                              float(s[2]) for s in slots if s[0] in e["frames"]))),
-                          "frames": e["frames"]}
-                         for e in episodes.episodes_for(slug)],
+            "delivery": {"entry": "index.html", "title": TOPIC[slug],
+                         "lengthSec": round(total, 3), "frames": [s[0] for s in slots]},
+            "narrationTempo": timing['tempo'],
         })
     return out
 
@@ -81,6 +93,8 @@ def main():
                 "projection": "third-angle",
                 "layers": ["외형선", "중심선", "숨은선", "치수선"],
                 "lessonCount": len(L),
+                "deliveryMode": "lesson",
+                "videoCount": len(L),
                 "totalSec": total,
                 "note": ("차시마다 새 파일을 열지 않는다. 앞 차시의 checkpointOut 파일을 열어 "
                          "이어 그린다. 이 파일은 scripts/part/write_course_docs.py 가 만든다."),
@@ -89,24 +103,23 @@ def main():
 
     io.open(os.path.join(ROOT, "recording-map.json"), "w",
             encoding="utf-8", newline="\n").write(json.dumps({
-                "note": ("한 차시의 녹화는 편 수만큼 나뉜다. cutAfterStep 이 비어 있으면 "
-                         "한 번에 찍고, 값이 있으면 그 단계를 끝낸 자리에서 끊는다. "
-                         "lengthSec 은 낭독 시간 × 1.3 으로 계산한 예상치이며, 실제 "
-                         "녹화가 들어오면 그 길이가 기준이 된다."),
+                "note": ("차시마다 통합 영상 하나를 전달한다. cutAfterStep은 실습 녹화의 내부 조각 경계다. "
+                         "lengthSec은 현재 master의 실측 음성 기반 슬롯 길이이며 실제 AutoCAD 조작 검수는 별도다. "
+                         "입력 녹화는 목표 슬롯과 원본 1프레임+3ms 이내로 같아야 하며 자동으로 자르거나 늘이지 않는다."),
                 "recordings": [{
                     "lesson": x["no"], "slug": x["slug"], "demoId": x["demoId"],
                     "lengthSec": x["demoSec"], "steps": x["steps"],
                     "cutAfterStep": x["cutAfterStep"], "parts": x["demoParts"],
                     "opens": x["checkpointIn"], "saves": x["checkpointOut"],
                 } for x in L if x["demoId"]],
-                "episodes": [{"lesson": x["no"], "slug": x["slug"],
-                              "list": x["episodes"]} for x in L],
+                "deliveries": [{"lesson": x["no"], "slug": x["slug"],
+                                **x["delivery"]} for x in L],
             }, ensure_ascii=False, indent=2) + "\n")
 
     io.open(os.path.join(ROOT, "COURSE_PLAN.md"), "w",
             encoding="utf-8", newline="\n").write(
         "# COURSE PLAN — AutoCAD Technician\n\n"
-        "LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나를 일곱 차시에 걸쳐\n"
+        "LG이노텍 「Green Star」 테크니션 인증제 실습과정. 부품 하나를 2~7차시의 여섯 실습 차시에 걸쳐\n"
         "처음부터 끝까지 그리고, 마지막 한 차시에서 시험 진행과 질문을 다룬다.\n"
         "도면 번호 `EDU-IB-02`, 아이들러 풀리 브래킷.\n\n"
         "전체 %s · A3 가로 · 제3각법 · 레이어 네 개\n\n" % clock(total)
@@ -115,17 +128,17 @@ def main():
         + "\n".join("| %d | %s | %s | %d | %s | %s |"
                    % (x["no"], x["topic"], clock(x["durationSec"]), x["frames"],
                       x["checkpointIn"] or "—", x["checkpointOut"] or "—") for x in L)
-        + "\n\n## 편\n\n한 편이 영상 하나다. 20분을 넘기지 않는다. "
-          "`npm run render -- -c compositions/episodes/ep1.html` 로 편 하나를 뽑는다.\n\n"
-        + "| 차시 | 편 | 제목 | 길이 | 프레임 |\n| --- | --- | --- | --- | --- |\n"
+        + "\n\n## 통합 전달\n\n차시당 영상 하나, 전체 8개를 전달한다. 에피소드 분할과 20분 상한은 적용하지 않는다. "
+          "Heami Rate 0 원본에 음높이 보존 1.38배속을 적용하고 결과 음성의 실제 길이에 맞춘다. "
+          "학생 전달의 기준은 각 차시 `index.html`이다. 과거 `compositions/episodes/` 파일은 역사 자료이며 전달·갱신 대상이 아니다.\n\n"
+        + "| 차시 | 제목 | 길이 | 프레임 |\n| --- | --- | --- | --- |\n"
         + "\n".join(
-            "| %d | %d편 | %s | %s | %s |"
-            % (x["no"], n, e["title"], clock(e["lengthSec"]),
+            "| %d | %s | %s | %s |"
+            % (x["no"], e["title"], clock(e["lengthSec"]),
                " · ".join("`%s`" % f for f in e["frames"]))
-            for x in L for n, e in enumerate(x["episodes"], 1))
-        + "\n\n합계 %d편. 끊는 자리와 그 이유는 "
-          "`scripts/part/episodes.json` 에 있다.\n"
-          % sum(len(x["episodes"]) for x in L)
+            for x in L for e in [x["delivery"]])
+        + "\n\n합계 %d개 통합 차시. 실습 녹화 내부의 단계 경계만 "
+          "`scripts/part/episodes.json`에 보존한다.\n" % len(L)
         + "\n\n## 이 과정이 스스로 지키는 것\n\n"
           "- **길이는 대본이 정한다.** 프레임 길이도 항목 등장 시각도 `SCRIPT.md` 에서 계산된다.\n"
           "  손으로 적은 숫자는 대본이 바뀌는 순간 조용히 어긋난다 (`LESSON_STYLE.md` 13·14번).\n"
@@ -135,9 +148,9 @@ def main():
           "  실제 과제 지시가 언제나 우선한다 (`LESSON_STYLE.md` 6번).\n\n"
           "## 검사\n\n"
           "    pwsh -File scripts/check-course-projects.ps1\n"
-          "    pwsh -File scripts/check-course-projects.ps1 -RunHyperFramesChecks\n\n"
-          "첫 번째는 빌드 결과가 대본과 맞는지 본다 — 대본을 고치고 스캐폴드를 다시\n"
-          "돌리지 않으면 여기서 걸린다. 두 번째는 각 차시에 `npm run check` 를 더한다.\n\n"
+          "\n대본·실측 음성·master의 프레임 시각과 정본 정책을 함께 확인한다.\n"
+          "HyperFrames 검사는 `prepare_lecture.py`로 만든 새 통합 프로젝트와 장면별 검사 사본에서 실행한다.\n"
+          "원본 폴더에는 과거 episode가 남아 있으므로 현재 전달의 검증 범위로 사용하지 않는다.\n\n"
           "## 다시 만들기\n\n"
           "    python scripts/part/scaffold_lesson_01.py projects/autocad-technician/lesson-01-orientation\n"
           "    python scripts/part/scaffold_lesson_02.py projects/autocad-technician/lesson-02-part-and-template\n"
@@ -147,55 +160,9 @@ def main():
           "저작물이고, 다시 돌리면 Studio 가 심어 둔 `data-hf-id` 와 편집이 사라진다.\n\n"
           "이전 10차시 구성은 `_archive/` 에 있다. 빌드·검사 대상이 아니다.\n")
 
-    io.open(os.path.join(ROOT, "RECORDING_GUIDE.md"), "w",
-            encoding="utf-8", newline="\n").write(
-        "# RECORDING GUIDE\n\n"
-        "한 차시가 20분짜리 **편** 여럿으로 나간다. 녹화도 그만큼 나뉜다.\n"
-        "「끊는 자리」 칸의 단계를 끝내고 저장한 뒤 녹화를 멈춘다. 다음 부분은 그 "
-        "파일을 다시 열고 이어서 찍는다.\n\n"
-        + "| 차시 | 주제 | 여는 파일 | 저장하는 상태 | 단계 | 끊는 자리 | 예상 길이 |\n"
-          "| --- | --- | --- | --- | --- | --- | --- |\n"
-        + "\n".join("| %d | %s | %s | %s | %d | %s | %s |"
-                   % (x["no"], x["topic"], x["checkpointIn"] or "—",
-                      x["checkpointOut"] or "—", x["steps"],
-                      " · ".join("%d단계 뒤" % c for c in x["cutAfterStep"]) or "—",
-                      " + ".join(clock(p["lengthSec"]) for p in x["demoParts"])
-                      or clock(x["demoSec"]))
-                   for x in L if x["demoId"])
-        + "\n\n예상 길이는 그 차시 `SCRIPT.md` Line 5 의 낭독 시간 × 1.3 이다.\n"
-          "타이핑과 대화상자와 기다리는 시간은 말하지 않기 때문이다.\n\n"
-          "끊는 자리는 시계가 아니라 작업이 한 덩어리로 끝나는 곳으로 정했다. "
-          "이유는 `scripts/part/episodes.json` 의 `why` 에 차시마다 적혀 있다.\n\n"
-          "## 녹화하기 전에\n\n"
-          "1. 그 차시 `SCRIPT.md` 의 Line 5 를 처음부터 끝까지 읽는다. 단계 순서가 곧 녹화 순서다.\n"
-          "2. **여는 파일**을 연다. 새로 만들지 않는다. 앞 차시가 저장한 상태에서 이어 그린다.\n"
-          "3. 화면 배율을 100%로 두고 1920×1080 으로 녹화한다. 프레임 안 삽입 영역이 그 비율이다.\n"
-          "4. 명령행이 보이게 둔다. 학습자가 따라 칠 값이 거기 뜬다.\n"
-          "5. 마지막 단계는 언제나 새 이름으로 저장이다. 저장까지 녹화한다.\n\n"
-          "## 녹화한 뒤\n\n"
-          "녹화 파일은 **저장소 밖 비공개 위치**에 둔다. 옮겨 오지 않는다.\n\n"
-          "    python scripts/part/ingest_recording.py <차시> <녹화파일>\n\n"
-          "이 명령이 두 파일을 쓴다.\n\n"
-          "- `recording.json` — 길이·해상도·프레임레이트만. 공개되고 커밋된다.\n"
-          "- `media.local.json` — 파일의 절대경로. gitignore 되며 미리보기만 읽는다.\n\n"
-          "그다음 그 차시를 다시 만들면 DEMO 프레임이 **예상치가 아니라 실제 길이**가 된다.\n\n"
-          "    python scripts/part/scaffold_lessons_3_7.py <차시번호>\n\n"
-          "현재 상태는 언제든 확인할 수 있다.\n\n"
-          "    python scripts/part/ingest_recording.py --list\n\n"
-          "## 목소리를 녹음했다면\n\n"
-          "화면 녹화와 별개로 나레이션을 녹음했다면, 항목이 등장하는 시각을\n"
-          "**추정이 아니라 실제 음성**에 맞출 수 있다.\n\n"
-          "    pwsh -File scripts/transcribe-narration.ps1 -AudioPath <음성파일>\n"
-          "    pwsh -File scripts/build-narration-timing.ps1 -LessonPath <차시> -TranscriptPath <위 결과>\n\n"
-          "받아쓴 글은 비공개 위치에 남고, 저장소에는 숫자만 담긴 `narration-timing.json` 만\n"
-          "들어온다. 그 파일이 있으면 스캐폴드가 음절 추정 대신 실측 시각을 쓴다.\n"
-          "지금 타이밍은 초당 5.0음절 가정이라, 실제 낭독이 그보다 빠르거나 느리면\n"
-          "화면이 말보다 앞서거나 뒤처진다.\n\n"
-          "## 길이가 다르면\n\n"
-          "손으로 프레임을 맞추지 않는다. 대본을 고치고 다시 만들거나, 위 방법으로\n"
-          "실측값을 넣는다. 길이의 원본은 대본이다 (`LESSON_STYLE.md` 14번).\n")
+    # RECORDING_GUIDE.md is reviewed operational guidance, not a generated table.
 
-    print("과정 문서 4개 재생성 — 전체 %s, %d차시" % (clock(total), len(L)))
+    print("과정 문서 3개 재생성 — 전체 %s, %d차시" % (clock(total), len(L)))
     for x in L:
         print("  %d %-32s %6s  DEMO %5s  %d단계"
               % (x["no"], x["slug"], clock(x["durationSec"]),

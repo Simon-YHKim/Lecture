@@ -5,7 +5,7 @@
   "ko": "원·호·오프셋",
   "en": "Circles, Arcs, Offset"
  },
- "videoLength": "36:27",
+ "videoLength": "27:26",
  "selfStudyMin": 100,
  "opens": "EDU-IB-02_L03_PROFILE",
  "saves": "EDU-IB-02_L04_FEATURES",
@@ -704,8 +704,8 @@
       "ko": "중심선 레이어의 값",
       "en": "Values on the centerline layer"
      },
-     "ko": "이 과정의 중심선은 빨강 1번, 굵기 0.25, 선 종류 축척 0.5입니다. 연습용 기본값이에요. 2차시 화면의 표와 값이 다르게 보이면 이 값이 정본이에요.",
-     "en": "In this course the centerline layer is red (1), 0.25 mm, linetype scale 0.5. These are practice defaults. Where the table on the Lesson 2 screen shows something different, these values are the authoritative ones."
+     "ko": "이 과정의 중심선은 빨강 1번, 선가중치 0.15, 개체 선 종류 축척 0.5입니다. 전체 LTSCALE은 1이에요. 2차시와 같은 정본 값을 사용합니다.",
+     "en": "The centerline uses red ACI 1, lineweight 0.15 and object linetype scale 0.5. Global LTSCALE is 1, matching the Lesson 2 standard."
     }
    ]
   },
@@ -758,7 +758,7 @@
       "ko": "보스 원의 아래쪽 절반을 지우면",
       "en": "Erase the lower half of the boss circle and"
      },
-     "ko": "5차시에서 투상선을 뽑을 때 사분점 32와 88, 그리고 34를 잡아야 합니다. 그 셋이 전부 아래쪽 절반에 있습니다. 지우면 잡을 데가 없어져요.",
+     "ko": "5차시에서 투상선을 뽑을 때 사분점 32와 88, 그리고 34를 잡아야 합니다. 32와88은 좌우 사분점이고34는 아래 사분점에 있습니다. 지우면 잡을 데가 없어져요.",
      "en": "In Lesson 5 you must snap to the quadrants at 32 and 88, and to 34, when pulling projectors up. All three lie on the lower half. Erase it and there is nothing left to snap to."
     }
    ]
@@ -949,7 +949,133 @@
          "snap": "cen"
         }
        ],
-       "feature": "bore"
+       "feature": "bore",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        }
+       ]
       },
       {
        "n": 3,
@@ -1060,6 +1186,142 @@
           "en": "It asks which way. Click anywhere **inside** the circle and the Ø44 pitch circle lands inside."
          }
         }
+       ],
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        }
        ]
       },
       {
@@ -1069,6 +1331,14 @@
         "en": "The 45-degree construction line"
        },
        "actions": [
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터. 극좌표 추적 탭에서 극좌표 추적 켜기, 증분 각도45도, 각도 측정 절대를 선택하고 확인합니다.",
+          "en": "Enter. On Polar Tracking, enable tracking, set increment45 degrees and absolute angle measurement, then click OK."
+         },
+         "type": "DSETTINGS"
+        },
         {
          "kind": "type",
          "do": {
@@ -1102,8 +1372,8 @@
         {
          "kind": "key",
          "do": {
-          "ko": "상태 막대의 극좌표 추적을 켭니다. 각도 증분이 45도인지 확인해요.",
-          "en": "Turn on polar tracking in the status bar and check the increment is 45 degrees."
+          "ko": "극좌표 추적이 꺼져 있을 때만 누릅니다. 앞의 DSETTINGS에서 켰으면 다시 누르지 않습니다. 직교는 끕니다.",
+          "en": "Press only if Polar Tracking is off. Do not toggle it off after enabling it in DSETTINGS; keep Ortho off."
          },
          "type": "F10"
         },
@@ -1154,7 +1424,158 @@
          "snap": "cen"
         }
        ],
-       "feature": "tap"
+       "feature": "tap",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           62
+          ],
+          [
+           75.55634918610404,
+           77.55634918610404
+          ]
+         ],
+         "role": "guide"
+        }
+       ]
       },
       {
        "n": 5,
@@ -1226,6 +1647,167 @@
          },
          "snap": "end"
         }
+       ],
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           62
+          ],
+          [
+           75.55634918610404,
+           77.55634918610404
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        }
        ]
       },
       {
@@ -1282,20 +1864,19 @@
          "type": "4"
         },
         {
-         "kind": "type",
+         "kind": "click",
          "do": {
-          "ko": "입력하고 엔터. 사이의 각도입니다.",
-          "en": "then Enter. The angle between items."
-         },
-         "type": "A"
+          "ko": "명령행 옵션 목록에서 채울 각도(Fill angle)를 클릭합니다.",
+          "en": "Click Fill angle in the command-line option list."
+         }
         },
         {
          "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 360을 4로 나눈 값입니다.",
-          "en": "then Enter. 360 divided by 4."
+          "ko": "입력하고 엔터. 네 구멍을 한 바퀴에 놓습니다. 간격은90도예요.",
+          "en": "Enter. Place four holes around a full circle,90 degrees apart."
          },
-         "type": "90"
+         "type": "360"
         },
         {
          "kind": "type",
@@ -1320,6 +1901,13 @@
           "en": "then Enter. The array is committed."
          },
          "type": "X"
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "배열 결과는 항목 4, 채울 각도 360도, 이웃 사이 각도 90도입니다. 네 원이 각각 45·135·225·315도 방향인지 봅니다.",
+          "en": "Verify 4 items, 360-degree fill and 90-degree spacing: one circle each at 45, 135, 225 and 315 degrees."
+         }
         }
        ],
        "expect": {
@@ -1345,7 +1933,198 @@
          "snap": "cen"
         }
        ],
-       "feature": "tap"
+       "feature": "tap",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           62
+          ],
+          [
+           75.55634918610404,
+           77.55634918610404
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        }
+       ]
       },
       {
        "n": 7,
@@ -1360,7 +2139,8 @@
           "ko": "입력하고 엔터. 지우기입니다.",
           "en": "Type it and press Enter. That starts ERASE."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 1
         },
         {
          "do": {
@@ -1381,7 +2161,210 @@
        "pitfall": {
         "ko": "보조선을 남겨 두면 자르기나 필렛에서 엉뚱한 선을 물게 됩니다. 지운 뒤 45도 자리에 남은 선이 없는지 확인하세요.",
         "en": "Left in place, it gets grabbed by TRIM or FILLET instead of the line you meant. After erasing, check that nothing is left along the 45-degree direction."
-       }
+       },
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           62
+          ],
+          [
+           75.55634918610404,
+           77.55634918610404
+          ]
+         ],
+         "role": "remove"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        }
+       ],
+       "spots": [
+        {
+         "view": "front",
+         "x": 75.55634918610404,
+         "y": 77.55634918610404,
+         "hover": {
+          "ko": "지울 45도 보조선의 바깥 끝",
+          "en": "Outer end of the 45-degree guide"
+         },
+         "snap": "end"
+        }
+       ]
       }
      ]
     }
@@ -1423,149 +2406,119 @@
        },
        "actions": [
         {
-         "kind": "see",
+         "kind": "key",
          "do": {
-          "ko": "도면층(레이어)이 외형선인지 확인합니다.",
-          "en": "Check the current layer is the visible-outline layer."
-         }
+          "ko": "눌러 명령을 끝내고 선택을 풉니다.",
+          "en": "Press to end any command and clear selection."
+         },
+         "type": "Esc"
         },
         {
-         "kind": "see",
+         "kind": "click",
          "do": {
-          "ko": "장공 중심은 베이스 왼쪽 아래 구석에서 오른쪽 29, 위 8입니다. 그 자리에는 잡을 것이 없어요. 그래서 잡을 것을 먼저 만듭니다.",
-          "en": "The slot center is 29 right and 8 up from the base's lower-left corner. There is nothing to snap to there, so make something first."
+          "ko": "레이어를 고릅니다. 보조선부터 만듭니다.",
+          "en": "Choose this layer for the guides."
          },
+         "type": "치수선"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터, `H` 엔터입니다. 베이스 왼쪽 아래 끝점에 스냅하고 엔터로 끝냅니다.",
+          "en": "Enter,H Enter; snap to the lower-left base endpoint, then Enter."
+         },
+         "type": "XL",
          "spot": 1
         },
         {
          "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 간격 띄우기 명령이에요.",
-          "en": "then Enter. The offset command."
+          "ko": "엔터, `V` 엔터입니다. 같은 끝점에 스냅하고 엔터로 끝냅니다.",
+          "en": "Enter,V Enter; snap to the same endpoint, then Enter."
+         },
+         "type": "XL",
+         "spot": 1
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터, `8` 엔터입니다. 수평 구성선을 클릭하고 위쪽 클릭, 엔터로 끝냅니다.",
+          "en": "Enter,8 Enter; select the horizontal xline, click above it, and press Enter."
          },
          "type": "O"
         },
         {
          "kind": "type",
          "do": {
-          "ko": "거리를 묻습니다. 입력하고 엔터.",
-          "en": "It asks for the distance. Type it and press Enter."
+          "ko": "엔터, `29` 엔터입니다. 수직 구성선을 클릭하고 오른쪽 클릭, 엔터로 끝냅니다.",
+          "en": "Enter,29 Enter; select the vertical xline, click right, and press Enter."
          },
-         "type": "8"
+         "type": "O"
         },
         {
          "kind": "click",
          "do": {
-          "ko": "베이스 밑변을 클릭하고, 그 위쪽을 한 번 더 클릭합니다. 밑변이 8만큼 위로 복사됩니다.",
-          "en": "Click the base bottom edge, then click above it. The edge is copied 8 up."
-         }
+          "ko": "레이어를 되돌립니다. 베이스 폴리선은 간격띄우기하지 않습니다.",
+          "en": "Restore this layer. Do not offset the base polyline."
+         },
+         "type": "외형선"
         },
         {
          "kind": "type",
          "do": {
-          "ko": "엔터로 명령을 되부르고 거리를 다시 줍니다. 입력하고 엔터.",
-          "en": "Press Enter to repeat the command and give a new distance."
+          "ko": "엔터. 안쪽 두 구성선의 교차점에 스냅하고 반지름 `5` 엔터입니다. 원 명령이 끝납니다.",
+          "en": "Enter; snap to the inner guide intersection, then radius5 Enter completes CIRCLE."
          },
-         "type": "29"
-        },
-        {
-         "kind": "click",
-         "do": {
-          "ko": "베이스 왼쪽 변을 클릭하고, 그 오른쪽을 한 번 더 클릭합니다.",
-          "en": "Click the base left edge, then click to the right of it."
-         }
-        },
-        {
-         "kind": "see",
-         "do": {
-          "ko": "보조선 두 개가 만나는 자리가 장공 왼쪽 끝원의 중심입니다.",
-          "en": "Where the two guides cross is the center of the slot's left end circle."
-         }
-        },
-        {
-         "kind": "type",
-         "do": {
-          "ko": "입력하고 엔터. 원 명령입니다.",
-          "en": "then Enter. The circle command."
-         },
-         "type": "C"
-        },
-        {
-         "kind": "move",
-         "do": {
-          "ko": "커서를 두 보조선이 만나는 자리에 올립니다.",
-          "en": "Hover where the two guides cross."
-         }
-        },
-        {
-         "kind": "snap",
-         "do": {
-          "ko": "가위표 표식이 뜨면 클릭합니다. 교차점이에요.",
-          "en": "Click when the cross shows - the intersection."
-         }
-        },
-        {
-         "kind": "type",
-         "do": {
-          "ko": "반지름을 물어봅니다. 도면에 R5로 적혀 있으니 `D` 를 누르지 않습니다. 그대로 입력하고 엔터.",
-          "en": "It asks for the radius. The drawing says R5, so do not press `D`. Type it and press Enter."
-         },
-         "type": "5"
-        },
-        {
-         "kind": "type",
-         "do": {
-          "ko": "입력하고 엔터. 복사 명령입니다.",
-          "en": "then Enter. The copy command."
-         },
-         "type": "CO"
-        },
-        {
-         "kind": "click",
-         "do": {
-          "ko": "객체를 물어봅니다. 방금 그린 원을 클릭하고 엔터.",
-          "en": "It asks for objects. Click the circle you just drew, then Enter."
-         }
-        },
-        {
-         "kind": "snap",
-         "do": {
-          "ko": "기준점을 물어봅니다. 방금 그린 원의 둘레에 커서를 올려 중심 표식이 뜨면 클릭합니다.",
-          "en": "It asks for a base point. Hover that circle's rim and click its centre marker."
-         },
+         "type": "C",
          "spot": 2
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터, `1` 엔터입니다. 한 번만 복사하도록 정합니다.",
+          "en": "Enter,1 Enter to make one copy."
+         },
+         "type": "COPYMODE"
         },
         {
          "kind": "key",
          "do": {
-          "ko": "두 번째 점을 물어봅니다. 직교가 꺼져 있으면 눌러 켜고, 커서를 그 점보다 오른쪽에 둡니다.",
-          "en": "It asks for the second point. If ortho is off, press this to turn it on, then hold the cursor to the right of that point."
+          "ko": "직교 표시를 켭니다.",
+          "en": "Enable Ortho."
          },
          "type": "F8"
         },
         {
          "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 방향은 직교가 잡아 주고 거리만 숫자로 줍니다. 장공 두 끝원의 중심 거리예요.",
-          "en": "then Enter. Ortho holds the direction and you give only the distance - the gap between the slot's two end centres."
+          "ko": "엔터. 방금 원을 클릭하고 엔터입니다. 기준점은 그 원의 중심 스냅으로 찍습니다.",
+          "en": "Enter; select the circle, Enter, and choose its centre as the base point."
          },
-         "type": "12"
-        },
-        {
-         "kind": "key",
-         "do": {
-          "ko": "눌러 명령을 끝냅니다.",
-          "en": "to end the command."
-         },
-         "type": "Enter"
+         "type": "CO",
+         "spot": 2
         },
         {
          "kind": "type",
          "do": {
-          "ko": "보조선 두 개를 지웁니다. 입력하고 엔터, 두 선을 클릭하고 엔터. 자리를 잡으려고 그은 선은 도면에 남기지 않습니다.",
-          "en": "Erase the two guides: type this, Enter, click both lines, Enter. Lines drawn only to find a position do not belong on the drawing."
+          "ko": "커서를 오른쪽에 두고 입력한 뒤 엔터입니다. 단일 복사 모드이므로 명령이 끝납니다.",
+          "en": "Point right and enter12. Single-copy mode ends the command."
          },
-         "type": "E"
+         "type": "12"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터. 적용 대상 전체 도면, 객체 유형 구성선, 연산자 모두 선택, 새 선택 세트에 포함을 고릅니다.",
+          "en": "Enter. Choose Entire drawing, Xline, Select All, and Include in new selection set."
+         },
+         "type": "QSELECT"
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "확인을 누릅니다. 구성선 네 개만 선택됐는지 보고 Delete로 지웁니다. 외형선 레이어에 원 두 개가 남습니다.",
+          "en": "Click OK, confirm four xlines, and Delete. Two circles remain on Outline."
+         }
         }
        ],
        "expect": {
@@ -1577,30 +2530,286 @@
         "en": "The 29 and the 8 are printed dimensions, measured from the lower-left corner - a vertex of the outline polyline, so an endpoint snap catches it. The result no longer depends on where the origin sits."
        },
        "pitfall": {
-        "ko": "원이 엉뚱한 데 생기면 OFFSET 을 어느 쪽으로 했는지 봅니다. 밑변은 위로, 왼쪽 변은 오른쪽으로예요. 보조선을 지우는 것도 잊지 마세요. 남으면 외형선으로 읽힙니다.",
-        "en": "A circle in the wrong place means the offsets went the wrong way: the bottom edge goes up, the left edge goes right. And do erase the guides - left behind, they read as real edges."
+        "ko": "사각형 전체가 복사되면 구성선 대신 베이스를 고른 것입니다. Esc로 끝내고 U로 취소한 뒤 XL만 선택하세요.",
+        "en": "If the whole base offsets, you selected the polyline. End with Esc, undo, then select only the xline."
        },
        "spots": [
         {
          "x": 0,
          "y": 0,
+         "snap": "end",
          "hover": {
-          "ko": "베이스 왼쪽 아래 구석 — 여기서 오른쪽 29, 위로 8",
-          "en": "The lower-left corner of the base - 29 right and 8 up from here"
-         },
-         "snap": "end"
+          "ko": "보조선의 기준인 베이스 왼쪽 아래 끝점입니다.",
+          "en": "Lower-left base endpoint for the guide origins."
+         }
         },
         {
          "x": 29,
          "y": 8,
+         "snap": "int",
          "hover": {
-          "ko": "첫 끝원의 중심. 여기서 오른쪽으로 12 복사합니다",
-          "en": "The first end circle. Copy it 12 to the right"
-         },
-         "snap": "cen"
+          "ko": "위8·오른쪽29의 구성선 교차점입니다.",
+          "en": "Guide intersection8 up and29 right."
+         }
         }
        ],
-       "feature": "slot"
+       "feature": "slot",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -3,
+         -4,
+         54,
+         22
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          29,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          41,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           -3,
+           0
+          ],
+          [
+           52,
+           0
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           0,
+           -5
+          ],
+          [
+           0,
+           25
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           -3,
+           8
+          ],
+          [
+           52,
+           8
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           -5
+          ],
+          [
+           29,
+           25
+          ]
+         ],
+         "role": "guide"
+        }
+       ]
       },
       {
        "n": 9,
@@ -1704,7 +2913,233 @@
          "snap": "qua"
         }
        ],
-       "feature": "slot"
+       "feature": "slot",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         17,
+         -3,
+         53,
+         24
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          29,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          41,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
+        }
+       ]
       },
       {
        "n": 10,
@@ -1714,42 +3149,51 @@
        },
        "actions": [
         {
-         "type": "TR",
+         "kind": "type",
          "do": {
-          "ko": "입력하고 엔터. 자르기입니다.",
-          "en": "Type it and press Enter. That starts TRIM."
+          "ko": "엔터, `0` 엔터입니다. AutoCAD 2024의 표준 모드를 사용합니다.",
+          "en": "Enter,0 Enter to use Standard mode in AutoCAD2024."
          },
-         "kind": "type"
+         "type": "TRIMEXTENDMODE"
         },
         {
+         "kind": "type",
          "do": {
-          "ko": "버전에 따라 묻는 것이 다릅니다. 절단 모서리를 먼저 고르라고 하면 방금 그은 두 직선을 클릭하고 엔터로 선택을 끝냅니다. 바로 자를 부분을 고르라고 하면 그대로 진행합니다.",
-          "en": "What it asks depends on the version. If it asks for cutting edges first, click the two lines you just drew and press Enter to finish the selection. If it goes straight to asking what to cut, just carry on."
+          "ko": "입력하고 엔터를 누릅니다.",
+          "en": "Enter."
          },
-         "kind": "key"
+         "type": "TR"
         },
         {
-         "do": {
-          "ko": "왼쪽 원의 오른쪽 반을 클릭합니다. 장공 안쪽으로 들어간 부분입니다. 사라집니다.",
-          "en": "Click the right half of the left circle - the part that reaches into the slot. It disappears."
-         },
          "kind": "click",
+         "do": {
+          "ko": "위아래 직선 두 개만 경계로 클릭하고 엔터를 누릅니다.",
+          "en": "Select only the top and bottom straight edges as boundaries, then Enter."
+         }
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "왼쪽 원의 오른쪽 반을 클릭합니다.",
+          "en": "Click the right half of the left circle."
+         },
          "spot": 1
         },
         {
-         "do": {
-          "ko": "오른쪽 원의 왼쪽 반을 클릭합니다. 사라집니다.",
-          "en": "Click the left half of the right circle. It disappears."
-         },
          "kind": "click",
+         "do": {
+          "ko": "오른쪽 원의 왼쪽 반을 클릭합니다.",
+          "en": "Click the left half of the right circle."
+         },
          "spot": 2
         },
         {
+         "kind": "key",
          "do": {
-          "ko": "엔터를 눌러 명령을 끝냅니다.",
-          "en": "Press Enter to end the command."
+          "ko": "한 번 눌러 자르기를 끝냅니다.",
+          "en": "Press once to end TRIM."
          },
-         "kind": "key"
+         "type": "Enter"
         }
        ],
        "expect": {
@@ -1781,6 +3225,232 @@
           "ko": "오른쪽 끝원의 **왼쪽 반**. 같은 이유로 지웁니다. 남는 것은 바깥쪽 반원 둘과 위아래 직선 둘이에요.",
           "en": "The **left half** of the right end circle, for the same reason. What is left is two outer half-circles and two straight sides."
          }
+        }
+       ],
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         17,
+         -3,
+         53,
+         24
+        ],
+        "padding": 5
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          29,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          41,
+          8
+         ],
+         "radius": 5,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
         }
        ]
       },
@@ -1877,7 +3547,547 @@
          "snap": "end"
         }
        ],
-       "feature": "slot"
+       "feature": "slot",
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -8,
+         -8,
+         128,
+         98
+        ],
+        "padding": 4
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           29.0,
+           13.0
+          ],
+          [
+           28.02454838991936,
+           12.903926402016152
+          ],
+          [
+           27.08658283817455,
+           12.619397662556434
+          ],
+          [
+           26.22214883490199,
+           12.157348061512726
+          ],
+          [
+           25.464466094067262,
+           11.535533905932738
+          ],
+          [
+           24.842651938487272,
+           10.77785116509801
+          ],
+          [
+           24.380602337443566,
+           9.91341716182545
+          ],
+          [
+           24.096073597983846,
+           8.975451610080643
+          ],
+          [
+           24.0,
+           8.0
+          ],
+          [
+           24.096073597983846,
+           7.024548389919358
+          ],
+          [
+           24.380602337443566,
+           6.086582838174552
+          ],
+          [
+           24.842651938487272,
+           5.22214883490199
+          ],
+          [
+           25.464466094067262,
+           4.464466094067262
+          ],
+          [
+           26.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           27.08658283817455,
+           3.380602337443568
+          ],
+          [
+           28.024548389919357,
+           3.0960735979838487
+          ],
+          [
+           29.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           41.0,
+           3.0
+          ],
+          [
+           41.97545161008064,
+           3.096073597983848
+          ],
+          [
+           42.91341716182545,
+           3.380602337443566
+          ],
+          [
+           43.777851165098014,
+           3.8426519384872737
+          ],
+          [
+           44.53553390593274,
+           4.464466094067262
+          ],
+          [
+           45.15734806151273,
+           5.222148834901989
+          ],
+          [
+           45.61939766255644,
+           6.086582838174551
+          ],
+          [
+           45.903926402016154,
+           7.024548389919358
+          ],
+          [
+           46.0,
+           8.0
+          ],
+          [
+           45.903926402016154,
+           8.975451610080642
+          ],
+          [
+           45.61939766255644,
+           9.91341716182545
+          ],
+          [
+           45.15734806151273,
+           10.77785116509801
+          ],
+          [
+           44.53553390593274,
+           11.535533905932738
+          ],
+          [
+           43.777851165098014,
+           12.157348061512726
+          ],
+          [
+           42.91341716182545,
+           12.619397662556434
+          ],
+          [
+           41.97545161008064,
+           12.903926402016152
+          ],
+          [
+           41.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           79.0,
+           13.0
+          ],
+          [
+           78.02454838991936,
+           12.903926402016152
+          ],
+          [
+           77.08658283817455,
+           12.619397662556434
+          ],
+          [
+           76.22214883490199,
+           12.157348061512726
+          ],
+          [
+           75.46446609406726,
+           11.535533905932738
+          ],
+          [
+           74.84265193848728,
+           10.77785116509801
+          ],
+          [
+           74.38060233744356,
+           9.91341716182545
+          ],
+          [
+           74.09607359798385,
+           8.975451610080643
+          ],
+          [
+           74.0,
+           8.0
+          ],
+          [
+           74.09607359798385,
+           7.024548389919358
+          ],
+          [
+           74.38060233744356,
+           6.086582838174552
+          ],
+          [
+           74.84265193848728,
+           5.22214883490199
+          ],
+          [
+           75.46446609406726,
+           4.464466094067262
+          ],
+          [
+           76.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           77.08658283817455,
+           3.380602337443568
+          ],
+          [
+           78.02454838991936,
+           3.0960735979838487
+          ],
+          [
+           79.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           91.0,
+           3.0
+          ],
+          [
+           91.97545161008064,
+           3.096073597983848
+          ],
+          [
+           92.91341716182545,
+           3.380602337443566
+          ],
+          [
+           93.77785116509801,
+           3.8426519384872737
+          ],
+          [
+           94.53553390593274,
+           4.464466094067262
+          ],
+          [
+           95.15734806151272,
+           5.222148834901989
+          ],
+          [
+           95.61939766255644,
+           6.086582838174551
+          ],
+          [
+           95.90392640201615,
+           7.024548389919358
+          ],
+          [
+           96.0,
+           8.0
+          ],
+          [
+           95.90392640201615,
+           8.975451610080642
+          ],
+          [
+           95.61939766255644,
+           9.91341716182545
+          ],
+          [
+           95.15734806151272,
+           10.77785116509801
+          ],
+          [
+           94.53553390593274,
+           11.535533905932738
+          ],
+          [
+           93.77785116509801,
+           12.157348061512726
+          ],
+          [
+           92.91341716182545,
+           12.619397662556434
+          ],
+          [
+           91.97545161008064,
+           12.903926402016152
+          ],
+          [
+           91.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           13
+          ],
+          [
+           91,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           3
+          ],
+          [
+           91,
+           3
+          ]
+         ],
+         "role": "before"
+        }
+       ]
       }
      ]
     },
@@ -1968,6 +4178,546 @@
           "en": "The middle of the base top face - the stretch caught between the two web lines. Click here and only that stretch goes."
          }
         }
+       ],
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -2,
+         -3,
+         122,
+         40
+        ],
+        "padding": 7
+       },
+       "construction": [
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ]
+         ],
+         "closed": true,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           29.0,
+           13.0
+          ],
+          [
+           28.02454838991936,
+           12.903926402016152
+          ],
+          [
+           27.08658283817455,
+           12.619397662556434
+          ],
+          [
+           26.22214883490199,
+           12.157348061512726
+          ],
+          [
+           25.464466094067262,
+           11.535533905932738
+          ],
+          [
+           24.842651938487272,
+           10.77785116509801
+          ],
+          [
+           24.380602337443566,
+           9.91341716182545
+          ],
+          [
+           24.096073597983846,
+           8.975451610080643
+          ],
+          [
+           24.0,
+           8.0
+          ],
+          [
+           24.096073597983846,
+           7.024548389919358
+          ],
+          [
+           24.380602337443566,
+           6.086582838174552
+          ],
+          [
+           24.842651938487272,
+           5.22214883490199
+          ],
+          [
+           25.464466094067262,
+           4.464466094067262
+          ],
+          [
+           26.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           27.08658283817455,
+           3.380602337443568
+          ],
+          [
+           28.024548389919357,
+           3.0960735979838487
+          ],
+          [
+           29.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           41.0,
+           3.0
+          ],
+          [
+           41.97545161008064,
+           3.096073597983848
+          ],
+          [
+           42.91341716182545,
+           3.380602337443566
+          ],
+          [
+           43.777851165098014,
+           3.8426519384872737
+          ],
+          [
+           44.53553390593274,
+           4.464466094067262
+          ],
+          [
+           45.15734806151273,
+           5.222148834901989
+          ],
+          [
+           45.61939766255644,
+           6.086582838174551
+          ],
+          [
+           45.903926402016154,
+           7.024548389919358
+          ],
+          [
+           46.0,
+           8.0
+          ],
+          [
+           45.903926402016154,
+           8.975451610080642
+          ],
+          [
+           45.61939766255644,
+           9.91341716182545
+          ],
+          [
+           45.15734806151273,
+           10.77785116509801
+          ],
+          [
+           44.53553390593274,
+           11.535533905932738
+          ],
+          [
+           43.777851165098014,
+           12.157348061512726
+          ],
+          [
+           42.91341716182545,
+           12.619397662556434
+          ],
+          [
+           41.97545161008064,
+           12.903926402016152
+          ],
+          [
+           41.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           79.0,
+           13.0
+          ],
+          [
+           78.02454838991936,
+           12.903926402016152
+          ],
+          [
+           77.08658283817455,
+           12.619397662556434
+          ],
+          [
+           76.22214883490199,
+           12.157348061512726
+          ],
+          [
+           75.46446609406726,
+           11.535533905932738
+          ],
+          [
+           74.84265193848728,
+           10.77785116509801
+          ],
+          [
+           74.38060233744356,
+           9.91341716182545
+          ],
+          [
+           74.09607359798385,
+           8.975451610080643
+          ],
+          [
+           74.0,
+           8.0
+          ],
+          [
+           74.09607359798385,
+           7.024548389919358
+          ],
+          [
+           74.38060233744356,
+           6.086582838174552
+          ],
+          [
+           74.84265193848728,
+           5.22214883490199
+          ],
+          [
+           75.46446609406726,
+           4.464466094067262
+          ],
+          [
+           76.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           77.08658283817455,
+           3.380602337443568
+          ],
+          [
+           78.02454838991936,
+           3.0960735979838487
+          ],
+          [
+           79.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           91.0,
+           3.0
+          ],
+          [
+           91.97545161008064,
+           3.096073597983848
+          ],
+          [
+           92.91341716182545,
+           3.380602337443566
+          ],
+          [
+           93.77785116509801,
+           3.8426519384872737
+          ],
+          [
+           94.53553390593274,
+           4.464466094067262
+          ],
+          [
+           95.15734806151272,
+           5.222148834901989
+          ],
+          [
+           95.61939766255644,
+           6.086582838174551
+          ],
+          [
+           95.90392640201615,
+           7.024548389919358
+          ],
+          [
+           96.0,
+           8.0
+          ],
+          [
+           95.90392640201615,
+           8.975451610080642
+          ],
+          [
+           95.61939766255644,
+           9.91341716182545
+          ],
+          [
+           95.15734806151272,
+           10.77785116509801
+          ],
+          [
+           94.53553390593274,
+           11.535533905932738
+          ],
+          [
+           93.77785116509801,
+           12.157348061512726
+          ],
+          [
+           92.91341716182545,
+           12.619397662556434
+          ],
+          [
+           91.97545161008064,
+           12.903926402016152
+          ],
+          [
+           91.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           13
+          ],
+          [
+           91,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           3
+          ],
+          [
+           91,
+           3
+          ]
+         ],
+         "role": "before"
+        }
        ]
       },
       {
@@ -1977,6 +4727,14 @@
         "en": "The right fillet, R10"
        },
        "actions": [
+        {
+         "kind": "type",
+         "do": {
+          "ko": "엔터, `1` 엔터입니다. 선을 필렛 호 끝에서 자르게 합니다.",
+          "en": "Enter,1 Enter to trim edges to the fillet."
+         },
+         "type": "TRIMMODE"
+        },
         {
          "type": "F",
          "do": {
@@ -2048,12 +4806,560 @@
          }
         },
         {
-         "x": 100,
+         "x": 96.596092,
          "y": 30,
          "hover": {
           "ko": "두 번째 객체는 오른쪽 목 선입니다. 역시 남기고 싶은 쪽, 모서리보다 위쪽을 클릭합니다.",
           "en": "The second object is the right web line. Again click the side you keep - above the corner."
          }
+        }
+       ],
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -2,
+         -3,
+         122,
+         40
+        ],
+        "padding": 7
+       },
+       "construction": [
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           100,
+           16
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           29.0,
+           13.0
+          ],
+          [
+           28.02454838991936,
+           12.903926402016152
+          ],
+          [
+           27.08658283817455,
+           12.619397662556434
+          ],
+          [
+           26.22214883490199,
+           12.157348061512726
+          ],
+          [
+           25.464466094067262,
+           11.535533905932738
+          ],
+          [
+           24.842651938487272,
+           10.77785116509801
+          ],
+          [
+           24.380602337443566,
+           9.91341716182545
+          ],
+          [
+           24.096073597983846,
+           8.975451610080643
+          ],
+          [
+           24.0,
+           8.0
+          ],
+          [
+           24.096073597983846,
+           7.024548389919358
+          ],
+          [
+           24.380602337443566,
+           6.086582838174552
+          ],
+          [
+           24.842651938487272,
+           5.22214883490199
+          ],
+          [
+           25.464466094067262,
+           4.464466094067262
+          ],
+          [
+           26.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           27.08658283817455,
+           3.380602337443568
+          ],
+          [
+           28.024548389919357,
+           3.0960735979838487
+          ],
+          [
+           29.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           41.0,
+           3.0
+          ],
+          [
+           41.97545161008064,
+           3.096073597983848
+          ],
+          [
+           42.91341716182545,
+           3.380602337443566
+          ],
+          [
+           43.777851165098014,
+           3.8426519384872737
+          ],
+          [
+           44.53553390593274,
+           4.464466094067262
+          ],
+          [
+           45.15734806151273,
+           5.222148834901989
+          ],
+          [
+           45.61939766255644,
+           6.086582838174551
+          ],
+          [
+           45.903926402016154,
+           7.024548389919358
+          ],
+          [
+           46.0,
+           8.0
+          ],
+          [
+           45.903926402016154,
+           8.975451610080642
+          ],
+          [
+           45.61939766255644,
+           9.91341716182545
+          ],
+          [
+           45.15734806151273,
+           10.77785116509801
+          ],
+          [
+           44.53553390593274,
+           11.535533905932738
+          ],
+          [
+           43.777851165098014,
+           12.157348061512726
+          ],
+          [
+           42.91341716182545,
+           12.619397662556434
+          ],
+          [
+           41.97545161008064,
+           12.903926402016152
+          ],
+          [
+           41.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           79.0,
+           13.0
+          ],
+          [
+           78.02454838991936,
+           12.903926402016152
+          ],
+          [
+           77.08658283817455,
+           12.619397662556434
+          ],
+          [
+           76.22214883490199,
+           12.157348061512726
+          ],
+          [
+           75.46446609406726,
+           11.535533905932738
+          ],
+          [
+           74.84265193848728,
+           10.77785116509801
+          ],
+          [
+           74.38060233744356,
+           9.91341716182545
+          ],
+          [
+           74.09607359798385,
+           8.975451610080643
+          ],
+          [
+           74.0,
+           8.0
+          ],
+          [
+           74.09607359798385,
+           7.024548389919358
+          ],
+          [
+           74.38060233744356,
+           6.086582838174552
+          ],
+          [
+           74.84265193848728,
+           5.22214883490199
+          ],
+          [
+           75.46446609406726,
+           4.464466094067262
+          ],
+          [
+           76.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           77.08658283817455,
+           3.380602337443568
+          ],
+          [
+           78.02454838991936,
+           3.0960735979838487
+          ],
+          [
+           79.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           91.0,
+           3.0
+          ],
+          [
+           91.97545161008064,
+           3.096073597983848
+          ],
+          [
+           92.91341716182545,
+           3.380602337443566
+          ],
+          [
+           93.77785116509801,
+           3.8426519384872737
+          ],
+          [
+           94.53553390593274,
+           4.464466094067262
+          ],
+          [
+           95.15734806151272,
+           5.222148834901989
+          ],
+          [
+           95.61939766255644,
+           6.086582838174551
+          ],
+          [
+           95.90392640201615,
+           7.024548389919358
+          ],
+          [
+           96.0,
+           8.0
+          ],
+          [
+           95.90392640201615,
+           8.975451610080642
+          ],
+          [
+           95.61939766255644,
+           9.91341716182545
+          ],
+          [
+           95.15734806151272,
+           10.77785116509801
+          ],
+          [
+           94.53553390593274,
+           11.535533905932738
+          ],
+          [
+           93.77785116509801,
+           12.157348061512726
+          ],
+          [
+           92.91341716182545,
+           12.619397662556434
+          ],
+          [
+           91.97545161008064,
+           12.903926402016152
+          ],
+          [
+           91.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           13
+          ],
+          [
+           91,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           3
+          ],
+          [
+           91,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ],
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           100,
+           16
+          ]
+         ],
+         "closed": false,
+         "role": "before"
         }
        ]
       },
@@ -2084,14 +5390,16 @@
           "ko": "베이스 윗면을 모서리보다 왼쪽에서 클릭합니다.",
           "en": "Click the base top face to the left of the corner."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
           "ko": "왼쪽 목 선을 모서리보다 위쪽에서 클릭합니다.",
           "en": "Click the left web edge above the corner."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 2
         }
        ],
        "expect": {
@@ -2105,7 +5413,644 @@
        "pitfall": {
         "ko": "반지름이 기억되어 있다고 믿고 확인하지 않으면 좌우가 다른 값이 될 수 있습니다. 그리고 보스 원은 손대지 않습니다. 아래쪽 절반을 지우면 5차시에서 사분점 32와 88, 그리고 34를 잡을 수 없어요.",
         "en": "Trust the remembered radius without looking and the two sides can end up different. Also leave the boss circle alone: erase its lower half and you cannot snap to the quadrants at 32 and 88, or to 34, in Lesson 5."
-       }
+       },
+       "diagramOnly": true,
+       "on": "front",
+       "focus": {
+        "view": "front",
+        "bounds": [
+         -2,
+         -3,
+         122,
+         40
+        ],
+        "padding": 7
+       },
+       "construction": [
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 28,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           60,
+           -5
+          ],
+          [
+           60,
+           95
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           27,
+           62
+          ],
+          [
+           93,
+           62
+          ]
+         ],
+         "role": "guide"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           32.792638917721234,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 12.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          60,
+          62
+         ],
+         "radius": 22,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389596,
+          77.55634918610404
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          44.44365081389595,
+          46.44365081389596
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "circle",
+         "view": "front",
+         "centre": [
+          75.55634918610404,
+          46.44365081389595
+         ],
+         "radius": 2.5,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           29.0,
+           13.0
+          ],
+          [
+           28.02454838991936,
+           12.903926402016152
+          ],
+          [
+           27.08658283817455,
+           12.619397662556434
+          ],
+          [
+           26.22214883490199,
+           12.157348061512726
+          ],
+          [
+           25.464466094067262,
+           11.535533905932738
+          ],
+          [
+           24.842651938487272,
+           10.77785116509801
+          ],
+          [
+           24.380602337443566,
+           9.91341716182545
+          ],
+          [
+           24.096073597983846,
+           8.975451610080643
+          ],
+          [
+           24.0,
+           8.0
+          ],
+          [
+           24.096073597983846,
+           7.024548389919358
+          ],
+          [
+           24.380602337443566,
+           6.086582838174552
+          ],
+          [
+           24.842651938487272,
+           5.22214883490199
+          ],
+          [
+           25.464466094067262,
+           4.464466094067262
+          ],
+          [
+           26.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           27.08658283817455,
+           3.380602337443568
+          ],
+          [
+           28.024548389919357,
+           3.0960735979838487
+          ],
+          [
+           29.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           41.0,
+           3.0
+          ],
+          [
+           41.97545161008064,
+           3.096073597983848
+          ],
+          [
+           42.91341716182545,
+           3.380602337443566
+          ],
+          [
+           43.777851165098014,
+           3.8426519384872737
+          ],
+          [
+           44.53553390593274,
+           4.464466094067262
+          ],
+          [
+           45.15734806151273,
+           5.222148834901989
+          ],
+          [
+           45.61939766255644,
+           6.086582838174551
+          ],
+          [
+           45.903926402016154,
+           7.024548389919358
+          ],
+          [
+           46.0,
+           8.0
+          ],
+          [
+           45.903926402016154,
+           8.975451610080642
+          ],
+          [
+           45.61939766255644,
+           9.91341716182545
+          ],
+          [
+           45.15734806151273,
+           10.77785116509801
+          ],
+          [
+           44.53553390593274,
+           11.535533905932738
+          ],
+          [
+           43.777851165098014,
+           12.157348061512726
+          ],
+          [
+           42.91341716182545,
+           12.619397662556434
+          ],
+          [
+           41.97545161008064,
+           12.903926402016152
+          ],
+          [
+           41.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           13
+          ],
+          [
+           41,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           29,
+           3
+          ],
+          [
+           41,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           79.0,
+           13.0
+          ],
+          [
+           78.02454838991936,
+           12.903926402016152
+          ],
+          [
+           77.08658283817455,
+           12.619397662556434
+          ],
+          [
+           76.22214883490199,
+           12.157348061512726
+          ],
+          [
+           75.46446609406726,
+           11.535533905932738
+          ],
+          [
+           74.84265193848728,
+           10.77785116509801
+          ],
+          [
+           74.38060233744356,
+           9.91341716182545
+          ],
+          [
+           74.09607359798385,
+           8.975451610080643
+          ],
+          [
+           74.0,
+           8.0
+          ],
+          [
+           74.09607359798385,
+           7.024548389919358
+          ],
+          [
+           74.38060233744356,
+           6.086582838174552
+          ],
+          [
+           74.84265193848728,
+           5.22214883490199
+          ],
+          [
+           75.46446609406726,
+           4.464466094067262
+          ],
+          [
+           76.22214883490199,
+           3.8426519384872737
+          ],
+          [
+           77.08658283817455,
+           3.380602337443568
+          ],
+          [
+           78.02454838991936,
+           3.0960735979838487
+          ],
+          [
+           79.0,
+           3.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           91.0,
+           3.0
+          ],
+          [
+           91.97545161008064,
+           3.096073597983848
+          ],
+          [
+           92.91341716182545,
+           3.380602337443566
+          ],
+          [
+           93.77785116509801,
+           3.8426519384872737
+          ],
+          [
+           94.53553390593274,
+           4.464466094067262
+          ],
+          [
+           95.15734806151272,
+           5.222148834901989
+          ],
+          [
+           95.61939766255644,
+           6.086582838174551
+          ],
+          [
+           95.90392640201615,
+           7.024548389919358
+          ],
+          [
+           96.0,
+           8.0
+          ],
+          [
+           95.90392640201615,
+           8.975451610080642
+          ],
+          [
+           95.61939766255644,
+           9.91341716182545
+          ],
+          [
+           95.15734806151272,
+           10.77785116509801
+          ],
+          [
+           94.53553390593274,
+           11.535533905932738
+          ],
+          [
+           93.77785116509801,
+           12.157348061512726
+          ],
+          [
+           92.91341716182545,
+           12.619397662556434
+          ],
+          [
+           91.97545161008064,
+           12.903926402016152
+          ],
+          [
+           91.0,
+           13.0
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           13
+          ],
+          [
+           91,
+           13
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           79,
+           3
+          ],
+          [
+           91,
+           3
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           20,
+           16
+          ],
+          [
+           5,
+           16
+          ],
+          [
+           0,
+           11
+          ],
+          [
+           0,
+           0
+          ],
+          [
+           120,
+           0
+          ],
+          [
+           120,
+           11
+          ],
+          [
+           115,
+           16
+          ],
+          [
+           107.85996971262418,
+           16
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        },
+        {
+         "kind": "line",
+         "view": "front",
+         "points": [
+          [
+           98.14305504038177,
+           23.637465502397895
+          ],
+          [
+           87.20736108227877,
+           68.61509659328588
+          ]
+         ],
+         "role": "before"
+        },
+        {
+         "kind": "polyline",
+         "view": "front",
+         "points": [
+          [
+           107.85996971262418,
+           16.0
+          ],
+          [
+           106.90977112685839,
+           16.045246228680053
+          ],
+          [
+           105.9681711215932,
+           16.18057547047826
+          ],
+          [
+           105.04369046666129,
+           16.404763097830326
+          ],
+          [
+           104.14469501468731,
+           16.715780381805363
+          ],
+          [
+           103.27931999643177,
+           17.110812850572533
+          ],
+          [
+           102.45539640308863,
+           17.586285758248266
+          ],
+          [
+           101.68038012172177,
+           18.137896433650184
+          ],
+          [
+           100.96128446511067,
+           18.76065321622596
+          ],
+          [
+           100.30461670655971,
+           19.448920626816317
+          ],
+          [
+           99.71631919398295,
+           20.19647036449072
+          ],
+          [
+           99.20171557613756,
+           20.99653766797307
+          ],
+          [
+           98.76546262761806,
+           21.841882531628805
+          ],
+          [
+           98.41150810855869,
+           22.724855222055027
+          ],
+          [
+           98.14305504038177,
+           23.63746550239789
+          ]
+         ],
+         "closed": false,
+         "role": "before"
+        }
+       ],
+       "spots": [
+        {
+         "view": "front",
+         "x": 10,
+         "y": 16,
+         "hover": {
+          "ko": "남길 왼쪽 윗면 부분",
+          "en": "Retained left top edge"
+         }
+        },
+        {
+         "view": "front",
+         "x": 23.403908,
+         "y": 30,
+         "hover": {
+          "ko": "남길 왼쪽 목 부분",
+          "en": "Retained left web"
+         }
+        }
+       ],
+       "feature": "fillet"
       },
       {
        "n": 15,
@@ -2171,11 +6116,54 @@
           "en": "Check the bore the same way. The radius must be 12.5, which is Ø25."
          },
          "kind": "see"
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "현재 레이어를 중심선으로 바꿉니다.",
+          "en": "Make the center layer current."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "`DIMSCALE` 엔터, 1 엔터로 표시 축척을 맞춥니다. `DIMCEN` 엔터, 3 엔터로 중심에서 끝까지 3인 표식을 정합니다. 표시용 크기이며 부품 치수가 아닙니다.",
+          "en": "`DIMSCALE`, Enter, 1, Enter; `DIMCEN`, Enter, 3, Enter. This sets a mark extending 3 from its centre; it is not a part dimension."
+         }
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "입력하고 엔터. 탭 원 하나의 둘레를 클릭하고 Esc로 명령을 정리합니다.",
+          "en": "Type and Enter. Pick one tap circle and press Esc to clear the command."
+         },
+         "type": "DIMCENTER"
+        },
+        {
+         "kind": "type",
+         "do": {
+          "ko": "나머지 탭 원 세 개, 필렛 호 두 개, 두 장공 끝호 네 개에도 각각 `DIMCENTER` 엔터, 해당 둘레 클릭, Esc를 반복합니다.",
+          "en": "Repeat `DIMCENTER`, Enter, pick the outline, Esc for the other three taps, two fillets and four slot-end arcs."
+         }
+        },
+        {
+         "kind": "see",
+         "do": {
+          "ko": "중심점 열 곳의 십자 표시를 확인합니다. 이 비연관 표식은 나중에 형상을 바꾸면 함께 검산합니다.",
+          "en": "Verify marks at ten centres. These non-associative marks must be checked after later geometry changes."
+         }
+        },
+        {
+         "kind": "click",
+         "do": {
+          "ko": "Esc로 선택을 풀고 외형선 레이어로 돌아옵니다.",
+          "en": "Clear selection with Esc and return to the visible layer."
+         }
         }
        ],
        "expect": {
-        "ko": "끝원 중심거리 12와 장공 사이 50이 확인됩니다. 피치원은 반지름 22에 중심선 레이어입니다. 축 구멍은 반지름 12.5입니다.",
-        "en": "You confirm 12 between the end-arc centers, 50 between the slots, a bolt circle of radius 22 on the centerline layer, and a bore of radius 12.5."
+        "ko": "끝원 중심거리 12, 두 장공의 같은 끝원 중심거리 50, 피치원 반지름 22를 확인합니다. 탭 넷·필렛 둘·장공 끝호 넷에는 크기 3의 중심 표식이 있습니다.",
+        "en": "Verify end-centre spacing 12, matching slot end-centre spacing 50 and pitch radius 22, plus size-3 marks at four taps, two fillets and four slot-end arcs."
        },
        "why": {
         "ko": "눈으로 맞아 보이는 것과 실제로 맞는 것은 다릅니다. 숫자로 확인합니다.",
@@ -2217,7 +6205,7 @@
         {
          "x": 60,
          "y": 84,
-         "snap": "cen",
+         "snap": "qua",
          "hover": {
           "ko": "피치원입니다. `LI` 로 골라 도면층이 중심선인지, 반지름이 22 인지 봐요. 반지름 22 면 지름 44 입니다.",
           "en": "The pitch circle. Pick it with `LI` and check the layer is the centerline one and the radius is 22 - that is Ø44."
@@ -2577,6 +6565,17 @@
    }
   },
   {
+   "key": "DSETTINGS",
+   "name": {
+    "ko": "DSETTINGS",
+    "en": "DSETTINGS"
+   },
+   "when": {
+    "ko": "극좌표 추적의 증분 각도를 정할 때",
+    "en": "Set polar tracking increments."
+   }
+  },
+  {
    "key": "L",
    "name": {
     "ko": "LINE",
@@ -2610,6 +6609,28 @@
    }
   },
   {
+   "key": "XL",
+   "name": {
+    "ko": "XLINE · 구성선",
+    "en": "XLINE - construction line"
+   },
+   "when": {
+    "ko": "뷰끼리 값을 맞추는 투상선을 그을 때. 무한히 뻗어 세 뷰를 한 번에 지나갑니다",
+    "en": "To draw projectors that align the views. Being infinite, one line crosses all three views"
+   }
+  },
+  {
+   "key": "COPYMODE",
+   "name": {
+    "ko": "COPYMODE",
+    "en": "COPYMODE"
+   },
+   "when": {
+    "ko": "한 번 복사 뒤 명령을 끝낼 때",
+    "en": "End COPY after one copy."
+   }
+  },
+  {
    "key": "CO",
    "name": {
     "ko": "COPY",
@@ -2618,6 +6639,28 @@
    "when": {
     "ko": "반복되는 부품, 같은 구멍을 다른 자리에 둘 때",
     "en": "Repeated features, or the same hole in another position"
+   }
+  },
+  {
+   "key": "QSELECT",
+   "name": {
+    "ko": "신속 선택",
+    "en": "Quick select"
+   },
+   "when": {
+    "ko": "조건에 맞는 객체를 한 번에 고를 때. 구성선만 골라 지울 때, 레이어별로 걸어 개수를 셀 때, 레이어 전체에 축척을 넣을 때",
+    "en": "To grab everything matching a condition: deleting only construction lines, counting a layer's objects, or applying a scale across a whole layer"
+   }
+  },
+  {
+   "key": "TRIMEXTENDMODE",
+   "name": {
+    "ko": "TRIMEXTENDMODE",
+    "en": "TRIMEXTENDMODE"
+   },
+   "when": {
+    "ko": "TRIM·EXTEND를 표준 모드로 맞출 때",
+    "en": "Use Standard selection order."
    }
   },
   {
@@ -2640,6 +6683,17 @@
    "when": {
     "ko": "좌우 대칭 형상. 한 번만 그리고 뒤집습니다",
     "en": "Symmetric features. Draw once, then flip"
+   }
+  },
+  {
+   "key": "TRIMMODE",
+   "name": {
+    "ko": "TRIMMODE",
+    "en": "TRIMMODE"
+   },
+   "when": {
+    "ko": "호나 경사선 끝에 맞춰 원래 선을 자를 때",
+    "en": "Trim original edges when chamfering or filleting."
    }
   },
   {
@@ -2673,6 +6727,39 @@
    "when": {
     "ko": "그린 것이 정말 그 값인지 검산할 때",
     "en": "Cross-checking that what you drew really is that value"
+   }
+  },
+  {
+   "key": "DIMSCALE",
+   "name": {
+    "ko": "DIMSCALE",
+    "en": "DIMSCALE"
+   },
+   "when": {
+    "ko": "모형 1대1의 표시 크기를 유지할 때",
+    "en": "Keep display scale at 1."
+   }
+  },
+  {
+   "key": "DIMCEN",
+   "name": {
+    "ko": "DIMCEN",
+    "en": "DIMCEN"
+   },
+   "when": {
+    "ko": "표식 크기를 3으로 통일할 때",
+    "en": "Use size-3 centre marks."
+   }
+  },
+  {
+   "key": "DIMCENTER",
+   "name": {
+    "ko": "DIMCENTER",
+    "en": "DIMCENTER"
+   },
+   "when": {
+    "ko": "탭·필렛·장공 끝호의 중심을 표시할 때",
+    "en": "Mark the centres of taps, fillets and slot-end arcs."
    }
   },
   {

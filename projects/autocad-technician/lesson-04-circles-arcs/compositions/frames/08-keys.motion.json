@@ -1,5 +1,5 @@
 {
-  "duration": 157.798,
+  "duration": 162.624,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -9,6 +9,227 @@
     {
       "kind": "staysInFrame",
       "selector": "#l4f8 .body"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .note",
+      "bySec": 157.49
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky1",
+      "bySec": 14.79
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky1"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky2",
+      "bySec": 20.17
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky2"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky3",
+      "bySec": 25.93
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky3"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky4",
+      "bySec": 31.46
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky4"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky5",
+      "bySec": 37.0
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky5"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky6",
+      "bySec": 44.85
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky6"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky7",
+      "bySec": 51.15
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky7"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky8",
+      "bySec": 56.07
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky8"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky9",
+      "bySec": 62.97
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky9"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky10",
+      "bySec": 67.3
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky10"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky11",
+      "bySec": 72.75
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky11"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky12",
+      "bySec": 79.3
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky12"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky13",
+      "bySec": 86.57
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky13"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky14",
+      "bySec": 92.94
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky14"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky15",
+      "bySec": 99.81
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky15"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky16",
+      "bySec": 106.54
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky16"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky17",
+      "bySec": 111.48
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky17"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky18",
+      "bySec": 119.33
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky18"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky19",
+      "bySec": 125.54
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky19"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky20",
+      "bySec": 130.97
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky20"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky21",
+      "bySec": 137.43
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky21"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky22",
+      "bySec": 144.77
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky22"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky23",
+      "bySec": 151.17
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky23"
+    },
+    {
+      "kind": "appearsBy",
+      "selector": "#l4f8 .ky24",
+      "bySec": 158.09
+    },
+    {
+      "kind": "staysInFrame",
+      "selector": "#l4f8 .ky24"
     }
   ]
 }

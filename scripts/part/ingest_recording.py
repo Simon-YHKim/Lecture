@@ -134,7 +134,7 @@ def write_metadata(lesson, updates, originals):
     with tempfile.TemporaryDirectory(prefix='.recording-', dir=lesson) as temp:
         stage = Path(temp)
         for name, value in updates.items():
-            (stage / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+            (stage / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8', newline='\n')
             if originals[name] is not None:
                 (stage / (name + '.before')).write_bytes(originals[name])
         for name, original in originals.items():

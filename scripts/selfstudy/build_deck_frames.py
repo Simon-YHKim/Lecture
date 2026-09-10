@@ -1,25 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Turn a lesson's own video frames into a navigable deck.
+"""Shared frame and SCRIPT readers for the Korean self-study deck.
 
-The first deck built slides from the self-study JSON and threw away what the
-course already had: seventy-eight frames authored in Studio, with the LG type
-system, the canonical drawing, feature highlighting and real motion. That was
-the wrong call. This one mounts those frames as the slides.
+The former frames-only command delegates to build_deck_selfstudy so it cannot
+create a second, incomplete deck that omits the practice instructions. The
+frame readers stay here for the canonical builder's imports.
 
-Each frame is already a HyperFrames composition with its own `data-composition-id`
-and its own paused timeline, so a deck is mostly bookkeeping: place them on one
-clock, list them in the slideshow island, and turn the narration beats that were
-measured from the script into fragment hold-points, so pressing Next walks the
-same reveal the video walks.
-
-The frames carry Korean text. An English deck cannot be made by mounting them —
-that needs either translated frames or an English layer over them, which is a
-decision, not a build step.
-
-    python scripts/selfstudy/build_deck_frames.py <lesson-dir> [출력 파일]
-
-**폐기.** 2세대. 기존 78프레임을 그대로 마운트하는 방식이라 영어 덱을 만들 수
-없어 접었다. 현행 정본은 `build_deck_selfstudy.py` 다.
+    python scripts/selfstudy/build_deck_frames.py <lesson-dir> [output file]
 """
 import io
 import json
@@ -89,90 +75,15 @@ def notes_for(script_md):
 
 
 def main(lesson_dir, outpath):
-    index = io.open(os.path.join(lesson_dir, "index.html"), encoding="utf-8").read()
-    slots = slots_of(index)
-    if not slots:
-        raise SystemExit("index.html 에서 프레임 슬롯을 못 찾았다: %s" % lesson_dir)
-
-    timing_path = os.path.join(lesson_dir, "narration-timing.json")
-    timing = json.load(io.open(timing_path, encoding="utf-8")) if os.path.exists(timing_path) else None
-    beats_by_frame = {}
-    frame_start = {}
-    if timing:
-        for f in timing["frames"]:
-            frame_start[f["frame"]] = f["start"]
-        for b in timing["beats"]:
-            beats_by_frame.setdefault(b["frame"], []).append(b["observedStart"])
-
-    notes = notes_for(os.path.join(lesson_dir, "SCRIPT.md"))
-
-    bodies, slides, clock = [], [], 0.0
-    for n, (cid, src, _s, dur) in enumerate(slots, 1):
-        path = os.path.join(lesson_dir, src.replace("/", os.sep))
-        body = frame_body(path)
-        # The frame's root sits at data-start 0 in its own file; on the deck's
-        # clock it has to say where it actually is.
-        body = re.sub(r'(id="%s-root"[^>]*?)data-start="0"' % re.escape(cid),
-                      r'\1data-start="%s"' % clock, body, count=1)
-        bodies.append('<!-- %s · %s -->\n%s' % (cid, os.path.basename(src), body))
-
-        entry = {"sceneId": cid, "notes": notes.get(n, "")[:900] or "—"}
-        bts = beats_by_frame.get(n) or []
-        f0 = frame_start.get(n)
-        if bts and f0 is not None:
-            frag = [round(clock + (t - f0), 2) for t in bts]
-            frag = [t for t in frag if clock <= t <= clock + dur]
-            if frag:
-                entry["fragments"] = frag
-        slides.append(entry)
-        clock += dur
-
-    island = json.dumps({"slides": slides, "slideSequences": []},
-                        ensure_ascii=False, indent=1)
-    nav = io.open(os.path.join(HERE, "assets", "deck_nav.html"), encoding="utf-8").read()
-    lesson = os.path.basename(lesson_dir.rstrip("/\\"))
-    title = re.search(r"#\s*SCRIPT\s*—\s*(.*)", io.open(
-        os.path.join(lesson_dir, "SCRIPT.md"), encoding="utf-8").read())
-    title = title.group(1).strip() if title else lesson
-
-    doc = """<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>%s</title>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-<style>
-  *{box-sizing:border-box}
-  html,body{margin:0;background:#0B0A0A}
-  /* The frames position themselves at inset:0 and expect to be the only thing
-     on the page. On a deck they are siblings, so the stage places them and
-     these three properties have to win. */
-  /* inset is a shorthand for all four sides, so it has to be cleared *before*
-     left/top are set — put it after and it wipes the two values just given. */
-  #stage [data-composition-id]{inset:auto!important;position:absolute!important;
-    left:50%%!important;top:50%%!important}
-</style>
-</head>
-<body>
-<script type="application/hyperframes-slideshow+json">
-%s
-</script>
-%s
-<script>window.__timelines = window.__timelines || {};</script>
-%s
-</body>
-</html>
-""" % (title, island, "\n".join(bodies), nav)
-
-    outdir = os.path.dirname(os.path.abspath(outpath))
-    if outdir and not os.path.isdir(outdir):
-        os.makedirs(outdir)
-    io.open(outpath, "w", encoding="utf-8", newline="\n").write(doc)
-    size = os.path.getsize(outpath)
-    withfrag = sum(1 for s in slides if s.get("fragments"))
-    print("%-32s 슬라이드 %2d · 프래그먼트 %2d장 · %.0f초 · %d B"
-          % (lesson, len(slides), withfrag, clock, size))
-    return 0
+    """기존 명령 진입점도 같은 자습 덱 생성기를 사용한다."""
+    import build_deck_selfstudy as builder
+    match = re.match(r'lesson-(\d+)-', os.path.basename(lesson_dir.rstrip('/\\')))
+    if not match:
+        raise SystemExit('차시 번호가 있는 폴더를 지정하세요: ' + lesson_dir)
+    lesson_json = os.path.join(HERE, 'source', 'lesson-%02d.json' % int(match[1]))
+    if not os.path.isfile(lesson_json):
+        raise SystemExit('차시 자습 원본이 없습니다: ' + lesson_json)
+    return builder.main(lesson_dir, lesson_json, outpath)
 
 
 if __name__ == "__main__":

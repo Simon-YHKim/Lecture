@@ -24,7 +24,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
 import episodes  # noqa: E402
-from narrate_tts import verify_script_hash  # noqa: E402
+from narrate_tts import TEMPO, verify_script_hash, verify_tempo_timing, frame_hold  # noqa: E402
 from sync_narration import attach  # noqa: E402
 
 ROOT = "projects/autocad-technician"
@@ -82,6 +82,20 @@ def fail(where, msg):
     fails.append("%s :: %s" % (where, msg))
 
 
+def check_delivery_policy(policy=None):
+    """A policy edit must not silently change labels while execution stays old."""
+    if policy is None:
+        with open(os.path.join(ROOT, 'course-standards.json'), encoding='utf-8') as fh:
+            policy = json.load(fh).get('policy', {})
+    slugs = [slug for slug, _, _ in LESSONS]
+    if policy.get('narrationPlaybackRate') != TEMPO:
+        raise ValueError('policy.narrationPlaybackRate differs from the executable narration tempo')
+    if (policy.get('deliveryUnit') != 'lesson' or policy.get('lessonCount') != len(slugs)
+            or episodes.slugs() != sorted(slugs) or not all(episodes.is_unified(slug) for slug in slugs)
+            or any(len(episodes.episodes_for(slug)) != 1 for slug in slugs)):
+        raise ValueError('policy delivery unit/count differs from the complete lesson masters')
+
+
 
 def measured_frames(lesson_dir):
     """프레임 이름 → (잰 시작, 잰 길이). 잰 적이 없으면 빈 dict.
@@ -124,6 +138,12 @@ def check_episodes(slug):
                              " · 중복 %s" % ", ".join(dup) if dup else ""))
 
     eps = episodes.episodes_for(slug)
+    if episodes.is_unified(slug):
+        if len(eps) != 1 or eps[0]['frames'] != order:
+            fail(slug, '통합 차시는 master 전체 프레임을 한 번씩 가져야 한다')
+        if re.search(r'data-composition-src="[^"]*episodes/', index):
+            fail(slug, '통합 master가 과거 episode를 참조한다')
+        return
     ed = os.path.join(d, "compositions", "episodes")
     have = sorted(n for n in os.listdir(ed)) if os.path.isdir(ed) else []
     if have != ["ep%d.html" % i for i in range(1, len(eps) + 1)]:
@@ -226,6 +246,10 @@ def check_lesson(slug, cp_in, cp_out):
 
     measured_dur = measured_frames(d)
     measured_beats = beats.load_measured(d)
+    measured_hold = beats.LEAD_SEC
+    if measured_dur:
+        with open(os.path.join(d, 'narration-timing.json'), encoding='utf-8') as fh:
+            measured_hold = frame_hold(json.load(fh))
 
     total = 0
     for slot_i, ((stem, start, dur), (line_no, segs, part_sec)) in enumerate(
@@ -246,7 +270,7 @@ def check_lesson(slug, cp_in, cp_out):
         if stem in measured_dur:
             # 잰 것은 말한 시간이다. 슬롯은 그보다 LEAD_SEC 만큼 길다 — 머리글이
             # 첫 마디보다 먼저 들어오는 몫이고, 그 몫은 음성 바깥에 있다.
-            want = measured_dur[stem][1] + beats.LEAD_SEC
+            want = measured_dur[stem][1] + measured_hold
             if abs(dur - want) > 0.01:
                 fail(slug, "%s 길이 %.3f 인데 narration-timing.json 은 %.3f "
                            "— 실측을 다시 반영하지 않았다" % (stem, dur, want))
@@ -333,11 +357,13 @@ def check_narration_identity(slug):
         return False
     try:
         verify_script_hash(root, timing)
+        verify_tempo_timing(timing, required=episodes.is_unified(slug))
         if any(not re.fullmatch(r'[a-f0-9]{64}', f.get('audioSha256', '')) for f in timing['frames']):
             raise ValueError('A WAV identity is missing')
         paths = [os.path.join(root, 'index.html')]
         epdir = os.path.join(root, 'compositions', 'episodes')
-        paths += [os.path.join(epdir, f) for f in os.listdir(epdir) if re.fullmatch(r'ep\d+\.html', f)]
+        if not episodes.is_unified(slug):
+            paths += [os.path.join(epdir, f) for f in os.listdir(epdir) if re.fullmatch(r'ep\d+\.html', f)]
         for playlist in paths:
             with open(playlist, encoding='utf-8') as fh:
                 source = fh.read()
@@ -351,6 +377,10 @@ def check_narration_identity(slug):
 def main():
     here = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     os.chdir(here)
+    try:
+        check_delivery_policy()
+    except (OSError, ValueError) as error:
+        fail('course policy', str(error))
 
     total = 0
     for slug, a, b in LESSONS:
