@@ -35,7 +35,11 @@ import beats  # noqa: E402
 import episodes  # noqa: E402
 
 ROOT = "projects/autocad-technician"
-VOICE = "Microsoft Heami Desktop"
+# 판마다 목소리가 다르고 배속은 같다. 배속은 과정 정책이라 언어를 타지 않는다.
+# 영문판은 국문 차시를 그대로 복사한 비공개 사본 위에서 돌므로, 여기서 바뀌는
+# 것은 어떤 목소리를 허용하는가 하나뿐이다.
+VOICES = {"ko": "Microsoft Heami Desktop", "en": "Microsoft Zira Desktop"}
+VOICE = VOICES["ko"]
 TEMPO = 1.38
 BASE_FRAME_HOLD = 1.6
 
@@ -92,8 +96,8 @@ def verify_tempo_timing(timing, required=False):
         return 1.0
     if (timing.get('schemaVersion') != 2 or timing.get('rate') != 0
             or timing.get('tempo') != TEMPO or timing.get('tempoMethod') != 'ffmpeg-atempo-per-paragraph'
-            or not timing.get('tempoToolVersion') or timing.get('voice') != VOICE):
-        raise ValueError('Expected Heami Rate 0 followed by pitch-preserving 1.38x tempo conversion')
+            or not timing.get('tempoToolVersion') or timing.get('voice') not in VOICES.values()):
+        raise ValueError('Expected Rate 0 speech followed by pitch-preserving 1.38x tempo conversion')
     if timing.get('timingSha256') != timing_identity(timing):
         raise ValueError('Narration timing identity changed; regenerate speech')
     if timing.get('sourceFrameHoldSeconds') != BASE_FRAME_HOLD or abs(timing.get('frameHoldSeconds', -1) - BASE_FRAME_HOLD / TEMPO) > 1e-9:
@@ -359,8 +363,9 @@ def synthesis_plan(script):
 
 
 def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=TEMPO):
-    if tempo != TEMPO or voice != VOICE:
-        raise ValueError('Use Microsoft Heami Desktop Rate 0 with tempo 1.38')
+    if tempo != TEMPO or voice not in VOICES.values():
+        raise ValueError('Use %s at Rate 0 with tempo 1.38'
+                         % ' or '.join(sorted(VOICES.values())))
     outroot = str(private_output(outroot))
     script = os.path.join(lesson_dir, 'SCRIPT.md')
     input_hash = spoken_hash(script)
@@ -480,7 +485,8 @@ def main(argv=None):
     ap.add_argument("lesson", nargs="?", help="차시 디렉터리")
     ap.add_argument("--all", action="store_true", help="여덟 차시 전부")
     ap.add_argument("--out", default=None, help="음성을 둘 곳 (저장소 밖)")
-    ap.add_argument("--voice", default=VOICE)
+    ap.add_argument("--voice", default=VOICE, choices=sorted(VOICES.values()),
+                    help="국문은 Heami, 영문은 Zira")
     ap.add_argument("--tempo", type=float, choices=[TEMPO], default=TEMPO,
                     help="Rate 0 원본의 음높이를 보존한 1.38배속")
     ap.add_argument("--dry-run", action="store_true", help="분량만 세고 쓰지 않는다")

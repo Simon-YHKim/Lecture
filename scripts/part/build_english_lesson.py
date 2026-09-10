@@ -1,0 +1,95 @@
+"""국문 차시에서 영문 차시 사본을 만든다 — 저장소 밖에.
+
+영문판은 국문 프레임을 건드리지 않는다. 검수 중인 화면이 흔들리면 안 되기
+때문이다. 대신 국문 차시를 통째로 복사한 **비공개 사본** 위에 영문 대본과
+영문 글자를 얹고, 기존 파이프라인(narrate_tts · retime_frames · prepare_lecture)
+을 그 사본에서 그대로 돌린다.
+
+    python scripts/part/build_english_lesson.py <차시 디렉터리> <나갈 곳>
+
+나갈 곳은 저장소 밖이어야 하고 비어 있어야 한다. 만들고 나면 그 안에서
+`SCRIPT.md` 는 영문 대본이고 프레임의 글자는 영문이다. 국문 음성·시각 파일은
+가져오지 않는다 — 영문은 자기 음성을 처음부터 잰다.
+"""
+import argparse
+import json
+import os
+import re
+import shutil
+import sys
+from pathlib import Path
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import frame_text  # noqa: E402
+
+HANGUL = re.compile(r'[가-힣]')
+# 국문 음성에 매인 것들. 영문 사본은 자기 것을 새로 만든다.
+DROP = ('narration-timing.json', 'media.local.json', 'SCRIPT.en.md')
+MAPS = Path(__file__).resolve().parent / 'frames_en'
+
+
+def private(path):
+    out = Path(path).resolve()
+    repo = Path(__file__).resolve().parents[2]
+    if repo == out or repo in out.parents:
+        raise ValueError('영문 사본은 저장소 밖에 두어야 한다: %s' % out)
+    return out
+
+
+def build(lesson_dir, out_dir):
+    lesson = Path(lesson_dir).resolve()
+    out = private(out_dir)
+    if out.exists():
+        raise ValueError('나갈 곳이 이미 있다. 새 폴더를 주어라: %s' % out)
+    english_script = lesson / 'SCRIPT.en.md'
+    if not english_script.is_file():
+        raise ValueError('영문 대본이 없다: %s' % english_script)
+    mapping = MAPS / (lesson.name + '.json')
+    if not mapping.is_file():
+        raise ValueError('프레임 영문 지도가 없다: %s' % mapping)
+    english = json.loads(mapping.read_text(encoding='utf-8'))
+
+    shutil.copytree(lesson, out, ignore=shutil.ignore_patterns('_*', '.hyperframes', 'node_modules'))
+    for name in DROP:
+        target = out / name
+        if target.exists():
+            target.unlink()
+    shutil.copyfile(english_script, out / 'SCRIPT.md')
+
+    missing, left = {}, {}
+    for path in frame_text.frames(str(out)):
+        source = Path(path).read_text(encoding='utf-8')
+        localised, gaps = frame_text.localise(source, english)
+        localised = localised.replace('<html lang="ko">', '<html lang="en">')
+        Path(path).write_text(localised, encoding='utf-8', newline='\n')
+        if gaps:
+            missing[os.path.basename(path)] = gaps
+        body = frame_text.SCRIPTS.sub('', localised)
+        rest = HANGUL.findall(re.sub(r'<svg.*?</svg>', '', body, flags=re.S))
+        if rest:
+            left[os.path.basename(path)] = len(rest)
+
+    print('영문 사본 %s' % out)
+    print('프레임 %d장 · 번역 지도 %d줄' % (len(frame_text.frames(str(out))), len(english)))
+    if missing:
+        print('바꾸지 못한 글자가 있다:')
+        for name, gaps in missing.items():
+            for text in gaps[:5]:
+                print('   %-24s %s' % (name, text[:70]))
+    if left:
+        print('한글이 남은 프레임 (도면 SVG 는 제외):')
+        for name, count in left.items():
+            print('   %-24s %d자' % (name, count))
+    return 1 if missing or left else 0
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument('lesson')
+    ap.add_argument('out')
+    a = ap.parse_args(argv)
+    return build(a.lesson, a.out)
+
+
+if __name__ == '__main__':
+    sys.exit(main())
