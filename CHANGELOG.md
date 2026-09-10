@@ -14,12 +14,16 @@
 - Prevent overlapping recording captions and explanation paragraphs during transitions.
 - Bind sparse drawing highlights and mixed sheet/layer explanations to their explicit narration beats.
 - Preserve early overview visibility while refreshing narration-driven motion deadlines.
+- Show each recap list with its measured spoken paragraph, including bullets previously delayed beyond the end of the clip.
+- Keep titles visible through their narration and leave at least two seconds to read all title text before the outro.
+- Keep reference-table text readable before and after narration while preserving row background emphasis and all scene timing.
 - Reject stale scripts, missing audio identities, changed WAV files, and invalid timing before private lecture export.
 - Share SVG definitions once in the combined workbook to avoid duplicate drawing IDs.
 
 ### Added
 
 - Private offline lecture preparation and scene-level checks for the CLI's bounded motion sampling.
+- Selected-episode lecture export with local timing, complete source/audio validation, and recording checks limited to the selected frames.
 - Narration identity, staged-edit, timeline, SVG-definition and sentence-rhythm regression checks.
 
 Actual AutoCAD recordings and original teaching materials remain required for application-level validation and complete practice videos. Generated speech, rendered video and private review artifacts are not included in this repository.

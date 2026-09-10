@@ -144,12 +144,35 @@ playlist on its own clock before interpreting overlap warnings.
 Missing AutoCAD recordings block a delivery export. `--preview` permits those
 placeholders only for validation and records them in the private export manifest.
 
+To export one completed episode, add `--episode ep1` (or another canonical
+episode ID). The selected episode becomes the private project's `index.html`,
+with its own clock, frame motion checks, and only its referenced narration WAVs.
+All source playlists and measured WAV identities are still checked first.
+An unused episode's recording placeholder does not block this export; a selected
+placeholder does. The current recording-free set is lesson 1 ep1, lesson 2
+ep1/ep3, lesson 3 ep3, and lesson 8 ep1: five of the course's twenty episodes.
+The other fifteen still require real AutoCAD recordings.
+
+If a long render fails the temporary-disk capacity check, use the CLI's
+`--low-memory-mode` streaming profile. It uses one screenshot worker and may
+take longer. Keep the same resolution and frame rate, and verify the resulting
+video and audio rather than treating a successful render as complete validation.
+
 The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do
 not. Legacy timing files without these identities cannot be reused by retiming
 or export. WAV contents and durations are checked again when preparing a render.
 Episodes use their own local clock, including the holds between scene WAVs.
 Timing updates are prepared in a temporary copy before replacing source files.
+The extended recap lists in lessons 2–8 have one measured paragraph per panel,
+so their bullets appear together. Their motion checks include the last bullet
+to catch delayed or missing content. Title outros follow the measured clip
+length; on short titles, late entrances move earlier to leave at least two
+seconds of reading time.
+Reference-table rows keep their text fully opaque before and after narration;
+the active row's background carries the emphasis. This preserves small labels
+that became hard to read when the whole row was dimmed. Other cards and notes
+keep their authored states, and explicit `read=0` still clears stacked panels.
 
 If Python is not on PATH, pass its executable to the course guard with
 `-PythonPath`, or set `LECTURE_PYTHON`. The course guard reports legacy narration

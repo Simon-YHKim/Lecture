@@ -2,11 +2,67 @@ from pathlib import Path
 import tempfile
 import unittest
 import json
+import re
 
 from retime_frames import CALL, retime_frame, validate_beats
 
 
 class IntroductionTimingTests(unittest.TestCase):
+    def test_title_remains_visible_through_speech_and_exits_inside_its_clip(self):
+        source = '''<div data-composition-id="f" data-duration="16"></div>
+const tl=gsap.timeline({paused:true});
+tl.fromTo("#f h2",{opacity:0},{opacity:1,duration:1},2);
+tl.fromTo("#f .sub",{opacity:0},{opacity:1,duration:1},6.36);
+tl.to("#f .brand,#f .cert,#f h2,#f .rule,#f .sub",{opacity:0,duration:.8},11.05);
+'''
+        for duration in (8.0, 16.0):
+            with self.subTest(duration=duration), tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / 'frame.html'
+                path.write_text(source, encoding='utf-8')
+                retime_frame(str(path), [], duration)
+                result = path.read_text(encoding='utf-8')
+                fade = next(m for m in CALL.finditer(result) if m.group('kind') == 'to')
+                at = float(fade.group('time'))
+                self.assertGreaterEqual(at, duration - 1.6)
+                self.assertLessEqual(at + .8, duration)
+                for entry in (m for m in CALL.finditer(result) if m.group('kind') == 'fromTo'):
+                    reveal = float(re.search(r'duration:([\d.]+)', entry.group('mid'))[1])
+                    self.assertLessEqual(float(entry.group('time')) + reveal + 2, at + .01,
+                        'Title text needs two seconds to read before its fade starts')
+                retime_frame(str(path), [], duration)
+                self.assertEqual(path.read_text(encoding='utf-8'), result)
+
+    def test_recap_lists_are_readable_when_their_paragraph_starts(self):
+        source = '''<div data-composition-id="f" data-duration="50"></div>
+const tl=gsap.timeline({paused:true});
+tl.fromTo("#f .p-done",{opacity:0},{opacity:1,duration:1},2);
+tl.fromTo("#f .p-done-li",{opacity:0},{opacity:1,duration:.8,stagger:5},2);
+tl.fromTo("#f .p-next",{opacity:0},{opacity:1,duration:1},25);
+tl.fromTo("#f .p-next-li",{opacity:0},{opacity:1,duration:.8,stagger:5},25);
+'''
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'frame.html'
+            path.write_text(source, encoding='utf-8')
+            spec = path.with_suffix('.motion.json')
+            spec.write_text(json.dumps({'duration': 50, 'assertions': []}), encoding='utf-8')
+            spans = [(3, 20), (22, 47)]
+            retime_frame(str(path), spans, 50)
+            result = path.read_text(encoding='utf-8')
+            for panel, (on, _) in zip(('p-done', 'p-next'), spans):
+                call = next(m for m in CALL.finditer(result)
+                            if m.group('sel') == '#f .' + panel + '-li')
+                duration = float(re.search(r'duration:([\d.]+)', call.group('mid'))[1])
+                stagger = float(re.search(r'stagger:([\d.]+)', call.group('mid'))[1])
+                last_visible = float(call.group('time')) + duration + 4 * stagger
+                self.assertLessEqual(last_visible, on + 1.0,
+                    'Five bullets share one spoken paragraph, not five measured beats')
+            retime_frame(str(path), spans, 50)
+            self.assertEqual(path.read_text(encoding='utf-8'), result)
+            assertions = json.loads(spec.read_text(encoding='utf-8'))['assertions']
+            self.assertEqual({a['selector'] for a in assertions},
+                {'#f .p-done-li:last-child', '#f .p-next-li:last-child'})
+            self.assertEqual(len(assertions), 2)
+
     def test_sparse_highlights_keep_their_explicit_beat_instead_of_shifting(self):
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'frame.html'

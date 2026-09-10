@@ -25,6 +25,7 @@ import io
 import json
 import math
 import os
+from html.parser import HTMLParser
 from pathlib import Path
 import re
 import sys
@@ -45,6 +46,78 @@ MAIN_DUR = re.compile(r'(id="root"[^>]*?data-duration=")(?P<d>[\d.]+)(")')
 
 TAIL = 1.6          # 말이 끝난 뒤 프레임이 더 서 있는 시간
 LEAD = 0.9          # 첫 박자 전에 등장 연출을 끝내 둘 여유
+
+_ROW_SELECTOR = re.compile(r'#(?P<scope>[\w-]+)\s+(?P<tag>[A-Za-z][\w-]*)?(?P<classes>(?:\.[\w-]+)*)\Z')
+_ROW_OPACITY = re.compile(r'(\bopacity\s*:\s*)(0?\.34|0?\.64)(?![\d.])')
+
+
+class _RowTargets(HTMLParser):
+    """Resolve only the scoped tag/class selectors emitted by our generators."""
+    _VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+             'link', 'meta', 'param', 'source', 'track', 'wbr'}
+
+    def __init__(self, source):
+        super().__init__()
+        self.stack, self.nodes = [], []
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        self.nodes.append((tag, set(attrs.get('class', '').split()),
+                           {identity for _, identity in self.stack if identity}))
+        if tag not in self._VOID:
+            self.stack.append((tag, attrs.get('id')))
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stack) - 1, -1, -1):
+            if self.stack[index][0] == tag:
+                del self.stack[index:]
+                break
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self._VOID:
+            self.handle_endtag(tag)
+
+    def matches(self, selector):
+        match = _ROW_SELECTOR.fullmatch(selector.strip())
+        if not match or not (match['tag'] or match['classes']):
+            return None
+        classes = set(re.findall(r'\.([\w-]+)', match['classes']))
+        return [tag for tag, found, ancestors in self.nodes
+                if match['scope'] in ancestors and classes <= found
+                and (not match['tag'] or match['tag'].lower() == tag)]
+
+
+def fix_row_readability(source):
+    """Keep generated row states opaque without touching animation timing.
+
+    A mixed selector retains its original tween and stagger. Its deterministic
+    GSAP value function returns 1 only for TR targets, leaving every other
+    target's old opacity intact. Unsupported selectors are left unchanged.
+    """
+    if '<tr' not in source.lower():
+        return source
+    targets = _RowTargets(source)
+
+    def fix(call):
+        if not _ROW_OPACITY.search(call['mid']):
+            return call.group(0)
+        matched = [targets.matches(selector) for selector in call['sel'].split(',')]
+        if any(tags is None or not tags for tags in matched):
+            return call.group(0)
+        tags = [tag for group in matched for tag in group]
+        if 'tr' not in tags:
+            return call.group(0)
+        only_rows = all(tag == 'tr' for tag in tags)
+        def opacity(match):
+            value = '1' if only_rows else "(i,target)=>target.tagName==='TR'?1:" + match[2]
+            return match[1] + value
+        mid = _ROW_OPACITY.sub(opacity, call['mid'])
+        start, end = call.start('mid') - call.start(), call.end('mid') - call.start()
+        return call.group(0)[:start] + mid + call.group(0)[end:]
+
+    return CALL.sub(fix, source)
 
 
 def beats_of(timing, frame):
@@ -264,6 +337,39 @@ def retime_frame(path, beats, dur, dry=False):
                     same = abs(float(m.group('time')) - base) < 1.5
                     newtime[m.start()] = round(on if same else nxt, 2)
 
+    # Recap bullets share one measured paragraph per panel. A stale, evenly
+    # spaced stagger can reveal the last bullet after the next paragraph has
+    # started. Show the whole list with its panel until item timings exist.
+    recap_lists = ('p-done-li', 'p-next-li')
+    if len(beats) == 2 and all(any(
+            m.group('kind') == 'fromTo' and m.group('sel').endswith(' .' + name)
+            for m in calls) for name in recap_lists):
+        for name, (on, _off) in zip(recap_lists, beats):
+            panel = name.removesuffix('-li')
+            for m in calls:
+                if m.group('kind') != 'fromTo':
+                    continue
+                if m.group('sel').endswith((' .' + panel, ' .' + name)):
+                    newtime[m.start()] = round(on, 2)
+                    newmid[m.start()] = re.sub(r'stagger:[\d.]+', 'stagger:0',
+                                              newmid.get(m.start(), m.group('mid')))
+
+    title_exit = next((m for m in calls if m.group('kind') == 'to'
+        and all(name in m.group('sel') for name in (' .brand', ' .cert', ' .sub'))), None)
+    if title_exit:
+        fade_at = round(max(0.0, dur - 1.05), 2)
+        newtime[title_exit.start()] = fade_at
+        for m in calls:
+            if m.group('kind') != 'fromTo' or not m.group('sel').endswith(
+                    (' .brand', ' .cert', ' h2', ' .rule', ' .sub')):
+                continue
+            duration = re.search(r'duration:([\d.]+)', m.group('mid'))
+            if duration:
+                # Short titles need the subtitle before the outro, with time
+                # to read it. Keep the established rhythm when it already fits.
+                latest = max(0.0, fade_at - float(duration[1]) - 2.0)
+                newtime[m.start()] = round(min(float(m.group('time')), latest), 2)
+
     # 등장 연출(계열 전체를 한 번에 잡는 호출)과 퇴장을 양 끝으로 옮긴다.
     first_on = beats[0][0] if beats else 0.0
     for m in calls:
@@ -282,6 +388,7 @@ def retime_frame(path, beats, dur, dry=False):
         # 맞출 트윈이 없어도 길이는 바뀐다. 인사 화면과 녹화 프레임이 그렇다.
         s = ROOT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), head + tl, count=1)
         s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
+        s = fix_row_readability(s)
         if not dry and s != head + tl:
             Path(path).write_text(s, encoding='utf-8', newline='\n')
         if not dry:
@@ -302,6 +409,7 @@ def retime_frame(path, beats, dur, dry=False):
 
     s = ROOT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
     s = SECT_DUR.sub(lambda x: x.group(1) + ('%g' % dur) + x.group(4), s, count=1)
+    s = fix_row_readability(s)
     if not dry:
         Path(path).write_text(s, encoding='utf-8', newline='\n')
         sync_motion(path, dur, beats)
@@ -363,6 +471,19 @@ def sync_motion(frame_path, dur, beats=None):
                 # animates together (e.g. the title-block rectangle and text).
                 if any(a['selector'] == sel or a['selector'] == sel.replace(' .', ' g.') for sel in selectors):
                     a['bySec'] = round(beats[i][0] + 2.4, 3)
+    if beats and len(beats) == 2:
+        recap = [next((sel for sel in first_calls if sel.endswith(' .' + name)), None)
+                 for name in ('p-done-li', 'p-next-li')]
+        if all(recap):
+            for selector, (on, _off) in zip(recap, beats):
+                # Checking only the panel misses bullets delayed past the clip.
+                last = selector + ':last-child'
+                assertion = next((a for a in doc['assertions']
+                    if a['kind'] == 'appearsBy' and a['selector'] == last), None)
+                if assertion is None:
+                    assertion = {'kind': 'appearsBy', 'selector': last}
+                    doc['assertions'].append(assertion)
+                assertion['bySec'] = round(on + 2.4, 3)
     if json.dumps(doc, sort_keys=True) == original:
         return
     with io.open(p, 'w', encoding='utf-8', newline='\n') as fh:
