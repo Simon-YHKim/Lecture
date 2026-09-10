@@ -1121,7 +1121,11 @@
           "ko": "잘라 낼 부분을 클릭합니다. 남길 쪽이 아니라 없앨 쪽이에요. 형상 밖으로 튀어나온 토막을 하나씩 클릭합니다.",
           "en": "Click the part to cut away - the part you remove, not the part you keep. Work through the pieces sticking out one at a time."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": [
+          1,
+          2
+         ]
         },
         {
          "type": "U",
@@ -1193,14 +1197,16 @@
           "ko": "경계 모서리를 물어봅니다. 늘어난 선이 가서 닿을 선을 클릭하고, 다 골랐으면 엔터.",
           "en": "It asks for boundary edges. Click the line the extension should reach, then press Enter."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 2
         },
         {
          "do": {
           "ko": "늘릴 선을 클릭합니다. 선의 가운데가 아니라 늘리고 싶은 쪽 끝 근처입니다.",
           "en": "Click the line to extend - near the end you want lengthened, not in the middle."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "do": {
@@ -1500,7 +1506,8 @@
           "ko": "왼쪽 장공의 왼쪽 끝원 중심과 오른쪽 장공의 왼쪽 끝원 중심을 클릭합니다. 50이 나옵니다. 29에서 79까지입니다.",
           "en": "Click the left slot's left end-arc center, then the right slot's left end-arc center. It reads 50 - from 29 to 79."
          },
-         "kind": "snap"
+         "kind": "snap",
+         "spot": 1
         },
         {
          "type": "DI",
@@ -1508,7 +1515,8 @@
           "ko": "다시 입력하고 엔터. 이번에는 오른쪽 장공의 오른쪽 끝원 중심과 도면 오른쪽 끝입니다.",
           "en": "Type it again. This time take the right slot's right end-arc center and the right edge of the part."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 2
         },
         {
          "do": {
@@ -1580,7 +1588,8 @@
           "ko": "먼저 원본 객체를 하나 클릭합니다. 제대로 된 중심선, 곧 빨간 파선으로 보이는 선입니다. 커서가 붓 모양으로 바뀝니다.",
           "en": "First click a source object - a correct centerline, one showing as a red broken line. The cursor turns into a brush."
          },
-         "kind": "click"
+         "kind": "click",
+         "spot": 1
         },
         {
          "type": "S",
@@ -1602,7 +1611,8 @@
           "ko": "고칠 객체를 클릭합니다. 더 있으면 계속 클릭하고, 다 됐으면 엔터.",
           "en": "Click the object to fix. Keep clicking if there are more, then press Enter."
          },
-         "kind": "key"
+         "kind": "key",
+         "spot": 2
         }
        ],
        "expect": {
@@ -1854,7 +1864,8 @@
           "ko": "입력하고 엔터. 특성은 도면층, 값은 중심선으로 걸고 확인을 누릅니다.",
           "en": "Type it and press Enter. Set the property to Layer, the value to the center layer, and click OK."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 1
         },
         {
          "do": {

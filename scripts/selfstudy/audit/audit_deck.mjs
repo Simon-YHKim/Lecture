@@ -47,12 +47,34 @@ async function sign() {
   });
 }
 
-const dead = [], nonote = [], noanim = [];
+const dead = [], nonote = [], noanim = [], blank = [];
 for (let n = 0; n < meta.length; n++) {
   const m = meta[n];
   if (!m.notes || m.notes === '—') nonote.push([n + 1, m.id]);
   await pg.evaluate((k) => window.__deckGo(k), n);
   await pg.waitForTimeout(30);
+
+  // 코치 마크 도면이 실제로 그려졌는가. `<use>` 가 viewBox 원점을 안 받으면
+  // 도면이 보이는 영역 밖으로 밀려나 코치 마크만 남는다 — 검수에서 「도면 누락」
+  // 여덟 장으로 올라온 결함이고, 마크업만 봐서는 멀졘해 보인다.
+  const bad = await pg.evaluate((id) => {
+    const sec = document.getElementById(id);
+    if (!sec) return null;
+    const out = [];
+    sec.querySelectorAll('svg.cdwg').forEach((svg) => {
+      const box = svg.getBoundingClientRect();
+      const u = svg.querySelector('use');
+      if (!u) { out.push('use 없음'); return; }
+      const r = u.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) { out.push('도면 크기 0'); return; }
+      const ox = Math.min(r.right, box.right) - Math.max(r.left, box.left);
+      const oy = Math.min(r.bottom, box.bottom) - Math.max(r.top, box.top);
+      const cover = (Math.max(0, ox) * Math.max(0, oy)) / (box.width * box.height || 1);
+      if (cover < 0.2) out.push('도면이 화면 밖 (겹침 ' + (cover * 100).toFixed(0) + '%)');
+    });
+    return out.length ? out : null;
+  }, m.id);
+  if (bad) blank.push([n + 1, m.id, bad.join(', ')]);
   let prev = await sign(), same = 0;
   for (let k = 1; k < Math.max(1, m.nf); k++) {
     await pg.keyboard.press('ArrowRight');
@@ -73,6 +95,10 @@ console.log('\n=== 조각이 하나뿐(넘길 것이 없음) ===');
 console.log('  ' + noanim.map(([n, id]) => n + ' ' + id).join(' · '));
 console.log('\n=== 노트 빈 장 ===');
 console.log('  ' + (nonote.length ? nonote.map(([n, id]) => n + ' ' + id).join(' · ') : '없음'));
+console.log('\n=== 도면이 안 보이는 장 ===');
+console.log('  ' + (blank.length
+  ? blank.map(([n, id, why]) => n + ' ' + id + ' — ' + why).join('\n  ')
+  : '없음'));
 console.log('\n=== 콘솔 오류 ' + errs.length + '건 ===');
 Array.from(new Set(errs)).slice(0, 12).forEach((e) => console.log('  ' + e));
 await b.close();

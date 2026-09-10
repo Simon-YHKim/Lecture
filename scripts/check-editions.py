@@ -139,6 +139,24 @@ def main():
                     kinds = {a.get("kind") for a in st.get("actions", [])}
                     if "snap" in kinds and not st.get("spots"):
                         holes.append(st.get("n"))
+                    # 도면 아래 캡션을 없앴으므로, 자리마다 그것을 설명하는 조작
+                    # 줄이 있어야 한다. 없으면 번호만 뜨고 설명이 사라진다.
+                    spots = st.get("spots") or []
+                    if spots:
+                        home = set()
+                        for a in st.get("actions", []):
+                            v = a.get("spot")
+                            if v is None:
+                                continue
+                            home |= set([v] if isinstance(v, int) else v)
+                        orphan = sorted(set(range(1, len(spots) + 1)) - home)
+                        if orphan:
+                            fail.append("%d차시 %d단계 — 설명 줄이 없는 코치 마크 %s"
+                                        % (no, st.get("n"), orphan))
+                        ghost = sorted(home - set(range(1, len(spots) + 1)))
+                        if ghost:
+                            fail.append("%d차시 %d단계 — 없는 코치 마크를 가리키는 줄 %s"
+                                        % (no, st.get("n"), ghost))
         if holes:
             fail.append("%d차시 — 스냅으로 점을 잡는데 코치 마크가 없는 단계: %s"
                         % (no, ", ".join(str(h) for h in holes)))

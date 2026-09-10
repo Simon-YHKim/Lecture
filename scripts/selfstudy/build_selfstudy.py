@@ -177,22 +177,18 @@ def coach_figure(st, ctx):
         return ''
     ctx.setdefault('surfaces', set()).add(surface)
     feature = st.get('feature')
-    body, caps = _coach.marks(spots, surface)
-    lis = []
-    for i, hover, snapname in caps:
-        tail = ('<em> — %s 표식</em>' % esc(snapname)) if snapname else ''
-        lis.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
-                   % (i, bi_txt(hover) if hover else '', tail))
+    only = {n for a in st.get('actions', []) for n in _coach.spot_badges(a)} or None
+    body, _caps = _coach.marks(spots, surface, only)
     head = ('지금 그리는 것 — <b>%s</b>' % esc(_coach.FEATURE_KO[feature])) \
         if feature in _coach.FEATURE_KO else '도면 위에서 지금 잡을 자리'
+    # 자리 설명을 도면 아래에 또 적지 않는다. 같은 말이 조작 줄에 있고, 번호로
+    # 서로 짚는다. 비는 자리는 도면이 가져간다.
     return ('<figure class="coachfig" data-memo="도면 코치 마크">'
             '<div class="fh">%s</div>'
             '<svg class="dwg cdwg" viewBox="%s" role="img" aria-label="%s">'
-            '<use href="#sfc-%s"/>%s<g class="coach">%s</g></svg>'
-            '<ul class="cap%s">%s</ul></figure>'
+            '%s%s<g class="coach">%s</g></svg></figure>'
             % (head, _coach.viewbox(svg), attr(head.replace('<b>', '').replace('</b>', '')),
-               esc(surface), _coach.hl_for(svg, feature), body,
-               ' many' if len(spots) > 4 else '', ''.join(lis)))
+               _coach.use_tag('sfc-' + surface, svg), _coach.hl_for(svg, feature), body))
 
 
 def surface_defs(used):
@@ -225,8 +221,13 @@ def render_steps(items, ctx):
             lab = ''
             if kind and kind in ACT_KIND:
                 lab = bi(ACT_KIND[kind], 'span', 'kind', False)
-            acts.append('<div class="act %s">%s%s%s</div>'
-                        % (esc(kind or ''), lab, tok, bi_txt(a.get('do'))))
+            # 도면 위 자리 표시와 같은 번호. 도면 아래에 같은 말을 또 적는 대신
+            # 여기서 대조한다.
+            badge = ''.join('<span class="spotno">%d</span>' % n
+                            for n in _coach.spot_badges(a))
+            acts.append('<div class="act %s%s">%s%s%s%s</div>'
+                        % (esc(kind or ''), ' pointed' if badge else '',
+                           lab, badge, tok, bi_txt(a.get('do'))))
         foot = []
         if st.get('expect'):
             foot.append('<div><b class="k">이렇게 되면 맞습니다</b><b class="e">You did it right if</b>%s</div>'

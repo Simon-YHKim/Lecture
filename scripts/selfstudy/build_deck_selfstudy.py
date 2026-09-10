@@ -111,7 +111,7 @@ def surface_defs():
             'style="position:absolute;width:0;height:0;overflow:hidden">%s</svg>' % syms)
 
 
-def fig_block(spots, figs, feature=None, surface='front'):
+def fig_block(spots, figs, feature=None, surface='front', only=None):
     """정면도 한 장 위에 자리 표시를 얹고, 아래에 무엇을 볼지 적는다.
 
     `feature` 가 있으면 그 형상의 강조 겹선을 켠다. 자리만 찍어 두면 「여기를
@@ -121,7 +121,7 @@ def fig_block(spots, figs, feature=None, surface='front'):
     base = figs.get(surface) if isinstance(figs, dict) else figs
     if not base:
         return ''
-    marks_svg, rows = _coach.marks(spots, surface)
+    marks_svg, rows = _coach.marks(spots, surface, only)
     caps = []
     for i, hover, snapname in rows:
         caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
@@ -134,16 +134,17 @@ def fig_block(spots, figs, feature=None, surface='front'):
     USED_SURFACES.add(surface)
     vb = _coach.viewbox(base).split()
     body = ('<svg class="dwg cdwg" viewBox="%s" width="%s" height="%s" '
-            'preserveAspectRatio="xMidYMid meet"><use href="#dsfc-%s"/>%s'
+            'preserveAspectRatio="xMidYMid meet">%s%s'
             '<g class="coach">%s</g></svg>'
-            % (_coach.viewbox(base), vb[2], vb[3], surface,
+            % (_coach.viewbox(base), vb[2], vb[3],
+               _coach.use_tag('dsfc-' + surface, base),
                _coach.hl_for(base, feature), marks_svg))
     # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
     head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
+    # 캡션 목록은 내지 않는다. 같은 말이 왼쪽 조작 줄에 이미 있고, 번호로 서로
+    # 짚을 수 있게 했다. 비는 자리는 도면이 가져간다.
     return ('<figure class="fig" data-memo="도면 코치 마크">'
-            '<div class="fh">%s</div>'
-            '%s<ul class="cap%s">%s</ul></figure>'
-            % (head, body, ' many' if len(spots) > 4 else '', ''.join(caps)))
+            '<div class="fh">%s</div>%s</figure>' % (head, body))
 
 
 def esc(s):
@@ -174,7 +175,13 @@ def ko(node):
 # ── 조작 목록의 글자 크기 ──────────────────────────────────────
 # 단계마다 조작이 2줄에서 11줄까지 온다. 한 크기로 박아 두면 긴 단계가 넘치고
 # 짧은 단계는 허전하다. 들어갈 크기 중 가장 큰 것을 고른다.
-SIZES = (28, 26, 24, 22, 20, 18)
+# 글자 크기는 하나다. 줄이지 않는다.
+#
+# 예전에는 28에서 18까지 내려가는 사다리였고, 그래서 조작이 많은 단계는
+# 18px 로 쪼그라들어 「설명 text 크기가 너무 작아져서 보기 어려워짐」이라는
+# 검수 지적을 받았다. LESSON_STYLE 11번이 이미 「글자를 줄이지 말고 화면을
+# 나눈다」고 정해 두었는데 사다리가 그 규칙을 어기고 있었다.
+SIZES = (28,)
 OPS_H = 700          # .body 안에서 조작 목록이 쓸 수 있는 높이(px)
 OPS_W = 940          # 글이 놓이는 폭(px). 라벨 칸을 뺀 값이다.
 
@@ -231,20 +238,27 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
     acts = st.get('actions', [])
     spots = st.get('spots') if front else None
     size, est, cap = ops_font(acts, narrow=bool(spots))
-    if est > cap and len(acts) > 4 and part is None:
-        # 가장 작은 크기로도 한 장에 안 들어가는 단계가 있다. 글자를 더 줄이는
-        # 대신 장을 나눈다. 열두 줄을 한 화면에 몰아 넣어 봐야 읽히지 않는다.
-        half = (len(acts) + 1) // 2
+    if est > cap and len(acts) > 1 and part is None:
+        # 한 장에 안 들어가면 글자를 줄이는 대신 장을 나눈다(LESSON_STYLE 11번).
+        # 두 장으로 모자란 단계가 있어 필요한 만큼 나눈다 — 조작이 스물한 줄인
+        # 단계까지 있다.
+        parts = min(len(acts), max(2, int(math.ceil(est / cap))))
+        size_of = int(math.ceil(len(acts) / float(parts)))
+        chunks = [acts[i:i + size_of] for i in range(0, len(acts), size_of)]
+        parts = len(chunks)
         out = []
-        for k, chunk in enumerate(([acts[:half], acts[half:]])):
+        for k, chunk in enumerate(chunks):
             sub = dict(st, actions=chunk)
-            # 앞장에는 「왜 이 순서인가」를, 뒷장에는 「이렇게 되면 맞습니다」와
-            # 「안 되면 여기」를 둔다. 앞장에서 셋을 다 빼면 그 장은 카드가 없어
-            # 마지막 조각에서 아무 일도 안 일어나고, 발표자 노트도 비어 버린다.
-            for key in (('expect', 'pitfall') if k == 0 else ('why',)):
-                sub.pop(key, None)
-            one = step_slide(sub, '%s%s' % (cid, 'ab'[k]), clock,
-                             sec_label, total, front, part=(k + 1, 2))
+            # 첫 장에는 「왜 이 순서인가」를, 마지막 장에는 「이렇게 되면
+            # 맞습니다」와 「안 되면 여기」를 둔다. 가운데 장은 카드가 없어도
+            # 조작 줄이 조각을 만들어 주므로 빈 장이 되지 않는다.
+            if k != 0:
+                sub.pop('why', None)
+            if k != parts - 1:
+                sub.pop('expect', None)
+                sub.pop('pitfall', None)
+            one = step_slide(sub, '%s%s' % (cid, 'abcdefgh'[k]), clock,
+                             sec_label, total, front, part=(k + 1, parts))
             out += one
             clock += one[-1][3]
         return out
@@ -253,10 +267,14 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
         kind = a.get('kind') or ('type' if a.get('type') else '')
         lab = ACT_LAB.get(kind, '')
         cmd = ('<span class="cmd">%s</span>' % esc(a['type'])) if a.get('type') else ''
-        ops.append('<li class="op o%d %s" data-memo="%s"><span class="lab">%s</span>'
-                   '<span class="w">%s%s</span></li>'
-                   % (k + 1, esc(kind), esc('%s단계 · 조작 %d' % (st['n'], k + 1)),
-                      esc(lab), cmd, rich(ko(a.get('do')))))
+        # 도면 위 자리 표시와 같은 번호를 이 줄에 단다. 도면 아래에 같은 말을 또
+        # 적는 대신 여기서 대조하게 하는 것이 검수 요청이다.
+        badge = ''.join('<span class="spotno">%d</span>' % n for n in _coach.spot_badges(a))
+        ops.append('<li class="op o%d %s%s" data-memo="%s"><span class="lab">%s</span>'
+                   '<span class="w">%s%s%s</span></li>'
+                   % (k + 1, esc(kind), ' pointed' if badge else '',
+                      esc('%s단계 · 조작 %d' % (st['n'], k + 1)),
+                      esc(lab), badge, cmd, rich(ko(a.get('do')))))
 
     side, texts = [], []
     for cls, lab, key in (('', '이렇게 되면 맞습니다', 'expect'),
@@ -290,7 +308,9 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
       % {'c': cid, 's': clock, 'd': dur, 'fs': size,
          'fx': ' hasfig' if spots else '',
          'sst': (' style="font-size:%dpx"' % ssz) if ssz else '',
-         'fig': fig_block(spots, front, st.get('feature'), st.get('on', 'front')) if spots else '',
+         'fig': fig_block(spots, front, st.get('feature'), st.get('on', 'front'),
+                          only={n for a in acts for n in _coach.spot_badges(a)})
+                if spots else '',
          'lab': esc('%s단계%s · %s' % (st['n'], (' (%d/%d)' % part) if part else '',
                                       ko(st.get('title')))),
          'title': rich(ko(st.get('title'))) + (
@@ -315,7 +335,18 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
                   '{opacity:1,y:0,duration:.45,stagger:.08,ease:"power2.out"},%s);'
                   % (cid, len(ops) + 0.5))
     frags = [round(clock + k + 1.0, 2) for k in range(n_frag)]
-    notes = ' / '.join(x for x in (ko(st.get('expect')), ko(st.get('why'))) if x)
+    # 노트는 이 장이 실제로 시키는 일에서 만든다. 예전에는 `expect` 와 `why` 만
+    # 썼는데, 단계를 나누면 그 둘은 첫 장과 마지막 장에만 남아 가운데 장 마흔
+    # 곳이 빈 노트가 됐다 — 검수에서 「대본 누락」으로 올라온 자리다.
+    said = []
+    for a in acts:
+        t = (a.get('type') or '').strip()
+        d = plain(ko(a.get('do')))
+        line = ('%s — %s' % (t, d)) if t and d else (d or t)
+        if line:
+            said.append(line)
+    notes = ' / '.join(x for x in
+                       [' '.join(said)] + [ko(st.get('expect')), ko(st.get('why'))] if x)
     return [(body, tl, {'sceneId': cid, 'notes': notes or '—',
                         'fragments': frags}, dur)]
 
@@ -323,6 +354,31 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None):
 CONCEPT_W = {'cards': 2.2, 'para': 1.4, 'fig': 0.0}
 CONCEPT_ROOM = 4.4          # 한 장이 감당하는 몫
 CONCEPT_ROOM_FIG = 2.6      # 그림이 오른쪽 절반을 가져가면 왼쪽 몫이 줄어든다
+
+
+def part_notes(sec, page, pi, pnote):
+    """이 장이 실제로 담은 내용으로 발표자 노트를 만든다.
+
+    나뉜 개념 절의 모든 장에 절의 lede 를 그대로 붙이고 있었다. 그래서 2/4, 3/4,
+    4/4 가 1/4 과 똑같은 한 줄을 노트로 갖고, 검수에서 「대본 누락」으로 올라왔다.
+    빈 노트가 아니라 **같은 노트**여서 빈 노트 검사에도 안 걸렸다.
+
+    첫 장은 절을 여는 문장으로 시작하고, 뒷장은 그 장에 있는 글로만 만든다.
+    """
+    say = []
+    if pi == 0 and ko(sec.get('lede')):
+        say.append(plain(ko(sec['lede'])))
+    for _kind, items in page:
+        for h in items:
+            t = re.sub(r'\s+', ' ', plain(re.sub(r'<[^>]+>', ' ', h))).strip()
+            if t:
+                say.append(t)
+    if pnote:
+        t = re.sub(r'\s+', ' ', plain(re.sub(r'<[^>]+>', ' ', pnote))).strip()
+        if t:
+            say.append(t)
+    out = ' '.join(say).strip()
+    return out or (ko(sec.get('lede')) or '—')
 
 
 def concept_slide(sec, cid, clock):
@@ -444,7 +500,7 @@ def concept_slide(sec, cid, clock):
             tl.append('tl.fromTo("#%s .nn",{opacity:0,y:12},'
                       '{opacity:1,y:0,duration:.5,ease:"power3.out"},%s);' % (pcid, k - 0.5))
         frags = [round(clock + j + 1.0, 2) for j in range(max(1, n_frag))]
-        out.append((body, tl, {'sceneId': pcid, 'notes': ko(sec.get('lede')) or '—',
+        out.append((body, tl, {'sceneId': pcid, 'notes': part_notes(sec, page, pi, pnote),
                                'fragments': frags}, dur))
         clock += dur
     return out
@@ -587,8 +643,14 @@ STYLE = """
 .ss .ssbody.hasfig .side .card{padding:12px 16px}
 .ss .ssbody.hasfig .side .card b{font-size:20px}
 .ss .ssbody.hasfig .side .card span{margin-top:4px;font-size:18px;line-height:1.4}
-.ss .fig{margin:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:10px;
+.ss .fig{margin:0;display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px;
   border:2px solid #A4A3A4;background:#F5F5F3;padding:12px 16px 14px}
+/* 조작 줄의 코치 마크 번호. 도면 위 표시와 같은 숫자다. */
+.ss .op .spotno{display:inline-grid;place-items:center;width:1.15em;height:1.15em;
+  border-radius:50%;background:#C7004C;color:#FFF;font-size:.78em;font-weight:700;
+  margin-right:.4em;vertical-align:.06em;
+  font-family:"LG EI Headline TTF Semibold","Malgun Gothic",sans-serif}
+.ss .op.pointed .lab{color:#C7004C}
 .ss .fig .fh{font-size:19px;letter-spacing:.04em;color:#8A8788}
 .ss .cdwg{width:100%;height:100%;display:block}
 .ss .cdwg .outline{fill:none;stroke:#111;stroke-width:.5;vector-effect:non-scaling-stroke}

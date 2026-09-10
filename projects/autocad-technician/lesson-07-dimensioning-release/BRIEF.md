@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 43m06s
+length: 43m08s
 angle: lesson-07-dimensioning-release
 narration: user-recorded
 style_preset: lg-training

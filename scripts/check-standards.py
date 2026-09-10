@@ -91,6 +91,32 @@ def check_layers(std, docs, fail):
                 fail.append(f"{label}: 레이어 「{name}」 의 색 「{want}」 이 보이지 않는다")
 
 
+def check_typed_values(std, fail):
+    """학습자가 **실제로 치는 값**이 정본과 같은가.
+
+    산문만 보면 놓친다. 실제로 2차시 레이어 단계가 「0.30 을 고릅니다」라고 말하면서
+    치는 값은 `0.50` 으로 남아 있었다 — 검수에서 「뒤쪽 실습 내용과 숫자를 일관성
+    있게 맞추자」로 올라온 자리다. 자습본의 `actions[].type` 을 따로 센다.
+    """
+    import glob
+    want = {r["name"]: "%.2f" % r["lineweight"] for r in std["layers"]["rows"]}
+    dead = {"0.50", "0.25", "0.5"}
+    for p in sorted(glob.glob(os.path.join(ROOT, SELF.replace("/", os.sep)))):
+        doc = json.load(open(p, encoding="utf-8"))
+        rel = os.path.relpath(p, ROOT)
+        for sec in doc.get("sections", []):
+            for blk in sec.get("blocks", []):
+                if blk.get("type") != "steps":
+                    continue
+                for st in blk.get("items", []):
+                    for a in st.get("actions", []):
+                        t = (a.get("type") or "").strip()
+                        do = (a.get("do") or {}).get("ko", "")
+                        if t in dead and "선가중치" in do:
+                            fail.append("%s %d단계 — 치는 선가중치가 폐기값 「%s」"
+                                        % (rel, st.get("n"), t))
+
+
 def check_present(std, docs, fail):
     """정본에 있는데 과정 어디에서도 가르치지 않는 것."""
     blob = "\n".join(b for _, b in docs)
@@ -203,6 +229,7 @@ def main():
     docs = texts()
     fail = []
     check_layers(std, docs, fail)
+    check_typed_values(std, fail)
     check_present(std, docs, fail)
     check_coordinates(docs, fail)
 

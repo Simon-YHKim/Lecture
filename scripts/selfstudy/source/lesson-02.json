@@ -1301,7 +1301,7 @@
      "items": [
       {
        "label": {
-        "ko": "정확해야 하는 점 — 오늘",
+        "ko": "정확해야 하는 점",
         "en": "Must be exact — today"
        },
        "body": {
@@ -1311,7 +1311,7 @@
       },
       {
        "label": {
-        "ko": "눈대중이어도 되는 점 — 오늘",
+        "ko": "눈대중이어도 되는 점",
         "en": "By eye is fine — today"
        },
        "body": {
@@ -1393,74 +1393,19 @@
         "ko": "`REC` → `D` → `200` → `30` — 표제란",
         "en": "`REC`, `D`, `200`, `30` - the title block"
        }
-      ]
-     ]
-    },
-    {
-     "type": "p",
-     "ko": "절대좌표는 도면에 원점 기준으로 위치가 적혀 있을 때만 씁니다. 용지선 두 구석이 그렇습니다. 그 밖에는 쓰지 않아요 — 원점이 어디인지 화면에 안 보이니 값이 맞는지 눈으로 확인할 수가 없습니다.",
-     "en": "Absolute coordinates are for the few places the drawing states a position from the origin - the two sheet corners here. Nowhere else: the origin is not on screen, so you cannot see whether the number landed where you meant."
-    },
-    {
-     "type": "p",
-     "ko": "나머지는 전부 마우스와 숫자입니다. 방향은 커서가 정하고, 거리만 숫자로 줍니다. 기계 도면의 치수는 대부분 「여기서 저기까지 얼마」라서, 도면에 적힌 숫자가 그대로 입력값이 돼요. 계산을 안 하면 계산 실수도 없습니다. 게다가 그리는 동안 도형이 미리 보이니 틀렸으면 누르기 전에 압니다.",
-     "en": "Everything else is the mouse and a number. The cursor sets the direction; you type only the distance. Mechanical dimensions mostly read from here to there is this much, so the printed number goes straight in. No arithmetic means no arithmetic mistakes - and the shape previews as you go, so a wrong value shows before you commit it."
-    },
-    {
-     "type": "table",
-     "caption": {
-      "ko": "각도는 오른쪽이 0도, 반시계로 늘어납니다",
-      "en": "Angles start at 0 to the right and grow counter-clockwise"
-     },
-     "head": [
-      {
-       "ko": "각도",
-       "en": "Angle"
-      },
-      {
-       "ko": "극좌표 추적이 잡아 주는 방향",
-       "en": "Direction the polar tracking guide holds"
-      }
-     ],
-     "rows": [
-      [
-       {
-        "ko": "0도",
-        "en": "0"
-       },
-       {
-        "ko": "오른쪽",
-        "en": "right"
-       }
       ],
       [
        {
-        "ko": "90도",
-        "en": "90"
+        "ko": "극좌표 추적 `F10`",
+        "en": "Polar tracking `F10`"
        },
        {
-        "ko": "위",
-        "en": "up"
-       }
-      ],
-      [
-       {
-        "ko": "135도",
-        "en": "135"
+        "ko": "각도는 안내선이 고정, 거리만 숫자",
+        "en": "The guide holds the angle; you type only the distance"
        },
        {
-        "ko": "왼쪽 위",
-        "en": "up and left"
-       }
-      ],
-      [
-       {
-        "ko": "180도",
-        "en": "180"
-       },
-       {
-        "ko": "왼쪽",
-        "en": "left"
+        "ko": "45도 보조선처럼 기운 방향이 필요할 때. **각도를 눈대중으로 찍으면 안 됩니다** — 화면에서는 45도처럼 보여도 값이 다릅니다",
+        "en": "When you need a slanted direction, like the 45-degree guide. **Never eyeball an angle** - it can look like 45 on screen and not be."
        }
       ]
      ]
@@ -2139,7 +2084,7 @@
          "kind": "click"
         },
         {
-         "type": "0.50",
+         "type": "0.30",
          "do": {
           "ko": "외형선의 선가중치 칸에서 이 값을 고릅니다. 넷 중 이 줄만 굵습니다.",
           "en": "Choose this in the lineweight cell for the visible line. It is the only thick one of the four."
@@ -2155,7 +2100,7 @@
          "kind": "type"
         },
         {
-         "type": "0.25",
+         "type": "0.15",
          "do": {
           "ko": "중심선의 선가중치입니다.",
           "en": "This is the centerline lineweight."
@@ -2171,7 +2116,7 @@
          "kind": "type"
         },
         {
-         "type": "0.25",
+         "type": "0.15",
          "do": {
           "ko": "숨은선의 선가중치입니다.",
           "en": "This is the hidden line lineweight."
@@ -2186,7 +2131,7 @@
          "kind": "click"
         },
         {
-         "type": "0.25",
+         "type": "0.15",
          "do": {
           "ko": "치수선의 선가중치입니다.",
           "en": "This is the dimension line lineweight."
@@ -2195,12 +2140,12 @@
         }
        ],
        "expect": {
-        "ko": "네 행이 표대로 채워집니다. 외형선 행만 선가중치가 0.50 입니다.",
-        "en": "The four rows read as the table says, and only the visible layer is 0.50."
+        "ko": "네 행이 표대로 채워집니다. 외형선 행만 선가중치가 0.30 입니다.",
+        "en": "The four rows read as the table says, and only the visible layer is 0.30."
        },
        "why": {
-        "ko": "이름과 값은 같은 창에서 이어서 하는 일이에요. 굵기를 레이어에서 정해 두면 개체마다 따로 줄 일이 없습니다.",
-        "en": "Naming and setting happen in the same dialog. Fix lineweight on the layer and no object ever needs its own."
+        "ko": "이름과 값은 같은 창에서 이어서 하는 일이에요. 굵기를 레이어에서 정해 두면 개체마다 따로 줄 일이 없습니다. 이 굵기 값은 절대적인 것이 아니에요. 회사 표준이나 과제 지시가 다른 값을 주면 그 지시가 우선합니다. 정해진 것은 **외형선만 굵고 나머지는 그 절반**이라는 관계이고, 이 과정은 그 관계를 0.30 과 0.15 로 씁니다.",
+        "en": "Naming and setting happen in the same dialog. Fix lineweight on the layer and no object ever needs its own. These numbers are not absolute. A company standard or an assignment may name others, and that instruction wins. What is fixed is the relation - the visible line is thick and the rest are half of it - which this course writes as 0.30 and 0.15."
        },
        "pitfall": {
         "ko": "이름을 한 글자라도 다르게 적으면 뒤 차시에서 레이어를 못 찾아요. 나중에 선 하나가 굵기만 다르면 레이어가 틀린 겁니다.",
@@ -2286,7 +2231,8 @@
           "ko": "첫 번째 구석점을 묻습니다. 화면에 아직 아무것도 없어 잡을 것이 없는 자리라 좌표로 넣습니다. 입력하고 엔터를 누릅니다.",
           "en": "It asks for the first corner. Nothing is drawn yet, so there is nothing to catch here and the value goes in as a coordinate. Type it and press Enter."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 1
         },
         {
          "type": "420,297",
@@ -2294,7 +2240,8 @@
           "ko": "반대 구석점을 묻습니다. 입력하고 엔터를 누릅니다. 용지선이 그려집니다. 또는 `D` 엔터로 길이 `420`, 폭 `297` 을 넣고 마우스를 오른쪽 위에 두고 클릭해도 같은 사각형이 나와요.",
           "en": "It asks for the opposite corner. Type this and press Enter. That is the sheet outline. Or press `D`, give length `420` and width `297`, and click with the mouse up and to the right - the same rectangle."
          },
-         "kind": "type"
+         "kind": "type",
+         "spot": 2
         },
         {
          "type": "OFFSET",
@@ -2317,7 +2264,8 @@
          "do": {
           "ko": "용지선을 클릭합니다. 어느 쪽에 만들지 물어보면 용지선 안쪽 아무 자리나 클릭합니다. 엔터로 명령을 끝냅니다. 사방 10 씩 들어간 도면선이 그려집니다.",
           "en": "Click the sheet outline. When it asks which side, click anywhere inside it, then press Enter to end the command. The border appears, 10 in on every side."
-         }
+         },
+         "spot": 3
         },
         {
          "type": "Z",
@@ -2404,7 +2352,8 @@
          "do": {
           "ko": "세모 표식이 뜨면 그 변의 중간점입니다. **표식을 보고 나서** 클릭합니다. 안 보고 누르면 근처의 다른 점이 잡혀요. 두 표식이 겹쳐 뜨면 `Tab` 으로 넘깁니다.",
           "en": "A triangle marker means the midpoint of that edge. **See the marker first, then** click. Click without looking and you catch some other point. When two compete, press `Tab` to cycle."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "move",
@@ -2416,8 +2365,8 @@
         {
          "type": "30",
          "do": {
-          "ko": "거리만 입력하고 엔터를 누릅니다. 엔터를 한 번 더 눌러 명령을 끝냅니다. 도면선을 넘어 안쪽까지 들어간 선이 하나 생깁니다.",
-          "en": "Type just the distance and press Enter, then Enter once more to end the command. The line now runs past the border into the sheet."
+          "ko": "거리만 입력하고 엔터를 누릅니다. 엔터를 한 번 더 눌러 명령을 끝냅니다. 이 `30` 은 정해진 값이 아니에요. **도면선을 넘어가기만 하면 됩니다** — 넘친 만큼은 곧 TRIM 으로 잘라 내거든요.",
+          "en": "Type just the distance and press Enter, then Enter once more to finish. The `30` is not a fixed value: **it only has to reach past the border**, because you trim the overshoot in a moment."
          },
          "kind": "type"
         },
@@ -2426,7 +2375,12 @@
          "do": {
           "ko": "같은 방법으로 세 개를 더 그립니다. 위 변의 중간점에서 아래로 `30`, 왼쪽 변의 중간점에서 오른쪽으로 `30`, 오른쪽 변의 중간점에서 왼쪽으로 `30` 입니다. 넷 다 용지선 안쪽으로 넉넉히 나갑니다.",
           "en": "Draw the other three the same way: from the top edge midpoint down `30`, from the left edge midpoint right `30`, from the right edge midpoint left `30`. All four run generously inward."
-         }
+         },
+         "spot": [
+          2,
+          3,
+          4
+         ]
         },
         {
          "type": "TRIM",
@@ -2456,7 +2410,7 @@
         "en": "A short line bridging outline and border appears at the middle of each edge."
        },
        "why": {
-        "ko": "한가운데는 계산하지 않습니다. 변마다 중간점 표식을 보고 잡아요. 넉넉히 긋고 넘친 만큼을 TRIM 으로 잘라 내면 자리가 저절로 맞습니다.",
+        "ko": "한가운데는 계산하지 않습니다. 변마다 중간점 표식을 보고 잡아요. 넉넉히 긋고 넘친 만큼을 TRIM 으로 잘라 내면 자리가 저절로 맞아요. 그래서 길이는 정해진 값이 아니라 도면선만 넘으면 되는 값입니다.",
         "en": "You do not work the middle out. You hover each edge and catch the midpoint marker. Draw long, cut the overshoot with TRIM, and the position comes out right by construction."
        },
        "pitfall": {
@@ -2524,7 +2478,8 @@
          "do": {
           "ko": "첫 번째 구석점은 도면선의 오른쪽 아래 모서리입니다. 그 모서리에 커서를 올려 네모 표식, 끝점이 뜨면 클릭합니다.",
           "en": "The first corner is the lower right corner of the border. Hover it, wait for the square endpoint marker, and click."
-         }
+         },
+         "spot": 1
         },
         {
          "kind": "type",
@@ -2577,7 +2532,8 @@
          "do": {
           "ko": "표제란 위 변에 커서를 올려 세모 표식이 뜨면 클릭합니다. 그 변의 중간점입니다.",
           "en": "Hover the top edge of the title block, wait for the triangle midpoint marker, and click."
-         }
+         },
+         "spot": 2
         },
         {
          "type": "30",
@@ -2586,6 +2542,14 @@
           "en": "With ortho on, hold the mouse below that point and type just the distance. Press Enter once more to end. Now there are two cells of 100."
          },
          "kind": "type"
+        },
+        {
+         "kind": "alt",
+         "type": "M",
+         "do": {
+          "ko": "자리가 어긋났으면 지우고 다시 그리지 않아요. 입력하고 엔터, 표제란을 클릭하고 엔터. 기준점으로 표제란의 오른쪽 아래 모서리를 끝점 스냅으로 잡고, 두 번째 점으로 도면선의 오른쪽 아래 모서리를 잡으면 딱 붙습니다. 두 점을 스냅으로 잡았으니 눈대중이 끼어들 자리가 없어요.",
+          "en": "If it landed wrong, do not erase and redraw. Type it, Enter, click the title block, Enter. Snap the base point to the block's lower-right corner and the second point to the border's lower-right corner, and it lands flush. Both points came from snaps, so there is no eyeballing in it."
+         }
         }
        ],
        "expect": {
@@ -2776,7 +2740,8 @@
          "do": {
           "ko": "X 자가 만나는 자리에 커서를 올립니다. 가위표 표식, 교차점이 뜨면 클릭합니다.",
           "en": "Hover where the X crosses. Click when the cross-shaped intersection marker appears."
-         }
+         },
+         "spot": 1
         },
         {
          "type": "10",
@@ -2806,7 +2771,8 @@
          "do": {
           "ko": "오른쪽 칸도 같은 방법이에요. X 자를 두 줄 긋고, `DTEXT` 엔터, `J` 엔터, `MC` 엔터, 교차점 클릭, 높이 `10`, 각도 `0`, 사번 입력, 엔터, 엔터.",
           "en": "The right cell goes the same way: draw the X, then `DTEXT`, `J`, `MC`, click the intersection, height `10`, angle `0`, type the number, Enter, Enter."
-         }
+         },
+         "spot": 2
         },
         {
          "kind": "click",
