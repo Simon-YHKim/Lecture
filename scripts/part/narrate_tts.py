@@ -40,7 +40,10 @@ ROOT = "projects/autocad-technician"
 # 것은 어떤 목소리를 허용하는가 하나뿐이다.
 VOICES = {"ko": "Microsoft Heami Desktop", "en": "Microsoft Zira Desktop"}
 VOICE = VOICES["ko"]
-TEMPO = 1.38
+# 배속은 목소리를 따른다. 국문 1.38 은 사용자가 정한 과정 정책이고, 영문은
+# 표본을 듣고 1.15 로 정했다 — Zira 는 또렷해서 1.38 이 빠르게 들린다.
+TEMPOS = {VOICES["ko"]: 1.38, VOICES["en"]: 1.15}
+TEMPO = TEMPOS[VOICE]
 BASE_FRAME_HOLD = 1.6
 
 # Silence around a paragraph, matching what beats.plan assumes for a reading.
@@ -95,12 +98,14 @@ def verify_tempo_timing(timing, required=False):
             raise ValueError('Current delivery requires regenerated 1.38x tempo timing')
         return 1.0
     if (timing.get('schemaVersion') != 2 or timing.get('rate') != 0
-            or timing.get('tempo') != TEMPO or timing.get('tempoMethod') != 'ffmpeg-atempo-per-paragraph'
+            or timing.get('tempo') != TEMPOS.get(timing.get('voice'))
+            or timing.get('tempoMethod') != 'ffmpeg-atempo-per-paragraph'
             or not timing.get('tempoToolVersion') or timing.get('voice') not in VOICES.values()):
         raise ValueError('Expected Rate 0 speech followed by pitch-preserving 1.38x tempo conversion')
     if timing.get('timingSha256') != timing_identity(timing):
         raise ValueError('Narration timing identity changed; regenerate speech')
-    if timing.get('sourceFrameHoldSeconds') != BASE_FRAME_HOLD or abs(timing.get('frameHoldSeconds', -1) - BASE_FRAME_HOLD / TEMPO) > 1e-9:
+    tempo = timing['tempo']
+    if timing.get('sourceFrameHoldSeconds') != BASE_FRAME_HOLD or abs(timing.get('frameHoldSeconds', -1) - BASE_FRAME_HOLD / tempo) > 1e-9:
         raise ValueError('Frame hold must use the same approved tempo')
     expected_beats, clock, source_clock = [], 0.0, 0.0
     for seq, frame in enumerate(timing['frames'], 1):
@@ -136,7 +141,7 @@ def verify_tempo_timing(timing, required=False):
     if (timing['beats'] != expected_beats or abs(timing['totalSeconds'] - clock) > .002
             or abs(timing['sourceTotalSeconds'] - source_clock) > .002):
         raise ValueError('Measured beats or totals differ from their paragraph timelines')
-    return TEMPO
+    return tempo
 
 
 def frame_hold(timing):
@@ -145,8 +150,9 @@ def frame_hold(timing):
 
 def change_tempo(source, target, tempo=TEMPO):
     """Create new PCM with atempo; source audio and its pitch are preserved."""
-    if tempo != TEMPO:
-        raise ValueError('The approved narration tempo is 1.38')
+    if tempo not in TEMPOS.values():
+        raise ValueError('Approved narration tempos are %s'
+                         % ', '.join('%g' % t for t in sorted(set(TEMPOS.values()))))
     source, target = private_output(source), private_output(target)
     if source == target or target.exists():
         raise ValueError('Tempo output must be a fresh file')
@@ -155,7 +161,7 @@ def change_tempo(source, target, tempo=TEMPO):
         raise ValueError('Local FFmpeg is required for pitch-preserving 1.38x speech')
     target.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run([exe, '-nostdin', '-v', 'error', '-xerror', '-i', str(source),
-                    '-map', '0:a:0', '-af', 'atempo=1.38', '-c:a', 'pcm_s16le', '-n', str(target)],
+                    '-map', '0:a:0', '-af', 'atempo=%g' % tempo, '-c:a', 'pcm_s16le', '-n', str(target)],
                    capture_output=True, check=True, timeout=max(60, wav_seconds(source) * 2 + 30))
     original, result = read_wav(source), read_wav(target)
     if original['fmt'][:16] != result['fmt'][:16] or not result['data']:
@@ -362,10 +368,13 @@ def synthesis_plan(script):
     return jobs, units, order
 
 
-def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=TEMPO):
-    if tempo != TEMPO or voice not in VOICES.values():
-        raise ValueError('Use %s at Rate 0 with tempo 1.38'
+def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=None):
+    if voice not in VOICES.values():
+        raise ValueError('Use %s at Rate 0'
                          % ' or '.join(sorted(VOICES.values())))
+    tempo = TEMPOS[voice] if tempo is None else tempo
+    if tempo != TEMPOS[voice]:
+        raise ValueError('%s reads at %g' % (voice, TEMPOS[voice]))
     outroot = str(private_output(outroot))
     script = os.path.join(lesson_dir, 'SCRIPT.md')
     input_hash = spoken_hash(script)
@@ -456,7 +465,7 @@ def narrate(lesson_dir, outroot, voice, dry_run=False, tempo=TEMPO):
         "sourceFrameHoldSeconds": BASE_FRAME_HOLD,
         "frameHoldSeconds": BASE_FRAME_HOLD / tempo,
         "spokenTextSha256": input_hash,
-        "note": ("Heami Rate 0 원본 문단을 atempo=1.38로 변환하고 결과 PCM 길이를 다시 쟀다. "
+        "note": ("%s Rate 0 원본 문단을 atempo=%g 로 변환하고 결과 PCM 길이를 다시 쟀다. " % (voice, tempo) +
                  "문단 경계는 실제 합친 음성의 시각이며 문장 내부의 발음·의미는 별도 검수한다. "
                  "원본 음성과 변환 음성, 도구 버전과 해시를 비공개 출력에 함께 보존한다."),
         "totalSeconds": round(clock, 3),
@@ -487,8 +496,8 @@ def main(argv=None):
     ap.add_argument("--out", default=None, help="음성을 둘 곳 (저장소 밖)")
     ap.add_argument("--voice", default=VOICE, choices=sorted(VOICES.values()),
                     help="국문은 Heami, 영문은 Zira")
-    ap.add_argument("--tempo", type=float, choices=[TEMPO], default=TEMPO,
-                    help="Rate 0 원본의 음높이를 보존한 1.38배속")
+    ap.add_argument("--tempo", type=float, default=None,
+                    help="비우면 목소리에 정해진 배속을 쓴다 (국문 1.38 · 영문 1.15)")
     ap.add_argument("--dry-run", action="store_true", help="분량만 세고 쓰지 않는다")
     a = ap.parse_args(argv)
 

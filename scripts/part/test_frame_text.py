@@ -66,5 +66,36 @@ class FrameTextTests(unittest.TestCase):
                 self.assertEqual([k for k, v in english.items() if not v.strip()], [])
 
 
+class NarrationTempoTests(unittest.TestCase):
+    """배속은 목소리를 따른다 — 국문 1.38 · 영문 1.15."""
+
+    def setUp(self):
+        import narrate_tts
+        self.tts = narrate_tts
+
+    def test_each_voice_has_its_own_tempo(self):
+        self.assertEqual(self.tts.TEMPOS[self.tts.VOICES['ko']], 1.38)
+        self.assertEqual(self.tts.TEMPOS[self.tts.VOICES['en']], 1.15)
+
+    def test_a_voice_cannot_borrow_the_other_tempo(self):
+        with self.assertRaises(ValueError):
+            self.tts.narrate('unused', 'unused', self.tts.VOICES['en'], tempo=1.38)
+
+    def test_timing_is_read_against_the_voice_that_made_it(self):
+        base = {'schemaVersion': 2, 'rate': 0, 'tempoMethod': 'ffmpeg-atempo-per-paragraph',
+                'tempoToolVersion': 'ffmpeg 8', 'sourceFrameHoldSeconds': 1.6,
+                'frames': [], 'beats': [], 'totalSeconds': 0, 'sourceTotalSeconds': 0}
+        for language, tempo in (('ko', 1.38), ('en', 1.15)):
+            timing = dict(base, voice=self.tts.VOICES[language], tempo=tempo,
+                          frameHoldSeconds=1.6 / tempo)
+            timing['timingSha256'] = self.tts.timing_identity(timing)
+            with self.subTest(language=language):
+                self.assertEqual(self.tts.verify_tempo_timing(timing), tempo)
+        wrong = dict(base, voice=self.tts.VOICES['en'], tempo=1.38, frameHoldSeconds=1.6 / 1.38)
+        wrong['timingSha256'] = self.tts.timing_identity(wrong)
+        with self.assertRaises(ValueError):
+            self.tts.verify_tempo_timing(wrong)
+
+
 if __name__ == '__main__':
     unittest.main()
