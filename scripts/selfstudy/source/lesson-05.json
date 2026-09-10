@@ -193,7 +193,7 @@
    "kind": "concept",
    "label": {
     "ko": "제3각법 — 본 방향에 그 뷰를 놓습니다",
-    "en": "Third angle - the view goes where you looked from"
+    "en": "Third-angle - the view goes where you looked from"
    },
    "lede": {
     "ko": "규칙은 한 줄이에요. 위에서 봤으면 위에 놓고, 오른쪽에서 봤으면 오른쪽에 놓습니다.",
@@ -210,11 +210,11 @@
      "id": "fig-l05-angle",
      "caption": {
       "ko": "같은 부품의 제3각법·제1각법 배치와 각 배치에 붙는 기호입니다.",
-      "en": "The same part in third angle and first angle, with the symbol for each."
+      "en": "The same part in third-angle and first-angle, with the symbol for each."
      },
      "alt": {
       "ko": "왼쪽 제3각법은 평면도가 위, 우측면도가 오른쪽입니다. 오른쪽 제1각법은 평면도가 아래, 우측면도가 왼쪽입니다. 기호는 원 두 개와 원뿔대입니다. 제3각법은 작은 끝이, 제1각법은 큰 끝이 원을 향합니다.",
-      "en": "Left, third angle: top view above, right view to the right. Right, first angle: top view below, right view on the left. The symbol is two circles beside a truncated cone. The small end faces the circles in third angle, the large end in first angle."
+      "en": "Left, third-angle: top view above, right view to the right. Right, first-angle: top view below, right view on the left. The symbol is two circles beside a truncated cone. The small end faces the circles in third-angle, the large end in first-angle."
      },
      "svg": "<svg viewBox='0 0 620 312' width='620' height='312'><text class='slh' x='20' y='24'>제3각법</text><text class='slh' x='320' y='24'>제1각법</text><rect class='si' x='70' y='40' width='80' height='30'/><rect class='si' x='70' y='92' width='80' height='56'/><rect class='si' x='172' y='92' width='30' height='56'/><text class='sl' x='64' y='59' text-anchor='end'>평면도</text><text class='sl' x='64' y='124' text-anchor='end'>정면도</text><text class='sl' x='210' y='124'>우측면도</text><rect class='si' x='390' y='92' width='80' height='56'/><rect class='si' x='390' y='170' width='80' height='30'/><rect class='si' x='338' y='92' width='30' height='56'/><text class='sl' x='430' y='86' text-anchor='middle'>정면도</text><text class='sl' x='353' y='86' text-anchor='middle'>우측면도</text><text class='sl' x='430' y='216' text-anchor='middle'>평면도</text><circle class='sh' cx='85' cy='258' r='14'/><circle class='sh' cx='85' cy='258' r='7'/><path class='sh' d='M112 249 L112 267 M150 240 L150 276 M112 249 L150 240 M112 267 L150 276'/><circle class='sh' cx='385' cy='258' r='14'/><circle class='sh' cx='385' cy='258' r='7'/><path class='sh' d='M412 240 L412 276 M450 249 L450 267 M412 240 L450 249 M412 276 L450 267'/><text class='sl' x='20' y='300'>작은 끝이 원을 향합니다</text><text class='sl' x='320' y='300'>큰 끝이 원을 향합니다</text></svg>"
     },
@@ -231,11 +231,11 @@
       },
       {
        "ko": "제3각법",
-       "en": "Third angle"
+       "en": "Third-angle"
       },
       {
        "ko": "제1각법",
-       "en": "First angle"
+       "en": "First-angle"
       }
      ],
      "rows": [
@@ -293,7 +293,7 @@
      "type": "note",
      "tone": "field",
      "ko": "현장에서 받는 설비 조립도도 대부분 제3각법입니다. 스페어 파트 도면을 급히 확인할 때 이 배치를 알아야 어느 면인지 압니다.",
-     "en": "Most equipment assembly drawings are third angle. When you check a spare-part drawing in a hurry, the layout tells you which face you are seeing."
+     "en": "Most equipment assembly drawings are third-angle. When you check a spare-part drawing in a hurry, the layout tells you which face you are seeing."
     }
    ]
   },
@@ -936,7 +936,7 @@
         {
          "do": {
           "ko": "화면 위 레이어 목록을 열고 `치수선` 을 고릅니다. 투상선은 여기에 긋습니다.",
-          "en": "Open the layer list and pick `치수선`, the dimension layer. Projectors go here."
+          "en": "Open the layer list and pick `dimension line`, the dimension layer. Projectors go here."
          },
          "kind": "click"
         }
@@ -1436,7 +1436,7 @@
          "z": 0,
          "hover": {
           "ko": "그 선을 30 띄운 자리입니다. 평면도의 맨 아래 선이고 **보스 앞면**이에요. 정면도에 가까운 변이 앞면입니다.",
-          "en": "Offset that line by 30 and you get the bottom edge of the top view - the **boss front face**. In third angle the edge nearest the front view is the front."
+          "en": "Offset that line by 30 and you get the bottom edge of the top view - the **boss front face**. In third-angle the edge nearest the front view is the front."
          }
         },
         {
@@ -2023,7 +2023,7 @@
         {
          "do": {
           "ko": "레이어를 다시 `치수선` 으로 바꿉니다. 여기서부터 다시 보조선입니다.",
-          "en": "Switch back to the `치수선` layer. Scaffolding again."
+          "en": "Switch back to the `dimension line` layer. Scaffolding again."
          },
          "kind": "click"
         },
@@ -2583,7 +2583,7 @@
         {
          "do": {
           "ko": "레이어를 `외형선` 으로 바꿉니다.",
-          "en": "Switch to the `외형선` layer."
+          "en": "Switch to the `visible line` layer."
          },
          "kind": "click"
         },
@@ -2948,7 +2948,7 @@
         {
          "do": {
           "ko": "레이어를 `중심선` 으로 바꿉니다.",
-          "en": "Switch to the `중심선` layer."
+          "en": "Switch to the `centerline` layer."
          },
          "kind": "click"
         },
@@ -3267,7 +3267,7 @@
         {
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Switch to the `치수선` layer."
+          "en": "Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -3306,7 +3306,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -3467,7 +3467,7 @@
         {
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Switch to the `치수선` layer."
+          "en": "Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -3506,7 +3506,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -3667,7 +3667,7 @@
         {
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Switch to the `치수선` layer."
+          "en": "Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -3706,7 +3706,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -3931,7 +3931,7 @@
         {
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Switch to the `치수선` layer."
+          "en": "Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -3962,7 +3962,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -4160,7 +4160,7 @@
         {
          "do": {
           "ko": "레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Switch to the `치수선` layer."
+          "en": "Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -4199,7 +4199,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -4262,7 +4262,7 @@
         {
          "do": {
           "ko": "우측면도로 갑니다. 레이어를 `치수선` 으로 바꿉니다.",
-          "en": "Move to the right side view. Switch to the `치수선` layer."
+          "en": "Move to the right side view. Switch to the `dimension line` layer."
          },
          "kind": "click"
         },
@@ -4292,7 +4292,7 @@
         {
          "do": {
           "ko": "레이어를 `숨은선` 으로 바꿉니다.",
-          "en": "Switch to the `숨은선` layer."
+          "en": "Switch to the `hidden line` layer."
          },
          "kind": "click"
         },
@@ -4489,7 +4489,7 @@
         {
          "do": {
           "ko": "레이어를 `외형선` 으로 되돌립니다.",
-          "en": "Switch back to the `외형선` layer."
+          "en": "Switch back to the `visible line` layer."
          },
          "kind": "click"
         },

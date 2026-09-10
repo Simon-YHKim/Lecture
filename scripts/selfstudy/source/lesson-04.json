@@ -62,7 +62,7 @@
   },
   {
    "ko": "FILLET의 반지름을 R 옵션으로 먼저 설정할 수 있습니다. 그다음 두 선을 골라 R10 라운드를 넣을 수 있습니다.",
-   "en": "You can set the FILLET radius with the R option first. You can then pick two lines to drop in an R10 round."
+   "en": "You can set the FILLET radius with the R option first. You can then pick two lines to drop in an R10 fillet."
   },
   {
    "ko": "TRIM의 절단 모서리는 필요한 선만 골라 지정합니다. FILLET에서는 남기고 싶은 쪽을 클릭하는 규칙을 적용합니다.",
@@ -868,7 +868,7 @@
          "kind": "click",
          "do": {
           "ko": "화면 위 도면층(레이어) 목록을 봅니다. 외형선인지 확인하고, 아니면 눌러서 외형선으로 바꿉니다.",
-          "en": "Check the layer dropdown reads the outline layer; switch it if not."
+          "en": "Check the layer dropdown reads the visible line layer; switch it if not."
          }
         },
         {
