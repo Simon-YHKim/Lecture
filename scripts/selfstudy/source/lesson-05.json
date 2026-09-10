@@ -3805,7 +3805,7 @@
          "z": 10,
          "hover": {
           "ko": "탭 깊이 10 만큼만 들어갑니다. 관통이 아니에요 — 도면 표기가 `4-M5 깊이 10` 입니다.",
-          "en": "It reaches only the 10 of thread depth. Not a through hole - the drawing says `4-M5 깊이 10`."
+          "en": "It reaches only the 10 of thread depth. Not a through hole - the drawing says `4-M5 DEPTH 10`."
          }
         }
        ],

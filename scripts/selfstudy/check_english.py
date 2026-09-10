@@ -43,25 +43,10 @@ BANNED = [
 ]
 
 
-# 도면에 새겨진 표기를 그대로 인용하는 자리다. 도면 생성기가 한국어로 그리므로
-# 영문 도면(`edu_ib_02.py --lang en`)이 나오기 전에는 여기를 고칠 수 없다.
-# 도면이 영문이 되면 이 목록을 지우고 문장을 그 표기에 맞춘다.
-PENDING = {
-    ('lesson-05.json', '/sections/9/blocks/1/items/2/spots/3/hover'),
-    ('lesson-07.json', '/sections/3/blocks/0/rows/3/3'),
-    ('lesson-07.json', '/sections/5/blocks/0/alt'),
-    ('lesson-07.json', '/sections/5/blocks/1/rows/13/1'),
-    ('lesson-07.json', '/sections/6/blocks/1/items/1/label'),
-    ('lesson-07.json', '/sections/6/blocks/3/rows/1/0'),
-    ('lesson-07.json', '/sections/6/blocks/3/rows/3/0'),
-    ('lesson-07.json', '/sections/8/blocks/1/items/3/title'),
-    ('lesson-07.json', '/sections/8/blocks/1/items/3/actions/5/do'),
-    ('lesson-07.json', '/sections/8/blocks/1/items/3/expect'),
-    ('lesson-07.json', '/sections/9/blocks/1/items/1/title'),
-    ('lesson-07.json', '/sections/9/blocks/1/items/1/expect'),
-    ('lesson-07.json', '/recap/did/7'),
-    ('lesson-07.json', '/recap/did/10'),
-}
+# 도면에 새겨진 표기를 인용하는 자리는 도면이 영문이 될 때까지 여기 있었다.
+# `edu_ib_02.py --lang en` 이 나오면서 열넷 모두 영문 표기(`4-M5 DEPTH 10` ·
+# `2-SLOT R5`)를 인용하도록 고쳤다. 새로 보류할 자리가 생기면 이유와 함께 넣는다.
+PENDING = set()
 
 
 def pairs(node, path, found):
