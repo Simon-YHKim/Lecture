@@ -17,6 +17,8 @@ CSS = min_css(io.open(os.path.join(HERE, 'assets', 'base.css'), encoding='utf-8'
 JS = min_js(io.open(os.path.join(HERE, 'assets', 'app.js'), encoding='utf-8').read())
 
 STAMP = os.environ.get('BUILD_STAMP', '')
+# 판의 언어. 영문판은 영문 도면을 받고 영문이 먼저 보인다 — figures.LANG 과 같은 값이다.
+LANG = os.environ.get('SELFSTUDY_LANG', 'ko')
 PAGE_CAP = 100 * 1024          # 지침 §2 — 단일 파일 100KB. 넘으면 1부/2부로 나눈다
 
 # 정본 도면 — scripts/part/edu_ib_02.py 가 그린 것을 빌드할 때마다 다시 뽑는다.
@@ -321,7 +323,7 @@ def shell(title, eyebrow, h1, meta, tabs, panels, pager='', grade='S', body_attr
 <meta name="color-scheme" content="light dark">
 <style>%(css)s</style>
 </head>
-<body data-lang="ko"%(battrs)s>
+<body data-lang="%(lang)s"%(battrs)s>
 <p class="translation-status"><span class="k">국문을 먼저 검수합니다. 영문은 의미를 맞춘 초안이며 국문 완료 후 정식 제작합니다.</span><span class="e">Korean is reviewed first. English is an alignment draft; full English production follows Korean approval.</span></p>
 <p class="translation-status"><span class="k">음성 구성 시간은 내레이션과 화면 전환을 합친 길이입니다. 2~7차시는 실제 녹화 후 길이가 달라질 수 있습니다.</span><span class="e">Narrated timeline duration includes narration and scene transitions. Lessons 2–7 may change in length after screen recording.</span></p>
 <div class="banner"><span class="k">이 파일은 <b>내려받아 브라우저로 열어야</b> 메모 저장과 진도 저장이 동작합니다. 미리보기 창에서는 저장이 막힐 수 있어요.</span><span class="e">Download this file and open it in a browser — notes and progress only persist there. Sandboxed previews may block storage.</span></div>
@@ -334,8 +336,8 @@ def shell(title, eyebrow, h1, meta, tabs, panels, pager='', grade='S', body_attr
     </div>
     <div class="tools">
       <span class="seg" role="group" aria-label="언어 / Language">
-        <button type="button" class="t" data-lang-btn="ko" aria-pressed="true">국문</button>
-        <button type="button" class="t" data-lang-btn="en" aria-pressed="false" aria-label="English alignment draft">EN · 초안</button>
+        <button type="button" class="t" data-lang-btn="ko" aria-pressed="%(kopressed)s">국문</button>
+        <button type="button" class="t" data-lang-btn="en" aria-pressed="%(enpressed)s" aria-label="English edition">EN</button>
       </span>
       <button type="button" class="t" id="theme-btn"><span class="k">자동</span><span class="e">Auto</span></button>
       <button type="button" class="t" id="memo-btn" aria-pressed="false" aria-controls="memo"><span class="k">&#128221; 메모</span><span class="e">&#128221; Notes</span></button>
@@ -362,7 +364,9 @@ def shell(title, eyebrow, h1, meta, tabs, panels, pager='', grade='S', body_attr
 </html>
 """ % {'title': html.escape(title, quote=True), 'css': CSS, 'js': JS, 'eyebrow': eyebrow,
        'h1': h1, 'meta': meta, 'grade': grade, 'tabbar': tabbar, 'body': body,
-       'pager': pager, 'battrs': body_attrs}
+       'pager': pager, 'battrs': body_attrs,
+       'lang': LANG, 'kopressed': str(LANG == 'ko').lower(),
+       'enpressed': str(LANG == 'en').lower()}
 
 
 # 스타일·스크립트·헤더가 먹는 고정 비용. 쪽을 나눌 때 예산에서 먼저 뺀다.

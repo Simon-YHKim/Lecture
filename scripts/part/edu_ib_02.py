@@ -136,6 +136,27 @@ PROFILE = ("frontdim" if "frontdim" in sys.argv
            else "full")
 # The front view and its dimensions belong together; the other two views do not.
 FRONT_ONLY = PROFILE in ("front", "frontdim")
+
+# 도면에 새겨지는 글자 가운데 언어를 타는 것은 다섯뿐이다. 나머지 숫자·Ø·PCD·
+# R·C·도(°)는 두 판이 같은 글자를 쓴다. 영문판은 학습자가 이 글자를 그대로
+# 보고 타이핑하므로, 자습 문장이 인용하는 표기와 반드시 같아야 한다.
+_lang_at = sys.argv.index("--lang") + 1 if "--lang" in sys.argv else 0
+LANG = sys.argv[_lang_at] if 0 < _lang_at < len(sys.argv) else "ko"
+LABELS = {
+    "tap": {"ko": "4-M5 &#44618;&#51060; 10", "en": "4-M5 DEPTH 10"},
+    "slot": {"ko": "2-&#51109;&#44277; R5", "en": "2-SLOT R5"},
+    "front": {"ko": "정면도", "en": "FRONT VIEW"},
+    "top": {"ko": "평면도", "en": "TOP VIEW"},
+    "right": {"ko": "우측면도", "en": "RIGHT SIDE VIEW"},
+}
+if LANG not in ("ko", "en"):
+    raise SystemExit("--lang takes ko or en, not %r" % LANG)
+
+
+def label(name):
+    return LABELS[name][LANG]
+
+
 _feature = None
 _dim = None
 
@@ -393,7 +414,7 @@ if PROFILE != "front":
  D("d56", leader, bcx, bcy, BOSS_R, 288, "&#216;56", length=19)
  D("pcd", leader, bcx, bcy, TAP_PCD / 2, 236, "PCD &#216;44")
  p0 = F(*tap_xy[0])
- D("m5", leader, p0[0], p0[1], TAP_D / 2, 40, "4-M5 &#44618;&#51060; 10")
+ D("m5", leader, p0[0], p0[1], TAP_D / 2, 40, label("tap"))
  fp = F(*FT_WEB)
  dimid("r10")
  line(fp[0], fp[1], fp[0] + 16, fp[1] - 12, "dim")
@@ -402,7 +423,7 @@ if PROFILE != "front":
  text(fp[0] + 26, fp[1] - 13.2, f"2-R{FILLET_R:g}", anchor="start")
  dimid(None)
  ps = F(SLOT_C[0][0] - SLOT_CTC / 2, SLOT_C[0][1])
- D("sr5", leader, ps[0], ps[1], SLOT_W / 2, 210, "2-&#51109;&#44277; R5", length=22)
+ D("sr5", leader, ps[0], ps[1], SLOT_W / 2, 210, label("slot"), length=22)
 
  dimid("a45")
  a0 = math.radians(TAP_START)
@@ -487,9 +508,9 @@ if not FRONT_ONLY:
        ext_from=(T(BOSS_C[0] + BOSS_R, 0), T(BASE_W, DEPTH)), rot=-90)
  dimid(None)
 
- text(*F(BASE_W / 2, -60), "정면도", cls="vl")
- text(FX + BASE_W / 2, TY - DEPTH - 24, "평면도", cls="vl")
- text(RX + DEPTH / 2, FY + 30, "우측면도", cls="vl")
+ text(*F(BASE_W / 2, -60), label("front"), cls="vl")
+ text(FX + BASE_W / 2, TY - DEPTH - 24, label("top"), cls="vl")
+ text(RX + DEPTH / 2, FY + 30, label("right"), cls="vl")
 
 if "--check" in sys.argv:
     for x in [0, 22, 28, 37.5, 50, 62.5, 72, 78, 100]:

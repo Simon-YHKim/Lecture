@@ -9,13 +9,19 @@ import xml.etree.ElementTree as ET
 HERE = Path(__file__).resolve().parent
 
 
-def drawing(profile="full"):
+def drawing(profile="full", lang=None):
     source = (HERE / "edu_ib_02.py").read_text(encoding="utf-8")
     namespace = {}
-    argv = ["edu_ib_02.py", "unused.svg"] + (["--profile", profile] if profile != "full" else [])
+    argv = (["edu_ib_02.py", "unused.svg"]
+            + (["--profile", profile] if profile != "full" else [])
+            + (["--lang", lang] if lang else []))
     with patch("sys.argv", argv):
         exec(compile(source.split("target = sys.argv[1]")[0], str(HERE / "edu_ib_02.py"), "exec"), namespace)
     return namespace, ET.fromstring(namespace["svg"])
+
+
+def texts(root):
+    return [(el.text or "").strip() for el in root.iter() if el.tag.endswith("}text")]
 
 
 def lines(root, css="outline"):
@@ -77,6 +83,38 @@ class ProjectionTests(unittest.TestCase):
         # All ten DIMCENTER crosses have two strokes of length 6.
         crosses=[q for q in lines(svg,"center") if abs(math.hypot(q[2]-q[0],q[3]-q[1])-6)<.001]
         self.assertEqual(len(crosses),20)
+
+
+class DrawingLanguageTests(unittest.TestCase):
+    """영문판은 학습자가 도면의 글자를 그대로 보고 타이핑한다."""
+
+    def test_korean_drawing_still_carries_the_korean_callouts(self):
+        _, svg = drawing()
+        found = texts(svg)
+        self.assertIn("4-M5 깊이 10", found)
+        self.assertIn("2-장공 R5", found)
+        self.assertIn("정면도", found)
+
+    def test_english_drawing_has_no_korean_left(self):
+        _, svg = drawing(lang="en")
+        found = texts(svg)
+        self.assertEqual([t for t in found if re.search(r"[가-힣]", t)], [])
+        for expected in ("4-M5 DEPTH 10", "2-SLOT R5",
+                         "FRONT VIEW", "TOP VIEW", "RIGHT SIDE VIEW"):
+            self.assertIn(expected, found)
+
+    def test_geometry_is_identical_in_both_languages(self):
+        """말이 바뀌어도 선은 한 줄도 움직이지 않는다."""
+        korean, _ = drawing()
+        english, _ = drawing(lang="en")
+        strip = re.compile(r"<text[^>]*>.*?</text>", re.S)
+        self.assertEqual(strip.sub("", korean["svg"]), strip.sub("", english["svg"]))
+
+    def test_front_profile_localises_the_two_callouts(self):
+        _, svg = drawing("frontdim", lang="en")
+        found = texts(svg)
+        self.assertIn("4-M5 DEPTH 10", found)
+        self.assertIn("2-SLOT R5", found)
 
 
 if __name__ == "__main__":
