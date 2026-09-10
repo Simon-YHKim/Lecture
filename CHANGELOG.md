@@ -23,6 +23,10 @@
 
 ### Added
 
+- Publishable five-video preview, eight-lesson self-study bundle and a single offline review HTML.
+- Markdown feedback download and edition-checked JSON backup/restore for review notes and script edits.
+- Preserve script edits while navigating or exporting; focus newly added common notes correctly.
+
 - Private offline lecture preparation and scene-level checks for the CLI's bounded motion sampling.
 - Selected-episode lecture export with local timing, complete source/audio validation, and recording checks limited to the selected frames.
 - Narration identity, staged-edit, timeline, SVG-definition and sentence-rhythm regression checks.

@@ -83,7 +83,8 @@ html,body{height:100%;overflow:hidden;background:#0B0A0A}
 
   // ── 발표자 노트 = 대본. 읽기만 하는 글이 아니라 고쳐서 돌려줄 수 있는 글이다.
   // 고친 것은 원문과 나란히 남겨 두었다가 프롬프트에 「원문 → 고친 글」로 낸다.
-  var SKEY = 'acad-deck-script:' + (location.pathname.split('/').pop() || 'deck');
+  var SKEY = 'acad-deck-script:' + (location.pathname.split('/').pop() || 'deck')
+    + (island.reviewId ? ':' + island.reviewId : '');
   var edits = (function () {
     try { return JSON.parse(localStorage.getItem(SKEY) || '{}'); }
     catch (e) { return {}; }
@@ -112,14 +113,22 @@ html,body{height:100%;overflow:hidden;background:#0B0A0A}
     btnReset.hidden = !has;
   }
 
+  function captureEdit() {
+    if (noteText.getAttribute('contenteditable') !== 'true') return;
+    var id = noteText.dataset.scene;
+    var source = slides.find(function (s) { return s.sceneId === id; });
+    if (!source) return;
+    var now = noteText.textContent.replace(/ /g, ' ').trim();
+    if (now !== (source.notes || '').trim()) edits[id] = now;
+    else delete edits[id];
+    saveEdits();
+  }
+  noteText.addEventListener('input', captureEdit);
+
   btnEdit.addEventListener('click', function () {
     var on = noteText.getAttribute('contenteditable') === 'true';
     if (on) {
-      var id = noteText.dataset.scene;
-      var orig = (slides[i] || {}).notes || '';
-      var now = noteText.textContent.replace(/ /g, ' ').trim();
-      if (now && now !== orig.trim()) { edits[id] = now; } else { delete edits[id]; }
-      saveEdits();
+      captureEdit();
       paintNote(slides[i]);
       if (!savedOK) noteMark.hidden = false;
     } else {
@@ -136,13 +145,22 @@ html,body{height:100%;overflow:hidden;background:#0B0A0A}
 
   // 메모 패널이 「대본 수정 제안」을 조립할 때 쓴다.
   window.__deckScript = {
+    capture: captureEdit,
+    replace: function (next) {
+      edits = Object.assign(Object.create(null), next);
+      saveEdits();
+      paintNote(slides[i]);
+      return savedOK;
+    },
     count: function () { return Object.keys(edits).length; },
     list: function () {
+      captureEdit();
       var out = [];
       slides.forEach(function (s, n) {
         if (!Object.prototype.hasOwnProperty.call(edits, s.sceneId)) return;
         var el = scenes[n];
         out.push({
+          sceneId: s.sceneId,
           n: n + 1,
           label: (el && el.getAttribute('data-label')) || s.sceneId,
           orig: s.notes || '',
@@ -205,6 +223,7 @@ html,body{height:100%;overflow:hidden;background:#0B0A0A}
   // The composition's timelines are paused and hold the "from" state, so a slide
   // is blank until its own timeline is advanced. Fragments step through it.
   function paint() {
+    captureEdit();
     scenes.forEach(function (el, n) { el.classList.toggle('on', n === i); });
     var slide = slides[i];
     var t = (window.__timelines || {})[slide.sceneId];

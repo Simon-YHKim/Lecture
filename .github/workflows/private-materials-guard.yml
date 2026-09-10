@@ -25,3 +25,6 @@ jobs:
       - name: Validate AutoCAD course projects
         shell: pwsh
         run: ./scripts/check-course-projects.ps1
+
+      - name: Test review feedback transfer
+        run: node --test scripts/selfstudy/test_review_transfer.cjs

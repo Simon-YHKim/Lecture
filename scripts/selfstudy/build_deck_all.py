@@ -14,6 +14,7 @@
     python scripts/selfstudy/build_deck_all.py <출력 파일> [작업폴더] [--standalone <gsap.min.js>]
 """
 import io
+import hashlib
 import json
 import os
 import re
@@ -67,7 +68,8 @@ def main(outpath, tmpdir, gsap=None):
         slides += island['slides']
         bodies.append('<!-- ===== %d차시 %s ===== -->\n%s' % (no, title, body))
 
-    manifest = json.dumps({'slides': slides, 'slideSequences': [],
+    review_id = hashlib.sha256((''.join(bodies) + json.dumps(slides, ensure_ascii=False, sort_keys=True)).encode('utf-8')).hexdigest()
+    manifest = json.dumps({'slides': slides, 'slideSequences': [], 'reviewId': review_id,
                            'lessons': lessons}, ensure_ascii=False, indent=1)
     nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
     memo = io.open(os.path.join(HERE, 'assets', 'deck_memo.html'), encoding='utf-8').read()
@@ -76,8 +78,11 @@ def main(outpath, tmpdir, gsap=None):
         # 프레임의 스크립트가 첫 줄에서 멎고 화면이 통째로 빈다.
         lib = ('<script>%s</script>'
                % io.open(gsap, encoding='utf-8').read().replace('</script>', '<\\/script>'))
-        banner = ('<div id="dl">이 파일은 <b>내려받아 브라우저로 열면</b> 메모가 저장됩니다. '
-                  '인터넷 없이도 열려요. <button type="button" id="dlx">닫기</button></div>'
+        banner = ('<div id="dl"><b>검수판 · %d차시 %d장</b> — 내려받아 브라우저로 여세요. ' % (len(lessons), len(slides)) +
+                  '<b>M</b> 메모 · <b>N</b> 대본 · <b>P</b> 애니메이션. '
+                  '검수 후 메모 파일을 대화창에 첨부하세요. 인터넷 없이 열립니다. '
+                  '강의 영상은 별도 MP4이며 이 파일에는 음성이 없습니다. '
+                  '<button type="button" id="dlx">닫기</button></div>'
                   '<style>#dl{position:fixed;top:0;left:0;right:0;z-index:50;padding:9px 16px;'
                   'background:#F7E9EC;color:#5c0021;border-bottom:1px solid #C7004C;'
                   'font:14px/1.5 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif}'

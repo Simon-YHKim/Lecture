@@ -42,6 +42,22 @@ publication of original materials, separate narration WAVs, transcripts or font
 binaries. The latest delivery scope and remaining work are recorded in
 [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
+The author confirmed publishing **five finished videos first**, with the
+eight-lesson self-study package and one offline review HTML. The remaining
+15 episodes require actual AutoCAD recordings.
+
+- [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
+- Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
+  for slide, element or common notes, **N** to edit the script, and **P** to
+  preview animation. This review file has no narration audio.
+- Use **Markdown 복사** or **메모 파일 받기** to return feedback. **백업 받기**
+  saves notes and script edits as JSON; **백업 불러오기** restores them into
+  the same edition. Records are stored in the browser, not inside the HTML,
+  and do not sync automatically. Keep the backup when changing computers.
+- The review generator supports offline export with
+  `python scripts/selfstudy/build_deck_all.py <output.html> <temporary-directory> --standalone <gsap.min.js>`.
+  Review transfer regression checks: `node --test scripts/selfstudy/test_review_transfer.cjs`.
+
 ## Guardrails
 
 The repository uses three layers of protection:
