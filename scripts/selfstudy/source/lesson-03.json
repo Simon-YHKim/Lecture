@@ -949,7 +949,7 @@
        "n": 3,
        "title": {
         "ko": "외형선 레이어로 바꾸고 그릴 자리 확대",
-        "en": "Switch to the outline layer and zoom in"
+        "en": "Switch to the visible line layer and zoom in"
        },
        "actions": [
         {

@@ -632,7 +632,7 @@
        "n": 4,
        "title": {
         "ko": "제3각법으로 세 뷰 작도",
-        "en": "Draw the three views in third angle"
+        "en": "Draw the three views in third-angle"
        },
        "actions": [
         {
@@ -664,7 +664,7 @@
        },
        "pitfall": {
         "ko": "제1각법으로 배치하면 평면도와 우측면도가 반대편으로 갑니다. 판별 기준은 원의 좌우 위치가 아닙니다 — 제3각법 기호에서 원뿔대의 작은 끝이 원을 향합니다.",
-        "en": "Laid out in first angle, the top and side views swap to the opposite sides. The test is not which side the circles sit on. In the third-angle symbol the small end of the cone faces the circles."
+        "en": "Laid out in first-angle, the top and side views swap to the opposite sides. The test is not which side the circles sit on. In the third-angle symbol the small end of the cone faces the circles."
        }
       },
       {
@@ -814,7 +814,7 @@
      },
      "alt": {
       "ko": "왼쪽은 제3각법입니다. 두 개의 동심원 오른쪽에 원뿔대가 있고 작은 끝이 원 쪽을 향합니다. 평면도는 위, 우측면도는 오른쪽입니다. 오른쪽은 제1각법이며 큰 끝이 원 쪽을 향하고 평면도는 아래, 우측면도는 왼쪽으로 갑니다.",
-      "en": "Left is third angle. Two concentric circles sit beside a truncated cone, its small end facing the circles. The top view goes above and the right side view to the right. Right is first angle. The large end faces the circles, the top view goes below, and the side view to the left."
+      "en": "Left is third-angle. Two concentric circles sit beside a truncated cone, its small end facing the circles. The top view goes above and the right side view to the right. Right is first-angle. The large end faces the circles, the top view goes below, and the side view to the left."
      }
     },
     {
@@ -1276,7 +1276,7 @@
        },
        {
         "ko": "제3각법으로 평면도와 우측면도를 세웠습니다. 탭 네 개는 배열로 반복했습니다.",
-        "en": "Raised the top and right side views in third angle; arrayed the four tapped holes."
+        "en": "Raised the top and right side views in third-angle; arrayed the four tapped holes."
        },
        {
         "ko": "`EDU-IB-02_L05_VIEWS`",
@@ -1370,15 +1370,15 @@
        },
        {
         "ko": "객체 스냅",
-        "en": "객체 스냅"
+        "en": "Object Snap"
        },
        {
         "ko": "끝점·중간점·중심 같은 특징점에 커서가 달라붙습니다",
-        "en": "끝점·중간점·중심 같은 특징점에 커서가 달라붙습니다"
+        "en": "The cursor sticks to feature points such as endpoint, midpoint and center"
        },
        {
         "ko": "항상 켭니다",
-        "en": "항상 켭니다"
+        "en": "Keep it on"
        }
       ],
       [
@@ -1388,15 +1388,15 @@
        },
        {
         "ko": "그리드",
-        "en": "그리드"
+        "en": "Grid"
        },
        {
         "ko": "모눈 표시를 켜고 끕니다",
-        "en": "모눈 표시를 켜고 끕니다"
+        "en": "Turns the grid display on and off"
        },
        {
         "ko": "이 과정은 끕니다 — 모눈에 스냅되지 않고 화면만 어지럽습니다",
-        "en": "이 과정은 끕니다 — 모눈에 스냅되지 않고 화면만 어지럽습니다"
+        "en": "Off in this course - it does not snap to anything and only clutters the screen"
        }
       ],
       [
@@ -1406,15 +1406,15 @@
        },
        {
         "ko": "직교",
-        "en": "직교"
+        "en": "Ortho"
        },
        {
         "ko": "커서가 수평·수직으로만 움직입니다",
-        "en": "커서가 수평·수직으로만 움직입니다"
+        "en": "The cursor moves horizontally and vertically only"
        },
        {
         "ko": "수평 수직선을 그을 때 켭니다",
-        "en": "수평 수직선을 그을 때 켭니다"
+        "en": "On while you draw horizontal and vertical lines"
        }
       ],
       [
@@ -1424,15 +1424,15 @@
        },
        {
         "ko": "스냅",
-        "en": "스냅"
+        "en": "Snap"
        },
        {
         "ko": "커서가 일정 간격 격자에 걸립니다",
-        "en": "커서가 일정 간격 격자에 걸립니다"
+        "en": "The cursor lands on a fixed-spacing grid"
        },
        {
         "ko": "이 과정은 끕니다 — 형상의 특징점을 못 잡게 만듭니다",
-        "en": "이 과정은 끕니다 — 형상의 특징점을 못 잡게 만듭니다"
+        "en": "Off in this course - it keeps you from catching the feature points of the shape"
        }
       ],
       [
@@ -1442,15 +1442,15 @@
        },
        {
         "ko": "극좌표 추적",
-        "en": "극좌표 추적"
+        "en": "Polar Tracking"
        },
        {
         "ko": "정해 둔 각도마다 안내선이 뜹니다",
-        "en": "정해 둔 각도마다 안내선이 뜹니다"
+        "en": "A guide line appears at each angle you set"
        },
        {
         "ko": "기울어진 방향이 필요할 때 켭니다",
-        "en": "기울어진 방향이 필요할 때 켭니다"
+        "en": "On when you need a slanted direction"
        }
       ],
       [
@@ -1460,15 +1460,15 @@
        },
        {
         "ko": "객체 스냅 추적",
-        "en": "객체 스냅 추적"
+        "en": "Object Snap Tracking"
        },
        {
         "ko": "특징점에서 뻗은 안내선이 만나는 자리에 없는 점을 잡습니다",
-        "en": "특징점에서 뻗은 안내선이 만나는 자리에 없는 점을 잡습니다"
+        "en": "Catches a point that is not drawn, where guide lines from feature points meet"
        },
        {
         "ko": "켭니다 — 좌표 없이 중심을 잡는 주된 방법입니다",
-        "en": "켭니다 — 좌표 없이 중심을 잡는 주된 방법입니다"
+        "en": "On - the main way to find a center without typing coordinates"
        }
       ],
       [
@@ -1478,15 +1478,15 @@
        },
        {
         "ko": "동적 입력",
-        "en": "동적 입력"
+        "en": "Dynamic Input"
        },
        {
         "ko": "커서 옆 입력칸에 길이와 각도를 직접 칩니다",
-        "en": "커서 옆 입력칸에 길이와 각도를 직접 칩니다"
+        "en": "Type length and angle straight into the box beside the cursor"
        },
        {
         "ko": "켭니다 — 「방향은 마우스, 길이는 숫자」가 이것 위에서 돕니다",
-        "en": "켭니다 — 「방향은 마우스, 길이는 숫자」가 이것 위에서 돕니다"
+        "en": "On - \"direction with the mouse, length as a number\" runs on top of this"
        }
       ]
      ]
@@ -1534,7 +1534,7 @@
        },
        {
         "ko": "지름",
-        "en": "지름"
+        "en": "Diameter"
        }
       ],
       [
@@ -1548,7 +1548,7 @@
        },
        {
         "ko": "도",
-        "en": "도"
+        "en": "Degree"
        }
       ],
       [
@@ -1562,7 +1562,7 @@
        },
        {
         "ko": "플러스마이너스",
-        "en": "플러스마이너스"
+        "en": "Plus/minus"
        }
       ]
      ]
@@ -1592,7 +1592,7 @@
        },
        {
         "ko": "특성 창을 엽니다 — 개체 하나의 레이어·색·선 종류 축척을 직접 봅니다",
-        "en": "특성 창을 엽니다 — 개체 하나의 레이어·색·선 종류 축척을 직접 봅니다"
+        "en": "Opens the Properties window - read one object's layer, color and linetype scale directly"
        }
       ],
       [
@@ -1602,7 +1602,7 @@
        },
        {
         "ko": "전체를 선택합니다",
-        "en": "전체를 선택합니다"
+        "en": "Selects everything"
        }
       ],
       [
@@ -1612,7 +1612,7 @@
        },
        {
         "ko": "복사합니다",
-        "en": "복사합니다"
+        "en": "Copies"
        }
       ],
       [
@@ -1622,7 +1622,7 @@
        },
        {
         "ko": "기준점을 지정해 복사합니다 — 다른 도면에 같은 자리로 붙일 때 씁니다",
-        "en": "기준점을 지정해 복사합니다 — 다른 도면에 같은 자리로 붙일 때 씁니다"
+        "en": "Copies with a base point you pick - use it to paste at the same spot in another drawing"
        }
       ],
       [
@@ -1632,7 +1632,7 @@
        },
        {
         "ko": "붙여넣습니다",
-        "en": "붙여넣습니다"
+        "en": "Pastes"
        }
       ],
       [
@@ -1642,7 +1642,7 @@
        },
        {
         "ko": "잘라냅니다",
-        "en": "잘라냅니다"
+        "en": "Cuts"
        }
       ],
       [
@@ -1652,7 +1652,7 @@
        },
        {
         "ko": "되돌립니다 (UNDO)",
-        "en": "되돌립니다 (UNDO)"
+        "en": "Undoes (UNDO)"
        }
       ],
       [
@@ -1662,7 +1662,7 @@
        },
        {
         "ko": "직전 명령을 반복합니다 — Space Bar 도 같습니다",
-        "en": "직전 명령을 반복합니다 — Space Bar 도 같습니다"
+        "en": "Repeats the last command - Space Bar does the same"
        }
       ],
       [
@@ -1672,7 +1672,7 @@
        },
        {
         "ko": "명령을 취소합니다 — 다음 명령 전에 명령행을 비웁니다",
-        "en": "명령을 취소합니다 — 다음 명령 전에 명령행을 비웁니다"
+        "en": "Cancels the command - clears the command line before the next one"
        }
       ]
      ]
@@ -1706,37 +1706,37 @@
       [
        {
         "ko": "왼쪽 → 오른쪽",
-        "en": "왼쪽 → 오른쪽"
+        "en": "Left to right"
        },
        {
         "ko": "윈도우",
-        "en": "윈도우"
+        "en": "Window"
        },
        {
         "ko": "실선",
-        "en": "실선"
+        "en": "Solid"
        },
        {
         "ko": "상자 안에 완전히 들어온 것만 골라집니다",
-        "en": "상자 안에 완전히 들어온 것만 골라집니다"
+        "en": "Selects only what sits entirely inside the box"
        }
       ],
       [
        {
         "ko": "오른쪽 → 왼쪽",
-        "en": "오른쪽 → 왼쪽"
+        "en": "Right to left"
        },
        {
         "ko": "크로싱",
-        "en": "크로싱"
+        "en": "Crossing"
        },
        {
         "ko": "파선",
-        "en": "파선"
+        "en": "Dashed"
        },
        {
         "ko": "상자에 걸치기만 해도 골라집니다",
-        "en": "상자에 걸치기만 해도 골라집니다"
+        "en": "Selects anything the box touches"
        }
       ]
      ]
@@ -1802,7 +1802,7 @@
    },
    "how": {
     "ko": "정면도 기준으로 평면도가 위에, 우측면도가 오른쪽에 있습니다. 반대면 제1각법으로 배치한 것입니다.",
-    "en": "Top view above the front view, right side view to its right. The other way round is first angle."
+    "en": "Top view above the front view, right side view to its right. The other way round is first-angle."
    }
   },
   {

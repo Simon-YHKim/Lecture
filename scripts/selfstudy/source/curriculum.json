@@ -1115,7 +1115,7 @@
      "kind": "concept",
      "label": {
       "ko": "제3각법 — 본 방향에 그 뷰를 놓는다",
-      "en": "Third angle - the view goes where you looked from"
+      "en": "Third-angle - the view goes where you looked from"
      },
      "note": "위에서 봤으니 위에 두고, 오른쪽에서 봤으니 오른쪽에 둡니다. 제1각법과 나란히 놓은 배치도 두 장으로 차이를 보입니다. 기호는 반드시 방향까지 맞게 그립니다 — 판별 기준은 원의 좌우 위치가 아니라 원뿔대의 어느 쪽 끝이 원을 향하는가이고, 제3각법은 작은 끝이 원을 향합니다. 기억으로 그리지 않고 확인합니다. 뒤집어 그리면 투상법을 가르치는 그림이 정반대를 가르치게 됩니다."
     },
@@ -2300,7 +2300,7 @@
    "en": "slot",
    "def": {
     "ko": "끝이 반원인 긴 구멍입니다. 조립 후 위치를 조정하기 위한 것으로, 끝단 반지름과 두 끝원 중심거리로 형상이 확정됩니다. 이 부품은 2-R5, 중심거리 12입니다.",
-    "en": "An elongated hole with semicircular ends, used to adjust position after assembly. End radius plus the distance between end-arc centers fully defines it. Here: 2-R5 with 12 between centers."
+    "en": "A long hole with semicircular ends, used to adjust position after assembly. End radius plus the distance between end-arc centers fully defines it. Here: 2-R5 with 12 between centers."
    },
    "lessons": [
     2,
