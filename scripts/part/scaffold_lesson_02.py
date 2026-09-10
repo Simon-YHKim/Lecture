@@ -354,7 +354,16 @@ def build_sheet(comp, dur, spans):
         beats.read_along(comp, items, spans),
         beats.outro(comp, dur),
     ])
-    return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)
+    mapping = [["#%s %s" % (comp, it['sel'])] for it in items]
+    mapping[0].append("#%s .sh-size" % comp)
+    mapping[1].append("#%s .sh-gap" % comp)
+    tl += '\n    // narration-beats: ' + json.dumps(mapping)
+    assertions = beats.assertions(comp, items, spans)
+    for assertion in assertions:
+        for key in ('selector', 'a', 'b'):
+            if assertion.get(key) == '#%s .sh-title' % comp:
+                assertion[key] = '#%s g.sh-title' % comp
+    return kit.frame_html(comp, dur, body, tl), assertions
 
 
 frame("07-sheet-and-layers", "l2f7", 7, [1] * 11, build_sheet)
@@ -396,7 +405,7 @@ def build_demo(comp, dur, spans):
     tl = "\n".join([
         '    tl.fromTo("#%s .tag",{opacity:0,y:-14},{opacity:1,y:0,duration:.8,'
         'ease:"power3.out"},.35);' % comp,
-        '    tl.fromTo("#%s .strip",{opacity:0,y:26},{opacity:1,y:0,duration:.9,'
+        '    tl.fromTo("#%s .strip",{opacity:0,y:0},{opacity:1,y:0,duration:.9,'
         'ease:"power3.out"},.7);' % comp,
         beats.read_along(comp, items, spans),
         '    tl.fromTo("#%s .prog",{scaleX:0},{scaleX:1,duration:%s,ease:"none"},1.2);'
@@ -426,9 +435,9 @@ DONE = ("이번에 한 일", "부품을 읽고 도면 환경을 만들었습니�
          "도면 위 모든 표기가 무엇을 지시하는지 — 치수 여덟 개와 기호 여덟 개",
          "A3 용지에 사방 10 도면틀과 중심 마크, 200×30 표제란을 만들고 네 개 레이어를 설정해 템플릿 파일로 저장"])
 NEXT = ("다음", "3차시 · 기준선과 외곽",
-        ["절대·상대·극좌표로 점을 찍는 세 가지 방법과 각각을 언제 쓰는지",
-         "LINE과 PLINE의 차이 — 왜 외곽은 하나로 이어진 객체여야 하는지",
-         "원점과 기준면을 정하고 120 × 16 베이스를 좌표 입력으로 작도",
+        ["스냅·추적·직교·자유클릭으로 점을 잡는 네 가지 방법과 각각을 언제 쓰는지",
+         "LINE과 PLINE과 REC의 차이 — 왜 외곽은 하나로 이어진 객체여야 하는지",
+         "기준을 형상에서 잡고 120 × 16 베이스를 REC 치수 옵션으로 작도",
          "오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그린다",
          "마치면 L03_PROFILE 상태로 저장한다"])
 

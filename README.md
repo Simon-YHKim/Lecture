@@ -116,6 +116,50 @@ scene boundary a few seconds apart. Treat `narration-timing.json` the way the
 artifact manifest is treated. Generate it once, review the drift, commit it, and
 regenerate only when the recording itself changes. Do not rebuild it in CI.
 
+### Local Heami synthesis
+
+For the current lecture workflow, synthesize the revised script with Windows
+SAPI **Microsoft Heami Desktop, Rate 0**, then refresh the frame and episode clocks:
+
+```powershell
+python scripts/part/narrate_tts.py projects/autocad-technician/lesson-01-orientation --out <fresh-private-audio-directory>
+python scripts/part/retime_frames.py projects/autocad-technician/lesson-01-orientation
+python scripts/part/prepare_lecture.py projects/autocad-technician/lesson-01-orientation --out <fresh-private-render-directory> --gsap <local-gsap.min.js>
+```
+
+Both output directories must be outside Git and new for this generation. Use the
+local GSAP 3.14.2 distributable to match the authored compositions. The export
+includes private WAV files and must remain private. Run the pinned HyperFrames
+check and render commands from that exported project. `prepare_lecture.py`
+aggregates scene motion assertions into `index.motion.json`, because the CLI
+reads a sidecar only at the project root. For long lessons, the 0.8.33 CLI caps
+motion sampling at 300 points; use `prepare_scene_checks.py <private-project>
+--out <fresh-private-check-directory>` to check the unchanged scenes on their
+own clocks. It preserves every original assertion and adds a short entrance
+check, including bounds, where full-scene sampling is too sparse. Run
+`hyperframes@0.8.33 check <scene-project> --json --at-transitions` for each entry
+in its manifest. These checks are sampled verification, not continuous proof.
+The static linter also pools audio from independent episode files; verify each
+playlist on its own clock before interpreting overlap warnings.
+Missing AutoCAD recordings block a delivery export. `--preview` permits those
+placeholders only for validation and records them in the private export manifest.
+
+The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
+spoken text or step boundaries requires new speech; editorial time headers do
+not. Legacy timing files without these identities cannot be reused by retiming
+or export. WAV contents and durations are checked again when preparing a render.
+Episodes use their own local clock, including the holds between scene WAVs.
+Timing updates are prepared in a temporary copy before replacing source files.
+
+If Python is not on PATH, pass its executable to the course guard with
+`-PythonPath`, or set `LECTURE_PYTHON`. The course guard reports legacy narration
+as pending; a course structure pass alone does not verify its private audio.
+
+`scripts/selfstudy/rhythm_report.py` reports formal/informal balance, repeated
+final words, and ending diversity in fixed 20-sentence windows. Its global
+unique-ending ratio decreases as documents grow; use it as an editorial signal,
+not a pass/fail score for an entire textbook.
+
 ## AutoCAD Technician course
 
 The course is organized as eight connected HyperFrames projects under
@@ -123,7 +167,7 @@ The course is organized as eight connected HyperFrames projects under
 `EDU-IB-02` idler pulley bracket from orientation to an A3 third-angle release
 drawing; the eighth covers the exam briefing and its questions. Each lesson owns
 its brief, narration script, storyboard, six to eleven scene compositions, motion
-assertions, and final assembly, and the eight lessons are cut into 19 episodes of
+assertions, and final assembly, and the eight lessons are cut into 20 episodes of
 at most twenty minutes each.
 
 The earlier ten-lesson arrangement is kept under

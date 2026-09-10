@@ -59,6 +59,13 @@ def prefix_ids(html, prefix):
     return ID_ATTR.sub(lambda m: '%s id="%s-%s"' % (m.group(1), prefix, m.group(2)), html)
 
 
+def consolidate_surfaces(html):
+    """Shared SVG symbols must be defined once, outside any hideable tab."""
+    html = re.sub(r'<svg\b[^>]*class="sfcdefs"[^>]*>.*?</svg>', '', html, flags=re.S)
+    used = set(re.findall(r'href="#sfc-([\w-]+)"', html))
+    return re.sub(r'(<body\b[^>]*>)', lambda m: m[1] + B.surface_defs(used), html, count=1)
+
+
 ARTIFACT_TITLE = 'AutoCAD 브래킷 자습 과정'
 ARTIFACT_BANNER = (
     '<div class="banner"><span class="k">메모와 진도는 이 페이지를 여는 브라우저에만 저장됩니다. '
@@ -160,6 +167,7 @@ def main(outpath):
     html = B.shell((C.get('courseTitle') or {}).get('ko', '자습 교재'), eyeb,
                    B.bi(C.get('courseTitle')), meta, tabs, panels, '',
                    grade='M', body_attrs=body_attrs)
+    html = consolidate_surfaces(html)
 
     if os.environ.get('SELFSTUDY_ARTIFACT') == '1':
         html = to_artifact(html)

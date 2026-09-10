@@ -1,5 +1,5 @@
 {
-  "duration": 130.888,
+  "duration": 129.144,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -9,12 +9,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f2 .c1",
-      "bySec": 31.9
+      "bySec": 27.4
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f2 .c2",
-      "bySec": 55.6
+      "bySec": 47.9
     },
     {
       "kind": "before",
@@ -24,7 +24,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f2 .c3",
-      "bySec": 78.4
+      "bySec": 66.7
     },
     {
       "kind": "before",
@@ -34,7 +34,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f2 .c4",
-      "bySec": 121.0
+      "bySec": 110.63
     },
     {
       "kind": "before",

@@ -5,7 +5,7 @@
   "ko": "기준선과 외곽",
   "en": "Datum Lines and the Outline"
  },
- "videoLength": "38:17",
+ "videoLength": "37:30",
  "selfStudyMin": 107,
  "opens": "EDU-IB-02_L02_TEMPLATE",
  "saves": "EDU-IB-02_L03_PROFILE",
@@ -30,7 +30,7 @@
   },
   {
    "ko": "베이스 외곽을 사각형 하나로 세웁니다. 첫 구석은 자유 클릭이고, 가로 120 과 세로 16 은 REC 의 치수 옵션으로 넣습니다. 모따기는 그다음에 CHAMFER 로 자릅니다.",
-   "en": "You can draw the base outline as a single polyline: the first point by a free click, every other number straight off the drawing as a relative coordinate."
+   "en": "Draw the base as one rectangle. Click the first corner freely and enter 120 and 16 with REC's Dimensions option. Then cut the chamfers with CHAMFER."
   },
   {
    "ko": "그린 형상에서 기준선을 뽑습니다. 밑변의 중간점으로 세로 중심선을, 그 교차점에서 62 올려 가로 중심선을 세울 수 있습니다.",
@@ -2266,8 +2266,8 @@
     "en": "Symmetry of the two web lines"
    },
    "how": {
-    "ko": "세로 중심선을 기준으로 좌우 대칭인지 봅니다. 한쪽만 기울기가 다르면 기준으로 삼은 교차점과 40을 칠 때 커서가 어느 쪽에 있었는지 다시 봅니다.",
-    "en": "Check they mirror about the vertical centerline. If one slope differs, check the intersection you stepped off from and which side the cursor was on for the 40."
+    "ko": "세로 중심선을 기준으로 좌우 대칭인지 확인합니다. 한쪽만 기울기가 다르면 기준 교차점을 다시 봅니다. 40을 칠 때 커서 방향도 되짚어 보세요.",
+    "en": "Check symmetry about the vertical centerline. If one slope differs, check the reference intersection again. Also retrace the cursor direction when you entered 40."
    }
   },
   {
@@ -2389,8 +2389,8 @@
    "en": "A 60 x 20 rectangle with one C3 chamfer"
   },
   "body": {
-   "ko": "지금 그린 베이스 외곽은 그대로 두세요. 빈 자리에 같은 방법으로 60 × 20 직사각형을 폴리선 하나로 그립니다. 오른쪽 위 모서리만 C3으로 만듭니다. 3만큼 45도로 자른다는 뜻입니다. 좌표는 스스로 계산합니다. 세로변이 어디까지 올라가고 윗면이 얼마가 되는지 두 값을 먼저 종이에 적습니다. 그다음에 입력하세요. 확인이 끝나면 그 연습 도형만 지우고 저장합니다.",
-   "en": "Leave the base outline you just drew alone. In an empty area, draw a 60 x 20 rectangle as a single polyline the same way. Chamfer only the top right corner, C3, meaning a 3 mm cut at 45 degrees. Work the coordinates out yourself. Write down on paper how far the vertical edge rises and how long the top face becomes. Then type them in. When you have checked it, erase only that practice shape and save."
+   "ko": "지금 그린 베이스 외곽은 그대로 두세요. 빈 자리에 REC로 사각형을 하나 만듭니다. 첫 구석은 클릭하고 치수 옵션에 60과 20을 넣습니다. CHAMFER의 두 거리는 각각 3으로 정합니다. 오른쪽 위 구석의 두 변만 골라 C3 모따기를 만듭니다. 3만큼 45도로 자른다는 뜻입니다. 좌표를 계산하지 않고 방향과 치수로 그려 보세요. 확인이 끝나면 연습 도형만 지우고 저장합니다.",
+   "en": "Leave the base outline in place. Draw another rectangle in an empty area with REC. Click its first corner and enter 60 and 20 with the Dimensions option. Set both CHAMFER distances to 3. Select only the two edges at the top-right corner to make the C3 chamfer. This means a 3 mm cut at 45 degrees. Use direction and dimensions without calculating coordinates. After checking, erase only the practice shape and save."
   },
   "criteria": [
    {
@@ -2398,8 +2398,8 @@
     "en": "One polyline with five vertices: a single chamfer splits just one of the four corners in two."
    },
    {
-    "ko": "`LIST` 결과의 닫힘이 예입니다. 마지막 변은 손으로 찍지 않고 닫기로 붙입니다.",
-    "en": "`LIST` reports closed as yes. The last edge is closed with the option, not picked by hand."
+    "ko": "`LIST` 결과의 닫힘이 예입니다. REC로 만든 사각형은 처음부터 닫힌 폴리선입니다.",
+    "en": "`LIST` reports closed as yes. A rectangle made with REC is a closed polyline from the start."
    },
    {
     "ko": "세로변은 20에서 3을 뺀 17까지 올라갑니다.",
@@ -2622,8 +2622,8 @@
     "en": "You opened last lesson's template and, before anything else, hovered a line to see a snap marker appear."
    },
    {
-    "ko": "베이스 외곽을 폴리선 하나로 그렸습니다. 첫 점만 자유 클릭이고 아래변 120, 오른쪽 11, 모따기 5와 5, 윗면 110, 왼쪽 모따기, 닫기 순입니다.",
-    "en": "You drew the base outline as one polyline: a free click for the first point, then 120 along the bottom, 11 up the right, a 5 and 5 chamfer, 110 across the top, the left chamfer, and close."
+    "ko": "REC의 치수 옵션에 120과 16을 넣어 사각형을 그렸습니다. 첫 구석만 자유롭게 클릭했습니다. CHAMFER에 5와 5를 주고 위쪽 두 구석만 잘랐습니다.",
+    "en": "You drew a rectangle with 120 and 16 in REC's Dimensions option. Only the first corner was a free click. You set both CHAMFER distances to 5 and cut only the two top corners."
    },
    {
     "ko": "한 번 클릭과 `LIST` 로 그 외곽이 폴리선 하나인지 검산했습니다.",
@@ -2646,8 +2646,8 @@
     "en": "Stepping 40 either side of where the centerline meets the top face gave both web starts, and the tangent snap put their far ends on the circle."
    },
    {
-    "ko": "점을 찍는 네 가지 방법이 한 도형 안에서 다 나왔습니다. 자유 클릭 한 번, 방향과 거리 두 번, 스냅과 추적 일곱 번, 그리고 치수 옵션으로 준 숫자 둘이에요. 좌표는 한 번도 치지 않았습니다.",
-    "en": "All four ways of placing a point turned up in one shape: one free click, two direction-and-distance moves, five snaps, and coordinates only where the drawing printed the number."
+    "ko": "자유 클릭, 방향과 거리, 스냅과 추적, 치수 옵션을 사용했습니다. 좌표는 한 번도 치지 않았습니다. 이 과정에서 좌표를 입력하는 자리는 용지선 두 구석뿐이에요.",
+    "en": "You used free clicks, direction and distance, snaps and tracking, and the Dimensions option. You entered no coordinates. This course uses coordinate entry only for the sheet's two corners."
    },
    {
     "ko": "파일을 EDU-IB-02_L03_PROFILE 이름으로 저장했습니다.",

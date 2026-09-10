@@ -5,7 +5,7 @@
   "ko": "편집과 표현",
   "en": "Cleaning Up and Reading the Symbols"
  },
- "videoLength": "42:30",
+ "videoLength": "38:25",
  "selfStudyMin": 93,
  "opens": "EDU-IB-02_L05_VIEWS",
  "saves": "EDU-IB-02_L06_REPRESENTED",
@@ -25,8 +25,8 @@
  },
  "objectives": [
   {
-   "ko": "투상선이 형상이 아니라 자임을 알고, `QSELECT` 로 `구성선` 만 걸어 한 번에 지울 수 있습니다.",
-   "en": "You can explain that projectors are rulers, not geometry, and delete them in one pass with QSELECT filtered to construction line."
+   "ko": "투상선이 부품 형상이 아니라 위치를 맞추는 자임을 설명할 수 있습니다. `QSELECT` 로 `구성선` 만 골라 한 번에 지울 수 있습니다.",
+   "en": "You can explain that projectors are positioning rulers rather than part geometry. You can delete them in one pass with QSELECT filtered to construction line."
   },
   {
    "ko": "`TR` 과 `EX` 의 클릭 규칙대로 다듬고 `Shift` 로 둘을 오갈 수 있습니다. 창 선택과 걸침 선택도 구별합니다.",
@@ -1366,8 +1366,8 @@
       "en": "Front view with dimensions. Read the symmetry check values 29, 12, 50, and 120 from here."
      },
      "alt": {
-      "ko": "치수가 다 들어간 정면도입니다. 전체 가로 120, 높이 90, 베이스 높이 16이고 아래에 장공 두 개가 있습니다. 왼쪽 끝에서 첫 끝원 중심까지 29, 한 장공의 두 끝원 사이 12, 두 장공의 첫 끝원 사이 50입니다. 위에는 보스 지름 56과 축 구멍 지름 25, 보스 중심의 가로 위치 60입니다.",
-      "en": "The front view with every dimension: 120 wide, 90 tall, a 16 mm base, two slots low down. Left edge to the first end-arc center is 29, one slot's end-arc centers 12 apart, the two slots' first end-arc centers 50 apart. Above, the 56 mm boss and 25 mm bore, boss center 60 from the left."
+      "ko": "치수가 다 들어간 정면도입니다. 전체 가로 120, 높이 90, 베이스 높이 16입니다. 아래에는 장공 두 개가 있습니다. 왼쪽 끝에서 첫 끝원 중심까지는 29입니다. 한 장공의 두 끝원 사이는 12, 두 장공의 첫 끝원 사이는 50입니다. 위에는 지름 56인 보스와 지름 25인 축 구멍이 있습니다. 보스 중심의 가로 위치는 60입니다.",
+      "en": "The front view with every dimension: 120 wide, 90 tall, with a 16 mm base. Two slots sit low down. The left edge to the first end-arc center is 29. One slot's end-arc centers are 12 apart; the two slots' first end-arc centers are 50 apart. Above them are the 56 mm boss and 25 mm bore. The boss center is 60 from the left."
      }
     },
     {

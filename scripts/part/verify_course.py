@@ -24,6 +24,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import beats  # noqa: E402
 import episodes  # noqa: E402
+from narrate_tts import verify_script_hash  # noqa: E402
+from sync_narration import attach  # noqa: E402
 
 ROOT = "projects/autocad-technician"
 
@@ -71,7 +73,7 @@ _SLOT = re.compile(r'data-composition-src="compositions/frames/([^"]+)\.html"'
 _SLOT_EP = re.compile(
     r'data-composition-src="compositions/frames/([^"]+)\.html"'
     r'[^>]*data-start="([\d.]+)"\s+data-duration="([\d.]+)"')
-_CUE = re.compile(r",\s*(-?\d+(?:\.\d+)?)\s*\)\s*;")
+_CUE = re.compile(r",\s*(-?(?:\d+(?:\.\d*)?|\.\d+))\s*\)\s*;")
 
 fails, notes = [], []
 
@@ -315,6 +317,37 @@ def check_lesson(slug, cp_in, cp_out):
     return total
 
 
+def is_lesson_source_dir(path):
+    """A preview cache left after archiving a lesson is not an active lesson."""
+    return any(os.path.isfile(os.path.join(path, name))
+               for name in ('SCRIPT.md', 'index.html', 'BRIEF.md'))
+
+
+def check_narration_identity(slug):
+    """Legacy planning metadata is visible as pending, never verified speech."""
+    root = os.path.join(ROOT, slug)
+    path = os.path.join(root, 'narration-timing.json')
+    with open(path, encoding='utf-8') as fh:
+        timing = json.load(fh)
+    if not timing.get('spokenTextSha256'):
+        return False
+    try:
+        verify_script_hash(root, timing)
+        if any(not re.fullmatch(r'[a-f0-9]{64}', f.get('audioSha256', '')) for f in timing['frames']):
+            raise ValueError('A WAV identity is missing')
+        paths = [os.path.join(root, 'index.html')]
+        epdir = os.path.join(root, 'compositions', 'episodes')
+        paths += [os.path.join(epdir, f) for f in os.listdir(epdir) if re.fullmatch(r'ep\d+\.html', f)]
+        for playlist in paths:
+            with open(playlist, encoding='utf-8') as fh:
+                source = fh.read()
+            if attach(source, timing) != source:
+                raise ValueError('Narration placement is stale: ' + os.path.basename(playlist))
+    except ValueError as error:
+        fail(slug, str(error))
+    return True
+
+
 def main():
     here = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     os.chdir(here)
@@ -325,13 +358,17 @@ def main():
         total += t or 0
 
     stale = [n for n in os.listdir(ROOT)
-             if n.startswith("lesson-") and n not in {s for s, _, _ in LESSONS}]
+             if n.startswith("lesson-") and n not in {s for s, _, _ in LESSONS}
+             and is_lesson_source_dir(os.path.join(ROOT, n))]
     if stale:
         fail("course", "옛 차시 디렉터리가 남아 있다: %s" % ", ".join(sorted(stale)))
 
+    legacy_speech = []
     for slug, _a, _b in LESSONS:
         check_episodes(slug)
         check_frame_headings(slug)
+        if not check_narration_identity(slug):
+            legacy_speech.append(slug)
 
     geo = subprocess.run([sys.executable, "scripts/part/edu_ib_02.py",
                           os.devnull], capture_output=True, text=True,
@@ -345,6 +382,9 @@ def main():
 
     print("\n".join(notes))
     print("  %-32s %2d차시  %d:%02d" % ("합계", len(LESSONS), total // 60, total % 60))
+    if legacy_speech:
+        print('  음성 검증 대기: %d차시 — 이전 측정값에는 대본/WAV 식별정보가 없어 재합성이 필요합니다.'
+              % len(legacy_speech))
     if fails:
         print("\n실패 %d건" % len(fails))
         for f in fails:

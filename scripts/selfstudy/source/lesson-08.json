@@ -5,7 +5,7 @@
   "ko": "시험 안내와 Q&A",
   "en": "Exam Briefing and Q&A"
  },
- "videoLength": "09:41",
+ "videoLength": "09:15",
  "selfStudyMin": 97,
  "opens": null,
  "saves": null,
@@ -15,8 +15,8 @@
    "en": "There is no new drawing here. You settle how the exam runs, in six items. Then you set a 40-minute clock and redraw Lessons 2 through 7 in one pass."
   },
   "why": {
-   "ko": "시험이 어떻게 진행되는지를 알아야 준비할 것이 정해집니다. 시간은 40분이고 지나면 즉시 제출입니다. 순서가 손에 붙어 있지 않으면 화면 앞에서 시간이 샙니다.",
-   "en": "Knowing how the exam runs is what fixes your preparation. You get 40 minutes, and submission is immediate when time is up. If the sequence is not in your hands, the clock drains at the screen."
+   "ko": "시험 진행 방식을 알아야 필요한 준비를 할 수 있습니다. 시간은 40분이고 지나면 즉시 제출합니다. 작도 순서를 미리 익혀 두세요. 화면 앞에서 순서를 고민하는 시간을 줄일 수 있어요.",
+   "en": "Knowing how the exam runs helps you prepare. You have 40 minutes and must submit as soon as time is up. Practise the drawing sequence in advance to reduce time spent deciding what to do next."
   },
   "where": {
    "ko": "부품은 7차시에서 이미 끝났습니다. 치수까지 들어간 A3 한 장이 손에 있어요. 이 차시는 그 한 장을 40분 안에 다시 만들 수 있는지를 봐요.",
@@ -29,8 +29,8 @@
    "en": "You can state all six items from memory: format, source material, time, scope, submission, and venue."
   },
   {
-   "ko": "40분 안에 템플릿부터 치수까지 끝내는 순서를 손에 붙여 둡니다. 화면 앞에서 무엇을 먼저 할지 고민하지 않습니다.",
-   "en": "You have the template-to-dimensions sequence in hand well enough that you never stop to think about order."
+   "ko": "40분 안에 템플릿부터 치수까지 끝내는 순서를 미리 익힙니다. 화면 앞에서 무엇을 먼저 할지 망설이지 않고 작도할 수 있습니다.",
+   "en": "You can practise the template-to-dimensions sequence in advance and complete it within 40 minutes without hesitating over what comes next."
   },
   {
    "ko": "숨은선과 실선이 겹치면 실선을 남기고, 치수는 정면도 외형선에서 최대한 뽑을 수 있습니다.",
@@ -1333,8 +1333,8 @@
     "en": "Appendix - map to the in-house course deck"
    },
    "lede": {
-    "ko": "사내 정본 교안이 표로 주는 것 중, 작도 차시에서 그때그때 쓰느라 한자리에 모이지 않았던 것들입니다. 시험 전에 여기만 훑어도 됩니다.",
-    "en": "The tables the in-house deck gives you, gathered in one place because the drawing lessons use them a few at a time. Skimming this before the exam is enough."
+    "ko": "사내 정본 교안의 표를 한자리에 모았습니다. 작도 차시마다 나누어 살펴봤던 내용이에요. 시험 전에 이 표들을 훑으며 복습하세요.",
+    "en": "The tables from the in-house course deck are gathered here. You covered them in separate drawing lessons. Review these tables before the exam."
    },
    "blocks": [
     {

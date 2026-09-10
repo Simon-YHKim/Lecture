@@ -19,6 +19,7 @@ copied from the deck into this repository.
 
 import json
 import os
+import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -55,6 +56,8 @@ def frame(stem, comp, line_no, items, build, fixed=None):
             spans = got
     _at[0] += dur
     html, asserts = build(comp, dur, spans)
+    html = re.sub(r'font-size:(\d+)px',
+                  lambda m: 'font-size:%dpx' % max(28, int(m[1])), html)
     put(stem + ".html", html)
     with open(os.path.join(FRAMES, stem + ".motion.json"), "w", encoding="utf-8", newline="\n") as fh:
         json.dump({"duration": dur, "assertions": asserts}, fh, ensure_ascii=False)
@@ -156,9 +159,9 @@ frame("03-how-assessed", "l1f3", 3, TASKS, build_task)
 # reads and nobody acts on.
 ROAD = [("1", "오리엔테이션", "지금 보고 있는 차시"),
         ("2", "부품 이해와 도면 환경", "부품이 왜 그 모양인지 읽고 A3 템플릿을 만든다"),
-        ("3", "기준선과 외곽", "좌표를 입력해 베이스와 목의 외곽을 그린다"),
-        ("4", "원·호·오프셋", "축 구멍, 보스, 장공, 필렛을 넣는다"),
-        ("5", "제3각법 3뷰와 반복", "투상해 세 뷰를 만들고 탭을 배열한다"),
+        ("3", "기준선과 외곽", "스냅과 길이 입력으로 베이스와 목의 외곽을 그린다"),
+        ("4", "원·호·오프셋", "축 구멍, 탭 배열, 장공, 필렛을 넣는다"),
+        ("5", "제3각법 3뷰", "폭과 높이를 옮겨 평면도와 우측면도를 그린다"),
         ("6", "편집과 표현", "남은 보조선을 정리하고 도면 기호를 읽는다"),
         ("7", "치수와 출도", "치수를 기입하고 축척을 확인해 내보낸다"),
         ("8", "시험 안내와 Q&amp;A", "시험이 어떻게 진행되는지와 자주 나온 질문")]
@@ -166,27 +169,26 @@ ROAD = [("1", "오리엔테이션", "지금 보고 있는 차시"),
 
 def build_roadmap(comp, dur, spans):
     rows = "".join('<tr class="rd rd%d"><td style="color:#C7004C;font-weight:600;width:74px">%s</td>'
-                   '<td style="color:#111;font-size:26px;width:34%%">%s</td>'
-                   '<td style="color:#666;font-size:24px">%s</td></tr>'
+                   '<td style="color:#111;font-size:28px;width:34%%">%s</td>'
+                   '<td style="color:#666;font-size:28px">%s</td></tr>'
                    % (i, n, t, d) for i, (n, t, d) in enumerate(ROAD, 1))
     body = (kit.header("03 · ROADMAP", "부품 하나를 끝까지 그리고 시험을 준비합니다",
                        "EDU-IB-02 아이들러 풀리 브래킷")
             + '\n      <main class="body" style="grid-template-rows:auto 1fr">'
             + '<section class="lead" style="font-size:30px;color:#666;max-width:1500px">'
-            + '차시마다 새 파일을 여는 것이 아니라, 지난 시간에 저장한 파일을 열어 이어 그립니다. '
-            + '한 차시를 놓치더라도 그 지점부터 이어 갈 수 있습니다.</section>'
+            + '지난 시간에 저장한 파일을 열어 다음 작업을 이어갑니다. '
+            + '다시 연습할 때도 저장한 지점부터 시작하세요.</section>'
             + '<section><table class="spec"><thead><tr><th>차시</th><th>주제</th><th>하는 일</th>'
             + '</tr></thead><tbody>' + rows + '</tbody></table></section></main>')
-    items = [beats.item(".rd%d" % i, kind="row") for i in range(1, len(ROAD) + 1)]
-    # The lead sentence is the third framing paragraph. Showing it at t=0 let the
-    # viewer finish reading it seventeen seconds before it was spoken, and the
-    # table header sat complete above an empty body for the same stretch.
-    lead_at = beats.segment_at(spans, 2)
+    items = [beats.item(".rd%d" % i, kind="row", read=1) for i in range(1, len(ROAD) + 1)]
+    # The introductory narration explains the whole course for thirty seconds.
+    # Show the complete map early, then emphasize each row at its spoken beat.
+    overview = beats.read_along(comp, items, spans, overview_at=2.5, unread=1)
     tl = "\n".join([
         beats.chrome(comp),
-        beats.cue(comp, ".lead", lead_at, dy=16),
-        beats.cue(comp, "thead", lead_at + 1.4, dy=8, dur=0.7, ease="power2.out"),
-        beats.read_along(comp, items, spans),
+        beats.cue(comp, ".lead", 1.0, dy=16),
+        beats.cue(comp, "thead", 1.8, dy=8, dur=0.7, ease="power2.out"),
+        overview,
         beats.outro(comp, dur),
     ])
     return kit.frame_html(comp, dur, body, tl), beats.assertions(comp, items, spans)

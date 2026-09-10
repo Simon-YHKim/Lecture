@@ -9,12 +9,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l2f9 .p-done",
-      "bySec": 4.6
+      "bySec": 4.0
     },
     {
       "kind": "appearsBy",
       "selector": "#l2f9 .p-next",
-      "bySec": 75.6
+      "bySec": 77.15
     },
     {
       "kind": "before",

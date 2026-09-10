@@ -5,7 +5,7 @@
   "ko": "부품 이해와 도면 환경",
   "en": "Reading the Part, Building the Sheet"
  },
- "videoLength": "33:41",
+ "videoLength": "36:46",
  "selfStudyMin": 130,
  "opens": null,
  "saves": "EDU-IB-02_L02_TEMPLATE",
@@ -33,8 +33,8 @@
    "en": "You can decide why each face is machined and finished differently by asking what touches it."
   },
   {
-   "ko": "형상 다섯 가지의 근거를 대고 치수 여덟과 기호 여덟을 읽을 수 있습니다.",
-   "en": "You can give the reason behind five shape decisions and read all eight dimensions and all eight symbols."
+   "ko": "형상 다섯 가지의 근거를 설명합니다. 치수 여덟과 기호 여덟의 뜻도 읽어 봅니다.",
+   "en": "Explain the reasons behind five shape decisions. Read the meaning of all eight dimensions and eight symbols."
   },
   {
    "ko": "acadiso.dwt 로 도면을 열고 레이어 네 개를 설정할 수 있습니다.",
@@ -370,8 +370,8 @@
       "en": "Front view. You can see the wide base at the bottom, the web in the middle, and the boss and bore above."
      },
      "alt": {
-      "ko": "정면도입니다. 아래에 가로로 긴 베이스가 있고 그 안에 좌우로 장공 두 개가 있습니다. 베이스 바깥 위 모서리 두 곳은 비스듬히 잘려 있습니다. 가운데에서 목이 올라가는데 밑이 넓고 위로 갈수록 좁아지며, 목과 베이스가 만나는 안쪽 모서리는 크게 둥글려져 있습니다. 목 위쪽에는 큰 원인 보스가 있고 그 안에 작은 축 구멍이 같은 중심으로 뚫려 있습니다. 축 구멍 둘레에는 작은 탭 구멍 네 개가 원을 따라 놓여 있고, 가로 세로 중심선이 그려져 있습니다.",
-      "en": "The front view. A long horizontal base sits at the bottom with two slots side by side inside it. The two outer top corners of the base are cut off at an angle. A web rises from the middle, wide at the foot and narrowing upward, and the inside corners where the web meets the base are generously rounded. Above the web is a large circle, the boss, with a smaller bore through it on the same center. Four small tapped holes sit on a circle around the bore, and horizontal and vertical centerlines are drawn."
+      "ko": "정면도입니다. 아래의 긴 베이스 안에 장공 두 개가 좌우로 놓입니다. 베이스 바깥 위 모서리 두 곳은 비스듬히 잘렸습니다. 가운데 목은 밑이 넓고 위로 갈수록 좁아집니다. 목과 베이스 사이의 안쪽 모서리는 크게 둥글렸습니다. 목 위에는 큰 원인 보스가 있습니다. 작은 축 구멍은 보스와 같은 중심에 뚫려 있습니다. 축 구멍 둘레에는 작은 탭 구멍 네 개가 원을 따라 놓입니다. 가로와 세로 중심선도 보입니다.",
+      "en": "Front view. Two slots sit side by side inside the long base at the bottom. Both outer top corners are chamfered. The central web is wide at the foot and narrows upward. Large rounds join its inside corners to the base. Above the web is the large circular boss, with a smaller concentric bore. Four small tapped holes follow a circle around the bore. Horizontal and vertical centerlines are also visible."
      }
     },
     {
@@ -1185,8 +1185,8 @@
       "ko": "오늘의 Tip",
       "en": "Tip of the day"
      },
-     "ko": "**`Esc` 로 끝내고 시작합니다.** 무슨 상태든 `Esc` 를 누르면 명령이 취소되고 선택도 풀립니다. 잘 모르겠으면 두 번 누르세요. 점을 여러 개 받는 명령은 마지막에 엔터를 한 번 더 눌러야 끝나고, 아무 명령도 없을 때 누르는 엔터는 **직전 명령을 다시 실행**합니다. 그리고 **한글 상태에서는 명령이 안 먹습니다.** `L` 이 `ㅣ` 로, `C` 가 `ㅊ` 으로 들어가요. 명령행에 그런 글자가 보이면 한/영 키로 영문에 놓고 다시 칩니다. 문자 쓰기를 마쳤으면 `Esc` 로 끝내고 한/영 키를 되돌리는 것까지가 한 묶음이에요.",
-     "en": "**End with `Esc`, then start.** Whatever state you are in, `Esc` cancels the command and clears the selection; press it twice if you are unsure. Commands that take several points need one more Enter at the end, and Enter on an empty command line **repeats the last command**. And **commands do not work while Korean input is on**: `L` arrives as a Korean letter. When you see that on the command line, switch back to English and retype. Ending text with `Esc` and switching the key back is one single habit."
+     "ko": "**`Esc` 로 끝내고 시작합니다.** 무슨 상태든 `Esc` 를 누르면 명령이 취소되고 선택도 풀립니다. 잘 모르겠으면 두 번 누르세요. 점을 여러 개 받는 명령은 마지막에 엔터를 한 번 더 눌러 끝냅니다. 명령행이 비었을 때 엔터를 누르면 **직전 명령이 다시 실행**됩니다. **한글 입력 상태에서는 명령이 안 먹습니다.** `L` 이 `ㅣ` 로, `C` 가 `ㅊ` 으로 들어가요. 이런 글자가 보이면 한/영 키로 영문에 놓고 다시 칩니다. 문자 쓰기를 마치면 `Esc` 로 끝내고 입력 언어도 되돌리세요. 여기까지가 한 묶음이에요.",
+     "en": "**End with `Esc`, then start.** `Esc` cancels the command and clears the selection. Press it twice if you are unsure. Commands that take several points need one more Enter to finish. Enter on an empty command line **repeats the last command**. **Commands do not work while Korean input is on.** `L` becomes `ㅣ`, and `C` becomes `ㅊ`. If you see these letters, switch to English and retype. After entering text, press `Esc` and switch the input language back. Treat these as one habit."
     }
    ]
   },
@@ -1417,8 +1417,8 @@
       "ko": "골뱅이는 왜 안 쓰나",
       "en": "Why no @"
      },
-     "ko": "상대좌표라는 표기가 있습니다. 앞에 골뱅이를 붙여 `@120,0` 처럼 씁니다. 앞에 찍은 점에서 얼마 갔는지를 적는 방식이에요. 이 과정에서는 쓰지 않습니다. 부호를 한 번 틀리면 반대로 그려지는데 화면을 봐도 왜 틀렸는지 모르고, 45도 모따기 같은 곳에서는 도면에 없는 계산값을 만들어 내야 합니다. 직교로 방향을 잡고 거리만 치면 부호가 아예 없어요.",
-     "en": "There is a notation called a relative coordinate, written with an @ as in `@120,0`: how far you went from the point before. This course does not use it. One wrong sign draws the opposite way and the screen does not tell you why, and at a 45-degree chamfer it forces you to compute values the drawing never states. Lock the direction with ortho and type the distance, and there is no sign to get wrong."
+     "ko": "상대좌표라는 표기가 있습니다. 앞에 골뱅이를 붙여 `@120,0` 처럼 씁니다. 앞에 찍은 점에서 얼마 갔는지를 적는 방식이에요. 이 과정에서는 쓰지 않습니다. 부호를 틀리면 반대로 그려집니다. 화면만 보고는 원인을 찾기 어렵습니다. 45도 모따기에서는 도면에 없는 계산값도 필요합니다. 직교로 방향을 잡고 거리만 치면 부호가 아예 없어요.",
+     "en": "Relative coordinates use an @, as in `@120,0`. They state how far to move from the previous point. This course does not use them. A wrong sign draws the opposite way, and the screen alone may not explain why. A 45-degree chamfer also needs calculated values absent from the drawing. Lock the direction with ortho and type the distance, and there is no sign to get wrong."
     }
    ]
   },
