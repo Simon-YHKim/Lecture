@@ -103,6 +103,7 @@ python scripts/part/narrate_tts.py <사본> --voice "Microsoft Zira Desktop" --o
 python scripts/part/retime_frames.py <사본>
 python scripts/part/prepare_lecture.py <사본> --out <렌더 폴더> --gsap <gsap.min.js> --preview
 python scripts/part/prepare_scene_checks.py <렌더 폴더> --out <장면 폴더>   # ← 긴 차시는 이것부터
+sh scripts/part/run_scene_checks.sh <장면 폴더> <이름표>
 npx hyperframes@0.8.33 check <렌더 폴더> --json --at-transitions
 ```
 
@@ -110,6 +111,17 @@ npx hyperframes@0.8.33 check <렌더 폴더> --json --at-transitions
 까지만 훑으므로 30분 차시는 6초에 한 번 본다. 그러면 2초짜리 등장이 통째로
 "늦게 나타남" 오류가 된다. `prepare_scene_checks.py` 가 장면별로 쪼개 준다.
 **레이아웃·대비 판정은 통짜 check 도 정확하다.**
+
+여섯 차시 71장면을 전부 돌렸다 — **오류 0**. 그 과정에서 **4차시 명령표의 행
+조건이 옛 값으로 남아 있던 것**을 찾았다(PR #41). 24개짜리 표는 두 쪽으로
+넘어가는데, 시각을 다시 맞추면 넘어가는 시점이 83.57→92.82초로 가지만 행 조건은
+`retime_frames.sync_motion` 이 못 찾아 국문 값으로 남았다. 행의 등장이 스물넉
+줄을 **한 선택자에 묶어** 부르기 때문이다. 지금은 그 행을 켜는 `tl.to` 를 본다.
+
+⚠ **검사는 메모리를 많이 먹는다.** 71장면을 한 번에 돌리다 두 번 끊겼다.
+`npx` 로 띄운 wrapper 가 끝나도 남아 크롬 자식까지 붙들고 있다(32개 · 약 0.8GB).
+`scripts/part/run_scene_checks.sh` 는 이미 통과한 장면을 건너뛰므로 끊긴 자리에서
+이어 돌린다.
 
 ### 이 세션의 영문 음성 길이 (Zira 1.15배, 실측)
 
@@ -134,7 +146,7 @@ npx hyperframes@0.8.33 check <렌더 폴더> --json --at-transitions
 | --- | --- | --- | --- |
 | A | 2~7차시 실제 AutoCAD 2024 녹화 | large | **사용자 몫.** 국문·영문 영상이 같이 막혀 있다 |
 | B | 작도 안내 P2 잔여 5건 | medium | 실제 조작·원본 대조 필요 → A 와 함께 |
-| C | 2~7차시 영문 **장면별** 모션 check 완주 | small | lint·runtime·layout·contrast 는 여섯 차시 전부 오류 0 · 경고 0 으로 확인했다. 모션만 남았다 |
+| C | ~~2~7차시 영문 장면별 check~~ **닫음** | — | 71장면 전부 통과. 그 과정에서 4차시 명령표의 행 조건이 옛 값으로 남아 있던 것을 찾아 고쳤다(PR #41) |
 
 ### 다음 세션 시작하는 법
 
