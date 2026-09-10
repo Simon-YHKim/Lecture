@@ -56,7 +56,8 @@ LINE = "#A4A3A4"
 
 _BEAT = re.compile(r"^\((\d+)")
 _LINE_HEAD = re.compile(r"^##+\s*Line\s+(\d+)")
-_STEP_HEAD = re.compile(r"^###\s+(\d+)단계")
+# 녹화 Line 의 단계 제목. 국문은 「### 3단계」, 영문은 「### Step 3」 이다.
+_STEP_HEAD = re.compile(r"^###\s+(?:Step\s+)?(\d+)(?:단계)?\b")
 
 
 def syllables(text):
