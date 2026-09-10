@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Follow-up after the first preview
+
+- Align lesson 7's recording captions with all 17 spoken steps, including the missing snap/ortho setup and final SAVEAS caption.
+- Correct the lesson 3 self-study layer description to green, matching the outer-line layer standard.
+- Preserve narration bindings when registering screen recordings and connect verified recordings during private lecture preparation.
+- Keep the first preview assets stable while preparing the remaining 15 recording episodes.
+
 ### Changed
 
 - Align all eight AutoCAD lesson scripts and self-study prose with the course's formal/conversational style balance, and update the self-study video durations.

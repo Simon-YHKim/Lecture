@@ -58,6 +58,14 @@ eight-lesson self-study package and one offline review HTML. The remaining
   `python scripts/selfstudy/build_deck_all.py <output.html> <temporary-directory> --standalone <gsap.min.js>`.
   Review transfer regression checks: `node --test scripts/selfstudy/test_review_transfer.cjs`.
 
+Recording intake preserves the existing narration bindings. Private lecture
+preparation verifies and copies registered recordings, retains the authored
+overlays, and rejects changed media or a duration differing from its measured
+slot by more than one source frame. It does not trim or retime recordings.
+See [the recording guide](projects/autocad-technician/RECORDING_GUIDE.md) before
+registering takes. The first preview assets remain a fixed review edition;
+follow-up source corrections do not replace those downloads automatically.
+
 ## Guardrails
 
 The repository uses three layers of protection:

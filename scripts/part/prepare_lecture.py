@@ -11,7 +11,9 @@ import math
 from pathlib import Path
 import re
 import shutil
+import tempfile
 
+import ingest_recording as recordings
 from lesson_docs import _SLOT
 from narrate_tts import private_output, verify_script_hash, wav_seconds
 from sync_narration import attach
@@ -21,6 +23,8 @@ GSAP_URL = re.compile(r'https://cdn\.jsdelivr\.net/npm/gsap@[\d.]+/dist/gsap\.mi
 EXTERNAL = re.compile(r'<(?:script|link|img|audio|video|iframe)\b[^>]*\b(?:src|href)=["\'](?:https?:)?//', re.I)
 EPISODE = re.compile(r'ep[1-9][0-9]*')
 FRAME_SOURCE = re.compile(r'compositions/frames/([a-zA-Z0-9_-]+)\.html')
+RECORDING = re.compile(r'<div class="rec"><div class="recmark">USER RECORDING</div>'
+                       r'<div class="recsub">(DEMO-01[A-H]?)\b[^<]*</div></div>')
 
 
 class CompositionTags(HTMLParser):
@@ -137,6 +141,77 @@ def motion_spec(lesson, index):
     return {'duration': round(duration, 3), 'assertions': assertions}
 
 
+def recording_parts(lesson, media):
+    path = lesson / 'recording.json'
+    if not path.is_file():
+        if any(str(key).startswith('DEMO-') for key in media):
+            raise ValueError('Recording bindings have no recording metadata')
+        return {}, None
+    original = path.read_bytes()
+    doc = json.loads(original)
+    parts = doc.get('parts', [])
+    expected = recordings.recording_ids(lesson.name)
+    if (doc.get('schemaVersion') != 2 or doc.get('lesson') != lesson.name
+            or not isinstance(parts, list) or any(not isinstance(p, dict) for p in parts)
+            or [p.get('demoId') for p in parts] != expected):
+        raise ValueError('Recording parts must match the complete canonical recording plan')
+    for part in parts:
+        duration, fps = part.get('durationSec'), part.get('fps')
+        if (not isinstance(duration, (int, float)) or not math.isfinite(duration) or duration <= 0
+                or not isinstance(fps, (int, float)) or not math.isfinite(fps) or not 1 <= fps <= 120
+                or not re.fullmatch(r'[0-9a-f]{64}', part.get('sha256', ''))
+                or not isinstance(media.get(part['demoId']), str)):
+            raise ValueError('Recording metadata needs complete durations, identities and local bindings; register again')
+    total = doc.get('durationSec')
+    if not isinstance(total, (int, float)) or not math.isfinite(total) or abs(total - sum(p['durationSec'] for p in parts)) > .003:
+        raise ValueError('Recording total duration differs from its parts')
+    return {p['demoId']: p for p in parts}, original
+
+
+def connect_recording(text, comp, length, part, media, used):
+    if not re.fullmatch(r'[a-zA-Z0-9_-]+', comp):
+        raise ValueError('Recording composition ID is not a safe HTML identifier')
+    matches = list(RECORDING.finditer(text))
+    if len(matches) != 1 or text.count('USER RECORDING') != 1:
+        raise ValueError('Recording placeholder does not match the authored frame')
+    wrappers = list(re.finditer(r'<section\b[^>]*>', text))
+    if len(wrappers) != 1 or wrappers[0].end() > matches[0].start():
+        raise ValueError('Recording needs one authored full-frame section')
+    wrapper = wrappers[0]
+    attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', wrapper[0]))
+    if float(attrs.get('data-start', 'nan')) != 0 or abs(float(attrs.get('data-duration', 'nan')) - length) > .002 or not math.isfinite(float(attrs.get('data-duration', 'nan'))):
+        raise ValueError('Recording section must cover the complete measured frame from zero')
+    demo_id = matches[0][1]
+    if demo_id not in part or demo_id in used:
+        raise ValueError('A recording must match exactly one canonical frame')
+    spec = part[demo_id]
+    source = recordings.recording_file(media[demo_id])
+    if recordings.file_sha256(source) != spec['sha256']:
+        raise ValueError('Recording identity changed; register again: ' + demo_id)
+    info = recordings.probe(source)
+    for key in ('durationSec', 'fps', 'width', 'height', 'codec', 'pixelFormat'):
+        if spec.get(key) != info[key]:
+            raise ValueError('Recording metadata differs from the actual stream: ' + demo_id)
+    tolerance = 1 / info['fps'] + .003
+    if abs(info['durationSec'] - length) > tolerance:
+        raise ValueError('Recording duration must match its measured slot within one source frame; '
+                         'no automatic trim or speed change: ' + demo_id)
+    if recordings.file_sha256(source) != spec['sha256']:
+        raise ValueError('Recording changed during validation: ' + demo_id)
+    relative = 'assets/recordings/' + demo_id + '.mp4'
+    # HyperFrames requires a timed video and rejects a plain timed ancestor.
+    # This section covers the whole scene, so its composition retains exactly
+    # the same visibility window when the redundant section start is removed.
+    text = text[:wrapper.start()] + re.sub(r'\sdata-start="[^"]*"', '', wrapper[0]) + text[wrapper.end():]
+    match = RECORDING.search(text)
+    video = ('<div class="rec"><video id="%s-recording" class="clip" src="%s" '
+             'data-start="0" data-duration="%s" data-media-start="0" data-volume="0" muted playsinline '
+             'style="position:absolute;inset:0;width:1920px;height:1080px;object-fit:contain">'
+             '</video></div>') % (comp, relative, format(length, '.3f').rstrip('0').rstrip('.'))
+    used[demo_id] = {'path': source, 'relative': relative, 'sha256': spec['sha256'], **info}
+    return text[:match.start()] + video + text[match.end():]
+
+
 def prepare(lesson, output, gsap, preview=False, episode=None):
     if episode is not None and (not isinstance(episode, str) or not EPISODE.fullmatch(episode)):
         raise ValueError('Episode must have the form ep1, ep2, ...')
@@ -144,17 +219,23 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
     output = private_output(output)
     if output.exists():
         raise ValueError('Choose a fresh output directory: ' + str(output))
-    timing = json.loads((lesson / 'narration-timing.json').read_text(encoding='utf-8'))
+    timing_original = (lesson / 'narration-timing.json').read_bytes()
+    script_original = (lesson / 'SCRIPT.md').read_bytes()
+    timing = json.loads(timing_original)
     verify_script_hash(lesson, timing)
     if not timing.get('spokenTextSha256'):
         raise ValueError('Regenerate speech to record its script identity before exporting')
-    media = json.loads((lesson / 'media.local.json').read_text(encoding='utf-8'))
-    playlists = {}
+    media_original = (lesson / 'media.local.json').read_bytes()
+    media = json.loads(media_original)
+    playlists, playlist_originals = {}, {}
     for playlist in [lesson / 'index.html', *sorted((lesson / 'compositions/episodes').glob('ep*.html'))]:
-        source = playlist.read_text(encoding='utf-8')
+        original = playlist.read_bytes()
+        # Match read_text's universal-newline behavior while hashing raw bytes.
+        source = original.decode('utf-8').replace('\r\n', '\n').replace('\r', '\n')
         if attach(source, timing) != source:
             raise ValueError('Playlist narration is stale; refresh timing: ' + playlist.name)
         playlists[playlist] = source
+        playlist_originals[playlist] = original
     entry = lesson / 'index.html'
     slots = _SLOT.findall(playlists[entry])
     stems = [stem for _, stem, _, _ in slots]
@@ -192,18 +273,34 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
             files += [local_file(lesson, 'compositions/frames/' + stem + suffix, 'compositions/frames')
                       for suffix in ('.html', '.motion.json')]
     prepared, hashes, missing_recordings = {}, {}, []
+    recording_specs, recording_original, used_recordings = None, None, {}
+    selected_slots = {stem: (comp, float(length)) for comp, stem, _, length in slots}
+    canonical_recordings = recordings.recording_frames(lesson.name)
     for source in files:
         relative = source.relative_to(lesson)
         content = source.read_bytes()
         hashes[relative.as_posix()] = hashlib.sha256(content).hexdigest()
         if source.suffix == '.html':
             text = GSAP_URL.sub('assets/vendor/gsap.min.js', content.decode('utf-8'))
+            if relative.parent == Path('compositions/frames') and source.stem in canonical_recordings:
+                matches = RECORDING.findall(text)
+                if matches != [canonical_recordings[source.stem]]:
+                    raise ValueError('Canonical recording placeholder is missing or has the wrong part ID')
             if episode is not None and source != entry:
                 tags = CompositionTags(text)
                 if tags.refs or tags.audio:
                     raise ValueError('Nested frame or audio references require an explicit export plan: ' + str(relative))
             if 'USER RECORDING' in text:
-                missing_recordings.append(relative.as_posix())
+                if recording_specs is None:
+                    recording_specs, recording_original = recording_parts(lesson, media)
+                if recording_specs:
+                    if source.stem not in selected_slots or relative.parent != Path('compositions/frames'):
+                        raise ValueError('Recording placeholder must belong to a selected canonical frame')
+                    comp, length = selected_slots[source.stem]
+                    text = connect_recording(text, comp, length, recording_specs, media, used_recordings)
+                    used_recordings[RECORDING.search(content.decode('utf-8'))[1]]['frame'] = source.stem
+                else:
+                    missing_recordings.append(relative.as_posix())
             if EXTERNAL.search(text):
                 raise ValueError('An external runtime dependency remains: ' + str(relative))
             content = text.encode('utf-8')
@@ -223,25 +320,57 @@ def prepare(lesson, output, gsap, preview=False, episode=None):
         'sourceFiles': hashes, 'audioFrames': len(wave_files),
         'audioFrameIds': selected_ids, 'audioSources': audio_sources,
         'audioSeconds': audio_seconds, 'duration': motion['duration'],
-        'validationSources': {p.relative_to(lesson).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-                              for p in [*playlists, lesson / 'media.local.json']},
+        'validationSources': {p.relative_to(lesson).as_posix(): hashlib.sha256(original).hexdigest()
+                               for p, original in {**playlist_originals,
+                                   lesson / 'media.local.json': media_original,
+                                   lesson / 'narration-timing.json': timing_original,
+                                   lesson / 'SCRIPT.md': script_original}.items()},
         'gsapSha256': hashlib.sha256(gsap.read_bytes()).hexdigest(),
         'purpose': 'validation-preview' if preview else 'lecture',
-        'missingRecordings': missing_recordings}
+        'missingRecordings': missing_recordings,
+        'recordingSources': {key: {field: value for field, value in spec.items() if field != 'path'}
+                             for key, spec in used_recordings.items()}}
+    if recording_original is not None:
+        manifest['validationSources']['recording.json'] = hashlib.sha256(recording_original).hexdigest()
+    for relative in hashes.keys() & manifest['validationSources'].keys():
+        if hashes[relative] != manifest['validationSources'][relative]:
+            raise ValueError('Source changed after validation: ' + relative)
     prepared[Path('source-manifest.json')] = (json.dumps(manifest, indent=2) + '\n').encode('utf-8')
     # All source identities and audio durations are checked before any copy.
-    output.mkdir(parents=True)
-    for relative, content in prepared.items():
-        dest = output / relative
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        dest.write_bytes(content)
-    (output / 'assets/narration').mkdir(parents=True)
-    for name, source in wave_files.items():
-        shutil.copyfile(source, output / 'assets/narration' / name)
-    (output / 'assets/vendor').mkdir(parents=True)
-    shutil.copyfile(gsap, output / 'assets/vendor/gsap.min.js')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.lecture-', dir=output.parent) as temp:
+        stage = Path(temp) / 'project'
+        for relative, content in prepared.items():
+            dest = stage / relative
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(content)
+        (stage / 'assets/narration').mkdir(parents=True)
+        for name, source in wave_files.items():
+            dest = stage / 'assets/narration' / name
+            shutil.copyfile(source, dest)
+            if recordings.file_sha256(dest) != audio_sources[name]['sha256']:
+                raise ValueError('Narration changed during export: ' + name)
+        for spec in used_recordings.values():
+            dest = stage / spec['relative']
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(spec['path'], dest)
+            if recordings.file_sha256(dest) != spec['sha256'] or recordings.file_sha256(spec['path']) != spec['sha256']:
+                raise ValueError('Recording changed during export')
+        (stage / 'assets/vendor').mkdir(parents=True)
+        shutil.copyfile(gsap, stage / 'assets/vendor/gsap.min.js')
+        if recordings.file_sha256(stage / 'assets/vendor/gsap.min.js') != manifest['gsapSha256']:
+            raise ValueError('GSAP changed during export')
+        if (lesson / 'media.local.json').read_bytes() != media_original:
+            raise ValueError('Media bindings changed during export')
+        for relative, identity in {**hashes, **manifest['validationSources']}.items():
+            if recordings.file_sha256(lesson / relative) != identity:
+                raise ValueError('Source changed during export: ' + relative)
+        if output.exists():
+            raise ValueError('Output appeared during export; choose a fresh directory')
+        stage.rename(output)
     return {'project': str(output), 'audioFrames': len(wave_files),
-            'audioSeconds': audio_seconds, 'duration': motion['duration'], 'sourceFiles': len(files)}
+            'audioSeconds': audio_seconds, 'duration': motion['duration'], 'sourceFiles': len(files),
+            'recordings': len(used_recordings)}
 
 
 def main():
