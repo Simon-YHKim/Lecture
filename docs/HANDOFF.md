@@ -6,11 +6,83 @@
 > 지난 블록은 월별로 내렸다 — [`docs/handoff-archive/`](handoff-archive/).
 > 최신 블록과 직전 블록만 이 파일에 둔다. 한 파일 100KB 를 넘기지 않기 위해서다.
 
-> 최종 갱신 **2026-09-11 02:20 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-11 04:35 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-11 (3차) / 영문 자습판 완료 · 영문 강의 착수 (PR #25~#32)
+## Latest — 2026-09-11 (4차) / 영문 강의가 굴러간다 — 1·8차시 영상 완성 · 프레임 지도 여덟 차시 (PR #34~#37)
+
+### 어디까지 왔나
+
+- main HEAD **`866f426`** · CI 초록 · 열린 PR 0 · 워킹 트리 깨끗.
+- **영문 1·8차시가 영상까지 나왔다.** 녹화가 필요 없는 두 차시다.
+  국문도 이 둘만 영상이 있으므로, 두 판의 진도가 같아졌다.
+- 사용자가 영문 낭독 속도를 **1.15배**로 정했다(1.38배 표본을 듣고 빠르다고 판단).
+  국문 1.38 은 그대로다. **국문도 내릴지는 사용자 확인 대기.**
+
+| 무엇 | 상태 |
+| --- | --- |
+| 영문 자습 교재 | **완료** (도해 영문 짝 161자리 · 넘침 0) |
+| 영문 도면 | **완료** (`--lang en` · 다섯 글자만 영문) |
+| 영문 프레임 지도 | **여덟 차시 973개 전부** |
+| 영문 대본 | **1·8차시 완료** · 2~7차시 남음 |
+| 영문 영상 | **1·8차시 완료** (6:04 · 6:50) |
+
+### 영문 강의를 만드는 길
+
+```bash
+python scripts/part/build_english_lesson.py <국문 차시> <비공개 사본>
+python scripts/part/narrate_tts.py <사본> --voice "Microsoft Zira Desktop" --out <새 폴더>
+python scripts/part/retime_frames.py <사본>
+python scripts/part/prepare_lecture.py <사본> --out <렌더 폴더> --gsap <gsap.min.js>
+npx hyperframes@0.8.33 check <렌더 폴더> --json --at-transitions
+npx hyperframes@0.8.33 render <렌더 폴더> --quality high --fps 30 --low-memory-mode --output <mp4>
+```
+
+**국문 프레임은 건드리지 않는다.** 사본에서만 갈아 끼운다. 필요한 것 둘 —
+`SCRIPT.en.md`(문단·비트가 국문과 같아야 한다)와 `scripts/part/frames_en/<차시>.json`.
+
+- 배속은 목소리를 따른다 — `TEMPOS = {Heami: 1.38, Zira: 1.15}`. 시각 파일에 적힌
+  목소리로 판정하므로 국문 시각은 그대로 통과한다.
+- 번역 단위는 **한 문장을 담은 가장 바깥 요소**다. `<b>` 강조가 섞여도 한 단위다.
+  자리는 글자 찾기가 아니라 **파싱한 오프셋**으로 덮는다.
+
+### 남은 것 — 영문 대본 2~7차시
+
+문단 수가 국문과 한 개라도 다르면 그 차시의 강조 시점이 통째로 밀린다.
+`test_script_editions.py` 가 Line·문단·비트 번호를 검사한다.
+
+| 차시 | 문단 | 비고 |
+| --- | --- | --- |
+| 2 | 130 | Line 8 이 16단계 42문단 |
+| 3 | 85 | Line 5 가 40문단 |
+| 4 | 100 | Line 5 가 47문단 |
+| 5 | 105 | Line 5 가 64문단 |
+| 6 | 104 | Line 5 가 58문단 |
+| 7 | 103 | Line 5 가 56문단 |
+
+합계 **627문단**. 국문 대본 한글 61,872자에 대응한다.
+
+### 사용자 확인 대기
+
+- **국문 낭독도 1.15 로 내릴까.** 지금은 영문만 1.15 다. 국문까지 내리면 8차시
+  음성을 다시 합성하고 프레임 시각을 다시 맞춰야 하며, 공개된 첫 판과 달라진다.
+- 저장소 루트의 추적 파일 **`--help`** (31,150B · 참조 0) 삭제 여부.
+- 머지 끝난 원격 브랜치 정리 여부.
+
+### 다음 세션 시작하는 법
+
+```bash
+git fetch origin main && git pull --ff-only origin main
+cat docs/HANDOFF.md
+python scripts/selfstudy/check_english.py            # 통과여야 한다
+python scripts/part/frame_text.py projects/autocad-technician/lesson-02-part-and-template --map scripts/part/frames_en/lesson-02-part-and-template.json
+# 2차시 SCRIPT.en.md 부터. 1·8차시를 본보기로 삼는다.
+```
+
+---
+
+## 2026-09-11 (3차) / 영문 자습판 완료 · 영문 강의 착수 (PR #25~#32)
 
 ### 어디까지 왔나
 
