@@ -32,6 +32,16 @@ published only as a numbers-only derivative such as `narration-timing.json`, whi
 carries scene identifiers, start and end seconds, and cue keys, and never carries
 spoken text.
 
+### Approved release downloads
+
+On 2026-09-10 the course author authorized completed lecture videos and self-study
+files to be distributed through GitHub Releases after the work is complete and
+merged. Reviewed delivery files may be attached to a release with a file manifest
+and SHA-256 checksums. This does not add media to Git history or authorize bulk
+publication of original materials, separate narration WAVs, transcripts or font
+binaries. The latest delivery scope and remaining work are recorded in
+[`docs/HANDOFF.md`](docs/HANDOFF.md).
+
 ## Guardrails
 
 The repository uses three layers of protection:

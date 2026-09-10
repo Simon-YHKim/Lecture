@@ -19,6 +19,7 @@
 - Keep reference-table text readable before and after narration while preserving row background emphasis and all scene timing.
 - Reject stale scripts, missing audio identities, changed WAV files, and invalid timing before private lecture export.
 - Share SVG definitions once in the combined workbook to avoid duplicate drawing IDs.
+- Open lesson tabs within the combined workbook instead of following missing separate-page links.
 
 ### Added
 
