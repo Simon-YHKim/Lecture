@@ -52,6 +52,8 @@ _ROW_OPACITY = re.compile(r'(\bopacity\s*:\s*)(0?\.34|0?\.64)(?![\d.])')
 _ROW_CLEAR = re.compile(r'''(\bbackgroundColor\s*:\s*)(['"])rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\)\2''')
 _ROW_TINT = re.compile(r'''\bbackgroundColor\s*:\s*(['"])(?:#F5F5F3|#FFF|rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\))\1''', re.I)
 _ROW_SEED = re.compile(r'gsap\.set\(gsap\.utils\.toArray\([^\n]+; // row-readability-background\r?\n')
+# 두 쪽짜리 명령표의 행. `#l4f8 .ky13` 처럼 생겼다.
+_KEY_ROW = re.compile(r'#[\w-]+\s+\.ky\d+\Z')
 
 
 class _RowTargets(HTMLParser):
@@ -496,6 +498,19 @@ def sync_motion(frame_path, dur, beats=None):
                     # An entrance tied to measured speech can move later when
                     # the script grows. Keep the deadline tied to that beat.
                     a['bySec'] = round(at + 2.4, 3)
+    if beats:
+        # 두 쪽짜리 명령표(24개)의 행 조건은 만든 쪽에서 「그 행이 켜지는 박자
+        # + 3초」로 적힌다. 그런데 행의 등장 트윈은 스물넉 줄을 한 선택자에 묶어
+        # 부르므로 바로 위의 규칙이 `#l4f8 .ky13` 을 못 찾는다. 그래서 시각을 다시
+        # 맞춰도 조건만 옛 값으로 남았고, 4차시 영문판에서 13·14행이 「나타나야 할
+        # 때보다 6초 늦게 나타남」으로 잡혔다. 대신 그 행을 켜는 tl.to 를 본다.
+        # 뒤쪽 쪽으로 넘어가는 시점도 13번 박자라 두 쪽 모두 이 값이 맞다.
+        for a in doc['assertions']:
+            if a['kind'] != 'appearsBy' or not _KEY_ROW.match(a.get('selector', '')):
+                continue
+            call = first_calls.get(a['selector'])
+            if call and call.group('kind') == 'to' and 'opacity:1' in call.group('mid'):
+                a['bySec'] = round(float(call.group('time')) + 3, 2)
     explicit = re.search(r'// narration-beats: (\[[^\n]+\])', source)
     if explicit and beats:
         groups = json.loads(explicit.group(1))
