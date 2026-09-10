@@ -58,10 +58,6 @@ validation. Catalog durations describe the measured narration timeline, not
 guaranteed hands-on completion time. English text already present in the
 workbook is a draft, not a completed English course.
 
-The revision report is
-[`revision-20260910-report.html`](docs/autocad-technician/revision-20260910-report.html).
-Download the report to switch between Korean/English and easy/expert explanations.
-
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
   for slide, element or common notes, **N** to edit the script, and **P** to
