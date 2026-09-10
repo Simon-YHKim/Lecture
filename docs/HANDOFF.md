@@ -3,11 +3,81 @@
 이 파일이 세션 간 인수인계의 정본이다. 세션을 시작하면 먼저 읽고, 끝낼 때 갱신한다.
 최신 블록만 `## Latest` 를 달고, 이전 블록은 `## <날짜>` 로 내린다.
 
-> 최종 갱신 **2026-09-11 00:21 KST** · Claude Opus 5 · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-11 00:58 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-11 / AutoCAD 2024 개편이 **미커밋 상태**로 작업 트리에만 있다
+## Latest — 2026-09-11 (2차) / 개편분을 회수해 main 에 넣었다 (PR #23)
+
+### 어디까지 왔나
+
+- main HEAD **`cfcda5f`** (PR #23 merge) · CI 초록. 열린 PR 0 · 워킹 트리 깨끗.
+- 회수 경로 — 다른 PC(`C:\Lecture`)의 미커밋 250+9 파일을 사용자가 `codex/autocad2024-revision`
+  브랜치로 push → 이 세션이 검증·수정하고 PR #23 으로 머지했다. **앞 블록의 유실 위험은 닫혔다.**
+- 들어간 규모 — 260파일 **+20,924 / −7,026** · 추가 9 · 수정 251 · **삭제 0 · 리네임 0**.
+- **작업 PC 가 바뀌었다.** 이 세션은 `E:\Lecture` 다. `C:\Lecture` · `C:\LectureDelivery` ·
+  `C:\Users\Soha.Bae` 는 **이 PC 에 없다.** 저장소 밖 산출물(1·8차시 개정 MP4 · WAV ·
+  개편 보고서 · 촬영 큐)은 전부 그 PC 에만 있다 — 필요하면 회수하거나 여기서 다시 만든다.
+
+### 이 PC 환경 — 앞 블록의 함정 표는 그 PC 한정이다
+
+| 무엇 | 값 |
+| --- | --- |
+| Python | **3.12.10 · `python` 이 PATH 에 있다.** `check-course-projects.ps1` 이 그대로 돈다 |
+| node · FFmpeg | 24.14.1 · 8.1.1 (`ffmpeg`·`ffprobe` 둘 다 PATH) |
+| SAPI 음성 | **Heami(한국어) + Zira(영어)** — 영문판 TTS 를 여기서 만들 수 있다 |
+| 그 외 | Chrome · gh 로그인됨 · Playwright MCP(headless) |
+
+⚠ Git Bash 에서 Python 한글 출력이 cp949 로 깨진다. **`PYTHONIOENCODING=utf-8` 를 붙인다.**
+
+### 이 세션이 고친 것 둘
+
+1. **회수 커밋의 CI 실패** — `test_narration_identity` 의 「합성 중 대본이 바뀌면 timing 을 쓰지
+   않는다」 검사가 FFmpeg 없는 러너에서 tempo 사전 점검(`Local FFmpeg is required...`)에 먼저
+   걸렸다. 그 조사만 stub 해 **낭독 원문 동일성만이 실패 원인**이 되게 했다.
+   FFmpeg 를 PATH 에서 감춘 CI 동형 실행으로 확인했다 — 7 / 91(skip 8) / 22, CI 개수와 일치한다.
+2. **README 끊긴 링크** — 저장소에 없는 `docs/autocad-technician/revision-20260910-report.html`
+   를 가리키던 문단을 걷어냈다. README 의 남은 로컬 링크는 전부 실재한다(스크립트로 확인).
+
+### 검증 (이 PC 실행값)
+
+```
+Python 136개 통과       scripts 7 · scripts/part 107 · scripts/selfstudy 22
+node 8개 통과           test_review_transfer.cjs
+CI 동형(FFmpeg 감춤)     7 / 91(skip 8) / 22 통과
+과정 검사 통과           8차시 78프레임 181:49   ← 1.38배 반영 전 247:52
+규격 검사 통과(문서 18개) · 판 대조 통과
+가드 자체검사 통과 · 비공개 자료 전수 검사 통과 · 커밋마다 staged 검사 통과
+```
+
+### 다음 작업 큐
+
+| # | 작업 | 크기 | 권장 |
+| --- | --- | --- | --- |
+| A | **2~7차시 실제 AutoCAD 2024 녹화** | large | ⭐ 남은 15편의 전제. **사용자 몫** — 이 PC 에도 AutoCAD 가 없다 |
+| B | 영문판 자습·슬라이드·대본·영상 | large | 정책상 국문 완성 후. **Zira 음성이 이 PC 에 있어 실행 가능** |
+| C | 작도 안내 P2 잔여 5건 | medium | 실제 조작·원본 대조 필요 → A 와 함께 |
+| D | 개편 보고서 HTML (사용자 검수용) | small | 그 PC 의 보고서를 못 가져오면 여기서 다시 만든다 |
+| E | **`docs/HANDOFF.md` 분할** | small | **92.7KB / 100KB.** 다음 블록이면 상한을 넘는다 — 옛 블록을 `docs/handoff-archive/` 로 내린다 |
+
+### 사용자 확인 대기
+
+- **E(핸드오프 분할)** — 상한을 넘기 직전이라 이번 응답에서 물었다.
+- 저장소 루트의 추적 파일 **`--help`** (31,150B · `d47cfe0` 에서 리다이렉트 사고로 유입 ·
+  참조 0) 삭제 여부. §7 정지 조건(파일 삭제)이라 묻고 진행한다.
+- 머지 끝난 원격 브랜치 정리 여부. `codex/heami-course-sync` 는 다른 세션이 쓸 수 있어 남기길 권한다.
+
+### 다음 세션 시작하는 법
+
+```bash
+git fetch origin main && git pull --ff-only origin main
+cat docs/HANDOFF.md
+# 큐 A 는 사용자 녹화 대기. 에이전트가 지금 진행할 수 있는 것은 B · D 다.
+```
+
+---
+
+## 2026-09-11 (1차) / AutoCAD 2024 개편이 **미커밋 상태**로 작업 트리에만 있었다 — 2차 블록에서 회수됨
 
 ### 어디까지 왔나
 - main HEAD: `534aaddba060ca025200f1cd0f5bbfe7ff3ce67c` — PR #21 (`fix: preserve narration and connect verified practice recordings`) merge 완료.
