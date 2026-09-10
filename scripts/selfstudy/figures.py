@@ -24,6 +24,10 @@ PROFILES = [('front', ['--profile', 'front']),
             ('frontdim', ['--profile', 'frontdim']),
             ('three', [])]
 
+# 판의 언어. 영문판은 도면의 다섯 글자(탭·장공 표기와 뷰 이름)를 영문으로 받는다.
+# 학습자가 도면의 글자를 그대로 보고 타이핑하므로 본문이 인용하는 표기와 같아야 한다.
+LANG = os.environ.get('SELFSTUDY_LANG', 'ko')
+
 STYLE = ''   # .dwg 규칙은 base.css 한 곳에만 둔다 — 도해마다 복사하지 않는다
 
 DROP = re.compile(r'<(?:path|line|circle|rect)[^>]*class="(?:hl|chk)"[^>]*/>\s*')
@@ -46,9 +50,12 @@ VIEW_LABELS = [('>평면도<', '>평면도 TOP<'),
                ('>우측면도<', '>우측면도 RIGHT<')]
 
 
-def adapt(svg, keep_features=False, keep_hl=False):
-    for a, b in VIEW_LABELS:
-        svg = svg.replace(a, b)
+def adapt(svg, keep_features=False, keep_hl=False, lang=None):
+    # 국문 도면은 뷰 이름에 영문을 나란히 붙인다. 영문 도면은 이미 영문 이름을
+    # 달고 나오므로 붙이지 않는다.
+    if (lang or LANG) != 'en':
+        for a, b in VIEW_LABELS:
+            svg = svg.replace(a, b)
     if not keep_hl:
         svg = DROP.sub('', svg)
     svg = BG.sub('', svg)
@@ -61,7 +68,7 @@ def adapt(svg, keep_features=False, keep_hl=False):
     return svg.strip()
 
 
-def build_map(keep_hl=False):
+def build_map(keep_hl=False, lang=None):
     """정본 생성기를 돌려 {이름: svg} 로 돌려준다. 저장소에 .svg 파일을 남기지 않는다.
 
     `keep_hl` 은 강조 겹선(.hl)과 형상 이름(data-feature)을 남긴다. 슬라이드가
@@ -77,11 +84,12 @@ def build_map(keep_hl=False):
     try:
         out = {}
         tmp = os.path.join(tmpdir, 'raw.svg')
+        want = lang or LANG
         for name, args in PROFILES:
-            subprocess.run([sys.executable, GEN, tmp] + args,
+            subprocess.run([sys.executable, GEN, tmp] + args + ['--lang', want],
                            check=True, capture_output=True)
             out[name] = adapt(io.open(tmp, encoding='utf-8').read(),
-                              keep_features=keep_hl, keep_hl=keep_hl)
+                              keep_features=keep_hl, keep_hl=keep_hl, lang=want)
         return out
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
