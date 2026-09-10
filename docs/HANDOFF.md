@@ -14,7 +14,9 @@
 
 ### 어디까지 왔나
 
-- main HEAD: `43024ae` · **워킹 트리 깨끗하다.** 다른 세션은 `git pull origin main` 이면 된다.
+- 마지막 **내용** 커밋 `32e2fb7` (PR #16). 이 문서는 그 뒤에 얹힌다 —
+  핸드오프 커밋은 제 SHA 를 못 적으므로 **`git rev-parse --short origin/main` 이 정본**이다.
+- **워킹 트리 깨끗하다.** 다른 세션은 `git pull origin main` 이면 된다.
 - 이번 세션 머지된 PR: **#13**(정본 교안 반영) · **#14**(제3각법 코치 마크) ·
   **#15**(핸드오프) · **#16**(검수 라운드) · **#17**(이 문서).
 - CI `private-materials-guard` — main 의 세 커밋 모두 green.
