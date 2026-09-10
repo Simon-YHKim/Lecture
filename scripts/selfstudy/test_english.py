@@ -47,6 +47,25 @@ class EnglishEditionTests(unittest.TestCase):
             with self.subTest(text=text[:32]):
                 self.assertEqual(check_english.violations('t.json', '/x', '보기', text), [])
 
+    def test_figure_text_is_paired(self):
+        """도해의 한글 글자마다 같은 자리에 영문 글자가 있어야 한다."""
+        svg = ('<svg viewBox="0 0 10 10">'
+               '<text class="a k" x="1" y="1">외형선</text>'
+               '<text class="a e" x="1" y="1">visible line</text></svg>')
+        self.assertEqual(check_english.figure_rows(svg, 't.json', '/x'), [])
+
+    def test_unpaired_figure_text_is_caught(self):
+        svg = '<svg viewBox="0 0 10 10"><text x="1" y="1">외형선</text></svg>'
+        self.assertTrue(check_english.figure_rows(svg, 't.json', '/x'))
+
+    def test_duplicated_class_attribute_is_caught(self):
+        """`class` 가 두 번이면 파서가 뒤엣것을 버려 짝이 무효가 된다."""
+        svg = ('<svg viewBox="0 0 10 10">'
+               '<text class=\'a\' x="1" class="k">외형선</text>'
+               '<text class=\'a\' x="1" class="e">visible line</text></svg>')
+        found = check_english.figure_rows(svg, 't.json', '/x')
+        self.assertEqual(len(found), 2)
+
     def test_source_files_stay_valid_json(self):
         for name in self.files():
             with self.subTest(file=name):
