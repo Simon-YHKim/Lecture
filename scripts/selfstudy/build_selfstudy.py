@@ -183,8 +183,15 @@ def coach_figure(st, ctx):
     only = {n for a in st.get('actions', []) for n in _coach.spot_badges(a)} or None
     body, _caps = _coach.marks(spots, surface, only)
     temporary = _coach.construction_for(st, surface)
-    head = ('지금 그리는 것 — <b>%s</b>' % esc(_coach.FEATURE_KO[feature])) \
-        if feature in _coach.FEATURE_KO else '도면 위에서 지금 잡을 자리'
+    # 교재는 두 언어를 한 파일에 담는다. 이 머리글만 한쪽 언어로 박혀 있어
+    # 영문판에서도 한국어로 섰다 — 바로 아래 두 줄은 이미 두 쪽을 다 낸다.
+    if feature in _coach.FEATURE_KO:
+        head = ('<span class="k">지금 그리는 것 — <b>%s</b></span>'
+                '<span class="e">Drawing now — <b>%s</b></span>'
+                % (esc(_coach._FEATURE_KO[feature]), esc(_coach._FEATURE_EN[feature])))
+    else:
+        head = ('<span class="k">도면 위에서 지금 잡을 자리</span>'
+                '<span class="e">Where to catch it on the drawing</span>')
     if temporary:
         head += ' · <span class="k">점선: 이 단계의 임시선·가공 전 선</span><span class="e">Dashed: temporary or pre-edit lines</span>'
     if st.get('diagramOnly'):
