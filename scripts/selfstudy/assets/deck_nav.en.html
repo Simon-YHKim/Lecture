@@ -1,0 +1,362 @@
+<style>
+html,body{height:100%;overflow:hidden;background:#0B0A0A}
+/* scale() shrinks what you see but not the layout box, so a 1920x1080 slide
+   centred by the grid still overflows. Pin it and translate from its own middle. */
+/* 메모와 노트가 열리면 무대가 그만큼 물러난다. 덮으면 가려서 검수를 못 한다. */
+:root{--mmw:0px;--noteh:0px;--dltop:0px;--noteH:clamp(150px,24vh,250px)}
+#stage{position:fixed;top:var(--dltop);left:0;right:var(--mmw);bottom:calc(56px + var(--noteh));
+  overflow:hidden;transition:right .16s ease,bottom .16s ease,top .16s ease}
+#stage [data-composition-id]{display:none;position:absolute;left:50%;top:50%;
+  right:auto;bottom:auto;transform-origin:center center;box-shadow:0 0 0 1px #1d1a1b}
+#stage [data-composition-id].on{display:block}
+#bar{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;
+  gap:14px;padding:0 20px;background:#0B0A0A;border-top:1px solid #1d1a1b;
+  font:14px/1 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif;color:#A4A3A4;z-index:9}
+#bar button{font:inherit;padding:8px 14px;border:1px solid #4a4446;border-radius:4px;
+  background:#151314;color:#F5F5F3;cursor:pointer;min-height:36px}
+#bar button:hover{border-color:#C7004C;color:#C7004C}
+#bar button:focus-visible{outline:3px solid #C7004C;outline-offset:2px}
+#bar .sp{flex:1}
+#pos{font-variant-numeric:tabular-nums;color:#F5F5F3}
+#lsn{font:inherit;padding:7px 10px;border:1px solid #4a4446;border-radius:4px;
+  background:#151314;color:#F5F5F3;max-width:20vw}
+#lsn:focus-visible{outline:3px solid #C7004C;outline-offset:2px}
+#lab{max-width:44vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#note{position:fixed;left:0;right:var(--mmw);bottom:56px;padding:12px 20px 14px;
+  background:#151314;border-top:1px solid #262223;color:#DCDBD7;
+  font:15px/1.6 "LG EI Text TTF Regular","Malgun Gothic",system-ui,sans-serif;
+  display:none;z-index:9;height:var(--noteH);overflow:hidden;
+  grid-template-rows:auto minmax(0,1fr)}
+#note.on{display:grid}
+#notebar{display:flex;align-items:center;gap:9px;padding-bottom:9px;margin-bottom:9px;
+  border-bottom:1px solid #262223;font-size:12px;color:#8A8788}
+#notebar .sp{flex:1}
+#notebar button{font:inherit;font-size:12px;padding:4px 9px;border:1px solid #4a4446;
+  border-radius:4px;background:#1d1a1b;color:#F5F5F3;cursor:pointer}
+#notebar button:hover{border-color:#C7004C;color:#C7004C}
+#notebar button:focus-visible{outline:3px solid #C7004C;outline-offset:2px}
+#notemark{color:#C7004C}
+/* 고칠 때만 상자가 보인다. 읽을 때는 그냥 글이다. */
+#notetext{white-space:pre-wrap;min-height:1.6em;border-radius:4px;overflow:auto;
+  padding-right:6px}
+#notetext[contenteditable="true"]{background:#0E0D0E;border:1px solid #C7004C;
+  padding:9px 10px;outline:none;color:#FFF}
+@media print{#bar,#note{display:none}#stage{position:static;inset:auto}
+  #stage [data-composition-id]{display:block;page-break-after:always;transform:none!important}}
+</style>
+<div id="bar">
+  <button id="prev" aria-label="Previous">&#8592;</button>
+  <button id="next" aria-label="Next">&#8594;</button>
+  <select id="lsn" aria-label="Lesson" hidden></select>
+  <span id="pos">1 / 1</span><span id="lab"></span>
+  <span class="sp"></span>
+  <button id="play" aria-label="Play">&#9654; Play P</button>
+  <button id="nb">Notes N</button>
+  <button id="fs">Full screen F</button>
+</div>
+<div id="note" role="note">
+  <div id="notebar">
+    <span>Presenter notes · script</span><span id="notemark" hidden>edited</span>
+    <span class="sp"></span>
+    <button id="noteedit" type="button">Edit</button>
+    <button id="notereset" type="button" hidden>Revert</button>
+  </div>
+  <div id="notetext"></div>
+</div>
+<script>
+(function () {
+  var island = JSON.parse(document.querySelector(
+    'script[type="application/hyperframes-slideshow+json"]').textContent);
+  var stage = document.createElement('div');
+  stage.id = 'stage';
+  document.body.appendChild(stage);
+
+  var slides = island.slides.filter(function (s) {
+    return document.querySelector('[data-composition-id="' + s.sceneId + '"]');
+  });
+  var scenes = slides.map(function (s) {
+    return document.querySelector('[data-composition-id="' + s.sceneId + '"]');
+  });
+  scenes.forEach(function (el) { stage.appendChild(el); });
+
+  var i = 0, frag = 0;
+
+  // ── 발표자 노트 = 대본. 읽기만 하는 글이 아니라 고쳐서 돌려줄 수 있는 글이다.
+  // 고친 것은 원문과 나란히 남겨 두었다가 프롬프트에 「원문 → 고친 글」로 낸다.
+  var SKEY = 'acad-deck-script:' + (location.pathname.split('/').pop() || 'deck')
+    + (island.reviewId ? ':' + island.reviewId : '');
+  var edits = (function () {
+    try { return JSON.parse(localStorage.getItem(SKEY) || '{}'); }
+    catch (e) { return {}; }
+  })();
+  var noteEl = document.getElementById('note');
+  var noteText = document.getElementById('notetext');
+  var noteMark = document.getElementById('notemark');
+  var btnEdit = document.getElementById('noteedit');
+  var btnReset = document.getElementById('notereset');
+  var savedOK = true;
+
+  function saveEdits() {
+    try { localStorage.setItem(SKEY, JSON.stringify(edits)); savedOK = true; }
+    catch (e) { savedOK = false; }
+    return savedOK;
+  }
+
+  function paintNote(slide) {
+    var id = slide.sceneId;
+    var has = Object.prototype.hasOwnProperty.call(edits, id);
+    noteText.textContent = has ? edits[id] : (slide.notes || '');
+    noteText.setAttribute('contenteditable', 'false');
+    noteText.dataset.scene = id;
+    btnEdit.textContent = 'Edit';
+    noteMark.hidden = !has;
+    btnReset.hidden = !has;
+  }
+
+  function captureEdit() {
+    if (noteText.getAttribute('contenteditable') !== 'true') return;
+    var id = noteText.dataset.scene;
+    var source = slides.find(function (s) { return s.sceneId === id; });
+    if (!source) return;
+    var now = noteText.textContent.replace(/ /g, ' ').trim();
+    if (now !== (source.notes || '').trim()) edits[id] = now;
+    else delete edits[id];
+    saveEdits();
+  }
+  noteText.addEventListener('input', captureEdit);
+
+  btnEdit.addEventListener('click', function () {
+    var on = noteText.getAttribute('contenteditable') === 'true';
+    if (on) {
+      captureEdit();
+      paintNote(slides[i]);
+      if (!savedOK) noteMark.hidden = false;
+    } else {
+      noteText.setAttribute('contenteditable', 'true');
+      noteText.focus();
+      btnEdit.textContent = '저장';
+    }
+  });
+  btnReset.addEventListener('click', function () {
+    delete edits[noteText.dataset.scene];
+    saveEdits();
+    paintNote(slides[i]);
+  });
+
+  // 메모 패널이 「대본 수정 제안」을 조립할 때 쓴다.
+  window.__deckScript = {
+    capture: captureEdit,
+    replace: function (next) {
+      edits = Object.assign(Object.create(null), next);
+      saveEdits();
+      paintNote(slides[i]);
+      return savedOK;
+    },
+    count: function () { return Object.keys(edits).length; },
+    list: function () {
+      captureEdit();
+      var out = [];
+      slides.forEach(function (s, n) {
+        if (!Object.prototype.hasOwnProperty.call(edits, s.sceneId)) return;
+        var el = scenes[n];
+        out.push({
+          sceneId: s.sceneId,
+          n: n + 1,
+          label: (el && el.getAttribute('data-label')) || s.sceneId,
+          orig: s.notes || '',
+          now: edits[s.sceneId]
+        });
+      });
+      return out;
+    },
+    saved: function () { return savedOK; }
+  };
+
+  // 여러 차시를 한 파일로 엮었으면 아래 막대에서 차시를 고를 수 있게 한다.
+  var sel = document.getElementById('lsn');
+  if (island.lessons && island.lessons.length > 1) {
+    island.lessons.forEach(function (L) {
+      var o = document.createElement('option');
+      o.value = String(L.at - 1);
+      o.textContent = 'Lesson ' + L.no + ' · ' + L.title;
+      sel.appendChild(o);
+    });
+    sel.hidden = false;
+    sel.addEventListener('change', function () {
+      if (window.__deckStop) window.__deckStop();
+      i = Math.max(0, Math.min(scenes.length - 1, parseInt(sel.value, 10) || 0));
+      frag = 0;
+      paint();
+    });
+  }
+
+  function markLesson() {
+    if (sel.hidden) return;
+    var at = 0;
+    island.lessons.forEach(function (L) { if (i >= L.at - 1) at = L.at - 1; });
+    if (sel.value !== String(at)) sel.value = String(at);
+  }
+
+  function fit() {
+    // 창이 아니라 무대에 남은 자리로 잰다. 패널이 열리면 무대가 좁아지고
+    // 슬라이드도 같이 줄어야 가려지지 않는다.
+    var box = stage.getBoundingClientRect();
+    var s = Math.min((box.width || 1) / 1920, (box.height || 1) / 1080);
+    scenes.forEach(function (el) {
+      el.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+    });
+  }
+  // 패널이 열고 닫힐 때 무대 크기가 바뀐다. 그때마다 다시 맞춘다.
+  window.__deckFit = fit;
+  function layout() {
+    var n = document.getElementById('note');
+    // 노트 높이는 고정이다. 글이 길면 노트 안에서 굴린다. 그래야 무대가 들썩이지 않고,
+    // 긴 대본이 슬라이드를 밀어내지도 않는다.
+    var h = n.classList.contains('on') ? Math.ceil(n.getBoundingClientRect().height) : 0;
+    document.documentElement.style.setProperty('--noteh', h + 'px');
+    // 전환이 끝난 뒤의 크기로 맞춰야 한 번에 정확히 앉는다.
+    fit();
+    setTimeout(fit, 180);
+  }
+  window.__deckLayout = layout;
+
+  // The composition's timelines are paused and hold the "from" state, so a slide
+  // is blank until its own timeline is advanced. Fragments step through it.
+  function paint() {
+    captureEdit();
+    scenes.forEach(function (el, n) { el.classList.toggle('on', n === i); });
+    var slide = slides[i];
+    var t = (window.__timelines || {})[slide.sceneId];
+    if (t) {
+      // Seek by time, not by fraction. A lesson frame's timeline ends with its
+      // own out-transition -- progress(1) is the frame after it has faded, which
+      // is a blank slide. Fragments are absolute times on the deck clock, so the
+      // frame's own clock is that minus where the deck put it.
+      var el = scenes[i];
+      var start = parseFloat(el.getAttribute('data-start')) || 0;
+      var dur = parseFloat(el.getAttribute('data-duration')) || t.duration();
+      var f = slide.fragments || [];
+      var k = Math.min(frag, f.length - 1);
+      var local = f.length ? (f[k] - start) : dur * 0.5;
+      if (f.length) {
+        // A fragment marks the instant a beat begins -- which is also the
+        // instant the previous beat's highlight starts fading out. Land exactly
+        // there and the screen still shows the beat before: the row that was
+        // lit is lit, the one being read is not yet. So hold a moment after the
+        // transition has run, but never far enough to reach the next beat.
+        // The hold has to clear the transition (0.7s at the longest) without
+        // reaching far enough into the beat to start showing the next one, so
+        // it is also capped at a fraction of the beat's own length.
+        var next = (k + 1 < f.length) ? (f[k + 1] - start) : dur;
+        local += Math.max(0, Math.min(0.7, (next - local) * 0.4));
+      }
+      t.time(Math.max(0, Math.min(t.duration(), local)));
+    }
+    document.getElementById('pos').textContent = (i + 1) + ' / ' + scenes.length;
+    document.getElementById('lab').textContent = scenes[i].getAttribute('data-label') || '';
+    paintNote(slide);
+    markLesson();
+    try { history.replaceState(null, '', '#s' + (i + 1)); } catch (e) {}
+  }
+
+  function go(d) {
+    stopPlay();
+    var f = (slides[i].fragments || []).length;
+    if (d > 0 && frag < f - 1) { frag += 1; return paint(); }
+    if (d < 0 && frag > 0) { frag -= 1; return paint(); }
+    var n = i + d;
+    if (n < 0 || n >= scenes.length) return;
+    i = n;
+    frag = d > 0 ? 0 : Math.max(0, ((slides[n].fragments || []).length - 1));
+    paint();
+  }
+
+  // ── 재생 ────────────────────────────────────────────────────
+  // 지금까지는 조각 사이를 건너뛰기만 했다. 모션이 어떻게 흐르는지 보려면
+  // 실제로 돌려 봐야 한다. 이 장의 끝(마지막 조각, 없으면 프레임 끝)까지
+  // 돌리고 멈춘다. 다음 장으로 저절로 넘어가지 않는다.
+  var playing = null;
+  var btnPlay = document.getElementById('play');
+
+  function stopPlay() {
+    if (!playing) return;
+    if (playing.tl) playing.tl.pause();
+    if (playing.raf) cancelAnimationFrame(playing.raf);
+    playing = null;
+    btnPlay.textContent = '\u25b6 Play P';
+  }
+
+  function startPlay() {
+    var slide = slides[i];
+    var tl = (window.__timelines || {})[slide.sceneId];
+    if (!tl) return;
+    var el = scenes[i];
+    var start = parseFloat(el.getAttribute('data-start')) || 0;
+    var dur = parseFloat(el.getAttribute('data-duration')) || tl.duration();
+    var f = slide.fragments || [];
+    var from = f.length ? (f[0] - start) : 0;
+    var to = f.length ? (f[f.length - 1] - start) : Math.min(tl.duration(), dur);
+    to = Math.max(0, Math.min(tl.duration(), to));
+    if (tl.time() >= to - 0.02) tl.time(Math.max(0, from));
+    tl.play();
+    btnPlay.textContent = '\u275a\u275a Pause P';
+    playing = { tl: tl, raf: 0 };
+    (function tick() {
+      if (!playing) return;
+      if (tl.time() >= to - 0.01 || !tl.isActive()) {
+        tl.pause(); tl.time(to);
+        frag = f.length ? f.length - 1 : frag;
+        stopPlay();
+        return;
+      }
+      playing.raf = requestAnimationFrame(tick);
+    })();
+  }
+
+  btnPlay.onclick = function () { if (playing) { stopPlay(); } else { startPlay(); } };
+
+  document.getElementById('prev').onclick = function () { go(-1); };
+  document.getElementById('next').onclick = function () { go(1); };
+  document.getElementById('nb').onclick = function () {
+    document.getElementById('note').classList.toggle('on');
+    layout();
+  };
+  document.getElementById('fs').onclick = function () {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen(); }
+  };
+  // 메모나 대본을 치는 중에는 스페이스가 다음 장이 아니라 띄어쓰기여야 한다.
+  function typing(t) {
+    if (!t) return false;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return true;
+    if (t.isContentEditable) return true;
+    return !!(t.closest && t.closest('#mm,#note'));
+  }
+  window.__deckTyping = typing;
+
+  document.addEventListener('keydown', function (e) {
+    if (typing(e.target)) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    else if (e.key === 'n' || e.key === 'N') { document.getElementById('nb').click(); }
+    else if (e.key === 'p' || e.key === 'P') { document.getElementById('play').click(); }
+    else if (e.key === 'f' || e.key === 'F') { document.getElementById('fs').click(); }
+    else if (e.key === 'Home') { i = 0; frag = 0; paint(); }
+    else if (e.key === 'End') { i = scenes.length - 1; frag = 0; paint(); }
+  });
+  window.addEventListener('resize', fit);
+
+  // 메모 패널이 「그 장으로」를 누를 때 쓴다.
+  window.__deckGo = function (n) {
+    if (typeof n !== 'number' || n < 0 || n >= scenes.length) return;
+    stopPlay();
+    i = n; frag = 0; paint();
+  };
+  window.__deckStop = stopPlay;
+
+  var h = parseInt(String(location.hash || '').replace('#s', ''), 10);
+  if (h >= 1 && h <= scenes.length) { i = h - 1; }
+  fit();
+  paint();
+})();
+</script>

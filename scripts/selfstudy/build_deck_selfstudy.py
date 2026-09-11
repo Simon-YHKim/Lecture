@@ -66,8 +66,45 @@ AFTER = {8: '02-exam'}
 DROP_FRAMES = {1: {'05-recap'}}
 
 INLINE = re.compile(r'`([^`]+)`|\*\*([^*]+)\*\*')
-ACT_LAB = {'ask': '묻는 것', 'move': '마우스', 'snap': '스냅', 'click': '클릭',
+_ACT_KO = {'ask': '묻는 것', 'move': '마우스', 'snap': '스냅', 'click': '클릭',
            'key': '키', 'see': '확인', 'alt': '또는', 'type': '입력'}
+_ACT_EN = {'ask': 'Asks', 'move': 'Mouse', 'snap': 'Snap', 'click': 'Click',
+           'key': 'Key', 'see': 'Check', 'alt': 'Or', 'type': 'Type'}
+
+# 덱이 제 손으로 쓰는 이름표. 본문은 자습 원본의 `{ko, en}` 에서 오지만 이것들은
+# 여기 박혀 있어서, 영문판에도 한글로 나갔다.
+_UI_KO = {
+    'drawing_now': '지금 그리는 것 — <b>%s</b>',
+    'where': '완성 도면 위에서 지금 잡을 자리',
+    'step_figure': '이 단계의 작도 도해',
+    'temp_lines': '점선: 이 단계의 임시선',
+    'marker': '<em> — %s 표식</em>',
+    'step_action': '%s단계 · 조작 %d',
+    'step_dot': '%s단계 · %s',
+    'step_part': '%s단계%s · %s',
+    'expect': '이렇게 되면 맞습니다',
+    'why': '왜 이 순서인가',
+    'pitfall': '안 되면 여기',
+    'path_here': '이 과정이 걷는 길',
+    'path_other': '알아만 두면 되는 길',
+    'edition': '자습본',
+}
+_UI_EN = {
+    'drawing_now': 'Drawing now — <b>%s</b>',
+    'where': 'Where to catch it, on the finished drawing',
+    'step_figure': 'The drawing for this step',
+    'temp_lines': 'Dashed: this step&#8217;s temporary lines',
+    'marker': '<em> — %s marker</em>',
+    'step_action': 'Step %s · action %d',
+    'step_dot': 'Step %s · %s',
+    'step_part': 'Step %s%s · %s',
+    'expect': 'You have it right when',
+    'why': 'Why this order',
+    'pitfall': 'If it does not work',
+    'path_here': 'The path this course takes',
+    'path_other': 'A path to know about',
+    'edition': 'self-study',
+}
 
 # ── 코치 마크 ──────────────────────────────────────────────────
 # 찍는 규칙은 `coach.py` 한 곳에 있다. 자습 교재와 이 데크가 같은 규칙을 써야
@@ -126,7 +163,7 @@ def fig_block(spots, figs, feature=None, surface='front', only=None, step=None):
     for i, hover, snapname in rows:
         caps.append('<li><span class="bd">%d</span><span>%s%s</span></li>'
                     % (i, rich(ko(hover)),
-                       ('<em> — %s 표식</em>' % esc(snapname)) if snapname else ''))
+                       (UI['marker'] % esc(snapname)) if snapname else ''))
     # 도해는 문서에 한 벌만 두고 슬라이드는 `<use>` 로 부른다. 단계마다 통째로
     # 복사하면 여덟 차시 묶음이 4MB 를 넘어 브라우저가 30초 안에 못 연다 —
     # 실제로 그렇게 됐다. 강조 겹선만 인스턴스에 직접 그린다(`<use>` 안쪽은
@@ -144,11 +181,12 @@ def fig_block(spots, figs, feature=None, surface='front', only=None, step=None):
                '' if separate else _coach.use_tag('dsfc-' + surface, base),
                '' if separate else _coach.hl_for(base, feature), construction, marks_svg))
     # 완성 도면을 지도로 쓴다. 지금 화면에 그려져 있는 것과 다르다는 것을 밝혀 둔다.
-    head = ('지금 그리는 것 — <b>%s</b>' % esc(FEATURE_KO[feature])) if feature in FEATURE_KO         else '완성 도면 위에서 지금 잡을 자리'
+    head = ((UI['drawing_now'] % esc(FEATURE_KO[feature]))
+            if feature in FEATURE_KO else UI['where'])
     if separate:
-        head = '이 단계의 작도 도해'
+        head = UI['step_figure']
     if construction:
-        head += '<span class="construction-key">점선: 이 단계의 임시선</span>'
+        head += '<span class="construction-key">%s</span>' % UI['temp_lines']
     # 캡션 목록은 내지 않는다. 같은 말이 왼쪽 조작 줄에 이미 있고, 번호로 서로
     # 짚을 수 있게 했다. 비는 자리는 도면이 가져간다.
     return ('<figure class="fig" data-memo="도면 코치 마크">'
@@ -176,7 +214,27 @@ def plain(s):
     return INLINE.sub(lambda m: m.group(1) or m.group(2), s or '')
 
 
+# 자습 원본은 한 마디를 `{ko, en}` 로 갖는다. 화면에 나가는 글은 판의 언어를
+# 따르고, 절을 찾는 열쇠는 언제나 국문이다 — `EXTRA` 가 국문 제목으로 적혀
+# 있어서, 열쇠까지 언어를 따르면 영문 빌드가 「절이 없다」로 멎는다.
+LANG = os.environ.get('SELFSTUDY_LANG', 'ko')
+
+
 def ko(node):
+    node = node or {}
+    if LANG == 'en':
+        # 영문 자리가 비면 국문으로 떨어뜨린다. 빈칸이 남는 것보다 낫고,
+        # 그 자리는 `check_english.py` 가 잡는다.
+        return node.get('en') or node.get('ko', '')
+    return node.get('ko', '')
+
+
+ACT_LAB = _ACT_EN if LANG == 'en' else _ACT_KO
+UI = _UI_EN if LANG == 'en' else _UI_KO
+
+
+def ident(node):
+    """절을 가리키는 이름. 판이 바뀌어도 같아야 한다."""
     return (node or {}).get('ko', '')
 
 
@@ -316,18 +374,18 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None, action_s
         ops.append('<li class="op o%d %s%s" data-memo="%s" data-action="%d"><span class="lab">%s</span>'
                    '<span class="w">%s%s%s</span></li>'
                    % (k + 1, esc(kind), ' pointed' if badge else '',
-                      esc('%s단계 · 조작 %d' % (st['n'], action_start + k + 1)),
+                      esc(UI['step_action'] % (st['n'], action_start + k + 1)),
                       action_start + k + 1,
                       esc(lab), badge, cmd, rich(ko(a.get('do')))))
 
     side, texts = [], []
-    for cls, lab, key in (('', '이렇게 되면 맞습니다', 'expect'),
-                          ('', '왜 이 순서인가', 'why'),
-                          (' pit', '안 되면 여기', 'pitfall')):
+    for cls, lab, key in (('', UI['expect'], 'expect'),
+                          ('', UI['why'], 'why'),
+                          (' pit', UI['pitfall'], 'pitfall')):
         if st.get(key):
             side.append('<div class="card sc%s" data-memo="%s"><b>%s</b>'
                         '<span>%s</span></div>'
-                        % (cls, esc('%s단계 · %s' % (st['n'], lab)), lab,
+                        % (cls, esc(UI['step_dot'] % (st['n'], lab)), lab,
                            rich(ko(st[key]))))
             texts.append(plain(ko(st[key])))
     ssz = side_font(texts) if (texts and not has_fig) else 0
@@ -353,8 +411,8 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None, action_s
          'fig': fig_block(spots, front, st.get('feature'), st.get('on', 'front'),
                           only={n for a in acts for n in _coach.spot_badges(a)}, step=st)
                 if has_fig else '',
-         'lab': esc('%s단계%s · %s' % (st['n'], (' (%d/%d)' % part) if part else '',
-                                      ko(st.get('title')))),
+         'lab': esc(UI['step_part'] % (st['n'], (' (%d/%d)' % part) if part else '',
+                                       ko(st.get('title')))),
          'title': rich(ko(st.get('title'))) + (
              ' <span class="pt">%d / %d</span>' % part if part else ''),
          'sec': esc(sec_label.split('—')[0].strip()),
@@ -572,7 +630,7 @@ def split_slide(sec, cid, clock):
         cols.append('<div class="half h%d" data-memo="%s"><div class="tag">%s</div>'
                     '<h3>%s</h3><p class="bd">%s</p>%s</div>'
                     % (k + 1, esc(ko(h.get('label'))),
-                       '이 과정이 걷는 길' if k == 0 else '알아만 두면 되는 길',
+                       UI['path_here'] if k == 0 else UI['path_other'],
                        rich(ko(h.get('label'))), rich(ko(h.get('body'))),
                        ('<p class="ft">%s</p>' % foot) if (k == 1 and foot) else ''))
     dur = 2.0
@@ -775,7 +833,7 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
     extra = {}
     for name, label, kind in EXTRA.get(L['no'], []):
         extra.setdefault(name, []).append((label, kind))
-    by_label = {ko(s.get('label')): s for s in L['sections']}
+    by_label = {ident(s.get('label')): s for s in L['sections']}
     # 코치 마크가 앉을 정면도. 도면을 그리는 코드가 하나뿐이라 자습본 쪽
     # 그림과 어긋날 수 없다.
     front = surfaces()
@@ -863,10 +921,10 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
                      for cid, t in tls)
 
     doc = """<!DOCTYPE html>
-<html lang="ko">
+<html lang="%s">
 <head>
 <meta charset="UTF-8">
-<title>%s · 자습본</title>
+<title>%s · %s</title>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <style>
   *{box-sizing:border-box}
@@ -888,7 +946,7 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
 %s
 </body>
 </html>
-""" % (title, STYLE, island,
+""" % (LANG, title, UI['edition'], STYLE, island,
        (surface_defs() if include_symbols else '') + '\n'.join(bodies), made, nav)
 
     outdir = os.path.dirname(os.path.abspath(outpath))
