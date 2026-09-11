@@ -11,7 +11,10 @@
 내려받아 여는 판은 `--standalone` 으로 만든다. 바깥에서 가져오는 것이 하나도
 없어야 인터넷 없이도 열리므로 GSAP 을 파일 안에 넣고, 검수 메모까지 붙인다.
 
-    python scripts/selfstudy/build_deck_all.py <출력 파일> [작업폴더] [--standalone <gsap.min.js>]
+    python scripts/selfstudy/build_deck_all.py <출력 파일> [작업폴더] \
+        [--standalone <gsap.min.js>] [--root <차시 폴더들이 있는 곳>] [--lang ko|en]
+
+영문판은 `build_english_lesson.py` 가 만든 사본 묶음을 `--root` 로 준다.
 """
 import io
 import hashlib
@@ -36,6 +39,20 @@ LESSONS = [
  (8, 'lesson-08-exam-and-qa', '시험 안내와 Q&A'),
 ]
 
+# 영문판의 차시 이름. 슬라이드 본문은 영문 사본에서 나오지만 덱을 둘러싼 글 —
+# 제목, 차시 목록, 안내 띠 — 은 이 파일이 쓴다. 한쪽만 영문이면 영문 덱 안에
+# 한국어 목차가 남는다.
+TITLES_EN = {
+ 1: 'Orientation',
+ 2: 'The part and the drawing environment',
+ 3: 'Datum lines and the outline',
+ 4: 'Circles, arcs and offset',
+ 5: 'Third angle, three views and repetition',
+ 6: 'Editing and representation',
+ 7: 'Dimensioning and release',
+ 8: 'Exam guidance and Q&A',
+}
+
 ISLAND = re.compile(
     r'<script type="application/hyperframes-slideshow\+json">(.*?)</script>', re.S)
 
@@ -53,13 +70,21 @@ def parts(path):
     return island, body[:cut]
 
 
-def main(outpath, tmpdir, gsap=None):
+def main(outpath, tmpdir, gsap=None, root=None, lang='ko'):
+    """root 는 차시 폴더들이 있는 곳이다.
+
+    국문은 저장소 안이고, 영문은 `build_english_lesson.py` 가 만든 비공개 사본
+    묶음이다 — 영문 프레임과 영문 `SCRIPT.md` 가 그 안에 있다. 덱 빌더는 차시
+    폴더만 읽으므로 두 판이 같은 코드로 나온다.
+    """
     if not os.path.isdir(tmpdir):
         os.makedirs(tmpdir)
     B.USED_SURFACES.clear()
     slides, bodies, lessons = [], [], []
-    for no, slug, title in LESSONS:
-        src = os.path.join(ROOT, 'projects', 'autocad-technician', slug)
+    for no, slug, ko_title in LESSONS:
+        title = TITLES_EN[no] if lang == 'en' else ko_title
+        src = (os.path.join(root, slug) if root
+               else os.path.join(ROOT, 'projects', 'autocad-technician', slug))
         js = os.path.join(HERE, 'source', 'lesson-%02d.json' % no)
         one = os.path.join(tmpdir, 'deck-l%02d.html' % no)
         B.main(src, js, one, include_symbols=False)
@@ -69,14 +94,22 @@ def main(outpath, tmpdir, gsap=None):
                         'practiceSteps': island['practiceSteps'],
                         'practiceActions': island['practiceActions']})
         slides += island['slides']
-        bodies.append('<!-- ===== %d차시 %s ===== -->\n%s' % (no, title, body))
+        bodies.append('<!-- ===== %s ===== -->\n%s'
+                      % (('Lesson %d %s' % (no, title)) if lang == 'en'
+                         else ('%d차시 %s' % (no, title)), body))
 
     review_id = hashlib.sha256((''.join(bodies) + json.dumps(slides, ensure_ascii=False, sort_keys=True)).encode('utf-8')).hexdigest()
     manifest = json.dumps({'slides': slides, 'slideSequences': [], 'reviewId': review_id,
-                           'lessons': lessons, 'language': 'ko',
+                           'lessons': lessons, 'language': lang,
                            'organization': 'lesson'}, ensure_ascii=False, indent=1)
-    nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
-    memo = io.open(os.path.join(HERE, 'assets', 'deck_memo.html'), encoding='utf-8').read()
+    nav = io.open(os.path.join(HERE, 'assets',
+                               'deck_nav.en.html' if lang == 'en' else 'deck_nav.html'),
+                  encoding='utf-8').read()
+    # 메모 패널은 검수 도구다 — 「검수 후 메모 파일을 대화창에 첨부하세요」가
+    # 그 쓰임이다. 영문판은 배우는 사람에게 가는 판이라 달지 않는다. 막대는
+    # 메모를 부르지 않고 반대로 불리기만 하므로 빼도 동작이 멀쩡하다.
+    memo = ('' if lang == 'en' else
+            io.open(os.path.join(HERE, 'assets', 'deck_memo.html'), encoding='utf-8').read())
     if gsap:
         # 내려받은 파일은 인터넷 없이도 열려야 한다. 애니메이션 엔진이 없으면
         # 프레임의 스크립트가 첫 줄에서 멎고 화면이 통째로 빈다.
@@ -110,10 +143,10 @@ def main(outpath, tmpdir, gsap=None):
                '</script>')
         banner = ''
     doc = """<!DOCTYPE html>
-<html lang="ko">
+<html lang="%s">
 <head>
 <meta charset="UTF-8">
-<title>AutoCAD Technician 자습 슬라이드 · 여덟 차시</title>
+<title>%s</title>
 %s
 <style>
   *{box-sizing:border-box}
@@ -134,12 +167,14 @@ def main(outpath, tmpdir, gsap=None):
 %s
 </body>
 </html>
-""" % (lib, B.STYLE, manifest, B.surface_defs(), '\n'.join(bodies), nav, memo, banner)
+""" % (lang, ("AutoCAD Technician · self-study slides · eight lessons"
+                if lang == "en" else "AutoCAD Technician 자습 슬라이드 · 여덟 차시"),
+       lib, B.STYLE, manifest, B.surface_defs(), '\n'.join(bodies), nav, memo, banner)
     io.open(outpath, 'w', encoding='utf-8', newline='\n').write(doc)
     print('\n엮음 %d차시 · 슬라이드 %d장 · %.1f MB'
           % (len(lessons), len(slides), os.path.getsize(outpath) / 1048576.0))
     for l in lessons:
-        print('  %d차시 %-18s %3d장 (%d~%d)'
+        print('  %2d %-40s %3d (%d~%d)'
               % (l['no'], l['title'], l['count'], l['at'], l['at'] + l['count'] - 1))
     return 0
 
@@ -151,7 +186,17 @@ if __name__ == '__main__':
         k = av.index('--standalone')
         gsap = av[k + 1]
         del av[k:k + 2]
+    root = None
+    if '--root' in av:
+        k = av.index('--root')
+        root = av[k + 1]
+        del av[k:k + 2]
+    lang = 'ko'
+    if '--lang' in av:
+        k = av.index('--lang')
+        lang = av[k + 1]
+        del av[k:k + 2]
     out = av[0] if av else os.path.join(ROOT, 'deck-all.html')
     tmp = av[1] if len(av) > 1 else os.path.join(
         os.path.dirname(os.path.abspath(out)), '_decks')
-    sys.exit(main(out, tmp, gsap))
+    sys.exit(main(out, tmp, gsap, root, lang))

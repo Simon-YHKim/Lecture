@@ -21,6 +21,7 @@
 `sheet` 가 없어서 2차시의 용지선·중심 마크·표제란·이름 넣기 네 단계가 코치 마크
 없이 남아 있었다. 검수 메모 8~11 이 그 자리다.
 """
+import os
 import re
 import math
 
@@ -68,8 +69,14 @@ FIG_OF = {'front': 'front', 'frontdim': 'frontdim', 'three': 'three'}
 
 # ── 스냅 표식 ──────────────────────────────────────────────────
 # 오토캐드가 커서 옆에 띄우는 표식. 모양이 곧 스냅 종류다.
-SNAP_NAME = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사분점',
-             'int': '교차점', 'tan': '접점', 'per': '직교', 'nea': '근처점'}
+_SNAP_KO = {'end': '끝점', 'mid': '중간점', 'cen': '중심', 'qua': '사분점',
+            'int': '교차점', 'tan': '접점', 'per': '직교', 'nea': '근처점'}
+_SNAP_EN = {'end': 'endpoint', 'mid': 'midpoint', 'cen': 'center', 'qua': 'quadrant',
+            'int': 'intersection', 'tan': 'tangent', 'per': 'perpendicular',
+            'nea': 'nearest'}
+# 판의 언어. 자습 교재·덱과 같은 스위치를 본다.
+LANG = os.environ.get('SELFSTUDY_LANG', 'ko')
+SNAP_NAME = _SNAP_EN if LANG == 'en' else _SNAP_KO
 
 
 def snap_glyph(kind, x, y, r=4.2):
@@ -98,15 +105,23 @@ def snap_glyph(kind, x, y, r=4.2):
     return '<circle %s cx="%.2f" cy="%.2f" r="%.2f"/>' % (a, x, y, r)
 
 
-FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 원', 'bore': '축 구멍',
-              'fillet': '필렛', 'slot': '장공', 'tap': '탭 구멍',
-              # 같은 형상이라도 재는 곳이 다르면 켜는 것도 다르다.
-              'basehl': '베이스 윤곽', 'neck': '목과 밑동 라운드',
-              'bossc': '보스 중심선', 'filletc': '필렛 중심선',
-              'slotc': '장공 중심선', 'thick': '옆면도의 두께',
-              # 도면틀 쪽 강조. sheet 바탕에서만 쓴다.
-              'sh-paper': '용지선', 'sh-frame': '도면선', 'sh-mark': '중심 마크',
-              'sh-title': '표제란'}
+_FEATURE_KO = {'profile': '베이스와 목의 바깥 윤곽', 'boss': '보스 원', 'bore': '축 구멍',
+               'fillet': '필렛', 'slot': '장공', 'tap': '탭 구멍',
+               # 같은 형상이라도 재는 곳이 다르면 켜는 것도 다르다.
+               'basehl': '베이스 윤곽', 'neck': '목과 밑동 라운드',
+               'bossc': '보스 중심선', 'filletc': '필렛 중심선',
+               'slotc': '장공 중심선', 'thick': '옆면도의 두께',
+               # 도면틀 쪽 강조. sheet 바탕에서만 쓴다.
+               'sh-paper': '용지선', 'sh-frame': '도면선', 'sh-mark': '중심 마크',
+               'sh-title': '표제란'}
+_FEATURE_EN = {'profile': 'outer profile of base and web', 'boss': 'boss circle',
+               'bore': 'bore', 'fillet': 'fillet', 'slot': 'slot', 'tap': 'tapped hole',
+               'basehl': 'base outline', 'neck': 'web and the round at its foot',
+               'bossc': 'boss centerline', 'filletc': 'fillet centerline',
+               'slotc': 'slot centerline', 'thick': 'thickness in the right side view',
+               'sh-paper': 'sheet edge', 'sh-frame': 'border', 'sh-mark': 'centering marks',
+               'sh-title': 'title block'}
+FEATURE_KO = _FEATURE_EN if LANG == 'en' else _FEATURE_KO
 
 
 def marks(spots, surface, only=None):
