@@ -28,6 +28,7 @@
 `suspect.jsonl` 에 적는다 — 조용히 버리지 않는다.
 """
 import argparse
+import gc
 import hashlib
 import io
 import json
@@ -39,7 +40,10 @@ import wave
 # 초당 몇 글자를 읽는가. 한국어 낭독은 5~6자쯤이고, 영어는 글자가 잘게
 # 쪼개져 두 배 반쯤 들어간다. 아래위로 넉넉히 잡아 잘림만 잡는다.
 RATE = {'ko': 5.5, 'en': 14.5}
-BATCH = 8                   # 한 번에 몇 토막을 같이 만드는가
+# 한 번에 몇 토막을 같이 만드는가. 8 로 두니 호스트 RAM 이 터져 프로세스가
+# 죽었다(31.6GB 중 여유 10GB 에서). 배치는 가장 긴 토막에 맞춰 패딩되므로
+# 길이를 섞으면 낭비가 크다 — 그래서 길이순으로 정렬해 묶는다.
+BATCH = 4
 BAND = (0.45, 2.2)          # 기대 길이의 몇 배까지 받아들이는가
 TRIES = 3
 SILENCE = 0.008             # 이 아래는 소리가 없는 것으로 본다 (정규화 진폭)
@@ -191,17 +195,21 @@ def speak(model, texts, language, mood, refs, prompts):
 
 
 def groups(todo, refs, size):
-    """같은 참조 음성을 쓰는 토막끼리 묶는다. 순서는 그대로 둔다."""
-    out, run = [], []
+    """같은 참조 음성을 쓰는 토막끼리, **길이가 비슷한 것끼리** 묶는다.
+
+    배치는 가장 긴 토막 길이로 패딩된다. 24자와 100자를 같이 넣으면 짧은 쪽
+    계산이 네 배로 낭비되고 메모리도 그만큼 더 쓴다. 만드는 순서는 아무래도
+    좋다 — 토막마다 제 파일에 따로 쓴다.
+    """
+    by_ref = {}
     for item in todo:
         mood = item['mood'] if item['mood'] in refs else '_'
         item['ref'] = mood
-        if run and (run[0]['ref'] != mood or len(run) >= size):
-            out.append(run)
-            run = []
-        run.append(item)
-    if run:
-        out.append(run)
+        by_ref.setdefault(mood, []).append(item)
+    out = []
+    for mood in sorted(by_ref):
+        rows = sorted(by_ref[mood], key=lambda x: len(x['text']))
+        out.extend(rows[i:i + size] for i in range(0, len(rows), size))
     return out
 
 
@@ -289,6 +297,11 @@ def main(argv=None):
                                         ensure_ascii=False) + '\n')
                 log(outdir, '? %s#%02d  %.1f초 (기대 %.1f초) · %d자'
                     % (item['key'], item['n'], got, want, len(item['text'])))
+        del wavs
+        if bi % 4 == 0:
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
         if bi % 5 == 0 or bi == len(batches):
             spent = time.time() - began
             left = (len(todo) - made) * spent / made
