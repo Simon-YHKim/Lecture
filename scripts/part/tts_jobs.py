@@ -41,12 +41,48 @@ import tts_script
 COURSE = HERE.parents[1] / 'projects' / 'autocad-technician'
 SCRIPTS = {'ko': 'SCRIPT.md', 'en': 'SCRIPT.en.md'}
 TAG = re.compile(r'\[[^\[\]]{1,12}\]\s*')
+# 굵게 표시는 화면의 강조 표기다. `speakable()` 은 백틱만 걷어내므로 여기까지
+# 별표가 따라온다. 규칙 기반 음성은 별표를 흘려 버렸지만 신경망 음성은 그걸
+# 소리로 만들거나 그 자리에서 발음이 흔들린다. 국문 7문단·영문 1문단이다.
+BOLD = re.compile(r'\*\*([^*]*)\*\*')
+
+
+def spoken(text):
+    """엔진에 실제로 넘기는 글. 감정 태그와 굵게 표시는 말이 아니다."""
+    return BOLD.sub(r'', TAG.sub('', text)).strip()
 
 # 한 번에 읽힐 길이. 한국어 합성은 초당 5~6자쯤이라 100자면 20초 아래다.
 # 영어는 글자가 잘게 쪼개져 같은 시간에 두 배 반쯤 들어간다.
 SIZE = {'ko': (100, 150), 'en': (260, 380)}
 SENT = re.compile(r'(?<=[.!?])\s+')
 CLAUSE = re.compile(r'(?<=[,;:])\s+')
+
+# tone 을 음성 엔진에 어떻게 말해 주는가. 지시를 받는 체크포인트(CustomVoice ·
+# VoiceDesign)에는 이 문장을 그대로 넘긴다. 목소리를 복제하는 Base 에는 지시
+# 인자가 없어서, 어느 참조 음성을 고를지 가르는 이름으로만 쓴다.
+INSTRUCT = {
+    'ko': {'calm': '차분하고 안정된 강의 말투로 말해',
+           'point': '화면의 한 곳을 가리키며 짚어 주듯 말해',
+           'stress': '중요한 대목이라 힘을 주어 말해',
+           'slow': '숫자를 또박또박 천천히 끊어 읽어',
+           'ask': '학습자에게 묻듯 끝을 살짝 올려 말해',
+           'warn': '실수를 주의시키듯 낮고 단단하게 말해',
+           'light': '가볍고 짧게 툭 던지듯 말해',
+           'warm': '따뜻하게 격려하듯 말해'},
+    'en': {'calm': 'speak in a calm, steady lecturing voice',
+           'point': 'speak as if pointing at one spot on the screen',
+           'stress': 'stress this; it is the important part',
+           'slow': 'read the numbers slowly and distinctly',
+           'ask': 'ask the learner, lifting the end slightly',
+           'warn': 'warn against a mistake, low and firm',
+           'light': 'toss this off lightly and briefly',
+           'warm': 'speak warmly, encouraging them'},
+}
+
+# 참조 음성을 네 개만 녹음할 때 여덟 tone 을 어디에 묶는가. 녹음 하나에 열두
+# 마디씩이면 1분이면 끝나고, 네 시간 반짜리 낭독 전체의 굴곡이 생긴다.
+MOOD = {'calm': 'base', 'point': 'base', 'slow': 'careful', 'stress': 'firm',
+        'warn': 'firm', 'ask': 'light', 'light': 'light', 'warm': 'light'}
 
 # 같은 수로 갈리면 값과 경고가 이긴다. 색이 아니라 정확도의 문제다.
 PRIORITY = ('warn', 'slow', 'ask', 'stress', 'point', 'warm', 'light', 'calm')
@@ -115,23 +151,35 @@ def step_keys(path):
     return inside
 
 
+def lesson_rows(script, lang):
+    """한 차시의 문단 목록. **작업 목록과 받아쓰기가 같은 함수를 쓴다** —
+    두 곳에서 따로 쪼개면 토막 번호가 어긋나 엉뚱한 소리가 붙는다."""
+    jobs, _units, _order = N.synthesis_plan(str(script))
+    steps = step_keys(script)
+    rows = []
+    for key, text in jobs:
+        clean = spoken(text)
+        in_step = clean[:24] in steps
+        lead = bool(tts_script.STAGE.match(text))
+        tone = tone_of(clean, lang, in_step)
+        # **말투는 토막마다 고른다.** 토막이 대충 한 문장이고, 참조 음성도
+        # 토막 하나에 하나씩 붙는다. 문단 전체를 한 말투로 묶으면 값을 읽는
+        # 문장이 주변 설명에 묻혀 여덟 차시가 한 가지 톤으로 나온다.
+        pieces = []
+        for i, body in enumerate(chunks_of(clean, lang), 1):
+            name = tts_script.pick(body, lang, in_step, i == 1 and lead)
+            pieces.append({'n': i, 'tone': name, 'mood': MOOD[name], 'text': body})
+        rows.append({'key': key, 'tone': tone, 'mood': MOOD[tone],
+                     'chars': len(clean), 'chunks': pieces})
+    return rows
+
+
 def collect(lang):
     out = []
     for lesson in sorted(p for p in COURSE.glob('lesson-*') if p.is_dir()):
         src = lesson / SCRIPTS[lang]
-        if not src.is_file():
-            continue
-        jobs, _units, _order = N.synthesis_plan(str(src))
-        steps = step_keys(src)
-        rows = []
-        for key, text in jobs:
-            clean = TAG.sub('', text).strip()
-            in_step = clean[:24] in steps
-            rows.append({'key': key, 'tone': tone_of(clean, lang, in_step),
-                         'chars': len(clean),
-                         'chunks': [{'n': i, 'text': c}
-                                    for i, c in enumerate(chunks_of(clean, lang), 1)]})
-        out.append({'slug': lesson.name, 'jobs': rows})
+        if src.is_file():
+            out.append({'slug': lesson.name, 'jobs': lesson_rows(src, lang)})
     return out
 
 
@@ -145,8 +193,11 @@ def main(argv=None):
     doc = {'schemaVersion': 1, 'lang': a.lang,
            'language': 'Korean' if a.lang == 'ko' else 'English',
            'chunkTarget': target, 'chunkHard': hard,
-           'tones': list(PRIORITY),
-           'note': ('본문에 태그는 없다. 감정은 tone 에 맞는 참조 음성으로 낸다. '
+           'tones': list(PRIORITY), 'moods': sorted(set(MOOD.values())),
+           'instruct': INSTRUCT[a.lang],
+           'note': ('본문에 태그는 없다. Base 체크포인트에는 감정 인자가 없어서 '
+                    'mood 에 맞는 참조 음성의 말투로 감정을 낸다(ICL). instruct 는 '
+                    '지시를 받는 체크포인트로 옮길 때 쓴다. '
                     'WAV 는 out/<slug>/<key>#<n>.wav 로 하나씩 저장하고, 한 문단의 '
                     '토막들은 받는 쪽에서 공백 하나만큼의 쉼으로 이어 붙인다.'),
            'lessons': lessons}
@@ -163,8 +214,12 @@ def main(argv=None):
           % (path.name, len(lessons), len(rows), len(parts), sum(j['chars'] for j in rows)))
     print('   토막 길이  중간 %d · 최대 %d (상한 %d)'
           % (sizes[len(sizes) // 2], sizes[-1], hard))
-    for name, n in Counter(j['tone'] for j in rows).most_common():
-        print('   %-8s %4d' % (name, n))
+    print('   토막 말투:')
+    for name, n in Counter(c['tone'] for c in parts).most_common():
+        print('     %-8s %4d  %4.1f%%  → %s' % (name, n, 100.0 * n / len(parts), MOOD[name]))
+    print('   참조 음성이 맡는 몫:')
+    for name, n in Counter(c['mood'] for c in parts).most_common():
+        print('     %-9s 토막 %4d  %4.1f%%' % (name, n, 100.0 * n / len(parts)))
     over = [c for c in parts if len(c['text']) > hard]
     if over:
         print('   ! 상한 넘는 토막 %d개 (공백 없는 덩어리)' % len(over))

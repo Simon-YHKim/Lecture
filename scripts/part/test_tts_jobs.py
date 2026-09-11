@@ -25,7 +25,7 @@ class ChunkTests(unittest.TestCase):
                 for job in lesson['jobs']:
                     with self.subTest(lesson=lesson['slug'], lang=lang, key=job['key']):
                         self.assertIn(job['key'], said)
-                        want = tts_jobs.TAG.sub('', said[job['key']]).strip()
+                        want = tts_jobs.spoken(said[job['key']])
                         self.assertEqual(' '.join(c['text'] for c in job['chunks']), want)
                         self.assertEqual(job['chars'], len(want))
                         self.assertEqual([c['n'] for c in job['chunks']],

@@ -53,7 +53,7 @@ class IngestVoiceTests(unittest.TestCase):
         jobs, _u, _o = N.synthesis_plan(str(self.lesson / 'SCRIPT.md'))
         made = 0
         for key, text in jobs:
-            pieces = tts_jobs.chunks_of(tts_jobs.TAG.sub('', text).strip(), 'ko')
+            pieces = tts_jobs.chunks_of(tts_jobs.spoken(text), 'ko')
             for n in range(1, len(pieces) + 1):
                 if (key, n) in skip:
                     continue
@@ -107,7 +107,10 @@ class IngestVoiceTests(unittest.TestCase):
 
     def test_chunks_are_joined_with_a_shorter_pause_than_paragraphs(self):
         """한 문단 안의 쉼이 문단 사이 쉼보다 짧아야 한 문단으로 들린다."""
+        self.assertLess(max(ingest_voice.CHUNK_GAPS.values()), N.GAP)
         self.assertLess(ingest_voice.CHUNK_GAP, N.GAP)
+        # 값을 읽는 문장 앞이 툭 던지는 말 앞보다 넉넉해야 한다.
+        self.assertGreater(ingest_voice.CHUNK_GAPS['slow'], ingest_voice.CHUNK_GAPS['light'])
 
     def test_ffmpeg_path_still_produces_two_distinct_tracks(self):
         if not shutil.which('ffmpeg'):

@@ -29,8 +29,13 @@ sys.path.insert(0, str(HERE))
 import narrate_tts as N
 import tts_jobs
 
-# 한 문단 안에서 토막을 잇는 쉼. 문단 사이(0.45초)보다 짧아야 한 문단으로 들린다.
-CHUNK_GAP = 0.2
+# 한 문단 안에서 토막을 잇는 쉼. **말투마다 다르다.** 참조 음성이 하나면
+# 억양은 한 가지로 나오므로, 문장 사이 호흡이 강의에 굴곡을 주는 유일한 수단이
+# 된다. 값을 읽는 문장 앞은 벌리고, 툭 던지는 말 앞은 붙인다. 전부 문단 사이
+# 쉼(0.45초)보다 짧아야 한 문단으로 들린다.
+CHUNK_GAPS = {'slow': 0.30, 'warn': 0.28, 'stress': 0.24, 'ask': 0.22,
+              'warm': 0.22, 'calm': 0.20, 'point': 0.20, 'light': 0.14}
+CHUNK_GAP = 0.20                # 이름 없는 말투
 CHUNK = re.compile(r'^(?P<key>L\d+-\d+-\d+)#(?P<n>\d+)\.wav$')
 
 
@@ -68,15 +73,18 @@ def ingest(lesson_dir, source, outroot, voice, tempo, tool_version, lang='ko'):
     source_dir.mkdir(parents=True)
     partdir.mkdir(parents=True)
 
-    # 토막 → 문단. 이은 글이 대본과 같은지 여기서 다시 확인한다.
+    # 토막 → 문단. 쪼개는 함수는 작업 목록을 만들 때와 같은 것이다.
     joined = {}
-    for key, text in jobs:
-        pieces = tts_jobs.chunks_of(tts_jobs.TAG.sub('', text).strip(), lang)
-        parts = chunk_paths(Path(source) / slug, key, len(pieces))
-        gaps = [0.0] + [CHUNK_GAP] * (len(parts) - 1)
+    for row in tts_jobs.lesson_rows(script, lang):
+        key = row['key']
+        parts = chunk_paths(Path(source) / slug, key, len(row['chunks']))
+        # 쉼은 **뒤에 오는 토막의 말투**로 정한다. 호흡이 그 문장을 끌고 온다.
+        gaps = [0.0] + [CHUNK_GAPS.get(c['tone'], CHUNK_GAP) for c in row['chunks'][1:]]
         dest = partdir / ('%s.wav' % key)
         N.concat_wavs(parts, gaps, str(dest), tail=0.0)
         joined[key] = str(dest)
+    if sorted(joined) != sorted(k for k, _ in jobs):
+        raise SystemExit('문단 목록이 대본과 어긋난다')
 
     fast = joined if tempo == 1.0 else {
         key: N.change_tempo(path, outdir / '_parts-tempo' / (key + '.wav'), tempo)
