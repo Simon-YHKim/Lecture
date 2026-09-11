@@ -6,11 +6,89 @@
 > 지난 블록은 월별로 내렸다 — [`docs/handoff-archive/`](handoff-archive/).
 > 최신 블록과 직전 블록만 이 파일에 둔다. 한 파일 100KB 를 넘기지 않기 위해서다.
 
-> 최종 갱신 **2026-09-11 11:40 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-12 02:15 KST** · Claude Opus 5 (Claude Code) · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-11 (5차) / 영문 대본 여덟 차시 완성 · 프레임 넘침 0 · 공개판 preview.2 (PR #39~#43)
+## Latest — 2026-09-12 (6차) / 복제 음성 경로 — 작업 목록 · Colab 노트북 · 받아쓰기
+
+### 어디까지 왔나
+
+- 사용자가 Colab 에서 Qwen3-TTS 음성 복제를 직접 돌려 봤다. **내가 Colab 을
+  조작할 수는 없다** — 구글 계정 로그인이 필요하고 그건 대리로 하지 않는다.
+  그래서 **돌릴 것을 만들어 넘기는** 쪽으로 잡았다. 셀 하나만 돌리면 된다.
+- 새 파일 5개. `scripts/part/` 아래 `tts_jobs.py` · `qwen_colab.py` ·
+  `ingest_voice.py` 와 시험 둘, 그리고 `docs/autocad-technician/qwen-narration.ipynb`.
+- 부품 시험 141개 통과. 규격·판 대조 통과.
+
+### 모델 확인 — 목소리와 감정은 **동시에 못 가진다**
+
+모델 카드와 GitHub README 를 읽어 확인한 사실이다(추정이 아니다).
+
+| 체크포인트 | 호출 | 내 목소리 | 감정 지시 |
+| --- | --- | --- | --- |
+| `…-0.6B-Base` | `generate_voice_clone(text, language, ref_audio, ref_text)` | **된다** | **없다** |
+| `…-0.6B-CustomVoice` | `generate_custom_voice(text, language, speaker, instruct)` | 안 된다 (고정 9명) | 된다 |
+| `…-1.7B-VoiceDesign` | `generate_voice_design(text, language, instruct)` | 안 된다 | 된다 |
+
+그래서 `SCRIPT.tts.ko.md` 의 `[차분하게]` 는 **Base 에 그냥 넣으면 글자로
+읽힌다.** 태그를 본문에서 떼어 `tone` 이라는 열쇠로 옮겼다 — 이 모델에서
+감정은 참조 음성의 말투에서 온다. `refs/refs.json` 에 tone 마다 다른 참조
+음성을 두면 말투가 갈리고, `_` 하나만 두면 한 말투로 전체가 나온다.
+**태그본은 그대로 남겨 두었다** — 태그를 읽는 엔진으로 옮길 때 쓴다.
+
+### 문단이 너무 길다 — 규칙 기반 음성에는 없던 문제
+
+합성 단위인 문단은 최대 **1,493자**다. SAPI 는 길이를 타지 않지만 자기회귀
+모델은 긴 입력에서 문장을 삼키거나 끝을 잘라먹고, **잘려도 소리는 정상으로
+난다.** 선생님 목소리로 문장 반쪽이 나가는 사고다.
+
+- 문장 경계에서 토막을 낸다. 국문 목표 100자/상한 150자, 영문 260/380.
+- 488문단 → **국문 토막 1,185개** (중간 82자 · 최대 100자), 영문 1,036개.
+- 토막을 공백 하나로 이으면 원문이 **글자까지** 복원된다. `speakable()` 이
+  이미 모든 공백을 하나로 줄여 놓기 때문이다. `test_tts_jobs.py` 가 그것을
+  `synthesis_plan` 과 직접 대조해 지킨다.
+- `qwen_colab.py` 는 글자 수로 기대 길이를 잡고(국문 초당 5.5자) 0.45~2.2배
+  밖으로 벗어나면 세 번까지 다시 만든다. 그래도 안 되면 가장 가까운 것을
+  남기고 `suspect.jsonl` 에 원문과 함께 적는다 — **조용히 버리지 않는다.**
+
+### 배속은 1.0 이다
+
+1.38 은 Heami 가 느려서 올린 값이고 복제 음성에는 올릴 이유가 없다.
+`narrate_tts.CLONES` 에 `Simon Clone (Qwen3-TTS): 1.0` 을 넣고
+`verify_tempo_timing` 이 복제 음성에는 `tempoMethod: voice-clone-native` 를
+요구하게 했다. Heami·Zira 쪽 검사는 한 줄도 느슨해지지 않았다
+(`test_tempo_delivery.py` 33개 그대로 통과). 같은 속도로 맞추고 싶으면
+`ingest_voice.py --tempo 1.38` 이 기존 ffmpeg 두 갈래 경로를 그대로 쓴다.
+
+### 쓰는 순서
+
+```
+python scripts/part/tts_jobs.py <드라이브 폴더> --lang ko
+   → jobs-ko.json  (여기에 qwen_colab.py 와 refs/base.wav 를 같이 둔다)
+docs/autocad-technician/qwen-narration.ipynb 를 Colab 에서 열고 셀 순서대로
+   → out/ko/<차시>/<열쇠>#<번호>.wav  · 끊기면 4번 셀만 다시 돌린다
+python scripts/part/ingest_voice.py --in <풀어놓은 zip> --out <저장소 밖>
+   → 차시마다 narration-timing.json · media.local.json
+```
+
+### 막힌 것 · 결정할 것
+
+- **참조 음성을 몇 개 둘 것인가.** 하나면 한 말투로 여덟 차시가 나온다.
+  tone 여덟 개(`warn` `slow` `ask` `stress` `point` `warm` `light` `calm`)에
+  맞춰 3~4개를 짧게 더 녹음하면 강의에 굴곡이 생긴다. 사용자 결정 사항.
+- **`ref_text` 는 `ref_audio` 에서 실제로 들리는 말과 같아야 한다.** 사용자가
+  준 녹음 대사에 「갑습니다!」처럼 어색한 토막이 있다 — 오타인지 실제 발화인지
+  확인이 필요하다. 다르면 복제 품질이 떨어진다.
+- 음성 파일은 24kHz·16bit·mono·26.74초. 3초 상한은 넘지만 10~15초로 줄이면
+  대개 더 안정적이다.
+- **PR #50 은 여전히 빨갛다.** 국문 7차시의 `narration-timing.json` 이 검토
+  반영 전 대본에 묶여 있다. 사용자 합의로 보류 중 — 복제 음성으로 다시 만들면
+  같이 풀린다.
+
+---
+
+## 2026-09-11 (5차) / 영문 대본 여덟 차시 완성 · 프레임 넘침 0 · 공개판 preview.2 (PR #39~#43)
 
 ### 어디까지 왔나
 
