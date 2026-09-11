@@ -53,6 +53,20 @@ BATCH = 4
 # 실제로 수상했다(가장 느린 것이 2.60자/초 · 중간값의 2.8배 느림).
 BAND = (0.65, 1.6)
 TRIES = 3
+# 1초 음성에 토큰이 몇 개 드는가. 재 보니 1,200토큰으로 100자(13.6초)를 자르지
+# 않고 다 읽었으므로 88개 아래다 — 여유를 두어 120으로 잡는다.
+#
+# **상한이 없으면 한 토막이 폭주해 몇십 분을 잡아먹는다.** 실제로 그랬다:
+# VRAM 이 2.74GB 에서 10.8/12GB 로 불고 22분간 파일 하나도 안 나왔다. 대역
+# 위끝(1.6배)을 넘는 음성은 어차피 버리므로, 그 길이까지만 만들게 한다 —
+# 잘라 버릴 것을 끝까지 만들 이유가 없다.
+TOKENS_PER_SEC = 120
+TOKEN_FLOOR = 300           # 짧은 토막도 이만큼은 준다
+
+
+def token_cap(chars, rate):
+    """이 글자 수에 허용할 토큰 상한."""
+    return int(TOKENS_PER_SEC * BAND[1] * chars / rate) + TOKEN_FLOOR
 FRAME = 0.02                # 소리를 재는 창 (초)
 GATE = 0.04                 # 큰 소리의 이 비율 아래는 무음으로 본다
 FLOOR_MULT = 3.0            # 잡음 바닥(10분위)의 이 배수까지 문턱을 올린다
@@ -247,11 +261,13 @@ def build_prompts(model, refs):
     return prompts
 
 
-def speak(model, texts, language, mood, refs, prompts):
+def speak(model, texts, language, mood, refs, prompts, cap=None):
     """토막 여러 개를 한 번에. 배치가 이 작업의 유일한 속도 수단이다 —
     4070 에서 낱개로 돌리면 0.28배속이라 국문만 아홉 시간이 걸린다."""
     n = len(texts)
     call = {'text': list(texts), 'language': [language] * n, 'non_streaming_mode': True}
+    if cap:
+        call['max_new_tokens'] = cap
     if prompts:
         call['voice_clone_prompt'] = prompts[mood] * n
     else:
@@ -344,10 +360,15 @@ def main(argv=None):
 
     began, made, suspect, seconds_made = time.time(), 0, 0, 0.0
     batches = groups(todo, refs, a.batch)
-    log(outdir, '배치 %d개 · 한 묶음 최대 %d토막' % (len(batches), a.batch))
+    log(outdir, '배치 %d개 · 한 묶음 최대 %d토막 · 토큰 상한 %d~%d'
+        % (len(batches), a.batch,
+           token_cap(min(len(x['text']) for x in todo), rate),
+           token_cap(max(len(x['text']) for x in todo), rate)))
     for bi, batch in enumerate(batches, 1):
         mood = batch[0]['ref']
-        wavs, sr = speak(model, [x['text'] for x in batch], doc['language'], mood, refs, prompts)
+        cap = token_cap(max(len(x['text']) for x in batch), rate)
+        wavs, sr = speak(model, [x['text'] for x in batch], doc['language'],
+                         mood, refs, prompts, cap)
         for item, raw in zip(batch, wavs):
             audio = trim(raw, sr)
             got = len(audio) / float(sr)
@@ -356,7 +377,8 @@ def main(argv=None):
             # 잘렸거나 늘어진 것만 낱개로 다시 만든다. 배치 전체를 버리지 않는다.
             while not (low * want <= got <= high * want) and tries < TRIES:
                 tries += 1
-                one, sr = speak(model, [item['text']], doc['language'], mood, refs, prompts)
+                one, sr = speak(model, [item['text']], doc['language'], mood, refs,
+                                prompts, token_cap(len(item['text']), rate))
                 again = trim(one[0], sr)
                 if abs(len(again) / float(sr) - want) < abs(got - want):
                     audio, got = again, len(again) / float(sr)
@@ -379,10 +401,10 @@ def main(argv=None):
                 log(outdir, '? %s#%02d  %.1f초 (기대 %.1f초) · %d자'
                     % (item['key'], item['n'], got, want, len(item['text'])))
         del wavs
-        if bi % 4 == 0:
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        if bi % 8 == 0:
             gc.collect()
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
         if bi % 5 == 0 or bi == len(batches):
             spent = time.time() - began
             left = (len(todo) - made) * spent / made
