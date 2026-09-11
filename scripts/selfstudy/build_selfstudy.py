@@ -225,7 +225,9 @@ def render_steps(items, ctx):
         acts = []
         for a in st.get('actions', []):
             cmd = a.get('type')
-            tok = ('<span class="cmd">%s</span>' % esc(cmd)) if cmd else ''
+            # 치는 값이 판마다 다를 수 있다 — 레이어 이름이 그렇다. `bi` 는
+            # 문자열이면 두 쪽에 같은 값을, 사전이면 각 쪽에 제 값을 낸다.
+            tok = ('<span class="cmd">%s</span>' % bi(cmd)) if cmd else ''
             # 마우스로 하는 일은 타이핑과 다른 종류의 동작이다. 한 줄에 뭉쳐 두면
             # 「어디에 올리고 무엇이 뜨면 누르는지」가 문장 속에 묻힌다.
             kind = a.get('kind')

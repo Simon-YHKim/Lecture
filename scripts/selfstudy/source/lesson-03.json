@@ -958,7 +958,10 @@
           "ko": "레이어 드롭다운에서 고릅니다. 초록색 실선이에요.",
           "en": "from the layer dropdown. It is a green continuous line."
          },
-         "type": "외형선"
+         "type": {
+          "ko": "외형선",
+          "en": "Visible line"
+         }
         },
         {
          "kind": "type",
@@ -1459,7 +1462,10 @@
           "ko": "을 고릅니다.",
           "en": "and pick it."
          },
-         "type": "중심선"
+         "type": {
+          "ko": "중심선",
+          "en": "Centerline"
+         }
         },
         {
          "kind": "see",
@@ -1687,7 +1693,10 @@
           "ko": "레이어 목록에서 고릅니다. 가로 중심 높이를 잡을 임시선을 만들어요.",
           "en": "Choose this layer for temporary height guides."
          },
-         "type": "치수선"
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         }
         },
         {
          "kind": "type",
@@ -1712,7 +1721,10 @@
           "ko": "레이어를 되돌립니다. F8의 직교 표시를 켭니다.",
           "en": "Restore this layer and enable Ortho with F8."
          },
-         "type": "중심선"
+         "type": {
+          "ko": "중심선",
+          "en": "Centerline"
+         }
         },
         {
          "kind": "type",
@@ -1992,7 +2004,10 @@
           "ko": "레이어를 되돌립니다. 원은 부품 선이에요.",
           "en": "Go back to it - the circle is part geometry."
          },
-         "type": "외형선"
+         "type": {
+          "ko": "외형선",
+          "en": "Visible line"
+         }
         },
         {
          "kind": "type",
@@ -2172,7 +2187,10 @@
           "ko": "레이어를 고릅니다. 목 시작점용 구성선을 만듭니다.",
           "en": "Choose this layer for temporary web guides."
          },
-         "type": "치수선"
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         }
         },
         {
          "kind": "type",
@@ -2213,7 +2231,10 @@
           "ko": "레이어를 되돌립니다. F8의 직교 표시는 끕니다. 접선은 교차점에서 시작해요.",
           "en": "Restore this layer and turn Ortho off. Tangents will start at intersections."
          },
-         "type": "외형선"
+         "type": {
+          "ko": "외형선",
+          "en": "Visible line"
+         }
         }
        ],
        "spots": [

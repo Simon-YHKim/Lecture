@@ -101,7 +101,11 @@ def check(path, figures):
                 for st in b.get('items', []):
                     for a in st.get('actions', []):
                         if a.get('type'):
-                            step_types.append(a['type'])
+                            # 판마다 치는 값이 다른 자리는 사전이다. 명령을
+                            # 세는 기준은 국문 과정이다.
+                            value = a['type']
+                            step_types.append(value['ko'] if isinstance(value, dict)
+                                              else value)
                     for key in ('expect', 'why', 'pitfall'):
                         if not st.get(key):
                             warns.append('%d단계에 %s 가 비었다' % (st.get('n', 0), key))

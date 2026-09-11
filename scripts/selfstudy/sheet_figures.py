@@ -16,6 +16,38 @@
 용지선 rect(30,30,462,327) · 도면선 rect(41,41,440,305) · 표제란(261,313,220,33).
 """
 
+import os
+
+# 판의 언어. 자습 교재·덱과 같은 스위치를 본다.
+LANG = os.environ.get('SELFSTUDY_LANG', 'ko')
+
+# 도해 글자의 영문 짝. 이 도해는 `<symbol>` 로 들어가 CSS 로 한쪽을 감출 수
+# 없으므로, 겹쳐 두지 않고 뽑을 때 고른다.
+LABELS_EN = {
+    '끝점 스냅': 'endpoint snap',
+    '중간점 스냅': 'midpoint snap',
+    '끝점에서 시작': 'start at an endpoint',
+    '중심 마크': 'centering mark',
+    '중간-센터': 'middle-center',
+    '이름': 'Name',
+    '사번': 'Employee no.',
+    'A3 420 × 297 · 문자 높이 10': 'A3 420 × 297 · text height 10',
+    '제3각법': 'Third angle',
+    '제1각법': 'First angle',
+    '작은 끝': 'small end',
+    '큰 끝': 'large end',
+    '작은 끝이 원을 향합니다': 'the small end faces the circle',
+    '큰 끝이 원을 향합니다': 'the large end faces the circle',
+    '평면도는 위 · 우측면도는 오른쪽': 'top view above · right side view right',
+    '평면도는 아래 · 우측면도는 왼쪽': 'top view below · right side view left',
+}
+
+
+def _t(text):
+    """도해에 적을 글자. 영문판에서 짝이 없으면 국문 그대로 둔다."""
+    return LABELS_EN.get(text, text) if LANG == 'en' else text
+
+
 SVG_A3 = (
  '<svg viewBox="0 0 560 400" width="560" height="400">'
  '<rect class="si" x="30" y="30" width="462" height="327"/>'
@@ -27,19 +59,19 @@ SVG_A3 = (
  '<text class="sl" x="47" y="66">10</text>'
  '<text class="sl" x="30" y="372" text-anchor="middle">0,0</text>'
  '<text class="sl" x="486" y="24" text-anchor="middle">420,297</text>'
- '<text class="slh" x="48" y="336">끝점 스냅</text>'
+ '<text class="slh" x="48" y="336">' + _t('끝점 스냅') + '</text>'
  '<text class="slh" x="474" y="58" text-anchor="end">OFFSET 10</text>'
- '<text class="slh" x="256" y="370" text-anchor="end">중간점 스냅</text>'
- '<text class="slh" x="476" y="308" text-anchor="end">끝점에서 시작</text>'
+ '<text class="slh" x="256" y="370" text-anchor="end">' + _t('중간점 스냅') + '</text>'
+ '<text class="slh" x="476" y="308" text-anchor="end">' + _t('끝점에서 시작') + '</text>'
  '<text class="slh" x="371" y="308" text-anchor="middle">310</text>'
  '<text class="sl" x="316" y="308" text-anchor="middle">200 × 30</text>'
  '<text class="sl" x="46" y="190">148.5</text>'
- '<text class="sl" x="46" y="208">중심 마크</text>'
- '<text class="slh" x="277" y="329">중간-센터</text>'
- '<text class="sl" x="277" y="343">이름</text>'
- '<text class="slh" x="387" y="329">중간-센터</text>'
- '<text class="sl" x="387" y="343">사번</text>'
- '<text class="sl" x="261" y="390" text-anchor="middle">A3 420 × 297 · 문자 높이 10</text>'
+ '<text class="sl" x="46" y="208">' + _t('중심 마크') + '</text>'
+ '<text class="slh" x="277" y="329">' + _t('중간-센터') + '</text>'
+ '<text class="sl" x="277" y="343">' + _t('이름') + '</text>'
+ '<text class="slh" x="387" y="329">' + _t('중간-센터') + '</text>'
+ '<text class="sl" x="387" y="343">' + _t('사번') + '</text>'
+ '<text class="sl" x="261" y="390" text-anchor="middle">' + _t('A3 420 × 297 · 문자 높이 10') + '</text>'
  # 강조 겹선 — 코치 마크가 「지금 그리는 것」을 켤 때 쓴다. 평소에는 stroke:none 이라 보이지 않는다.
  '<rect class="hl" data-feature="sh-paper" x="30" y="30" width="462" height="327"/>'
  '<rect class="hl" data-feature="sh-frame" x="41" y="41" width="440" height="305"/>'
@@ -49,8 +81,8 @@ SVG_A3 = (
 
 SVG_THIRD = (
  '<svg viewBox="0 0 600 196" width="600" height="196">'
- '<text class="slh" x="8" y="15">제3각법</text>'
- '<text class="sl" x="308" y="15">제1각법</text>'
+ '<text class="slh" x="8" y="15">' + _t('제3각법') + '</text>'
+ '<text class="sl" x="308" y="15">' + _t('제1각법') + '</text>'
  '<line class="sd" x1="298" y1="4" x2="298" y2="192"/>'
  '<circle class="si" cx="72" cy="92" r="34"/>'
  '<circle class="si" cx="72" cy="92" r="18"/>'
@@ -58,18 +90,18 @@ SVG_THIRD = (
  '<line class="sc" x1="72" y1="46" x2="72" y2="138"/>'
  '<polygon class="sh" points="152,74 234,58 234,126 152,110"/>'
  '<line class="sc" x1="142" y1="92" x2="244" y2="92"/>'
- '<text class="sl" x="132" y="150" text-anchor="middle">작은 끝</text>'
- '<text class="sl" x="252" y="150" text-anchor="middle">큰 끝</text>'
- '<text class="slh" x="8" y="172">작은 끝이 원을 향합니다</text>'
- '<text class="sl" x="8" y="188">평면도는 위 · 우측면도는 오른쪽</text>'
+ '<text class="sl" x="132" y="150" text-anchor="middle">' + _t('작은 끝') + '</text>'
+ '<text class="sl" x="252" y="150" text-anchor="middle">' + _t('큰 끝') + '</text>'
+ '<text class="slh" x="8" y="172">' + _t('작은 끝이 원을 향합니다') + '</text>'
+ '<text class="sl" x="8" y="188">' + _t('평면도는 위 · 우측면도는 오른쪽') + '</text>'
  '<circle class="si" cx="372" cy="92" r="34"/>'
  '<circle class="si" cx="372" cy="92" r="18"/>'
  '<line class="sc" x1="326" y1="92" x2="418" y2="92"/>'
  '<line class="sc" x1="372" y1="46" x2="372" y2="138"/>'
  '<polygon class="si" points="452,58 534,74 534,110 452,126"/>'
  '<line class="sc" x1="442" y1="92" x2="544" y2="92"/>'
- '<text class="sl" x="432" y="150" text-anchor="middle">큰 끝</text>'
- '<text class="sl" x="552" y="150" text-anchor="middle">작은 끝</text>'
- '<text class="sl" x="308" y="172">큰 끝이 원을 향합니다</text>'
- '<text class="sl" x="308" y="188">평면도는 아래 · 우측면도는 왼쪽</text>'
+ '<text class="sl" x="432" y="150" text-anchor="middle">' + _t('큰 끝') + '</text>'
+ '<text class="sl" x="552" y="150" text-anchor="middle">' + _t('작은 끝') + '</text>'
+ '<text class="sl" x="308" y="172">' + _t('큰 끝이 원을 향합니다') + '</text>'
+ '<text class="sl" x="308" y="188">' + _t('평면도는 아래 · 우측면도는 왼쪽') + '</text>'
  '</svg>')

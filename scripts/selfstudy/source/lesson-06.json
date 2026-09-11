@@ -1060,7 +1060,10 @@
          "kind": "click"
         },
         {
-         "type": "구성선",
+         "type": {
+          "ko": "구성선",
+          "en": "Construction Line"
+         },
          "do": {
           "ko": "객체 유형 목록에서 이것을 고릅니다.",
           "en": "Choose this in the object type list."

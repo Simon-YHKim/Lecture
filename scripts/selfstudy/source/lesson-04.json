@@ -2419,7 +2419,10 @@
           "ko": "레이어를 고릅니다. 보조선부터 만듭니다.",
           "en": "Choose this layer for the guides."
          },
-         "type": "치수선"
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         }
         },
         {
          "kind": "type",
@@ -2461,7 +2464,10 @@
           "ko": "레이어를 되돌립니다. 베이스 폴리선은 간격띄우기하지 않습니다.",
           "en": "Restore this layer. Do not offset the base polyline."
          },
-         "type": "외형선"
+         "type": {
+          "ko": "외형선",
+          "en": "Visible line"
+         }
         },
         {
          "kind": "type",

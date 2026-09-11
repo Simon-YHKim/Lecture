@@ -1421,7 +1421,10 @@
           "ko": "— 이 행을 고르고 현재로 설정 버튼을 누릅니다. 그리고 대화상자를 닫습니다.",
           "en": "- select this row and click Set Current, then close the dialog."
          },
-         "type": "치수선",
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         },
          "kind": "type"
         }
        ],
@@ -2145,7 +2148,10 @@
           "ko": "— 측정값 앞에 치고 뒤에 한 칸 띄웁니다. 편집기를 닫고 치수선을 장공 아래 빈 자리에 놓으면 2-장공 R5 입니다.",
           "en": "- type it in front of the measured value, trailing space and all. Close the editor and place the dimension below the slot; it reads 2-SLOT R5, two slots at R5."
          },
-         "type": "2-장공",
+         "type": {
+          "ko": "2-장공",
+          "en": "2-SLOT"
+         },
          "kind": "type"
         }
        ],
@@ -2235,7 +2241,10 @@
           "ko": "— 화면 위 레이어 목록에서 고릅니다. 각도를 재려면 선이 두 개 있어야 하는데, 45도 선은 4차시 「원 · 호 · 오프셋」에서 지웠거든요.",
           "en": "- pick this layer from the layer list. An angular dimension needs two lines, and the 45-degree line was erased back in Lesson 4, Circles, Arcs, Offset."
          },
-         "type": "중심선",
+         "type": {
+          "ko": "중심선",
+          "en": "Centerline"
+         },
          "kind": "type"
         },
         {
@@ -2280,7 +2289,10 @@
           "ko": "— 레이어를 다시 되돌립니다.",
           "en": "- switch the layer back to this one."
          },
-         "type": "치수선",
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         },
          "kind": "type"
         },
         {
@@ -2486,7 +2498,10 @@
           "ko": "— 문자 편집기에 입력하고 편집기 바깥을 클릭합니다. 개수, 규격, 깊이 순서로 한 줄에 씁니다.",
           "en": "- type it into the text editor and click outside. Quantity, designation, depth, one line."
          },
-         "type": "4-M5 깊이 10",
+         "type": {
+          "ko": "4-M5 깊이 10",
+          "en": "4-M5 DEPTH 10"
+         },
          "kind": "type"
         }
        ],

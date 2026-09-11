@@ -35,6 +35,37 @@ MAPS = Path(__file__).resolve().parent / 'frames_en'
 # 강조색 칸은 짧고 끊기면 안 되므로 그대로 둔다.
 WRAP = re.compile(r'(style="color:#111;(?:font-size:\d+px;)?)white-space:nowrap"')
 
+# 도면 안의 글자. `frame_text` 는 도면을 건드리지 않는다 — SVG 안에서는 한 문장이
+# 요소 하나가 아니라 좌표가 붙은 `<text>` 낱개라, 문장 단위로 덮는 규칙이 닿지
+# 않는다. 대신 여덟 차시 전수로 세어 보면 일곱 낱말뿐이므로 여기서 낱말로 바꾼다.
+# 뷰 이름 셋은 `edu_ib_02.py --lang en` 이 내는 것과 같은 표기다.
+DRAWING = {
+    '정면도': 'FRONT VIEW',
+    '평면도': 'TOP VIEW',
+    '우측면도': 'RIGHT SIDE VIEW',
+    # 표제란의 보기. 국문은 홍길동, 영문은 같은 자리의 보기 이름이다.
+    '홍길동': 'John Doe',
+    '사번': 'Employee no.',
+    '용지선과 도면선 간격 · 사방 10': 'Sheet edge to border · 10 all round',
+    'A3  420 × 297 · 문자 높이 10': 'A3  420 × 297 · text height 10',
+}
+_DRAWING_TEXT = re.compile(r'(<(?:text|tspan)\b[^>]*>)([^<]+)(</(?:text|tspan)>)')
+
+
+def localise_drawing(source):
+    """도면 `<text>` 의 글자를 낱말로 바꾼다. 좌표는 손대지 않는다."""
+    hits = [0]
+
+    def one(m):
+        body = m.group(2)
+        key = body.strip()
+        if key in DRAWING:
+            hits[0] += 1
+            return m.group(1) + body.replace(key, DRAWING[key]) + m.group(3)
+        return m.group(0)
+
+    return _DRAWING_TEXT.sub(one, source), hits[0]
+
 # 명령표는 국문에서 한 줄로 앉는 칸이 영문에서 두 줄이 된다. 17개짜리 표는
 # 그것만으로 칸(573px)을 넘긴다. 칸을 줄이려고 문장을 더 깎으면 표가 자동
 # 배치라 열 너비가 다시 나뉘면서 다른 행이 대신 두 줄이 된다 — 6차시에서 세 줄
@@ -72,7 +103,7 @@ def build(lesson_dir, out_dir):
             target.unlink()
     shutil.copyfile(english_script, out / 'SCRIPT.md')
 
-    missing, left, unwrapped = {}, {}, 0
+    missing, left, unwrapped, redrawn = {}, {}, 0, 0
     for path in frame_text.frames(str(out)):
         source = Path(path).read_text(encoding='utf-8')
         localised, gaps = frame_text.localise(source, english)
@@ -80,24 +111,26 @@ def build(lesson_dir, out_dir):
         localised, hits = WRAP.subn(lambda m: m.group(1).rstrip(';') + '"', localised)
         unwrapped += hits
         localised = localised.replace(*ROW_PADDING)
+        localised, drawn = localise_drawing(localised)
+        redrawn += drawn
         Path(path).write_text(localised, encoding='utf-8', newline='\n')
         if gaps:
             missing[os.path.basename(path)] = gaps
         body = frame_text.SCRIPTS.sub('', localised)
-        rest = HANGUL.findall(re.sub(r'<svg.*?</svg>', '', body, flags=re.S))
+        rest = HANGUL.findall(body)
         if rest:
             left[os.path.basename(path)] = len(rest)
 
     print('영문 사본 %s' % out)
-    print('프레임 %d장 · 번역 지도 %d줄 · 설명 칸 줄바꿈 허용 %d곳'
-          % (len(frame_text.frames(str(out))), len(english), unwrapped))
+    print('프레임 %d장 · 번역 지도 %d줄 · 설명 칸 줄바꿈 허용 %d곳 · 도면 글자 %d자리'
+          % (len(frame_text.frames(str(out))), len(english), unwrapped, redrawn))
     if missing:
         print('바꾸지 못한 글자가 있다:')
         for name, gaps in missing.items():
             for text in gaps[:5]:
                 print('   %-24s %s' % (name, text[:70]))
     if left:
-        print('한글이 남은 프레임 (도면 SVG 는 제외):')
+        print('한글이 남은 프레임:')
         for name, count in left.items():
             print('   %-24s %d자' % (name, count))
     return 1 if missing or left else 0

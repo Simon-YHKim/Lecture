@@ -839,7 +839,7 @@
       "ko": "가로로 긴 바깥 사각형이 용지선이고 왼쪽 아래 구석이 0,0, 오른쪽 위 구석이 420,297 입니다. 그 안쪽에 사방 10 을 띄운 사각형이 도면선이며 용지선을 OFFSET 10 으로 띄워 만듭니다. 네 변의 한가운데에 용지선과 도면선을 잇는 짧은 중심 마크가 하나씩 있고, 좌우 마크는 바닥에서 148.5 높이입니다. 오른쪽 아래 구석에 가로 200 세로 30 의 표제란이 도면선 모서리에 붙어 있고, 가운데 세로선이 100 짜리 칸 둘로 나눕니다. 왼쪽 칸에는 이름, 오른쪽 칸에는 사번이 칸 한가운데에 들어가고 문자 높이는 10 입니다.",
       "en": "The outer landscape rectangle is the sheet outline, with 0,0 at the lower left and 420,297 at the upper right. Inside it, 10 in on every side, is the border, made by offsetting the sheet outline by 10. At the middle of each edge a short centering mark bridges the two rectangles; the left and right marks sit 148.5 up from the bottom. In the lower right corner a 200 by 30 title block meets the border corner, and a vertical line splits it into two cells of 100. The left cell holds the name and the right one the employee number, each centred in its cell at text height 10."
      },
-     "svg": "<svg viewBox=\"0 0 560 400\" width=\"560\" height=\"400\"><rect class=\"si\" x=\"30\" y=\"30\" width=\"462\" height=\"327\"/><rect class=\"si\" x=\"41\" y=\"41\" width=\"440\" height=\"305\"/><path class=\"si\" d=\"M261 357 L261 346 M261 41 L261 30 M30 194 L41 194 M481 194 L492 194\"/><rect class=\"sh\" x=\"261\" y=\"313\" width=\"220\" height=\"33\"/><path class=\"sh\" d=\"M371 313 L371 346\"/><path class=\"sd\" d=\"M30 62 L41 62\"/><text class=\"sl\" x=\"47\" y=\"66\">10</text><text class=\"sl\" x=\"30\" y=\"372\" text-anchor=\"middle\">0,0</text><text class=\"sl\" x=\"486\" y=\"24\" text-anchor=\"middle\">420,297</text><text class=\"slh\" x=\"48\" y=\"336\">OFFSET 10</text><text class=\"slh k\" x=\"474\" y=\"36\" text-anchor=\"end\">도면선</text><text class=\"slh e\" x=\"474\" y=\"36\" text-anchor=\"end\">Border line</text><text class=\"slh k\" x=\"256\" y=\"370\" text-anchor=\"end\">표제란</text><text class=\"slh e\" x=\"256\" y=\"370\" text-anchor=\"end\">Title block</text><text class=\"slh k\" x=\"476\" y=\"308\" text-anchor=\"end\">모서리에 붙임</text><text class=\"slh e\" x=\"476\" y=\"308\" text-anchor=\"end\">At the corner</text><text class=\"slh\" x=\"371\" y=\"308\" text-anchor=\"middle\">310</text><text class=\"sl\" x=\"316\" y=\"308\" text-anchor=\"middle\">200 × 30</text><text class=\"sl\" x=\"46\" y=\"190\">148.5</text><text class=\"sl k\" x=\"46\" y=\"208\">중심 마크</text><text class=\"sl e\" x=\"46\" y=\"208\">Centering mark</text><text class=\"slh k\" x=\"277\" y=\"329\">한가운데</text><text class=\"slh e\" x=\"277\" y=\"329\">Centered</text><text class=\"sl k\" x=\"277\" y=\"343\">이름</text><text class=\"sl e\" x=\"277\" y=\"343\">Name</text><text class=\"slh k\" x=\"387\" y=\"329\">한가운데</text><text class=\"slh e\" x=\"387\" y=\"329\">Centered</text><text class=\"sl k\" x=\"387\" y=\"343\">사번</text><text class=\"sl e\" x=\"387\" y=\"343\">Employee no.</text><text class=\"sl k\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · 문자 높이 10</text><text class=\"sl e\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · text height 10</text></svg>"
+     "svg": "<svg viewBox=\"0 0 560 400\" width=\"560\" height=\"400\"><rect class=\"si\" x=\"30\" y=\"30\" width=\"462\" height=\"327\"/><rect class=\"si\" x=\"41\" y=\"41\" width=\"440\" height=\"305\"/><path class=\"si\" d=\"M261 357 L261 346 M261 41 L261 30 M30 194 L41 194 M481 194 L492 194\"/><rect class=\"sh\" x=\"261\" y=\"313\" width=\"220\" height=\"33\"/><path class=\"sh\" d=\"M371 313 L371 346\"/><path class=\"sd\" d=\"M30 62 L41 62\"/><text class=\"sl\" x=\"47\" y=\"66\">10</text><text class=\"sl\" x=\"30\" y=\"372\" text-anchor=\"middle\">0,0</text><text class=\"sl\" x=\"486\" y=\"24\" text-anchor=\"middle\">420,297</text><text class=\"slh\" x=\"48\" y=\"336\">OFFSET 10</text><text class=\"slh k\" x=\"474\" y=\"36\" text-anchor=\"end\">도면선</text><text class=\"slh e\" x=\"474\" y=\"36\" text-anchor=\"end\">Border line</text><text class=\"slh k\" x=\"256\" y=\"370\" text-anchor=\"end\">표제란</text><text class=\"slh e\" x=\"256\" y=\"370\" text-anchor=\"end\">Title block</text><text class=\"slh k\" x=\"476\" y=\"308\" text-anchor=\"end\">모서리에 붙임</text><text class=\"slh e\" x=\"476\" y=\"308\" text-anchor=\"end\">At the corner</text><text class=\"slh\" x=\"371\" y=\"308\" text-anchor=\"middle\">310</text><text class=\"sl\" x=\"316\" y=\"308\" text-anchor=\"middle\">200 × 30</text><text class=\"sl\" x=\"46\" y=\"190\">148.5</text><text class=\"sl k\" x=\"46\" y=\"208\">중심 마크</text><text class=\"sl e\" x=\"46\" y=\"208\">Centering marks</text><text class=\"sl e\" x=\"46\" y=\"208\">Centering mark</text><text class=\"slh k\" x=\"277\" y=\"329\">한가운데</text><text class=\"slh e\" x=\"277\" y=\"329\">Centered</text><text class=\"sl k\" x=\"277\" y=\"343\">이름</text><text class=\"sl e\" x=\"277\" y=\"343\">Name</text><text class=\"sl e\" x=\"277\" y=\"343\">Name</text><text class=\"slh k\" x=\"387\" y=\"329\">한가운데</text><text class=\"slh e\" x=\"387\" y=\"329\">Centered</text><text class=\"sl k\" x=\"387\" y=\"343\">사번</text><text class=\"sl e\" x=\"387\" y=\"343\">Employee no.</text><text class=\"sl e\" x=\"387\" y=\"343\">Employee no.</text><text class=\"sl k\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · 문자 높이 10</text><text class=\"sl e\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · text height 10</text><text class=\"sl e\" x=\"261\" y=\"390\" text-anchor=\"middle\">A3 420 × 297 · text height 10</text></svg>"
     },
     {
      "type": "table",
@@ -2038,7 +2038,10 @@
          "kind": "click"
         },
         {
-         "type": "외형선",
+         "type": {
+          "ko": "외형선",
+          "en": "Visible line"
+         },
          "do": {
           "ko": "을 이름에 입력하고 엔터를 누릅니다.",
           "en": "Type it as the name and press Enter."
@@ -2046,7 +2049,10 @@
          "kind": "type"
         },
         {
-         "type": "중심선",
+         "type": {
+          "ko": "중심선",
+          "en": "Centerline"
+         },
          "do": {
           "ko": "을 같은 방법으로 만듭니다.",
           "en": "Create this one the same way."
@@ -2054,7 +2060,10 @@
          "kind": "type"
         },
         {
-         "type": "숨은선",
+         "type": {
+          "ko": "숨은선",
+          "en": "Hidden line"
+         },
          "do": {
           "ko": "을 같은 방법으로 만듭니다.",
           "en": "Create this one the same way."
@@ -2062,7 +2071,10 @@
          "kind": "type"
         },
         {
-         "type": "치수선",
+         "type": {
+          "ko": "치수선",
+          "en": "Dimension line"
+         },
          "do": {
           "ko": "을 같은 방법으로 만듭니다. 모두 네 개입니다.",
           "en": "Create this one the same way. Four in all."
@@ -2653,7 +2665,10 @@
          "kind": "type"
         },
         {
-         "type": "굴림",
+         "type": {
+          "ko": "굴림",
+          "en": "Gulim"
+         },
          "do": {
           "ko": "으로 글꼴 이름을 바꿉니다. PC에 설치된 글꼴을 쓰며 별도 글꼴 파일은 추가하지 않습니다.",
           "en": "Choose this installed font. No additional font file is required."
