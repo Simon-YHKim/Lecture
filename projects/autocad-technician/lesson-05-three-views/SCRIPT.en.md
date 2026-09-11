@@ -287,7 +287,7 @@
     If the intersection markers crowd together, zoom in and type `INT`, Enter to ask for the intersection snap.
 
     First, on the back face depth line, join the projection line at the part's left end to the one at its right end.
-    On the plate front face depth line, join only from the left end to the projection line taken up from the left web's upper endpoint.
+    On the plate front face depth line, join only from the left end to the projection line of the left web's upper endpoint.
     On the right, join from the projection line taken up from the right web's upper endpoint to the part's right end.
     Do not run the middle across in one line. Over that stretch the boss and the plate carry on as the same cylindrical face.
     On the boss front face depth line, join the projection lines of the boss's left and right quadrants.

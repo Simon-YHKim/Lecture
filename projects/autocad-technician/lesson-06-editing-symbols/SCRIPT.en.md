@@ -199,8 +199,8 @@
     With MIRROR you picked the left slot and threw it across that vertical line.
     You set the mirror axis with two points, and you catch those two points with a snap.
     You pick the lower and upper endpoints of the vertical centerline you stood up in Lesson 3, with the endpoint snap.
-    Or you put the first point on the boss circle centre with the center snap,
-    and with ortho on, put the cursor above that point and click — the same axis.
+    Or you put the first point on the boss circle centre with the center snap.
+    Then with ortho on, put the cursor above that point and click. It is the same axis.
     A point caught with a snap is not eyeballed; it is an exact point.
     So today's job is not to build it again. It is to measure whether it is right.
     Erase something already right and rebuild it and nothing is added to the drawing.
@@ -400,7 +400,7 @@
 
     (1 card — moving on with helper lines still there) First check whether you erased the three practice lines. A stub of a helper line drawn between two views may be left as well. The construction lines drawn with XLINE went in one go in step 4, but a short helper line drawn with LINE is not caught by that condition. They are left near the edges of the border too. It is a screen you have been looking at while you worked, so your eye passes over it. The way to check is zoom all. Type `Z`, Enter, `A`, Enter. Put the whole border on one screen and look. What can you see besides the part shape, the border and the title block? That is a helper line still there.
 
-    (2 card — thinking you erased it when you only turned the layer off) This is where you turned a layer off to check and did not turn it back on. The lines have gone from the screen, so it looks exactly like erasing. But the objects are still there. That the layer is off is saved into the file too. Open it next lesson and it looks as if there is not one centerline. So you draw the centerlines again. Then there are two lines laid on top of each other in the same place. Open the layer list before you save. Get into the habit of checking that every lamp is on.
+    (2 card — thinking you erased it when you only turned the layer off) This happens when you turn a layer off to check and do not turn it back on. The lines have gone from the screen, so it looks exactly like erasing. But the objects are still there. That the layer is off is saved into the file too. Open it next lesson and it looks as if there is not one centerline. So you draw the centerlines again. Then there are two lines laid on top of each other in the same place. Open the layer list before you save. Get into the habit of checking that every lamp is on.
 
     (3 card — applying LTSCALE to one object only) You click one centerline and fix its linetype scale. You see that line come out nicely and think you are finished. The rest of the centerlines are unchanged. Print it and lines of the same kind have different spacing. When you give a value to objects, use QSELECT. Take that whole layer in one go and put it in. The value that moves the whole drawing is LTSCALE. Put it in once on the command line and it takes everywhere. Remember that the two values are separate.
 

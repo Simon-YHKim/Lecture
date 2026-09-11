@@ -408,6 +408,13 @@ def dim_highlight(comp, dims, spans, lead=0.2):
     return attr_highlight(comp, "dim", dims, spans, lead)
 
 
+# 단계 띠에 뜨는 단축키. 대본은 낭독용이라 한글로 적지만(「컨트롤 일」), 화면은
+# 키보드에 적힌 대로 `Ctrl+1` 을 보여야 한다. 읽을 때만 한글을 알아본다.
+_KEY_ALIAS = {'컨트롤 에스': 'Ctrl+S', '컨트롤 일': 'Ctrl+1', '컨트롤 에이': 'Ctrl+A',
+              '컨트롤 지': 'Ctrl+Z', '컨트롤 오': 'Ctrl+O'}
+_KEYS = re.compile(r"Ctrl\+[A-Za-z0-9]+|\bF(?:[3-9]|1[0-2])\b|"
+                   + "|".join(sorted(_KEY_ALIAS, key=len, reverse=True)))
+
 _TICK = re.compile(r"`([A-Za-z][A-Za-z0-9]{0,31})`")
 _FILLET_COMMAND = re.compile(r'\bFILLET\b|모깎기|필렛\s*명령', re.I)
 _FILLET_OPTION = re.compile(
@@ -528,7 +535,7 @@ def step_keys(path, line_no):
                 continue
             if key in kit.COMMANDS and key not in found:
                 found.append(key)
-        fk = re.findall(r"Ctrl\+[A-Za-z0-9]+|\bF(?:[3-9]|1[0-2])\b", text)
+        fk = [_KEY_ALIAS.get(k, k) for k in _KEYS.findall(text)]
         for k in fk:
             if k not in found:
                 found.append(k)

@@ -271,7 +271,7 @@
     Check object snap is on. The shortcut is F3.
     Turn ortho on too. The shortcut is F8. It fixes the direction to horizontal and vertical.
     Turn object snap tracking on. That is F11.
-    When a command asks for a point, rest the cursor on a feature point and a guide line reaches out; where two guide lines meet, you can catch that spot.
+    When a command asks for a point, rest the cursor on a feature point and a guide line reaches out. Where two guide lines meet, you can catch that spot.
     It is how you make a point the shape does not have yet.
     Turn dynamic input on as well. That is F12.
     A box follows the cursor and takes the length and the angle there.
@@ -409,9 +409,9 @@
     Then press Enter once more to end the text command.
 
     Put your employee number in the right box the same way.
-    Draw the two X lines in the right box as well,
-    then `DTEXT`, Enter, `J`, Enter, `MC`, Enter, click the intersection,
-    height `10`, Enter, angle `0`, Enter, type the number, Enter, Enter.
+    Draw the two diagonal lines in the right box as well.
+    Then `DTEXT`, Enter, `J`, Enter, `MC`, Enter, and click the intersection.
+    Height `10`, Enter, angle `0`, Enter, type the number, then press Enter twice.
 
     Once the text is in, erase the four X lines.
     Click each of the four and press Delete.
