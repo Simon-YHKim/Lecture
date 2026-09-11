@@ -165,6 +165,8 @@ def main(argv=None):
     ap.add_argument('--in', dest='source', required=True, help='토막 WAV 가 든 폴더')
     ap.add_argument('--out', required=True, help='음성을 둘 곳 (저장소 밖)')
     ap.add_argument('--lesson', default='', help='한 차시만 (예: lesson-02)')
+    ap.add_argument('--root', default=None,
+                    help='차시가 있는 곳. 영문은 저장소 밖 사본 묶음을 가리킨다')
     ap.add_argument('--voice', default=sorted(N.CLONES)[0], choices=sorted(N.CLONES))
     ap.add_argument('--tempo', type=float, default=None, help='기본은 목소리에 정해진 값')
     ap.add_argument('--lang', default='ko', choices=('ko', 'en'),
@@ -182,7 +184,8 @@ def main(argv=None):
     else:
         tool_version = 'qwen-tts voice clone (no tempo conversion)'
 
-    lessons = [p for p in sorted(tts_jobs.COURSE.glob('lesson-*'))
+    root = Path(a.root) if a.root else tts_jobs.COURSE
+    lessons = [p for p in sorted(root.glob('lesson-*'))
                if p.is_dir() and (p / 'SCRIPT.md').is_file()
                and (not a.lesson or a.lesson in p.name)]
     if not lessons:
