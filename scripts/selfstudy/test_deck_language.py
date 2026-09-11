@@ -57,6 +57,21 @@ class DeckLabelTests(unittest.TestCase):
         self.assertEqual(HANGUL.findall(re.sub(r'<[^>]+>', ' ', body)), [])
         self.assertEqual(re.findall(r'aria-label="[^"]*[가-힣][^"]*"', source), [])
 
+    def test_sheet_figures_have_an_english_twin_for_every_label(self):
+        """A3 도해는 `<symbol>` 로 들어가 CSS 로 한쪽을 감출 수 없다.
+
+        그래서 두 언어를 겹쳐 두지 못하고 뽑을 때 고른다. 짝이 빠지면 영문
+        덱에 한국어가 그대로 선다 — 국문판에서는 아무 표시도 나지 않는다.
+        """
+        import sheet_figures as S
+        for name in ('SVG_A3', 'SVG_THIRD'):
+            svg = getattr(S, name)
+            for body in re.findall(r'<text[^>]*>([^<]+)</text>', svg):
+                if not HANGUL.search(body):
+                    continue
+                with self.subTest(figure=name, label=body):
+                    self.assertIn(body.strip(), S.LABELS_EN)
+
     def test_the_lookup_key_stays_korean(self):
         """`EXTRA` 는 국문 제목으로 절을 찾는다. 열쇠까지 언어를 따르면 빌드가 멎는다."""
         node = {'ko': '점을 찍는 네 가지 방법', 'en': 'Four ways to place a point'}

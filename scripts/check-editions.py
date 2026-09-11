@@ -90,7 +90,10 @@ def selfstudy(no):
             for st in blk.get("items", []):
                 steps += 1
                 for a in st.get("actions", []):
-                    t = (a.get("type") or "").strip()
+                    # 판마다 치는 값이 다른 자리는 {ko, en} 사전이다.
+                    # 명령을 세는 기준은 국문 과정이다.
+                    typed = a.get("type") or ""
+                    t = (typed.get("ko", "") if isinstance(typed, dict) else typed).strip()
                     if t and not NOT_A_COMMAND.match(t):
                         cmds.add(t.upper())
                     cmds |= commands_in((a.get("do") or {}).get("ko", ""))

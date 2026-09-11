@@ -238,6 +238,18 @@ def ident(node):
     return (node or {}).get('ko', '')
 
 
+def typed(action):
+    """학습자가 실제로 치는 값.
+
+    대부분 두 판에서 같다 — `REC` · `120` · `D`. 레이어 이름처럼 판마다 다른
+    자리만 원본이 `{ko, en}` 사전이다.
+    """
+    value = (action or {}).get('type')
+    if isinstance(value, dict):
+        return ko(value)
+    return value or ''
+
+
 # ── 조작 목록의 글자 크기 ──────────────────────────────────────
 # 단계마다 조작이 2줄에서 11줄까지 온다. 한 크기로 박아 두면 긴 단계가 넘치고
 # 짧은 단계는 허전하다. 들어갈 크기 중 가장 큰 것을 고른다.
@@ -267,7 +279,7 @@ def ops_font(actions, narrow=False):
         line = size * 1.45
         h = 0.0
         for a in actions:
-            txt = plain(ko(a.get('do'))) + ('  ' + (a.get('type') or ''))
+            txt = plain(ko(a.get('do'))) + ('  ' + typed(a))
             h += max(1, math.ceil(len(txt) / cpl)) * line + gap
         last = (size, h)
         if h <= cap:
@@ -292,8 +304,8 @@ def action_pages(actions, narrow=False):
             # 확인 뒤/다음 명령 앞을 우선한다. 질문 직후에는 나누지 않는다.
             candidates = [i for i in range(start + 1, end + 1)
                           if actions[i - 1].get('kind') == 'see'
-                          or (i < len(actions) and actions[i].get('type')
-                              and re.fullmatch(r'[A-Z][A-Z_-]{1,}', actions[i]['type']))]
+                          or (i < len(actions)
+                              and re.fullmatch(r'[A-Z][A-Z_-]{1,}', typed(actions[i])))]
             candidates = [i for i in candidates
                           if actions[i - 1].get('kind') != 'ask'
                           and ops_font(actions[start:i], narrow)[1] >= cap * .55]
@@ -365,9 +377,9 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None, action_s
         return out
     ops = []
     for k, a in enumerate(acts):
-        kind = a.get('kind') or ('type' if a.get('type') else '')
+        kind = a.get('kind') or ('type' if typed(a) else '')
         lab = ACT_LAB.get(kind, '')
-        cmd = ('<span class="cmd">%s</span>' % esc(a['type'])) if a.get('type') else ''
+        cmd = ('<span class="cmd">%s</span>' % esc(typed(a))) if typed(a) else ''
         # 도면 위 자리 표시와 같은 번호를 이 줄에 단다. 도면 아래에 같은 말을 또
         # 적는 대신 여기서 대조하게 하는 것이 검수 요청이다.
         badge = ''.join('<span class="spotno">%d</span>' % n for n in _coach.spot_badges(a))
@@ -439,7 +451,7 @@ def step_slide(st, cid, clock, sec_label, total, front=None, part=None, action_s
     # 곳이 빈 노트가 됐다 — 검수에서 「대본 누락」으로 올라온 자리다.
     said = []
     for a in acts:
-        t = (a.get('type') or '').strip()
+        t = typed(a).strip()
         d = plain(ko(a.get('do')))
         line = ('%s — %s' % (t, d)) if t and d else (d or t)
         if line:
@@ -797,7 +809,15 @@ STYLE = """
 .ss .half .ft b{color:#C7004C}
 .ss .half .ft{margin:6px 0 0;padding-top:14px;border-top:2px solid #A4A3A4;
   font-size:22px;line-height:1.45;color:#666}
-"""
+""" + ('''
+/* 자습 원본의 도해는 한 자리에 두 언어를 `.k` / `.e` 로 겹쳐 둔다. 교재 쪽은
+   [data-lang] 으로 한쪽을 감추지만 덱에는 그 규칙이 없어 둘이 함께 보였다 —
+   영문 덱에 한국어가 겹쳐 나온 자리가 여기다. 덱은 한 판만 보여 주므로 여기서
+   반대 언어를 감춘다. */
+.k{display:none!important}
+''' if LANG == 'en' else '''
+.e{display:none!important}
+''')
 
 
 def main(lesson_dir, lesson_json, outpath, include_symbols=True):

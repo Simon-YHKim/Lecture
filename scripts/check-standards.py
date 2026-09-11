@@ -110,7 +110,10 @@ def check_typed_values(std, fail):
                     continue
                 for st in blk.get("items", []):
                     for a in st.get("actions", []):
-                        t = (a.get("type") or "").strip()
+                        # 판마다 치는 값이 다른 자리는 {ko, en} 사전이다.
+                        typed = a.get("type") or ""
+                        t = (typed.get("ko", "") if isinstance(typed, dict)
+                             else typed).strip()
                         do = (a.get("do") or {}).get("ko", "")
                         if t in dead and "선가중치" in do:
                             fail.append("%s %d단계 — 치는 선가중치가 폐기값 「%s」"
