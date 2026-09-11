@@ -26,8 +26,19 @@ class ChunkTests(unittest.TestCase):
                     with self.subTest(lesson=lesson['slug'], lang=lang, key=job['key']):
                         self.assertIn(job['key'], said)
                         want = tts_jobs.spoken(said[job['key']])
-                        self.assertEqual(' '.join(c['text'] for c in job['chunks']), want)
+                        got = ' '.join(c['text'] for c in job['chunks'])
+                        self.assertEqual(got, want)
                         self.assertEqual(job['chars'], len(want))
+                        # **순환하지 않는 대조.** 위 두 줄은 양쪽이 같은
+                        # 함수를 쓰므로 그 함수가 글자를 지워도 통과한다.
+                        # 실제로 굵게 표시된 문장이 제어문자 하나로 바뀌었는데
+                        # 시험 150개가 전부 통과했다. 그래서 함수를 쓰지 않고
+                        # 만든 기대값과 한 번 더 맞춘다.
+                        plain = tts_jobs.TAG.sub('', said[job['key']])
+                        plain = ' '.join(plain.replace('**', '').split())
+                        self.assertEqual(got, plain, '낭독될 글자가 달라졌다')
+                        for ch in got:
+                            self.assertGreaterEqual(ord(ch), 32, '제어문자가 섞였다')
                         self.assertEqual([c['n'] for c in job['chunks']],
                                          list(range(1, len(job['chunks']) + 1)))
                         for c in job['chunks']:
