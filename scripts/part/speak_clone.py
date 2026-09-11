@@ -37,17 +37,28 @@ import sys
 import time
 import wave
 
-# 초당 몇 글자를 읽는가. 한국어 낭독은 5~6자쯤이고, 영어는 글자가 잘게
-# 쪼개져 두 배 반쯤 들어간다. 아래위로 넉넉히 잡아 잘림만 잡는다.
+# 초당 몇 글자를 읽는가. **씨앗값일 뿐이다** — 실제 속도는 목소리마다 다르다.
+# 국문 267토막을 재 보니 중간값이 7.21자/초였다. 5.5 로 가정하면 31% 어긋나고,
+# 그러면 기대 길이가 22% 길게 잡혀 대역이 실제로는 2.50~12.22자/초를 다 받아
+# 준다 — 본문의 3분의 1만 읽은 토막도 통과한다. 그래서 만든 것이 쌓이면
+# `done.jsonl` 의 중간값으로 갈아탄다.
 RATE = {'ko': 5.5, 'en': 14.5}
+CALIBRATE = 40              # 이만큼 쌓이면 실측 중간값을 쓴다
 # 한 번에 몇 토막을 같이 만드는가. 8 로 두니 호스트 RAM 이 터져 프로세스가
 # 죽었다(31.6GB 중 여유 10GB 에서). 배치는 가장 긴 토막에 맞춰 패딩되므로
 # 길이를 섞으면 낭비가 크다 — 그래서 길이순으로 정렬해 묶는다.
 BATCH = 4
-BAND = (0.45, 2.2)          # 기대 길이의 몇 배까지 받아들이는가
+# 기대 길이의 몇 배까지 받아들이는가. 실측 중간값을 쓰면 좁혀도 안전하다 —
+# 국문 267토막에서 [0.65, 1.60] 이 걸러 낸 것은 5개(1.9%)였고 그 다섯은 모두
+# 실제로 수상했다(가장 느린 것이 2.60자/초 · 중간값의 2.8배 느림).
+BAND = (0.65, 1.6)
 TRIES = 3
-SILENCE = 0.008             # 이 아래는 소리가 없는 것으로 본다 (정규화 진폭)
-MARGIN = 0.04               # 앞뒤로 남겨 두는 여유 (초)
+FRAME = 0.02                # 소리를 재는 창 (초)
+GATE = 0.04                 # 큰 소리의 이 비율 아래는 무음으로 본다
+FLOOR_MULT = 3.0            # 잡음 바닥(10분위)의 이 배수까지 문턱을 올린다
+MARGIN = 0.06               # 앞뒤로 남겨 두는 여유 (초)
+MAX_GAP = 0.8               # 토막 안에서 이보다 긴 구멍은 줄인다 (초)
+KEEP_GAP = 0.3              # 줄인 뒤 남기는 한 호흡 (초)
 
 # 녹음할 때 어떤 말투인지. 이 글은 참조 음성의 대사가 아니라 **안내문**이다.
 MOOD_HINT = {
@@ -74,17 +85,65 @@ def wav_seconds(path):
         return fh.getnframes() / float(fh.getframerate())
 
 
+def _voiced(x, sr):
+    """20밀리초 창마다 말이 있는지. 큰 소리의 한 줌을 기준으로 잰다.
+
+    최대 진폭을 기준으로 잡으면 안 된다 — 한 번의 파열음이 기준을 끌어올려
+    잡음 바닥이 소리로 세어진다. 실제로 그래서 앞에 10.5초 무음이 붙은 토막이
+    통과했다. 큰 쪽 20% 창의 평균을 기준으로 삼으면 그 일이 없다.
+    """
+    import numpy as np
+    win = max(1, int(FRAME * sr))
+    m = len(x) // win
+    if m == 0:
+        return None, win
+    rms = np.sqrt((x[:m * win].reshape(m, win) ** 2).mean(axis=1))
+    loud = float(np.sort(rms)[int(m * 0.8):].mean()) or 1e-9
+    # 바닥을 따로 잰다. 잡음 바닥이 말의 5%쯤 되면 `GATE * loud` 하나로는
+    # 넘어서지 못한다 — 바닥의 세 배까지 올려 그 위만 말로 센다. 위쪽은
+    # 막아 둔다: 거의 쉼이 없는 토막은 10분위가 이미 말소리라서, 그 세 배를
+    # 문턱으로 쓰면 토막이 통째로 무음이 되어 버린다.
+    floor = float(np.percentile(rms, 10))
+    gate = min(max(GATE * loud, FLOOR_MULT * floor), 0.5 * loud)
+    return rms > gate, win
+
+
 def trim(wav, sr):
-    """앞뒤 무음을 잘라낸다. 토막을 이어 붙일 때 쉼이 들쭉날쭉해지지 않게."""
+    """앞뒤 무음을 걷고 **안쪽의 긴 구멍도 줄인다.**
+
+    구멍은 그냥 조용한 게 아니다. 문단 경계 시각을 실측으로 잡으므로, 토막
+    안의 10초 무음은 시각 파일에 그대로 실려 화면이 멈춘 채 말이 늦게
+    시작하게 만든다. 문장 사이 한 호흡(0.3초)보다 긴 구멍은 그만큼으로 줄인다.
+    """
     import numpy as np
     x = np.asarray(wav, dtype=np.float32).reshape(-1)
-    peak = float(np.max(np.abs(x))) or 1.0
-    loud = np.abs(x) > SILENCE * peak
-    if not loud.any():
+    mask, win = _voiced(x, sr)
+    if mask is None or not mask.any():
         return x
-    first, last = int(np.argmax(loud)), len(x) - int(np.argmax(loud[::-1]))
+    idx = np.flatnonzero(mask)
     pad = int(MARGIN * sr)
-    return x[max(0, first - pad):min(len(x), last + pad)]
+    x = x[max(0, int(idx[0]) * win - pad):min(len(x), (int(idx[-1]) + 1) * win + pad)]
+
+    mask, win = _voiced(x, sr)
+    if mask is None or not mask.any():
+        return x
+    keep, gap, limit = [], 0, int(round(MAX_GAP / FRAME))
+    for i, voiced in enumerate(mask):
+        if voiced:
+            if gap > limit:
+                # 구멍의 앞뒤를 남기고 가운데를 버린다. 꼬리와 머리의 잔향이
+                # 남아 이어 붙인 자리가 뚝 끊기지 않는다.
+                half = int(round(KEEP_GAP / FRAME / 2))
+                keep.extend(range(i - gap, i - gap + half))
+                keep.extend(range(i - half, i))
+            else:
+                keep.extend(range(i - gap, i))
+            gap = 0
+            keep.append(i)
+        else:
+            gap += 1
+    pieces = [x[j * win:(j + 1) * win] for j in keep]
+    return np.concatenate(pieces) if pieces else x
 
 
 def refs_template(moods):
@@ -134,6 +193,15 @@ def load_refs(work, moods):
     return refs
 
 
+def measured_rate(done, seed):
+    """지금까지 만든 것에서 실제 낭독 속도를 구한다. 모자라면 씨앗값."""
+    rates = sorted(r['chars'] / r['sec'] for r in done.values()
+                   if r.get('ok') and r.get('sec', 0) > 0.5 and r.get('chars', 0) >= 10)
+    if len(rates) < CALIBRATE:
+        return seed, len(rates)
+    return rates[len(rates) // 2], len(rates)
+
+
 def load_done(path):
     done = {}
     if os.path.exists(path):
@@ -146,7 +214,7 @@ def load_done(path):
     return done
 
 
-def plan(doc, done, outdir, only):
+def plan(doc, done, outdir, only, redo=False):
     """아직 안 만든 토막만. 대본이 바뀐 토막은 sha 가 달라 다시 만든다."""
     todo = []
     for lesson in doc['lessons']:
@@ -158,7 +226,8 @@ def plan(doc, done, outdir, only):
                 dest = os.path.join(outdir, slug, '%s#%02d.wav' % (job['key'], chunk['n']))
                 row = done.get((slug, job['key'], chunk['n']))
                 if row and row.get('sha') == sha(chunk['text']) and os.path.exists(dest):
-                    continue
+                    if not (redo and not row.get('ok')):
+                        continue
                 todo.append({'slug': slug, 'key': job['key'], 'n': chunk['n'],
                              'mood': chunk.get('mood', '_'), 'tone': chunk.get('tone', ''),
                              'text': chunk['text'], 'dest': dest})
@@ -221,6 +290,8 @@ def main(argv=None):
     ap.add_argument('--limit', type=int, default=0, help='이번에 만들 토막 수 상한')
     ap.add_argument('--model', default='Qwen/Qwen3-TTS-12Hz-0.6B-Base')
     ap.add_argument('--batch', type=int, default=BATCH, help='한 번에 만들 토막 수')
+    ap.add_argument('--redo-suspect', action='store_true',
+                    help='길이가 수상하다고 표시된 토막을 다시 만든다')
     a = ap.parse_args(argv)
 
     work = os.path.abspath(a.work)
@@ -233,10 +304,21 @@ def main(argv=None):
 
     refs = load_refs(work, doc.get('moods') or [])
     done = load_done(donefile)
-    todo = plan(doc, done, outdir, a.lesson)
+    rate, samples = measured_rate(done, RATE[a.lang])
+    # 대역이 바뀌었으면 옛 판정을 그 대역으로 다시 본다. 느슨한 대역에서
+    # 통과한 토막이 새 대역에서는 수상할 수 있다 — 그걸 놓치면 선생님 목소리로
+    # 반쪽 문장이 나간다.
+    low, high = BAND
+    for row in done.values():
+        if row.get('sec', 0) > 0 and row.get('chars', 0) >= 10:
+            want = row['chars'] / rate
+            row['ok'] = low * want <= row['sec'] <= high * want
+    todo = plan(doc, done, outdir, a.lesson, a.redo_suspect)
     total = sum(len(j['chunks']) for l in doc['lessons'] for j in l['jobs']
                 if not a.lesson or a.lesson in l['slug'])
-    log(outdir, '남은 토막 %d / %d' % (len(todo), total))
+    log(outdir, '남은 토막 %d / %d · 속도 %.2f자/초 (%s) · 대역 [%.2f, %.2f]'
+        % (len(todo), total, rate,
+           '실측 %d개' % samples if samples >= CALIBRATE else '씨앗값', low, high))
     if not todo:
         log(outdir, '다 만들었다.')
         return 0
@@ -260,7 +342,6 @@ def main(argv=None):
     log(outdir, '%s · %s · %s' % (a.model, kwargs['device_map'], kwargs['dtype']))
     prompts = build_prompts(model, refs)
 
-    rate, (low, high) = RATE[a.lang], BAND
     began, made, suspect, seconds_made = time.time(), 0, 0, 0.0
     batches = groups(todo, refs, a.batch)
     log(outdir, '배치 %d개 · 한 묶음 최대 %d토막' % (len(batches), a.batch))
