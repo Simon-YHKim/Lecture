@@ -27,7 +27,7 @@
 
     (2 card — tapped 4-M5 in a polar array) The second is the four screw seats. They sit around the bore. You cut M5 threads 10 deep. The four centres lie on a circle 44 across. The first hole is at 45 degrees. The rest step round every 90. You do not draw the four one at a time. You draw one and rotate it round with a polar array. That way the angle is set by arithmetic, not by hand.
 
-    (3 card — slots 2-R5) The third is the two long holes at the bottom. They are 10 wide and each end is a half-circle of radius 5. One circle command will not give you that: you draw the two end circles, join them with tangent lines and trim the inside away to get the pill shape. That is where you use the trim command today.
+    (3 card — slots 2-R5) The third is the two long holes at the bottom. They are 10 wide and each end is a half-circle of radius 5. One circle command will not give you that. You draw the two end circles, join them with tangent lines, and trim the inside away to get the pill shape. That is where you use the trim command today.
 
     (4 card — fillets 2-R10) The fourth is the inside corner. It is where the web turns into the base. You round it at radius 10. You do not draw a separate circle here. You only pick two lines. The command fits the arc between them itself. It trims what is left over as well. This is where the load piles up most. That is why the R is as large as 10. It is the story from Lesson 2.
 

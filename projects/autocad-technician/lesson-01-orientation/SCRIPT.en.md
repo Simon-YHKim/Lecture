@@ -21,7 +21,7 @@
 
     Let us start with why you learn drawings at all.
 
-    Standing in front of a machine you have probably said something like this. "Just shave off about this much here."
+    Standing in front of a machine, you have probably said something like this. "Just shave off about this much here."
 
     To the person saying it, that can feel like a clear instruction. Did the person listening understand the same thing?
 
@@ -45,7 +45,7 @@
 
     When a task is awkward, you draw a jig and propose an improvement.
 
-    You also check where new equipment will stand, on a drawing first. You find blocked walkways or clashes with nearby machines before they happen.
+    You also check on a drawing first where new equipment will stand. You find blocked walkways or clashes with nearby machines before they happen.
 
     When a machine stops and you need a spare part quickly, you need a drawing as well. You find the part in the assembly drawing and check its part drawing. Then you talk to the machine shop with that drawing in front of you both.
 
@@ -69,7 +69,7 @@
 
     (5 below) One thing to note in passing.
 
-    Sheet size, layer names and colors can differ from task to task. The values this course settles are practice defaults. If the task sheet in front of you states something else, follow the task sheet.
+    Sheet size, layer names and colors can differ from task to task. The values this course sets are practice defaults. If the task sheet in front of you states something else, follow the task sheet.
 
 ## Line 4 — One part, drawn to the end, and the exam (Frame 4)
 
@@ -107,7 +107,7 @@
 
     A drawing carries the author's intent so that anyone reading it takes the same meaning. You saw the five things a drawing has to have.
 
-    You also told the two practice formats apart — drawing to given dimensions, and orthographic projection. From Lesson 2 you carry one saved file forward and finish one part.
+    You also learned to tell the two practice formats apart: drawing to given dimensions, and orthographic projection. From Lesson 2 you carry one saved file forward and finish one part.
 
     (2 right) The course proper starts next time.
 
