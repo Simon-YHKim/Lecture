@@ -265,7 +265,11 @@ def speak(model, texts, language, mood, refs, prompts, cap=None):
     """토막 여러 개를 한 번에. 배치가 이 작업의 유일한 속도 수단이다 —
     4070 에서 낱개로 돌리면 0.28배속이라 국문만 아홉 시간이 걸린다."""
     n = len(texts)
-    call = {'text': list(texts), 'language': [language] * n, 'non_streaming_mode': True}
+    # `non_streaming_mode` 는 넘기지 않는다. 복제 호출의 기본값은 False 이고
+    # 그것이 맞다 — True 로 덮었더니 VRAM 이 2.74GB 에서 11.9GB 로 불고 호스트
+    # RAM 까지 12.7GB 를 먹으며 멈춰 섰다. 스트리밍이 아닌 쪽은 생성 전체를
+    # 한 번에 들고 있으려 한다.
+    call = {'text': list(texts), 'language': [language] * n}
     if cap:
         call['max_new_tokens'] = cap
     if prompts:
