@@ -405,10 +405,13 @@ def main(argv=None):
                 log(outdir, '? %s#%02d  %.1f초 (기대 %.1f초) · %d자'
                     % (item['key'], item['n'], got, want, len(item['text'])))
         del wavs
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
+        # 여덟 배치에 한 번만 손댄다. 배치마다 `empty_cache()` 를 부르면 다음
+        # 할당이 드라이버를 다시 거쳐 느려진다 — VRAM 을 3GB 밖에 안 쓰는데
+        # 돌려줄 이유가 없다.
         if bi % 8 == 0:
             gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
         if bi % 5 == 0 or bi == len(batches):
             spent = time.time() - began
             left = (len(todo) - made) * spent / made
