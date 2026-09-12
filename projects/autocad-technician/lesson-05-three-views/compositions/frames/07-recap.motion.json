@@ -1,5 +1,5 @@
 {
-  "duration": 74.295,
+  "duration": 92.631,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -9,12 +9,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l5f7 .p-done",
-      "bySec": 3.56
+      "bySec": 4.0
     },
     {
       "kind": "appearsBy",
       "selector": "#l5f7 .p-next",
-      "bySec": 23.77
+      "bySec": 32.07
     },
     {
       "kind": "before",
@@ -28,12 +28,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l5f7 .p-done-li:last-child",
-      "bySec": 3.559
+      "bySec": 4.0
     },
     {
       "kind": "appearsBy",
       "selector": "#l5f7 .p-next-li:last-child",
-      "bySec": 23.769
+      "bySec": 32.07
     }
   ]
 }

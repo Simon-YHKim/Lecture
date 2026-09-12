@@ -1,5 +1,5 @@
 {
-  "duration": 162.624,
+  "duration": 179.008,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -13,12 +13,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .note",
-      "bySec": 157.49
+      "bySec": 172.77
     },
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky1",
-      "bySec": 14.79
+      "bySec": 13.03
     },
     {
       "kind": "staysInFrame",
@@ -27,7 +27,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky2",
-      "bySec": 20.17
+      "bySec": 18.69
     },
     {
       "kind": "staysInFrame",
@@ -36,7 +36,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky3",
-      "bySec": 25.93
+      "bySec": 25.12
     },
     {
       "kind": "staysInFrame",
@@ -45,7 +45,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky4",
-      "bySec": 31.46
+      "bySec": 30.95
     },
     {
       "kind": "staysInFrame",
@@ -54,7 +54,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky5",
-      "bySec": 37.0
+      "bySec": 37.08
     },
     {
       "kind": "staysInFrame",
@@ -63,7 +63,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky6",
-      "bySec": 44.85
+      "bySec": 45.63
     },
     {
       "kind": "staysInFrame",
@@ -72,7 +72,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky7",
-      "bySec": 51.15
+      "bySec": 52.78
     },
     {
       "kind": "staysInFrame",
@@ -81,7 +81,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky8",
-      "bySec": 56.07
+      "bySec": 58.05
     },
     {
       "kind": "staysInFrame",
@@ -90,7 +90,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky9",
-      "bySec": 62.97
+      "bySec": 66.2
     },
     {
       "kind": "staysInFrame",
@@ -99,7 +99,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky10",
-      "bySec": 67.3
+      "bySec": 72.31
     },
     {
       "kind": "staysInFrame",
@@ -108,7 +108,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky11",
-      "bySec": 72.75
+      "bySec": 78.26
     },
     {
       "kind": "staysInFrame",
@@ -117,7 +117,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky12",
-      "bySec": 79.3
+      "bySec": 85.58
     },
     {
       "kind": "staysInFrame",
@@ -126,7 +126,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky13",
-      "bySec": 86.57
+      "bySec": 92.43
     },
     {
       "kind": "staysInFrame",
@@ -135,7 +135,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky14",
-      "bySec": 92.94
+      "bySec": 98.58
     },
     {
       "kind": "staysInFrame",
@@ -144,7 +144,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky15",
-      "bySec": 99.81
+      "bySec": 106.51
     },
     {
       "kind": "staysInFrame",
@@ -153,7 +153,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky16",
-      "bySec": 106.54
+      "bySec": 113.58
     },
     {
       "kind": "staysInFrame",
@@ -162,7 +162,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky17",
-      "bySec": 111.48
+      "bySec": 118.95
     },
     {
       "kind": "staysInFrame",
@@ -171,7 +171,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky18",
-      "bySec": 119.33
+      "bySec": 127.36
     },
     {
       "kind": "staysInFrame",
@@ -180,7 +180,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky19",
-      "bySec": 125.54
+      "bySec": 134.36
     },
     {
       "kind": "staysInFrame",
@@ -189,7 +189,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky20",
-      "bySec": 130.97
+      "bySec": 141.13
     },
     {
       "kind": "staysInFrame",
@@ -198,7 +198,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky21",
-      "bySec": 137.43
+      "bySec": 149.4
     },
     {
       "kind": "staysInFrame",
@@ -207,7 +207,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky22",
-      "bySec": 144.77
+      "bySec": 158.09
     },
     {
       "kind": "staysInFrame",
@@ -216,7 +216,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky23",
-      "bySec": 151.17
+      "bySec": 165.24
     },
     {
       "kind": "staysInFrame",
@@ -225,7 +225,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l4f8 .ky24",
-      "bySec": 158.09
+      "bySec": 173.37
     },
     {
       "kind": "staysInFrame",

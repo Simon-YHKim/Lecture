@@ -1,15 +1,15 @@
 {
-  "duration": 6.427,
+  "duration": 7.175,
   "assertions": [
     {
       "kind": "appearsBy",
       "selector": "#l5f1 .brand",
-      "bySec": 1.99
+      "bySec": 2.44
     },
     {
       "kind": "appearsBy",
       "selector": "#l5f1 h2",
-      "bySec": 3.53
+      "bySec": 3.98
     },
     {
       "kind": "before",

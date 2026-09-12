@@ -1,5 +1,5 @@
 {
-  "duration": 133.205,
+  "duration": 151.034,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -13,7 +13,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l5f3 .note",
-      "bySec": 108.39
+      "bySec": 122.37
     }
   ]
 }
