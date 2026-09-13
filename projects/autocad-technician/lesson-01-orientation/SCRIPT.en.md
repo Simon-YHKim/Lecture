@@ -1,15 +1,14 @@
 # SCRIPT — AutoCAD Technician Lesson 1 · Orientation (English edition)
 
 **Checkpoint:** none (no drawing work)<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · playback tempo to be confirmed<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm and clear, as if introducing the course to someone you have just met. Do not rush.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 7 min 32 sec, including narration and frame holds.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:11
+**Time:** 0:00–0:15
 
     (silence, or a short greeting)
 
@@ -17,7 +16,7 @@
 
 ## Line 2 — A drawing speaks for you (Frame 2)
 
-**Time:** 0:11–1:49
+**Time:** 0:15–2:28
 
     Let us start with why you learn drawings at all.
 
@@ -53,7 +52,7 @@
 
 ## Line 3 — What the practice tasks look like (Frame 3)
 
-**Time:** 1:49–2:51
+**Time:** 2:28–3:50
 
     In this course you draw these yourself, so that you can do that work. The two formats introduced here are practice examples for this course. The exam's task format and how it is run are confirmed in the announcement that will be shared.
 
@@ -73,7 +72,7 @@
 
 ## Line 4 — One part, drawn to the end, and the exam (Frame 4)
 
-**Time:** 2:51–4:35
+**Time:** 3:50–6:13
 
     Now let us see what you learn, and in what order.
 
@@ -101,7 +100,7 @@
 
 ## Line 5 — This lesson and the next (Frame 5)
 
-**Time:** 4:35–5:20
+**Time:** 6:13–7:16
 
     (1 left) Four things from today.
 
@@ -119,7 +118,7 @@
 
 ## Line 6 — Well done (Frame 6)
 
-**Time:** 5:20–5:36
+**Time:** 7:16–7:32
 
     (1) That is it for today. Well done.
 

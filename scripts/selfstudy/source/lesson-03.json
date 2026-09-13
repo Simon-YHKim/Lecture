@@ -5,7 +5,7 @@
   "ko": "기준선과 외곽",
   "en": "Datum Lines and the Outline"
  },
- "videoLength": "26:47",
+ "videoLength": "31:11",
  "selfStudyMin": 107,
  "opens": "EDU-IB-02_L02_TEMPLATE",
  "saves": "EDU-IB-02_L03_PROFILE",
@@ -3487,5 +3487,9 @@
    "ko": "다음은 4차시, 원·호·오프셋입니다. 축 구멍부터 시작해 탭과 장공을 그리고, 필렛 2-R10과 중심 표시를 넣을 거예요.",
    "en": "Next is Lesson 4: circles, arcs and offset. Start with the bore, add taps and slots, then the R10 fillets and center marks."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "31:11",
+  "en": "37:29"
  }
 }

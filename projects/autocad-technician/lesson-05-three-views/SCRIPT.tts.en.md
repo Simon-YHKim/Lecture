@@ -5,16 +5,15 @@
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L04_FEATURES → L05_VIEWS`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** This lesson moves between views, so leave a beat when you say a position such as "in the front view" or "into the top view". Do not hurry a question toward its answer; leave a beat and carry on.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 41 min 28 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:06
+**Time:** 0:00–0:08
 
     (silence)
 
@@ -22,7 +21,7 @@
 
 ## Line 2 — What you draw today (Frame 2)
 
-**Time:** 0:06–1:23
+**Time:** 0:08–1:54
 
     [calm] Up to last time you finished one front view.
     [calm] Today you make two more views out of that front view.
@@ -50,7 +49,7 @@
     (3 card — making the right side view) [pointing] You make the right side view to the right of the front view.
     [calm] Vertically it takes the front view's height of 90 as it is.
     [calm] Across, it is the thickness again.
-    [calm] That thickness arrives by way of a 45 degree line in the top view.
+    [calm] That thickness arrives by way of a forty-five degree line in the top view.
 
     (4 card — putting hidden lines in) [pointing] The bore, the taps and the slots are inside the material.
     [calm] They are not visible in the top view or the right side view.
@@ -60,7 +59,7 @@
 
 ## Line 3 — The three views hold each other in place (Frame 3)
 
-**Time:** 1:23–3:36
+**Time:** 1:54–5:07
 
     [calm] Before you draw, four things to look at.
     [cautionary] You can draw every line accurately and still put a view in the wrong place.
@@ -72,7 +71,7 @@
     [calm] Second, the attitude the part actually sits or assembles in.
     [calm] This part bolts to a vertical frame face with two bolts. [calm] You look at it in that attitude.
     [calm] Third, the direction that yields the fewest hidden lines.
-    [calm] In the LG Innotek internal exam you are given a three-dimensional picture. [calm] This is the thing to settle first.
+    [calm] In the LG Innotek internal exam you are given a three-dimensional picture. [calm] Choose the front view first.
     [calm] Once it is settled, the other two views follow.
     [calm] Third angle puts a view on the side you looked from.
     [calm] Looked at from above, it goes above.
@@ -106,16 +105,16 @@
     (4 card — joining with a 45 degree line) [emphatic] This is the part people find most confusing today.
     [calm] Depth is not in the front view.
     [calm] It is settled for the first time in the top view.
-    [calm] The device that carries that depth into the right side view is the 45 degree line.
-    [calm] A line running right out of the top view turns at the 45 degree line.
+    [calm] The device that carries that depth into the right side view is the forty-five degree line.
+    [calm] A line running right out of the top view turns at the forty-five degree line.
     [calm] It turns and comes down.
     [calm] A vertical distance in the top view becomes a horizontal distance in the right side view.
-    [calm] Because it is 45 degrees, the two distances are equal.
+    [calm] Because it is forty-five degrees, the two distances are equal.
     [cautionary] Measure it with a rule and carry it over and you will be wrong; carry it on this line and you cannot be.
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 3:36–5:55
+**Time:** 5:07–8:23
 
     [calm] Now we point at six places on this part.
     [calm] We see where the rules you have just seen actually attach.
@@ -157,8 +156,8 @@
     [calm] So the dashed line ends in the middle of the thickness.
     [measured] Go in 10 from the front and 10 is left behind it.
     [calm] The four positions across come out of arithmetic.
-    [calm] The pitch circle radius is 22. [calm] The first hole is at 45 degrees.
-    [measured] 22 times the cosine of 45 degrees is about 15.6.
+    [calm] The pitch circle radius is 22. [calm] The first hole is at forty-five degrees.
+    [measured] 22 times the cosine of forty-five degrees is about 15.6.
     [measured] Take it from and add it to the centre of 60 and you get 44.4 and 75.6.
     [calm] The upper two and the lower two land on the same positions across.
     [emphatic] So in the top view they show at two positions only.
@@ -174,7 +173,7 @@
 
 ## Line 5 — Making three views · DEMO-01 screen recording (Frame 5)
 
-**Time:** 5:55–24:13
+**Time:** 8:23–35:19
 
 > This section is a screen recording. Work through the 16 steps below **in order and without skipping**, speaking as you go.
 > What is inside backticks is what you actually type, and where it says click, that is a point you catch with an object snap.
@@ -339,8 +338,8 @@
     [calm] Pass through this point and the depth carries over unchanged.
 
     [measured] `XL`, Enter. [measured] `V`, Enter.
-    [measured] Click the intersection of the 45 degree line and the top view's plate front face line.
-    [measured] Click the intersection of the 45 degree line and the back face line too. [light] Enter.
+    [calm] Click the intersection of the forty-five degree line and the top view's plate front face line.
+    [calm] Click the intersection of the forty-five degree line and the back face line too. [light] Enter.
 
     [calm] Two more vertical lines have appeared.
     [measured] They are 8, and then 20, from the right side view's left-hand line.
@@ -548,8 +547,8 @@
     [calm] It asks whether to erase the original. [measured] Type `N` and press Enter.
     [cautionary] You do not erase it.
 
-    [measured] Of the four taps the first hole is at 45 degrees.
-    [measured] From there they step round every 90.
+    [calm] Of the four taps the first hole is at forty-five degrees.
+    [calm] From there they step round every ninety degrees.
     [calm] So the upper two are at the same height.
     [calm] The lower two are at the same height too.
     [emphatic] In the right side view only two heights appear.
@@ -638,7 +637,7 @@
 
 ## Line 6 — Check these before you move on (Frame 6)
 
-**Time:** 24:13–25:48
+**Time:** 35:19–37:31
 
     [calm] Four mistakes that come up often.
     [calm] In all four the lines themselves are accurate.
@@ -683,11 +682,11 @@
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 25:48–27:03
+**Time:** 37:31–39:15
 
     (1 left) [pointing] You made two views out of one front view.
     [measured] The only values you settled anew today were the thickness of 12 and the boss zone of 20.
-    [calm] Width and height came across on construction lines, and depth was carried over by the 45 degree line.
+    [calm] Width and height came across on construction lines, and depth was carried over by the forty-five degree line.
     [measured] The hidden lines went in at different lengths: 20 for the bore, 10 for the taps, 12 for the slots.
     [calm] You saved as L05_VIEWS with the projection lines still in place.
 
@@ -710,7 +709,7 @@
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 27:03–28:24
+**Time:** 39:15–41:09
 
     [calm] Here are today's commands in one place. [emphatic] Rather than the names, remember **when you use them**.
     [calm] That is the part that stays after the exam.
@@ -739,7 +738,7 @@
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 28:24–28:39
+**Time:** 41:09–41:28
 
     (1) [light] That is today's portion.
     [calm] Splitting the views and lining them up again took a lot of handwork.

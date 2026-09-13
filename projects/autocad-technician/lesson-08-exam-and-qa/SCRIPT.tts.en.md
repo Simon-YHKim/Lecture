@@ -4,24 +4,23 @@
 # SCRIPT — AutoCAD Technician Lesson 8 · Exam guidance and Q&A (English edition)
 
 **Checkpoint:** none (no drawing work)<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.38x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm, the way you brief someone before an exam. Do not alarm them. After a question, hold a beat before answering.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 8 min 24 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:07
+**Time:** 0:00–0:11
 
     (silence)
 
-    [calm] This is the last session. [calm] Lesson 8, exam guidance and Q&A.
+    [calm] This is the last session. [calm] Lesson 8, exam guidance and questions and answers.
 
 ## Line 2 — Six things to check in the exam announcement (Frame 2)
 
-**Time:** 0:07–1:28
+**Time:** 0:11–1:52
 
     [calm] Across six lessons you drew one part from start to finish. [calm] Now it is time to do it again on your own and get ready for the exam.
 
@@ -41,7 +40,7 @@
 
 ## Line 3 — Five questions that keep coming up (Frame 3)
 
-**Time:** 1:28–2:50
+**Time:** 1:52–3:33
 
     [calm] Five questions came up again and again in review. [calm] Here is an answer to each.
 
@@ -57,7 +56,7 @@
 
 ## Line 4 — What a technician actually does with this (Frame 4)
 
-**Time:** 2:50–3:55
+**Time:** 3:33–4:57
 
     [calm] After the LG Innotek internal exam you use this on the floor. [calm] Here are three ways it serves equipment PM and preventive maintenance.
 
@@ -69,7 +68,7 @@
 
 ## Line 5 — Commands you reach for on the floor (Frame 5)
 
-**Time:** 3:55–5:21
+**Time:** 4:57–6:45
 
     [calm] There are six commands in the table on screen. [calm] Five of them you already typed in the drawing lessons. [calm] The same command lands in a different place on the floor.
 
@@ -89,7 +88,7 @@
 
 ## Line 6 — Closing the course (Frame 6)
 
-**Time:** 5:21–6:22
+**Time:** 6:45–8:08
 
     (1 left) [pointing] On the left of the screen the lessons you came through are in five rows. [measured] In Lessons 1 and 2 you read why a drawing is needed and built an A3 template. [calm] In Lessons 3 and 4 you drew the outline and added circles and arcs. [calm] In Lesson 5 you raised the top and right side views in third-angle projection. [calm] In Lesson 6 you cleared the construction lines and sent each line to its own layer. [calm] In Lesson 7 you put the dimensions on and exported one A3 sheet. [calm] One idler pulley bracket, the kind used on a car engine, became one drawing.
 
@@ -97,7 +96,7 @@
 
 ## Line 7 — Well done (Frame 7)
 
-**Time:** 6:22–6:35
+**Time:** 8:08–8:24
 
     (1) [light] That is the end. [calm] Thank you for the work you put in across eight lessons.
 

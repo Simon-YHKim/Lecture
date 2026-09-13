@@ -5,7 +5,7 @@
   "ko": "오리엔테이션",
   "en": "Orientation"
  },
- "videoLength": "05:36",
+ "videoLength": "6:20",
  "selfStudyMin": 28,
  "opens": null,
  "saves": null,
@@ -1201,5 +1201,9 @@
    "ko": "2차시 · 부품 이해와 도면 환경입니다. 아이들러 풀리 브래킷이 무엇인지 봅니다. 각 면을 어떤 방법으로 가공하는지 봅니다. 왜 그 가공을 골랐는지까지 이야기합니다. 그게 부품 수명과 성능에 어떻게 영향을 주는지도 다룹니다. 도면 위 표기 하나하나가 무엇을 지시하는지도 전부 읽습니다. 그다음 A3 용지에 도면틀과 표제란을 만듭니다. 레이어 네 개를 설정해 템플릿 파일로 남깁니다. 준비물은 AutoCAD 하나면 됩니다.",
    "en": "Lesson 2: the part and the drawing environment. You look at what the idler pulley bracket is, how each face is machined, and why that method was chosen. You also cover how the choice affects the life and the performance of the part. Every notation on the drawing is read for what it instructs. Then you build the border and title block on an A3 sheet and set up four layers, leaving a template file behind. All you need is AutoCAD."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "6:20",
+  "en": "7:32"
  }
 }

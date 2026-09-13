@@ -6,6 +6,12 @@
 
     python scripts/part/speak_clone.py --work local-materials/qwen-narration --lang ko
 
+검토한 발음 표기만 따로 줄 때는 --pronunciations <비공개 JSON>을 쓴다.
+형식은 {"<slug>/<key>#<두 자리 번호>": "읽을 글"}이다. 숫자·기호의 뜻을
+보존한 입력만 넣는다. 원본 대본 해시와 발음 입력 해시(spokenSha)를 함께 남겨,
+해당 토막의 발음 표기가 바뀌면 그 토막만 다시 만든다. 적용할 토막을 명시하고
+생성 결과는 청취·받아쓰기 대조로 검수한다.
+
 작업 폴더:
 
     qwen-narration/
@@ -32,6 +38,7 @@ import gc
 import hashlib
 import io
 import json
+import math
 import os
 import sys
 import time
@@ -53,20 +60,34 @@ BATCH = 4
 # 실제로 수상했다(가장 느린 것이 2.60자/초 · 중간값의 2.8배 느림).
 BAND = (0.65, 1.6)
 TRIES = 3
-# 1초 음성에 토큰이 몇 개 드는가. 재 보니 1,200토큰으로 100자(13.6초)를 자르지
-# 않고 다 읽었으므로 88개 아래다 — 여유를 두어 120으로 잡는다.
+# 생성 한 스텝은 코덱 한 프레임이다. 12Hz 체크포인트의 speech_tokenizer/config.json:
+# output_sample_rate=24000, decode_upsample_rate=1920 → 초당 12.5프레임.
+# 1,200토큰이 13.6초를 담는다는 사실은 상한일 뿐 초당 토큰 수가 아니다.
+# 120으로 잡으면 종료 토큰이 늦게 나올 때 허용 길이의 약 열 배까지 생성한다.
 #
 # **상한이 없으면 한 토막이 폭주해 몇십 분을 잡아먹는다.** 실제로 그랬다:
 # VRAM 이 2.74GB 에서 10.8/12GB 로 불고 22분간 파일 하나도 안 나왔다. 대역
 # 위끝(1.6배)을 넘는 음성은 어차피 버리므로, 그 길이까지만 만들게 한다 —
 # 잘라 버릴 것을 끝까지 만들 이유가 없다.
-TOKENS_PER_SEC = 120
-TOKEN_FLOOR = 300           # 짧은 토막도 이만큼은 준다
+TOKENS_PER_SEC = 13         # 코덱 12.5프레임/초를 올림
+TOKEN_FLOOR = 64            # 시작·종료와 자연스러운 쉼에 약 5초 여유
 
 
-def token_cap(chars, rate):
+def token_cap(chars, rate, codec_hz=None):
     """이 글자 수에 허용할 토큰 상한."""
-    return int(TOKENS_PER_SEC * BAND[1] * chars / rate) + TOKEN_FLOOR
+    per_second = math.ceil(codec_hz) if codec_hz is not None else TOKENS_PER_SEC
+    return int(per_second * BAND[1] * chars / rate) + TOKEN_FLOOR
+
+
+def codec_frame_rate(model):
+    """모델 이름으로 추정하지 않고, 로드한 코덱의 PCM 길이에서 구한다."""
+    codec = model.model.speech_tokenizer
+    sample_rate = codec.get_output_sample_rate()
+    samples_per_frame = codec.get_decode_upsample_rate()
+    if (not math.isfinite(sample_rate) or not math.isfinite(samples_per_frame)
+            or sample_rate <= 0 or samples_per_frame <= 0):
+        raise ValueError('코덱 샘플레이트와 프레임 길이는 양수여야 한다')
+    return sample_rate / samples_per_frame
 FRAME = 0.02                # 소리를 재는 창 (초)
 GATE = 0.04                 # 큰 소리의 이 비율 아래는 무음으로 본다
 FLOOR_MULT = 3.0            # 잡음 바닥(10분위)의 이 배수까지 문턱을 올린다
@@ -228,8 +249,14 @@ def load_done(path):
     return done
 
 
-def plan(doc, done, outdir, only, redo=False):
+def plan(doc, done, outdir, only, redo=False, pronunciations=None):
     """아직 안 만든 토막만. 대본이 바뀐 토막은 sha 가 달라 다시 만든다."""
+    pronunciations = pronunciations or {}
+    valid = {'%s/%s#%02d' % (lesson['slug'], job['key'], chunk['n'])
+             for lesson in doc['lessons'] for job in lesson['jobs'] for chunk in job['chunks']}
+    if set(pronunciations) - valid or any(not isinstance(v, str) or not v.strip()
+                                          for v in pronunciations.values()):
+        raise ValueError('발음 입력은 실재 토막의 열쇠와 비어 있지 않은 문자열이어야 한다')
     todo = []
     for lesson in doc['lessons']:
         slug = lesson['slug']
@@ -239,13 +266,24 @@ def plan(doc, done, outdir, only, redo=False):
             for chunk in job['chunks']:
                 dest = os.path.join(outdir, slug, '%s#%02d.wav' % (job['key'], chunk['n']))
                 row = done.get((slug, job['key'], chunk['n']))
-                if row and row.get('sha') == sha(chunk['text']) and os.path.exists(dest):
+                identity = '%s/%s#%02d' % (slug, job['key'], chunk['n'])
+                speech = pronunciations.get(identity)
+                speech_matches = row and row.get('spokenSha', row.get('sha')) == sha(
+                    speech if speech is not None else chunk['text'])
+                if row and row.get('sha') == sha(chunk['text']) and speech_matches and os.path.exists(dest):
                     if not (redo and not row.get('ok')):
                         continue
                 todo.append({'slug': slug, 'key': job['key'], 'n': chunk['n'],
                              'mood': chunk.get('mood', '_'), 'tone': chunk.get('tone', ''),
                              'text': chunk['text'], 'dest': dest})
+                if speech is not None:
+                    todo[-1]['speech_text'] = speech
     return todo
+
+
+def speech_text(item):
+    """표시 대본과 분리한, 검토된 발음 입력. 없으면 원문 그대로."""
+    return item.get('speech_text', item['text'])
 
 
 def build_prompts(model, refs):
@@ -297,7 +335,7 @@ def groups(todo, refs, size):
         by_ref.setdefault(mood, []).append(item)
     out = []
     for mood in sorted(by_ref):
-        rows = sorted(by_ref[mood], key=lambda x: len(x['text']))
+        rows = sorted(by_ref[mood], key=lambda x: len(speech_text(x)))
         out.extend(rows[i:i + size] for i in range(0, len(rows), size))
     return out
 
@@ -312,6 +350,7 @@ def main(argv=None):
     ap.add_argument('--batch', type=int, default=BATCH, help='한 번에 만들 토막 수')
     ap.add_argument('--redo-suspect', action='store_true',
                     help='길이가 수상하다고 표시된 토막을 다시 만든다')
+    ap.add_argument('--pronunciations', help='검토된 발음 JSON: <slug>/<key>#<n> → 읽을 글. 원본 대본은 유지')
     a = ap.parse_args(argv)
 
     work = os.path.abspath(a.work)
@@ -333,7 +372,13 @@ def main(argv=None):
         if row.get('sec', 0) > 0 and row.get('chars', 0) >= 10:
             want = row['chars'] / rate
             row['ok'] = low * want <= row['sec'] <= high * want
-    todo = plan(doc, done, outdir, a.lesson, a.redo_suspect)
+    pronunciations = None
+    if a.pronunciations:
+        with io.open(a.pronunciations, encoding='utf-8') as fh:
+            pronunciations = json.load(fh)
+        if not isinstance(pronunciations, dict):
+            raise ValueError('발음 JSON은 객체여야 한다')
+    todo = plan(doc, done, outdir, a.lesson, a.redo_suspect, pronunciations)
     total = sum(len(j['chunks']) for l in doc['lessons'] for j in l['jobs']
                 if not a.lesson or a.lesson in l['slug'])
     log(outdir, '남은 토막 %d / %d · 속도 %.2f자/초 (%s) · 대역 [%.2f, %.2f]'
@@ -360,29 +405,33 @@ def main(argv=None):
         log(outdir, 'flash_attention_2 없음 → sdpa (%s)' % type(exc).__name__)
         model = Qwen3TTSModel.from_pretrained(a.model, attn_implementation='sdpa', **kwargs)
     log(outdir, '%s · %s · %s' % (a.model, kwargs['device_map'], kwargs['dtype']))
+    codec_hz = codec_frame_rate(model)
+    log(outdir, '코덱 %.3f프레임/초 · 생성 상한에 코덱 규격 적용' % codec_hz)
     prompts = build_prompts(model, refs)
 
     began, made, suspect, seconds_made = time.time(), 0, 0, 0.0
     batches = groups(todo, refs, a.batch)
     log(outdir, '배치 %d개 · 한 묶음 최대 %d토막 · 토큰 상한 %d~%d'
         % (len(batches), a.batch,
-           token_cap(min(len(x['text']) for x in todo), rate),
-           token_cap(max(len(x['text']) for x in todo), rate)))
+           token_cap(min(len(speech_text(x)) for x in todo), rate, codec_hz),
+           token_cap(max(len(speech_text(x)) for x in todo), rate, codec_hz)))
     for bi, batch in enumerate(batches, 1):
         mood = batch[0]['ref']
-        cap = token_cap(max(len(x['text']) for x in batch), rate)
-        wavs, sr = speak(model, [x['text'] for x in batch], doc['language'],
+        cap = token_cap(max(len(speech_text(x)) for x in batch), rate, codec_hz)
+        log(outdir, '배치 %d/%d · %d토막 · 토큰 상한 %d 시작'
+            % (bi, len(batches), len(batch), cap))
+        wavs, sr = speak(model, [speech_text(x) for x in batch], doc['language'],
                          mood, refs, prompts, cap)
         for item, raw in zip(batch, wavs):
             audio = trim(raw, sr)
             got = len(audio) / float(sr)
-            want = len(item['text']) / rate
+            want = len(speech_text(item)) / rate
             tries = 1
             # 잘렸거나 늘어진 것만 낱개로 다시 만든다. 배치 전체를 버리지 않는다.
             while not (low * want <= got <= high * want) and tries < TRIES:
                 tries += 1
-                one, sr = speak(model, [item['text']], doc['language'], mood, refs,
-                                prompts, token_cap(len(item['text']), rate))
+                one, sr = speak(model, [speech_text(item)], doc['language'], mood, refs,
+                                prompts, token_cap(len(speech_text(item)), rate, codec_hz))
                 again = trim(one[0], sr)
                 if abs(len(again) / float(sr) - want) < abs(got - want):
                     audio, got = again, len(again) / float(sr)
@@ -391,8 +440,10 @@ def main(argv=None):
             sf.write(item['dest'], np.asarray(audio, dtype=np.float32), sr, subtype='PCM_16')
             row = {'slug': item['slug'], 'key': item['key'], 'n': item['n'],
                    'sha': sha(item['text']), 'sec': round(got, 3), 'sr': sr,
-                   'chars': len(item['text']), 'tone': item['tone'], 'mood': item['mood'],
+                   'chars': len(speech_text(item)), 'tone': item['tone'], 'mood': item['mood'],
                    'ref': mood, 'tries': tries, 'ok': ok}
+            if 'speech_text' in item:
+                row.update(spokenSha=sha(item['speech_text']), sourceChars=len(item['text']))
             with io.open(donefile, 'a', encoding='utf-8') as fh:
                 fh.write(json.dumps(row, ensure_ascii=False) + '\n')
             made += 1
@@ -403,7 +454,7 @@ def main(argv=None):
                     fh.write(json.dumps(dict(row, want=round(want, 2), text=item['text']),
                                         ensure_ascii=False) + '\n')
                 log(outdir, '? %s#%02d  %.1f초 (기대 %.1f초) · %d자'
-                    % (item['key'], item['n'], got, want, len(item['text'])))
+                    % (item['key'], item['n'], got, want, len(speech_text(item))))
         del wavs
         # 여덟 배치에 한 번만 손댄다. 배치마다 `empty_cache()` 를 부르면 다음
         # 할당이 드라이버를 다시 거쳐 느려진다 — VRAM 을 3GB 밖에 안 쓰는데

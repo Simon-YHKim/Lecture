@@ -5,7 +5,7 @@
   "ko": "시험 안내와 Q&A",
   "en": "Exam Briefing and Q&A"
  },
- "videoLength": "06:35",
+ "videoLength": "7:32",
  "selfStudyMin": 97,
  "opens": null,
  "saves": null,
@@ -2059,5 +2059,9 @@
    "ko": "AutoCAD 기본 과정은 8차시로 끝납니다. 템플릿 만들기, 세 뷰 배치, 치수 기입과 저장을 다시 연습하세요. 걸린 시간과 막힌 단계를 기록하면 다음 연습을 정하기 쉽습니다. 막히면 김정웅, 김양환에게 문의합니다. 채점 기준과 합격선, 시험 운영 안내는 공유 예정입니다.",
    "en": "The AutoCAD basics course ends here. Rehearse the template, three-view placement, dimensions, and saving. Record elapsed time and difficult steps to plan further practice. Contact Kim Jeong-ung or Kim Yang-hwan if needed. Marking, the pass mark, and exam operations will be shared later."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "7:32",
+  "en": "8:25"
  }
 }

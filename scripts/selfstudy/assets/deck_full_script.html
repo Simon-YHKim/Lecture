@@ -1,0 +1,45 @@
+<style>
+#full-script{margin:auto;width:min(1000px,94vw);max-height:90vh;padding:20px;border:1px solid #777;border-radius:8px;background:#fff;color:#191919;font:16px/1.6 system-ui,sans-serif}
+#full-script::backdrop{background:#0009}
+#full-script header{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+#full-script h2{font-size:21px;margin:0}
+#full-script select,#full-script button{font:inherit;background:inherit;color:inherit;border:1px solid #777;border-radius:4px;padding:6px 12px}
+#full-script pre{white-space:pre-wrap;overflow:auto;max-height:65vh;font:inherit;margin:0}
+#full-script :focus-visible{outline:3px solid #c7004c;outline-offset:2px}
+@media(prefers-color-scheme:dark){#full-script{background:#202020;color:#f5f5f5}}
+</style>
+<dialog id="full-script" aria-labelledby="full-script-title">
+ <header><h2 id="full-script-title"></h2><select id="full-script-lesson"></select><button id="full-script-close" type="button" autofocus></button></header>
+ <pre id="full-script-text" tabindex="0"></pre>
+</dialog>
+<script>
+(function(){
+ 'use strict';
+ var data=JSON.parse(document.querySelector('script[type="application/hyperframes-slideshow+json"]').textContent);
+ var english=data.language==='en', label=english?'Full lesson script':'차시별 전체 대본';
+ var dialog=document.getElementById('full-script'),select=document.getElementById('full-script-lesson');
+ document.getElementById('full-script-title').textContent=label;
+ select.setAttribute('aria-label',english?'Lesson':'차시');
+ document.getElementById('full-script-close').textContent=english?'Close':'닫기';
+ document.getElementById('full-script-close').onclick=function(){dialog.close();};
+ data.lessons.forEach(function(l,i){var o=document.createElement('option');o.value=i;o.textContent=l.no+' · '+l.title;select.appendChild(o);});
+ function paint(){
+  var source=data.lessons[Number(select.value)].script;
+  document.getElementById('full-script-text').textContent=source
+   .replace(/^#{1,6}[ \t]+/gm,'').replace(/^> ?/gm,'').replace(/^    /gm,'')
+   .replace(/\*\*([^*]+)\*\*/g,'$1').replace(/`([^`]+)`/g,'$1').replace(/<br\s*\/?\s*>/gi,'\n');
+ }
+ select.onchange=paint;
+ var open=document.createElement('button');open.type='button';open.id='full-script-open';open.textContent=label;
+ open.onclick=function(){
+  if(window.__deckStop)window.__deckStop();
+  var lesson=document.getElementById('lsn');
+  if(lesson&&lesson.selectedIndex>=0)select.selectedIndex=lesson.selectedIndex;
+  paint();dialog.showModal();
+ };
+ document.getElementById('bar').appendChild(open);
+ // Reading/scrolling the modal must not also advance the underlying slide.
+ dialog.addEventListener('keydown',function(e){e.stopPropagation();});
+ window.dispatchEvent(new Event('resize'));
+})();
+</script>

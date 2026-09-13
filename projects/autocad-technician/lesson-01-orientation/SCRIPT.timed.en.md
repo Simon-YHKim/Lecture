@@ -1,16 +1,16 @@
-<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
-     python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 7:23 · 문단 46개 -->
+<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.en.md 를 고친 뒤 다시 뽑아라.
+     python scripts/part/timed_script.py --lang en --root <영문 사본 묶음>
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 7:23 · 합성 단위 46개 -->
 
 # SCRIPT — AutoCAD Technician Lesson 1 · Orientation (English edition)
 
 **Checkpoint:** none (no drawing work)<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm and clear, as if introducing the course to someone you have just met. Do not rush.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 7 min 32 sec, including narration and frame holds.
 
 ## Line 1 — Title (Frame 1)
 

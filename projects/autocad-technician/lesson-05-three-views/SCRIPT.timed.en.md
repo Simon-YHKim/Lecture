@@ -1,17 +1,17 @@
-<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
-     python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 41:20 · 문단 56개 -->
+<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.en.md 를 고친 뒤 다시 뽑아라.
+     python scripts/part/timed_script.py --lang en --root <영문 사본 묶음>
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 41:11 · 합성 단위 56개 -->
 
 # SCRIPT — AutoCAD Technician Lesson 5 · Third angle, three views and repetition (English edition)
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L04_FEATURES → L05_VIEWS`<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** This lesson moves between views, so leave a beat when you say a position such as "in the front view" or "into the top view". Do not hurry a question toward its answer; leave a beat and carry on.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 41 min 28 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
@@ -24,79 +24,79 @@
 
 ## Line 2 — What you draw today (Frame 2)
 
-**Time:** 0:08–1:53
+**Time:** 0:08–1:54
 
     `[0:08–0:21]` Up to last time you finished one front view.
-    `[0:21–0:34]` Today you make two more views out of that front view.
-    `[0:34–0:53]` There is almost nothing new to measure.
-    `[0:54–1:15]` You take it from lines you have already drawn.
+    Today you make two more views out of that front view.
+    There is almost nothing new to measure.
+    You take it from lines you have already drawn.
 
-    `[1:16–1:31]` Three views are not a format used only in an exam.
-    `[1:31–1:49]` You draw like this when you propose a fixture to make a job easier.
-    `[1:52–2:00]` It is the smallest unit for explaining an object to somebody else.
+    `[0:21–0:34]` Three views are not a format used only in an exam.
+    You draw like this when you propose a fixture to make a job easier.
+    It is the smallest unit for explaining an object to somebody else.
 
-    `[2:00–3:24]` (1 card — drawing projection lines) First you pull projection lines out.
-    `[3:25–3:52]` You pull them from the corners and the circles of the front view.
-    `[3:53–4:19]` Up, and across to the right.
-    `[4:19–5:00]` These lines do not stay on the drawing.
-    `[5:02–5:11]` Follow them and you never have to measure width and height again.
-    `[5:11–5:32]` Today you leave them, and clear them away in Lesson 6.
+    `[0:34–0:53]` (1 card — drawing projection lines) First you pull projection lines out.
+    You pull them from the corners and the circles of the front view.
+    Up, and across to the right.
+    These lines do not stay on the drawing.
+    Follow them and you never have to measure width and height again.
+    Today you leave them, and clear them away in Lesson 6.
 
-    `[5:32–6:01]` (2 card — making the top view) You make the top view above the front view.
-    `[6:01–6:33]` Across, it is the 120 taken straight from the front view.
-    `[6:33–7:04]` Down the page is the thickness.
-    `[7:04–7:49]` The plate is 12; where the boss is, 20.
-    `[7:49–8:13]` Thickness is a value the front view did not have.
-    `[8:16–8:54]` So it appears here for the first time.
+    `[0:54–1:15]` (2 card — making the top view) You make the top view above the front view.
+    Across, it is the 120 taken straight from the front view.
+    Down the page is the thickness.
+    The plate is 12; where the boss is, 20.
+    Thickness is a value the front view did not have.
+    So it appears here for the first time.
 
-    `[8:54–9:39]` (3 card — making the right side view) You make the right side view to the right of the front view.
-    `[9:39–12:03]` Vertically it takes the front view's height of 90 as it is.
-    `[12:04–14:00]` Across, it is the thickness again.
-    `[14:00–15:37]` That thickness arrives by way of a 45 degree line in the top view.
+    `[1:16–1:32]` (3 card — making the right side view) You make the right side view to the right of the front view.
+    Vertically it takes the front view's height of 90 as it is.
+    Across, it is the thickness again.
+    That thickness arrives by way of a forty-five degree line in the top view.
 
-    `[15:38–16:38]` (4 card — putting hidden lines in) The bore, the taps and the slots are inside the material.
-    `[16:41–18:16]` They are not visible in the top view or the right side view.
-    `[18:17–19:57]` Leave the hidden lines out and it reads as if there were no holes there.
-    `[19:57–22:32]` Draw them continuous and they become visible edges.
-    `[22:32–24:38]` So you draw them dashed.
+    `[1:32–1:50]` (4 card — putting hidden lines in) The bore, the taps and the slots are inside the material.
+    They are not visible in the top view or the right side view.
+    Leave the hidden lines out and it reads as if there were no holes there.
+    Draw them continuous and they become visible edges.
+    So you draw them dashed.
 
 ## Line 3 — The three views hold each other in place (Frame 3)
 
-**Time:** 1:53–5:05
+**Time:** 1:54–5:07
 
-    `[24:39–25:35]` Before you draw, four things to look at.
-    `[25:35–26:27]` You can draw every line accurately and still put a view in the wrong place.
+    `[1:53–2:01]` Before you draw, four things to look at.
+    You can draw every line accurately and still put a view in the wrong place.
 
-    `[26:30–28:26]` (1 card — settle the front view first) Three views start from the front view.
-    `[28:26–30:45]` There are tests for what you take as the front view.
-    `[30:45–33:17]` First, the face that shows the shape best.
-    `[33:17–35:13]` For this part, the face where the base, the web and the boss are all visible at once.
-    `[35:15–35:28]` Second, the attitude the part actually sits or assembles in.
-    `[35:29–35:54]` This part bolts to a vertical frame face with two bolts. You look at it in that attitude.
-    `[35:55–36:26]` Third, the direction that yields the fewest hidden lines.
-    `[36:26–36:48]` In the LG Innotek internal exam you are given a three-dimensional picture. This is the thing to settle first.
-    `[36:48–37:24]` Once it is settled, the other two views follow.
-    `[37:26–38:00]` Third angle puts a view on the side you looked from.
-    `[38:01–39:09]` Looked at from above, it goes above.
-    `[39:12–39:21]` Looked at from the right, it goes to the right.
-    `[39:22–39:28]` So above the front view is the top view.
-    `[39:29–39:37]` To the right of the front view is the right side view.
-    `[39:37–39:48]` First angle places them the other way round.
-    `[39:49–39:58]` What was seen from above goes below.
-    `[39:59–40:10]` The same part laid out differently, and the reader takes up and down the wrong way round.
-    `[40:10–40:17]` The equipment assembly drawings you get on the floor are mostly third angle too.
-    `[40:18–40:26]` When you check a spare part drawing in a hurry, you have to know this layout.
-    `[40:26–40:35]` Our drawing is third angle as well.
+    `[2:01–3:25]` (1 card — settle the front view first) Three views start from the front view.
+    There are tests for what you take as the front view.
+    First, the face that shows the shape best.
+    For this part, the face where the base, the web and the boss are all visible at once.
+    Second, the attitude the part actually sits or assembles in.
+    This part bolts to a vertical frame face with two bolts. You look at it in that attitude.
+    Third, the direction that yields the fewest hidden lines.
+    In the LG Innotek internal exam you are given a three-dimensional picture. Choose the front view first.
+    Once it is settled, the other two views follow.
+    Third angle puts a view on the side you looked from.
+    Looked at from above, it goes above.
+    Looked at from the right, it goes to the right.
+    So above the front view is the top view.
+    To the right of the front view is the right side view.
+    First angle places them the other way round.
+    What was seen from above goes below.
+    The same part laid out differently, and the reader takes up and down the wrong way round.
+    The equipment assembly drawings you get on the floor are mostly third angle too.
+    When you check a spare part drawing in a hurry, you have to know this layout.
+    Our drawing is third angle as well.
 
-    `[40:35–40:45]` (2 card — projection lines) They exist so that you never measure the same value twice.
-    `[40:46–40:53]` The front view's width of 120 is the top view's width unchanged.
-    `[40:53–41:01]` The front view's height of 90 is the right side view's height unchanged.
-    `[41:04–41:12]` Line them up by eye and they drift a little.
-    `[41:13–41:19]` That drift shows up later, when you dimension.
+    `[3:25–3:53]` (2 card — projection lines) They exist so that you never measure the same value twice.
+    The front view's width of 120 is the top view's width unchanged.
+    The front view's height of 90 is the right side view's height unchanged.
+    Line them up by eye and they drift a little.
+    That drift shows up later, when you dimension.
     Hang a projection line and it cannot drift.
     You are lashing the views to each other.
 
-    (3 card — hidden lines) You draw edges that material hides from view.
+    `[3:54–4:19]` (3 card — hidden lines) You draw edges that material hides from view.
     The judgement has three branches.
     Visible, and it is a visible line.
     There but not visible, and it is a hidden line.
@@ -105,31 +105,31 @@
     But look down from above and material covers it.
     So in the top view it is dashed.
 
-    (4 card — joining with a 45 degree line) This is the part people find most confusing today.
+    `[4:20–5:01]` (4 card — joining with a 45 degree line) This is the part people find most confusing today.
     Depth is not in the front view.
     It is settled for the first time in the top view.
-    The device that carries that depth into the right side view is the 45 degree line.
-    A line running right out of the top view turns at the 45 degree line.
+    The device that carries that depth into the right side view is the forty-five degree line.
+    A line running right out of the top view turns at the forty-five degree line.
     It turns and comes down.
     A vertical distance in the top view becomes a horizontal distance in the right side view.
-    Because it is 45 degrees, the two distances are equal.
+    Because it is forty-five degrees, the two distances are equal.
     Measure it with a rule and carry it over and you will be wrong; carry it on this line and you cannot be.
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 5:05–8:20
+**Time:** 5:07–8:23
 
-    Now we point at six places on this part.
+    `[5:04–5:13]` Now we point at six places on this part.
     We see where the rules you have just seen actually attach.
 
-    (1 row — top view plate thickness 12) The top view's width is set by the projection lines.
+    `[5:13–5:34]` (1 row — top view plate thickness 12) The top view's width is set by the projection lines.
     The lines you took up from the front view.
     Left end and right end, 120 unchanged.
     Only one thing is left over.
     That is the thickness of 12.
     In practice the only value the top view settles anew is the thickness.
 
-    (2 row — top view boss zone 20) The boss stands 8 forward.
+    `[5:34–6:02]` (2 row — top view boss zone 20) The boss stands 8 forward.
     So only there is it 12 plus 8, which is 20.
     How far across does that zone run?
     The boss circle decides.
@@ -138,7 +138,7 @@
     You do not compute these two values and type them.
     You take them up on projection lines from the left and right quadrants of the boss circle.
 
-    (3 row — right side view height 90) The right side view's vertical is set by projection lines too.
+    `[6:03–6:35]` (3 row — right side view height 90) The right side view's vertical is set by projection lines too.
     The lines you drew across to the right from the front view.
     Bottom 0, top face of the base 16.
     Below the boss 34, the very top 90.
@@ -147,25 +147,25 @@
     Add it and you get 90.
     The overall height of 90 is a value the top of the boss creates.
 
-    (4 row — bore hidden lines) The bore Ø25 goes right through, front to back.
+    `[6:35–7:05]` (4 row — bore hidden lines) The bore Ø25 goes right through, front to back.
     In the top view and in the right side view alike it crosses the whole thickness.
     It is in the boss zone, so that is the whole 20.
     Its positions are half the diameter, 12.5, either side of the centre.
     In the top view the centre is 60, so 47.5 and 72.5.
     In the right side view the centre is 62, so 49.5 and 74.5.
 
-    (5 row — tap depth 10 hidden lines) The taps do not go through.
+    `[7:06–7:51]` (5 row — tap depth 10 hidden lines) The taps do not go through.
     They enter 10 from the boss front face and stop.
     So the dashed line ends in the middle of the thickness.
     Go in 10 from the front and 10 is left behind it.
     The four positions across come out of arithmetic.
-    The pitch circle radius is 22. The first hole is at 45 degrees.
-    22 times the cosine of 45 degrees is about 15.6.
+    The pitch circle radius is 22. The first hole is at forty-five degrees.
+    22 times the cosine of forty-five degrees is about 15.6.
     Take it from and add it to the centre of 60 and you get 44.4 and 75.6.
     The upper two and the lower two land on the same positions across.
     So in the top view they show at two positions only.
 
-    (6 row — slot hidden lines) The slots go through as well.
+    `[7:52–8:16]` (6 row — slot hidden lines) The slots go through as well.
     But they are where there is no boss.
     So the dashed lines run only across the 12 of thickness.
     The bore starts at the boss front face.
@@ -176,13 +176,14 @@
 
 ## Line 5 — Making three views · DEMO-01 screen recording (Frame 5)
 
-**Time:** 8:20–35:24
+**Time:** 8:23–35:19
 
 > This section is a screen recording. Work through the 16 steps below **in order and without skipping**, speaking as you go.
 > What is inside backticks is what you actually type, and where it says click, that is a point you catch with an object snap.
 > If a snap will not take, check first with F3 that object snap is on.
 
 ### Step 1 — Open the previous file
+> <!-- timed-step --> `[8:19–8:57]` entire step; not individual paragraph times
 
     Start AutoCAD, type `OPEN` and press Enter.
     Choose the `EDU-IB-02_L04_FEATURES` file you saved last time.
@@ -196,6 +197,7 @@
     That is where the top view and the right side view go.
 
 ### Step 2 — Choose the layer for projection lines
+> <!-- timed-step --> `[8:57–9:41]` entire step; not individual paragraph times
 
     Open the layer list at the top of the screen and choose `Dimension line`.
     Projection lines go here.
@@ -211,6 +213,7 @@
     That tells you at once whether every projection line is on it.
 
 ### Step 3 — Take vertical projection lines up from the front view
+> <!-- timed-step --> `[9:42–12:06]` entire step; not individual paragraph times
 
     This is today's first drawing. Look at object snap in the status bar. If it is off, press F3.
     Turn ortho on with F8 too.
@@ -246,6 +249,7 @@
     Take it from the circle itself and neither can happen.
 
 ### Step 4 — The three depth lines of the top view
+> <!-- timed-step --> `[12:06–14:02]` entire step; not individual paragraph times
 
     `XL`, Enter. `H`, Enter. Horizontal lines this time.
     Click the top quadrant of the boss circle.
@@ -285,6 +289,7 @@
     In the top view that face comes to the bottom.
 
 ### Step 5 — Draw the top view outline
+> <!-- timed-step --> `[14:03–15:40]` entire step; not individual paragraph times
 
     In the layer list change to `Visible line`.
     Every point in this step is caught as the intersection of a vertical projection line and a depth line.
@@ -305,6 +310,7 @@
 
 
 ### Step 6 — Check the top view boundary
+> <!-- timed-step --> `[15:40–16:41]` entire step; not individual paragraph times
 
     Turn the dimension line layer's lamp off for a moment and look at the top view alone.
     The part's overall width is 120 and the plate thickness is 12.
@@ -320,6 +326,7 @@
 
 
 ### Step 7 — The right side view position and the 45 degree line
+> <!-- timed-step --> `[16:44–18:13]` entire step; not individual paragraph times
 
     Change the layer back to `Dimension line`.
     From here it is projection lines again.
@@ -341,8 +348,8 @@
     Pass through this point and the depth carries over unchanged.
 
     `XL`, Enter. `V`, Enter.
-    Click the intersection of the 45 degree line and the top view's plate front face line.
-    Click the intersection of the 45 degree line and the back face line too. Enter.
+    Click the intersection of the forty-five degree line and the top view's plate front face line.
+    Click the intersection of the forty-five degree line and the back face line too. Enter.
 
     Two more vertical lines have appeared.
     They are 8, and then 20, from the right side view's left-hand line.
@@ -351,6 +358,7 @@
     You carried them over without measuring.
 
 ### Step 8 — Draw horizontal projection lines from the front view
+> <!-- timed-step --> `[18:14–19:54]` entire step; not individual paragraph times
 
     `XL`, Enter. `H`, Enter.
     Click the lower left corner of the front view. That is the bottom, 0.
@@ -381,6 +389,7 @@
     Draw it once and it passes through all three views.
 
 ### Step 9 — Draw the right side view outline
+> <!-- timed-step --> `[19:54–22:29]` entire step; not individual paragraph times
 
     Change the layer to `Visible line`.
 
@@ -422,6 +431,7 @@
     Where the outline runs as one line, the later method is faster.
 
 ### Step 10 — Three centerlines
+> <!-- timed-step --> `[22:29–24:35]` entire step; not individual paragraph times
 
     Change the layer to `Centerline`. Check that ortho is on; turn it on if it is off.
 
@@ -458,6 +468,7 @@
     You cannot see at a glance where the centre is.
 
 ### Step 11 — Bore hidden lines · top view
+> <!-- timed-step --> `[24:36–25:31]` entire step; not individual paragraph times
 
     Change the layer to `Dimension line` and type `XL`, Enter, `V`, Enter.
     Click the bore circle's left quadrant, click its right quadrant, Enter.
@@ -475,6 +486,7 @@
     Green and continuous means you drew them on the visible line layer.
 
 ### Step 12 — Bore hidden lines · right side view
+> <!-- timed-step --> `[25:32–26:24]` entire step; not individual paragraph times
 
     Change the layer to `Dimension line` and type `XL`, Enter, `H`, Enter.
     Click the bore circle's top quadrant, click its bottom quadrant, Enter.
@@ -491,6 +503,7 @@
     It is only the same hole seen from a different direction.
 
 ### Step 13 — Tap hidden lines · top view
+> <!-- timed-step --> `[26:26–28:23]` entire step; not individual paragraph times
 
     Change the layer to `Dimension line` and type `XL`, Enter, `V`, Enter.
     Click the left and right quadrants of the upper left tap circle.
@@ -522,6 +535,7 @@
     Zoom out and they look like one line.
 
 ### Step 14 — Tap hidden lines · right side view, and mirroring
+> <!-- timed-step --> `[28:23–30:39]` entire step; not individual paragraph times
 
     Change the layer to `Dimension line` and type `XL`, Enter, `H`, Enter.
     Click the top and bottom quadrants of the upper tap circle and press Enter.
@@ -550,8 +564,8 @@
     It asks whether to erase the original. Type `N` and press Enter.
     You do not erase it.
 
-    Of the four taps the first hole is at 45 degrees.
-    From there they step round every 90.
+    Of the four taps the first hole is at forty-five degrees.
+    From there they step round every ninety degrees.
     So the upper two are at the same height.
     The lower two are at the same height too.
     In the right side view only two heights appear.
@@ -560,6 +574,7 @@
     Compute nothing and there is nothing to come out wrong.
 
 ### Step 15 — Slot hidden lines
+> <!-- timed-step --> `[30:39–33:11]` entire step; not individual paragraph times
 
     Change the layer to `Dimension line` and type `XL`, Enter, `V`, Enter.
     On the left slot, click the left quadrant of the left end circle.
@@ -604,6 +619,7 @@
     Two lines are enough.
 
 ### Step 16 — Check the projection lines and save
+> <!-- timed-step --> `[33:11–35:07]` entire step; not individual paragraph times
 
     Put the layer back to `Visible line`.
 
@@ -640,14 +656,14 @@
 
 ## Line 6 — Check these before you move on (Frame 6)
 
-**Time:** 35:24–37:37
+**Time:** 35:19–37:31
 
-    Four mistakes that come up often.
+    `[35:10–35:22]` Four mistakes that come up often.
     In all four the lines themselves are accurate.
     It is the position or the kind that is wrong.
     So they are hard for the person who drew them to see.
 
-    (1 card — top view position) Say you drew the top view below the front view.
+    `[35:23–35:48]` (1 card — top view position) Say you drew the top view below the front view.
     That is a first angle layout.
     Not one line is wrong.
     But the whole drawing now means something else.
@@ -656,7 +672,7 @@
     Fixing it after everything is drawn means moving a whole view.
     So you check it at the stage where you place them.
 
-    (2 card — projection line layer) A projection line is a line that does not stay on the drawing.
+    `[35:49–36:20]` (2 card — projection line layer) A projection line is a line that does not stay on the drawing.
     Draw it on the visible line layer and it is green and continuous.
     You cannot tell it from the rest of the shape.
     What happens if you forget to erase it?
@@ -666,14 +682,14 @@
     Check that every projection line disappears.
     If one does not disappear, it went on the wrong layer.
 
-    (3 card — hidden line layer) Draw without changing the layer and a hidden line comes out continuous.
+    `[36:20–36:42]` (3 card — hidden line layer) Draw without changing the layer and a hidden line comes out continuous.
     A continuous line means a visible edge.
     Then a hole through the inside reads as a groove cut in the surface.
     Look at the layer list every time you draw.
     Afterwards, check by colour.
     Yellow and dashed is right.
 
-    (4 card — tap depth) You must not run the tap hidden lines through the whole thickness.
+    `[36:42–37:18]` (4 card — tap depth) You must not run the tap hidden lines through the whole thickness.
     The drawing then says something other than 4-M5 depth 10.
     Whoever makes it drills from the drawing.
     Drawn as a through hole, they drill right through the back.
@@ -685,15 +701,15 @@
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 37:37–39:25
+**Time:** 37:31–39:15
 
-    (1 left) You made two views out of one front view.
+    `[37:21–37:51]` (1 left) You made two views out of one front view.
     The only values you settled anew today were the thickness of 12 and the boss zone of 20.
-    Width and height came across on construction lines, and depth was carried over by the 45 degree line.
+    Width and height came across on construction lines, and depth was carried over by the forty-five degree line.
     The hidden lines went in at different lengths: 20 for the bore, 10 for the taps, 12 for the slots.
     You saved as L05_VIEWS with the projection lines still in place.
 
-    (2 right) Next time you tidy up what you have drawn.
+    `[37:52–39:00]` (2 right) Next time you tidy up what you have drawn.
     And you make it read properly.
     You select in one go and clear away the construction lines you drew today to align the views.
     Stubs of shape line you could not trim, you cut with TRIM.
@@ -712,40 +728,40 @@
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 39:25–41:18
+**Time:** 39:15–41:09
 
-    Here are today's commands in one place. Rather than the names, remember **when you use them**.
+    `[39:03–39:12]` Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
 
-    (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
+    `[39:13–39:19]` (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
 
-    (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
+    `[39:20–39:27]` (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
 
-    (3) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
+    `[39:28–39:39]` (3) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
 
-    (4) `XL`. XLINE. Draws a construction line that runs on forever. You use it for projection lines.
+    `[39:40–39:49]` (4) `XL`. XLINE. Draws a construction line that runs on forever. You use it for projection lines.
 
-    (5) `O`. OFFSET. Makes the same shape a set distance away. You use it for concentric circles and parallel lines without picking the centre again.
+    `[39:50–40:00]` (5) `O`. OFFSET. Makes the same shape a set distance away. You use it for concentric circles and parallel lines without picking the centre again.
 
-    (6) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
+    `[40:01–40:08]` (6) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
 
-    (7) `MI`. MIRROR. Copies symmetrically. You use it for shapes symmetrical left and right.
+    `[40:09–40:17]` (7) `MI`. MIRROR. Copies symmetrically. You use it for shapes symmetrical left and right.
 
-    (8) `LAYER`. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
+    `[40:17–40:25]` (8) `LAYER`. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
 
-    (9) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
+    `[40:26–40:36]` (9) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
 
-    (10) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
+    `[40:37–40:44]` (10) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
 
-    (11) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
+    `[40:44–40:52]` (11) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 41:18–41:37
+**Time:** 41:09–41:28
 
-    (1) That is today's portion.
+    `[40:55–41:03]` (1) That is today's portion.
     Splitting the views and lining them up again took a lot of handwork.
     Well done.
 
-    (2) Next is Lesson 6, editing and representation.
+    `[41:04–41:10]` (2) Next is Lesson 6, editing and representation.
     See you then.

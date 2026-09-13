@@ -5,7 +5,7 @@
   "ko": "제3각법 3뷰와 반복",
   "en": "Third-Angle Views and Repetition"
  },
- "videoLength": "28:39",
+ "videoLength": "33:25",
  "selfStudyMin": 144,
  "opens": "EDU-IB-02_L04_FEATURES",
  "saves": "EDU-IB-02_L05_VIEWS",
@@ -5094,5 +5094,9 @@
    "ko": "6차시는 편집과 표현입니다. 오늘 그은 구성선을 한 번에 골라 걷어냅니다. 남은 형상선 토막은 잘라내고 못 미친 선은 늘려요. 레이어가 틀린 선은 다시 그리지 않고 제자리에 옮깁니다. 그다음 색상·선 종류·선가중치를 ByLayer로 통일합니다. 중심선과 숨은선의 선 종류 축척은 0.5로 넣어요. 마지막으로 표기 네 가지를 읽습니다. 표면 거칠기 기호·기하 공차·재질·열처리 지시입니다.",
    "en": "Lesson 6 is editing and presentation. Today's construction lines get swept out in one selection, stubs get trimmed, short lines get extended. Lines on the wrong layer get moved, not redrawn. Color, linetype and lineweight go to ByLayer, with linetype scale 0.5 on the center and hidden layers. Finally you read what surface roughness, geometric tolerance, material and heat treatment notations specify."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "33:25",
+  "en": "41:28"
  }
 }

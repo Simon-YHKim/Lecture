@@ -5,7 +5,7 @@
   "ko": "편집과 표현",
   "en": "Cleaning Up and Reading the Symbols"
  },
- "videoLength": "28:14",
+ "videoLength": "32:59",
  "selfStudyMin": 93,
  "opens": "EDU-IB-02_L05_VIEWS",
  "saves": "EDU-IB-02_L06_REPRESENTED",
@@ -3158,5 +3158,9 @@
    "ko": "다음은 7차시 「치수 기입과 도면 완성」이고, 부품을 그리는 마지막 차시입니다. 치수 스타일을 만들고, 현재 레이어를 치수선으로 바꿔 기입에 들어갑니다. 축척 표기와 표제란까지 마치면 여섯 차시 동안 쌓아 온 파일이 완성됩니다.",
    "en": "Next is Lesson 7, dimensioning and finishing the drawing - the last one. You build a dimension style, switch the current layer to dimension, and place the dimensions. With the scale note and title block done, the file is complete."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "32:59",
+  "en": "39:23"
  }
 }

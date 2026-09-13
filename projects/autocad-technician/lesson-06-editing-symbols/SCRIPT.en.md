@@ -2,16 +2,15 @@
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L05_VIEWS → L06_REPRESENTED`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** The tone of looking over a finished drawing together and tidying it up. Through the hands-on section (Line 5), leave a beat for every click.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 39 min 22 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:05
+**Time:** 0:00–0:07
 
     (silence)
 
@@ -19,7 +18,7 @@
 
 ## Line 2 — What has to be done after you draw (Frame 2)
 
-**Time:** 0:05–2:03
+**Time:** 0:07–2:55
 
     Last time you projected the top view and the right side view from the front view. The shape of the idler pulley bracket used on a car engine is all there. But the file still carries the marks of the work. Hand a spare part drawing over in this state during LG Innotek equipment PM, preventive maintenance, and there is trouble. The reader cannot tell shape lines from helper lines, and it comes back as rework loss. Today you tidy the lines you have already drawn and make them read properly.
 
@@ -33,7 +32,7 @@
 
 ## Line 3 — The four things you use today (Frame 3)
 
-**Time:** 2:03–4:09
+**Time:** 2:55–5:48
 
     Before the hands-on, look at what each command changes. Memorise only the names and nothing comes to mind about where to use them. Know what changes and you can choose the command you need.
 
@@ -47,7 +46,7 @@
 
 ## Line 4 — The instructions on the drawing (Frame 4)
 
-**Time:** 4:09–8:07
+**Time:** 5:48–11:27
 
     Now we look at how symbols and linetypes appear on a drawing. The first four items are instructions you have to read on a real drawing. You do not draw them in this course. The last two you work on yourself today.
 
@@ -65,7 +64,7 @@
 
 ## Line 5 — Tidying and representation · DEMO-01 screen recording (Frame 5)
 
-**Time:** 8:07–22:54
+**Time:** 11:27–32:12
 
 > This section is a screen recording. Work through the 16 steps below **in order and without skipping**, speaking as you go.
 > What is inside backticks is what you actually type. Use the command line rather than the mouse menus.
@@ -394,11 +393,11 @@
 
 ## Line 6 — This is where people go wrong (Frame 6)
 
-**Time:** 22:54–24:56
+**Time:** 32:12–34:57
 
     Four mistakes come round again and again in tidying work. All four look perfectly fine on screen. So you cannot find them yourself.
 
-    (1 card — moving on with helper lines still there) First check whether you erased the three practice lines. A stub of a helper line drawn between two views may be left as well. The construction lines drawn with XLINE went in one go in step 4, but a short helper line drawn with LINE is not caught by that condition. They are left near the edges of the border too. It is a screen you have been looking at while you worked, so your eye passes over it. The way to check is zoom all. Type `Z`, Enter, `A`, Enter. Put the whole border on one screen and look. What can you see besides the part shape, the border and the title block? That is a helper line still there.
+    (1 card — moving on with helper lines still there) First check whether you erased the three practice lines. A stub of a helper line drawn between two views may be left as well. The construction lines drawn with XLINE went in one go in step 4. But a short helper line drawn with LINE is not caught by that condition. They are left near the edges of the border too. It is a screen you have been looking at while you worked, so your eye passes over it. The way to check is zoom all. Type `Z`, Enter, `A`, Enter. Put the whole border on one screen and look. What can you see besides the part shape, the border and the title block? That is a helper line still there.
 
     (2 card — thinking you erased it when you only turned the layer off) This happens when you turn a layer off to check and do not turn it back on. The lines have gone from the screen, so it looks exactly like erasing. But the objects are still there. That the layer is off is saved into the file too. Open it next lesson and it looks as if there is not one centerline. So you draw the centerlines again. Then there are two lines laid on top of each other in the same place. Open the layer list before you save. Get into the habit of checking that every lamp is on.
 
@@ -408,15 +407,15 @@
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 24:56–25:50
+**Time:** 34:57–36:17
 
     (1 left) Today's file is one whose representation changed, not its shape. You cleared the projection lines away, measured the slots' symmetry to confirm it, and put layers, colours and dash spacing back where they belong. With this much set, next time you only have to lay dimensions on top. You open the saved `EDU-IB-02_L06_REPRESENTED` as it is and start there.
 
-    (2 right) Next time is the last lesson. You dimension. First you make a dimension style. You set the text height and the arrow size. You set the spacing of dimension lines and extension lines, and the number of decimal places. Then you change the current layer to dimension line and start entering. Dimensions go in one at a time, starting from the overall ones. Then you look at the principles for laying dimensions out without overlapping. You look at why you must not overwrite dimension text by hand. You finish with the scale notation and the title block, and save the final file. The file you have built over six lessons is finished then.
+    (2 right) Next time is the last drawing lesson. You dimension. First you make a dimension style. You set the text height and the arrow size. You set the spacing of dimension lines and extension lines, and the number of decimal places. Then you change the current layer to dimension line and start entering. Dimensions go in one at a time, starting from the overall ones. Then you look at the principles for laying dimensions out without overlapping. You look at why you must not overwrite dimension text by hand. You finish with the scale notation and the title block, and save the final file. The file you have built over six lessons is finished then.
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 25:50–27:53
+**Time:** 36:17–39:00
 
     Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
@@ -457,7 +456,7 @@
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 27:53–28:14
+**Time:** 39:00–39:22
 
     (1) That is today's portion. The tidying will have felt longer than the drawing. It is like that on the real floor too. Well done.
 

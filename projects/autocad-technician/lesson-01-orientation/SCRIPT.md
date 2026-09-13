@@ -1,7 +1,7 @@
 # SCRIPT — AutoCAD Technician 1차시 · 오리엔테이션
 
 **Checkpoint:** 없음 (도면 작업 없음)<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** 처음 만난 수강자에게 과정을 소개하듯 차분하고 또렷하게. 서두르지 않는다.
 
 > 전체 길이 6분 20초 — 실제 TTS와 화면 전환 시간을 반영한 값입니다.

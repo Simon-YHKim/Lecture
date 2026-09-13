@@ -2,15 +2,14 @@
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L02_TEMPLATE → L03_PROFILE`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Take a beat before a number when you say a dimension. Through the hands-on section (Line 5), say the value first, then move at the speed of pressing Enter.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 37 min 29 sec, including narration and frame holds.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:05
+**Time:** 0:00–0:07
 
     (silence)
 
@@ -18,7 +17,7 @@
 
 ## Line 2 — What you draw today (Frame 2)
 
-**Time:** 0:05–2:04
+**Time:** 0:07–2:53
 
     Last time you made the A3 border. You set up four layers as well. Today you open that file. For the first time you draw part lines. Four things go on the screen.
 
@@ -26,13 +25,13 @@
 
     (2 card — base 120 × 16 outline) You draw the outer profile of the bottom plate. 120 across, and 16 high seen from the front. This plate is the first thing you draw today. This plate decides where the whole part sits. The 120 across is the whole width of the part. For the plate's lower left corner you just click an empty spot inside the border. You do not type coordinates. What happens if that wanders? Everything that stands on it wanders too.
 
-    (3 card — chamfers 2-C5) You cut the two upper corners of the base. 5 off each, at 45 degrees. On the drawing that is 2-C5. The 2 is the count, C is a chamfer, 5 is the length of the side cut off. Leave a sharp corner and it cuts your hand. It clashes with another part on assembly. Paint goes on thin at a sharp edge, too. Cut it and all three go away at once. You make the rectangle first and cut it with the chamfer command. You give the 5 and 5 that are written on the drawing as the two distances.
+    (3 card — chamfers 2-C5) You cut the two upper corners of the base. 5 off each, at forty-five degrees. On the drawing that is 2-C5. The 2 is the count, C is a chamfer, 5 is the length of the side cut off. Leave a sharp corner and it cuts your hand. It clashes with another part on assembly. Paint goes on thin at a sharp edge, too. Cut it and all three go away at once. You make the rectangle first and cut it with the chamfer command. You give the 5 and 5 that are written on the drawing as the two distances.
 
     (4 card — boss circle Ø56 and the tangent web) You draw the outer circle of the boss at the top. Then you draw the web that climbs from the base to that circle. Two lines. The web lines have to touch the boss circle exactly. What does touching mean here? It means meeting at one point, in passing. Not cutting in, not falling short. Place that one point by eye and it will be wrong every time. That is why you use the tangent object snap today.
 
 ## Line 3 — Four ways to place a point, two commands that make a line (Frame 3)
 
-**Time:** 2:04–4:50
+**Time:** 2:53–6:39
 
     A line is made of two points. So drawing accurately means placing points accurately. There are four ways to place one. There is only one test for choosing. Is that point fixed by a drawing dimension? And there are two commands that string those points into lines.
 
@@ -48,7 +47,7 @@
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 4:50–7:28
+**Time:** 6:39–10:12
 
     The front view is on the left, and on the right a table of the values you use today. We will work down the table and see where each value comes from on the drawing, in order.
 
@@ -56,9 +55,9 @@
 
     (2 row) Read how the base is set up. You stand the rectangle up first, without worrying about the chamfers. With the REC command you click one corner, then press D for the dimensions option. 120 across, 16 up. Those two numbers are written on the drawing as they are. All four corners land exactly, in one go. Which corner you clicked first does not matter. It is not a point that a dimension fixes.
 
-    (3 row) The chamfers go on after the rectangle is standing. 2-C5 means cutting 5 off at 45 degrees. The 2 is the count, C is a chamfer, 5 is the length of the side cut off. You give the CHAMFER command 5 and 5 and cut only the top two corners. You never have to type a computed value like 11 or 115. The numbers on the drawing are 120, 16 and 5. Those three are the only ones we typed. Make no computed values and you make no arithmetic slips either.
+    (3 row) The chamfers go on after the rectangle is standing. 2-C5 means cutting 5 off at forty-five degrees. The 2 is the count, C is a chamfer, 5 is the length of the side cut off. You give the CHAMFER command 5 and 5 and cut only the top two corners. You never have to type a computed value like 11 or 115. The numbers on the drawing are 120, 16 and 5. Those three are the only ones we typed. Make no computed values and you make no arithmetic slips either.
 
-    (4 row) Look at the top face of the base. This height decides half of what you draw today. The web climbs from here. The R10 fillet you add next lesson starts here too. 16 is not the plate thickness but the height seen from the front. The thickness of 12 is a value you read in the top view. It does not appear in today's front view.
+    (4 row) Look at the top face of the base. This height decides half of what you draw today. The web climbs from here. The radius 10 fillet you add next lesson starts here too. 16 is not the plate thickness but the height seen from the front. The thickness of 12 is a value you read in the top view. It does not appear in today's front view.
 
     (5 row) You draw the boss circle first. The diameter is 56. Its centre goes on the intersection of the two centerlines. The web lines have to be tangent to this circle. With no circle on screen to be tangent to, there is no tangent point to catch. That is why the circle comes before the web. Add the radius of 28 to the centre height of 62 and you get 90. That is the overall height of the part. The top of the boss circle is the top of this part.
 
@@ -66,7 +65,7 @@
 
 ## Line 5 — Datum lines and the outline · DEMO-01 screen recording (Frame 5)
 
-**Time:** 7:28–20:09
+**Time:** 10:12–28:05
 
 > This section is a screen recording. Work through the 16 steps below in order and without skipping, speaking as you go.
 > What is inside backticks is what you actually type; everything else you check on screen or click.
@@ -143,7 +142,7 @@
 
     Now click the two edges that make the corner you are cutting, in turn.
     Click the top edge at the upper right corner, then click the right-hand vertical edge.
-    The corner is cut at 45 degrees. 5 across and 5 up makes it exactly 45.
+    The corner is cut at forty-five degrees. 5 across and 5 up makes it exactly 45.
 
     The 2-C5 on the drawing is this value. You put in 5 and 5 as they are.
     Chamfer while drawing the rectangle and you have to work out values like 11 and 110 by hand.
@@ -340,7 +339,7 @@
 
 ## Line 6 — This is where people go wrong (Frame 6)
 
-**Time:** 20:09–22:29
+**Time:** 28:05–31:21
 
     The same mistakes come round again. There are four. We will look at how to notice each one while drawing, and how to fix it.
 
@@ -354,7 +353,7 @@
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 22:29–24:43
+**Time:** 31:21–34:38
 
     (1 left) You opened last lesson's template and checked the snap state first. On the visible line layer you made the base rectangle with REC. You clicked the first corner and gave 120 and 16 through the dimensions option. Then you gave CHAMFER 5 and 5. You cut only the top two corners and finished the base outline. Next you switched to the centerline layer. From the midpoint of the bottom edge you stood the vertical centerline up. You made the horizontal centerline 66 long and moved it by its midpoint. It is the line that sits 62 up from the bottom. This is exactly why a shape has to exist before a snap can catch it. The boss circle went on the intersection of the two centerlines. You put 56 in through the diameter option. For the web you stepped 40 either way from the reference intersection on the base's top face. From those two points you ran lines to the boss circle with the tangent snap. Last you checked the top height of 90. You typed no coordinates at all while drawing the part today. In this course, typed coordinates are used at the two corners of the sheet edge and nowhere else. Everything else is caught with snaps, direction and a typed length. You saved the file under the name L03_PROFILE. It is the same order when you propose a jig to make a job easier. You fix the shape, pull the reference out of that shape, and put the circle on the reference.
 
@@ -362,7 +361,7 @@
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 24:43–26:32
+**Time:** 34:38–37:11
 
     Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
@@ -399,7 +398,7 @@
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 26:32–26:46
+**Time:** 37:11–37:29
 
     (1) That is today's portion. It was the lesson where you drew part lines for the first time. Well done.
 

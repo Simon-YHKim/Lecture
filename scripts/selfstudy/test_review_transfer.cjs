@@ -24,10 +24,49 @@ function fixture() {
   ], scripts: {'scene-b': ''}};
 }
 
-test('both production scripts parse without a browser', () => {
-  for (const text of [memo, nav]) {
+test('production scripts parse without a browser', () => {
+  for (const text of [memo, nav, asset('deck_full_script.html')]) {
     for (const m of text.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(m[1]);
   }
+});
+
+test('self-study opens in its edition language and retains a saved preference', () => {
+  function initialLanguage(edition, saved) {
+    const attributes = {'data-lang': edition};
+    const context = vm.createContext({
+      document: {body: {getAttribute: k => attributes[k], setAttribute: (k,v) => attributes[k]=v},
+        documentElement: {setAttribute: (k,v) => attributes[k]=v}},
+      localStorage: {getItem: () => saved === null ? null : JSON.stringify(saved), setItem() {}},
+      mem: {}, $$: () => []
+    });
+    vm.runInContext(section(asset('app.js'), '  var root = document.documentElement;',
+      "  $$('[data-lang-btn]').forEach(function (b) {\n    b.addEventListener"), context);
+    return attributes.lang;
+  }
+  assert.equal(initialLanguage('en', null), 'en');
+  assert.equal(initialLanguage('ko', null), 'ko');
+  assert.equal(initialLanguage('en', 'ko'), 'ko');
+  assert.equal(initialLanguage('ko', 'en'), 'en');
+});
+test('opening editions does not implicitly save a language preference', () => {
+  const values = new Map();
+  function openEdition(edition) {
+    const attributes = {'data-lang': edition};
+    const context = vm.createContext({
+      document: {body: {getAttribute: k => attributes[k], setAttribute: (k,v) => attributes[k]=v},
+        documentElement: {setAttribute: (k,v) => attributes[k]=v}},
+      localStorage: {getItem: k => values.get(k) ?? null, setItem: (k,v) => values.set(k,v)},
+      mem: {}, $$: () => []
+    });
+    vm.runInContext(section(asset('app.js'), '  var root = document.documentElement;',
+      "  $$('[data-lang-btn]').forEach(function (b) {\n    b.addEventListener"), context);
+    return {attributes, context};
+  }
+  assert.equal(openEdition('ko').attributes.lang, 'ko');
+  assert.equal(openEdition('en').attributes.lang, 'en');
+  assert.equal(values.size, 0);
+  openEdition('ko').context.setLang('en', true);
+  assert.equal(openEdition('ko').attributes.lang, 'en');
 });
 test('restore resolves scene IDs and preserves literal text and intentional empty scripts', () => {
   const next = validator()(fixture());

@@ -34,29 +34,29 @@ spoken text.
 
 ### Approved release downloads
 
-On 2026-09-10 the course author authorized completed lecture videos and self-study
-files to be distributed through GitHub Releases after the work is complete and
-merged. Reviewed delivery files may be attached to a release with a file manifest
+On 2026-09-14 the course author authorized Korean and English review videos,
+integrated scripts, slides and self-study files to be distributed through GitHub
+Releases. Reviewed delivery files may be attached to a release with a file manifest
 and SHA-256 checksums. This does not add media to Git history or authorize bulk
 publication of original materials, separate narration WAVs, transcripts or font
-binaries. The latest delivery scope and remaining work are recorded in
+binaries. Subtitles generated from the approved scripts belong in the explicitly
+authorized review downloads, outside Git history. The latest delivery scope and remaining work are recorded in
 [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-The first preview contains five videos, the eight-lesson self-study package and
-one offline review HTML. It preserves the earlier episode layout and voice speed.
-The current revision targets **AutoCAD 2024**, **one video per lesson** and
-**1.38× narration**, without starter files. Grading and exam operations remain
-to be shared; only the two help contacts' names are disclosed. Complete the
-Korean edition before producing English self-study, slides, scripts and videos.
-Lessons 2–7 still require real AutoCAD recordings. Do not treat the first preview
-as a completed delivery of this revision or replace its files silently.
+The current revision targets **AutoCAD 2024**, **eight lessons per language** and
+**native 1.00× cloned instructor narration**, without starter files. The measured
+video timelines total **211:43 Korean** and **253:27 English**. Grading and exam
+operations remain to be shared. Lessons 2–7 contain PREVIEW placeholders for
+15 unrecorded AutoCAD demonstrations; hands-on validation and human listening
+approval remain pending. A review release is not final instructional signoff.
 
-The AutoCAD 2024 revision prepares Korean self-study, lesson slides and scripts
-for all eight lessons. Only lessons 1 and 8 have complete integrated MP4s at
-this stage; lessons 2–7 require real AutoCAD 2024 recordings and application
-validation. Catalog durations describe the measured narration timeline, not
-guaranteed hands-on completion time. English text already present in the
-workbook is a draft, not a completed English course.
+The review package combines an offline video player, synchronized script,
+timestamped feedback export, MP4 subtitles, original scripts, slides and workbooks.
+The decks contain **222 Korean / 263 English slides** and all eight original
+lesson scripts through **Full lesson script / 차시별 전체 대본**. Presenter notes
+on practice slides retain their step-specific guidance. Self-study pages open in
+their edition language and retain a saved language preference. Every split page
+must remain within 100 KB, including its diagrams and navigation.
 
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
@@ -174,12 +174,14 @@ scene boundary a few seconds apart. Treat `narration-timing.json` the way the
 artifact manifest is treated. Generate it once, review the drift, commit it, and
 regenerate only when the recording itself changes. Do not rebuild it in CI.
 
-### Local Heami synthesis
+### Earlier local Heami synthesis
 
-For the current lecture workflow, synthesize the revised script with Windows
-SAPI **Microsoft Heami Desktop, Rate 0**, then process the speech at **1.38×**
-with pitch preserved and measure the resulting WAVs. SAPI Rate and playback
-speed are separate settings. Refresh the complete lesson's clock:
+The earlier local workflow synthesizes a script with Windows
+SAPI **Microsoft Heami Desktop, Rate 0**, then processes the speech at **1.38×**
+with pitch preserved and measures the resulting WAVs. The current review edition
+uses cloned instructor narration at **1.00×**; do not use the earlier Heami
+settings to regenerate it. SAPI Rate and playback speed are separate settings.
+For the earlier workflow, refresh the complete lesson's clock:
 
 ```powershell
 python scripts/part/narrate_tts.py projects/autocad-technician/lesson-01-orientation --tempo 1.38 --out <fresh-private-audio-directory>
@@ -206,20 +208,25 @@ check, including bounds, where full-scene sampling is too sparse. Run
 in its manifest. These checks are sampled verification, not continuous proof.
 The static linter also pools audio from independent episode files; verify each
 playlist on its own clock before interpreting overlap warnings.
-Missing AutoCAD recordings block a delivery export. `--preview` permits those
-placeholders only for validation and records them in the private export manifest.
+Missing AutoCAD recordings block a final delivery export. `--preview` records
+every placeholder in the private export manifest. The course author's explicit
+2026-09-14 authorization permits labeled review downloads containing those
+placeholders, with the missing demonstrations disclosed.
 
 Export the entire lesson with the command above. Internal recording parts join
 the same lesson; they are not separate public episodes. The old `ep*.html` files
 remain as production history and are excluded from the current delivery path.
-A lesson that still has a recording placeholder cannot be exported for delivery.
-`--preview` is a private validation aid and must not be published as a finished
-AutoCAD lesson.
+A lesson that still has a recording placeholder must not be described as a
+finished AutoCAD lesson. The authorized review prerelease retains PREVIEW labels
+and keeps hands-on validation and final instructional signoff pending.
 
-If a long render fails the temporary-disk capacity check, use the CLI's
-`--low-memory-mode` streaming profile. It uses one screenshot worker and may
-take longer. Keep the same resolution and frame rate, and verify the resulting
-video and audio rather than treating a successful render as complete validation.
+The current private render projects use HyperFrames 0.8.36 at 1920×1080, 30 fps,
+high quality, with streaming encode and automatic verified parallel capture.
+Their environment sets `PRODUCER_STREAMING_ENCODE_MAX_DURATION_SECONDS=3600`
+and `HF_DE_PARALLEL_ROUTER=true`; render uses `--no-low-memory-mode --gpu` and
+leaves worker selection automatic. This avoids accumulating every frame on disk.
+Canonical project pins remain unchanged. Validate the finished MP4's duration,
+subtitle roundtrip, full decode, and narration alignment as well as scene checks.
 
 The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do

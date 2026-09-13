@@ -1,17 +1,17 @@
-<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
-     python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 39:06 · 문단 61개 -->
+<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.en.md 를 고친 뒤 다시 뽑아라.
+     python scripts/part/timed_script.py --lang en --root <영문 사본 묶음>
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 39:05 · 합성 단위 61개 -->
 
 # SCRIPT — AutoCAD Technician Lesson 6 · Editing and representation (English edition)
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L05_VIEWS → L06_REPRESENTED`<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** The tone of looking over a finished drawing together and tidying it up. Through the hands-on section (Line 5), leave a beat for every click.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 39 min 22 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
@@ -76,68 +76,73 @@
 > What is inside backticks is what you actually type. Use the command line rather than the mouse menus.
 
 ### Step 1 — Open the previous file
+> <!-- timed-step --> `[11:23–11:56]` entire step; not individual paragraph times
 
-    `[11:23–11:56]` Type `OPEN` and press Enter. The file selection dialog opens.
-    `[11:56–12:54]` Find the `EDU-IB-02_L05_VIEWS` you saved last time. Select it and press Open.
-    `[12:54–13:48]` You do not make a new drawing. This course carries one file across six lessons.
+    Type `OPEN` and press Enter. The file selection dialog opens.
+    Find the `EDU-IB-02_L05_VIEWS` you saved last time. Select it and press Open.
+    You do not make a new drawing. This course carries one file across six lessons.
 
-    `[13:48–15:27]` Type `Z` and press Enter, then `A` and press Enter. That is zoom all.
-    `[15:27–17:23]` The whole A3 border comes onto the screen.
+    Type `Z` and press Enter, then `A` and press Enter. That is zoom all.
+    The whole A3 border comes onto the screen.
 
 ### Step 2 — Check the basic settings · snaps and ortho
+> <!-- timed-step --> `[11:56–12:54]` entire step; not individual paragraph times
 
-    `[17:23–17:56]` Press Esc twice to clear the command and the selection.
-    `[17:56–18:32]` Type `OS` and press Enter. Check the six: endpoint, midpoint, center, quadrant, intersection and tangent.
-    `[18:34–19:21]` Press OK to close the dialog. Press F3 to turn object snap on only if the status bar shows it off.
-    `[19:22–23:42]` `L`, Enter. While it asks for the first point, rest the cursor on the endpoint of an existing line. Do not click.
-    `[23:43–25:34]` Watch for the square marker, then press Esc twice to cancel LINE. If there is no marker, look at OS and F3 again.
-    `[25:34–26:48]` Look at ortho too, and press F8 to turn it on only if it is off. On diagonals and tangents you turn it off, as each step says.
-    `[26:49–27:48]` Catch a point on the shape itself and you notice at once when a value has gone out.
+    Press Esc twice to clear the command and the selection.
+    Type `OS` and press Enter. Check the six: endpoint, midpoint, center, quadrant, intersection and tangent.
+    Press OK to close the dialog. Press F3 to turn object snap on only if the status bar shows it off.
+    `L`, Enter. While it asks for the first point, rest the cursor on the endpoint of an existing line. Do not click.
+    Watch for the square marker, then press Esc twice to cancel LINE. If there is no marker, look at OS and F3 again.
+    Look at ortho too, and press F8 to turn it on only if it is off. On diagonals and tangents you turn it off, as each step says.
+    Catch a point on the shape itself and you notice at once when a value has gone out.
 
 ### Step 3 — See the state before tidying
+> <!-- timed-step --> `[12:54–13:48]` entire step; not individual paragraph times
 
-    `[27:48–28:44]` You do not start cutting. First you look at what is left.
+    You do not start cutting. First you look at what is left.
 
-    `[28:47–29:39]` The vertical lines that ran up from the front view to the top view.
-    `[29:40–30:58]` The horizontal lines that ran right from the front view to the right side view.
-    `[30:59–32:00]` They are the projection lines you drew last time to align the views. They stick out beyond the views.
+    The vertical lines that ran up from the front view to the top view.
+    The horizontal lines that ran right from the front view to the right side view.
+    They are the projection lines you drew last time to align the views. They stick out beyond the views.
 
-    `[32:03–32:13]` Click one projection line. The layer indicator at the top of the screen changes to `Dimension line`.
-    `[32:14–32:57]` That is because you drew the projection lines on the dimension line layer in Lesson 5.
-    `[32:57–33:32]` If this line were on the visible line layer, it would print at exactly the shape line weight.
-    `[33:32–34:06]` Whoever reads it hunts for where on the part it is and never finds it. Press Esc to clear the selection.
+    Click one projection line. The layer indicator at the top of the screen changes to `Dimension line`.
+    That is because you drew the projection lines on the dimension line layer in Lesson 5.
+    If this line were on the visible line layer, it would print at exactly the shape line weight.
+    Whoever reads it hunts for where on the part it is and never finds it. Press Esc to clear the selection.
 
 ### Step 4 — Erase the projection lines in one go with QSELECT
+> <!-- timed-step --> `[13:48–15:27]` entire step; not individual paragraph times
 
-    `[34:07–34:43]` Tidying starts with erasing, not with cutting.
-    `[34:46–35:19]` Let us settle the names first. Projection line is what we call a line drawn to align the views,
-    `[35:19–36:03]` and construction line is that line's object type. Helper line covers both.
-    `[36:06–36:16]` You drew every projection line with XLINE in Lesson 5, so the object type is construction line throughout.
-    `[36:16–36:22]` A construction line is infinitely long, so it is not a line to leave on the drawing.
-    `[36:23–36:29]` If it is not staying, there is no reason to tidy it.
+    Tidying starts with erasing, not with cutting.
+    Let us settle the names first. Projection line is what we call a line drawn to align the views,
+    and construction line is that line's object type. Helper line covers both.
+    You drew every projection line with XLINE in Lesson 5, so the object type is construction line throughout.
+    A construction line is infinitely long, so it is not a line to leave on the drawing.
+    If it is not staying, there is no reason to tidy it.
 
-    `[36:30–36:42]` Type `QSELECT` and press Enter.
-    `[36:42–36:49]` Leave apply to as the entire drawing.
-    `[36:49–36:59]` Under object type choose `Construction Line`.
-    `[37:00–37:07]` Change the operator to select all. How to apply is include in new selection set, and append to current selection set is off.
-    `[37:08–37:16]` Press OK and every construction line is selected.
+    Type `QSELECT` and press Enter.
+    Leave apply to as the entire drawing.
+    Under object type choose `Construction Line`.
+    Change the operator to select all. How to apply is include in new selection set, and append to current selection set is off.
+    Press OK and every construction line is selected.
 
-    `[37:16–37:26]` Press Delete. The projection lines disappear in one go.
-    `[37:26–37:34]` It is the method mentioned at the end of Lesson 5.
+    Press Delete. The projection lines disappear in one go.
+    It is the method mentioned at the end of Lesson 5.
 
-    `[37:35–37:42]` Look at the screen. Only the shape lines of the three views are left.
-    `[37:43–37:51]` Clicking them one by one, or chopping infinite lines into pieces first, would have taken minutes here.
-    `[37:52–37:59]` There are lines this condition does not catch, though.
-    `[37:59–38:07]` A short helper line drawn with LINE while drafting is not caught as object type construction line, so it stays.
-    `[38:07–38:17]` You erase those separately in step 8.
+    Look at the screen. Only the shape lines of the three views are left.
+    Clicking them one by one, or chopping infinite lines into pieces first, would have taken minutes here.
+    There are lines this condition does not catch, though.
+    A short helper line drawn with LINE while drafting is not caught as object type construction line, so it stays.
+    You erase those separately in step 8.
 
 ### Step 5 — Learn the cutting side with TRIM
+> <!-- timed-step --> `[15:27–17:23]` entire step; not individual paragraph times
 
-    `[38:17–38:28]` The part from Lesson 5 is a finished outline. You do not practise by cutting a real edge.
-    `[38:29–38:36]` You make three short practice lines in an empty area inside the border, clear of the part and the title block.
-    `[38:37–38:45]` Change the current layer to `Dimension line` and turn ortho on.
-    `[38:48–38:56]` `L`, Enter, click a first point in the empty area, put the cursor to the right, `40`, Enter, Enter to finish.
-    `[38:57–39:05]` In another empty spot, `L`, Enter, click a first point, put the cursor above, `20`, Enter, Enter to finish.
+    The part from Lesson 5 is a finished outline. You do not practise by cutting a real edge.
+    You make three short practice lines in an empty area inside the border, clear of the part and the title block.
+    Change the current layer to `Dimension line` and turn ortho on.
+    `L`, Enter, click a first point in the empty area, put the cursor to the right, `40`, Enter, Enter to finish.
+    In another empty spot, `L`, Enter, click a first point, put the cursor above, `20`, Enter, Enter to finish.
     `M`, Enter. That is MOVE, the move command. Click only the vertical line and press Enter to end the selection.
     The base point is the vertical line's midpoint; the second point is the horizontal line's midpoint. The move ends here.
     `COPYMODE`, Enter, `1`, Enter to set copying once.
@@ -154,6 +159,7 @@
 
 
 ### Step 6 — Lengthen to a boundary with EXTEND
+> <!-- timed-step --> `[17:23–17:56]` entire step; not individual paragraph times
 
     `EX`, Enter. Click only the right vertical boundary line and press Enter.
     Click near the right end of the horizontal line.
@@ -165,6 +171,7 @@
 
 
 ### Step 7 — Switch from lengthening to cutting with Shift
+> <!-- timed-step --> `[17:56–18:32]` entire step; not individual paragraph times
 
     `EX`, Enter. This time click only the left vertical boundary line and press Enter.
     Hold the Shift key and click the part of the horizontal line between the two vertical boundaries.
@@ -175,6 +182,7 @@
 
 
 ### Step 8 — Erase the practice lines and any helper lines left
+> <!-- timed-step --> `[18:34–19:21]` entire step; not individual paragraph times
 
     Press Esc twice to end the command and the selection.
     Click the one horizontal line and the two vertical boundary lines you just made, one at a time, to select them.
@@ -188,6 +196,7 @@
 
 
 ### Step 9 — Measure whether the slots really are symmetrical
+> <!-- timed-step --> `[19:22–23:42]` entire step; not individual paragraph times
 
     Look at the two long horizontal holes at the bottom of the front view. You check whether these two slots are symmetrical.
     Follow the dimensions. From the left end to the first end circle centre is 29.
@@ -243,6 +252,7 @@
     The default is 0. If you find yourself mirroring near the title block, check it first.
 
 ### Step 10 — Fix a layer with MATCHPROP
+> <!-- timed-step --> `[23:43–25:34]` entire step; not individual paragraph times
 
     As you tidy, a line with the wrong layer turns up.
     Take the front view's vertical centerline as the target. The source is the front view's horizontal centerline.
@@ -271,6 +281,7 @@
     If there is more to fix, keep clicking. When you are done, Enter.
 
 ### Step 11 — Check the layers with LAYER
+> <!-- timed-step --> `[25:34–26:48]` entire step; not individual paragraph times
 
     Type `LA` and press Enter. The layer properties manager opens.
     There are four: visible line, centerline, hidden line, dimension line.
@@ -295,6 +306,7 @@
     Turn hidden line and dimension line off and on once each the same way.
 
 ### Step 12 — Pick by layer with QSELECT
+> <!-- timed-step --> `[26:49–27:48]` entire step; not individual paragraph times
 
     There is a surer way than scanning by eye.
     Type `QSELECT` and press Enter. The quick select dialog opens.
@@ -316,6 +328,7 @@
     Press Esc to clear the selection. Run it once for the hidden line the same way.
 
 ### Step 13 — Bring colour and linetype into line as ByLayer
+> <!-- timed-step --> `[27:48–28:44]` entire step; not individual paragraph times
 
     Sometimes the layer is right but a colour was given to the object directly.
     Then you change the layer colour and that one line does not change.
@@ -337,6 +350,7 @@
     Press Esc to clear the selection. Now the layer decides the colour.
 
 ### Step 14 — Give the centerlines and hidden lines their linetype scale
+> <!-- timed-step --> `[28:47–29:39]` entire step; not individual paragraph times
 
     Now you set the dash spacing.
 
@@ -353,6 +367,7 @@
     It is not a number invented now.
 
 ### Step 15 — Set the whole drawing with LTSCALE
+> <!-- timed-step --> `[29:40–30:58]` entire step; not individual paragraph times
 
     There is another value besides the one you give each object.
     It is the value that moves the whole drawing at once.
@@ -377,6 +392,7 @@
     Not the length of a line, not its position, not a dimension. Only the dash and gap lengths change.
 
 ### Step 16 — Save under a new name
+> <!-- timed-step --> `[30:59–32:00]` entire step; not individual paragraph times
 
     Before you save, one last check.
     Open the layer list at the top of the screen. See that all four lamps are on.
@@ -401,69 +417,69 @@
 
 **Time:** 32:12–34:57
 
-    Four mistakes come round again and again in tidying work. All four look perfectly fine on screen. So you cannot find them yourself.
+    `[32:03–32:13]` Four mistakes come round again and again in tidying work. All four look perfectly fine on screen. So you cannot find them yourself.
 
-    (1 card — moving on with helper lines still there) First check whether you erased the three practice lines. A stub of a helper line drawn between two views may be left as well. The construction lines drawn with XLINE went in one go in step 4, but a short helper line drawn with LINE is not caught by that condition. They are left near the edges of the border too. It is a screen you have been looking at while you worked, so your eye passes over it. The way to check is zoom all. Type `Z`, Enter, `A`, Enter. Put the whole border on one screen and look. What can you see besides the part shape, the border and the title block? That is a helper line still there.
+    `[32:14–32:57]` (1 card — moving on with helper lines still there) First check whether you erased the three practice lines. A stub of a helper line drawn between two views may be left as well. The construction lines drawn with XLINE went in one go in step 4. But a short helper line drawn with LINE is not caught by that condition. They are left near the edges of the border too. It is a screen you have been looking at while you worked, so your eye passes over it. The way to check is zoom all. Type `Z`, Enter, `A`, Enter. Put the whole border on one screen and look. What can you see besides the part shape, the border and the title block? That is a helper line still there.
 
-    (2 card — thinking you erased it when you only turned the layer off) This happens when you turn a layer off to check and do not turn it back on. The lines have gone from the screen, so it looks exactly like erasing. But the objects are still there. That the layer is off is saved into the file too. Open it next lesson and it looks as if there is not one centerline. So you draw the centerlines again. Then there are two lines laid on top of each other in the same place. Open the layer list before you save. Get into the habit of checking that every lamp is on.
+    `[32:57–33:32]` (2 card — thinking you erased it when you only turned the layer off) This happens when you turn a layer off to check and do not turn it back on. The lines have gone from the screen, so it looks exactly like erasing. But the objects are still there. That the layer is off is saved into the file too. Open it next lesson and it looks as if there is not one centerline. So you draw the centerlines again. Then there are two lines laid on top of each other in the same place. Open the layer list before you save. Get into the habit of checking that every lamp is on.
 
-    (3 card — applying LTSCALE to one object only) You click one centerline and fix its linetype scale. You see that line come out nicely and think you are finished. The rest of the centerlines are unchanged. Print it and lines of the same kind have different spacing. When you give a value to objects, use QSELECT. Take that whole layer in one go and put it in. The value that moves the whole drawing is LTSCALE. Put it in once on the command line and it takes everywhere. Remember that the two values are separate.
+    `[33:32–34:06]` (3 card — applying LTSCALE to one object only) You click one centerline and fix its linetype scale. You see that line come out nicely and think you are finished. The rest of the centerlines are unchanged. Print it and lines of the same kind have different spacing. When you give a value to objects, use QSELECT. Take that whole layer in one go and put it in. The value that moves the whole drawing is LTSCALE. Put it in once on the command line and it takes everywhere. Remember that the two values are separate.
 
-    (4 card — the layer is right but the colour was given to the object) The line is properly on the centerline layer. But that line's color property is not ByLayer. It has been set directly to red. Right now the layer colour is red too, so you cannot tell on screen. The trouble comes later. A task asks you to change the centerlines to another colour. You change the layer colour and that one line stays red. It is hard to find, too. So at the tidying stage you select everything once. You bring color, linetype and lineweight into line as ByLayer and move on.
+    `[34:06–34:43]` (4 card — the layer is right but the colour was given to the object) The line is properly on the centerline layer. But that line's color property is not ByLayer. It has been set directly to red. Right now the layer colour is red too, so you cannot tell on screen. The trouble comes later. A task asks you to change the centerlines to another colour. You change the layer colour and that one line stays red. It is hard to find, too. So at the tidying stage you select everything once. You bring color, linetype and lineweight into line as ByLayer and move on.
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 34:57–36:18
+**Time:** 34:57–36:17
 
-    (1 left) Today's file is one whose representation changed, not its shape. You cleared the projection lines away, measured the slots' symmetry to confirm it, and put layers, colours and dash spacing back where they belong. With this much set, next time you only have to lay dimensions on top. You open the saved `EDU-IB-02_L06_REPRESENTED` as it is and start there.
+    `[34:46–35:18]` (1 left) Today's file is one whose representation changed, not its shape. You cleared the projection lines away, measured the slots' symmetry to confirm it, and put layers, colours and dash spacing back where they belong. With this much set, next time you only have to lay dimensions on top. You open the saved `EDU-IB-02_L06_REPRESENTED` as it is and start there.
 
-    (2 right) Next time is the last lesson. You dimension. First you make a dimension style. You set the text height and the arrow size. You set the spacing of dimension lines and extension lines, and the number of decimal places. Then you change the current layer to dimension line and start entering. Dimensions go in one at a time, starting from the overall ones. Then you look at the principles for laying dimensions out without overlapping. You look at why you must not overwrite dimension text by hand. You finish with the scale notation and the title block, and save the final file. The file you have built over six lessons is finished then.
+    `[35:19–36:02]` (2 right) Next time is the last drawing lesson. You dimension. First you make a dimension style. You set the text height and the arrow size. You set the spacing of dimension lines and extension lines, and the number of decimal places. Then you change the current layer to dimension line and start entering. Dimensions go in one at a time, starting from the overall ones. Then you look at the principles for laying dimensions out without overlapping. You look at why you must not overwrite dimension text by hand. You finish with the scale notation and the title block, and save the final file. The file you have built over six lessons is finished then.
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 36:18–39:02
+**Time:** 36:17–39:00
 
-    Here are today's commands in one place. Rather than the names, remember **when you use them**.
+    `[36:05–36:15]` Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
 
-    (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
+    `[36:15–36:21]` (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
 
-    (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
+    `[36:22–36:28]` (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
 
-    (3) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
+    `[36:28–36:41]` (3) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
 
-    (4) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
+    `[36:41–36:47]` (4) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
 
-    (5) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
+    `[36:48–36:58]` (5) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
 
-    (6) `M`. MOVE. Moves something. You use it to bring a centerline or a view onto a reference point.
+    `[36:58–37:06]` (6) `M`. MOVE. Moves something. You use it to bring a centerline or a view onto a reference point.
 
-    (7) `COPYMODE`. Decides whether the copy command repeats. You use it to end the command after one copy.
+    `[37:07–37:15]` (7) `COPYMODE`. Decides whether the copy command repeats. You use it to end the command after one copy.
 
-    (8) `CO`. COPY. Puts the same thing somewhere else. You use it for repeated parts and identical holes.
+    `[37:15–37:25]` (8) `CO`. COPY. Puts the same thing somewhere else. You use it for repeated parts and identical holes.
 
-    (9) `TRIMEXTENDMODE`. Sets how trim and extend choose. You use it to pick the cutting edge first.
+    `[37:25–37:33]` (9) `TRIMEXTENDMODE`. Sets how trim and extend choose. You use it to pick the cutting edge first.
 
-    (10) `TR`. TRIM. Cuts back to a boundary. You use it on overlapping lines and stubs that stick out.
+    `[37:34–37:41]` (10) `TR`. TRIM. Cuts back to a boundary. You use it on overlapping lines and stubs that stick out.
 
-    (11) `EX`. EXTEND. Lengthens to a boundary. You use it on a line that falls short of an intersection.
+    `[37:41–37:50]` (11) `EX`. EXTEND. Lengthens to a boundary. You use it on a line that falls short of an intersection.
 
-    (12) `DI`. DIST. Measures the distance between two points. You use it before you dimension.
+    `[37:50–37:57]` (12) `DI`. DIST. Measures the distance between two points. You use it before you dimension.
 
-    (13) `MIRRTEXT`. Decides whether text flips when mirrored. You use it before mirroring something with text in it.
+    `[37:58–38:06]` (13) `MIRRTEXT`. Decides whether text flips when mirrored. You use it before mirroring something with text in it.
 
-    (14) `MA`. MATCHPROP. Copies properties onto another object. You use it to move a line off the wrong layer without redrawing it.
+    `[38:06–38:16]` (14) `MA`. MATCHPROP. Copies properties onto another object. You use it to move a line off the wrong layer without redrawing it.
 
-    (15) `LA`. LAYER. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
+    `[38:16–38:27]` (15) `LA`. LAYER. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
 
-    (16) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
+    `[38:28–38:35]` (16) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
 
-    (17) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
+    `[38:36–38:44]` (17) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 39:02–39:23
+**Time:** 39:00–39:22
 
-    (1) That is today's portion. The tidying will have felt longer than the drawing. It is like that on the real floor too. Well done.
+    `[38:47–38:55]` (1) That is today's portion. The tidying will have felt longer than the drawing. It is like that on the real floor too. Well done.
 
-    (2) Next is Lesson 7, dimensioning and finishing the drawing. It is the last lesson in which you draw the part. See you then.
+    `[38:55–39:04]` (2) Next is Lesson 7, dimensioning and finishing the drawing. It is the last lesson in which you draw the part. See you then.

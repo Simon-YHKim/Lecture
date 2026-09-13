@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 33m22s
+length: 33m25s
 angle: lesson-05-three-views
 narration: user-recorded
 style_preset: lg-training
@@ -51,9 +51,9 @@ recording_slots: 1
 | --- | --- | --- | --- | --- |
 | 1 | `01-title` | 7s | 검정 타이틀 · **제3각법 3뷰와 반복** | — |
 | 2 | `02-today` | 91s | 왼쪽 카드 4장(마크 포함) / 오른쪽 정면도 | 4 |
-| 3 | `03-concept` | 151s | 개념 카드 4장 + 하단 문단 | 4 |
+| 3 | `03-concept` | 152s | 개념 카드 4장 + 하단 문단 | 4 |
 | 4 | `04-on-the-drawing` | 160s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
-| 5 | `05-demo-a` | 402s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (1/3) | 6 |
+| 5 | `05-demo-a` | 404s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (1/3) | 6 |
 | 6 | `05-demo-b` | 460s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (2/3) | 6 |
 | 7 | `05-demo-c` | 417s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (3/3) | 4 |
 | 8 | `06-check` | 113s | 확인 카드 4장 + 하단 문단 | 4 |

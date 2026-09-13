@@ -92,16 +92,18 @@ def main(outpath, tmpdir, gsap=None, root=None, lang='ko'):
         lessons.append({'no': no, 'title': title, 'at': len(slides) + 1,
                         'count': len(island['slides']),
                         'practiceSteps': island['practiceSteps'],
-                        'practiceActions': island['practiceActions']})
+                        'practiceActions': island['practiceActions'],
+                        'script': io.open(os.path.join(src, 'SCRIPT.md'), encoding='utf-8').read()})
         slides += island['slides']
         bodies.append('<!-- ===== %s ===== -->\n%s'
                       % (('Lesson %d %s' % (no, title)) if lang == 'en'
                          else ('%d차시 %s' % (no, title)), body))
 
-    review_id = hashlib.sha256((''.join(bodies) + json.dumps(slides, ensure_ascii=False, sort_keys=True)).encode('utf-8')).hexdigest()
+    review_id = hashlib.sha256((''.join(bodies) + json.dumps(
+        {'slides': slides, 'lessons': lessons}, ensure_ascii=False, sort_keys=True)).encode('utf-8')).hexdigest()
     manifest = json.dumps({'slides': slides, 'slideSequences': [], 'reviewId': review_id,
                            'lessons': lessons, 'language': lang,
-                           'organization': 'lesson'}, ensure_ascii=False, indent=1)
+                           'organization': 'lesson'}, ensure_ascii=False, indent=1).replace('<', '\\u003c')
     nav = io.open(os.path.join(HERE, 'assets',
                                'deck_nav.en.html' if lang == 'en' else 'deck_nav.html'),
                   encoding='utf-8').read()
@@ -149,6 +151,9 @@ def main(outpath, tmpdir, gsap=None, root=None, lang='ko'):
         lib = ('<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js">'
                '</script>')
         banner = ''
+    # 실습용 슬라이드의 노트는 단계 안내이므로 원래 낭독 전체와 다르다.
+    # 차시별 원본도 함께 넣어 검수자가 대본 전부를 이 파일 안에서 확인한다.
+    banner += io.open(os.path.join(HERE, 'assets', 'deck_full_script.html'), encoding='utf-8').read()
     doc = """<!DOCTYPE html>
 <html lang="%s">
 <head>

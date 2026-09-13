@@ -5,7 +5,7 @@
   "ko": "치수와 출도",
   "en": "Dimensioning and Release"
  },
- "videoLength": "31:37",
+ "videoLength": "37:13",
  "selfStudyMin": 137,
  "opens": "EDU-IB-02_L06_REPRESENTED",
  "saves": "EDU-IB-02_L07_RELEASE",
@@ -3414,5 +3414,9 @@
    "ko": "고생하셨습니다. 여기까지가 그리는 일의 끝이에요. 부품 하나를 읽는 데서 시작해 A3 도면 한 장을 직접 완성하셨습니다. 다른 부품을 받아도 순서는 같습니다. 무엇을 하는 물건인지 읽고, 기준면을 정하고, 그 기준에서 잽니다. 다음은 8차시, 시험 안내와 Q&A 입니다.",
    "en": "Well done. That is the end of the drawing work. You started by reading one part and finished an A3 sheet yourself. The order is the same on any other part: read what it does, fix the datum faces, measure from them. Next is Lesson 8, the exam briefing and Q&A."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "37:13",
+  "en": "45:09"
  }
 }

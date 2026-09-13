@@ -5,15 +5,14 @@
 
 **Part:** `idler pulley bracket used on a car engine`<br>
 **Checkpoint:** `L02_TEMPLATE → L03_PROFILE`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Take a beat before a number when you say a dimension. Through the hands-on section (Line 5), say the value first, then move at the speed of pressing Enter.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 37 min 29 sec, including narration and frame holds.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:05
+**Time:** 0:00–0:07
 
     (silence)
 
@@ -21,7 +20,7 @@
 
 ## Line 2 — What you draw today (Frame 2)
 
-**Time:** 0:05–2:04
+**Time:** 0:07–2:53
 
     [calm] Last time you made the A3 border. [calm] You set up four layers as well. [calm] Today you open that file. [calm] For the first time you draw part lines. [calm] Four things go on the screen.
 
@@ -29,13 +28,13 @@
 
     (2 card — base 120 × 16 outline) [pointing] You draw the outer profile of the bottom plate. [measured] 120 across, and 16 high seen from the front. [calm] This plate is the first thing you draw today. [calm] This plate decides where the whole part sits. [measured] The 120 across is the whole width of the part. [calm] For the plate's lower left corner you just click an empty spot inside the border. [cautionary] You do not type coordinates. [asking] What happens if that wanders? [calm] Everything that stands on it wanders too.
 
-    (3 card — chamfers 2-C5) [pointing] You cut the two upper corners of the base. [measured] 5 off each, at 45 degrees. [calm] On the drawing that is 2-C5. [calm] The 2 is the count, C is a chamfer, 5 is the length of the side cut off. [calm] Leave a sharp corner and it cuts your hand. [calm] It clashes with another part on assembly. [calm] Paint goes on thin at a sharp edge, too. [calm] Cut it and all three go away at once. [calm] You make the rectangle first and cut it with the chamfer command. [calm] You give the 5 and 5 that are written on the drawing as the two distances.
+    (3 card — chamfers 2-C5) [pointing] You cut the two upper corners of the base. [calm] 5 off each, at forty-five degrees. [calm] On the drawing that is 2-C5. [calm] The 2 is the count, C is a chamfer, 5 is the length of the side cut off. [calm] Leave a sharp corner and it cuts your hand. [calm] It clashes with another part on assembly. [calm] Paint goes on thin at a sharp edge, too. [calm] Cut it and all three go away at once. [calm] You make the rectangle first and cut it with the chamfer command. [calm] You give the 5 and 5 that are written on the drawing as the two distances.
 
     (4 card — boss circle Ø56 and the tangent web) [pointing] You draw the outer circle of the boss at the top. [calm] Then you draw the web that climbs from the base to that circle. [light] Two lines. [emphatic] The web lines have to touch the boss circle exactly. [asking] What does touching mean here? [calm] It means meeting at one point, in passing. [calm] Not cutting in, not falling short. [cautionary] Place that one point by eye and it will be wrong every time. [calm] That is why you use the tangent object snap today.
 
 ## Line 3 — Four ways to place a point, two commands that make a line (Frame 3)
 
-**Time:** 2:04–4:50
+**Time:** 2:53–6:39
 
     [calm] A line is made of two points. [calm] So drawing accurately means placing points accurately. [calm] There are four ways to place one. [emphatic] There is only one test for choosing. [asking] Is that point fixed by a drawing dimension? [calm] And there are two commands that string those points into lines.
 
@@ -51,7 +50,7 @@
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 4:50–7:28
+**Time:** 6:39–10:12
 
     [calm] The front view is on the left, and on the right a table of the values you use today. [calm] We will work down the table and see where each value comes from on the drawing, in order.
 
@@ -59,9 +58,9 @@
 
     (2 row) [pointing] Read how the base is set up. [calm] You stand the rectangle up first, without worrying about the chamfers. [calm] With the REC command you click one corner, then press D for the dimensions option. [measured] 120 across, 16 up. [calm] Those two numbers are written on the drawing as they are. [emphatic] All four corners land exactly, in one go. [calm] Which corner you clicked first does not matter. [calm] It is not a point that a dimension fixes.
 
-    (3 row) [pointing] The chamfers go on after the rectangle is standing. [measured] 2-C5 means cutting 5 off at 45 degrees. [calm] The 2 is the count, C is a chamfer, 5 is the length of the side cut off. [emphatic] You give the CHAMFER command 5 and 5 and cut only the top two corners. [cautionary] You never have to type a computed value like 11 or 115. [measured] The numbers on the drawing are 120, 16 and 5. [emphatic] Those three are the only ones we typed. [calm] Make no computed values and you make no arithmetic slips either.
+    (3 row) [pointing] The chamfers go on after the rectangle is standing. [measured] 2-C5 means cutting 5 off at forty-five degrees. [calm] The 2 is the count, C is a chamfer, 5 is the length of the side cut off. [emphatic] You give the CHAMFER command 5 and 5 and cut only the top two corners. [cautionary] You never have to type a computed value like 11 or 115. [measured] The numbers on the drawing are 120, 16 and 5. [emphatic] Those three are the only ones we typed. [calm] Make no computed values and you make no arithmetic slips either.
 
-    (4 row) [pointing] Look at the top face of the base. [calm] This height decides half of what you draw today. [calm] The web climbs from here. [calm] The R10 fillet you add next lesson starts here too. [calm] 16 is not the plate thickness but the height seen from the front. [calm] The thickness of 12 is a value you read in the top view. [calm] It does not appear in today's front view.
+    (4 row) [pointing] Look at the top face of the base. [calm] This height decides half of what you draw today. [calm] The web climbs from here. [calm] The radius 10 fillet you add next lesson starts here too. [calm] 16 is not the plate thickness but the height seen from the front. [calm] The thickness of 12 is a value you read in the top view. [calm] It does not appear in today's front view.
 
     (5 row) [pointing] You draw the boss circle first. [light] The diameter is 56. [calm] Its centre goes on the intersection of the two centerlines. [calm] The web lines have to be tangent to this circle. [calm] With no circle on screen to be tangent to, there is no tangent point to catch. [calm] That is why the circle comes before the web. [measured] Add the radius of 28 to the centre height of 62 and you get 90. [calm] That is the overall height of the part. [calm] The top of the boss circle is the top of this part.
 
@@ -69,7 +68,7 @@
 
 ## Line 5 — Datum lines and the outline · DEMO-01 screen recording (Frame 5)
 
-**Time:** 7:28–20:09
+**Time:** 10:12–28:05
 
 > This section is a screen recording. Work through the 16 steps below in order and without skipping, speaking as you go.
 > What is inside backticks is what you actually type; everything else you check on screen or click.
@@ -146,7 +145,7 @@
 
     [calm] Now click the two edges that make the corner you are cutting, in turn.
     [calm] Click the top edge at the upper right corner, then click the right-hand vertical edge.
-    [measured] The corner is cut at 45 degrees. [measured] 5 across and 5 up makes it exactly 45.
+    [calm] The corner is cut at forty-five degrees. [measured] 5 across and 5 up makes it exactly 45.
 
     [measured] The 2-C5 on the drawing is this value. [measured] You put in 5 and 5 as they are.
     [measured] Chamfer while drawing the rectangle and you have to work out values like 11 and 110 by hand.
@@ -343,7 +342,7 @@
 
 ## Line 6 — This is where people go wrong (Frame 6)
 
-**Time:** 20:09–22:29
+**Time:** 28:05–31:21
 
     [calm] The same mistakes come round again. [light] There are four. [calm] We will look at how to notice each one while drawing, and how to fix it.
 
@@ -357,7 +356,7 @@
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 22:29–24:43
+**Time:** 31:21–34:38
 
     (1 left) [pointing] You opened last lesson's template and checked the snap state first. [calm] On the visible line layer you made the base rectangle with REC. [measured] You clicked the first corner and gave 120 and 16 through the dimensions option. [calm] Then you gave CHAMFER 5 and 5. [emphatic] You cut only the top two corners and finished the base outline. [calm] Next you switched to the centerline layer. [calm] From the midpoint of the bottom edge you stood the vertical centerline up. [calm] You made the horizontal centerline 66 long and moved it by its midpoint. [calm] It is the line that sits 62 up from the bottom. [emphatic] This is exactly why a shape has to exist before a snap can catch it. [calm] The boss circle went on the intersection of the two centerlines. [calm] You put 56 in through the diameter option. [calm] For the web you stepped 40 either way from the reference intersection on the base's top face. [calm] From those two points you ran lines to the boss circle with the tangent snap. [calm] Last you checked the top height of 90. [calm] You typed no coordinates at all while drawing the part today. [calm] In this course, typed coordinates are used at the two corners of the sheet edge and nowhere else. [calm] Everything else is caught with snaps, direction and a typed length. [calm] You saved the file under the name L03_PROFILE. [calm] It is the same order when you propose a jig to make a job easier. [calm] You fix the shape, pull the reference out of that shape, and put the circle on the reference.
 
@@ -365,7 +364,7 @@
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 24:43–26:32
+**Time:** 34:38–37:11
 
     [calm] Here are today's commands in one place. [emphatic] Rather than the names, remember **when you use them**.
     [calm] That is the part that stays after the exam.
@@ -402,7 +401,7 @@
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 26:32–26:46
+**Time:** 37:11–37:29
 
     (1) [light] That is today's portion. [calm] It was the lesson where you drew part lines for the first time. [warm] Well done.
 

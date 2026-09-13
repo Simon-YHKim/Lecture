@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 31m52s
+length: 31m56s
 angle: lesson-04-circles-arcs
 narration: user-recorded
 style_preset: lg-training
@@ -56,8 +56,8 @@ recording_slots: 1
 | 2 | `02-today` | 111s | 왼쪽 카드 4장(마크 포함) / 오른쪽 정면도 | 4 |
 | 3 | `03-concept` | 166s | 개념 카드 4장 + 하단 문단 | 4 |
 | 4 | `04-on-the-drawing` | 265s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
-| 5 | `05-demo-a` | 305s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (1/3) | 6 |
-| 6 | `05-demo-b` | 505s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (2/3) | 8 |
+| 5 | `05-demo-a` | 306s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (1/3) | 6 |
+| 6 | `05-demo-b` | 508s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (2/3) | 8 |
 | 7 | `05-demo-c` | 163s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (3/3) | 2 |
 | 8 | `06-check` | 127s | 확인 카드 4장 + 하단 문단 | 4 |
 | 9 | `07-recap` | 64s | 2분할 마무리 | 2 |

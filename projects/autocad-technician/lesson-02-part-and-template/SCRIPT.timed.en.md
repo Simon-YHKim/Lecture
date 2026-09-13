@@ -1,17 +1,17 @@
-<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
-     python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 35:34 · 문단 103개 -->
+<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.en.md 를 고친 뒤 다시 뽑아라.
+     python scripts/part/timed_script.py --lang en --root <영문 사본 묶음>
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 35:41 · 합성 단위 103개 -->
 
 # SCRIPT — AutoCAD Technician Lesson 2 · The part and the drawing environment (English edition)
 
 **Part:** `EDU-IB-02 idler pulley bracket`<br>
 **Checkpoint:** `none → L02_TEMPLATE`<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm, as if explaining to someone holding a drawing for the first time. Through the hands-on section (Line 8), keep a beat between steps, at the speed a hand moves.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 35 min 58 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
@@ -94,7 +94,7 @@
 
 ## Line 5 — Dimensions pin the shape down (Frame 5)
 
-**Time:** 7:34–9:50
+**Time:** 7:34–9:52
 
     `[7:30–7:38]` Now we read the notation on the drawing, one item at a time. Dimensions first. The eight on this screen are all of them.
 
@@ -112,67 +112,67 @@
 
     `[9:01–9:09]` (6 row) 8. The height of the slot centre. 8 from the bottom. This value decides whether the bolt head lands inside the plate.
 
-    `[9:10–9:29]` (7 row) 26, and 95.7 in brackets. The centre of the R10 fillet sits 26 up from the bottom. 95.7 is the distance between the two fillet centres, left and right. It follows from the other drawing dimensions, so it is marked as a reference value in brackets.
+    `[9:10–9:31]` (7 row) 26, and 95.7 in brackets. The centre of the radius 10 fillet sits 26 up from the bottom. 95.7 is the distance between the two fillet centres, left and right. It follows from the other drawing dimensions, so it is marked as a reference value in brackets.
 
-    `[9:30–9:41]` (8 row) 12 and 20. The thicknesses. These you read in the top view, not the front view. The plate is 12; where the boss is, 20.
+    `[9:32–9:43]` (8 row) 12 and 20. The thicknesses. These you read in the top view, not the front view. The plate is 12; where the boss is, 20.
 
 ## Line 6 — The symbols tell the shop what to do (Frame 6)
 
-**Time:** 9:50–12:01
+**Time:** 9:52–12:06
 
-    `[9:44–9:53]` Next, the symbols. It is not only numbers. Letters come before and after them. We will look at all eight of these too.
+    `[9:46–9:55]` Next, the symbols. It is not only numbers. Letters come before and after them. We will look at all eight of these too.
 
-    `[9:53–10:06]` (1 row) Ø25 H7. Ø means diameter. The H7 after it is a fit grade. Neither loose nor forced. As we said, a drill cannot hold it. It needs a reamer.
+    `[9:55–10:11]` (1 row) Ø25 H7. The slashed circle in front means diameter. The H7 after it is a fit grade. Neither loose nor forced. As we said, a drill cannot hold it. It needs a reamer.
 
-    `[10:07–10:14]` (2 row) Ø56. The outside diameter of the boss. The size of the material left around the shaft.
+    `[10:11–10:20]` (2 row) Diameter 56. The outside diameter of the boss. The size of the material left around the shaft.
 
-    `[10:15–10:38]` (3 row) PCD Ø44. PCD is the pitch circle diameter, commonly called the bolt circle. It is the diameter of the circle the four tapped-hole centres sit on. Not the diameter of the holes themselves. People mix this up often. Mix it up and the holes come out wildly oversized.
+    `[10:20–10:44]` (3 row) PCD Ø44. PCD is the pitch circle diameter, commonly called the bolt circle. It is the diameter of the circle the four tapped-hole centres sit on. Not the diameter of the holes themselves. People mix this up often. Mix it up and the holes come out wildly oversized.
 
-    `[10:39–10:47]` (4 row) 45 degrees. The angle of the first hole on the bolt circle. The other three step round from there every 90 degrees.
+    `[10:44–10:53]` (4 row) Forty-five degrees. The angle of the first hole on the bolt circle. The other three step round from there every ninety degrees.
 
-    `[10:48–11:03]` (5 row) 4-M5 DEPTH 10. The 4 in front is the count. M5 is the thread. Depth 10 is how deep it goes. Count, thread, depth, written on one line in that order.
+    `[10:53–11:09]` (5 row) 4-M5 DEPTH 10. The 4 in front is the count. M5 is the thread. Depth 10 is how deep it goes. Count, thread, depth, written on one line in that order.
 
-    `[11:04–11:20]` (6 row) 2-SLOT R5. The 2 in front is the count. R5 is the radius of the half-circle at each end. R5 and the 12 between centres we saw earlier: those two values fix the shape of the slot.
+    `[11:09–11:25]` (6 row) 2-SLOT R5. The 2 in front is the count. R5 is the radius of the half-circle at each end. R5 and the 12 between centres we saw earlier: those two values fix the shape of the slot.
 
-    `[11:20–11:28]` (7 row) 2-R10. R is the radius of the rounding. The 2 in front means two of them, left and right.
+    `[11:25–11:33]` (7 row) 2-R10. R is the radius of the rounding. The 2 in front means two of them, left and right.
 
-    `[11:28–11:41]` (8 row) 2-C5. C is a chamfer. It means cut at 45 degrees. The 5 is the length of the side cut off. It is the two top corners of the plate.
+    `[11:33–11:45]` (8 row) 2-C5. C is a chamfer. It means cut at forty-five degrees. The 5 is the length of the side cut off. It is the two top corners of the plate.
 
-    `[11:42–11:51]` You talk to the machine shop in these symbols. Spell it out in words and the two of you hear different things. The symbol is the exact way to say it.
+    `[11:46–11:55]` You talk to the machine shop in these symbols. Spell it out in words and the two of you hear different things. The symbol is the exact way to say it.
 
 ## Line 7 — Settle the sheet and the line rules first (Frame 7)
 
-**Time:** 12:01–15:27
+**Time:** 12:06–15:29
 
-    `[11:54–11:58]` The part is read. Now you get ready to draw.
+    `[11:58–12:02]` The part is read. Now you get ready to draw.
 
-    `[11:58–12:12]` The environment you build today is not only for this part. When you draw a jig on the floor to propose it, you use exactly this. With the sheet and the line rules settled, you can start drawing straight away.
+    `[12:02–12:16]` The environment you build today is not only for this part. When you draw a jig on the floor to propose it, you use exactly this. With the sheet and the line rules settled, you can start drawing straight away.
 
-    `[12:12–12:22]` (1 sheet edge) The sheet is A3 landscape. 420 by 297 millimetres. That outer rectangle is the sheet edge.
+    `[12:16–12:26]` (1 sheet edge) The sheet is A3 landscape. 420 by 297 millimetres. That outer rectangle is the sheet edge.
 
-    `[12:22–12:40]` (2 border) Inside it, come in 10 millimetres on every side. Draw one more rectangle. That is the border. The drawing itself only goes inside this. Why come in? Because the edge can be cut off in printing. The content has to survive that.
+    `[12:26–12:44]` (2 border) Inside it, come in 10 millimetres on every side. Draw one more rectangle. That is the border. The drawing itself only goes inside this. Why come in? Because the edge can be cut off in printing. The content has to survive that.
 
-    `[12:40–12:50]` (3 centering marks) Draw one short line at the middle of each of the four edges. These are the centering marks. They are the reference when a drawing is folded or copied.
+    `[12:45–12:54]` (3 centering marks) Draw one short line at the middle of each of the four edges. These are the centering marks. They are the reference when a drawing is folded or copied.
 
-    `[12:51–13:04]` (4 title block) Make the title block in the bottom right corner. 200 across, 30 up. Split it into two of 100. Your name on the left, your employee number on the right. Text height is 10.
+    `[12:55–13:08]` (4 title block) Make the title block in the bottom right corner. 200 across, 30 up. Split it into two of 100. Your name on the left, your employee number on the right. Text height is 10.
 
-    `[13:04–13:12]` (5 layer table) And make four layers. Visible line, centerline, hidden line, dimension line. Only four.
+    `[13:09–13:16]` (5 layer table) And make four layers. Visible line, centerline, hidden line, dimension line. Only four.
 
-    `[13:12–13:24]` (6 visible line) The visible line is linetype Continuous. Lineweight 0.30, color green (3). It draws the shape you can see. It is the only thick one of the four.
+    `[13:16–13:29]` (6 visible line) The visible line is linetype Continuous. Lineweight 0.30, color green (3). It draws the shape you can see. It is the only thick one of the four.
 
-    `[13:25–13:40]` (7 centerline) The centerline is CENTER, lineweight 0.15, red (1). It draws circle centres and axes of symmetry. Its linetype scale, which sets the dash spacing, is 0.5.
+    `[13:29–13:44]` (7 centerline) The centerline is CENTER, lineweight 0.15, red (1). It draws circle centres and axes of symmetry. Its linetype scale, which sets the dash spacing, is 0.5.
 
-    `[13:41–13:55]` (8 hidden line) The hidden line is HIDDEN, lineweight 0.15, yellow (2). It draws what material hides. Its linetype scale is 0.5, the same as the centerline.
+    `[13:45–13:59]` (8 hidden line) The hidden line is HIDDEN, lineweight 0.15, yellow (2). It draws what material hides. Its linetype scale is 0.5, the same as the centerline.
 
-    `[13:55–14:11]` (9 dimension line) The dimension line is Continuous, lineweight 0.15, white (7). Being Continuous, it gets no linetype scale. You use it when you dimension. The construction lines that align the views go here too.
+    `[13:59–14:16]` (9 dimension line) The dimension line is Continuous, lineweight 0.15, white (7). Being Continuous, it gets no linetype scale. You use it when you dimension. The construction lines that align the views go here too.
 
-    `[14:12–15:02]` (10 weight and scale) There are two kinds of number in that table, and it is an easy place to slip. Lineweight is the thickness of the line, in millimetres. Only the visible line is 0.30 and the rest are 0.15 — exactly twice. That is because on a printed drawing the shape has to reach your eye first. Linetype scale is not thickness but the spacing of the dashes. So what actually changes on screen is the centerline and the hidden line, the two that use dashes. The visible line and the dimension line are Continuous, with no gaps, so a scale value never shows. If a dashed line reads as continuous on screen, the scale is out; how to fix it comes next lesson.
+    `[14:16–15:04]` (10 weight and scale) There are two kinds of number in that table, and it is an easy place to slip. Lineweight is the thickness of the line, in millimetres. Only the visible line is 0.30 and the rest are 0.15 — exactly twice. That is because on a printed drawing the shape has to reach your eye first. Linetype scale is not thickness but the spacing of the dashes. So what actually changes on screen is the centerline and the hidden line, the two that use dashes. The visible line and the dimension line are Continuous, with no gaps, so a scale value never shows. If a dashed line reads as continuous on screen, the scale is out. How to fix it comes next lesson.
 
-    `[15:03–15:15]` (11 which wins) Once more. A task sheet may name a different layer. The same goes for colors and scales. When it does, the task sheet wins. These are practice defaults.
+    `[15:05–15:17]` (11 which wins) Once more. A task sheet may name a different layer. The same goes for colors and scales. When it does, the task sheet wins. These are practice defaults.
 
 ## Line 8 — Building the template · DEMO-01 screen recording (Frame 8)
 
-**Time:** 15:27–31:27
+**Time:** 15:29–31:33
 
 > This section is a screen recording. Work through the 16 steps below **in order and without skipping**, speaking as you go.
 > A command written in capitals is the command; what is inside backticks is what you actually type.
@@ -180,72 +180,80 @@
 > Coordinates are typed only for the two corners of the sheet. Every other point is caught with object snaps, with the direction and length typed.
 
 ### Step 1 — Open a new drawing
+> <!-- timed-step --> `[15:20–15:46]` entire step; not individual paragraph times
 
-    `[15:18–15:44]` Start AutoCAD 2024. Make a new drawing, with no starter file. On the start screen press the arrow beside New.
-    `[15:45–16:06]` Open the template list. Choose `acadiso.dwt`.
-    `[16:06–16:27]` The one with iso in it is the millimetre template.
-    `[16:27–16:44]` `acad.dwt` is in inches. Pick that and every value is off from the start.
+    Start AutoCAD 2024. Make a new drawing, with no starter file. On the start screen press the arrow beside New.
+    Open the template list. Choose `acadiso.dwt`.
+    The one with iso in it is the millimetre template.
+    `acad.dwt` is in inches. Pick that and every value is off from the start.
 
 ### Step 2 — Save it first
+> <!-- timed-step --> `[15:47–16:08]` entire step; not individual paragraph times
 
-    `[16:44–17:00]` Save before you draw. Type `SAVEAS` and press Enter.
-    `[17:00–17:22]` Put `EDU-IB-02_L02_TEMPLATE` in the file name.
-    `[17:23–17:40]` Leave the file type as AutoCAD drawing, dwg. Press Save.
-    `[17:40–19:14]` From now on you open this file every lesson and carry on in it.
+    Save before you draw. Type `SAVEAS` and press Enter.
+    Put `EDU-IB-02_L02_TEMPLATE` in the file name.
+    Leave the file type as AutoCAD drawing, dwg. Press Save.
+    From now on you open this file every lesson and carry on in it.
 
 ### Step 3 — Check the units
+> <!-- timed-step --> `[16:08–16:29]` entire step; not individual paragraph times
 
-    `[19:15–19:31]` Type `UNITS` and press Enter. A dialog opens.
-    `[19:32–22:09]` Length type is Decimal. Leave the precision at two decimal places.
-    `[22:09–23:40]` Angle type is Decimal Degrees, precision 0.
-    `[23:40–26:01]` Look at whether the insertion scale unit is millimetres. If it says inches, change it.
-    `[26:02–27:40]` Press OK.
+    Type `UNITS` and press Enter. A dialog opens.
+    Length type is Decimal. Leave the precision at two decimal places.
+    Angle type is Decimal Degrees, precision 0.
+    Look at whether the insertion scale unit is millimetres. If it says inches, change it.
+    Press OK.
 
 ### Step 4 — Set the drawing limits
+> <!-- timed-step --> `[16:30–16:46]` entire step; not individual paragraph times
 
-    `[27:40–28:43]` Type `LIMITS` and press Enter.
-    `[28:44–30:59]` It asks for the lower left corner. Type `0,0` and press Enter.
-    `[30:59–31:13]` It asks for the upper right corner. Type `420,297` and press Enter.
-    `[31:16–31:32]` That is the size of A3 landscape.
+    Type `LIMITS` and press Enter.
+    It asks for the lower left corner. Type `0,0` and press Enter.
+    It asks for the upper right corner. Type `420,297` and press Enter.
+    That is the size of A3 landscape.
 
 ### Step 5 — Fit the view
+> <!-- timed-step --> `[16:46–17:02]` entire step; not individual paragraph times
 
-    `[31:33–31:48]` Type `Z` and press Enter. When the options appear type `A` and press Enter. That is zoom all.
-    `[31:48–32:04]` The view fits the limits you just set.
-    `[32:04–32:10]` There is nothing in it yet, so the screen is empty.
+    Type `Z` and press Enter. When the options appear type `A` and press Enter. That is zoom all.
+    The view fits the limits you just set.
+    There is nothing in it yet, so the screen is empty.
 
 ### Step 6 — Load the linetypes
+> <!-- timed-step --> `[17:02–17:24]` entire step; not individual paragraph times
 
-    `[32:10–32:28]` Before you make the layers, load the linetypes. Type `LINETYPE` and press Enter.
-    `[32:28–32:53]` Press Load. Find `CENTER` in the list and select it.
-    `[32:54–33:11]` Hold Ctrl and select `HIDDEN` as well. OK.
-    `[33:14–33:25]` Both linetypes are now inside the drawing.
-    `[33:25–33:33]` What happens if you skip this? The linetype you are about to assign is not in the list.
+    Before you make the layers, load the linetypes. Type `LINETYPE` and press Enter.
+    Press Load. Find `CENTER` in the list and select it.
+    Hold Ctrl and select `HIDDEN` as well. OK.
+    Both linetypes are now inside the drawing.
+    What happens if you skip this? The linetype you are about to assign is not in the list.
 
 ### Step 7 — Create the four layers
+> <!-- timed-step --> `[17:25–17:42]` entire step; not individual paragraph times
 
-    `[33:34–33:42]` Type `LAYER` and press Enter. The layer properties manager opens.
-    `[33:42–33:50]` Press the new layer icon and type `Visible line` for the name, then Enter.
-    `[33:50–33:56]` Make `Centerline`, `Hidden line` and `Dimension line` the same way. Four in all.
+    Type `LAYER` and press Enter. The layer properties manager opens.
+    Press the new layer icon and type `Visible line` for the name, then Enter.
+    Make `Centerline`, `Hidden line` and `Dimension line` the same way. Four in all.
 
 ### Step 8 — Set color and linetype on each layer
+> <!-- timed-step --> `[17:42–19:16]` entire step; not individual paragraph times
 
-    `[33:57–34:04]` On the visible line row, click the color cell.
-    `[34:05–34:15]` In the color dialog choose green, 3, and press OK.
-    `[34:15–34:24]` Leave the linetype cell as Continuous.
-    `[34:24–34:34]` Click the lineweight cell. Choose `0.30` millimetres from the list and press OK.
-    `[34:34–34:41]` This is the only thick row of the four.
+    On the visible line row, click the color cell.
+    In the color dialog choose green, 3, and press OK.
+    Leave the linetype cell as Continuous.
+    Click the lineweight cell. Choose `0.30` millimetres from the list and press OK.
+    This is the only thick row of the four.
 
-    `[34:41–34:50]` Now the centerline row. Click the color cell, choose red, 1, and OK.
-    `[34:50–34:55]` Click the linetype cell, choose `CENTER`, and OK.
-    `[34:56–35:06]` Lineweight is `0.15` millimetres.
+    Now the centerline row. Click the color cell, choose red, 1, and OK.
+    Click the linetype cell, choose `CENTER`, and OK.
+    Lineweight is `0.15` millimetres.
 
-    `[35:07–35:15]` The hidden line row. Color yellow, 2. Linetype `HIDDEN`. Lineweight `0.15`.
+    The hidden line row. Color yellow, 2. Linetype `HIDDEN`. Lineweight `0.15`.
 
-    `[35:15–35:21]` The dimension line row. Color white, 7. The visible line is green, so on screen the two never blur together. Leave the linetype as Continuous. Lineweight `0.15`.
-    `[35:23–35:26]` Continuous has no gap to adjust, so leave the linetype scale empty.
+    The dimension line row. Color white, 7. The visible line is green, so on screen the two never blur together. Leave the linetype as Continuous. Lineweight `0.15`.
+    Continuous has no gap to adjust, so leave the linetype scale empty.
 
-    `[35:27–35:33]` Fix the weight here and no object ever needs its own.
+    Fix the weight here and no object ever needs its own.
     Later, if one line differs only in weight, it is on the wrong layer.
 
     The linetype scale in that table is a different value from weight.
@@ -255,6 +263,7 @@
     For now just remember the value and move on.
 
 ### Step 9 — Make the visible line layer current
+> <!-- timed-step --> `[19:17–19:34]` entire step; not individual paragraph times
 
     In the layer manager, select the visible line row.
     Press Set Current. Close the dialog.
@@ -262,13 +271,14 @@
     Everything you draw from now on goes on this layer.
 
 ### Step 10 — Set the snaps and the display aids
+> <!-- timed-step --> `[19:34–22:16]` entire step; not individual paragraph times
 
     Before you draw a line, turn on the things that catch points for you.
     Type `OS` and press Enter. The object snap tab of the drafting settings dialog opens.
     Tick five: endpoint, midpoint, center, quadrant and intersection.
     You use midpoint two steps from now. That is how you catch the centering marks.
-    Tangent you pick one time at a time, only when you need it.
-    In Lesson 3, when you draw the web lines tangent to the boss circle, hold Shift and right-click while it asks for a point, and choose tangent.
+    Tangent you pick for a single use, only when you need it.
+    You use it in Lesson 3, when you draw the web lines tangent to the boss circle. While it asks for a point, hold Shift and right-click, and choose tangent.
     Leave the rest off. Turn them all on and it keeps sticking to points you did not want.
     Press OK.
 
@@ -282,7 +292,7 @@
     A box follows the cursor and takes the length and the angle there.
     With it off the same numbers go to the command line at the bottom. The values are the same, but your eyes have to watch two places.
     Two things you leave off, on the other hand.
-    F7 grid and F9 snap. The grid only clutters the screen, and snap holds the cursor to a fixed interval,
+    F7 grid and F9 snap. The grid only clutters the screen. Snap holds the cursor to a fixed interval,
     so it catches somewhere useless instead of an endpoint or a midpoint.
     If a snap seems not to catch, check F9 first.
     Turn on F10 polar tracking only when you need a slanted direction. You use it in Lesson 4.
@@ -294,6 +304,7 @@
     If they all look the same, you did not set the weights in Step 8.
 
 ### Step 11 — Sheet edge and border
+> <!-- timed-step --> `[22:16–23:46]` entire step; not individual paragraph times
 
     Type `REC` and press Enter. That is the rectangle command.
     It asks for the first corner. Type `0,0` and press Enter.
@@ -316,6 +327,7 @@
     Press `Z`, Enter, `A`, Enter to fit the view again.
 
 ### Step 12 — Four centering marks
+> <!-- timed-step --> `[23:47–26:08]` entire step; not individual paragraph times
 
     You do not calculate the middle. You catch it on each edge with a snap.
 
@@ -352,6 +364,7 @@
     What is left is a short line at the middle of each edge, joining the sheet edge to the border.
 
 ### Step 13 — Title block
+> <!-- timed-step --> `[26:08–27:47]` entire step; not individual paragraph times
 
     Press `REC`, Enter.
     The first corner is the bottom right corner of the border.
@@ -371,6 +384,7 @@
     That is the vertical line that splits it in half. Now you have two boxes of 100.
 
 ### Step 14 — Set a text style that shows every glyph
+> <!-- timed-step --> `[27:47–28:50]` entire step; not individual paragraph times
 
     There is one thing to do before you write text.
     Type `ST` and press Enter. The text style dialog opens.
@@ -391,6 +405,7 @@
     Press Apply and close.
 
 ### Step 15 — Add your name and employee number
+> <!-- timed-step --> `[28:51–31:05]` entire step; not individual paragraph times
 
     The text goes in the middle of the box. First, how to find the middle.
 
@@ -428,6 +443,7 @@
     Name on the left, employee number on the right. Do not swap the order.
 
 ### Step 16 — Save
+> <!-- timed-step --> `[31:06–31:20]` entire step; not individual paragraph times
 
     Press Ctrl+S. Or type `QSAVE` and press Enter.
     That puts you at the `L02_TEMPLATE` state.
@@ -436,61 +452,61 @@
 
 ## Line 9 — This lesson and the next (Frame 9)
 
-**Time:** 31:27–33:27
+**Time:** 31:33–33:33
 
-    (1 left) Let us gather up what you did today. You read the idler pulley bracket. It is the part that holds the shaft of the wheel that sets belt tension. The tension has to be right for the power to go through and for the parts to last.
+    `[31:23–31:39]` (1 left) Let us gather up what you did today. You read the idler pulley bracket. It is the part that holds the shaft of the wheel that sets belt tension. The tension has to be right for the power to go through and for the parts to last.
 
-    You also saw why the machining and the surface finish differ from face to face. The hole the shaft touches is finished fine. The slot the bolt only passes through can be rough. What touches it is the test.
+    `[31:39–31:54]` You also saw why the machining and the surface finish differ from face to face. The hole the shaft touches is finished fine. The slot the bolt only passes through can be rough. What touches it is the test.
 
-    You saw the reason behind each shape too. The wide base is for the twisting load. The slots are for the range of adjustment. The thick foot is for bending. The fillet keeps the load from piling onto one point.
+    `[31:55–32:10]` You saw the reason behind each shape too. The wide base is for the twisting load. The slots are for the range of adjustment. The thick foot is for bending. The fillet keeps the load from piling onto one point.
 
-    Of the notation on the drawing, you read all eight dimensions and all eight symbols.
+    `[32:11–32:16]` Of the notation on the drawing, you read all eight dimensions and all eight symbols.
 
-    And last you built the drawing environment. You set a border on an A3 sheet. You came in 10 millimetres on every side and drew the centering marks. You made the 200 by 30 title block. You set four layers and saved it as a template file.
+    `[32:17–32:35]` And last you built the drawing environment. You set a border on an A3 sheet. You came in 10 millimetres on every side and drew the centering marks. You made the 200 by 30 title block. You set four layers and saved it as a template file.
 
-    (2 right) Next time you finally draw lines. You will see four ways to place a point. Object snap, ortho with typed values, snap tracking and FROM, and a free click. And what decides which of the four to use. You will also see the difference between LINE, PLINE and REC. Why the outline has to be one connected object comes out there.
+    `[32:35–33:00]` (2 right) Next time you finally draw lines. You will see four ways to place a point. Object snap, ortho with typed values, snap tracking and FROM, and a free click. And what decides which of the four to use. You will also see the difference between LINE, PLINE and REC. Why the outline has to be one connected object comes out there.
 
-    You fix the origin and the datum faces. You draw the 120 by 16 base. You also pick the tangent snap once, when you need it, to draw the web lines tangent to the boss circle. When you finish, you save it as L03_PROFILE.
+    `[33:00–33:18]` You fix the origin and the datum faces. You draw the 120 by 16 base. You also pick the tangent snap once, when you need it, to draw the web lines tangent to the boss circle. When you finish, you save it as L03_PROFILE.
 
 ## Line 10 — What you typed today (Frame 10)  <!-- generated: keys -->
 
-**Time:** 33:27–35:37
+**Time:** 33:33–35:44
 
-    Here are today's commands in one place. Rather than the names, remember **when you use them**.
+    `[33:21–33:32]` Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
 
-    (1) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
+    `[33:32–33:40]` (1) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
 
-    (2) `UNITS`. Sets the units and the precision. You use it to check whether you are in millimetres or inches.
+    `[33:41–33:49]` (2) `UNITS`. Sets the units and the precision. You use it to check whether you are in millimetres or inches.
 
-    (3) `LIMITS`. Sets the drawing limits. You use it to fix the sheet size in coordinates.
+    `[33:49–33:57]` (3) `LIMITS`. Sets the drawing limits. You use it to fix the sheet size in coordinates.
 
-    (4) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
+    `[33:57–34:03]` (4) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
 
-    (5) `LINETYPE`. Loads a linetype. You use it before assigning CENTER and HIDDEN to layers.
+    `[34:04–34:11]` (5) `LINETYPE`. Loads a linetype. You use it before assigning CENTER and HIDDEN to layers.
 
-    (6) `LAYER`. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
+    `[34:12–34:21]` (6) `LAYER`. Creates and manages layers. You use it when linetype and color belong to the layer, not to each object.
 
-    (7) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
+    `[34:22–34:30]` (7) `LTSCALE`. Changes the global linetype scale. You use it when a dashed line reads as continuous.
 
-    (8) `REC`. RECTANG. Draws a rectangle as one polyline. You use it for the border, the title block and a plate outline.
+    `[34:31–34:41]` (8) `REC`. RECTANG. Draws a rectangle as one polyline. You use it for the border, the title block and a plate outline.
 
-    (9) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
+    `[34:41–34:48]` (9) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
 
-    (10) `ST`. STYLE. Sets the text style and the font. You use it when characters come out as question marks.
+    `[34:48–34:57]` (10) `ST`. STYLE. Sets the text style and the font. You use it when characters come out as question marks.
 
-    (11) `DTEXT`. Writes text. You use it for the title block and notes.
+    `[34:57–35:02]` (11) `DTEXT`. Writes text. You use it for the title block and notes.
 
-    (12) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
+    `[35:02–35:13]` (12) `OS`. OSNAP. Chooses which object snaps are on. You use it when you must catch an endpoint, a centre or a tangent exactly.
 
-    (13) `LWDISPLAY`. Decides whether lineweight shows on screen. You use it to see the weight difference on screen.
+    `[35:14–35:22]` (13) `LWDISPLAY`. Decides whether lineweight shows on screen. You use it to see the weight difference on screen.
 
-    (14) `QSAVE`. Saves over the file. Ctrl+S does the same.
+    `[35:22–35:27]` (14) `QSAVE`. Saves over the file. Ctrl+S does the same.
 
 ## Line 11 — Well done (Frame 11)
 
-**Time:** 35:37–35:51
+**Time:** 35:44–35:58
 
-    (1) That is today's portion. Well done.
+    `[35:30–35:33]` (1) That is today's portion. Well done.
 
-    (2) Next is Lesson 3, datum lines and the outline. See you then.
+    `[35:33–35:39]` (2) Next is Lesson 3, datum lines and the outline. See you then.

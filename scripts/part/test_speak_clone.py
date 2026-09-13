@@ -10,6 +10,8 @@
 자르지 않는가.
 """
 import sys
+import tempfile
+from types import SimpleNamespace
 import unittest
 from pathlib import Path
 
@@ -84,6 +86,28 @@ class TrimTests(unittest.TestCase):
 
 
 class BandTests(unittest.TestCase):
+    def test_a_different_codec_does_not_reuse_the_12hz_budget(self):
+        for sample_rate, samples_per_frame, expected in ((24000, 1920, 12.5), (24000, 960, 25)):
+            codec = SimpleNamespace(get_output_sample_rate=lambda: sample_rate,
+                                    get_decode_upsample_rate=lambda: samples_per_frame)
+            model = SimpleNamespace(model=SimpleNamespace(speech_tokenizer=codec))
+            hz = S.codec_frame_rate(model)
+            self.assertEqual(hz, expected)
+            allowed = S.BAND[1] * 100 / 7.35
+            self.assertGreaterEqual(S.token_cap(100, 7.35, hz) / hz, allowed)
+            self.assertLess(S.token_cap(100, 7.35, hz) / hz, allowed + 8)
+
+    def test_token_budget_bounds_audio_at_the_codec_frame_rate(self):
+        # The cached 12Hz codec emits 1,920 samples per generation step at 24kHz.
+        # A 120-token/second assumption permits minutes for a ten-second sentence.
+        codec_hz = 24000 / 1920
+        for chars, rate in ((30, 7.35), (100, 7.35), (260, 13.18), (380, 13.18)):
+            with self.subTest(chars=chars, rate=rate):
+                allowed_seconds = S.BAND[1] * chars / rate
+                cap_seconds = S.token_cap(chars, rate) / codec_hz
+                self.assertGreaterEqual(cap_seconds, allowed_seconds)
+                self.assertLess(cap_seconds, allowed_seconds + 8)
+
     def test_rate_falls_back_to_the_seed_until_there_are_samples(self):
         rate, n = S.measured_rate({}, 5.5)
         self.assertEqual((rate, n), (5.5, 0))
@@ -101,6 +125,39 @@ class BandTests(unittest.TestCase):
         want = 10.0
         self.assertFalse(low * want <= want / 3 <= high * want)
         self.assertTrue(low * want <= want <= high * want)
+
+
+class PronunciationCacheTests(unittest.TestCase):
+    def test_only_the_changed_pronunciation_is_regenerated(self):
+        doc = {'lessons': [{'slug': 'lesson', 'jobs': [{'key': 'line', 'chunks': [
+            {'n': 1, 'text': 'Ø25 H7.'}, {'n': 2, 'text': 'Keep the drawing.'}]}]}]}
+        done = {('lesson', 'line', c['n']): {'sha': S.sha(c['text'])}
+                for c in doc['lessons'][0]['jobs'][0]['chunks']}
+        readings = {'lesson/line#01': 'diameter twenty-five H seven.'}
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / 'lesson'
+            folder.mkdir()
+            for n in (1, 2):
+                (folder / ('line#%02d.wav' % n)).touch()
+            self.assertEqual(S.plan(doc, done, tmp, ''), [])
+            todo = S.plan(doc, done, tmp, '', pronunciations=readings)
+            self.assertEqual(len(todo), 1)
+            self.assertEqual(todo[0]['text'], 'Ø25 H7.')
+            self.assertEqual(S.speech_text(todo[0]), readings['lesson/line#01'])
+            done[('lesson', 'line', 1)]['spokenSha'] = S.sha(readings['lesson/line#01'])
+            self.assertEqual(S.plan(doc, done, tmp, '', pronunciations=readings), [])
+            removed = S.plan(doc, done, tmp, '')
+            self.assertEqual(len(removed), 1, 'removing a pronunciation override must replace its cached audio')
+            self.assertEqual(S.speech_text(removed[0]), 'Ø25 H7.')
+            readings['lesson/line#01'] = 'diameter twenty-five, H seven.'
+            self.assertEqual(len(S.plan(doc, done, tmp, '', pronunciations=readings)), 1)
+
+    def test_unknown_or_empty_reading_cannot_silently_skip(self):
+        doc = {'lessons': [{'slug': 'lesson', 'jobs': [{'key': 'line', 'chunks': [
+            {'n': 1, 'text': 'Read this.'}]}]}]}
+        for readings in ({'missing': 'Read this.'}, {'lesson/line#01': ' '}):
+            with self.subTest(readings=readings), self.assertRaises(ValueError):
+                S.plan(doc, {}, '.', '', pronunciations=readings)
 
 
 if __name__ == '__main__':

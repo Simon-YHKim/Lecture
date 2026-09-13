@@ -2,16 +2,15 @@
 
 **Part:** `EDU-IB-02 idler pulley bracket`<br>
 **Checkpoint:** `L06_REPRESENTED → L07_RELEASE`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Dimensioning is not drawing; it is instructing. Keep it level. Through the hands-on section, leave a beat as if pointing at each dialog entry in turn.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 45 min 08 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:05
+**Time:** 0:00–0:07
 
     (silence)
 
@@ -19,7 +18,7 @@
 
 ## Line 2 — What you draw today (Frame 2)
 
-**Time:** 0:05–1:57
+**Time:** 0:07–2:42
 
     The shape was finished last lesson and the lines are where they belong. But hand this drawing to the floor as it stands and nobody can make anything. Because how big it is is not written on it.
 
@@ -35,7 +34,7 @@
 
 ## Line 3 — Concepts (Frame 3)
 
-**Time:** 1:57–3:55
+**Time:** 2:42–5:32
 
     Four things to settle before you press a command.
 
@@ -49,7 +48,7 @@
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 3:55–7:22
+**Time:** 5:32–10:30
 
     Now we go through this part's values one at a time. Something matters more than which value it is. It is where you measure from and to. Even for the same 120, two different points caught means a different object comes out.
 
@@ -61,13 +60,13 @@
 
     (4 row) Diameters and radii. Ø25 H7 is the bore. Ø56 is the outside of the boss. Both are whole circles, so they are written as diameters. R5 is the half-circle at the end of a slot. R10 is the fillet where the web turns into the base. Both are arcs, parts of a circle, so they are written as radii. And these four have their dimension lines running outside the shape. It is because the inside of a circle is too narrow to hold a dimension line and its text. Diameter and radius commands are built to pull the dimension outward.
 
-    (5 row) PCD Ø44 and 45 degrees. PCD is the pitch circle diameter. The pitch circle is not a shape that actually gets cut. It is an imaginary circle the four tapped-hole centres sit on. So you draw it as a centerline. You put PCD in front of the diameter to show that it is not a hole. How does it read without PCD? It reads as one more hole, 44 across. The 45 degrees is the angle at which the first hole sits on that circle. It is 45 degrees up from the horizontal line through the boss centre. The other three step round from there every 90. Here you use the angular dimension's two-line selection method.
+    (5 row) PCD Ø44 and forty-five degrees. PCD is the pitch circle diameter. The pitch circle is not a shape that actually gets cut. It is an imaginary circle the four tapped-hole centres sit on. So you draw it as a centerline. You put PCD in front of the diameter to show that it is not a hole. How does it read without PCD? It reads as one more hole, 44 across. The forty-five degrees is the angle at which the first hole sits on that circle. It is forty-five degrees up from the horizontal line through the boss centre. The other three step round from there every ninety degrees. Here you use the angular dimension's two-line selection method.
 
     (6 row) The reference dimension 95.7, and the thicknesses 12 and 20. The 95.7 is the distance between the two fillet centres. You put brackets round this one. It is a value that follows from the fillets' radius of 10 and the slope of the web lines. So it comes out as a decimal. Being a decimal is not what makes it a reference dimension. On this drawing it is a duplicate value determined by other dimensions, so it is left as reference. The same fillets' centre height of 26, on the other hand, is written plainly with no brackets. And the two thicknesses. You cannot read thickness in the front view. It runs front to back, so from the front it all overlaps into one line. You measure it in the top view. The plate is 12. Where the boss stands 8 forward it is 12 plus 8, which is 20.
 
 ## Line 5 — Dimensioning and release · DEMO-01 screen recording (Frame 5)
 
-**Time:** 7:22–25:36
+**Time:** 10:30–36:30
 
 > This section is a screen recording. Work through the 17 steps below **in order and without skipping**, speaking as you go.
 > What is inside backticks is what you actually type. Rely on snaps when you place a point, and always check the value with your eyes once it appears.
@@ -131,7 +130,7 @@
     Leave the first arrowhead as closed filled. The second follows the first.
     For arrow size type `5`. It is the same value as the text height.
     Leave center marks as none. You do not lay an automatic mark over the centre marks from the earlier lesson.
-    If the two are badly out of step, one dimension stands apart from the rest.
+    If the arrow size and text height are badly out of step, one dimension stands apart from the rest.
 
     Open the Fit tab.
     Look at the scale for dimension features at the lower right. Check that use overall scale of is `1`.
@@ -141,7 +140,7 @@
     Open the Primary Units tab.
     The unit format is decimal. Leave the precision at `0` decimal places.
     This part's dimensions are all whole numbers apart from one reference dimension.
-    Leave a decimal place and 120 comes out as 120.00.
+    Leave decimal places in and 120 comes out as 120.00.
     Leave the measurement scale factor at `1`.
     You drew at one to one in model space, so the measured value has to come out as it is.
     Press OK.
@@ -180,7 +179,7 @@
     The first origin is the left end corner of the base bottom.
     The second origin is the upper endpoint of the chamfer.
     Go up the left vertical edge and part way it turns off at an angle. It is the upper end of that turned line.
-    The chamfer cut 5 off at 45 degrees.
+    The chamfer cut 5 off at forty-five degrees.
     So the left vertical edge only rises to 11, not 16. 16 take away 5.
     Pull the dimension line out to the left and set it there. 16 comes out.
     The two points are diagonally apart, so why is it 16?
@@ -247,9 +246,9 @@
     Type `DDI` and press Enter. DIMDIAMETER, the diameter dimension.
     It asks you to select an arc or a circle. Click the bore circle in the middle.
     It asks where to put the dimension line. Drag it out to an empty spot outside the circle and click. Ø25 has gone in.
-    The Ø symbol in front is not something we typed. The diameter dimension command puts it on itself.
-    There are times you have to type it. When you put a Ø into a note or leader text.
-    Then you type `%%c`. Two percent signs and a c. It turns into Ø on screen.
+    The diameter symbol in front is not something we typed. The diameter dimension command puts it on itself.
+    There are times you have to type it. When you put a diameter symbol into a note or leader text.
+    Then you type `%%c`. Two percent signs and a c. It turns into the diameter symbol on screen.
     The degree symbol is `%%d` and plus-minus is `%%p`.
     All three work the same in the text commands and in a dimension text override.
 
@@ -294,30 +293,30 @@
     Set the dimension line in the empty space outside the boss. That is PCD Ø44.
 
     This time you select two lines and measure the angle.
-    But the 45 degree line was used as a helper in Lesson 4 and erased.
+    But the forty-five degree line was used as a helper in Lesson 4 and erased.
     So you draw it again first. This time it is a centerline you keep on the drawing rather than erase.
     In the layer list at the top of the screen choose `Centerline`. Turn ortho off.
     `L`, Enter. For the first point rest the mouse on the boss circle's rim and catch it with the center snap.
     The next point is the first tapped hole at the upper right. Rest the mouse on that circle's rim, catch it with the center snap and press Enter to finish.
-    It is a line running 22 out from the boss centre at 45 degrees.
+    It is a line running 22 out from the boss centre at forty-five degrees.
     You use the point already placed on the pitch circle as it is, so there is nothing to remember.
     Put the layer back to `Dimension line`.
 
     Type `DAN` and press Enter. DIMANGULAR, the angular dimension.
     It asks you to select an arc, a circle or a line. Click the horizontal centerline through the boss centre.
-    It asks for the second line. Click the 45 degree centerline you just drew.
+    It asks for the second line. Click the forty-five degree centerline you just drew.
     It asks where to put the dimension arc. Drag it into the space opening between the two lines and click.
-    45 degrees has gone in.
+    Forty-five degrees has gone in.
 
     Here you put the angular dimension in by picking two lines.
-    The horizontal centerline was drawn in an earlier lesson, and the 45 degree line you have just drawn on the centerline layer.
+    The horizontal centerline was drawn in an earlier lesson, and the forty-five degree line you have just drawn on the centerline layer.
     You changed layer while drawing that line, so check again that you are back on dimension line.
     You do not put angles on the other three holes.
     With an even array, the first hole's angle and the count fix the rest.
 
 ### Step 13 — The chamfers 2-C5
 
-    A chamfer face is sloped at 45 degrees.
+    A chamfer face is sloped at forty-five degrees.
     Let us look at the aligned dimension here once.
 
     Type `DAL` and press Enter. DIMALIGNED, the aligned dimension.
@@ -449,13 +448,13 @@
 
 ## Line 6 — Checks (Frame 6)
 
-**Time:** 25:36–27:29
+**Time:** 36:30–39:09
 
     Four things to check before you finish. They are the mistakes that come up most often in dimensioning. All four you can see on this drawing right now.
 
     (1 card — entering without changing the layer) This is entering dimensions without switching to the dimension line layer. A dimension that goes on the visible line layer comes out green. You cannot tell it from the shape. You also cannot do the trick of turning the visible line layer off and on to check. Checking is simple. Click one dimension and look at the layer indicator at the top of the screen. There is a way to fix it, too. Click one dimension and then press the right mouse button. Choose Select Similar and everything of the same kind is caught at once. In that state choose dimension line in the layer list at the top and they all move across.
 
-    (2 card — text height not matching the drawing) On screen it looks fine because you are zoomed in. But print it on A3 and the numbers are tiny. The other way round, the dimension text can cover the shape. The way to check is the plot preview. You only know by looking on paper terms, not on screen. There are two causes. The text height on the dimension style's Text tab. And the overall scale on the Fit tab. If the text height is not what you expect, check the overall scale and the text style's fixed height too. That value multiplies the text height.
+    (2 card — text height not matching the drawing) On screen it looks fine because you are zoomed in. But print it on A3 and the numbers are tiny. The other way round, the dimension text can cover the shape. The way to check is the plot preview. You only know by looking on paper terms, not on screen. There are two causes. The text height on the dimension style's Text tab. And the overall scale on the Fit tab. If the text height is not what you expect, check the overall scale and the text style's fixed height too. The overall scale multiplies the text height.
 
     (3 card — the same dimension twice) Duplicate dimensions. Writing both the width of 10 and R5 on a slot. Writing R10 on each of the left and right fillets. Writing the same 120 twice, in the front view and the top view. Why is it a problem? When the drawing is revised and only one side is corrected, the two values say different things. Whoever makes it does not know which to believe. The time spent coming to ask is a straight loss. One value is written once.
 
@@ -463,15 +462,15 @@
 
 ## Line 7 — Wrapping up (Frame 7)
 
-**Time:** 27:29–29:19
+**Time:** 39:09–41:58
 
-    (1 left) Here is what to check on screen before you hand the drawing over. See that the dimension style EDU-A3 is set current, with text height 5, arrow size 5 and 0 decimal places. Count that the overall size 120 and 90, the base height 16, the boss centre 60 and 62, the slots 29 and 50 and 12 and 8, and the web foot 80 are all in. Look also at the bore Ø25 H7, the boss Ø56, and the fillets 2-R10 and 2-SLOT R5. Then check the pitch circle PCD Ø44 and 45 degrees, the thicknesses 12 and 20, the reference dimension (95.7) and the fillet centre height 26. The notations that a number alone cannot carry are the two leaders, 2-C5 and 4-M5 depth 10. Last, check in the plot dialog that it is A3 at one to one, export the PDF, and save under a new name.
+    (1 left) Here is what to check on screen before you hand the drawing over. See that the dimension style EDU-A3 is set current, with text height 5, arrow size 5 and 0 decimal places. Check that the overall size 120 and 90 and the base height 16 are in. Check the boss centre 60 and 62. Then check the slots 29 and 50 and 12 and 8, and the web foot 80. Look also at the bore Ø25 H7, the boss Ø56, and the fillets 2-R10 and 2-SLOT R5. Then check the pitch circle PCD Ø44 and forty-five degrees, and the thicknesses 12 and 20. Check the reference dimension (95.7) and the fillet centre height 26. The notations that a number alone cannot carry are the two leaders, 2-C5 and 4-M5 depth 10. Last, check in the plot dialog that it is A3 at one to one, export the PDF, and save under a new name.
 
     (2 right) Now let us see what you can do with this drawing. First, you can inspect it yourself. Turn the layers off and on one at a time. It shows up whether the dimensions really went on the dimension line layer. Whether the hidden lines are on the hidden line layer shows at a glance too. Second, the plot preview is the final verdict. The habit of checking on paper terms has to stay with you. Third, the values used today are the defaults for when the task gives no instruction. An instruction sometimes sets its own text height or layer names. The same goes for colours and scales. When it does, that instruction always wins. Fourth, the order of judgement is the same whatever part you are given. You read what this part is for. You settle the reference faces. You measure dimensions from that reference. It is never memorising the shape; it is reading the reason, all the way through. Fifth, once you are here you use drawings on the floor. You draw a jig yourself to propose it and make a job easier. You see in advance on a drawing where a machine will go and how people will move around it. When a spare part is urgent, the language of the conversation with the machine shop is the numbers you put up today. A drawing is not a picture; it is an instruction document.
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 29:19–31:16
+**Time:** 41:58–44:47
 
     Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
@@ -512,7 +511,7 @@
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 31:16–31:36
+**Time:** 44:47–45:08
 
     (1) That is today's portion. Well done.
 

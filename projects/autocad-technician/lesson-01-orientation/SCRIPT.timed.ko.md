@@ -1,12 +1,13 @@
 <!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
      python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 6:11 · 문단 46개 -->
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 6:11 · 합성 단위 46개 -->
 
 # SCRIPT — AutoCAD Technician 1차시 · 오리엔테이션
 
 **Checkpoint:** 없음 (도면 작업 없음)<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** 처음 만난 수강자에게 과정을 소개하듯 차분하고 또렷하게. 서두르지 않는다.
 
 > 전체 길이 6분 20초 — 실제 TTS와 화면 전환 시간을 반영한 값입니다.

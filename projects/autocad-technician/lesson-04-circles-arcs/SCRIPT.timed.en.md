@@ -1,17 +1,17 @@
-<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.md 를 고친 뒤 다시 뽑아라.
-     python scripts/part/timed_script.py
-     `[m:ss–m:ss]` 는 합친 음성을 다시 재서 얻은 실측 시각이다.
-     전체 37:20 · 문단 68개 -->
+<!-- 생성물이다. 손으로 고치지 말고 원본 SCRIPT.en.md 를 고친 뒤 다시 뽑아라.
+     python scripts/part/timed_script.py --lang en --root <영문 사본 묶음>
+     일반 구간은 문단, 녹화 구간은 단계 전체의 실측 시각이다.
+     음성 연결 시간축 기준이다. 화면 유지 시간을 포함한 **Time:** 과는 다르다.
+     전체 37:45 · 합성 단위 68개 -->
 
 # SCRIPT — AutoCAD Technician Lesson 4 · Circles, arcs and offset (English edition)
 
 **Part:** `idler pulley bracket used on a car engine` (internal drawing number EDU-IB-02)<br>
 **Checkpoint:** `L03_PROFILE → L04_FEATURES`<br>
-**Voice:** Windows SAPI · Simon Clone (Qwen3-TTS) · Rate 0 원본 · 음높이 보존 1.00배속<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Say the value first, then where it came from. Do not hurry a question toward its answer; leave a beat and carry on. Through the hands-on section (Line 5), keep to the speed a hand moves.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 38 min 02 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
@@ -24,53 +24,53 @@
 
 ## Line 2 — Filling in inside the outline (Frame 2)
 
-**Time:** 0:11–2:25
+**Time:** 0:11–2:24
 
     `[0:11–0:34]` Last time you drew the outer profile of the idler pulley bracket. It is a part that goes on a car engine. You finished the base, the web and the boss circle. Today you put four shapes inside it. Every one of them starts from a circle. You draw a circle, push it, fit one in, and rotate a copy round.
 
     `[0:34–1:01]` (1 card — bore Ø25) The first is the bore in the middle. It goes right through, 25 across, and its centre is where the boss centre is: 60 from the left end, 62 from the bottom. This hole is the reference of the part, and the shaft sits in here and turns. If this hole is off, the part is unusable however right the rest of it is. That is why you draw it first today.
 
-    `[1:02–1:30]` (2 card — tapped 4-M5 in a polar array) The second is the four screw seats. They sit around the bore. You cut M5 threads 10 deep. The four centres lie on a circle 44 across. The first hole is at 45 degrees. The rest step round every 90. You do not draw the four one at a time. You draw one and rotate it round with a polar array. That way the angle is set by arithmetic, not by hand.
+    `[1:02–1:29]` (2 card — tapped 4-M5 in a polar array) The second is the four screw seats. They sit around the bore. You cut M5 threads 10 deep. The four centres lie on a circle 44 across. The first hole is at forty-five degrees. The rest step round every 90. You do not draw the four one at a time. You draw one and rotate it round with a polar array. That way the angle is set by arithmetic, not by hand.
 
-    `[1:30–1:54]` (3 card — slots 2-R5) The third is the two long holes at the bottom. They are 10 wide and each end is a half-circle of radius 5. One circle command will not give you that. You draw the two end circles, join them with tangent lines, and trim the inside away to get the pill shape. That is where you use the trim command today.
+    `[1:29–1:53]` (3 card — slots 2-R5) The third is the two long holes at the bottom. They are 10 wide and each end is a half-circle of radius 5. One circle command will not give you that. You draw the two end circles, join them with tangent lines, and trim the inside away to get the pill shape. That is where you use the trim command today.
 
-    `[1:54–2:21]` (4 card — fillets 2-R10) The fourth is the inside corner. It is where the web turns into the base. You round it at radius 10. You do not draw a separate circle here. You only pick two lines. The command fits the arc between them itself. It trims what is left over as well. This is where the load piles up most. That is why the R is as large as 10. It is the story from Lesson 2.
+    `[1:54–2:20]` (4 card — fillets 2-R10) The fourth is the inside corner. It is where the web turns into the base. You round it at radius 10. You do not draw a separate circle here. You only pick two lines. The command fits the arc between them itself. It trims what is left over as well. This is where the load piles up most. That is why the R is as large as 10. It is the story from Lesson 2.
 
 ## Line 3 — The four commands you use today (Frame 3)
 
-**Time:** 2:25–5:47
+**Time:** 2:24–5:47
 
-    `[2:24–2:33]` Before you draw, here are the four commands you use today. Know what each one is for and the order of work follows easily.
+    `[2:23–2:32]` Before you draw, here are the four commands you use today. Know what each one is for and the order of work follows easily.
 
-    `[2:33–3:23]` (1 card — CIRCLE) The circle command. Its shortcut is `C`. There are five ways to draw a circle, and today you use the first two. First, pick the centre and give the radius. That is the default. Second, pick the centre and, where it asks for the radius, press `D` and give the diameter instead. The other three are two-point, three-point, and tangent-tangent-radius; knowing their names is enough. Which one you use follows the drawing's notation exactly. A value written with Ø is a diameter, so that is the second method. A value written with R is a radius, so that is the first. Follow the notation and you make fewer mistakes.
+    `[2:33–3:23]` (1 card — CIRCLE) The circle command. Its shortcut is `C`. There are five ways to draw a circle, and today you use the first two. First, pick the centre and give the radius. That is the default. Second, pick the centre and, where it asks for the radius, press `D` and give the diameter instead. The other three are two-point, three-point, and tangent-tangent-radius; knowing their names is enough. Which one you use follows the drawing's notation exactly. A value written with the diameter symbol is a diameter, so that is the second method. A value written with R is a radius, so that is the first. Follow the notation and you make fewer mistakes.
 
     `[3:23–4:23]` (2 card — OFFSET) Offset. Its shortcut is `O`. It copies the object you pick, parallel to itself. You give the distance yourself. Offset a straight line and you get a parallel line. Offset a circle and you get a concentric circle. You make the pitch circle with this today. You do not pick the centre again. So the centre cannot go out of line. It is a command you reach for often on the floor. You use it when you look at an equipment layout. You set wall thicknesses; you set walkway clearances. You push out from one datum line. There are three options. Through takes a point to pass through instead of a distance. Erase moves it, deleting the original. Layer decides where the copy goes. You choose between the source layer and the current layer. The default is source. Leave it and the copy follows the original's layer.
 
-    `[4:23–4:57]` (3 card — FILLET) Fillet. Its shortcut is `F`. Pick two lines and it fits an arc between them. The radius is a value you set beforehand. It trims what runs past the corner. The order matters. Set the radius first, then pick the lines. That is because the default radius is 0. Run it without setting it and no arc appears — you just get a square corner. You put the radius in with the `R` option. There is a polyline option too. It rounds every corner of a polyline at once.
+    `[4:24–4:57]` (3 card — FILLET) Fillet. Its shortcut is `F`. Pick two lines and it fits an arc between them. The radius is a value you set beforehand. It trims what runs past the corner. The order matters. Set the radius first, then pick the lines. That is because the default radius is 0. Run it without setting it and no arc appears — you just get a square corner. You put the radius in with the `R` option. There is a polyline option too. It rounds every corner of a polyline at once.
 
     `[4:58–5:41]` (4 card — ARRAYPOLAR) The polar array. This one has no short form of its own. You type the whole name. You pick the object. You pick a centre point. You say how many, at what angular spacing. It copies them just so. There are four options: number of items, angle between them, angle to fill, and whether it is associative. The angle between is the gap between neighbouring items. The angle to fill is the angle the whole thing turns through. You use it with associative off. Leave it on and the four are bound into one body. You cannot pick one of them on its own. Sooner or later you will need to edit one individually.
 
 ## Line 4 — On the drawing (Frame 4)
 
-**Time:** 5:47–10:51
+**Time:** 5:47–10:54
 
     `[5:44–5:54]` You know the commands. We will point at the drawing on the right and see what goes where. There are six, and the order of pointing is the order of work.
 
-    `[5:54–6:52]` (1 row — bore Ø25 H7) The bore in the middle. Its centre is 60, 62. The same centre as the boss. There is one thing to watch here. The drawing says Ø25. That is a diameter. But what the circle command asks for by default is the radius. Put 25 in as it stands and you get a hole 50 across. Exactly twice. So you press `D` to switch to diameter entry. Then you put 25 in. H7 is a fit grade. It has no effect on the shape. You draw it at 25. The grade goes on as text when you dimension. The reason that grade matters is out on the floor. When a machine stops you have to find a spare in a hurry. You look at the assembly drawing and find that part drawing. You hand that drawing to the machine shop. Leave the grade line off at that moment and the shaft does not go in.
+    `[5:54–6:55]` (1 row — bore Ø25 H7) The bore in the middle. Its centre is 60, 62. The same centre as the boss. There is one thing to watch here. The drawing marks 25 with the diameter symbol. That is a diameter. But what the circle command asks for by default is the radius. Put 25 in as it stands and you get a hole 50 across. Exactly twice. So you press `D` to switch to diameter entry. Then you put 25 in. H7 is a fit grade. It has no effect on the shape. You draw it at 25. The grade goes on as text when you dimension. The reason that grade matters is out on the floor. When a machine stops you have to find a spare in a hurry. You look at the assembly drawing and find that part drawing. You hand that drawing to the machine shop. Leave the grade line off at that moment and the shaft does not go in.
 
-    `[6:52–7:12]` (2 row — boss Ø56) You already drew the boss circle last time. You drew the two web lines tangent to this circle. Without this circle the outline does not hold together. Today you do not draw this circle again. You use it as a reference instead. You push the next row's pitch circle out of it.
+    `[6:55–7:15]` (2 row — boss Ø56) You already drew the boss circle last time. You drew the two web lines tangent to this circle. Without this circle the outline does not hold together. Today you do not draw this circle again. You use it as a reference instead. You push the next row's pitch circle out of it.
 
-    `[7:12–7:59]` (3 row — pitch circle PCD Ø44) This is the circle the four tapped-hole centres sit on. It is not a hole itself. It is a helper circle that fixes where the holes go. So it is not a visible line. You draw it on the centerline layer. On screen it should come out as a red chain line. The way to make it is offset. You push the boss Ø56 inward. The distance is 56 take away 44, divided by 2, which is 6. Half the difference in diameter is the difference in radius. That is because offset pushes the radius. Do it this way and you never retype the centre coordinates. The boss and the pitch circle cannot end up on different centres.
+    `[7:15–8:00]` (3 row — pitch circle PCD Ø44) This is the circle the four tapped-hole centres sit on. It is not a hole itself. It is a helper circle that fixes where the holes go. So it is not a visible line. You draw it on the centerline layer. On screen it should come out as a red chain line. The way to make it is offset. You push the boss circle, diameter 56, inward. The distance is 56 take away 44, divided by 2, which is 6. Half the difference in diameter is the difference in radius. That is because offset pushes the radius. Do it this way and you never retype the centre coordinates. The boss and the pitch circle cannot end up on different centres.
 
-    `[7:59–8:40]` (4 row — tapped 4-M5) The four screw seats. The first hole is at 45 degrees and the rest step round every 90. The order of drawing is this. From the boss centre, draw one helper line 22 long in the 45 degree direction. 22 is half of the pitch circle diameter of 44, that is, the radius. Then the end of that helper line lands exactly on the pitch circle at 45 degrees. You draw one hole there, make four with a polar array, and erase the helper line. You do not set the angle by eye. You fix the direction with polar tracking and type only the distance.
+    `[8:00–8:43]` (4 row — tapped 4-M5) The four screw seats. The first hole is at forty-five degrees and the rest step round every 90. The order of drawing is this. From the boss centre, draw one helper line 22 long in the forty-five degree direction. 22 is half of the pitch circle diameter of 44, that is, the radius. Then the end of that helper line lands exactly on the pitch circle at forty-five degrees. You draw one hole there, make four with a polar array, and erase the helper line. You do not set the angle by eye. You fix the direction with polar tracking and type only the distance.
 
-    `[8:41–9:56]` (5 row — slots 2-R5) The long holes at the bottom. The left slot's centre is at 35, 8. Halve the 12 between the two end circle centres and you get 6. Step 6 either side of the centre at 35 and you get 29 and 41. 29 is written on the drawing as it stands: 29 from the left edge to the first end circle. The two values agree. The order of drawing is this. You draw the two end circles at radius 5. You draw tangent lines above and below. You trim away the half-circles that point inward. Once trimmed, a circle becomes an arc. That is why the word arc is in today's title. You do not draw the right slot again. You mirror it. The two slot centres are 35 and 85. Halfway between them is 60. 60 is the horizontal position of the boss centre. That is what it means for the part to be symmetrical about this line. Slots come up often on the floor too — when you propose a jig to make a job easier. Put the bolt seats in slots and you can shift the position a little at a time.
+    `[8:44–9:58]` (5 row — slots 2-R5) The long holes at the bottom. The left slot's centre is at 35, 8. Halve the 12 between the two end circle centres and you get 6. Step 6 either side of the centre at 35 and you get 29 and 41. 29 is written on the drawing as it stands: 29 from the left edge to the first end circle. The two values agree. The order of drawing is this. You draw the two end circles at radius 5. You draw tangent lines above and below. You trim away the half-circles that point inward. Once trimmed, a circle becomes an arc. That is why the word arc is in today's title. You do not draw the right slot again. You mirror it. The two slot centres are 35 and 85. Halfway between them is 60. 60 is the horizontal position of the boss centre. That is what it means for the part to be symmetrical about this line. Slots come up often on the floor too — when you propose a jig to make a job easier. Put the bolt seats in slots and you can shift the position a little at a time.
 
-    `[9:56–10:44]` (6 row — fillets 2-R10) Last is the inside corner where the web meets the base. Between the web tangent and the top face of the base. The top face of the base is a horizontal plane at height 16. You round it here at radius 10. The drawing gives a centre height of 26. That is for checking. The top face of the base is at 16. The fillet is tangent to that face. So the centre is 16 plus 10, which is 26. There is one reference dimension in brackets, (95.7). It is a value computed from the others, so you do not type it. Once the fillet command has bitten on the two lines, the centre lands there by itself.
+    `[9:59–10:47]` (6 row — fillets 2-R10) Last is the inside corner where the web meets the base. Between the web tangent and the top face of the base. The top face of the base is a horizontal plane at height 16. You round it here at radius 10. The drawing gives a centre height of 26. That is for checking. The top face of the base is at 16. The fillet is tangent to that face. So the centre is 16 plus 10, which is 26. There is one reference dimension in brackets, (95.7). It is a value computed from the others, so you do not type it. Once the fillet command has bitten on the two lines, the centre lands there by itself.
 
 ## Line 5 — Circles, arcs and offset · DEMO-01 screen recording (Frame 5)
 
-**Time:** 10:51–30:04
+**Time:** 10:54–30:27
 
 > This section is a screen recording. Work through the 16 steps below in order and without skipping, speaking as you go.
 > A command written in capitals is the command; what is inside backticks is what you actually type.
@@ -78,74 +78,79 @@
 > A snap is not eyeballing — it takes a point the drawing already holds, so it is more accurate than a typed coordinate. Let a circle centre be out by one millimetre and everything after it is out.
 
 ### Step 1 — Open the previous file
+> <!-- timed-step --> `[10:50–11:46]` entire step; not individual paragraph times
 
-    `[10:47–11:41]` You do not make a new one. Type `OPEN` and press Enter.
-    `[11:41–12:34]` Choose the file you saved last lesson. (on screen · `EDU-IB-02_L03_PROFILE.dwg`)
-    `[12:34–13:52]` Press Open.
-    `[13:53–14:41]` The base and its chamfers should be on screen. The two web lines and the boss circle should be there too.
-    `[14:42–15:27]` That is today's starting state.
-    `[15:28–16:40]` `Z`, Enter, `A`, Enter to fit the view.
-    `[16:43–17:05]` Look at object snap in the status bar. If it is off, press F3.
-    `[17:06–19:15]` Look at ortho as well. If it is off, press F8. Step 8's horizontal copy and step 9's horizontal tangents depend on it.
-    `[19:16–20:25]` The six you turned on in Lesson 2 are endpoint, midpoint, center, quadrant, intersection and tangent.
-    `[20:26–21:08]` Today you use endpoint, center and quadrant.
+    You do not make a new one. Type `OPEN` and press Enter.
+    Choose the file you saved last lesson. (on screen: `EDU-IB-02_L03_PROFILE.dwg`)
+    Press Open.
+    The base and its chamfers should be on screen. The two web lines and the boss circle should be there too.
+    That is today's starting state.
+    `Z`, Enter, `A`, Enter to fit the view.
+    Look at object snap in the status bar. If it is off, press F3.
+    Look at ortho as well. If it is off, press F8. Step 8's horizontal copy and step 9's horizontal tangents depend on it.
+    The six you turned on in Lesson 2 are endpoint, midpoint, center, quadrant, intersection and tangent.
+    Today you use endpoint, center and quadrant.
 
 ### Step 2 — The bore Ø25
+> <!-- timed-step --> `[11:46–12:40]` entire step; not individual paragraph times
 
-    `[21:09–22:44]` Look at the layer list at the top of the screen. Check that it says visible line.
-    `[22:44–24:07]` If not, click it and change it to visible line.
-    `[24:07–25:04]` You can do it from the command line too. Type `CLAYER` and press Enter. Type `Visible line` and press Enter.
+    Look at the layer list at the top of the screen. Check that it says visible line.
+    If not, click it and change it to visible line.
+    You can do it from the command line too. Type `CLAYER` and press Enter. Type `Visible line` and press Enter.
 
-    `[25:04–26:44]` Type `C` and press Enter. That is the circle command.
-    `[26:47–29:24]` It asks for the centre point. You do not type coordinates here.
-    `[29:25–29:52]` Rest the cursor on the rim of the boss circle Ø56, and click when the center marker appears. The bore shares the boss's centre.
-    `[29:55–30:05]` It asks for the radius. Do not put a number straight in here. Type `D` and press Enter.
-    `[30:06–30:37]` Now it asks the diameter. Type `25` and press Enter.
-    `[30:38–31:10]` A small circle has appeared inside the boss circle. That is the bore.
+    Type `C` and press Enter. That is the circle command.
+    It asks for the centre point. You do not type coordinates here.
+    Rest the cursor on the rim of the boss circle, diameter 56, and click when the center marker appears. The bore shares the boss's centre.
+    It asks for the radius. Do not put a number straight in here. Type `D` and press Enter.
+    Now it asks the diameter. Type `25` and press Enter.
+    A small circle has appeared inside the boss circle. That is the bore.
 
 ### Step 3 — The pitch circle Ø44, by offset
+> <!-- timed-step --> `[12:40–13:57]` entire step; not individual paragraph times
 
-    `[31:11–31:40]` First change the layer. In the layer list choose the centerline.
+    First change the layer. In the layer list choose the centerline.
 
-    `[31:40–32:07]` Type `O` and press Enter. That is offset.
-    `[32:10–32:35]` It asks the distance. Before that you fix one option.
-    `[32:35–33:23]` Type `L` and press Enter. That is the layer option.
-    `[33:26–33:36]` It asks whether to use the source or the current one. Type `C` and press Enter.
-    `[33:37–33:44]` That means putting it on the current layer, the centerline.
-    `[33:44–33:51]` Skip this and the copy follows the original onto the visible line layer.
+    Type `O` and press Enter. That is offset.
+    It asks the distance. Before that you fix one option.
+    Type `L` and press Enter. That is the layer option.
+    It asks whether to use the source or the current one. Type `C` and press Enter.
+    That means putting it on the current layer, the centerline.
+    Skip this and the copy follows the original onto the visible line layer.
 
-    `[33:51–33:57]` It asks the distance again. Type `6` and press Enter. That is 56 take away 44, divided by 2.
-    `[33:58–34:05]` It asks which object to offset. Click the line of the boss Ø56 circle.
-    `[34:06–34:16]` It asks which side to put it on. Click anywhere inside the circle.
-    `[34:17–34:25]` Press Enter to end the command.
+    It asks the distance again. Type `6` and press Enter. That is 56 take away 44, divided by 2.
+    It asks which object to offset. Click the line of the boss circle, diameter 56.
+    It asks which side to put it on. Click anywhere inside the circle.
+    Press Enter to end the command.
 
-    `[34:25–34:31]` If the pitch circle reads as a continuous line, the linetype scale is out.
-    `[34:32–34:41]` Click that circle and press Ctrl+1 to open the Properties window.
-    `[34:41–34:46]` In the linetype scale box type `0.5` and press Enter.
-    `[34:47–34:56]` The dash spacing opens out and it reads as a chain line.
+    If the pitch circle reads as a continuous line, the linetype scale is out.
+    Click that circle and press Ctrl+1 to open the Properties window.
+    In the linetype scale box type `0.5` and press Enter.
+    The dash spacing opens out and it reads as a chain line.
 
 ### Step 4 — The 45 degree helper line
+> <!-- timed-step --> `[13:58–15:00]` entire step; not individual paragraph times
 
-    `[34:57–35:05]` Type `DSETTINGS` and press Enter.
-    `[35:06–35:14]` Open the polar tracking tab of the drafting settings.
-    `[35:15–35:24]` Select polar tracking on and set the increment angle to 45 degrees.
-    `[35:24–35:33]` Leave polar angle measurement on absolute. Press OK.
-    `[35:33–35:43]` F10 should be on and F8 ortho should be off.
-    `[35:43–35:51]` The current layer is the centerline.
-    `[35:51–36:04]` Type `L` and press Enter.
-    `[36:04–36:14]` For the first point, click the center snap of the boss circle.
-    `[36:15–36:22]` Move the cursor up and to the right and watch for the 45 degree tracking line.
-    `[36:23–36:32]` When the 45 degree guide shows, type `22` and press Enter.
-    `[36:33–36:42]` Press Enter once more to end the line command.
-    `[36:42–36:50]` The end lands on the pitch circle. That is the first tap centre.
+    Type `DSETTINGS` and press Enter.
+    Open the polar tracking tab of the drafting settings.
+    Select polar tracking on and set the increment angle to forty-five degrees.
+    Leave polar angle measurement on absolute. Press OK.
+    F10 should be on and F8 ortho should be off.
+    The current layer is the centerline.
+    Type `L` and press Enter.
+    For the first point, click the center snap of the boss circle.
+    Move the cursor up and to the right and watch for the forty-five degree tracking line.
+    When the forty-five degree guide shows, type `22` and press Enter.
+    Press Enter once more to end the line command.
+    The end lands on the pitch circle. That is the first tap centre.
 
 ### Step 5 — The first tapped hole
+> <!-- timed-step --> `[15:00–15:46]` entire step; not individual paragraph times
 
-    `[36:50–37:00]` In the layer list go back to the visible line.
+    In the layer list go back to the visible line.
 
-    `[37:01–37:08]` Type `C` and press Enter.
-    `[37:11–37:13]` It asks for the centre point. You do not type coordinates here.
-    `[37:14–37:18]` Take the mouse to the outer end of the helper line you just drew.
+    Type `C` and press Enter.
+    It asks for the centre point. You do not type coordinates here.
+    Take the mouse to the outer end of the helper line you just drew.
     Click when the square endpoint marker appears.
     It asks for the radius. Type `D` and press Enter, then `5` and press Enter.
 
@@ -154,6 +159,7 @@
     In this exercise you draw it as one circle. The representation rules are covered separately later.
 
 ### Step 6 — Four of them, by polar array
+> <!-- timed-step --> `[15:47–16:57]` entire step; not individual paragraph times
 
     Type `ARRAYPOLAR` and press Enter.
     Click only the first tap circle, the one 5 across, and press Enter.
@@ -163,20 +169,22 @@
     90 is the gap between neighbouring holes; the value you put in here is one full turn, 360.
     On the command line, associative option `AS`, Enter, `N`, Enter.
     That makes the four circles independent objects.
-    `X`, Enter to end the array command. Check that items is 4, fill angle 360 degrees, and the angle between neighbours 90 degrees.
+    `X`, Enter to end the array command. Check that items is 4, fill angle three hundred and sixty degrees, and the angle between neighbours ninety degrees.
     Check that there is one circle in each of the four quadrants around the boss centre.
-    They start at 45 degrees, then 135, 225 and 315.
+    They start at forty-five degrees, then 135, 225 and 315.
     If all four circles are bunched to one side, check the fill angle again.
 
 ### Step 7 — Erase the helper line
+> <!-- timed-step --> `[17:00–17:24]` entire step; not individual paragraph times
 
     Type `E` and press Enter. That is erase.
-    Click the 45 degree helper line and press Enter.
+    Click the forty-five degree helper line and press Enter.
     A helper line that has done its job gets erased there and then.
     Leave it and later you cannot tell them apart. You lose track of what is shape and what is helper.
     Trim or fillet then bites on the wrong line.
 
 ### Step 8 — The two slot end circles
+> <!-- timed-step --> `[17:24–19:34]` entire step; not individual paragraph times
 
     Press `Esc` to end the command and clear the selection.
     Change the layer to `Dimension line`.
@@ -211,6 +219,7 @@
     The current layer is the visible line. Two circles are left.
 
 ### Step 9 — The two tangent lines
+> <!-- timed-step --> `[19:34–20:44]` entire step; not individual paragraph times
 
     The two circles have the same radius. Their centres are at the same height.
     So the tangent lines are horizontal.
@@ -225,6 +234,7 @@
     If one floats clear or cuts in, the trim in the next step will not take.
 
 ### Step 10 — Trim the inner half-circles
+> <!-- timed-step --> `[20:44–21:27]` entire step; not individual paragraph times
 
     `TRIMEXTENDMODE`, Enter, `0`, Enter.
     That puts AutoCAD 2024's trim into the standard mode.
@@ -239,6 +249,7 @@
     Check step 9's top and bottom quadrant snaps again.
 
 ### Step 11 — The right slot by mirroring
+> <!-- timed-step --> `[21:27–23:02]` entire step; not individual paragraph times
 
     Type `MI` and press Enter. That is mirror.
     It asks for objects. Pick all four pieces that make the slot.
@@ -262,9 +273,10 @@
     25 to the left of 60 is 35. 25 to the right is 85.
 
 ### Step 12 — Trim the top face between the web lines
+> <!-- timed-step --> `[23:03–24:26]` entire step; not individual paragraph times
 
     There is something to do before you fillet.
-    The top face of the base runs in one line from 5,16 to 115,16.
+    The top face of the base runs in one line from 5, 16 to 115, 16.
     It is one of the six edges you drew in one go as a polyline in Lesson 3.
     The web climbs over it.
 
@@ -287,6 +299,7 @@
     Its two ends are exactly where the fillets go.
 
 ### Step 13 — The right fillet R10
+> <!-- timed-step --> `[24:26–25:23]` entire step; not individual paragraph times
 
     `TRIMMODE`, Enter, `1`, Enter, so the lines you pick are cut at the ends of the arc.
 
@@ -304,6 +317,7 @@
     The arc is fitted. What ran past the corner has been trimmed.
 
 ### Step 14 — The left fillet R10
+> <!-- timed-step --> `[25:23–27:03]` entire step; not individual paragraph times
 
     Type `F` and press Enter. The radius is remembered as 10.
     `R`, Enter, `10`, Enter to set the same radius.
@@ -334,6 +348,7 @@
     32 and 88 are the left and right quadrants; 34 is the bottom quadrant.
 
 ### Step 15 — Check the numbers
+> <!-- timed-step --> `[27:06–29:46]` entire step; not individual paragraph times
 
     Looking right and being right are different things. You confirm it with numbers.
 
@@ -364,16 +379,17 @@
     `DIMCEN`, Enter, `3`, Enter. That makes a cross mark 3 from the centre to each end.
     This 3 is the size of the mark, not a part dimension.
     `DIMCENTER`, Enter. Click the rim of one tap circle and press Esc to tidy the command up.
-    Run the same command again for each of the other three tap circles, the two fillet arcs, and the four end arcs of the two slots.
+    Run the same command again for each of the other three tap circles. Do the same for the two fillet arcs and the four end arcs of the two slots.
     You start DIMCENTER afresh for each circle or arc and select only that rim.
     Check that cross marks have appeared at ten centre points.
     These marks are non-associative objects, so if you move or resize the shape you have to check them with it.
     Clear the selection with Esc and put the current layer back to the visible line.
 
 ### Step 16 — Save under a new name
+> <!-- timed-step --> `[29:46–30:15]` entire step; not individual paragraph times
 
     Type `SAVEAS` and press Enter.
-    Change the file name to this lesson's name. (on screen · `EDU-IB-02_L04_FEATURES`) Leave the file type as dwg.
+    Change the file name to this lesson's name. (on screen: `EDU-IB-02_L04_FEATURES`) Leave the file type as dwg.
     Press Save.
 
     You do not overwrite the previous file; you leave it under a new name.
@@ -382,85 +398,85 @@
 
 ## Line 6 — Four mistakes that come up often (Frame 6)
 
-**Time:** 30:04–32:21
+**Time:** 30:27–32:43
 
-    Before we finish, here are the mistakes that come up often. There are four. All four look perfectly fine on screen. They only show up when you measure.
+    `[30:18–30:28]` Before we finish, here are the mistakes that come up often. There are four. All four look perfectly fine on screen. They only show up when you measure.
 
-    (1 card — radius and diameter) First, putting a diameter where the radius goes. The circle command asks for a radius by default. But the drawing gives Ø25, a diameter. Put 25 in as it stands and you get a diameter of 50. Exactly twice. And on screen it just looks like a slightly bigger circle. It is hard to notice. Make yourself one habit. If it carries Ø, press `D` first. If it carries R, put it straight in.
+    `[30:28–30:59]` (1 card — radius and diameter) First, putting a diameter where the radius goes. The circle command asks for a radius by default. But the drawing gives diameter 25. Put 25 in as it stands and you get a diameter of 50. Exactly twice. And on screen it just looks like a slightly bigger circle. It is hard to notice. Make yourself one habit. If it carries the diameter symbol, press `D` first. If it carries R, put it straight in.
 
-    (2 card — array angle) Second, giving the polar array an angle of 45. The drawing says 45 degrees, so that is the value you reach for. But 45 degrees is where the first hole sits. It is not the gap between holes. The gap is 360 divided by the count of 4, which is 90 degrees. Put 45 in and the four holes crowd into half a turn. They bunch to one side. Then the cover tilts that way. The whole reason for spacing four evenly is gone.
+    `[30:59–31:33]` (2 card — array angle) Second, giving the polar array an angle of 45. The drawing says forty-five degrees, so that is the value you reach for. But forty-five degrees is where the first hole sits. It is not the gap between holes. The gap is 360 divided by the count of 4, which is ninety degrees. Put 45 in and the four holes crowd into half a turn. They bunch to one side. Then the cover tilts that way. The whole reason for spacing four evenly is gone.
 
-    (3 card — fillet radius) Third, running fillet without setting the radius. The default radius is 0. Pick two lines while it is 0 and no arc goes in. The two lines simply meet at a square corner. The command finishes normally. There is no error either. So it is easy to walk past. When you start the command, the first line on the command line shows the current radius. Get into the habit of reading that line before you pick.
+    `[31:33–32:02]` (3 card — fillet radius) Third, running fillet without setting the radius. The default radius is 0. Pick two lines while it is 0 and no arc goes in. The two lines simply meet at a square corner. The command finishes normally. There is no error either. So it is easy to walk past. When you start the command, the first line on the command line shows the current radius. Get into the habit of reading that line before you pick.
 
-    (4 card — the lines inside a slot) Fourth, not trimming the lines inside a slot. You draw the two end circles and the two tangent lines. Then you forget the trim. That leaves two curves inside the pill. They are lines the real shape does not have. Lines like that catch you later. When you hatch a section, the boundary splits. When you dimension, the snap lands on the wrong point. Zoom in, check that no line is left inside, and move on.
+    `[32:02–32:30]` (4 card — the lines inside a slot) Fourth, not trimming the lines inside a slot. You draw the two end circles and the two tangent lines. Then you forget the trim. That leaves two curves inside the pill. They are lines the real shape does not have. Lines like that catch you later. When you hatch a section, the boundary splits. When you dimension, the snap lands on the wrong point. Zoom in, check that no line is left inside, and move on.
 
 ## Line 7 — This lesson and the next (Frame 7)
 
-**Time:** 32:21–33:38
+**Time:** 32:43–34:03
 
-    (1 left) That is the extent of the front view the LG Innotek internal exam asks for. The commands you used today are not for the exam alone. You use them just as they are when PM takes a machine down and you draw a jig, and when you check a spare part drawing. Misread one dimension and have it machined again, and that is rework loss.
+    `[32:32–33:00]` (1 left) That is the extent of the front view the LG Innotek internal exam asks for. The commands you used today are not for the exam alone. You use them just as they are when PM takes a machine down and you draw a jig. You also use them when you check a spare part drawing. Misread one dimension and have it machined again, and that is rework loss.
 
-    (2 right) Next time you make the whole drawing out of that one front view. You project it in third angle. The top view goes above, the right side view to the right. There are two things at the heart of it. Which point of the front view becomes which point of the top view. And how you pull construction lines across and use them. The bore and the tapped holes you drew today are hidden when seen from the side. So they come out as hidden lines. That is where you first use the hidden line layer you made in Lesson 2. The boss stands 8 forward. The thickness there is 20. That value too becomes a drawn thing for the first time, in the top view. When you finish you save it as the next state.
+    `[33:00–33:48]` (2 right) Next time you make the whole drawing out of that one front view. You project it in third angle. The top view goes above, the right side view to the right. There are two things at the heart of it. Which point of the front view becomes which point of the top view. And how you pull construction lines across and use them. The bore and the tapped holes you drew today are hidden when seen from the side. So they come out as hidden lines. That is where you first use the hidden line layer you made in Lesson 2. The boss stands 8 forward. The thickness there is 20. That value too becomes a drawn thing for the first time, in the top view. When you finish you save it as the next state.
 
 ## Line 8 — What you typed today (Frame 8)  <!-- generated: keys -->
 
-**Time:** 33:38–37:25
+**Time:** 34:03–37:50
 
-    Here are today's commands in one place. Rather than the names, remember **when you use them**.
+    `[33:50–34:01]` Here are today's commands in one place. Rather than the names, remember **when you use them**.
     That is the part that stays after the exam.
 
-    (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
+    `[34:02–34:09]` (1) `OPEN`. Opens a file. You use it to carry on every lesson from the previous state.
 
-    (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
+    `[34:09–34:16]` (2) `Z`. ZOOM. Changes the zoom. You use it when you need to see where a snap landed.
 
-    (3) `CLAYER`. Changes the current layer. You use it to change layer from the command line.
+    `[34:16–34:22]` (3) `CLAYER`. Changes the current layer. You use it to change layer from the command line.
 
-    (4) `C`. CIRCLE. Draws a circle. You use it for holes, shafts and pitch circles.
+    `[34:22–34:30]` (4) `C`. CIRCLE. Draws a circle. You use it for holes, shafts and pitch circles.
 
-    (5) `O`. OFFSET. Makes the same shape a set distance away. You use it for concentric circles and parallel lines without picking the centre again.
+    `[34:31–34:41]` (5) `O`. OFFSET. Makes the same shape a set distance away. You use it for concentric circles and parallel lines without picking the centre again.
 
-    (6) `DSETTINGS`. Opens the drafting settings. You use it to set the increment angle for polar tracking.
+    `[34:42–34:49]` (6) `DSETTINGS`. Opens the drafting settings. You use it to set the increment angle for polar tracking.
 
-    (7) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
+    `[34:50–34:56]` (7) `L`. LINE. Draws a line. You use it for pieces you need to handle singly.
 
-    (8) `ARRAYPOLAR`. Arrays around a centre. You use it for things spaced evenly by angle, like bolt holes.
+    `[34:57–35:06]` (8) `ARRAYPOLAR`. Arrays around a centre. You use it for things spaced evenly by angle, like bolt holes.
 
-    (9) `E`. ERASE. Erases. You use it to clear away helper lines.
+    `[35:06–35:11]` (9) `E`. ERASE. Erases. You use it to clear away helper lines.
 
-    (10) `XL`. XLINE. Draws a construction line that runs on forever. You use it for projection lines.
+    `[35:12–35:21]` (10) `XL`. XLINE. Draws a construction line that runs on forever. You use it for projection lines.
 
-    (11) `COPYMODE`. Decides whether the copy command repeats. You use it to end the command after one copy.
+    `[35:22–35:30]` (11) `COPYMODE`. Decides whether the copy command repeats. You use it to end the command after one copy.
 
-    (12) `CO`. COPY. Puts the same thing somewhere else. You use it for repeated parts and identical holes.
+    `[35:31–35:39]` (12) `CO`. COPY. Puts the same thing somewhere else. You use it for repeated parts and identical holes.
 
-    (13) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
+    `[35:40–35:49]` (13) `QSELECT`. Picks every object matching a condition at once. You use it to select only the construction lines and erase them.
 
-    (14) `TRIMEXTENDMODE`. Sets how trim and extend choose. You use it to pick the cutting edge first.
+    `[35:49–35:58]` (14) `TRIMEXTENDMODE`. Sets how trim and extend choose. You use it to pick the cutting edge first.
 
-    (15) `TR`. TRIM. Cuts back to a boundary. You use it on overlapping lines and stubs that stick out.
+    `[35:58–36:08]` (15) `TR`. TRIM. Cuts back to a boundary. You use it on overlapping lines and stubs that stick out.
 
-    (16) `MI`. MIRROR. Copies symmetrically. You use it for shapes symmetrical left and right.
+    `[36:08–36:16]` (16) `MI`. MIRROR. Copies symmetrically. You use it for shapes symmetrical left and right.
 
-    (17) `TRIMMODE`. Decides whether the original lines are tidied after a chamfer or fillet. You use it to cut the original line back to the end of an arc or a slanted edge.
+    `[36:16–36:29]` (17) `TRIMMODE`. Decides whether the original lines are tidied after a chamfer or fillet. You use it to cut the original line back to the end of an arc or a slanted edge.
 
-    (18) `F`. FILLET. Puts a round between two lines. You use it on an inside corner where stress piles up.
+    `[36:29–36:39]` (18) `F`. FILLET. Puts a round between two lines. You use it on an inside corner where stress piles up.
 
-    (19) `DI`. DIST. Measures the distance between two points. You use it before you dimension.
+    `[36:40–36:47]` (19) `DI`. DIST. Measures the distance between two points. You use it before you dimension.
 
-    (20) `LI`. LIST. Shows an object's information. You use it to check that what you drew really is that value.
+    `[36:48–36:57]` (20) `LI`. LIST. Shows an object's information. You use it to check that what you drew really is that value.
 
-    (21) `DIMSCALE`. Sets the overall scale of dimensions and centre marks. You use it to keep the display size at model one to one.
+    `[36:58–37:07]` (21) `DIMSCALE`. Sets the overall scale of dimensions and centre marks. You use it to keep the display size at model one to one.
 
-    (22) `DIMCEN`. Sets the size and style of the centre mark. You use it to standardise the mark size at 3.
+    `[37:07–37:14]` (22) `DIMCEN`. Sets the size and style of the centre mark. You use it to standardise the mark size at 3.
 
-    (23) `DIMCENTER`. Makes the centre mark for a circle or an arc. You use it to mark the centres of taps, fillets and slot end arcs.
+    `[37:15–37:25]` (23) `DIMCENTER`. Makes the centre mark for a circle or an arc. You use it to mark the centres of taps, fillets and slot end arcs.
 
-    (24) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
+    `[37:26–37:33]` (24) `SAVEAS`. Saves under a new name. You use it to leave the end-of-lesson state behind.
 
 ## Line 9 — Well done (Frame 9)
 
-**Time:** 37:25–37:37
+**Time:** 37:50–38:02
 
-    (1) That is today's portion. Well done.
+    `[37:36–37:38]` (1) That is today's portion. Well done.
 
-    (2) Next is Lesson 5, third angle projection. See you then.
+    `[37:39–37:43]` (2) Next is Lesson 5, third angle projection. See you then.

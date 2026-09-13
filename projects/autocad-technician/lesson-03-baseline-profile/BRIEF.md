@@ -7,7 +7,7 @@ destination: desktop-course
 aspect: 1920x1080
 language: ko
 audience: "CAD를 처음 접하는 Technician 실습과정 입문 수강자"
-length: 31m10s
+length: 31m11s
 angle: lesson-03-baseline-profile
 narration: user-recorded
 style_preset: lg-training
@@ -58,7 +58,7 @@ recording_slots: 1
 | 3 | `03-concept` | 197s | 개념 카드 4장 + 하단 문단 | 5 |
 | 4 | `04-on-the-drawing` | 183s | 왼쪽 도면 / 오른쪽 표 6행 — 행마다 도면의 해당 위치가 붉어진다 | 6 |
 | 5 | `05-demo-a` | 313s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (1/2) | 6 |
-| 6 | `05-demo-b` | 580s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (2/2) | 10 |
+| 6 | `05-demo-b` | 581s | 전체화면 **녹화 삽입 영역** — 하단 띠에 진행 중인 단계와 단축키 (2/2) | 10 |
 | 7 | `06-check` | 163s | 확인 카드 4장 + 하단 문단 | 4 |
 | 8 | `07-recap` | 156s | 2분할 마무리 | 2 |
 | 9 | `08-keys` | 118s | 오늘 친 단축키 표 + 기능키 | 15 |

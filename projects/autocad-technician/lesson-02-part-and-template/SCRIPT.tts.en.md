@@ -5,16 +5,15 @@
 
 **Part:** `EDU-IB-02 idler pulley bracket`<br>
 **Checkpoint:** `none → L02_TEMPLATE`<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.15x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm, as if explaining to someone holding a drawing for the first time. Through the hands-on section (Line 8), keep a beat between steps, at the speed a hand moves.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 35 min 58 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:06
+**Time:** 0:00–0:08
 
     (silence)
 
@@ -22,7 +21,7 @@
 
 ## Line 2 — The part that holds the wheel that sets belt tension (Frame 2)
 
-**Time:** 0:06–1:39
+**Time:** 0:08–2:08
 
     [calm] This is the part you will draw across six lessons. [calm] An idler pulley bracket, the kind used on a car engine.
 
@@ -42,7 +41,7 @@
 
 ## Line 3 — Each face is machined differently (Frame 3)
 
-**Time:** 1:39–4:30
+**Time:** 2:08–5:52
 
     [calm] Now we look at how the part is made. [calm] There is one principle here. [cautionary] **You do not cut every face the same way.** What touches a face decides how it is machined.
 
@@ -76,7 +75,7 @@
 
 ## Line 4 — Every shape has a reason (Frame 4)
 
-**Time:** 4:30–5:44
+**Time:** 5:52–7:34
 
     [calm] You have seen the machining, so now look at the shape. [calm] There is one dangerous habit when reading a drawing: memorising the shape. [calm] You have to know why a thing sits where it does. [calm] Then you notice when a dimension goes missing.
 
@@ -92,7 +91,7 @@
 
 ## Line 5 — Dimensions pin the shape down (Frame 5)
 
-**Time:** 5:44–7:30
+**Time:** 7:34–9:52
 
     [calm] Now we read the notation on the drawing, one item at a time. [light] Dimensions first. [calm] The eight on this screen are all of them.
 
@@ -110,23 +109,23 @@
 
     (6 row) [light] 8. [calm] The height of the slot centre. [light] 8 from the bottom. [calm] This value decides whether the bolt head lands inside the plate.
 
-    (7 row) [measured] 26, and 95.7 in brackets. [measured] The centre of the R10 fillet sits 26 up from the bottom. [measured] 95.7 is the distance between the two fillet centres, left and right. [calm] It follows from the other drawing dimensions, so it is marked as a reference value in brackets.
+    (7 row) [measured] 26, and 95.7 in brackets. [measured] The centre of the radius 10 fillet sits 26 up from the bottom. [measured] 95.7 is the distance between the two fillet centres, left and right. [calm] It follows from the other drawing dimensions, so it is marked as a reference value in brackets.
 
     (8 row) [measured] 12 and 20. [light] The thicknesses. [calm] These you read in the top view, not the front view. [measured] The plate is 12; where the boss is, 20.
 
 ## Line 6 — The symbols tell the shop what to do (Frame 6)
 
-**Time:** 7:30–9:07
+**Time:** 9:52–12:06
 
     [light] Next, the symbols. [emphatic] It is not only numbers. [calm] Letters come before and after them. [calm] We will look at all eight of these too.
 
-    (1 row) [measured] Ø25 H7. [light] Ø means diameter. [calm] The H7 after it is a fit grade. [light] Neither loose nor forced. [calm] As we said, a drill cannot hold it. [light] It needs a reamer.
+    (1 row) [measured] Ø25 H7. [calm] The slashed circle in front means diameter. [calm] The H7 after it is a fit grade. [light] Neither loose nor forced. [calm] As we said, a drill cannot hold it. [light] It needs a reamer.
 
-    (2 row) [light] Ø56. [calm] The outside diameter of the boss. [calm] The size of the material left around the shaft.
+    (2 row) [light] Diameter 56. [calm] The outside diameter of the boss. [calm] The size of the material left around the shaft.
 
     (3 row) [light] PCD Ø44. [calm] PCD is the pitch circle diameter, commonly called the bolt circle. [calm] It is the diameter of the circle the four tapped-hole centres sit on. [calm] Not the diameter of the holes themselves. [calm] People mix this up often. [calm] Mix it up and the holes come out wildly oversized.
 
-    (4 row) [light] 45 degrees. [calm] The angle of the first hole on the bolt circle. [calm] The other three step round from there every 90 degrees.
+    (4 row) [light] Forty-five degrees. [calm] The angle of the first hole on the bolt circle. [calm] The other three step round from there every ninety degrees.
 
     (5 row) [measured] 4-M5 DEPTH 10. [calm] The 4 in front is the count. [light] M5 is the thread. [calm] Depth 10 is how deep it goes. [calm] Count, thread, depth, written on one line in that order.
 
@@ -134,13 +133,13 @@
 
     (7 row) [measured] 2-R10. [calm] R is the radius of the rounding. [calm] The 2 in front means two of them, left and right.
 
-    (8 row) [light] 2-C5. [light] C is a chamfer. [calm] It means cut at 45 degrees. [calm] The 5 is the length of the side cut off. [calm] It is the two top corners of the plate.
+    (8 row) [light] 2-C5. [light] C is a chamfer. [calm] It means cut at forty-five degrees. [calm] The 5 is the length of the side cut off. [calm] It is the two top corners of the plate.
 
     [calm] You talk to the machine shop in these symbols. [calm] Spell it out in words and the two of you hear different things. [calm] The symbol is the exact way to say it.
 
 ## Line 7 — Settle the sheet and the line rules first (Frame 7)
 
-**Time:** 9:07–11:40
+**Time:** 12:06–15:29
 
     [light] The part is read. [calm] Now you get ready to draw.
 
@@ -164,13 +163,13 @@
 
     (9 dimension line) [measured] The dimension line is Continuous, lineweight 0.15, white (7). [calm] Being Continuous, it gets no linetype scale. [calm] You use it when you dimension. [calm] The construction lines that align the views go here too.
 
-    (10 weight and scale) [pointing] There are two kinds of number in that table, and it is an easy place to slip. [calm] Lineweight is the thickness of the line, in millimetres. [measured] Only the visible line is 0.30 and the rest are 0.15 — exactly twice. [calm] That is because on a printed drawing the shape has to reach your eye first. [calm] Linetype scale is not thickness but the spacing of the dashes. [calm] So what actually changes on screen is the centerline and the hidden line, the two that use dashes. [cautionary] The visible line and the dimension line are Continuous, with no gaps, so a scale value never shows. [calm] If a dashed line reads as continuous on screen, the scale is out; how to fix it comes next lesson.
+    (10 weight and scale) [pointing] There are two kinds of number in that table, and it is an easy place to slip. [calm] Lineweight is the thickness of the line, in millimetres. [measured] Only the visible line is 0.30 and the rest are 0.15 — exactly twice. [calm] That is because on a printed drawing the shape has to reach your eye first. [calm] Linetype scale is not thickness but the spacing of the dashes. [calm] So what actually changes on screen is the centerline and the hidden line, the two that use dashes. [cautionary] The visible line and the dimension line are Continuous, with no gaps, so a scale value never shows. [calm] If a dashed line reads as continuous on screen, the scale is out. [calm] How to fix it comes next lesson.
 
     (11 which wins) [light] Once more. [calm] A task sheet may name a different layer. [calm] The same goes for colors and scales. [calm] When it does, the task sheet wins. [light] These are practice defaults.
 
 ## Line 8 — Building the template · DEMO-01 screen recording (Frame 8)
 
-**Time:** 11:40–23:33
+**Time:** 15:29–31:33
 
 > This section is a screen recording. Work through the 16 steps below **in order and without skipping**, speaking as you go.
 > A command written in capitals is the command; what is inside backticks is what you actually type.
@@ -265,8 +264,8 @@
     [measured] Type `OS` and press Enter. [calm] The object snap tab of the drafting settings dialog opens.
     [calm] Tick five: endpoint, midpoint, center, quadrant and intersection.
     [calm] You use midpoint two steps from now. [calm] That is how you catch the centering marks.
-    [emphatic] Tangent you pick one time at a time, only when you need it.
-    [calm] In Lesson 3, when you draw the web lines tangent to the boss circle, hold Shift and right-click while it asks for a point, and choose tangent.
+    [emphatic] Tangent you pick for a single use, only when you need it.
+    [calm] You use it in Lesson 3, when you draw the web lines tangent to the boss circle. [calm] While it asks for a point, hold Shift and right-click, and choose tangent.
     [light] Leave the rest off. [calm] Turn them all on and it keeps sticking to points you did not want.
     [light] Press OK.
 
@@ -280,7 +279,7 @@
     [calm] A box follows the cursor and takes the length and the angle there.
     [calm] With it off the same numbers go to the command line at the bottom. [calm] The values are the same, but your eyes have to watch two places.
     [calm] Two things you leave off, on the other hand.
-    [measured] F7 grid and F9 snap. [emphatic] The grid only clutters the screen, and snap holds the cursor to a fixed interval,
+    [measured] F7 grid and F9 snap. [emphatic] The grid only clutters the screen. [calm] Snap holds the cursor to a fixed interval,
     [calm] so it catches somewhere useless instead of an endpoint or a midpoint.
     [calm] If a snap seems not to catch, check F9 first.
     [measured] Turn on F10 polar tracking only when you need a slanted direction. [calm] You use it in Lesson 4.
@@ -434,7 +433,7 @@
 
 ## Line 9 — This lesson and the next (Frame 9)
 
-**Time:** 23:33–25:01
+**Time:** 31:33–33:33
 
     (1 left) [pointing] Let us gather up what you did today. [calm] You read the idler pulley bracket. [calm] It is the part that holds the shaft of the wheel that sets belt tension. [calm] The tension has to be right for the power to go through and for the parts to last.
 
@@ -452,7 +451,7 @@
 
 ## Line 10 — What you typed today (Frame 10)  <!-- generated: keys -->
 
-**Time:** 25:01–26:42
+**Time:** 33:33–35:44
 
     [calm] Here are today's commands in one place. [emphatic] Rather than the names, remember **when you use them**.
     [calm] That is the part that stays after the exam.
@@ -487,7 +486,7 @@
 
 ## Line 11 — Well done (Frame 11)
 
-**Time:** 26:42–26:54
+**Time:** 35:44–35:58
 
     (1) [light] That is today's portion. [warm] Well done.
 
