@@ -58,6 +58,21 @@ on practice slides retain their step-specific guidance. Self-study pages open in
 their edition language and retain a saved language preference. Every split page
 must remain within 100 KB, including its diagrams and navigation.
 
+### Current review downloads
+
+[2026-09-14 bilingual review release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.14-review.1) provides all **16 MP4s** and
+the integrated review materials. Download the [Korean full ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_KO_REVIEW.zip),
+[English full ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_EN_REVIEW.zip), or
+[materials only ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_MATERIALS_KO_EN.zip).
+Extract the whole ZIP and open `START_REVIEW_KO.html` or `START_REVIEW_EN.html`.
+Click the transcript to seek, then export timestamped feedback as JSON.
+
+All 16 videos passed subtitle text/timing roundtrips, full decoding and per-scene
+audio/visual comparisons. The release includes a manifest and SHA-256 checksums;
+all 28 asset downloads were verified without authentication. It remains a
+**review prerelease**: 15 demonstration slots per language are PREVIEW guidance,
+and human listening and hands-on AutoCAD signoff remain pending.
+
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
   for slide, element or common notes, **N** to edit the script, and **P** to
