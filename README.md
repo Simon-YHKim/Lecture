@@ -241,6 +241,14 @@ as running the source scene checks. Font substitution can move otherwise intact
 text; inspect flagged differences and record the exact source and MP4 hashes.
 These samples do not replace complete human viewing or listening.
 
+When embedding captions, feed escaped WebVTT to FFmpeg's `mov_text` encoder.
+Its SRT decoder treats the literal AutoCAD measurement placeholder `<>` as a
+tag and removes it; the VTT decoder preserves it when written as `&lt;&gt;`.
+Verify all cue text and millisecond timestamps after extracting the MP4 track.
+The review player, embedded MP4 captions, and VTT preserve this notation.
+Raw SRT remains available for interchange, but some players hide its angle
+brackets. This format difference must not be treated as a script edit.
+
 The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do
 not. Legacy timing files without these identities cannot be reused by retiming
