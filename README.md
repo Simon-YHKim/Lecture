@@ -124,6 +124,12 @@ Run the checks manually:
 ./scripts/check-course-projects.ps1
 ```
 
+Python regression tests use Python 3.12 and the NumPy version pinned in
+`requirements-test.txt`. Install it with `python -m pip install -r
+requirements-test.txt` and make `ffmpeg`/`ffprobe` available on PATH. CI installs
+these dependencies so synthetic audio and recording tests run instead of failing
+or being skipped. No cloned voice model or private recordings are downloaded.
+
 Add `-RunHyperFramesChecks` to run every lesson's pinned HyperFrames validation in sequence:
 
 ```powershell

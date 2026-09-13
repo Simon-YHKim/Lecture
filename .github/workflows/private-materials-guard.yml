@@ -14,6 +14,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up test Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install -r requirements-test.txt
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+
       - name: Test guard behavior
         shell: pwsh
         run: ./scripts/test-private-materials-guard.ps1
