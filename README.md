@@ -227,12 +227,19 @@ finished AutoCAD lesson. The authorized review prerelease retains PREVIEW labels
 and keeps hands-on validation and final instructional signoff pending.
 
 The current private render projects use HyperFrames 0.8.36 at 1920×1080, 30 fps,
-high quality, with streaming encode and automatic verified parallel capture.
-Their environment sets `PRODUCER_STREAMING_ENCODE_MAX_DURATION_SECONDS=3600`
-and `HF_DE_PARALLEL_ROUTER=true`; render uses `--no-low-memory-mode --gpu` and
-leaves worker selection automatic. This avoids accumulating every frame on disk.
+high quality. Remaining renders use four `beginFrame` workers and streaming encode:
+`PRODUCER_STREAMING_ENCODE_MAX_DURATION_SECONDS=3600`,
+`HF_DE_PARALLEL_ROUTER=false`, `HF_CAPTURE_PARALLEL_STREAM=true`, and
+`PRODUCER_EXPERIMENTAL_FAST_CAPTURE=false`; render options are
+`--no-low-memory-mode --gpu --workers 4 --experimental-fast-capture=false`.
+This avoids accumulating every frame on disk. Earlier completed experimental
+captures are retained only after independent encoded-frame checks.
 Canonical project pins remain unchanged. Validate the finished MP4's duration,
-subtitle roundtrip, full decode, and narration alignment as well as scene checks.
+subtitle text and timing roundtrips, full decode, and narration alignment.
+Compare each encoded scene midpoint with an ordinary browser snapshot as well
+as running the source scene checks. Font substitution can move otherwise intact
+text; inspect flagged differences and record the exact source and MP4 hashes.
+These samples do not replace complete human viewing or listening.
 
 The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do
