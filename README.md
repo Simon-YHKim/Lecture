@@ -43,14 +43,14 @@ binaries. Subtitles generated from the approved scripts belong in the explicitly
 authorized review downloads, outside Git history. The latest delivery scope and remaining work are recorded in
 [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-The current revision targets **AutoCAD 2024**, **eight lessons per language** and
+The September 14 lecture review targets **AutoCAD 2024**, **eight lessons per language** and
 **native 1.00× cloned instructor narration**, without starter files. The measured
 video timelines total **211:43 Korean** and **253:27 English**. Grading and exam
 operations remain to be shared. Lessons 2–7 contain PREVIEW placeholders for
 15 unrecorded AutoCAD demonstrations; hands-on validation and human listening
 approval remain pending. A review release is not final instructional signoff.
 
-The review package combines an offline video player, synchronized script,
+The September 14 package combines an offline video player, synchronized script,
 timestamped feedback export, MP4 subtitles, original scripts, slides and workbooks.
 The decks contain **222 Korean / 263 English slides** and all eight original
 lesson scripts through **Full lesson script / 차시별 전체 대본**. Presenter notes
@@ -58,7 +58,23 @@ on practice slides retain their step-specific guidance. Self-study pages open in
 their edition language and retain a saved language preference. Every split page
 must remain within 100 KB, including its diagrams and navigation.
 
-### Current review downloads
+### Current self-study review downloads
+
+[2026-09-15 per-lesson self-study release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.15-selfstudy-review.1) provides
+**eight HTML decks with integrated scripts and eight matching narrated MP4s in
+each language**, 32 core files. Download the [Korean ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_KO_SELFSTUDY.zip)
+or [English ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_EN_SELFSTUDY.zip); individual lesson files are
+also attached. Extract the complete ZIP and open `START_REVIEW_KO.html` or
+`START_REVIEW_EN.html` in Chrome/Edge to seek from the transcript, open the matching
+slide and export timestamped feedback as JSON.
+
+All 16 videos and both complete offline review players passed automated checks.
+All 37 asset downloads were verified without authentication, with matching sizes
+and GitHub SHA-256 digests. Korean duration: **4:12:55**; English: **4:39:36**.
+These videos show the self-study slides with the instructor's cloned voice at
+native 1.00× speed. Full human listening and hands-on AutoCAD signoff remain pending.
+
+### Previous lecture review downloads
 
 [2026-09-14 bilingual review release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.14-review.1) provides all **16 MP4s** and
 the integrated review materials. Download the [Korean full ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_KO_REVIEW.zip),
@@ -75,12 +91,11 @@ and human listening and hands-on AutoCAD signoff remain pending.
 
 ### Per-lesson self-study video production
 
-The September 14 release contains lecture-frame videos and one combined self-study
-deck per language. It does **not** contain eight separate self-study-slide videos
-per language. The September 15 corrective delivery is being produced as **eight
-HTML decks plus eight matching MP4s in each language**, 32 core files in total.
-Its practice pages use the existing illustrated self-study steps. The videos show
-those pages with their own narration; they do not contain AutoCAD screen recordings.
+The September 15 delivery contains eight separate self-study decks and matching
+videos per language. Each deck integrates its own script, and each MP4 shows those
+same slides with cloned instructor narration. Practice pages use the existing
+illustrated self-study steps; actual AutoCAD screen recordings are outside this
+delivery. The September 14 lecture-frame review release remains available above.
 
 The private production pipeline is:
 

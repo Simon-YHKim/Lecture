@@ -6,18 +6,20 @@
 > 지난 블록은 월별로 내렸다 — [`docs/handoff-archive/`](handoff-archive/) · [9월 후속 보관](handoff-archive/2026-09-part2.md).
 > 최신 블록과 직전 블록만 이 파일에 둔다. 한 파일 100KB 를 넘기지 않기 위해서다.
 
-> 최종 갱신 **2026-09-15 01:52:43 KST** · Codex · 커밋은 이 파일의 git 이력 참조
+> 최종 갱신 **2026-09-15 08:26:34 KST** · Codex · 커밋은 이 파일의 git 이력 참조
 
 ---
 
-## Latest — 2026-09-15 / 실제 자습 슬라이드 영상으로 완료 범위 정정
+## Latest — 2026-09-15 / 차시별 자습 슬라이드·영상 국영문 릴리즈 완료
 
-- 사용자가 확인한 산출물은 **국문 슬라이드 8개·영상 8개 + 영문 슬라이드 8개·영상 8개**, 총 32개다. 각 영상은 해당 차시의 자습 슬라이드 화면과 그 화면의 대본, 선생님 복제 음성을 함께 담아야 한다.
-- 이전 릴리즈는 언어별 자습 통합 덱 한 파일과 원래 강의 장면의 영상이었다. 자습 슬라이드 화면으로 만든 차시별 영상까지 완료했다는 보고는 잘못이었다. 기존 릴리즈와 승인 원본 대본·음성을 보존하고 별도 제작 중이다.
-- `local-materials/selfstudy-video-current.json`이 새 작업 정본이다. 차시별 분리는 KO 222장·EN 263장이고, 기존 강의와 같은 124장에는 승인 음성을 재사용한다. 자습 실습·보충 361장에는 해당 내용의 새 낭독이 필요하다.
-- `prepare_narrated.py`, `narrated_delivery.py`, `render_narrated.py`, `verify_narrated.py`를 추가 중이다. 슬라이드 플레이어의 실제 화면을 음성 박자별로 캡처하고 FFmpeg가 실측 음성 길이만큼 유지한다. 덱 자체를 HyperFrames render에 넣어 첫 장만 출력하는 방식을 사용하지 않는다.
-- 현재 국문 1·2차시와 영문 1차시 HTML/MP4를 만들고 전체 디코딩·자막·음성·화면 대조를 통과했다. 자습 대본 어댑터를 구현했으며 새 음성 1,328토막을 로컬 합성하고 있다. 전체 32개 완료·새 릴리즈 공개는 아직 아니다. 나머지 합성, 전체 검증과 패키징이 남아 있다. 최신 진행 로그는 작업 정본의 `base`에서 확인한다.
-- 사용자는 기존에 GitHub 릴리즈까지 위임했으며 이번에 KO/EN 각각 8개씩을 다시 확인했다. 이 범위에 재승인을 묻지 않는다. 사람 청취·실제 AutoCAD 실행 검수는 자동 검사와 구분한다.
+- 사용자 확정 범위인 **국문 HTML 슬라이드 8개·MP4 8개 + 영문 HTML 슬라이드 8개·MP4 8개**, 총 32개를 제작하고 [GitHub 검수 릴리즈](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.15-selfstudy-review.1)로 공개했다. 자습 슬라이드마다 해당 대본을 통합했고 같은 화면에 선생님 복제 음성을 입혔다. 기존 강의 영상과 구분되는 차시별 자습 영상이다.
+- [국문 전체 ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_KO_SELFSTUDY.zip) · [영문 전체 ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_EN_SELFSTUDY.zip). ZIP 전체 압축을 풀고 `START_REVIEW_KO.html` 또는 `START_REVIEW_EN.html`을 Chrome/Edge에서 열면 대본 클릭 이동, 같은 슬라이드 열기, 시간별 의견 JSON 저장이 된다. 각 ZIP은 차시별 HTML·MP4·MD·VTT·SRT와 검수 페이지·안내·매니페스트·체크섬 등 44개 파일이다. 릴리즈에는 핵심 32개, ZIP 2개, 가이드·매니페스트·체크섬을 합쳐 37개 자산이 있다.
+- 국문은 222장·4:12:55, 영문은 263장·4:39:36이다. 1920×1080/30fps H.264/AAC, 음성은 원래 속도 1.00×다. 기존 승인 화면 124장의 음성을 재사용하고 새 자습 361장의 1,328토막을 만들었다. 영문 합성 입력의 숫자는 영어 단어로 명시했으며 표시 수치·좌표·대본은 유지했다.
+- 새 음성 1,328토막을 현재 WAV 해시 기준으로 자동 대조했고 빈 인식·길이 의심은 0개다. 두 독립 CPU 인식기로 확인한 KO5 저장 안내, KO6 파일명 반복, EN2 방향, EN3 반복, EN5 높이·60/for 경계, EN6 L 명령, EN7 5×5·나사 개수·95.7, EN8 중심선 축척 등 11토막을 교정했다. 동음 표기 차이는 원문·별도 인식·실제 음성 토막의 경계로 재확인했고 원래 인식 결과를 보존했다. 사람이 청취한 것으로 보고하지 않는다.
+- 모든 MP4의 전체 디코딩, 영상·음성 트랙 길이와 프레임 수, 자막 문자·시각, 원본 음성 표본, 모든 출력 화면과 마지막 프레임을 검사했다. 교정 전후 대본·자막 문자·슬라이드 화면 보존과 국영문 8차시 검수 플레이어를 확인했다. 공개 텍스트 91개 및 MP4 메타데이터에서 비공개 경로·자산을 검사했다. 37개 공개 다운로드 모두 비로그인 HTTP 200·크기·GitHub SHA-256 일치를 확인했다.
+- 제작 소스는 `c238f0e60045d04eb7e7c976ca5349a7bb81efab`이며 [CI](https://github.com/Simon-YHKim/Lecture/actions/runs/34894484103)와 총 252개 테스트가 통과했다. 마지막 영상 프레임이 일찍 끝나는 문제는 `fps=30` 확장과 정확한 트랙 길이·프레임 수·마지막 화면 검사로 수정했고, 모든 영상은 검증 버전 2다.
+- **사람의 전체 청취와 실제 AutoCAD 실행 검수는 남아 있는 prerelease다.** 실습은 도해와 단계별 자습 슬라이드로 구성하며 실제 AutoCAD 조작 녹화는 포함하지 않는다. 명령어·파일명·좌표·기호 발음을 검수자에게 확인받는다. 검수자에게 메시지는 보내지 않았다.
+- `local-materials/selfstudy-video-current.json`이 제작 기록 정본이다. `base` 아래 `assets/`, `public-release-validation.json`, `previous-release-preserved.json`, `retake-content-validation.json`, `voice-qa.json`, `completion-report.html`을 확인한다. 기존 릴리즈의 28개 자산 ID·크기·해시와 사용자 미커밋 파일은 보존했다. 참조 음성·개별 WAV·ASR 원문·모델·개인 경로는 공개하지 않았다. 제작·교정·검증·업로드 세션은 종료됐다.
 
 ---
 
