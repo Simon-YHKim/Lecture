@@ -73,6 +73,57 @@ all 28 asset downloads were verified without authentication. It remains a
 **review prerelease**: 15 demonstration slots per language are PREVIEW guidance,
 and human listening and hands-on AutoCAD signoff remain pending.
 
+### Per-lesson self-study video production
+
+The September 14 release contains lecture-frame videos and one combined self-study
+deck per language. It does **not** contain eight separate self-study-slide videos
+per language. The September 15 corrective delivery is being produced as **eight
+HTML decks plus eight matching MP4s in each language**, 32 core files in total.
+Its practice pages use the existing illustrated self-study steps. The videos show
+those pages with their own narration; they do not contain AutoCAD screen recordings.
+
+The private production pipeline is:
+
+1. Run `scripts/selfstudy/prepare_narrated.py` with the approved private lesson
+   stage, captions and local GSAP script. Set `SELFSTUDY_LANG` to the same language
+   as `--lang` before running it.
+2. Run `narrated_delivery.py jobs --work <private-work> --lang ko` (or `en`).
+   Original slide audio is hash-bound and reused. New slide narration is derived
+   from its selected-language text and exact visible action subset. Displayed CAD
+   literals remain intact; pronunciation substitutions are separate synthesis input.
+3. Generate the new jobs with the existing local `scripts/part/speak_clone.py`
+   workflow and the generated pronunciation map. Keep voice references, WAVs and
+   ASR output private. Use the instructor's native 1.00× voice rate.
+4. For each completed lesson, run `narrated_delivery.py assemble`,
+   `render_narrated.py capture`, `render_narrated.py render` and
+   `verify_narrated.py`, each with `--work <private-work> --lang ko --lesson 1`
+   (substitute the required language and lesson).
+5. Run `package_narrated.py --work <private-work> --out <new-private-delivery>`
+   with `--source-commit <full-sha>` and `--tag <selfstudy-review-tag>` after all
+   sixteen videos pass. Packaging creates language ZIPs, 32 individual core
+   downloads, an HTML review guide, a public manifest and SHA-256 checksums.
+   Publishing is a separate, explicitly authorized operation.
+
+Capture opens the actual offline HyperFrames/GSAP slide player and seeks each
+slide to its visible state. FFmpeg holds these stills for measured narration
+durations; later emphasis beats from reused lecture frames keep separate shots.
+Passing the whole multi-root deck directly to a single-composition renderer would
+export only its first slide. New self-study pages are captured after their final
+entrance so that all cards and diagrams are visible.
+
+The renderer uses FFmpeg/FFprobe with H.264 NVENC, Playwright Chromium, Pillow,
+NumPy and SciPy from the existing local production environment. It exports
+1920×1080/30fps H.264/AAC with embedded captions. Verification checks full decoding,
+exact subtitle text/timing, source PCM samples and every encoded shot against its
+captured slide. These checks do not replace human listening or hands-on validation.
+An existing MP4 prevents its deck and script from being silently reassembled;
+use a new private revision directory when narration changes.
+
+Each language ZIP opens through `START_REVIEW_KO.html` or `START_REVIEW_EN.html`.
+The offline player supports script seeking, matching-slide links and timestamped
+feedback export. Packaging selects exact filenames and excludes sample players,
+audio references, WAVs, ASR and other private neighboring files.
+
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
   for slide, element or common notes, **N** to edit the script, and **P** to
