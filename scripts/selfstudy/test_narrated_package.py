@@ -52,9 +52,15 @@ class NarratedPackageTests(unittest.TestCase):
             assembled = root/'assembled/en/L01.json'
             write_json(assembled, {'package':str(folder),'stem':stem,'source':str(source),
                 'lesson':1,'duration':1,'deckSha256':digest(deck),'cues':[]})
-            write_json(root/'validation/en/L01.json', {'ok':True,'sha256':digest(video),
+            write_json(root/'validation/en/L01.json', {'ok':True,'validationVersion':2,'sha256':digest(video),
                                                       'planSha256':digest(assembled)})
             self.assertFalse(review_data(root, 'en', complete=False)['complete'])
+            valid=root/'validation/en/L01.json'
+            record=json.loads(valid.read_text());record.pop('validationVersion')
+            write_json(valid,record)
+            with self.assertRaisesRegex(ValueError,'Unverified assembly'):
+                review_data(root,'en',complete=False)
+            record['validationVersion']=2;write_json(valid,record)
             deck.write_bytes(b'changed deck')
             with self.assertRaisesRegex(ValueError, 'Deck changed'):
                 review_data(root, 'en', complete=False)
@@ -85,7 +91,7 @@ class NarratedPackageTests(unittest.TestCase):
                     write_json(assembled, {'package':str(folder),'stem':stem,'source':str(source),
                         'lesson':n,'duration':1,'deckSha256':digest(folder/(stem+'.html')),'cues':[]})
                     write_json(root/'validation'/lang/('L%02d.json'%n),
-                        {'ok':True,'sha256':digest(folder/(stem+'.mp4')),'planSha256':digest(assembled),
+                        {'ok':True,'validationVersion':2,'sha256':digest(folder/(stem+'.mp4')),'planSha256':digest(assembled),
                          'slides':1,'shots':1,'cues':0,'fullDecode':True,'literalCaptions':True})
             output = root/'delivery'
             result = package(root, output, 'a'*40, 'autocad-2026.09.15-selfstudy-review.1')

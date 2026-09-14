@@ -18,7 +18,7 @@ def review_data(work,lang,complete=True):
         if not validation.exists():continue
         valid=read_json(validation)
         folder=Path(row['package']);stem=row['stem']
-        if not valid['ok'] or valid['planSha256']!=digest(path):raise ValueError('Unverified assembly')
+        if not valid['ok'] or valid.get('validationVersion')!=2 or valid['planSha256']!=digest(path):raise ValueError('Unverified assembly')
         if valid['sha256']!=digest(folder/(stem+'.mp4')):raise ValueError('Video changed after verification')
         if row['deckSha256']!=digest(folder/(stem+'.html')):raise ValueError('Deck changed after capture')
         source=read_json(row['source'])

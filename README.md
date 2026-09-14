@@ -117,7 +117,10 @@ The renderer uses FFmpeg/FFprobe with H.264 NVENC, Playwright Chromium, Pillow,
 NumPy and SciPy from the existing local production environment. It exports
 1920×1080/30fps H.264/AAC with embedded captions. Verification checks full decoding,
 exact subtitle text/timing, source PCM samples and every encoded shot against its
-captured slide. These checks do not replace human listening or hands-on validation.
+captured slide, including the final frame. Sparse stills are expanded with the
+FFmpeg `fps` filter before encoding. The video frame count and track duration must
+cover the full narration; container duration alone is insufficient. These checks
+do not replace human listening or hands-on validation.
 An existing MP4 prevents its deck and script from being silently reassembled;
 use a new private revision directory when narration changes.
 

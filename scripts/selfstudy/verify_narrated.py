@@ -13,6 +13,9 @@ from scipy.signal import correlate
 
 from prepare_narrated import read_json, write_json
 from narrated_delivery import digest, wav_data, SR, timestamp
+from render_narrated import validate_video_timing
+
+VALIDATION_VERSION=2
 
 
 def run(args):
@@ -31,8 +34,10 @@ def verify(work,lang,lesson=None):
         target=work/'validation'/lang/('L%02d.json'%row['lesson'])
         if target.exists():
             old=read_json(target)
-            if old.get('ok') and old['sha256']==sha and old['planSha256']==digest(path):
+            if old.get('ok') and old.get('validationVersion')==VALIDATION_VERSION and old['sha256']==sha and old['planSha256']==digest(path):
                 results.append(old);continue
+        probe=json.loads(run(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(video)]))
+        timing=validate_video_timing(probe,row['duration'])
         run(['ffmpeg','-nostdin','-v','error','-xerror','-i',str(video),'-map','0:v:0','-map','0:a:0','-f','null','-'])
         srt=run(['ffmpeg','-nostdin','-v','error','-i',str(video),'-map','0:s:0','-f','srt','-']).decode('utf-8-sig')
         blocks=re.split(r'\n\s*\n',srt.replace('\r\n','\n').strip())
@@ -72,10 +77,11 @@ def verify(work,lang,lesson=None):
             best=int(similarity.argmax());score=float(similarity[best])
             if score<.95:raise ValueError('Source audio mismatch: '+str((item['scene'],score)))
             checks.append({'scene':item['scene'],'correlation':round(score,6),'offsetMs':round((begin+best-center)/SR*1000,3)})
-        def visual(shot):
-            at=shot['start']+shot['duration']/2
+        def visual(shot,at=None):
+            if at is None:at=shot['start']+shot['duration']/2
             encoded=run(['ffmpeg','-nostdin','-v','error','-ss',str(at),'-i',str(video),'-frames:v','1',
                          '-vf','scale=480:270:flags=lanczos','-f','image2pipe','-vcodec','png','-'])
+            if not encoded:raise ValueError('Missing video frame: '+str((row['stem'],shot['image'],at)))
             actual_image=np.asarray(Image.open(io.BytesIO(encoded)).convert('RGB')).astype(np.float32)
             source=Path(shot['imagePath'])
             if digest(source)!=shot['imageSha256']:raise ValueError('Changed reference picture')
@@ -88,7 +94,9 @@ def verify(work,lang,lesson=None):
             if mean>3 or worst>15:raise ValueError('Encoded picture differs: '+str((row['stem'],shot['image'],mean,worst)))
             return {'image':shot['image'],'at':round(at,3),'meanError':round(mean,3),'worstTile':round(worst,3)}
         with ThreadPoolExecutor(max_workers=3) as pool:visuals=list(pool.map(visual,row['shots']))
+        last_frame=visual(row['shots'][-1],(timing['frames']-1)/30)
         result={'lang':lang,'lesson':row['lesson'],'ok':True,'sha256':sha,'planSha256':digest(path),
+                'validationVersion':VALIDATION_VERSION,'trackTiming':timing,'lastFrame':last_frame,
                 'slides':row['slides'],'shots':len(row['shots']),'cues':len(row['cues']),
                 'fullDecode':True,'literalCaptions':True,'audioSamples':checks,'visualSamples':visuals,
                 'humanListeningPerformed':False}

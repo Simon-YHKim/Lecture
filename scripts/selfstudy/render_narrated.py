@@ -13,6 +13,27 @@ import sys
 from prepare_narrated import read_json, write_json
 from narrated_delivery import digest
 
+VIDEO_FILTER='fps=30'
+
+
+def concat_text(shots):
+    # Give the sparse still timestamps the same time base as the output.
+    return ('ffconcat version 1.0\n'+''.join(
+        'file %s\noption framerate 30\nduration %.9f\n'%(quote_concat(s['imagePath']),s['duration']) for s in shots)
+        +'file '+quote_concat(shots[-1]['imagePath'])+'\noption framerate 30\n')
+
+
+def validate_video_timing(probe,duration):
+    video=next(s for s in probe['streams'] if s['codec_type']=='video')
+    audio=next(s for s in probe['streams'] if s['codec_type']=='audio')
+    frames=round(duration*30)
+    if (int(video['nb_frames'])!=frames or abs(float(video['duration'])-duration)>.001
+            or abs(float(video.get('start_time',0)))>.001):
+        raise ValueError('Video track does not cover the scheduled frames')
+    if abs(float(audio['duration'])-duration)>.05 or abs(float(probe['format']['duration'])-duration)>.05:
+        raise ValueError('Audio/container duration mismatch')
+    return {'frames':frames,'videoSeconds':float(video['duration']),'audioSeconds':float(audio['duration'])}
+
 
 def capture(work, lang, lesson=None):
     from playwright.sync_api import sync_playwright
@@ -76,8 +97,7 @@ def render(work,lang,lesson=None):
         for shot in shots:
             if digest(shot['imagePath'])!=shot['imageSha256']:raise ValueError('Changed captured frame')
         concat=base/'images.ffconcat'
-        concat.write_bytes(('ffconcat version 1.0\n'+''.join('file %s\nduration %.9f\n'%(quote_concat(s['imagePath']),s['duration']) for s in shots)
-                            +'file '+quote_concat(shots[-1]['imagePath'])+'\n').encode())
+        concat.write_bytes(concat_text(shots).encode())
         package=Path(row['package'])
         dest=package/(row['stem']+'.mp4')
         if dest.exists(): raise FileExistsError('Keep delivered video; use a new private output for revisions: '+str(dest))
@@ -86,7 +106,9 @@ def render(work,lang,lesson=None):
         args=['ffmpeg','-hide_banner','-nostdin','-y','-f','concat','-safe','0','-i',str(concat),
               '-i',row['audio'],'-i',str(package/(row['stem']+'.vtt')),
               '-map','0:v:0','-map','1:a:0','-map','2:s:0',
-              '-r','30','-fps_mode','cfr','-t','%.9f'%row['duration'],
+              # Expand sparse stills before output truncation; output -r alone
+              # can end early when the final still has a long hold.
+              '-vf',VIDEO_FILTER,'-r','30','-fps_mode','cfr','-t','%.9f'%row['duration'],
               '-c:v','h264_nvenc','-preset','p5','-rc','vbr','-cq','18','-b:v','0','-pix_fmt','yuv420p',
               '-c:a','aac','-b:a','160k','-c:s','mov_text','-metadata:s:s:0','language='+('kor' if lang=='ko' else 'eng'),
               '-metadata','title='+row['stem'],'-movflags','+faststart',str(pending)]
@@ -96,8 +118,7 @@ def render(work,lang,lesson=None):
         video=next(s for s in probe['streams'] if s['codec_type']=='video')
         if (video['width'],video['height'],video['r_frame_rate'])!=(1920,1080,'30/1'):
             raise ValueError('Unexpected video format')
-        if abs(float(probe['format']['duration'])-row['duration'])>.1:
-            raise ValueError('Video duration mismatch')
+        validate_video_timing(probe,row['duration'])
         pending.rename(dest)
         result={'lang':lang,'lesson':row['lesson'],'slides':row['slides'],'shots':len(shots),
                 'file':str(dest),'duration':row['duration'],'bytes':dest.stat().st_size,'sha256':digest(dest)}
