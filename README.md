@@ -91,6 +91,8 @@ The private production pipeline is:
    Original slide audio is hash-bound and reused. New slide narration is derived
    from its selected-language text and exact visible action subset. Displayed CAD
    literals remain intact; pronunciation substitutions are separate synthesis input.
+   Checkpoint filenames pronounce their letters, leading zeroes and separators
+   explicitly; their displayed names remain unchanged.
 3. Generate the new jobs with the existing local `scripts/part/speak_clone.py`
    workflow and the generated pronunciation map. Keep voice references, WAVs and
    ASR output private. Use the instructor's native 1.00× voice rate.

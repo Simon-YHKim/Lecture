@@ -85,7 +85,7 @@ def slide_narration(slide,lesson,lang):
 
 KO_LETTERS=dict(zip('ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     ['에이','비','씨','디','이','에프','지','에이치','아이','제이','케이','엘','엠','엔','오','피','큐','알','에스','티','유','브이','더블유','엑스','와이','제드']))
-KO_COMMANDS={'OPEN':'오픈','CLOSE':'클로즈','SAVEAS':'세이브 애즈','LINE':'라인','PLINE':'피라인',
+KO_COMMANDS={'OPEN':'오픈','CLOSE':'클로즈','SAVEAS':'세이브 애즈','QSAVE':'큐 세이브','LINE':'라인','PLINE':'피라인',
     'CIRCLE':'서클','ARC':'아크','OFFSET':'오프셋','TRIM':'트림','EXTEND':'익스텐드','ERASE':'이레이즈',
     'MOVE':'무브','COPY':'카피','MIRROR':'미러','ROTATE':'로테이트','FILLET':'필렛','CHAMFER':'챔퍼',
     'ARRAYPOLAR':'어레이 폴라','DIMLINEAR':'딤 리니어','DIMALIGNED':'딤 얼라인드',
@@ -93,13 +93,35 @@ KO_COMMANDS={'OPEN':'오픈','CLOSE':'클로즈','SAVEAS':'세이브 애즈','LI
     'DIMSTYLE':'딤 스타일','DIMTEDIT':'딤 티 에디트','DIMEDIT':'딤 에디트','DIM':'딤',
     'LAYER':'레이어','LINETYPE':'라인 타입','LTSCALE':'엘 티 스케일','OSNAP':'오스냅',
     'ORTHO':'오쏘','XLINE':'엑스 라인','QSELECT':'퀵 셀렉트','PLOT':'플롯','ZOOM':'줌',
-    'UNITS':'유닛츠','LIMITS':'리미츠','MTEXT':'엠 텍스트','TEXT':'텍스트','REGEN':'리젠',
+    'UNITS':'유닛츠','LIMITS':'리미츠','MTEXT':'엠 텍스트','DTEXT':'디 텍스트','TEXT':'텍스트','REGEN':'리젠',
     'Enter':'엔터','Ctrl':'컨트롤','Esc':'이스케이프','Tab':'탭','Shift':'시프트'}
+
+
+def filename_pronunciation(name, lang):
+    """Read canonical checkpoint names without losing zeroes or separators."""
+    ko=lang=='ko'
+    digits=('영','일','이','삼','사','오','육','칠','팔','구') if ko else (
+        'zero','one','two','three','four','five','six','seven','eight','nine')
+    words={'TEMPLATE':'템플릿','PROFILE':'프로파일','FEATURES':'피처스',
+           'VIEWS':'뷰즈','REPRESENTED':'레프리젠티드','RELEASE':'릴리스'}
+    punctuation={'-':'하이픈' if ko else 'hyphen','_':'밑줄' if ko else 'underscore',
+                 '.':'닷' if ko else 'dot'}
+    parts=[]
+    for token in re.split(r'([-_.])',name):
+        if token in punctuation:parts.append(punctuation[token])
+        elif token.upper() in words:
+            parts.append(words[token.upper()] if ko else token.lower())
+        else:
+            parts.append(' '.join(digits[int(c)] if c.isdigit() else KO_LETTERS[c.upper()] if ko
+                                  else c.upper() for c in token))
+    return ', '.join(parts)
 
 
 def pronunciation(text,lang):
     text=clean(text)
     ko=lang=='ko'
+    text=re.sub(r'(?<![A-Za-z0-9_])EDU-IB-02(?:_[A-Za-z0-9]+)+(?:\.dwg)?',
+                lambda m:filename_pronunciation(m[0],lang),text)
     if ko:
         # Dimension callouts mix Latin letters and digits; leaving R5 to a
         # multilingual model can turn the radius into a different number.

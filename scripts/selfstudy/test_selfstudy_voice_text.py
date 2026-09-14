@@ -3,6 +3,15 @@ from selfstudy_voice_text import clean,pronunciation,slide_narration
 
 
 class SelfstudyVoiceTextTests(unittest.TestCase):
+    def test_checkpoint_file_names_preserve_leading_zeroes_and_separators(self):
+        original='Save EDU-IB-02_L03_PROFILE.dwg.'
+        english=pronunciation(original,'en')
+        self.assertIn('E D U, hyphen, I B, hyphen, zero two, underscore, L zero three, underscore, profile, dot, D W G',english)
+        korean=pronunciation('EDU-IB-02_L02_TEMPLATE을 저장합니다.','ko')
+        self.assertIn('영 이, 밑줄, 엘 영 이, 밑줄, 템플릿을',korean)
+        self.assertNotIn('_',korean)
+        self.assertEqual(pronunciation('QSAVE DTEXT','ko'),'큐 세이브 디 텍스트')
+
     def test_command_letters_and_numbers_are_not_matched_inside_other_tokens(self):
         for typed,description in [('A','Choose a value.'),('FROM','Pick a point away from it.'),
                                   ('0','The other value is 0.5.'),('35','The opposite side is -35.')]:
