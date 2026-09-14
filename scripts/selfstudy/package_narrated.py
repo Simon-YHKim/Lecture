@@ -198,7 +198,10 @@ def package(work, output, source_commit, tag):
         entries = selected[lang] + [player, notes]
         local_manifest = folder/'release-manifest.json'
         write_json(local_manifest, {k: v for k, v in manifest.items() if k != 'assets'}
-                   | {'files': [file_record(p) for p in entries]})
+                   | {'scope': lang.upper()+' package: eight HTML decks and eight matching MP4 videos',
+                      'language': lang, 'coreFileCount': 16,
+                      'editions': {lang: manifest['editions'][lang]},
+                      'files': [file_record(p) for p in entries]})
         entries.append(local_manifest)
         sums = folder/'SHA256SUMS.txt'; sums.write_bytes(checksums(entries).encode('utf-8'))
         entries.append(sums)

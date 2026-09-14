@@ -97,7 +97,11 @@ class NarratedPackageTests(unittest.TestCase):
                     self.assertNotIn('reference.wav', z.namelist())
                     self.assertNotIn('asr.json', z.namelist())
                     self.assertFalse(any('SAMPLE' in name for name in z.namelist()))
-                    entries = json.loads(z.read('release-manifest.json'))['files']
+                    packaged = json.loads(z.read('release-manifest.json'))
+                    self.assertEqual(packaged['coreFileCount'], 16)
+                    self.assertEqual(packaged['language'], lang)
+                    self.assertEqual(set(packaged['editions']), {lang})
+                    entries = packaged['files']
                     import hashlib
                     for entry in entries:
                         self.assertEqual(hashlib.sha256(z.read(entry['file'])).hexdigest(), entry['sha256'])
