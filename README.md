@@ -93,6 +93,8 @@ The private production pipeline is:
    literals remain intact; pronunciation substitutions are separate synthesis input.
    Checkpoint filenames pronounce their letters, leading zeroes and separators
    explicitly; their displayed names remain unchanged.
+   English synthesis input spells out numbers, including decimal digits and
+   callout values, to avoid Korean numeral readings from the voice reference.
 3. Generate the new jobs with the existing local `scripts/part/speak_clone.py`
    workflow and the generated pronunciation map. Keep voice references, WAVs and
    ASR output private. Use the instructor's native 1.00× voice rate.

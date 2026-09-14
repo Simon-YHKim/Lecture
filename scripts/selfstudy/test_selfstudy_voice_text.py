@@ -3,6 +3,12 @@ from selfstudy_voice_text import clean,pronunciation,slide_narration
 
 
 class SelfstudyVoiceTextTests(unittest.TestCase):
+    def test_english_digits_are_spoken_in_english_even_with_a_korean_voice_reference(self):
+        self.assertEqual(pronunciation('30, 0, 11, 110 and 5.','en'),
+                         'thirty, zero, eleven, one hundred ten and five.')
+        self.assertEqual(pronunciation('F8 A3 25H7 M5 ISO25 -0.15','en'),
+                         'F eight A three twenty five H seven M five ISO twenty five minus zero point one five')
+        self.assertEqual(pronunciation('0.005 and 10000','en'),'zero point zero zero five and ten thousand')
     def test_checkpoint_file_names_preserve_leading_zeroes_and_separators(self):
         original='Save EDU-IB-02_L03_PROFILE.dwg.'
         english=pronunciation(original,'en')
@@ -32,7 +38,7 @@ class SelfstudyVoiceTextTests(unittest.TestCase):
 
     def test_relative_coordinates_and_function_key_keep_their_meaning(self):
         self.assertEqual(pronunciation('@-35,0 @31.11<45','en'),
-                         'at sign minus 35 comma 0 at sign 31 point 11 less than sign 45')
+                         'at sign minus thirty five comma zero at sign thirty one point one one less than sign forty five')
         self.assertIn('에프 8을',pronunciation('F8을 누릅니다.','ko'))
         self.assertIn('지름 25',pronunciation('Ø25','ko'))
         self.assertEqual(pronunciation('R5 끝원, M5, H7, %%c','ko'),'반지름 5 끝원, 엠 5, 에이치 7, 퍼센트 두 개, 씨')

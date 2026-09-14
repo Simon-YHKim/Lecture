@@ -117,6 +117,29 @@ def filename_pronunciation(name, lang):
     return ', '.join(parts)
 
 
+EN_SMALL=('zero','one','two','three','four','five','six','seven','eight','nine',
+          'ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen')
+EN_TENS=('','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety')
+
+
+def english_integer(digits):
+    if len(digits)>1 and digits[0]=='0':return ' '.join(EN_SMALL[int(d)] for d in digits)
+    value=int(digits)
+    if value<20:return EN_SMALL[value]
+    if value<100:return EN_TENS[value//10]+(' '+EN_SMALL[value%10] if value%10 else '')
+    for unit,name in [(1000000000,'billion'),(1000000,'million'),(1000,'thousand'),(100,'hundred')]:
+        if value>=unit:
+            return english_integer(str(value//unit))+' '+name+(' '+english_integer(str(value%unit)) if value%unit else '')
+
+
+def english_numbers(text):
+    # Read decimal places one at a time so values such as .005 keep their
+    # leading zeroes. Keep callout letters separate from their numbers.
+    text=re.sub(r'\bpoint\s+(\d+)',lambda m:'point '+' '.join(EN_SMALL[int(d)] for d in m[1]),text)
+    text=re.sub(r'(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])',' ',text)
+    return re.sub(r'\d+',lambda m:english_integer(m[0]),text)
+
+
 def pronunciation(text,lang):
     text=clean(text)
     ko=lang=='ko'
@@ -154,4 +177,5 @@ def pronunciation(text,lang):
         text=re.sub(r'\bZ\b','Zed',text)
         text=re.sub(r'(?<![A-Za-z0-9_])F(\d{1,2})(?![A-Za-z0-9_])',r'F \1',text)
         text=re.sub(r'\bdiameter\s+diameter\b','diameter',text,flags=re.I)
+        text=english_numbers(text)
     return re.sub(r'\s+',' ',text).strip()
