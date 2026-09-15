@@ -1,5 +1,5 @@
 {
-  "duration": 60.461,
+  "duration": 71.179,
   "assertions": [
     {
       "kind": "appearsBy",
@@ -9,7 +9,7 @@
     {
       "kind": "appearsBy",
       "selector": "#l8f6 .p-done",
-      "bySec": 3.56
+      "bySec": 4.0
     },
     {
       "kind": "before",
@@ -23,12 +23,12 @@
     {
       "kind": "appearsBy",
       "selector": "#l8f6 .p-done-li:last-child",
-      "bySec": 3.559
+      "bySec": 4.0
     },
     {
       "kind": "appearsBy",
       "selector": "#l8f6 .p-next-li:last-child",
-      "bySec": 29.744
+      "bySec": 35.665
     }
   ]
 }

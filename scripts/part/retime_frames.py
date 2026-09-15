@@ -52,6 +52,14 @@ _ROW_OPACITY = re.compile(r'(\bopacity\s*:\s*)(0?\.34|0?\.64)(?![\d.])')
 _ROW_CLEAR = re.compile(r'''(\bbackgroundColor\s*:\s*)(['"])rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\)\2''')
 _ROW_TINT = re.compile(r'''\bbackgroundColor\s*:\s*(['"])(?:#F5F5F3|#FFF|rgba\(\s*0\s*,\s*0\s*,\s*0\s*,\s*0\s*\))\1''', re.I)
 _ROW_SEED = re.compile(r'gsap\.set\(gsap\.utils\.toArray\([^\n]+; // row-readability-background\r?\n')
+# 제목 프레임의 등장 마감에 주는 여유. 연출이 끝나는 시각에 이만큼을 더한다.
+# 0.15 로 뒀더니 `hyperframes check` 가 오류를 냈다 — 1차시 `#l1f1 h2` 는
+# 3.96초에 시작해 1.3초 동안 나타나므로 5.26초에 다 보이는데, 검사기는 그것을
+# **5.476초에 관측**한다(마감 5.41초). 검사기가 시간축을 띄워 재기 때문이다.
+# 관측 지연 0.216초를 덮고도 남게, 그러나 제목의 호흡(퇴장 11.92초)을 깨지
+# 않을 만큼만 준다.
+TITLE_SLACK = 0.6
+
 # 두 쪽짜리 명령표의 행. `#l4f8 .ky13` 처럼 생겼다.
 _KEY_ROW = re.compile(r'#[\w-]+\s+\.ky\d+\Z')
 
@@ -486,7 +494,7 @@ def sync_motion(frame_path, dur, beats=None):
                 continue
             fade = re.search(r'duration:([\d.]+)', call['mid'])
             if fade:
-                assertion['bySec'] = round(float(call['time']) + float(fade[1]) + .15, 3)
+                assertion['bySec'] = round(float(call['time']) + float(fade[1]) + TITLE_SLACK, 3)
     if beats:
         for a in doc['assertions']:
             if a['kind'] != 'appearsBy':

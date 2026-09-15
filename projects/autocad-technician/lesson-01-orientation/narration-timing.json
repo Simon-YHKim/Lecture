@@ -1,39 +1,39 @@
 {
   "schemaVersion": 2,
   "source": "synthesised",
-  "voice": "Microsoft Heami Desktop",
+  "voice": "Simon Clone (Qwen3-TTS)",
   "rate": 0,
-  "tempo": 1.38,
-  "tempoMethod": "ffmpeg-atempo-per-paragraph",
-  "tempoToolVersion": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "tempo": 1.0,
+  "tempoMethod": "voice-clone-native",
+  "tempoToolVersion": "qwen-tts voice clone (no tempo conversion)",
   "sourceFrameHoldSeconds": 1.6,
-  "frameHoldSeconds": 1.1594202898550727,
+  "frameHoldSeconds": 1.6,
   "spokenTextSha256": "197b0616e0e4af4882b4c74d5c6e0de2c8e002c523125fd60f8b3c7a20226a16",
-  "note": "Heami Rate 0 원본 문단을 atempo=1.38로 변환하고 결과 PCM 길이를 다시 쟀다. 문단 경계는 실제 합친 음성의 시각이며 문장 내부의 발음·의미는 별도 검수한다. 원본 음성과 변환 음성, 도구 버전과 해시를 비공개 출력에 함께 보존한다.",
-  "totalSeconds": 329.423,
-  "sourceTotalSeconds": 455.513,
+  "note": "Simon Clone (Qwen3-TTS) 복제 음성으로 문장 토막을 따로 만들고 0.20초 쉼으로 한 문단으로 이었다. 문단 경계는 합친 PCM 을 다시 재서 얻은 실측값이다. 발음과 의미는 별도 검수한다. 원본 음성과 도구 버전, 해시를 비공개 출력에 함께 보존한다.",
+  "totalSeconds": 370.666,
+  "sourceTotalSeconds": 370.666,
   "frames": [
     {
       "frame": 1,
       "id": "01-title",
       "line": 1,
       "start": 0.0,
-      "end": 10.456,
-      "duration": 10.456,
+      "end": 11.375,
+      "duration": 11.375,
       "audio": "01-title.wav",
-      "audioSha256": "b435edea1e96ead7c4ada9eaa0335a81a121f4de5312960407e992f39ad64f86",
+      "audioSha256": "05a0b0f533511ae9ac60efac2016c6bd5c35e5f20aed4710bf5ee41a72378060",
       "sourceAudio": "01-title.wav",
-      "sourceAudioSha256": "386c613a49173ccb179a0497b13e938af1f9b0ff69ce8c0c9408e627668ff869",
+      "sourceAudioSha256": "05a0b0f533511ae9ac60efac2016c6bd5c35e5f20aed4710bf5ee41a72378060",
       "sourceStart": 0.0,
-      "sourceEnd": 14.453,
-      "sourceDuration": 14.453,
+      "sourceEnd": 11.375,
+      "sourceDuration": 11.375,
       "units": [
         {
           "beat": null,
-          "start": 1.159,
-          "end": 9.586,
+          "start": 1.6,
+          "end": 10.175,
           "sourceStart": 1.6,
-          "sourceEnd": 13.253
+          "sourceEnd": 10.175
         }
       ]
     },
@@ -41,128 +41,128 @@
       "frame": 2,
       "id": "02-why-drawings",
       "line": 2,
-      "start": 10.456,
-      "end": 107.284,
-      "duration": 96.828,
+      "start": 11.375,
+      "end": 116.727,
+      "duration": 105.352,
       "audio": "02-why-drawings.wav",
-      "audioSha256": "74c2403b3a4025f250c33a06d46e838c223eec1e8deffeeedd211b0c42b788f3",
+      "audioSha256": "d49025bb05bf40cdaddb5b19e211db00d516155b3a0d95cc95bf8fe1ae88d4c3",
       "sourceAudio": "02-why-drawings.wav",
-      "sourceAudioSha256": "09300533a6a7292e32e3491a1142e400ac7fea8cf053483d83b7132cc9cd0eb9",
-      "sourceStart": 14.453,
-      "sourceEnd": 148.403,
-      "sourceDuration": 133.95,
+      "sourceAudioSha256": "d49025bb05bf40cdaddb5b19e211db00d516155b3a0d95cc95bf8fe1ae88d4c3",
+      "sourceStart": 11.375,
+      "sourceEnd": 116.727,
+      "sourceDuration": 105.352,
       "units": [
         {
           "beat": null,
-          "start": 1.159,
-          "end": 4.145,
+          "start": 1.6,
+          "end": 3.98,
           "sourceStart": 1.6,
-          "sourceEnd": 5.739
+          "sourceEnd": 3.98
         },
         {
           "beat": null,
-          "start": 4.472,
-          "end": 9.644,
-          "sourceStart": 6.189,
-          "sourceEnd": 13.352
+          "start": 4.43,
+          "end": 9.751,
+          "sourceStart": 4.43,
+          "sourceEnd": 9.751
         },
         {
           "beat": null,
-          "start": 9.97,
-          "end": 15.368,
-          "sourceStart": 13.802,
-          "sourceEnd": 21.27
+          "start": 10.201,
+          "end": 15.681,
+          "sourceStart": 10.201,
+          "sourceEnd": 15.681
         },
         {
           "beat": null,
-          "start": 15.694,
-          "end": 18.664,
-          "sourceStart": 21.72,
-          "sourceEnd": 25.834
+          "start": 16.131,
+          "end": 19.688,
+          "sourceStart": 16.131,
+          "sourceEnd": 19.688
         },
         {
           "beat": null,
-          "start": 18.99,
-          "end": 23.519,
-          "sourceStart": 26.284,
-          "sourceEnd": 32.557
+          "start": 20.138,
+          "end": 24.818,
+          "sourceStart": 20.138,
+          "sourceEnd": 24.818
         },
         {
           "beat": 1,
-          "start": 23.846,
-          "end": 29.25,
-          "sourceStart": 33.007,
-          "sourceEnd": 40.49
+          "start": 25.268,
+          "end": 30.508,
+          "sourceStart": 25.268,
+          "sourceEnd": 30.508
         },
         {
           "beat": 2,
-          "start": 29.576,
-          "end": 38.138,
-          "sourceStart": 40.94,
-          "sourceEnd": 52.773
+          "start": 30.958,
+          "end": 39.778,
+          "sourceStart": 30.958,
+          "sourceEnd": 39.778
         },
         {
           "beat": 3,
-          "start": 38.464,
-          "end": 45.105,
-          "sourceStart": 53.223,
-          "sourceEnd": 62.411
+          "start": 40.228,
+          "end": 46.928,
+          "sourceStart": 40.228,
+          "sourceEnd": 46.928
         },
         {
           "beat": 4,
-          "start": 45.431,
-          "end": 51.546,
-          "sourceStart": 62.861,
-          "sourceEnd": 71.319
+          "start": 47.378,
+          "end": 53.758,
+          "sourceStart": 47.378,
+          "sourceEnd": 53.758
         },
         {
           "beat": 5,
-          "start": 51.872,
-          "end": 59.476,
-          "sourceStart": 71.769,
-          "sourceEnd": 82.282
+          "start": 54.208,
+          "end": 62.848,
+          "sourceStart": 54.208,
+          "sourceEnd": 62.848
         },
         {
           "beat": 6,
-          "start": 59.802,
-          "end": 62.041,
-          "sourceStart": 82.732,
-          "sourceEnd": 85.84
+          "start": 63.298,
+          "end": 65.398,
+          "sourceStart": 63.298,
+          "sourceEnd": 65.398
         },
         {
           "beat": null,
-          "start": 62.367,
-          "end": 65.033,
-          "sourceStart": 86.29,
-          "sourceEnd": 89.994
+          "start": 65.848,
+          "end": 68.625,
+          "sourceStart": 65.848,
+          "sourceEnd": 68.625
         },
         {
           "beat": null,
-          "start": 65.359,
-          "end": 68.466,
-          "sourceStart": 90.444,
-          "sourceEnd": 94.748
+          "start": 69.075,
+          "end": 71.975,
+          "sourceStart": 69.075,
+          "sourceEnd": 71.975
         },
         {
           "beat": null,
-          "start": 68.792,
-          "end": 75.764,
-          "sourceStart": 95.198,
-          "sourceEnd": 104.841
+          "start": 72.425,
+          "end": 80.625,
+          "sourceStart": 72.425,
+          "sourceEnd": 80.625
         },
         {
           "beat": null,
-          "start": 76.09,
-          "end": 87.143,
-          "sourceStart": 105.291,
-          "sourceEnd": 120.557
+          "start": 81.075,
+          "end": 93.902,
+          "sourceStart": 81.075,
+          "sourceEnd": 93.902
         },
         {
           "beat": null,
-          "start": 87.469,
-          "end": 95.959,
-          "sourceStart": 121.007,
-          "sourceEnd": 132.75
+          "start": 94.352,
+          "end": 104.152,
+          "sourceStart": 94.352,
+          "sourceEnd": 104.152
         }
       ]
     },
@@ -170,72 +170,72 @@
       "frame": 3,
       "id": "03-how-assessed",
       "line": 3,
-      "start": 107.284,
-      "end": 168.489,
-      "duration": 61.205,
+      "start": 116.727,
+      "end": 187.199,
+      "duration": 70.472,
       "audio": "03-how-assessed.wav",
-      "audioSha256": "fa6120e4aa9e837798504ff2d204bc16c2113f47273664105797ffe451846b82",
+      "audioSha256": "635dbd20b7ad3970ff433d6f73191131eb722aa8da20069e766a8d253df87f27",
       "sourceAudio": "03-how-assessed.wav",
-      "sourceAudioSha256": "aacfc0304ae6fbd2840eba58961687f05f8303b9f33a5af3efc95638f96aaa78",
-      "sourceStart": 148.403,
-      "sourceEnd": 233.006,
-      "sourceDuration": 84.603,
+      "sourceAudioSha256": "635dbd20b7ad3970ff433d6f73191131eb722aa8da20069e766a8d253df87f27",
+      "sourceStart": 116.727,
+      "sourceEnd": 187.199,
+      "sourceDuration": 70.472,
       "units": [
         {
           "beat": null,
-          "start": 1.159,
-          "end": 12.039,
+          "start": 1.6,
+          "end": 14.601,
           "sourceStart": 1.6,
-          "sourceEnd": 16.632
+          "sourceEnd": 14.601
         },
         {
           "beat": 1,
-          "start": 12.365,
-          "end": 19.489,
-          "sourceStart": 17.082,
-          "sourceEnd": 26.93
+          "start": 15.051,
+          "end": 23.473,
+          "sourceStart": 15.051,
+          "sourceEnd": 23.473
         },
         {
           "beat": 2,
-          "start": 19.815,
-          "end": 25.698,
-          "sourceStart": 27.38,
-          "sourceEnd": 35.518
+          "start": 23.923,
+          "end": 29.985,
+          "sourceStart": 23.923,
+          "sourceEnd": 29.985
         },
         {
           "beat": 3,
-          "start": 26.024,
-          "end": 35.75,
-          "sourceStart": 35.968,
-          "sourceEnd": 49.405
+          "start": 30.435,
+          "end": 41.555,
+          "sourceStart": 30.435,
+          "sourceEnd": 41.555
         },
         {
           "beat": 4,
-          "start": 36.076,
-          "end": 42.949,
-          "sourceStart": 49.855,
-          "sourceEnd": 59.363
+          "start": 42.005,
+          "end": 49.778,
+          "sourceStart": 42.005,
+          "sourceEnd": 49.778
         },
         {
           "beat": null,
-          "start": 43.275,
-          "end": 47.546,
-          "sourceStart": 59.813,
-          "sourceEnd": 65.722
+          "start": 50.228,
+          "end": 54.924,
+          "sourceStart": 50.228,
+          "sourceEnd": 54.924
         },
         {
           "beat": 5,
-          "start": 47.872,
-          "end": 49.868,
-          "sourceStart": 66.172,
-          "sourceEnd": 68.941
+          "start": 55.374,
+          "end": 57.418,
+          "sourceStart": 55.374,
+          "sourceEnd": 57.418
         },
         {
           "beat": null,
-          "start": 50.194,
-          "end": 60.335,
-          "sourceStart": 69.391,
-          "sourceEnd": 83.403
+          "start": 57.868,
+          "end": 69.272,
+          "sourceStart": 57.868,
+          "sourceEnd": 69.272
         }
       ]
     },
@@ -243,100 +243,100 @@
       "frame": 4,
       "id": "04-roadmap",
       "line": 4,
-      "start": 168.489,
-      "end": 271.242,
-      "duration": 102.753,
+      "start": 187.199,
+      "end": 306.818,
+      "duration": 119.619,
       "audio": "04-roadmap.wav",
-      "audioSha256": "da36ed4dfa1683f98d56e201b4a55bf38a04150ad25bab4875023e85be7ba2cd",
+      "audioSha256": "a2cb70ee94bd6052f72aa938598b14988e2edb045682bcc220d77967ecbeb42b",
       "sourceAudio": "04-roadmap.wav",
-      "sourceAudioSha256": "b22b6cb8b13fa43778c5011348b57654da2942843c6ab21f8601cd7c8c30ea17",
-      "sourceStart": 233.006,
-      "sourceEnd": 375.046,
-      "sourceDuration": 142.04,
+      "sourceAudioSha256": "a2cb70ee94bd6052f72aa938598b14988e2edb045682bcc220d77967ecbeb42b",
+      "sourceStart": 187.199,
+      "sourceEnd": 306.818,
+      "sourceDuration": 119.619,
       "units": [
         {
           "beat": null,
-          "start": 1.159,
-          "end": 4.136,
+          "start": 1.6,
+          "end": 4.4,
           "sourceStart": 1.6,
-          "sourceEnd": 5.729
+          "sourceEnd": 4.4
         },
         {
           "beat": null,
-          "start": 4.462,
-          "end": 11.245,
-          "sourceStart": 6.179,
-          "sourceEnd": 15.562
+          "start": 4.85,
+          "end": 13.45,
+          "sourceStart": 4.85,
+          "sourceEnd": 13.45
         },
         {
           "beat": null,
-          "start": 11.571,
-          "end": 28.052,
-          "sourceStart": 16.012,
-          "sourceEnd": 38.772
+          "start": 13.9,
+          "end": 30.98,
+          "sourceStart": 13.9,
+          "sourceEnd": 30.98
         },
         {
           "beat": null,
-          "start": 28.378,
-          "end": 31.78,
-          "sourceStart": 39.222,
-          "sourceEnd": 43.936
+          "start": 31.43,
+          "end": 34.69,
+          "sourceStart": 31.43,
+          "sourceEnd": 34.69
         },
         {
           "beat": 1,
-          "start": 32.107,
-          "end": 37.204,
-          "sourceStart": 44.386,
-          "sourceEnd": 51.439
+          "start": 35.14,
+          "end": 40.88,
+          "sourceStart": 35.14,
+          "sourceEnd": 40.88
         },
         {
           "beat": 2,
-          "start": 37.53,
-          "end": 45.098,
-          "sourceStart": 51.889,
-          "sourceEnd": 62.356
+          "start": 41.33,
+          "end": 50.833,
+          "sourceStart": 41.33,
+          "sourceEnd": 50.833
         },
         {
           "beat": 3,
-          "start": 45.424,
-          "end": 55.771,
-          "sourceStart": 62.806,
-          "sourceEnd": 77.103
+          "start": 51.283,
+          "end": 63.666,
+          "sourceStart": 51.283,
+          "sourceEnd": 63.666
         },
         {
           "beat": 4,
-          "start": 56.098,
-          "end": 69.315,
-          "sourceStart": 77.553,
-          "sourceEnd": 95.815
+          "start": 64.116,
+          "end": 80.059,
+          "sourceStart": 64.116,
+          "sourceEnd": 80.059
         },
         {
           "beat": 5,
-          "start": 69.641,
-          "end": 78.493,
-          "sourceStart": 96.265,
-          "sourceEnd": 108.502
+          "start": 80.509,
+          "end": 91.129,
+          "sourceStart": 80.509,
+          "sourceEnd": 91.129
         },
         {
           "beat": 6,
-          "start": 78.82,
-          "end": 84.513,
-          "sourceStart": 108.952,
-          "sourceEnd": 116.83
+          "start": 91.579,
+          "end": 97.839,
+          "sourceStart": 91.579,
+          "sourceEnd": 97.839
         },
         {
           "beat": 7,
-          "start": 84.839,
-          "end": 92.142,
-          "sourceStart": 117.28,
-          "sourceEnd": 127.378
+          "start": 98.289,
+          "end": 106.849,
+          "sourceStart": 98.289,
+          "sourceEnd": 106.849
         },
         {
           "beat": 8,
-          "start": 92.468,
-          "end": 101.884,
-          "sourceStart": 127.828,
-          "sourceEnd": 140.84
+          "start": 107.299,
+          "end": 118.419,
+          "sourceStart": 107.299,
+          "sourceEnd": 118.419
         }
       ]
     },
@@ -344,65 +344,65 @@
       "frame": 5,
       "id": "05-recap",
       "line": 5,
-      "start": 271.242,
-      "end": 315.034,
-      "duration": 43.792,
+      "start": 306.818,
+      "end": 354.755,
+      "duration": 47.937,
       "audio": "05-recap.wav",
-      "audioSha256": "5c3950700b4b539267ed39839830a825a7024405091f405d3b9b08ffd55da331",
+      "audioSha256": "eb1d91d7e37e9f2378dc247f9caf0f541f3842a94c25c1f625b527241a6ca7cf",
       "sourceAudio": "05-recap.wav",
-      "sourceAudioSha256": "50937b30557131b9fb54a59936b0eddecf5e261fdd4b5e77df250944575055cc",
-      "sourceStart": 375.046,
-      "sourceEnd": 435.612,
-      "sourceDuration": 60.566,
+      "sourceAudioSha256": "eb1d91d7e37e9f2378dc247f9caf0f541f3842a94c25c1f625b527241a6ca7cf",
+      "sourceStart": 306.818,
+      "sourceEnd": 354.755,
+      "sourceDuration": 47.937,
       "units": [
         {
           "beat": 1,
-          "start": 1.159,
-          "end": 3.387,
+          "start": 1.6,
+          "end": 3.22,
           "sourceStart": 1.6,
-          "sourceEnd": 4.689
+          "sourceEnd": 3.22
         },
         {
           "beat": null,
-          "start": 3.713,
-          "end": 10.29,
-          "sourceStart": 5.139,
-          "sourceEnd": 14.237
+          "start": 3.67,
+          "end": 10.41,
+          "sourceStart": 3.67,
+          "sourceEnd": 10.41
         },
         {
           "beat": null,
-          "start": 10.616,
-          "end": 19.385,
-          "sourceStart": 14.686,
-          "sourceEnd": 26.814
+          "start": 10.86,
+          "end": 21.357,
+          "sourceStart": 10.86,
+          "sourceEnd": 21.357
         },
         {
           "beat": 2,
-          "start": 19.711,
-          "end": 22.334,
-          "sourceStart": 27.264,
-          "sourceEnd": 30.898
+          "start": 21.807,
+          "end": 24.075,
+          "sourceStart": 21.807,
+          "sourceEnd": 24.075
         },
         {
           "beat": null,
-          "start": 22.66,
-          "end": 29.694,
-          "sourceStart": 31.348,
-          "sourceEnd": 41.07
+          "start": 24.525,
+          "end": 32.705,
+          "sourceStart": 24.525,
+          "sourceEnd": 32.705
         },
         {
           "beat": null,
-          "start": 30.02,
-          "end": 36.277,
-          "sourceStart": 41.52,
-          "sourceEnd": 50.173
+          "start": 33.155,
+          "end": 39.487,
+          "sourceStart": 33.155,
+          "sourceEnd": 39.487
         },
         {
           "beat": null,
-          "start": 36.603,
-          "end": 42.922,
-          "sourceStart": 50.623,
-          "sourceEnd": 59.366
+          "start": 39.937,
+          "end": 46.737,
+          "sourceStart": 39.937,
+          "sourceEnd": 46.737
         }
       ]
     },
@@ -410,30 +410,30 @@
       "frame": 6,
       "id": "06-closing",
       "line": 6,
-      "start": 315.034,
-      "end": 329.423,
-      "duration": 14.389,
+      "start": 354.755,
+      "end": 370.666,
+      "duration": 15.911,
       "audio": "06-closing.wav",
-      "audioSha256": "11cd9b6c022bcfa8f85da26ff9210e9a0376b63a07f40198baf970abc8e7d3b1",
+      "audioSha256": "29dd04deeb60ca5fd0fa688ea8d194a83a92b59f6fcbffb30fa93a233b48d05d",
       "sourceAudio": "06-closing.wav",
-      "sourceAudioSha256": "e23ec083a81dd9474ba4f2dc510902825a87c2ebca66cfee578d741bd724160d",
-      "sourceStart": 435.612,
-      "sourceEnd": 455.513,
-      "sourceDuration": 19.901,
+      "sourceAudioSha256": "29dd04deeb60ca5fd0fa688ea8d194a83a92b59f6fcbffb30fa93a233b48d05d",
+      "sourceStart": 354.755,
+      "sourceEnd": 370.666,
+      "sourceDuration": 15.911,
       "units": [
         {
           "beat": 1,
-          "start": 1.159,
-          "end": 4.336,
+          "start": 1.6,
+          "end": 5.501,
           "sourceStart": 1.6,
-          "sourceEnd": 6.009
+          "sourceEnd": 5.501
         },
         {
           "beat": 2,
-          "start": 4.662,
-          "end": 13.52,
-          "sourceStart": 6.459,
-          "sourceEnd": 18.701
+          "start": 5.951,
+          "end": 14.711,
+          "sourceStart": 5.951,
+          "sourceEnd": 14.711
         }
       ]
     }
@@ -442,187 +442,187 @@
     {
       "frame": 2,
       "beat": 1,
-      "observedStart": 34.302,
-      "observedEnd": 39.706,
-      "sourceObservedStart": 47.46,
-      "sourceObservedEnd": 54.943
+      "observedStart": 36.643,
+      "observedEnd": 41.883,
+      "sourceObservedStart": 36.643,
+      "sourceObservedEnd": 41.883
     },
     {
       "frame": 2,
       "beat": 2,
-      "observedStart": 40.032,
-      "observedEnd": 48.594,
-      "sourceObservedStart": 55.393,
-      "sourceObservedEnd": 67.226
+      "observedStart": 42.333,
+      "observedEnd": 51.153,
+      "sourceObservedStart": 42.333,
+      "sourceObservedEnd": 51.153
     },
     {
       "frame": 2,
       "beat": 3,
-      "observedStart": 48.92,
-      "observedEnd": 55.561,
-      "sourceObservedStart": 67.676,
-      "sourceObservedEnd": 76.864
+      "observedStart": 51.603,
+      "observedEnd": 58.303,
+      "sourceObservedStart": 51.603,
+      "sourceObservedEnd": 58.303
     },
     {
       "frame": 2,
       "beat": 4,
-      "observedStart": 55.887,
-      "observedEnd": 62.002,
-      "sourceObservedStart": 77.314,
-      "sourceObservedEnd": 85.772
+      "observedStart": 58.753,
+      "observedEnd": 65.133,
+      "sourceObservedStart": 58.753,
+      "sourceObservedEnd": 65.133
     },
     {
       "frame": 2,
       "beat": 5,
-      "observedStart": 62.328,
-      "observedEnd": 69.932,
-      "sourceObservedStart": 86.222,
-      "sourceObservedEnd": 96.735
+      "observedStart": 65.583,
+      "observedEnd": 74.223,
+      "sourceObservedStart": 65.583,
+      "sourceObservedEnd": 74.223
     },
     {
       "frame": 2,
       "beat": 6,
-      "observedStart": 70.258,
-      "observedEnd": 72.497,
-      "sourceObservedStart": 97.185,
-      "sourceObservedEnd": 100.293
+      "observedStart": 74.673,
+      "observedEnd": 76.773,
+      "sourceObservedStart": 74.673,
+      "sourceObservedEnd": 76.773
     },
     {
       "frame": 3,
       "beat": 1,
-      "observedStart": 119.649,
-      "observedEnd": 126.773,
-      "sourceObservedStart": 165.485,
-      "sourceObservedEnd": 175.333
+      "observedStart": 131.778,
+      "observedEnd": 140.2,
+      "sourceObservedStart": 131.778,
+      "sourceObservedEnd": 140.2
     },
     {
       "frame": 3,
       "beat": 2,
-      "observedStart": 127.099,
-      "observedEnd": 132.982,
-      "sourceObservedStart": 175.783,
-      "sourceObservedEnd": 183.921
+      "observedStart": 140.65,
+      "observedEnd": 146.712,
+      "sourceObservedStart": 140.65,
+      "sourceObservedEnd": 146.712
     },
     {
       "frame": 3,
       "beat": 3,
-      "observedStart": 133.308,
-      "observedEnd": 143.034,
-      "sourceObservedStart": 184.371,
-      "sourceObservedEnd": 197.808
+      "observedStart": 147.162,
+      "observedEnd": 158.282,
+      "sourceObservedStart": 147.162,
+      "sourceObservedEnd": 158.282
     },
     {
       "frame": 3,
       "beat": 4,
-      "observedStart": 143.36,
-      "observedEnd": 150.233,
-      "sourceObservedStart": 198.258,
-      "sourceObservedEnd": 207.766
+      "observedStart": 158.732,
+      "observedEnd": 166.505,
+      "sourceObservedStart": 158.732,
+      "sourceObservedEnd": 166.505
     },
     {
       "frame": 3,
       "beat": 5,
-      "observedStart": 155.156,
-      "observedEnd": 157.152,
-      "sourceObservedStart": 214.575,
-      "sourceObservedEnd": 217.344
+      "observedStart": 172.101,
+      "observedEnd": 174.145,
+      "sourceObservedStart": 172.101,
+      "sourceObservedEnd": 174.145
     },
     {
       "frame": 4,
       "beat": 1,
-      "observedStart": 200.596,
-      "observedEnd": 205.693,
-      "sourceObservedStart": 277.392,
-      "sourceObservedEnd": 284.445
+      "observedStart": 222.339,
+      "observedEnd": 228.079,
+      "sourceObservedStart": 222.339,
+      "sourceObservedEnd": 228.079
     },
     {
       "frame": 4,
       "beat": 2,
-      "observedStart": 206.019,
-      "observedEnd": 213.587,
-      "sourceObservedStart": 284.895,
-      "sourceObservedEnd": 295.362
+      "observedStart": 228.529,
+      "observedEnd": 238.032,
+      "sourceObservedStart": 228.529,
+      "sourceObservedEnd": 238.032
     },
     {
       "frame": 4,
       "beat": 3,
-      "observedStart": 213.913,
-      "observedEnd": 224.26,
-      "sourceObservedStart": 295.812,
-      "sourceObservedEnd": 310.109
+      "observedStart": 238.482,
+      "observedEnd": 250.865,
+      "sourceObservedStart": 238.482,
+      "sourceObservedEnd": 250.865
     },
     {
       "frame": 4,
       "beat": 4,
-      "observedStart": 224.587,
-      "observedEnd": 237.804,
-      "sourceObservedStart": 310.559,
-      "sourceObservedEnd": 328.821
+      "observedStart": 251.315,
+      "observedEnd": 267.258,
+      "sourceObservedStart": 251.315,
+      "sourceObservedEnd": 267.258
     },
     {
       "frame": 4,
       "beat": 5,
-      "observedStart": 238.13,
-      "observedEnd": 246.982,
-      "sourceObservedStart": 329.271,
-      "sourceObservedEnd": 341.508
+      "observedStart": 267.708,
+      "observedEnd": 278.328,
+      "sourceObservedStart": 267.708,
+      "sourceObservedEnd": 278.328
     },
     {
       "frame": 4,
       "beat": 6,
-      "observedStart": 247.309,
-      "observedEnd": 253.002,
-      "sourceObservedStart": 341.958,
-      "sourceObservedEnd": 349.836
+      "observedStart": 278.778,
+      "observedEnd": 285.038,
+      "sourceObservedStart": 278.778,
+      "sourceObservedEnd": 285.038
     },
     {
       "frame": 4,
       "beat": 7,
-      "observedStart": 253.328,
-      "observedEnd": 260.631,
-      "sourceObservedStart": 350.286,
-      "sourceObservedEnd": 360.384
+      "observedStart": 285.488,
+      "observedEnd": 294.048,
+      "sourceObservedStart": 285.488,
+      "sourceObservedEnd": 294.048
     },
     {
       "frame": 4,
       "beat": 8,
-      "observedStart": 260.957,
-      "observedEnd": 270.373,
-      "sourceObservedStart": 360.834,
-      "sourceObservedEnd": 373.846
+      "observedStart": 294.498,
+      "observedEnd": 305.618,
+      "sourceObservedStart": 294.498,
+      "sourceObservedEnd": 305.618
     },
     {
       "frame": 5,
       "beat": 1,
-      "observedStart": 272.401,
-      "observedEnd": 274.629,
-      "sourceObservedStart": 376.646,
-      "sourceObservedEnd": 379.735
+      "observedStart": 308.418,
+      "observedEnd": 310.038,
+      "sourceObservedStart": 308.418,
+      "sourceObservedEnd": 310.038
     },
     {
       "frame": 5,
       "beat": 2,
-      "observedStart": 290.953,
-      "observedEnd": 293.576,
-      "sourceObservedStart": 402.31,
-      "sourceObservedEnd": 405.944
+      "observedStart": 328.625,
+      "observedEnd": 330.893,
+      "sourceObservedStart": 328.625,
+      "sourceObservedEnd": 330.893
     },
     {
       "frame": 6,
       "beat": 1,
-      "observedStart": 316.193,
-      "observedEnd": 319.37,
-      "sourceObservedStart": 437.212,
-      "sourceObservedEnd": 441.621
+      "observedStart": 356.355,
+      "observedEnd": 360.256,
+      "sourceObservedStart": 356.355,
+      "sourceObservedEnd": 360.256
     },
     {
       "frame": 6,
       "beat": 2,
-      "observedStart": 319.696,
-      "observedEnd": 328.554,
-      "sourceObservedStart": 442.071,
-      "sourceObservedEnd": 454.313
+      "observedStart": 360.706,
+      "observedEnd": 369.466,
+      "sourceObservedStart": 360.706,
+      "sourceObservedEnd": 369.466
     }
   ],
-  "timingSha256": "ea912b87d2f0aa4d3afe38ebd4fb513f7965f803c75b14b5d32c0a3e4877bbc6"
+  "timingSha256": "b7c89974789af4eb708afeeb11e82081a4cfd7c9a0804baaf9ab5a24a7f7a11a"
 }

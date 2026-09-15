@@ -8,12 +8,13 @@
   2. 이중언어 — {"ko":…, "en":…} 쌍에 한쪽만 있는 곳이 없는가
   3. 사실 충실도 — 타이핑하는 값이 원본 대본의 백틱 안에 실제로 있었는가
   4. 안전 — 산문에 HTML 태그가 섞였는가, 도해 ref 가 실재하는가
-  5. 용량 — 62 KB(정본 도면을 쓰면 50 KB) 안에 들어오는가
+  5. 용량 — 큰 차시도 실제 분권 페이지가 각각 100 KB 안에 들어오는가
 """
 import io, json, os, re, sys, glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SCRATCH = os.environ.get('SELFSTUDY_SRC') or os.path.dirname(HERE)
+DEFAULT_SOURCE = os.path.join(HERE, 'source')
+SCRATCH = os.environ.get('SELFSTUDY_SRC') or DEFAULT_SOURCE
 REPO = os.environ.get('LECTURE_REPO') or os.path.abspath(os.path.join(HERE, os.pardir, os.pardir))
 LESSON_DIR = {
     1: 'lesson-01-orientation', 2: 'lesson-02-part-and-template',
@@ -58,7 +59,8 @@ def source_tokens(no):
     p = os.path.join(REPO, 'projects', 'autocad-technician', d, 'SCRIPT.md')
     if not os.path.exists(p):
         return None
-    txt = io.open(p, encoding='utf-8').read()
+    with io.open(p, encoding='utf-8') as source:
+        txt = source.read()
     toks = set()
     for m in BACKTICK.finditer(txt):
         toks.add(m.group(1).strip())
@@ -68,7 +70,8 @@ def source_tokens(no):
 def check(path, figures):
     errs, warns = [], []
     try:
-        d = json.load(io.open(path, encoding='utf-8'))
+        with io.open(path, encoding='utf-8') as source:
+            d = json.load(source)
     except Exception as e:
         return ['JSON 파싱 실패: %s' % e], []
 
@@ -125,9 +128,9 @@ def check(path, figures):
 
     # 영국식 철자 — 영문과 도해 글자 양쪽을 본다
     brit = []
-    for path, ko, en in pairs(d):
+    for pair_path, ko, en in pairs(d):
         for m in BRITISH.finditer(en or ''):
-            brit.append('%s: %s' % (path, m.group(0)))
+            brit.append('%s: %s' % (pair_path, m.group(0)))
     def svg_scan(node, path=''):
         if isinstance(node, dict):
             for k, v in node.items():
@@ -168,7 +171,19 @@ def check(path, figures):
     # 여기 값은 한 차시가 통째로 비대해지는 것만 막는 안전선이다.
     cap = 120 * 1024
     if size > cap:
-        errs.append('%d B — 한도 %d B 를 넘었다' % (size, cap))
+        # 전체 JSON은 두 언어와 여러 쪽의 내용을 함께 담는다. 120KB가
+        # 넘으면 실제 페이지를 검사한다. 각 HTML의 100KB 제한은 유지한다.
+        try:
+            import build_selfstudy as builder
+            pages = builder.build_lesson(d, (None, None))
+            oversized = [p['name'] for p in pages
+                         if len(p['html'].encode('utf-8')) > builder.PAGE_CAP]
+            if oversized:
+                errs.append('분권해도 100KB를 넘는 쪽: %s' % ', '.join(oversized))
+            else:
+                warns.append('전체 JSON %d B; 분권 %d쪽 모두 100KB 이내' % (size, len(pages)))
+        except Exception as exc:
+            errs.append('큰 차시의 실제 페이지 용량 검증 실패: %s' % exc)
     if inline_svg_bytes > 8 * 1024:
         warns.append('직접 그린 SVG 합계 %d B (한도 8192 B)' % inline_svg_bytes)
 
@@ -194,6 +209,9 @@ def main(argv):
         figures = {f[:-4] for f in os.listdir(figdir)} if os.path.isdir(figdir) else set()
     paths = argv or (sorted(glob.glob(os.path.join(SCRATCH, 'content', 'lesson-*.json')))
                      or sorted(glob.glob(os.path.join(SCRATCH, 'lesson-*.json'))))
+    if not paths:
+        print('검사할 lesson-*.json이 없습니다: %s' % SCRATCH)
+        return 1
     bad = 0
     for p in paths:
         e, _ = check(p, figures)

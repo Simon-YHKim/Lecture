@@ -43,6 +43,11 @@ VOICE = VOICES["ko"]
 # 배속은 목소리를 따른다. 국문 1.38 은 사용자가 정한 과정 정책이고, 영문은
 # 표본을 듣고 1.15 로 정했다 — Zira 는 또렷해서 1.38 이 빠르게 들린다.
 TEMPOS = {VOICES["ko"]: 1.38, VOICES["en"]: 1.15}
+# 복제 음성. SAPI 로는 만들 수 없어 `narrate()` 가 아니라 `ingest_voice.py` 로
+# 들어온다. 배속이 1.0 인 것은 사람 말투가 그대로 나오기 때문이다 — 1.38 은
+# 규칙 기반 음성이 느려서 올린 값이고 복제본에는 올릴 이유가 없다.
+CLONES = {"Simon Clone (Qwen3-TTS)": 1.0}
+TEMPOS.update(CLONES)
 TEMPO = TEMPOS[VOICE]
 BASE_FRAME_HOLD = 1.6
 
@@ -91,6 +96,11 @@ def timing_identity(timing):
                                     separators=(',', ':'), allow_nan=False).encode('utf-8')).hexdigest()
 
 
+def tempo_method(voice):
+    """배속을 어떻게 얻었는가. 복제 음성은 변환을 거치지 않는다."""
+    return 'voice-clone-native' if voice in CLONES else 'ffmpeg-atempo-per-paragraph'
+
+
 def verify_tempo_timing(timing, required=False):
     """Keep old reference audio distinct from the current 1.38x delivery voice."""
     if 'tempo' not in timing:
@@ -99,8 +109,9 @@ def verify_tempo_timing(timing, required=False):
         return 1.0
     if (timing.get('schemaVersion') != 2 or timing.get('rate') != 0
             or timing.get('tempo') != TEMPOS.get(timing.get('voice'))
-            or timing.get('tempoMethod') != 'ffmpeg-atempo-per-paragraph'
-            or not timing.get('tempoToolVersion') or timing.get('voice') not in VOICES.values()):
+            or timing.get('tempoMethod') != tempo_method(timing.get('voice'))
+            or not timing.get('tempoToolVersion')
+            or timing.get('voice') not in set(VOICES.values()) | set(CLONES)):
         raise ValueError('Expected Rate 0 speech followed by pitch-preserving 1.38x tempo conversion')
     if timing.get('timingSha256') != timing_identity(timing):
         raise ValueError('Narration timing identity changed; regenerate speech')

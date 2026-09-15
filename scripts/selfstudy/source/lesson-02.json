@@ -5,7 +5,7 @@
   "ko": "부품 이해와 도면 환경",
   "en": "Reading the Part, Building the Sheet"
  },
- "videoLength": "26:55",
+ "videoLength": "31:08",
  "selfStudyMin": 130,
  "opens": null,
  "saves": "EDU-IB-02_L02_TEMPLATE",
@@ -3343,5 +3343,9 @@
    "ko": "3차시는 기준선과 외곽입니다. 드디어 선을 그어요. 점 찍는 방법 넷을 봅니다. 객체 스냅, 직교와 수치 입력, 스냅 추적과 FROM, 자유 클릭이에요. 넷 중 무엇을 쓸지 가르는 기준도 함께 봐요. LINE 과 PLINE 의 차이도 봅니다. 원점과 기준면을 정하고 120 × 16 베이스를 작도해요. 오늘 켜 둔 접점 스냅으로 보스 원에 접하는 목 선을 그립니다. 시작할 때 EDU-IB-02_L02_TEMPLATE 을 엽니다. 새로 만들지 마세요.",
    "en": "Lesson 3 is the baseline and the outline, and you finally draw. You place points with absolute, relative, and polar coordinates and see when each one fits. You also see how LINE differs from PLINE. You fix the origin and the datum face, then draw the 120 by 16 base from typed coordinates. With the tangent snap you turned on today you draw the web lines tangent to the boss circle. Open EDU-IB-02_L02_TEMPLATE to start. Do not create a new file."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "31:08",
+  "en": "35:58"
  }
 }

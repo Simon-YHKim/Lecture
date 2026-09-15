@@ -1,15 +1,14 @@
 # SCRIPT — AutoCAD Technician Lesson 1 · Orientation (English edition)
 
 **Checkpoint:** none (no drawing work)<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · playback tempo to be confirmed<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm and clear, as if introducing the course to someone you have just met. Do not rush.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 7 min 32 sec, including narration and frame holds.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:11
+**Time:** 0:00–0:15
 
     (silence, or a short greeting)
 
@@ -17,11 +16,11 @@
 
 ## Line 2 — A drawing speaks for you (Frame 2)
 
-**Time:** 0:11–1:49
+**Time:** 0:15–2:28
 
     Let us start with why you learn drawings at all.
 
-    Standing in front of a machine you have probably said something like this. "Just shave off about this much here."
+    Standing in front of a machine, you have probably said something like this. "Just shave off about this much here."
 
     To the person saying it, that can feel like a clear instruction. Did the person listening understand the same thing?
 
@@ -45,7 +44,7 @@
 
     When a task is awkward, you draw a jig and propose an improvement.
 
-    You also check where new equipment will stand, on a drawing first. You find blocked walkways or clashes with nearby machines before they happen.
+    You also check on a drawing first where new equipment will stand. You find blocked walkways or clashes with nearby machines before they happen.
 
     When a machine stops and you need a spare part quickly, you need a drawing as well. You find the part in the assembly drawing and check its part drawing. Then you talk to the machine shop with that drawing in front of you both.
 
@@ -53,7 +52,7 @@
 
 ## Line 3 — What the practice tasks look like (Frame 3)
 
-**Time:** 1:49–2:51
+**Time:** 2:28–3:50
 
     In this course you draw these yourself, so that you can do that work. The two formats introduced here are practice examples for this course. The exam's task format and how it is run are confirmed in the announcement that will be shared.
 
@@ -69,11 +68,11 @@
 
     (5 below) One thing to note in passing.
 
-    Sheet size, layer names and colors can differ from task to task. The values this course settles are practice defaults. If the task sheet in front of you states something else, follow the task sheet.
+    Sheet size, layer names and colors can differ from task to task. The values this course sets are practice defaults. If the task sheet in front of you states something else, follow the task sheet.
 
 ## Line 4 — One part, drawn to the end, and the exam (Frame 4)
 
-**Time:** 2:51–4:35
+**Time:** 3:50–6:13
 
     Now let us see what you learn, and in what order.
 
@@ -101,13 +100,13 @@
 
 ## Line 5 — This lesson and the next (Frame 5)
 
-**Time:** 4:35–5:20
+**Time:** 6:13–7:16
 
     (1 left) Four things from today.
 
     A drawing carries the author's intent so that anyone reading it takes the same meaning. You saw the five things a drawing has to have.
 
-    You also told the two practice formats apart — drawing to given dimensions, and orthographic projection. From Lesson 2 you carry one saved file forward and finish one part.
+    You also learned to tell the two practice formats apart: drawing to given dimensions, and orthographic projection. From Lesson 2 you carry one saved file forward and finish one part.
 
     (2 right) The course proper starts next time.
 
@@ -119,7 +118,7 @@
 
 ## Line 6 — Well done (Frame 6)
 
-**Time:** 5:20–5:36
+**Time:** 7:16–7:32
 
     (1) That is it for today. Well done.
 

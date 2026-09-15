@@ -8,7 +8,7 @@ import episodes
 import lesson_docs
 import lesson_kit
 from sync_narration import sync
-from narrate_tts import verify_script_hash, verify_tempo_timing
+from narrate_tts import CLONES, verify_script_hash, verify_tempo_timing
 from lesson_edit import staged_edit
 
 
@@ -72,9 +72,13 @@ def refresh_inplace(lesson_dir):
         '> 전체 길이 %d분 %02d초 — 실제 TTS와 화면 전환 시간을 반영한 값입니다.'
         % (total // 60, total % 60), script, count=1, flags=re.M)
     if timing.get('source') == 'synthesised':
+        voice = ('**Voice:** Qwen3-TTS · %s · pitch-preserving %.2fx<br>'
+                 % (timing['voice'], timing.get('tempo', 1.0))
+                 if timing['voice'] in CLONES else
+                 '**Voice:** Windows SAPI · %s · Rate %s 원본 · 음높이 보존 %.2f배속<br>'
+                 % (timing['voice'], timing['rate'], timing.get('tempo', 1.0)))
         script = re.sub(r'^\*\*Voice:\*\*.*$',
-            '**Voice:** Windows SAPI · %s · Rate %s 원본 · 음높이 보존 %.2f배속<br>'
-            % (timing['voice'], timing['rate'], timing.get('tempo', 1.0)),
+            voice,
             script, count=1, flags=re.M)
     script_path.write_text(script, encoding='utf-8', newline='\n')
     return total

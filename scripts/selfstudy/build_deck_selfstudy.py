@@ -21,6 +21,7 @@
     python scripts/selfstudy/build_deck_selfstudy.py <lesson-dir> <lesson.json> [출력]
 """
 import io
+import html
 import json
 import math
 import os
@@ -484,6 +485,14 @@ def part_notes(sec, page, pi, pnote):
         say.append(plain(ko(sec['lede'])))
     for _kind, items in page:
         for h in items:
+            if _kind == 'fig':
+                # SVGs contain both language layers, only one of which is
+                # visible. Flattening their markup speaks both. Use the
+                # canonical description selected for this edition instead.
+                description = re.search(r'data-narration="([^"]*)"', h)
+                if description:
+                    say.append(html.unescape(description.group(1)))
+                    continue
             t = re.sub(r'\s+', ' ', plain(re.sub(r'<[^>]+>', ' ', h))).strip()
             if t:
                 say.append(t)
@@ -535,9 +544,10 @@ def concept_slide(sec, cid, clock):
             groups.append(('para', ['<p class="cp" data-memo="%s">%s</p>'
                                     % (esc(plain(ko(b))[:40]), rich(ko(b)))]))
         elif t == 'figure' and b.get('svg') and not any(k == 'fig' for k, _ in groups):
-            groups.append(('fig', ['<figure class="cfig"><div class="cfw">%s</div>'
+            groups.append(('fig', ['<figure class="cfig" data-narration="%s"><div class="cfw">%s</div>'
                                    '<figcaption>%s</figcaption></figure>'
-                                   % (b['svg'], esc(ko(b.get('caption'))))]))
+                                   % (html.escape(ko(b.get('alt') or b.get('caption')), quote=True),
+                                      b['svg'], esc(ko(b.get('caption'))))]))
         elif t == 'note' and not note:
             note = ('<div class="note nn" data-memo="%s"><b class="lb">%s</b>%s</div>'
                     % (esc(ko(b.get('label'))), esc(ko(b.get('label'))), rich(ko(b))))
@@ -896,7 +906,8 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
                                 'data-composition-id="%s" data-label="%s"'
                                 % (cid, esc(heads[fnum])), 1)
         bodies.append('<!-- %s · %s -->\n%s' % (cid, base, body))
-        entry = {'sceneId': cid, 'notes': notes.get(fnum, '') or '—'}
+        entry = {'sceneId': cid, 'notes': notes.get(fnum, '') or '—',
+                 'sourceFrame': base, 'sourceFrameSlot': n}
         bts, f0 = beats.get(n) or [], f_start.get(n)
         if bts and f0 is not None:
             frag = [round(clock + (t - f0), 2) for t in bts]
@@ -917,6 +928,7 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
                 # 내용이 한 장에 안 들어가면 개념 장은 스스로 여러 장으로 나뉜다.
                 made = concept_slide(sec, scid, clock)
             for b, t, sl, d in made:
+                sl['sourceSection'] = label
                 bodies.append(b); tls.append((sl['sceneId'], t))
                 slides.append(sl); clock += d
 
@@ -928,11 +940,13 @@ def main(lesson_dir, lesson_json, outpath, include_symbols=True):
     if steps and not dropped:
         raise SystemExit('%d차시 따라 하기를 놓을 자리를 못 찾았다' % L['no'])
 
-    island = json.dumps({'slides': slides, 'slideSequences': [], 'language': 'ko',
+    island = json.dumps({'slides': slides, 'slideSequences': [], 'language': LANG,
                         'practiceSteps': len(steps),
                         'practiceActions': sum(len(st.get('actions', [])) for st in steps)},
-                        ensure_ascii=False, indent=1)
-    nav = io.open(os.path.join(HERE, 'assets', 'deck_nav.html'), encoding='utf-8').read()
+                        ensure_ascii=False, indent=1).replace('<', '\\u003c')
+    nav = io.open(os.path.join(HERE, 'assets',
+                               'deck_nav.en.html' if LANG == 'en' else 'deck_nav.html'),
+                  encoding='utf-8').read()
     title = re.search(r'#\s*SCRIPT\s*—\s*(.*)', script)
     title = title.group(1).strip() if title else os.path.basename(lesson_dir)
     made = '\n'.join('<script>(function(){var tl=gsap.timeline({paused:true});%s'

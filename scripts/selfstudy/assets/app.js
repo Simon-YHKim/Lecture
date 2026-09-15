@@ -29,19 +29,21 @@
 
   /* ── 언어 ─────────────────────────────── */
   var root = document.documentElement;
-  function setLang(l) {
+  function setLang(l, remember) {
     document.body.setAttribute('data-lang', l);
     root.setAttribute('lang', l);
     $$('[data-lang-btn]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-lang-btn') === l));
     });
-    try { localStorage.setItem('acad-selfstudy/lang', JSON.stringify(l)); } catch (e) { mem.lang = l; }
+    if (remember) {
+      try { localStorage.setItem('acad-selfstudy/lang', JSON.stringify(l)); } catch (e) { mem.lang = l; }
+    }
   }
-  var savedLang = 'ko';
+  var savedLang = document.body.getAttribute('data-lang') || 'ko';
   try { var sl = localStorage.getItem('acad-selfstudy/lang'); if (sl) savedLang = JSON.parse(sl); } catch (e) { }
   setLang(savedLang === 'en' ? 'en' : 'ko');
   $$('[data-lang-btn]').forEach(function (b) {
-    b.addEventListener('click', function () { setLang(b.getAttribute('data-lang-btn')); });
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-lang-btn'), true); });
   });
 
   /* ── 테마 ─────────────────────────────── */

@@ -5,7 +5,7 @@
   "ko": "원·호·오프셋",
   "en": "Circles, Arcs, Offset"
  },
- "videoLength": "27:26",
+ "videoLength": "31:56",
  "selfStudyMin": 100,
  "opens": "EDU-IB-02_L03_PROFILE",
  "saves": "EDU-IB-02_L04_FEATURES",
@@ -6827,5 +6827,9 @@
    "ko": "5차시는 제3각법 투상입니다. 정면도 하나로 도면 전체를 만듭니다. 평면도를 위쪽에, 우측면도를 오른쪽에 놓습니다. 핵심은 둘이에요. 정면도의 어느 점이 평면도의 어느 점이 되는지입니다. 그리고 보조선을 어떻게 끌어 쓰는지입니다. 오늘 그린 축 구멍과 탭 구멍은 옆에서 보면 가려져 숨은선으로 나옵니다. 2차시에 만들어 둔 숨은선 레이어를 여기서 처음 써요.",
    "en": "Lesson 5 is third-angle projection. One front view generates the whole drawing: the top view above it, the right side view to its right. Two things matter - which point of the front view becomes which point of the top view, and how you pull construction lines across. The bore and tapped holes you drew today are hidden when seen from the side, so they come out as hidden lines. That is where the hidden layer built in Lesson 2 finally gets used."
   }
+ },
+ "videoLengthByLang": {
+  "ko": "31:56",
+  "en": "38:02"
  }
 }

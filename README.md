@@ -34,29 +34,117 @@ spoken text.
 
 ### Approved release downloads
 
-On 2026-09-10 the course author authorized completed lecture videos and self-study
-files to be distributed through GitHub Releases after the work is complete and
-merged. Reviewed delivery files may be attached to a release with a file manifest
+On 2026-09-14 the course author authorized Korean and English review videos,
+integrated scripts, slides and self-study files to be distributed through GitHub
+Releases. Reviewed delivery files may be attached to a release with a file manifest
 and SHA-256 checksums. This does not add media to Git history or authorize bulk
 publication of original materials, separate narration WAVs, transcripts or font
-binaries. The latest delivery scope and remaining work are recorded in
+binaries. Subtitles generated from the approved scripts belong in the explicitly
+authorized review downloads, outside Git history. The latest delivery scope and remaining work are recorded in
 [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-The first preview contains five videos, the eight-lesson self-study package and
-one offline review HTML. It preserves the earlier episode layout and voice speed.
-The current revision targets **AutoCAD 2024**, **one video per lesson** and
-**1.38× narration**, without starter files. Grading and exam operations remain
-to be shared; only the two help contacts' names are disclosed. Complete the
-Korean edition before producing English self-study, slides, scripts and videos.
-Lessons 2–7 still require real AutoCAD recordings. Do not treat the first preview
-as a completed delivery of this revision or replace its files silently.
+The September 14 lecture review targets **AutoCAD 2024**, **eight lessons per language** and
+**native 1.00× cloned instructor narration**, without starter files. The measured
+video timelines total **211:43 Korean** and **253:27 English**. Grading and exam
+operations remain to be shared. Lessons 2–7 contain PREVIEW placeholders for
+15 unrecorded AutoCAD demonstrations; hands-on validation and human listening
+approval remain pending. A review release is not final instructional signoff.
 
-The AutoCAD 2024 revision prepares Korean self-study, lesson slides and scripts
-for all eight lessons. Only lessons 1 and 8 have complete integrated MP4s at
-this stage; lessons 2–7 require real AutoCAD 2024 recordings and application
-validation. Catalog durations describe the measured narration timeline, not
-guaranteed hands-on completion time. English text already present in the
-workbook is a draft, not a completed English course.
+The September 14 package combines an offline video player, synchronized script,
+timestamped feedback export, MP4 subtitles, original scripts, slides and workbooks.
+The decks contain **222 Korean / 263 English slides** and all eight original
+lesson scripts through **Full lesson script / 차시별 전체 대본**. Presenter notes
+on practice slides retain their step-specific guidance. Self-study pages open in
+their edition language and retain a saved language preference. Every split page
+must remain within 100 KB, including its diagrams and navigation.
+
+### Current self-study review downloads
+
+[2026-09-15 per-lesson self-study release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.15-selfstudy-review.1) provides
+**eight HTML decks with integrated scripts and eight matching narrated MP4s in
+each language**, 32 core files. Download the [Korean ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_KO_SELFSTUDY.zip)
+or [English ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.15-selfstudy-review.1/AutoCAD_EN_SELFSTUDY.zip); individual lesson files are
+also attached. Extract the complete ZIP and open `START_REVIEW_KO.html` or
+`START_REVIEW_EN.html` in Chrome/Edge to seek from the transcript, open the matching
+slide and export timestamped feedback as JSON.
+
+All 16 videos and both complete offline review players passed automated checks.
+All 37 asset downloads were verified without authentication, with matching sizes
+and GitHub SHA-256 digests. Korean duration: **4:12:55**; English: **4:39:36**.
+These videos show the self-study slides with the instructor's cloned voice at
+native 1.00× speed. Full human listening and hands-on AutoCAD signoff remain pending.
+
+### Previous lecture review downloads
+
+[2026-09-14 bilingual review release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.14-review.1) provides all **16 MP4s** and
+the integrated review materials. Download the [Korean full ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_KO_REVIEW.zip),
+[English full ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_EN_REVIEW.zip), or
+[materials only ZIP](https://github.com/Simon-YHKim/Lecture/releases/download/autocad-2026.09.14-review.1/AutoCAD_MATERIALS_KO_EN.zip).
+Extract the whole ZIP and open `START_REVIEW_KO.html` or `START_REVIEW_EN.html`.
+Click the transcript to seek, then export timestamped feedback as JSON.
+
+All 16 videos passed subtitle text/timing roundtrips, full decoding and per-scene
+audio/visual comparisons. The release includes a manifest and SHA-256 checksums;
+all 28 asset downloads were verified without authentication. It remains a
+**review prerelease**: 15 demonstration slots per language are PREVIEW guidance,
+and human listening and hands-on AutoCAD signoff remain pending.
+
+### Per-lesson self-study video production
+
+The September 15 delivery contains eight separate self-study decks and matching
+videos per language. Each deck integrates its own script, and each MP4 shows those
+same slides with cloned instructor narration. Practice pages use the existing
+illustrated self-study steps; actual AutoCAD screen recordings are outside this
+delivery. The September 14 lecture-frame review release remains available above.
+
+The private production pipeline is:
+
+1. Run `scripts/selfstudy/prepare_narrated.py` with the approved private lesson
+   stage, captions and local GSAP script. Set `SELFSTUDY_LANG` to the same language
+   as `--lang` before running it.
+2. Run `narrated_delivery.py jobs --work <private-work> --lang ko` (or `en`).
+   Original slide audio is hash-bound and reused. New slide narration is derived
+   from its selected-language text and exact visible action subset. Displayed CAD
+   literals remain intact; pronunciation substitutions are separate synthesis input.
+   Checkpoint filenames pronounce their letters, leading zeroes and separators
+   explicitly; their displayed names remain unchanged.
+   English synthesis input spells out numbers, including decimal digits and
+   callout values, to avoid Korean numeral readings from the voice reference.
+3. Generate the new jobs with the existing local `scripts/part/speak_clone.py`
+   workflow and the generated pronunciation map. Keep voice references, WAVs and
+   ASR output private. Use the instructor's native 1.00× voice rate.
+4. For each completed lesson, run `narrated_delivery.py assemble`,
+   `render_narrated.py capture`, `render_narrated.py render` and
+   `verify_narrated.py`, each with `--work <private-work> --lang ko --lesson 1`
+   (substitute the required language and lesson).
+5. Run `package_narrated.py --work <private-work> --out <new-private-delivery>`
+   with `--source-commit <full-sha>` and `--tag <selfstudy-review-tag>` after all
+   sixteen videos pass. Packaging creates language ZIPs, 32 individual core
+   downloads, an HTML review guide, a public manifest and SHA-256 checksums.
+   Publishing is a separate, explicitly authorized operation.
+
+Capture opens the actual offline HyperFrames/GSAP slide player and seeks each
+slide to its visible state. FFmpeg holds these stills for measured narration
+durations; later emphasis beats from reused lecture frames keep separate shots.
+Passing the whole multi-root deck directly to a single-composition renderer would
+export only its first slide. New self-study pages are captured after their final
+entrance so that all cards and diagrams are visible.
+
+The renderer uses FFmpeg/FFprobe with H.264 NVENC, Playwright Chromium, Pillow,
+NumPy and SciPy from the existing local production environment. It exports
+1920×1080/30fps H.264/AAC with embedded captions. Verification checks full decoding,
+exact subtitle text/timing, source PCM samples and every encoded shot against its
+captured slide, including the final frame. Sparse stills are expanded with the
+FFmpeg `fps` filter before encoding. The video frame count and track duration must
+cover the full narration; container duration alone is insufficient. These checks
+do not replace human listening or hands-on validation.
+An existing MP4 prevents its deck and script from being silently reassembled;
+use a new private revision directory when narration changes.
+
+Each language ZIP opens through `START_REVIEW_KO.html` or `START_REVIEW_EN.html`.
+The offline player supports script seeking, matching-slide links and timestamped
+feedback export. Packaging selects exact filenames and excludes sample players,
+audio references, WAVs, ASR and other private neighboring files.
 
 - [First preview release](https://github.com/Simon-YHKim/Lecture/releases/tag/autocad-2026.09.10-preview.1)
 - Download `AutoCAD_Review_20260910.html` and open it in a browser. Press **M**
@@ -124,6 +212,12 @@ Run the checks manually:
 ./scripts/check-course-projects.ps1
 ```
 
+Python regression tests use Python 3.12 and the NumPy version pinned in
+`requirements-test.txt`. Install it with `python -m pip install -r
+requirements-test.txt` and make `ffmpeg`/`ffprobe` available on PATH. CI installs
+these dependencies so synthetic audio and recording tests run instead of failing
+or being skipped. No cloned voice model or private recordings are downloaded.
+
 Add `-RunHyperFramesChecks` to run every lesson's pinned HyperFrames validation in sequence:
 
 ```powershell
@@ -174,12 +268,14 @@ scene boundary a few seconds apart. Treat `narration-timing.json` the way the
 artifact manifest is treated. Generate it once, review the drift, commit it, and
 regenerate only when the recording itself changes. Do not rebuild it in CI.
 
-### Local Heami synthesis
+### Earlier local Heami synthesis
 
-For the current lecture workflow, synthesize the revised script with Windows
-SAPI **Microsoft Heami Desktop, Rate 0**, then process the speech at **1.38×**
-with pitch preserved and measure the resulting WAVs. SAPI Rate and playback
-speed are separate settings. Refresh the complete lesson's clock:
+The earlier local workflow synthesizes a script with Windows
+SAPI **Microsoft Heami Desktop, Rate 0**, then processes the speech at **1.38×**
+with pitch preserved and measures the resulting WAVs. The current review edition
+uses cloned instructor narration at **1.00×**; do not use the earlier Heami
+settings to regenerate it. SAPI Rate and playback speed are separate settings.
+For the earlier workflow, refresh the complete lesson's clock:
 
 ```powershell
 python scripts/part/narrate_tts.py projects/autocad-technician/lesson-01-orientation --tempo 1.38 --out <fresh-private-audio-directory>
@@ -206,20 +302,40 @@ check, including bounds, where full-scene sampling is too sparse. Run
 in its manifest. These checks are sampled verification, not continuous proof.
 The static linter also pools audio from independent episode files; verify each
 playlist on its own clock before interpreting overlap warnings.
-Missing AutoCAD recordings block a delivery export. `--preview` permits those
-placeholders only for validation and records them in the private export manifest.
+Missing AutoCAD recordings block a final delivery export. `--preview` records
+every placeholder in the private export manifest. The course author's explicit
+2026-09-14 authorization permits labeled review downloads containing those
+placeholders, with the missing demonstrations disclosed.
 
 Export the entire lesson with the command above. Internal recording parts join
 the same lesson; they are not separate public episodes. The old `ep*.html` files
 remain as production history and are excluded from the current delivery path.
-A lesson that still has a recording placeholder cannot be exported for delivery.
-`--preview` is a private validation aid and must not be published as a finished
-AutoCAD lesson.
+A lesson that still has a recording placeholder must not be described as a
+finished AutoCAD lesson. The authorized review prerelease retains PREVIEW labels
+and keeps hands-on validation and final instructional signoff pending.
 
-If a long render fails the temporary-disk capacity check, use the CLI's
-`--low-memory-mode` streaming profile. It uses one screenshot worker and may
-take longer. Keep the same resolution and frame rate, and verify the resulting
-video and audio rather than treating a successful render as complete validation.
+The current private render projects use HyperFrames 0.8.36 at 1920×1080, 30 fps,
+high quality. Remaining renders use four `beginFrame` workers and streaming encode:
+`PRODUCER_STREAMING_ENCODE_MAX_DURATION_SECONDS=3600`,
+`HF_DE_PARALLEL_ROUTER=false`, `HF_CAPTURE_PARALLEL_STREAM=true`, and
+`PRODUCER_EXPERIMENTAL_FAST_CAPTURE=false`; render options are
+`--no-low-memory-mode --gpu --workers 4 --experimental-fast-capture=false`.
+This avoids accumulating every frame on disk. Earlier completed experimental
+captures are retained only after independent encoded-frame checks.
+Canonical project pins remain unchanged. Validate the finished MP4's duration,
+subtitle text and timing roundtrips, full decode, and narration alignment.
+Compare each encoded scene midpoint with an ordinary browser snapshot as well
+as running the source scene checks. Font substitution can move otherwise intact
+text; inspect flagged differences and record the exact source and MP4 hashes.
+These samples do not replace complete human viewing or listening.
+
+When embedding captions, feed escaped WebVTT to FFmpeg's `mov_text` encoder.
+Its SRT decoder treats the literal AutoCAD measurement placeholder `<>` as a
+tag and removes it; the VTT decoder preserves it when written as `&lt;&gt;`.
+Verify all cue text and millisecond timestamps after extracting the MP4 track.
+The review player, embedded MP4 captions, and VTT preserve this notation.
+Raw SRT remains available for interchange, but some players hide its angle
+brackets. This format difference must not be treated as a script edit.
 
 The synthesis records script/step/frame identity and each WAV's SHA-256. Editing
 spoken text or step boundaries requires new speech; editorial time headers do

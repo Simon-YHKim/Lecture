@@ -1,24 +1,23 @@
 # SCRIPT — AutoCAD Technician Lesson 8 · Exam guidance and Q&A (English edition)
 
 **Checkpoint:** none (no drawing work)<br>
-**Voice:** Windows SAPI · Microsoft Zira Desktop · Rate 0 · pitch-preserving 1.38x<br>
+**Voice:** Qwen3-TTS · Simon Clone (Qwen3-TTS) · pitch-preserving 1.00x<br>
 **Voice direction:** Calm, the way you brief someone before an exam. Do not alarm them. After a question, hold a beat before answering.
 
-> Length not measured yet. The times below mirror the Korean script so the frames
-> line up; they are replaced by measured values once the English speech exists.
+> Measured length 8 min 24 sec, including narration and frame holds.
 > The parentheses name what lights up on screen at that moment. They are not read.
 
 ## Line 1 — Title (Frame 1)
 
-**Time:** 0:00–0:07
+**Time:** 0:00–0:11
 
     (silence)
 
-    This is the last session. Lesson 8, exam guidance and Q&A.
+    This is the last session. Lesson 8, exam guidance and questions and answers.
 
 ## Line 2 — Six things to check in the exam announcement (Frame 2)
 
-**Time:** 0:07–1:28
+**Time:** 0:11–1:52
 
     Across six lessons you drew one part from start to finish. Now it is time to do it again on your own and get ready for the exam.
 
@@ -30,7 +29,7 @@
 
     (3 row) Third, the time limit. No time has been confirmed yet. Until then, write down when you start and finish a practice run. It shows you which step you stalled on.
 
-    (4 row) Fourth, the scope of work. The drawing and the settings the exam asks for come from the announcement. When you practise, walk the same order you carried from Lesson 2 to Lesson 7 — build the border and the layers, draw the shape, then check the dimensions and the output.
+    (4 row) Fourth, the scope of work. The drawing and the settings the exam asks for come from the announcement. When you practise, walk the same order you carried from Lesson 2 to Lesson 7. Build the border and the layers, draw the shape, then check the dimensions and the output.
 
     (5 row) Fifth, how you submit. Check the file format, the file name and the route from the announcement. Do not fix an email address or a file name in advance.
 
@@ -38,7 +37,7 @@
 
 ## Line 3 — Five questions that keep coming up (Frame 3)
 
-**Time:** 1:28–2:50
+**Time:** 1:52–3:33
 
     Five questions came up again and again in review. Here is an answer to each.
 
@@ -54,7 +53,7 @@
 
 ## Line 4 — What a technician actually does with this (Frame 4)
 
-**Time:** 2:50–3:55
+**Time:** 3:33–4:57
 
     After the LG Innotek internal exam you use this on the floor. Here are three ways it serves equipment PM and preventive maintenance.
 
@@ -66,7 +65,7 @@
 
 ## Line 5 — Commands you reach for on the floor (Frame 5)
 
-**Time:** 3:55–5:21
+**Time:** 4:57–6:45
 
     There are six commands in the table on screen. Five of them you already typed in the drawing lessons. The same command lands in a different place on the floor.
 
@@ -86,15 +85,15 @@
 
 ## Line 6 — Closing the course (Frame 6)
 
-**Time:** 5:21–6:22
+**Time:** 6:45–8:08
 
-    (1 left) On the left of the screen the lessons you came through are in five rows. In Lessons 1 and 2 you read why a drawing is needed and built an A3 template. In Lessons 3 and 4 you drew the outline and added circles and arcs. In Lesson 5 you raised the top and right side views in third-angle projection, and in Lesson 6 you cleared the construction lines and sent each line to its own layer. In Lesson 7 you put the dimensions on and exported one A3 sheet. One idler pulley bracket, the kind used on a car engine, became one drawing.
+    (1 left) On the left of the screen the lessons you came through are in five rows. In Lessons 1 and 2 you read why a drawing is needed and built an A3 template. In Lessons 3 and 4 you drew the outline and added circles and arcs. In Lesson 5 you raised the top and right side views in third-angle projection. In Lesson 6 you cleared the construction lines and sent each line to its own layer. In Lesson 7 you put the dimensions on and exported one A3 sheet. One idler pulley bracket, the kind used on a car engine, became one drawing.
 
-    (2 right) Now go over the order again. First, build the template by hand once more, and write down where you stopped to hunt for a setting. Second, put a 3D picture in front of you, lay out the three views and take it as far as the dimensions — deciding which face is the front comes first. Third, draw it start to finish and record how long it took; that is when you see which step is slow. Fourth, when you get stuck, ask Kim Jeong-ung or Kim Yang-hwan. The marking scheme, the pass mark and the exam guidance are to be shared.
+    (2 right) Now go over the order again. First, build the template by hand once more, and write down where you stopped to hunt for a setting. Second, put a 3D picture in front of you, lay out the three views and take it as far as the dimensions. Deciding which face is the front comes first. Third, draw it start to finish and record how long it took; that is when you see which step is slow. Fourth, when you get stuck, ask Kim Jeong-ung or Kim Yang-hwan. The marking scheme, the pass mark and the exam guidance are to be shared.
 
 ## Line 7 — Well done (Frame 7)
 
-**Time:** 6:22–6:35
+**Time:** 8:08–8:24
 
     (1) That is the end. Thank you for the work you put in across eight lessons.
 

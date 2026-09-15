@@ -147,8 +147,8 @@ def main(outpath):
             head = ('<h2 class="first"><span class="num">%02d</span>%s</h2>'
                     '<p class="lede"><span class="k">음성 구성 시간 %s · 자습 약 %d분</span>'
                     '<span class="e">Narrated timeline duration %s · about %d min of self-study</span></p>'
-                    % (no, B.bi(L.get('title')), L.get('videoLength', '—'),
-                       L.get('selfStudyMin', 0), L.get('videoLength', '—'), L.get('selfStudyMin', 0)))
+                    % (no, B.bi(L.get('title')), B.video_length(L, 'ko'),
+                       L.get('selfStudyMin', 0), B.video_length(L, 'en'), L.get('selfStudyMin', 0)))
             tabs.append(('p-l%02d' % no, {'ko': '%d차시' % no, 'en': 'L%d' % no}))
             panels.append(('p-l%02d' % no, head + html))
 

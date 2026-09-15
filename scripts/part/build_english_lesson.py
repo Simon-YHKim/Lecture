@@ -12,6 +12,7 @@
 가져오지 않는다 — 영문은 자기 음성을 처음부터 잰다.
 """
 import argparse
+import html
 import json
 import os
 import re
@@ -37,12 +38,16 @@ WRAP = re.compile(r'(style="color:#111;(?:font-size:\d+px;)?)white-space:nowrap"
 
 # 도면 안의 글자. `frame_text` 는 도면을 건드리지 않는다 — SVG 안에서는 한 문장이
 # 요소 하나가 아니라 좌표가 붙은 `<text>` 낱개라, 문장 단위로 덮는 규칙이 닿지
-# 않는다. 대신 여덟 차시 전수로 세어 보면 일곱 낱말뿐이므로 여기서 낱말로 바꾼다.
+# 않는다. 도면에서 쓰는 정해진 보기 이름과 주석을 여기서 낱말로 바꾼다.
 # 뷰 이름 셋은 `edu_ib_02.py --lang en` 이 내는 것과 같은 표기다.
 DRAWING = {
     '정면도': 'FRONT VIEW',
     '평면도': 'TOP VIEW',
     '우측면도': 'RIGHT SIDE VIEW',
+    # edu_ib_02.py --lang en의 표기와 동일하다. 원본 SVG는 한글을
+    # 숫자 엔티티로 저장하기도 하므로 아래에서 디코딩 후 대조한다.
+    '4-M5 깊이 10': '4-M5 DEPTH 10',
+    '2-장공 R5': '2-SLOT R5',
     # 표제란의 보기. 국문은 홍길동, 영문은 같은 자리의 보기 이름이다.
     '홍길동': 'John Doe',
     '사번': 'Employee no.',
@@ -58,10 +63,10 @@ def localise_drawing(source):
 
     def one(m):
         body = m.group(2)
-        key = body.strip()
+        key = html.unescape(body.strip())
         if key in DRAWING:
             hits[0] += 1
-            return m.group(1) + body.replace(key, DRAWING[key]) + m.group(3)
+            return m.group(1) + body.replace(body.strip(), html.escape(DRAWING[key])) + m.group(3)
         return m.group(0)
 
     return _DRAWING_TEXT.sub(one, source), hits[0]
@@ -117,7 +122,7 @@ def build(lesson_dir, out_dir):
         if gaps:
             missing[os.path.basename(path)] = gaps
         body = frame_text.SCRIPTS.sub('', localised)
-        rest = HANGUL.findall(body)
+        rest = HANGUL.findall(html.unescape(body))
         if rest:
             left[os.path.basename(path)] = len(rest)
 

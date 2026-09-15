@@ -80,6 +80,7 @@
   "slug": "lesson-03-baseline-profile",
   "title": {"ko":"기준선과 외곽", "en":"Baseline and Outline"},
   "videoLength": "38:17",
+  "videoLengthByLang": {"ko":"38:17", "en":"41:20"}, // 언어별 실측값. 위 값은 국문 호환용
   "selfStudyMin": 55,
   "opens": "L02_TEMPLATE",          // 없으면 null
   "saves": "L03_PROFILE",           // 없으면 null
